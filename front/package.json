@@ -22,6 +22,7 @@
     "@angular/router": "^6.0.0",
     "core-js": "^2.5.4",
     "hoek": "^5.0.3",
+    "jwt-decode": "github:auth0/jwt-decode",
     "ng2-semantic-ui": "^0.9.7",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
