@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../services/auth.service";
 import { TokenService } from "../../services/token.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { SessionService } from "../../services/session.service";
 
 @Component({
   selector: 'app-login',
@@ -14,22 +16,31 @@ export class LoginComponent implements OnInit {
     password: null
   };
 
+  returnUrl: string;
+
   constructor(
-    private auth: AuthService,
-    private token: TokenService
+    private loginService: AuthService,
+    private tokenService: TokenService,
+    private authService: SessionService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/profile';
+
   }
 
-  onSubmit() {
-    this.auth.login(this.form).subscribe(
+  login() {
+    this.loginService.login(this.form).subscribe(
       data => this.handleResponse(data),
-      error => console.log(error)
+      error => console.log(error) // TODO: error handling
     );
   }
 
   handleResponse(data) {
-    this.token.handle(data.access_token);
+    this.tokenService.handle(data.access_token);
+    this.authService.changeAuthStatus(true);
+    this.router.navigateByUrl(this.returnUrl);
   }
 }

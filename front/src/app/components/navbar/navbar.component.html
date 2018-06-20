@@ -1,7 +1,8 @@
 <div class="ui menu">
   <a class="active item">Numéris</a>
   <div class="right menu">
-    <a class="item" routerLink="profile">Profile</a>
-    <a class="item" routerLink="login">Login</a>
+    <a class="item" routerLink="profile" *ngIf="loggedIn">Profile</a>
+    <a class="item" routerLink="login" *ngIf="!loggedIn">Login</a>
+    <a class="item" href="#" (click)="logout($event)" *ngIf="loggedIn">Logout</a>
   </div>
 </div>

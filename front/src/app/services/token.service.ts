@@ -15,7 +15,6 @@ export class TokenService {
 
   handle(token) {
     this.set(token);
-    console.log(this.isValid(token));
   }
 
   /**
@@ -47,8 +46,10 @@ export class TokenService {
    * @param token
    * @returns {boolean}
    */
-  isValid(token) {
-    if (this.get()) {
+  isValid() {
+    const token = this.get();
+
+    if (token) {
       const payload = this.payload(token);
 
       if (payload) {
@@ -79,15 +80,5 @@ export class TokenService {
    */
   decode(tokenPart) {
     return JSON.parse(atob(tokenPart));
-  }
-
-  /**
-   * Check if the user is logged in
-   *
-   * @param token
-   * @returns {boolean}
-   */
-  loggedIn(token) {
-    return this.isValid(token);
   }
 }
