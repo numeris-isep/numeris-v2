@@ -4,10 +4,13 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { AlertService } from "../_services/alert.service";
 import { first } from "rxjs/operators";
 import { AuthService } from "../_services/auth.service";
+import { TokenService } from "../_services/token.service";
 
-
-@Component({templateUrl: 'login.component.html'})
+@Component({
+  templateUrl: 'login.component.html'
+})
 export class LoginComponent implements OnInit {
+
   loginForm: FormGroup;
   loading = false;
   submitted = false;
@@ -18,6 +21,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
+    private tokenService: TokenService,
     private alertService: AlertService
   ) {}
 
@@ -30,11 +34,11 @@ export class LoginComponent implements OnInit {
     // reset login status
     this.authService.logout();
 
-    // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    // get return url from route parameters or default to '/profile'
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/profile';
   }
 
-  // convenience getter for easy access to form fields
+  // convenient getter for easy access to form fields
   get f() { return this.loginForm.controls; }
 
   onSubmit() {
@@ -50,6 +54,7 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          this.tokenService.handle(data.access_token)
           this.router.navigate([this.returnUrl]);
         },
         error => {
