@@ -1,15 +1,19 @@
-import { NgModule } from "@angular/core";
+import { LOCALE_ID, NgModule } from "@angular/core";
 import { AppComponent } from "./app.component";
 import { BrowserModule } from "@angular/platform-browser";
 import { ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AlertComponent } from "./_directives/alert.component";
-import { AlertService } from "./_services/alert.service";
-import { AuthGuard } from "./_guards/auth.service";
 import { LoginComponent } from "./login/login.component";
-import { AuthService } from "./_services/auth.service";
 import { ProfileComponent } from './profile/profile.component';
+import { ErrorInterceptor } from "./_helpers/error-interceptor.service";
+import { JwtInterceptor } from "./_helpers/jwt-interceptor.service";
+import localeFr from "@angular/common/locales/fr";
+import { registerLocaleData } from "@angular/common";
+
+// Setting to locale to 'fr'
+registerLocaleData(localeFr, 'fr');
 
 @NgModule({
   imports: [
@@ -25,11 +29,10 @@ import { ProfileComponent } from './profile/profile.component';
     ProfileComponent
   ],
   providers: [
-    AuthGuard,
-    AlertService,
-    AuthService,
+    { provide: LOCALE_ID, useValue: 'fr' },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
-
 export class AppModule { }

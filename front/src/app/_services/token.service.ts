@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenService {
 
-  private tokenName: string = 'numeris_v2_token';
+  private tokenName: string = environment.tokenName;
 
   private iss = {
-    login: 'http://localhost:8000/api/login'
+    login: `${environment.apiUrl}/api/login`
   };
 
   constructor() { }
