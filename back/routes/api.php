@@ -13,11 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group([
-    'middleware' => 'api'
-], function () {
-    Route::post('login', 'Auth\AuthController@login');
-    Route::post('logout', 'Auth\AuthController@logout');
-    Route::post('refresh', 'Auth\AuthController@refresh');
-    Route::post('me', 'Auth\AuthController@me');
-});
+// jwt auth routes
+Route::post('login', 'Auth\AuthController@login')->name('login');
+Route::post('logout', 'Auth\AuthController@logout')->name('logout');
+Route::post('refresh', 'Auth\AuthController@refresh')->name('refresh');
+Route::post('current-user', 'Auth\AuthController@currentUser')->name('current-user');
