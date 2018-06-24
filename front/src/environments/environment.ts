@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:8000',
-  tokenName: 'numeris_v2_token'
+  tokenName: 'numeris_token'
 };
 
 /*

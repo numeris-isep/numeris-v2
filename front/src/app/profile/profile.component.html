@@ -78,11 +78,11 @@
   </p>
 
   <p>
-    created_at: {{ currentUser.created_at }}
+    created_at: {{ currentUser.created_at | date:'medium' }}
   </p>
 
   <p>
-    updated_at: {{ currentUser.updated_at }}
+    updated_at: {{ currentUser.updated_at | date }}
   </p>
 
 </div>
