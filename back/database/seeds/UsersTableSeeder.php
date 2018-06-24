@@ -29,7 +29,7 @@ class UsersTableSeeder extends Seeder
 
         // Generate administrator account
         if (! User::where('email', 'administrator@numeris-isep.fr')->first()) {
-            $this->createUser(1, 'developer', 'active', [
+            $this->createUser(1, 'administrator', 'active', [
                 'email'         => 'administrator@numeris-isep.fr',
                 'username'      => 'administrator',
                 'first_name'    => 'Administrator',
