@@ -47,6 +47,5 @@ $factory->state(User::class, 'active', function (Faker $faker) {
         'social_insurance_number'   => $faker->numberBetween(1000000000000, 1999999999999),
         'iban'                      => strtoupper($faker->text(15)),
         'bic'                       => $faker->swiftBicNumber,
-
     ];
 });
