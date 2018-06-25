@@ -16,6 +16,7 @@ class UserRequest extends AbstractFormRequest
         $current_user = auth()->user();
         $user = User::find($this->route('user_id'));
 
+        // Use UserPolicy here to authorize before checking the fields
         if ($current_user->can('store', User::class)
             || $current_user->can('update', $user)
             || $current_user->can('update-profile', $user)
@@ -23,7 +24,7 @@ class UserRequest extends AbstractFormRequest
             return true;
         }
 
-        return true;
+        return false;
     }
 
     /**

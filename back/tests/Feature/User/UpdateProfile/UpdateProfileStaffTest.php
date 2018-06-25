@@ -48,28 +48,6 @@ class UpdateProfileStaffTest extends TestCaseWithAuth
     /**
      * @group staff
      */
-    public function testStaffUpdatingUserProfileWithoutData()
-    {
-        $user_id = 1;
-
-        $this->json('PATCH', route('users.update.profile', ['user' => $user_id]))
-            ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJson([
-                'errors' => [
-                    'phone'                     => ['Le champ téléphone est obligatoire.'],
-                    'nationality'               => ['Le champ nationalité est obligatoire.'],
-                    'birth_date'                => ['Le champ date de naissance est obligatoire.'],
-                    'birth_city'                => ['Le champ ville de naissance est obligatoire.'],
-                    'social_insurance_number'   => ['Le champ numéro de sécurité sociale est obligatoire.'],
-                    'iban'                      => ['Le champ iban est obligatoire.'],
-                    'bic'                       => ['Le champ bic est obligatoire.'],
-                ]
-            ]);
-    }
-
-    /**
-     * @group staff
-     */
     public function testStaffUpdatingDeveloperProfile()
     {
         $user_id = 2; // developer
