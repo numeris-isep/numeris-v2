@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
             $this->call(RolesTableSeeder::class);
         }
 
-        // Generate developer account
+        // Generate 2 developer accounts
         if (! User::where('email', 'developer@numeris-isep.fr')->first()) {
             $this->createUser(1, 'developer', 'active', [
                 'email'         => 'developer@numeris-isep.fr',
@@ -27,7 +27,16 @@ class UsersTableSeeder extends Seeder
             ]);
         }
 
-        // Generate administrator account
+        if (! User::where('email', 'developer2@numeris-isep.fr')->first()) {
+            $this->createUser(1, 'developer', 'active', [
+                'email'         => 'developer2@numeris-isep.fr',
+                'username'      => 'developer2',
+                'first_name'    => 'Developer2',
+                'last_name'     => 'Numeris',
+            ]);
+        }
+
+        // Generate 2 administrator accounts
         if (! User::where('email', 'administrator@numeris-isep.fr')->first()) {
             $this->createUser(1, 'administrator', 'active', [
                 'email'         => 'administrator@numeris-isep.fr',
@@ -37,12 +46,30 @@ class UsersTableSeeder extends Seeder
             ]);
         }
 
-        // Generate staff account
+        if (! User::where('email', 'administrator2@numeris-isep.fr')->first()) {
+            $this->createUser(1, 'administrator', 'active', [
+                'email'         => 'administrator2@numeris-isep.fr',
+                'username'      => 'administrator2',
+                'first_name'    => 'Administrator2',
+                'last_name'     => 'Numeris',
+            ]);
+        }
+
+        // Generate 2 staff accounts
         if (! User::where('email', 'staff@numeris-isep.fr')->first()) {
             $this->createUser(1, 'staff', 'active', [
                 'email'         => 'staff@numeris-isep.fr',
                 'username'      => 'staff',
                 'first_name'    => 'Staff',
+                'last_name'     => 'Numeris',
+            ]);
+        }
+
+        if (! User::where('email', 'staff2@numeris-isep.fr')->first()) {
+            $this->createUser(1, 'staff', 'active', [
+                'email'         => 'staff2@numeris-isep.fr',
+                'username'      => 'staff2',
+                'first_name'    => 'Staff2',
                 'last_name'     => 'Numeris',
             ]);
         }
@@ -53,6 +80,15 @@ class UsersTableSeeder extends Seeder
                 'email'         => 'student@numeris-isep.fr',
                 'username'      => 'student',
                 'first_name'    => 'Student',
+                'last_name'     => 'Numeris',
+            ]);
+        }
+
+        if (! User::where('email', 'student2@numeris-isep.fr')->first()) {
+            $this->createUser(1, 'student', 'active', [
+                'email'         => 'student2@numeris-isep.fr',
+                'username'      => 'student2',
+                'first_name'    => 'Student2',
                 'last_name'     => 'Numeris',
             ]);
         }
