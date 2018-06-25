@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-
-
 class AuthRequest extends AbstractFormRequest
 {
     /**

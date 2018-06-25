@@ -74,7 +74,27 @@ class User extends Authenticatable implements JWTSubject
 
     public function currentRole()
     {
-        return $this->roles()->latest();
+        return $this->roles()->latest()->first();
+    }
+
+    public function isDeveloper()
+    {
+        return $this->currentRole()->name === "developer";
+    }
+
+    public function isAdministrator()
+    {
+        return $this->currentRole()->name === "administrator";
+    }
+
+    public function isStaff()
+    {
+        return $this->currentRole()->name === "staff";
+    }
+
+    public function isStudent()
+    {
+        return $this->currentRole()->name === "student";
     }
 
     public function notifs()
