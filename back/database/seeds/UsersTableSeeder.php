@@ -27,6 +27,7 @@ class UsersTableSeeder extends Seeder
             ]);
         }
 
+<<<<<<< HEAD
         if (! User::where('email', 'developer2@numeris-isep.fr')->first()) {
             $this->createUser(1, 'developer', 'active', [
                 'email'         => 'developer2@numeris-isep.fr',
@@ -37,6 +38,9 @@ class UsersTableSeeder extends Seeder
         }
 
         // Generate 2 administrator accounts
+=======
+        // Generate administrator account
+>>>>>>> 87eaff66f3af388a6fef382b7166e0a0a0a56c17
         if (! User::where('email', 'administrator@numeris-isep.fr')->first()) {
             $this->createUser(1, 'administrator', 'active', [
                 'email'         => 'administrator@numeris-isep.fr',
