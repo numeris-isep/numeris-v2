@@ -14,7 +14,7 @@ abstract class TestCaseWithAuth extends TestCase
 
         $user = User::where('username', $this->username)->first();
 
-        auth()->claims(['rol' => $user->currentRole()->name])
+        auth()->claims(['rol' => $user->role()->name])
             ->attempt([
                 'email' => $user->email,
                 'password' => 'azerty'

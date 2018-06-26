@@ -33,7 +33,7 @@ class AuthController extends Controller
             return response()->json(['error' => 'Unauthorized'], JsonResponse::HTTP_UNAUTHORIZED);
         }
 
-        $token = auth()->claims(['rol' => $user->currentRole()->name])
+        $token = auth()->claims(['rol' => $user->role()->name])
             ->setTTL(120) // <-- token valid for 2 hours
             ->attempt($credentials);
 

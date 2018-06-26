@@ -72,29 +72,32 @@ class User extends Authenticatable implements JWTSubject
             ->withTimestamps();
     }
 
-    public function currentRole()
+    /**
+     * Return the current role of the user (= the latest)
+     */
+    public function role()
     {
         return $this->roles()->latest()->first();
     }
 
     public function isDeveloper()
     {
-        return $this->currentRole()->name === "developer";
+        return $this->role()->name === "developer";
     }
 
     public function isAdministrator()
     {
-        return $this->currentRole()->name === "administrator";
+        return $this->role()->name === "administrator";
     }
 
     public function isStaff()
     {
-        return $this->currentRole()->name === "staff";
+        return $this->role()->name === "staff";
     }
 
     public function isStudent()
     {
-        return $this->currentRole()->name === "student";
+        return $this->role()->name === "student";
     }
 
     public function notifs()
