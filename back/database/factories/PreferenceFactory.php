@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Notification;
+use App\Models\Preference;
 use Faker\Generator as Faker;
 
-$factory->define(Notification::class, function (Faker $faker) {
+$factory->define(Preference::class, function (Faker $faker) {
     return [
         'on_new_mission'    => $faker->numberBetween(0, 1),
         'on_acceptance'     => $faker->numberBetween(0, 1),
@@ -11,7 +11,7 @@ $factory->define(Notification::class, function (Faker $faker) {
     ];
 });
 
-$factory->state(Notification::class, 'all_notifications', function () {
+$factory->state(Preference::class, 'all_notifications', function () {
     return [
         'on_new_mission'    => 1,
         'on_acceptance'     => 1,
@@ -19,7 +19,7 @@ $factory->state(Notification::class, 'all_notifications', function () {
     ];
 });
 
-$factory->state(Notification::class, 'no_notifications', function () {
+$factory->state(Preference::class, 'no_notifications', function () {
     return [
         'on_new_mission'    => 0,
         'on_acceptance'     => 0,

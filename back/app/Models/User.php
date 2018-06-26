@@ -31,8 +31,7 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password'
     ];
 
     protected $casts = [
@@ -63,7 +62,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function address()
     {
-        return $this->hasOne(Address::class);
+        return $this->belongsTo(Address::class);
     }
 
     public function roles()
@@ -100,8 +99,8 @@ class User extends Authenticatable implements JWTSubject
         return $this->role()->name === "student";
     }
 
-    public function notifs()
+    public function preference()
     {
-        return $this->hasOne(Notification::class);
+        return $this->belongsTo(Preference::class);
     }
 }

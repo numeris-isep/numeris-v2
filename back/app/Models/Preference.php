@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Notification extends Model
+class Preference extends Model
 {
     public $timestamps = false;
 
@@ -19,4 +19,9 @@ class Notification extends Model
         'on_acceptance'     => 'boolean',
         'on_refusal'        => 'boolean',
     ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 }

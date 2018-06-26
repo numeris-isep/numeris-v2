@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Address;
-use App\Models\Notification;
+use App\Models\Preference;
 use App\Models\User;
 use Faker\Generator as Faker;
 
@@ -18,9 +18,8 @@ use Faker\Generator as Faker;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'email'             => $faker->unique()->safeEmail,
-        'password'          => bcrypt('azerty'),
-        'remember_token'    => str_random(10),
+        'email'     => $faker->unique()->safeEmail,
+        'password'  => bcrypt('azerty'),
     ];
 });
 
@@ -30,7 +29,7 @@ $factory->state(User::class, 'inactive', function () {
 
 $factory->state(User::class, 'active', function (Faker $faker) {
     return [
-        'notification_id' => factory(Notification::class)->create(),
+        'preference_id'             => factory(Preference::class)->create(),
         'address_id'                => factory(Address::class)->create(),
         'activated'                 => true,
         'tou_accepted'              => true,

@@ -38,7 +38,6 @@ class CreateUsersTable extends Migration
             $table->string('iban')->nullable();
             $table->string('bic')->nullable();
 
-            $table->rememberToken();
             $table->timestamps();
         });
     }

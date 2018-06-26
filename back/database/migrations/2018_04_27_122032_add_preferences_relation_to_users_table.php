@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddNotificationsRelationToUsersTable extends Migration
+class AddPreferencesRelationToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class AddNotificationsRelationToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('notification_id')->unsigned()->nullable()->after('id');
-            $table->foreign('notification_id')->references('id')->on('notifications');
+            $table->integer('preference_id')->unsigned()->nullable()->after('id');
+            $table->foreign('preference_id')->references('id')->on('preferences');
         });
     }
 
@@ -27,8 +27,8 @@ class AddNotificationsRelationToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign('users_notification_id_foreign');
-            $table->dropColumn('notification_id');
+            $table->dropForeign('users_preference_id_foreign');
+            $table->dropColumn('preference_id');
         });
     }
 }
