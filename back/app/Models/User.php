@@ -11,9 +11,13 @@ class User extends Authenticatable implements JWTSubject
     use Notifiable;
 
     protected $fillable = [
+        // One-to-One relations
+        'address_id',
+
+        // attributes
         'activated',
         'tou_accepted',
-        'membership_fee_paid',
+        'subscription_paid_at',
         'email',
         'password',
         'username',
@@ -37,7 +41,6 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'activated'             => 'boolean',
         'tou_accepted'          => 'boolean',
-        'membership_fee_paid'   => 'boolean',
     ];
 
     /**
@@ -63,6 +66,11 @@ class User extends Authenticatable implements JWTSubject
     public function address()
     {
         return $this->belongsTo(Address::class);
+    }
+
+    public function setAddress(Address $address)
+    {
+        return $this->address()->attach($address);
     }
 
     public function roles()

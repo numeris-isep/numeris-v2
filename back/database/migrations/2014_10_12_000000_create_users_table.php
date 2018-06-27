@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
 
             $table->boolean('activated')->default(false);
             $table->boolean('tou_accepted')->default(false);
-            $table->boolean('membership_fee_paid')->default(false);
+            $table->string('subscription_paid_at')->nullable();
 
             $table->string('email')->unique();
             $table->string('password');

@@ -33,7 +33,7 @@ $factory->state(User::class, 'active', function (Faker $faker) {
         'address_id'                => factory(Address::class)->create(),
         'activated'                 => true,
         'tou_accepted'              => true,
-        'membership_fee_paid'       => true,
+        'subscription_paid_at'      => $faker->dateTime(),
         'username'                  => $faker->unique()->userName,
         'first_name'                => $faker->firstName,
         'last_name'                 => $faker->lastName,

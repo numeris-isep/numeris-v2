@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 
@@ -11,20 +12,22 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()
     {
         $this->authorize('index', User::class);
 
-        return response()->json(User::all());
+        return response()->json(UserResource::collection(User::all()));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(UserRequest $request)
     {
@@ -32,49 +35,53 @@ class UserController extends Controller
 
         $user = User::create($request->all());
 
-        return response()->json($user, JsonResponse::HTTP_CREATED);
+        return response()->json(new UserResource($user), JsonResponse::HTTP_CREATED);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $user_id
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function show($id)
+    public function show($user_id)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($user_id);
         $this->authorize('show', $user);
 
-        return response()->json($user);
+        return response()->json(UserResource::make($user));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UserRequest $request
+     * @param $user_id
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(UserRequest $request, $id)
+    public function update(UserRequest $request, $user_id)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($user_id);
         $this->authorize('update', $user);
 
         $user->update($request->all());
 
-        return response()->json($user, JsonResponse::HTTP_CREATED);
+        return response()->json(UserResource::make($user), JsonResponse::HTTP_CREATED);
     }
 
     /**
      * Update profile
      *
      * @param UserRequest $request
+     * * @param $user_id
      * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function updateProfile(UserRequest $request, $id)
+    public function updateProfile(UserRequest $request, $user_id)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($user_id);
         $this->authorize('update-profile', $user);
 
         // Filtering the request to only update the fields an user is allowed to update
@@ -88,18 +95,19 @@ class UserController extends Controller
             'bic'
         ]));
 
-        return response()->json($user, JsonResponse::HTTP_CREATED);
+        return response()->json(UserResource::make($user), JsonResponse::HTTP_CREATED);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $user_id
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroy($id)
+    public function destroy($user_id)
     {
-        $user = User::findOrFail($id);
+        $user = User::findOrFail($user_id);
         $this->authorize('destroy', $user);
 
         $user->delete();

@@ -29,7 +29,11 @@ class UserPolicy
 
     public function show(User $current_user, User $user)
     {
-        return $current_user->role()->isSuperiorTo('student');
+        // $user1 whose $role < 'developer' can't show the profile of $user2
+        // unless   $user1 == $user2
+        // or       $user1->role > 'student'
+        return $current_user->is($user)
+            || $current_user->role()->isSuperiorTo('student');
     }
 
     public function update(User $current_user, User $user)

@@ -20,11 +20,9 @@ class ShowStaffTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'id',
-                'notification_id',
-                'address_id',
                 'activated',
                 'tou_accepted',
-                'membership_fee_paid',
+                'subscription_paid_at',
                 'email',
                 'username',
                 'first_name',
