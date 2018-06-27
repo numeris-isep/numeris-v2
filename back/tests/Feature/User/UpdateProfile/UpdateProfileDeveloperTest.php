@@ -28,7 +28,7 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
 
         $this->assertDatabaseMissing('users', $data);
 
-        $this->json('PATCH', route('users.update.profile', ['user' => $user_id]), $data)
+        $this->json('PATCH', route('users.update.profile', ['user_id' => $user_id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'phone',

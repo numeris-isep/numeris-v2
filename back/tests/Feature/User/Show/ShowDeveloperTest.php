@@ -12,11 +12,11 @@ class ShowDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      */
-    public function testDeveloperAccesingUserShow()
+    public function testDeveloperAccessingUserShow()
     {
         $user_id = 1;
 
-        $this->json('GET', route('users.show', ['user' => $user_id]))
+        $this->json('GET', route('users.show', ['user_id' => $user_id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'id',
@@ -48,7 +48,7 @@ class ShowDeveloperTest extends TestCaseWithAuth
     {
         $user_id = 0; // Unknown user
 
-        $this->json('GET', route('users.show', ['user' => $user_id]))
+        $this->json('GET', route('users.show', ['user_id' => $user_id]))
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
             ->assertJson([
                 'error' => 'Resource not found'

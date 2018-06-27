@@ -16,7 +16,7 @@ class ShowStudentTest extends TestCaseWithAuth
     {
         $user_id = 1; // Not his profile
 
-        $this->json('GET', route('users.show', ['user' => $user_id]))
+        $this->json('GET', route('users.show', ['user_id' => $user_id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson([
                 'error' => 'Forbidden'
@@ -30,7 +30,7 @@ class ShowStudentTest extends TestCaseWithAuth
     {
         $user_id = 7; // Own profile
 
-        $this->json('GET', route('users.show', ['user' => $user_id]))
+        $this->json('GET', route('users.show', ['user_id' => $user_id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'id',

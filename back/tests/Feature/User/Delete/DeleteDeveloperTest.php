@@ -22,7 +22,7 @@ class DeleteDeveloperTest extends TestCaseWithAuth
         $this->assertDatabaseHas('users', $user->toArray());
         $this->assertDatabaseHas('addresses', $address->toArray());
 
-        $this->json('DELETE', route('users.destroy', ['user' => $user_id]))
+        $this->json('DELETE', route('users.destroy', ['user_id' => $user_id]))
             ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
 
         $this->assertDatabaseMissing('users', $user->toArray());
@@ -41,7 +41,7 @@ class DeleteDeveloperTest extends TestCaseWithAuth
         $this->assertDatabaseHas('users', $user->toArray());
         $this->assertDatabaseHas('addresses', $address->toArray());
 
-        $this->json('DELETE', route('users.destroy', ['user' => $user_id]))
+        $this->json('DELETE', route('users.destroy', ['user_id' => $user_id]))
             ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
 
         $this->assertDatabaseMissing('users', $user->toArray());
@@ -55,7 +55,7 @@ class DeleteDeveloperTest extends TestCaseWithAuth
     {
         $user_id = 0; // Unknown user
 
-        $this->json('DELETE', route('users.destroy', ['user' => $user_id]))
+        $this->json('DELETE', route('users.destroy', ['user_id' => $user_id]))
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
             ->assertJson([
                 'error' => 'Resource not found'

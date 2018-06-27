@@ -16,7 +16,7 @@ class ShowAdministratorTest extends TestCaseWithAuth
     {
         $user_id = 1;
 
-        $this->json('GET', route('users.show', ['user' => $user_id]))
+        $this->json('GET', route('users.show', ['user_id' => $user_id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'id',

@@ -37,7 +37,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $this->assertDatabaseMissing('users', $db_data);
 
-        $this->json('PUT', route('users.update', ['user' => $user_id]), $data)
+        $this->json('PUT', route('users.update', ['user_id' => $user_id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',
@@ -80,7 +80,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $this->assertDatabaseMissing('users', $db_data);
 
-        $this->json('PUT', route('users.update', ['user' => $user_id]), $data)
+        $this->json('PUT', route('users.update', ['user_id' => $user_id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',
@@ -112,7 +112,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $this->assertDatabaseMissing('users', $db_data);
 
-        $this->json('PUT', route('users.update', ['user' => $user_id]), $data)
+        $this->json('PUT', route('users.update', ['user_id' => $user_id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson([
                 'errors' => [

@@ -28,7 +28,7 @@ class UpdateStudentTest extends TestCaseWithAuth
 
         $this->assertDatabaseMissing('users', $db_data);
 
-        $this->json('PUT', route('users.update', ['user' => $user_id]), $data)
+        $this->json('PUT', route('users.update', ['user_id' => $user_id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson([
                 'error' => 'Forbidden'
