@@ -17,8 +17,10 @@ class DeleteStudentTest extends TestCaseWithAuth
     {
         $user_id = 1;
         $user = User::find($user_id);
+        $address = $user->address;
 
         $this->assertDatabaseHas('users', $user->toArray());
+        $this->assertDatabaseHas('addresses', $address->toArray());
 
         $this->json('DELETE', route('users.destroy', ['user' => $user_id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
@@ -27,6 +29,7 @@ class DeleteStudentTest extends TestCaseWithAuth
             ]);
 
         $this->assertDatabaseHas('users', $user->toArray());
+        $this->assertDatabaseHas('addresses', $address->toArray());
     }
 
     /**
@@ -36,12 +39,15 @@ class DeleteStudentTest extends TestCaseWithAuth
     {
         $user_id = 7; // Own account
         $user = User::find($user_id);
+        $address = $user->address;
 
         $this->assertDatabaseHas('users', $user->toArray());
+        $this->assertDatabaseHas('addresses', $address->toArray());
 
         $this->json('DELETE', route('users.destroy', ['user' => $user_id]))
             ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
 
         $this->assertDatabaseMissing('users', $user->toArray());
+        $this->assertDatabaseMissing('addresses', $address->toArray());
     }
 }

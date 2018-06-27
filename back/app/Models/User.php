@@ -8,7 +8,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable;
+    use Notifiable,
+        OnEventsTrait;
 
     protected $fillable = [
         // One-to-One relations
@@ -35,7 +36,8 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     protected $hidden = [
-        'password'
+        'password',
+        'address',
     ];
 
     protected $casts = [
@@ -43,21 +45,11 @@ class User extends Authenticatable implements JWTSubject
         'tou_accepted'          => 'boolean',
     ];
 
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
     public function getJWTIdentifier()
     {
         return $this->getKey();
     }
 
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
     public function getJWTCustomClaims()
     {
         return [];
@@ -71,6 +63,15 @@ class User extends Authenticatable implements JWTSubject
     public function setAddress(Address $address)
     {
         return $this->address()->attach($address);
+    }
+
+    /**
+     * To be realised just after an user is deleted
+     */
+    public static function onDeleted(self $user)
+    {
+        // Delete all related models
+        $user->address()->delete();
     }
 
     public function roles()

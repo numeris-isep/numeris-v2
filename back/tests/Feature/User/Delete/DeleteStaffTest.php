@@ -17,8 +17,10 @@ class DeleteStaffTest extends TestCaseWithAuth
     {
         $user_id = 1;
         $user = User::find($user_id);
+        $address = $user->address;
 
         $this->assertDatabaseHas('users', $user->toArray());
+        $this->assertDatabaseHas('addresses', $address->toArray());
 
         $this->json('DELETE', route('users.destroy', ['user' => $user_id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
@@ -27,6 +29,7 @@ class DeleteStaffTest extends TestCaseWithAuth
             ]);
 
         $this->assertDatabaseHas('users', $user->toArray());
+        $this->assertDatabaseHas('addresses', $address->toArray());
     }
 
     /**

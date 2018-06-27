@@ -15,7 +15,7 @@ class AddAddressesRelationToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->integer('address_id')->unsigned()->nullable()->after('id');
-            $table->foreign('address_id')->references('id')->on('addresses');
+            $table->foreign('address_id')->references('id')->on('addresses')->onDelete('set null');
         });
     }
 
