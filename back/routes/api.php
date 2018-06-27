@@ -26,6 +26,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('users', 'UserController', ['parameters' => ['users' => 'user_id']]);
     Route::patch('users/{user_id}/profile', 'UserController@updateProfile')->name('users.update.profile');
 
+    // Address resource routes
+    Route::apiResource('addresses', 'AddressController', ['parameters' => ['addresses' => 'address_id']]);
+
 });
 
 
