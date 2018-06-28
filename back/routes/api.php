@@ -29,6 +29,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Address resource routes
     Route::apiResource('addresses', 'AddressController', ['parameters' => ['addresses' => 'address_id']]);
 
+    // Preference resource routes
+    Route::apiResource('preferences', 'PreferenceController', ['parameters' => ['preferences' => 'preferences_id']]);
+
 });
 
 

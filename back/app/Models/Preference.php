@@ -20,6 +20,10 @@ class Preference extends Model
         'on_refusal'        => 'boolean',
     ];
 
+    protected $hidden = [
+        'user',
+    ];
+
     public function user()
     {
         return $this->hasOne(User::class);

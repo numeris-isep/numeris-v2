@@ -14,6 +14,7 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         // One-to-One relations
         'address_id',
+        'preference_id',
 
         // attributes
         'activated',
@@ -65,6 +66,16 @@ class User extends Authenticatable implements JWTSubject
         return $this->address()->attach($address);
     }
 
+    public function preference()
+    {
+        return $this->belongsTo(Preference::class);
+    }
+
+    public function setPreference(Preference $preference)
+    {
+        return $this->preference()->attach($preference);
+    }
+
     /**
      * To be realised just after an user is deleted
      */
@@ -72,6 +83,7 @@ class User extends Authenticatable implements JWTSubject
     {
         // Delete all related models
         $user->address()->delete();
+        $user->preference()->delete();
     }
 
     public function roles()
@@ -106,10 +118,5 @@ class User extends Authenticatable implements JWTSubject
     public function isStudent()
     {
         return $this->role()->name === "student";
-    }
-
-    public function preference()
-    {
-        return $this->belongsTo(Preference::class);
     }
 }

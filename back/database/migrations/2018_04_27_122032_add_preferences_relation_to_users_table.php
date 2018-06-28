@@ -15,7 +15,7 @@ class AddPreferencesRelationToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->integer('preference_id')->unsigned()->nullable()->after('id');
-            $table->foreign('preference_id')->references('id')->on('preferences');
+            $table->foreign('preference_id')->references('id')->on('preferences')->onDelete('set null');
         });
     }
 
