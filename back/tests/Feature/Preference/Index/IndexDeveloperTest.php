@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Address\Index;
+namespace Tests\Feature\Preference\Index;
 
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
@@ -12,14 +12,14 @@ class IndexDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      */
-    public function testDeveloperAccessingAddressIndex()
+    public function testDeveloperAccessingPreferenceIndex()
     {
-        $this->json('GET', route('addresses.index'))
+        $this->json('GET', route('preferences.index'))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([[
-                'street',
-                'zip_code',
-                'city',
+                'on_new_mission',
+                'on_acceptance',
+                'on_refusal',
             ]]);
     }
 }

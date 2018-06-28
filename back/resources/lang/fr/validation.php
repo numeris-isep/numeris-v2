@@ -176,5 +176,8 @@ return [
         'time' => 'heure',
         'available' => 'disponible',
         'size' => 'taille',
+        'on_new_mission' => 'nouvelle mission disponible',
+        'on_acceptance' => 'accepté sur une mission',
+        'on_refusal' => 'refusé sur une mission',
     ],
 ];

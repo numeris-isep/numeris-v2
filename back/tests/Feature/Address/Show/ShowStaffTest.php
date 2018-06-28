@@ -12,7 +12,7 @@ class ShowStaffTest extends TestCaseWithAuth
     /**
      * @group staff
      */
-    public function testStaffAccessingUserShow()
+    public function testStaffAccessingAddressShow()
     {
         $address_id = 1;
 

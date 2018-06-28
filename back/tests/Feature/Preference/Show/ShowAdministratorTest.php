@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Address\Show;
+namespace Tests\Feature\Preference\Show;
 
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
@@ -12,16 +12,16 @@ class ShowAdministratorTest extends TestCaseWithAuth
     /**
      * @group administrator
      */
-    public function testAdministratorAccessingAddressShow()
+    public function testAdministratorAccessingPreferenceShow()
     {
-        $address_id = 1;
+        $preference_id = 1;
 
-        $this->json('GET', route('addresses.show', ['address_id' => $address_id]))
+        $this->json('GET', route('preferences.show', ['preference_id' => $preference_id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
-                'street',
-                'zip_code',
-                'city',
+                'on_new_mission',
+                'on_acceptance',
+                'on_refusal',
             ]);
     }
 }

@@ -1,22 +1,20 @@
 <?php
 
-namespace Tests\Feature\Address\Show;
+namespace Tests\Feature\Preference\Index;
 
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
-class ShowStudentTest extends TestCaseWithAuth
+class IndexStudentTest extends TestCaseWithAuth
 {
     protected $username = 'student';
 
     /**
      * @group student
      */
-    public function testStudentAccessingAddressShow()
+    public function testStudentAccessingPreferenceIndex()
     {
-        $address_id = 1;
-
-        $this->json('GET', route('addresses.show', ['address_id' => $address_id]))
+        $this->json('GET', route('preferences.index'))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson([
                 'error' => 'Forbidden'

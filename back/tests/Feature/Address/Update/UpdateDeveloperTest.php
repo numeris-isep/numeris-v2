@@ -38,7 +38,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      */
-    public function testDeveloperCreatingAddressWithoutData()
+    public function testDeveloperUpdatingAddressWithoutData()
     {
         $address_id = 1;
         $data = [];

@@ -12,7 +12,7 @@ class ShowDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      */
-    public function testDeveloperAccessingUserShow()
+    public function testDeveloperAccessingAddressShow()
     {
         $address_id = 1;
 

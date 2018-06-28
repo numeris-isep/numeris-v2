@@ -12,7 +12,7 @@ class IndexStudentTest extends TestCaseWithAuth
     /**
      * @group student
      */
-    public function testStudentAccessingUserIndex()
+    public function testStudentAccessingAddressIndex()
     {
         $this->json('GET', route('addresses.index'))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
