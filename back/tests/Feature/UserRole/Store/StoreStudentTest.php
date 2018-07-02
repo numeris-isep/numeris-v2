@@ -12,7 +12,7 @@ class IndexStudentTest extends TestCaseWithAuth
     protected $username = 'student';
 
     /**
-     * @group administrator
+     * @group student
      */
     public function testStudentChangingDeveloperToDeveloper()
     {
@@ -38,7 +38,7 @@ class IndexStudentTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group student
      */
     public function testStudentChangingDeveloperToAdministrator()
     {
@@ -64,7 +64,7 @@ class IndexStudentTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group student
      */
     public function testStudentChangingDeveloperToStaff()
     {
@@ -90,7 +90,7 @@ class IndexStudentTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group student
      */
     public function testStudentChangingDeveloperToStudent()
     {
@@ -116,7 +116,7 @@ class IndexStudentTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group student
      */
     public function testStudentChangingAdministratorToDeveloper()
     {
@@ -142,7 +142,7 @@ class IndexStudentTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group student
      */
     public function testStudentChangingAdministratorToAdministrator()
     {
@@ -168,7 +168,7 @@ class IndexStudentTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group student
      */
     public function testStudentChangingAdministratorToStaff()
     {
@@ -194,7 +194,7 @@ class IndexStudentTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group student
      */
     public function testStudentChangingAdministratorToStudent()
     {
@@ -220,7 +220,7 @@ class IndexStudentTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group student
      */
     public function testStudentChangingStaffToDeveloper()
     {
@@ -246,7 +246,7 @@ class IndexStudentTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group student
      */
     public function testStudentChangingStaffToAdministrator()
     {
@@ -272,7 +272,7 @@ class IndexStudentTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group student
      */
     public function testStudentChangingStaffToStaff()
     {
@@ -298,7 +298,7 @@ class IndexStudentTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group student
      */
     public function testStudentChangingStaffToStudent()
     {
@@ -324,7 +324,7 @@ class IndexStudentTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group student
      */
     public function testStudentChangingStudentToDeveloper()
     {
@@ -350,7 +350,7 @@ class IndexStudentTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group student
      */
     public function testStudentChangingStudentToAdministrator()
     {
@@ -376,7 +376,7 @@ class IndexStudentTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group student
      */
     public function testStudentChangingStudentToStaff()
     {
@@ -402,7 +402,7 @@ class IndexStudentTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group student
      */
     public function testStudentChangingStudentToStudent()
     {

@@ -12,7 +12,7 @@ class StoreStaffTest extends TestCaseWithAuth
     protected $username = 'staff';
 
     /**
-     * @group administrator
+     * @group staff
      */
     public function testStaffChangingDeveloperToDeveloper()
     {
@@ -38,7 +38,7 @@ class StoreStaffTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group staff
      */
     public function testStaffChangingDeveloperToAdministrator()
     {
@@ -64,7 +64,7 @@ class StoreStaffTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group staff
      */
     public function testStaffChangingDeveloperToStaff()
     {
@@ -90,7 +90,7 @@ class StoreStaffTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group staff
      */
     public function testStaffChangingDeveloperToStudent()
     {
@@ -116,7 +116,7 @@ class StoreStaffTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group staff
      */
     public function testStaffChangingAdministratorToDeveloper()
     {
@@ -142,7 +142,7 @@ class StoreStaffTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group staff
      */
     public function testStaffChangingAdministratorToAdministrator()
     {
@@ -168,7 +168,7 @@ class StoreStaffTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group staff
      */
     public function testStaffChangingAdministratorToStaff()
     {
@@ -194,7 +194,7 @@ class StoreStaffTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group staff
      */
     public function testStaffChangingAdministratorToStudent()
     {
@@ -220,7 +220,7 @@ class StoreStaffTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group staff
      */
     public function testStaffChangingStaffToDeveloper()
     {
@@ -246,7 +246,7 @@ class StoreStaffTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group staff
      */
     public function testStaffChangingStaffToAdministrator()
     {
@@ -272,7 +272,7 @@ class StoreStaffTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group staff
      */
     public function testStaffChangingStaffToStaff()
     {
@@ -298,7 +298,7 @@ class StoreStaffTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group staff
      */
     public function testStaffChangingStaffToStudent()
     {
@@ -324,7 +324,7 @@ class StoreStaffTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group staff
      */
     public function testStaffChangingStudentToDeveloper()
     {
@@ -350,7 +350,7 @@ class StoreStaffTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group staff
      */
     public function testStaffChangingStudentToAdministrator()
     {
@@ -376,7 +376,7 @@ class StoreStaffTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group staff
      */
     public function testStaffChangingStudentToStaff()
     {
@@ -402,7 +402,7 @@ class StoreStaffTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group staff
      */
     public function testStaffChangingStudentToStudent()
     {
