@@ -30,7 +30,16 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('addresses', 'AddressController', ['parameters' => ['addresses' => 'address_id']]);
 
     // Preference resource routes
-    Route::apiResource('preferences', 'PreferenceController', ['parameters' => ['preferences' => 'preferences_id']]);
+    Route::apiResource('preferences', 'PreferenceController', ['parameters' => ['preferences' => 'preference_id']]);
+
+    // Role resource routes
+    Route::get('roles', 'RoleController@index')->name('roles.index');
+
+    // UserRole resource routes
+    Route::resource('users.roles', 'UserRoleController', ['parameters' => [
+        'users' => 'user_id',
+        'roles' => 'role_id',
+    ]])->except(['create', 'show', 'edit', 'update', 'destroy']);
 
 });
 

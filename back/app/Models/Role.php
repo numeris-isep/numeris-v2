@@ -15,12 +15,14 @@ class Role extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)
+            ->using(UserRole::class)
+            ->withTimestamps();
     }
 
-    public function isCurrentRole()
+    public function isCurrentRoleOf(User $user)
     {
-        // TODO
+        return $user->role()->name === $this->name;
     }
 
     public static function findByName($name)

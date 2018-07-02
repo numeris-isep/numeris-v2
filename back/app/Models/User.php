@@ -89,11 +89,21 @@ class User extends Authenticatable implements JWTSubject
     public function roles()
     {
         return $this->belongsToMany(Role::class)
+            ->using(UserRole::class)
             ->withTimestamps();
+    }
+
+    public function setRole(Role $role)
+    {
+        $this->roles()->attach($role);
     }
 
     /**
      * Return the current role of the user (= the latest)
+     *
+     * DISCLAIMER: this method is the corner stone of the website, all user's
+     * authorizations depend on it. If it has to be modified, please do it with
+     * care. Thanks and happy coding!
      */
     public function role()
     {
