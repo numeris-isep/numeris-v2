@@ -3,11 +3,13 @@
 namespace App\Providers;
 
 use App\Models\Address;
+use App\Models\Client;
 use App\Models\Preference;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserRole;
 use App\Policies\AddressPolicy;
+use App\Policies\ClientPolicy;
 use App\Policies\PreferencePolicy;
 use App\Policies\RolePolicy;
 use App\Policies\UserPolicy;
@@ -28,6 +30,7 @@ class AuthServiceProvider extends ServiceProvider
         Preference::class   => PreferencePolicy::class,
         Role::class         => RolePolicy::class,
         UserRole::class     => UserRolePolicy::class,
+        Client::class       => ClientPolicy::class,
     ];
 
     /**

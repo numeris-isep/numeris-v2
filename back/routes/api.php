@@ -41,6 +41,9 @@ Route::group(['middleware' => 'auth:api'], function () {
         'roles' => 'role_id',
     ]])->except(['create', 'show', 'edit', 'update', 'destroy']);
 
+    // Client resource routes
+    Route::apiResource('clients', 'ClientController', ['parameters' => ['clients' => 'client_id']]);
+
 });
 
 
