@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
 
             $table->boolean('activated')->default(false);
             $table->boolean('tou_accepted')->default(false);
-            $table->string('subscription_paid_at')->nullable();
+            $table->timestamp('subscription_paid_at')->nullable();
 
             $table->string('email')->unique();
             $table->string('password');
@@ -32,7 +32,7 @@ class CreateUsersTable extends Migration
 
             $table->string('nationality')->nullable();
 
-            $table->dateTime('birth_date')->nullable();
+            $table->timestamp('birth_date')->nullable();
             $table->string('birth_city')->nullable();
             $table->string('social_insurance_number')->nullable();
             $table->string('iban')->nullable();

@@ -18,6 +18,8 @@ class UserResource extends JsonResource
 
         return [
             'id'                        => $this->id,
+            'preference_id'             => $this->preference_id,
+            'address_id'                => $this->address_id,
             'activated'                 => $this->activated,
             'tou_accepted'              => $this->tou_accepted,
             'subscription_paid_at'      => $this->subscription_paid_at,
@@ -34,8 +36,8 @@ class UserResource extends JsonResource
             'social_insurance_number'   => $this->social_insurance_number,
             'iban'                      => $this->iban,
             'bic'                       => $this->bic,
-            'created_at'                => $this->created_at,
-            'updated_at'                => $this->updated_at,
+            'created_at'                => $this->created_at->toDateTimeString(),
+            'updated_at'                => $this->updated_at->toDateTimeString(),
         ];
     }
 }

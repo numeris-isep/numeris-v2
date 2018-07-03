@@ -6,6 +6,8 @@ use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
 {
+    private $empty_table = false;
+
     /**
      * Run the database seeds.
      *
@@ -15,6 +17,10 @@ class UsersTableSeeder extends Seeder
     {
         if (Role::all()->isEmpty()) {
             $this->call(RolesTableSeeder::class);
+        }
+
+        if (User::all()->isEmpty()) {
+            $this->empty_table = true;
         }
 
         // Generate 2 developer accounts
@@ -94,7 +100,7 @@ class UsersTableSeeder extends Seeder
         }
 
         // Generate my account ;)
-        if (! User::where('email', 'eliott.de-seguier@numeris-isep.fr')->first()) {
+        if (! User::where('email', 'eliottdes@gmail.com')->first()) {
             $this->createUser(1, 'developer', 'active', [
                 'email'             => 'eliottdes@gmail.com',
                 'username'          => '2Seg',
@@ -109,11 +115,13 @@ class UsersTableSeeder extends Seeder
             ]);
         }
 
-        // Generate 5 random active users
-        $this->createUser(5, 'student', 'active');
+        if ($this->empty_table) {
+            // Generate 5 random active users
+            $this->createUser(5, 'student', 'active');
 
-        // Generate 5 random inactive users
-        $this->createUser(5);
+            // Generate 5 random inactive users
+            $this->createUser(5);
+        }
 
     }
 

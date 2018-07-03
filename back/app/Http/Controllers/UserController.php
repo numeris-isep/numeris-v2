@@ -35,7 +35,7 @@ class UserController extends Controller
 
         $user = User::create($request->all());
 
-        return response()->json(new UserResource($user), JsonResponse::HTTP_CREATED);
+        return response()->json(UserResource::make($user), JsonResponse::HTTP_CREATED);
     }
 
     /**

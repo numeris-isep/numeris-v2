@@ -34,6 +34,8 @@ class ShowStudentTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'id',
+                'preference_id',
+                'address_id',
                 'activated',
                 'tou_accepted',
                 'subscription_paid_at',
