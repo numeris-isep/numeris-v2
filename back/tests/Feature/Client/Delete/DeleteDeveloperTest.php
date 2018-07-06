@@ -39,7 +39,7 @@ class DeleteDeveloperTest extends TestCaseWithAuth
         $this->json('DELETE', route('clients.destroy', ['client_id' => $client_id]))
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
             ->assertJson([
-                'error' => 'Resource not found'
+                'error' => trans('api.404')
             ]);
     }
 }

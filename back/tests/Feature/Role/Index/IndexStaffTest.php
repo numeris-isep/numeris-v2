@@ -17,7 +17,7 @@ class IndexStaffTest extends TestCaseWithAuth
         $this->json('GET', route('roles.index'))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson([
-                'error' => 'Forbidden'
+                'error' => trans('api.403')
             ]);
     }
 }

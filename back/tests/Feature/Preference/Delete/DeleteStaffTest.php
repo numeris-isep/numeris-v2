@@ -25,7 +25,7 @@ class DeleteStaffTest extends TestCaseWithAuth
         $this->json('DELETE', route('preferences.destroy', ['preference_id' => $preference_id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson([
-                'error' => 'Forbidden'
+                'error' => trans('api.403')
             ]);
 
         $this->assertDatabaseHas('preferences', $preference->toArray());

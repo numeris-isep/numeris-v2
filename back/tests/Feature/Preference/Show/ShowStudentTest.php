@@ -19,7 +19,7 @@ class ShowStudentTest extends TestCaseWithAuth
         $this->json('GET', route('preferences.show', ['preference_id' => $preference_id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson([
-                'error' => 'Forbidden'
+                'error' => trans('api.403')
             ]);
     }
 }

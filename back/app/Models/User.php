@@ -62,11 +62,6 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsTo(Address::class);
     }
 
-    public function setAddress(Address $address)
-    {
-        return $this->address()->attach($address);
-    }
-
     public function preference()
     {
         return $this->belongsTo(Preference::class);

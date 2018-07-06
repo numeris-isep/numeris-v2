@@ -35,7 +35,7 @@ class ShowDeveloperTest extends TestCaseWithAuth
         $this->json('GET', route('preferences.show', ['preference_id' => $preference_id]))
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
             ->assertJson([
-                'error' => 'Resource not found'
+                'error' => trans('api.404')
             ]);
     }
 }

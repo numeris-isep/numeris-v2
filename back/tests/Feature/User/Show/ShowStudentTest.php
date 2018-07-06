@@ -19,7 +19,7 @@ class ShowStudentTest extends TestCaseWithAuth
         $this->json('GET', route('users.show', ['user_id' => $user_id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson([
-                'error' => 'Forbidden'
+                'error' => trans('api.403')
             ]);
     }
 
@@ -53,7 +53,21 @@ class ShowStudentTest extends TestCaseWithAuth
                 'iban',
                 'bic',
                 'created_at',
-                'updated_at'
+                'updated_at',
+
+
+                'address'       => [
+                    'id',
+                    'street',
+                    'zip_code',
+                    'city',
+                ],
+                'preference'    => [
+                    'id',
+                    'on_new_mission',
+                    'on_acceptance',
+                    'on_refusal',
+                ],
             ]);
     }
 }

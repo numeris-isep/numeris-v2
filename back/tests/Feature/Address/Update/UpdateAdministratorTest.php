@@ -26,7 +26,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
         $this->json('PUT', route('addresses.update', ['address_id' => $address_id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson([
-                'error' => 'Forbidden'
+                'error' => trans('api.403')
             ]);
 
         $this->assertDatabaseMissing('addresses', $data);

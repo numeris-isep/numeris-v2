@@ -39,7 +39,26 @@ class ShowDeveloperTest extends TestCaseWithAuth
                 'iban',
                 'bic',
                 'created_at',
-                'updated_at'
+                'updated_at',
+
+                'address'       => [
+                    'id',
+                    'street',
+                    'zip_code',
+                    'city',
+                ],
+                'preference'    => [
+                    'id',
+                    'on_new_mission',
+                    'on_acceptance',
+                    'on_refusal',
+                ],
+                'role'          => [
+                    'id',
+                    'name',
+                    'hierarchy',
+                    'created_at',
+                ],
             ]);
     }
 
@@ -53,7 +72,7 @@ class ShowDeveloperTest extends TestCaseWithAuth
         $this->json('GET', route('users.show', ['user_id' => $user_id]))
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
             ->assertJson([
-                'error' => 'Resource not found'
+                'error' => trans('api.404')
             ]);
     }
 }

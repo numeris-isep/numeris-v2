@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
+use App\Models\Address;
+use App\Models\Preference;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 
@@ -50,6 +52,12 @@ class UserController extends Controller
         $user = User::findOrFail($user_id);
         $this->authorize('show', $user);
 
+        $user->load(['address', 'preference']);
+
+        if (auth()->user()->role()->isSuperiorOrEquivalentTo('staff')) {
+            $user->load('roles');
+        }
+
         return response()->json(UserResource::make($user));
     }
 
@@ -81,11 +89,11 @@ class UserController extends Controller
      */
     public function updateProfile(UserRequest $request, $user_id)
     {
-        $user = User::findOrFail($user_id);
+        $user = User::with('address')->findOrFail($user_id);
         $this->authorize('update-profile', $user);
 
         // Filtering the request to only update the fields an user is allowed to update
-        $user->update($request->only([
+        $user_request = $request->only([
             'phone',
             'nationality',
             'birth_date',
@@ -93,7 +101,33 @@ class UserController extends Controller
             'social_insurance_number',
             'iban',
             'bic'
-        ]));
+        ]);
+        $address_request = $request->only([
+            'street',
+            'zip_code',
+            'city',
+        ]);
+        $preference_request = $request->only([
+            'on_new_mission',
+            'on_acceptance',
+            'on_refusal',
+        ]);
+
+        $user->update($user_request);
+
+        if ($user->address) {
+            $user->address()->update($address_request);
+        } else {
+            $address = Address::create($address_request);
+            $address->user()->save($user);
+        }
+
+        if ($user->preference) {
+            $user->preference()->update($preference_request);
+        } else {
+            $preference = Preference::create($preference_request);
+            $preference->user()->save($user);
+        }
 
         return response()->json(UserResource::make($user), JsonResponse::HTTP_CREATED);
     }

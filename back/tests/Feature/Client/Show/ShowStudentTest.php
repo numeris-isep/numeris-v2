@@ -19,7 +19,7 @@ class ShowStudentTest extends TestCaseWithAuth
         $this->json('GET', route('clients.show', ['client_id' => $client_id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson([
-                'error' => 'Forbidden'
+                'error' => trans('api.403')
             ]);
     }
 }

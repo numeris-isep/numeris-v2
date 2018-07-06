@@ -59,6 +59,16 @@ class UserRequest extends AbstractFormRequest
             'social_insurance_number'   => 'required|string',
             'iban'                      => 'required|string|min:13',
             'bic'                       => 'required|string',
+
+            // Address
+            'street'                    => 'required|string',
+            'zip_code'                  => 'required|integer',
+            'city'                      => 'required|string',
+
+            // Preference
+            'on_new_mission'            => 'required|boolean',
+            'on_acceptance'             => 'required|boolean',
+            'on_refusal'                => 'required|boolean',
         ];
 
         switch($this->method())

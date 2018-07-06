@@ -25,7 +25,7 @@ class StoreStudentTest extends TestCaseWithAuth
         $this->json('POST', route('addresses.store'), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson([
-                'error' => 'Forbidden'
+                'error' => trans('api.403')
             ]);
 
         $this->assertDatabaseMissing('addresses', $data);

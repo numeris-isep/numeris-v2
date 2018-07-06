@@ -23,7 +23,7 @@ class StoreStaffTest extends TestCaseWithAuth
         $this->json('POST', route('preferences.store'), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson([
-                'error' => 'Forbidden'
+                'error' => trans('api.403')
             ]);
     }
 }

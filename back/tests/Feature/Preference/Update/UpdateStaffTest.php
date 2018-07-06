@@ -24,7 +24,7 @@ class UpdateStaffTest extends TestCaseWithAuth
         $this->json('PUT', route('preferences.update', ['preference_id' => $preference_id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson([
-                'error' => 'Forbidden'
+                'error' => trans('api.403')
             ]);
     }
 }

@@ -14,8 +14,6 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
-        static::withoutWrapping();
-
         return [
             'id'                        => $this->id,
             'preference_id'             => $this->preference_id,
@@ -38,6 +36,11 @@ class UserResource extends JsonResource
             'bic'                       => $this->bic,
             'created_at'                => $this->created_at->toDateTimeString(),
             'updated_at'                => $this->updated_at->toDateTimeString(),
+
+            // Relation
+            'address'                   => $this->whenLoaded('address', AddressResource::make($this->address)),
+            'preference'                => $this->whenLoaded('preference', PreferenceResource::make($this->preference)),
+            'role'                      => $this->whenLoaded('roles', UserRoleResource::make($this->role())),
         ];
     }
 }
