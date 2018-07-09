@@ -19,11 +19,21 @@ class Client extends Model
 
     protected $hidden = [
         'address',
+        'projects',
     ];
 
     public static function findByName($name)
     {
         return static::where('name', $name)->first();
+    }
+
+    /**
+     * To be realised just before a client is deleted
+     */
+    public static function onDeleting(self $client)
+    {
+        // Delete all related models
+        $client->projects()->delete();
     }
 
     /**

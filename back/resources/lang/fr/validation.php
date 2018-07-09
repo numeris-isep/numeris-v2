@@ -180,5 +180,7 @@ return [
         'on_acceptance' => 'accepté sur une mission',
         'on_refusal' => 'refusé sur une mission',
         'reference' => 'reférence',
+        'start_at' => 'date de début',
+        'client_id' => 'client',
     ],
 ];

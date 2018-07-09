@@ -24,7 +24,13 @@ class ShowDeveloperTest extends TestCaseWithAuth
                 'name',
                 'reference',
                 'created_at',
-                'updated_at'
+                'updated_at',
+                'address' => [
+                    'id',
+                    'street',
+                    'zip_code',
+                    'city',
+                ],
             ]);
     }
 

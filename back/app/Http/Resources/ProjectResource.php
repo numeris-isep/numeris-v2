@@ -21,6 +21,8 @@ class ProjectResource extends JsonResource
             'start_at'          => $this->start_at,
             'is_private'        => $this->is_private,
             'money_received_at' => $this->money_received_at,
+            'created_at'        => $this->created_at->toDateTimeString(),
+            'updated_at'        => $this->updated_at->toDateTimeString(),
 
             // Relations
             'client'            => $this->whenLoaded('client', ClientResource::make($this->client)),

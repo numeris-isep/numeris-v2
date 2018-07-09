@@ -3,6 +3,7 @@
 namespace Tests\Feature\Client\Delete;
 
 use App\Models\Client;
+use App\Models\Project;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
@@ -13,7 +14,7 @@ class DeleteStudentTest extends TestCaseWithAuth
     /**
      * @group student
      */
-    public function testStudentDeletingUser()
+    public function testStudentDeletingClient()
     {
         $client_id = 1;
         $client = Client::find($client_id);
@@ -21,6 +22,7 @@ class DeleteStudentTest extends TestCaseWithAuth
 
         $this->assertDatabaseHas('clients', $client->toArray());
         $this->assertDatabaseHas('addresses', $address->toArray());
+        $this->assertNotEmpty(Project::where('client_id', $client_id)->get());
 
         $this->json('DELETE', route('clients.destroy', ['client_id' => $client_id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
@@ -30,5 +32,6 @@ class DeleteStudentTest extends TestCaseWithAuth
 
         $this->assertDatabaseHas('clients', $client->toArray());
         $this->assertDatabaseHas('addresses', $address->toArray());
+        $this->assertNotEmpty(Project::where('client_id', $client_id)->get());
     }
 }
