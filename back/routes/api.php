@@ -44,6 +44,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Client resource routes
     Route::apiResource('clients', 'ClientController', ['parameters' => ['clients' => 'client_id']]);
 
+    // Project resource routes
+    Route::apiResource('projects', 'ProjectController', ['parameters' => ['projects' => 'project_id']]);
+
 });
 
 

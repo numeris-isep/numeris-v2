@@ -131,13 +131,13 @@ class UsersTableSeeder extends Seeder
             return factory(User::class)->states($state)
                 ->create($attributes)
                 ->roles()
-                ->attach(Role::where('name', $type)->first());
+                ->attach(Role::findByName($type));
         } else {
             return factory(User::class, $number)->states($state)
                 ->create($attributes)
                 ->map(function ($user) use ($type) {
                    $user->roles()
-                       ->attach(Role::where('name', $type)->first());
+                       ->attach(Role::findByName($type));
                 });
         }
     }

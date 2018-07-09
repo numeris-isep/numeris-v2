@@ -21,6 +21,9 @@ class ClientResource extends JsonResource
             'reference'     => $this->reference,
             'created_at'    => $this->created_at->toDateTimeString(),
             'updated_at'    => $this->updated_at->toDateTimeString(),
+
+            // Relations
+            'address'       => $this->whenLoaded('address', AddressResource::make($this->address))
         ];
     }
 }

@@ -33,7 +33,7 @@ class ClientRequest extends AbstractFormRequest
      */
     public function rules()
     {
-        $user_id = $this->ids;
+        $client_id = $this->ids;
 
         switch($this->method())
         {
@@ -47,8 +47,8 @@ class ClientRequest extends AbstractFormRequest
             case 'PUT':
             case 'PATCH':
                 return [
-                    'name'      => 'required|string|unique:clients,name,' . $user_id,
-                    'reference' => 'required|string|unique:clients,reference,' . $user_id,
+                    'name'      => 'required|string|unique:clients,name,' . $client_id,
+                    'reference' => 'required|string|unique:clients,reference,' . $client_id,
                 ];
                 break;
 

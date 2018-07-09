@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Client;
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ClientPolicy
+class ProjectPolicy
 {
     use HandlesAuthorization;
 
@@ -31,17 +31,17 @@ class ClientPolicy
         return false;
     }
 
-    public function show(User $current_user, Client $client)
+    public function show(User $current_user, Project $project)
     {
         return false;
     }
 
-    public function update(User $current_user, Client $client)
+    public function update(User $current_user, Project $project)
     {
         return false;
     }
 
-    public function destroy(User $current_user, Client $client)
+    public function destroy(User $current_user, Project $project)
     {
         return false;
     }

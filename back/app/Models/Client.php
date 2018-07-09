@@ -21,8 +21,13 @@ class Client extends Model
         'address',
     ];
 
+    public static function findByName($name)
+    {
+        return static::where('name', $name)->first();
+    }
+
     /**
-     * To be realised just after an user is deleted
+     * To be realised just after a client is deleted
      */
     public static function onDeleted(self $client)
     {
@@ -33,5 +38,10 @@ class Client extends Model
     public function address()
     {
         return $this->belongsTo(Address::class);
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
     }
 }
