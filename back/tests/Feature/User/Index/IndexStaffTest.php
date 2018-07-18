@@ -37,7 +37,7 @@ class IndexStaffTest extends TestCaseWithAuth
                 'iban',
                 'bic',
                 'created_at',
-                'updated_at'
+                'updated_at',
             ]]);
     }
 }

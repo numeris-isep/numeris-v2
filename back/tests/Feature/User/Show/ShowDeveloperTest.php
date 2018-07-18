@@ -40,25 +40,9 @@ class ShowDeveloperTest extends TestCaseWithAuth
                 'bic',
                 'created_at',
                 'updated_at',
-
-                'address'       => [
-                    'id',
-                    'street',
-                    'zip_code',
-                    'city',
-                ],
-                'preference'    => [
-                    'id',
-                    'on_new_mission',
-                    'on_acceptance',
-                    'on_refusal',
-                ],
-                'role'          => [
-                    'id',
-                    'name',
-                    'hierarchy',
-                    'created_at',
-                ],
+                'address',
+                'preference',
+                'role',
             ]);
     }
 

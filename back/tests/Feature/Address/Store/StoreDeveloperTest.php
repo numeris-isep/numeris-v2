@@ -41,12 +41,6 @@ class StoreDeveloperTest extends TestCaseWithAuth
     {
         $this->json('POST', route('addresses.store'))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJson([
-                'errors' => [
-                    'street'    => ['Le champ rue est obligatoire.'],
-                    'zip_code'  => ['Le champ code postal est obligatoire.'],
-                    'city'      => ['Le champ ville est obligatoire.'],
-                ]
-            ]);
+            ->assertJsonValidationErrors([ 'street', 'zip_code', 'city']);
     }
 }

@@ -31,7 +31,8 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'name',
                 'reference',
                 'created_at',
-                'updated_at'
+                'updated_at',
+                'address',
             ]);
 
         $this->assertDatabaseHas('clients', $data);
@@ -53,12 +54,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $this->json('PUT', route('clients.update', ['client_id' => $client_id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJson([
-                'errors' => [
-                    'name'      => ['La valeur du champ nom est déjà utilisée.'],
-                    'reference' => ['La valeur du champ reférence est déjà utilisée.'],
-                ]
-            ]);
+            ->assertJsonValidationErrors(['name', 'reference']);
 
         $this->assertDatabaseHas('clients', $data);
     }
@@ -72,11 +68,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $this->json('PUT', route('clients.update', ['client_id' => $client_id]))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJson([
-                'errors' => [
-                    'name'      => ['Le champ nom est obligatoire.'],
-                    'reference' => ['Le champ reférence est obligatoire.'],
-                ]
-            ]);
+            ->assertJsonValidationErrors(['name', 'reference']);
     }
 }

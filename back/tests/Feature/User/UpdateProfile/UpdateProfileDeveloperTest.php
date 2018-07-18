@@ -52,7 +52,7 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
                 'iban',
                 'bic',
                 'created_at',
-                'updated_at'
+                'updated_at',
             ]);
 
         $this->assertDatabaseHas('users', $user_data);
@@ -68,16 +68,14 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
 
         $this->json('PATCH', route('users.update.profile', ['user' => $user_id]))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJson([
-                'errors' => [
-                    'phone'                     => ['Le champ téléphone est obligatoire.'],
-                    'nationality'               => ['Le champ nationalité est obligatoire.'],
-                    'birth_date'                => ['Le champ date de naissance est obligatoire.'],
-                    'birth_city'                => ['Le champ ville de naissance est obligatoire.'],
-                    'social_insurance_number'   => ['Le champ numéro de sécurité sociale est obligatoire.'],
-                    'iban'                      => ['Le champ iban est obligatoire.'],
-                    'bic'                       => ['Le champ bic est obligatoire.'],
-                ]
+            ->assertJsonValidationErrors([
+                'phone',
+                'nationality',
+                'birth_date',
+                'birth_city',
+                'social_insurance_number',
+                'iban',
+                'bic',
             ]);
     }
 

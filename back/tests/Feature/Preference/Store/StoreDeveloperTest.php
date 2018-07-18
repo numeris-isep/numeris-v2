@@ -37,12 +37,10 @@ class StoreDeveloperTest extends TestCaseWithAuth
     {
         $this->json('POST', route('preferences.store'))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJson([
-                'errors' => [
-                    'on_new_mission'    => ['Le champ nouvelle mission disponible est obligatoire.'],
-                    'on_acceptance'     => ['Le champ accepté sur une mission est obligatoire.'],
-                    'on_refusal'        => ['Le champ refusé sur une mission est obligatoire.'],
-                ]
+            ->assertJsonValidationErrors([
+                'on_new_mission',
+                'on_acceptance',
+                'on_refusal'
             ]);
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
 namespace Tests\Feature\Project\Store;
-
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
@@ -16,6 +15,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
     {
         $data = [
             'client_id'     => 1,
+            'convention_id' => 1,
             'name'          => 'Projet de test',
             'start_at'      => now()->toDateString(),
             'is_private'    => false,
@@ -34,6 +34,8 @@ class StoreDeveloperTest extends TestCaseWithAuth
                 'money_received_at',
                 'created_at',
                 'updated_at',
+                'client',
+                'convention',
             ]);
 
         $this->assertDatabaseHas('projects', $data);
@@ -55,11 +57,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
         $this->json('POST', route('projects.store'), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJson([
-                'errors' => [
-                    'name'      => ['La valeur du champ nom est déjà utilisée.'],
-                ]
-            ]);
+            ->assertJsonValidationErrors(['name']);
 
         $this->assertDatabaseMissing('projects', $data);
     }
@@ -71,12 +69,6 @@ class StoreDeveloperTest extends TestCaseWithAuth
     {
         $this->json('POST', route('projects.store'))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJson([
-                'errors' => [
-                    'client_id' => ['Le champ client est obligatoire.'],
-                    'name'      => ['Le champ nom est obligatoire.'],
-                    'start_at'  => ['Le champ date de début est obligatoire.'],
-                ]
-            ]);
+            ->assertJsonValidationErrors(['client_id', 'name', 'start_at']);
     }
 }

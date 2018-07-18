@@ -27,14 +27,8 @@ class ShowStaffTest extends TestCaseWithAuth
                 'money_received_at',
                 'created_at',
                 'updated_at',
-                'client' => [
-                    'id',
-                    'address_id',
-                    'name',
-                    'reference',
-                    'created_at',
-                    'updated_at',
-                ],
+                'client',
+                'convention',
             ]);
     }
 }

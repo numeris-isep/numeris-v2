@@ -57,7 +57,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'iban',
                 'bic',
                 'created_at',
-                'updated_at'
+                'updated_at',
             ]);
 
         $this->assertDatabaseHas('users', $db_data);
@@ -116,12 +116,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $this->json('PUT', route('users.update', ['user_id' => $user_id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJson([
-                'errors' => [
-                    'email'     => ['La valeur du champ email est déjà utilisée.'],
-                    'username' => ['La valeur du champ nom d\'utilisateur est déjà utilisée.'],
-                ]
-            ]);
+            ->assertJsonValidationErrors(['email', 'username']);
 
         $this->assertDatabaseMissing('users', $db_data);
     }
@@ -135,14 +130,12 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $this->json('PUT', route('users.update', ['user' => $user_id]))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJson([
-                'errors' => [
-                    'password'      => ['Le champ mot de passe est obligatoire.'],
-                    'first_name'    => ['Le champ prénom est obligatoire.'],
-                    'last_name'     => ['Le champ nom est obligatoire.'],
-                    'email'         => ['Le champ email est obligatoire.'],
-                    'username'      => ['Le champ nom d\'utilisateur est obligatoire.'],
-                ]
+            ->assertJsonValidationErrors([
+                'password',
+                'first_name',
+                'last_name',
+                'email',
+                'username'
             ]);
     }
 }

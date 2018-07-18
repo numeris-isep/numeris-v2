@@ -25,6 +25,8 @@ class IndexAdministratorTest extends TestCaseWithAuth
                 'money_received_at',
                 'created_at',
                 'updated_at',
+                'client',
+                'convention',
             ]]);
     }
 }

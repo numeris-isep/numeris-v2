@@ -22,7 +22,7 @@ class IndexDeveloperTest extends TestCaseWithAuth
                 'name',
                 'reference',
                 'created_at',
-                'updated_at'
+                'updated_at',
             ]]);
     }
 }

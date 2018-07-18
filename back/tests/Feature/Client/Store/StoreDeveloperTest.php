@@ -29,7 +29,8 @@ class StoreDeveloperTest extends TestCaseWithAuth
                 'name',
                 'reference',
                 'created_at',
-                'updated_at'
+                'updated_at',
+                'address',
             ]);
 
         $this->assertDatabaseHas('clients', $data);
@@ -49,12 +50,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
         $this->json('POST', route('clients.store'), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJson([
-                'errors' => [
-                    'name'      => ['La valeur du champ nom est déjà utilisée.'],
-                    'reference' => ['La valeur du champ reférence est déjà utilisée.'],
-                ]
-            ]);
+            ->assertJsonValidationErrors(['name', 'reference']);
 
         $this->assertDatabaseHas('clients', $data);
     }
@@ -66,11 +62,6 @@ class StoreDeveloperTest extends TestCaseWithAuth
     {
         $this->json('POST', route('clients.store'))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJson([
-                'errors' => [
-                    'name'      => ['Le champ nom est obligatoire.'],
-                    'reference' => ['Le champ reférence est obligatoire.'],
-                ]
-            ]);
+            ->assertJsonValidationErrors(['name', 'reference']);
     }
 }

@@ -54,20 +54,8 @@ class ShowStudentTest extends TestCaseWithAuth
                 'bic',
                 'created_at',
                 'updated_at',
-
-
-                'address'       => [
-                    'id',
-                    'street',
-                    'zip_code',
-                    'city',
-                ],
-                'preference'    => [
-                    'id',
-                    'on_new_mission',
-                    'on_acceptance',
-                    'on_refusal',
-                ],
+                'address',
+                'preference',
             ]);
     }
 }

@@ -23,7 +23,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $role_name = Role::find($role_id)->name;
 
         $data = [
-            'role' => $role_id,
+            'role_id' => $role_id,
         ];
 
         $this->assertTrue($user->role()->name == $role_name);
@@ -49,7 +49,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $role_name = Role::find($role_id)->name;
 
         $data = [
-            'role' => $role_id,
+            'role_id' => $role_id,
         ];
 
         $this->assertFalse($user->role()->name == $role_name);
@@ -76,7 +76,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $role_name = Role::find($role_id)->name;
 
         $data = [
-            'role' => $role_id,
+            'role_id' => $role_id,
         ];
 
         $this->assertFalse($user->role()->name == $role_name);
@@ -103,7 +103,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $role_name = Role::find($role_id)->name;
 
         $data = [
-            'role' => $role_id,
+            'role_id' => $role_id,
         ];
 
         $this->assertFalse($user->role()->name == $role_name);
@@ -130,7 +130,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $role_name = Role::find($role_id)->name;
 
         $data = [
-            'role' => $role_id,
+            'role_id' => $role_id,
         ];
 
         $this->assertFalse($user->role()->name == $role_name);
@@ -157,7 +157,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $role_name = Role::find($role_id)->name;
 
         $data = [
-            'role' => $role_id,
+            'role_id' => $role_id,
         ];
 
         $this->assertTrue($user->role()->name == $role_name);
@@ -183,7 +183,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $role_name = Role::find($role_id)->name;
 
         $data = [
-            'role' => $role_id,
+            'role_id' => $role_id,
         ];
 
         $this->assertFalse($user->role()->name == $role_name);
@@ -210,7 +210,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $role_name = Role::find($role_id)->name;
 
         $data = [
-            'role' => $role_id,
+            'role_id' => $role_id,
         ];
 
         $this->assertFalse($user->role()->name == $role_name);
@@ -237,7 +237,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $role_name = Role::find($role_id)->name;
 
         $data = [
-            'role' => $role_id,
+            'role_id' => $role_id,
         ];
 
         $this->assertFalse($user->role()->name == $role_name);
@@ -264,7 +264,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $role_name = Role::find($role_id)->name;
 
         $data = [
-            'role' => $role_id,
+            'role_id' => $role_id,
         ];
 
         $this->assertFalse($user->role()->name == $role_name);
@@ -291,7 +291,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $role_name = Role::find($role_id)->name;
 
         $data = [
-            'role' => $role_id,
+            'role_id' => $role_id,
         ];
 
         $this->assertTrue($user->role()->name == $role_name);
@@ -317,7 +317,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $role_name = Role::find($role_id)->name;
 
         $data = [
-            'role' => $role_id,
+            'role_id' => $role_id,
         ];
 
         $this->assertFalse($user->role()->name == $role_name);
@@ -344,7 +344,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $role_name = Role::find($role_id)->name;
 
         $data = [
-            'role' => $role_id,
+            'role_id' => $role_id,
         ];
 
         $this->assertFalse($user->role()->name == $role_name);
@@ -371,7 +371,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $role_name = Role::find($role_id)->name;
 
         $data = [
-            'role' => $role_id,
+            'role_id' => $role_id,
         ];
 
         $this->assertFalse($user->role()->name == $role_name);
@@ -398,7 +398,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $role_name = Role::find($role_id)->name;
 
         $data = [
-            'role' => $role_id,
+            'role_id' => $role_id,
         ];
 
         $this->assertFalse($user->role()->name == $role_name);
@@ -425,7 +425,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $role_name = Role::find($role_id)->name;
 
         $data = [
-            'role' => $role_id,
+            'role_id' => $role_id,
         ];
 
         $this->assertTrue($user->role()->name == $role_name);
@@ -456,7 +456,9 @@ class StoreDeveloperTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson([
                 'errors' => [
-                    'role' => ['Le champ role est obligatoire.']
+                    'role_id' => [
+                        trans('validation.required', ['attribute' => trans('validation.attributes.role_id')])
+                    ]
                 ]
             ]);
 
@@ -471,15 +473,11 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $user_id = 8; // student user
 
         $data = [
-            'role' => 'wrong-value',
+            'role_id' => 'wrong-value',
         ];
 
         $this->json('POST', route('users.roles.store', ['user_id' => $user_id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJson([
-                'errors' => [
-                    'role' => ['Le champ role doit être un entier.']
-                ]
-            ]);
+            ->assertJsonValidationErrors(['role_id']);
     }
 }

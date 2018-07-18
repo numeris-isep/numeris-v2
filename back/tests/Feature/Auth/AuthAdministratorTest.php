@@ -42,7 +42,7 @@ class AuthAdministratorTest extends TestCase
         $this->json('POST', route('login'), $data)
             ->assertStatus(JsonResponse::HTTP_UNAUTHORIZED)
             ->assertJson([
-                'error' => 'Unauthorized'
+                'error' => trans('api.403')
             ]);
     }
 }

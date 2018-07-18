@@ -19,16 +19,24 @@ class DeleteStaffTest extends TestCaseWithAuth
         $client_id = 1;
         $client = Client::find($client_id);
         $address = $client->address;
+        $conventions = $client->conventions;
 
         $this->assertDatabaseHas('clients', $client->toArray());
         $this->assertDatabaseHas('addresses', $address->toArray());
+        $this->assertDatabaseHas('conventions', $conventions->get(0)->toArray());
+        $this->assertDatabaseHas('conventions', $conventions->get(1)->toArray());
         $this->assertNotEmpty(Project::where('client_id', $client_id)->get());
 
         $this->json('DELETE', route('clients.destroy', ['client_id' => $client_id]))
-            ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
+            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
+            ->assertJson([
+                'error' => trans('api.403')
+            ]);
 
-        $this->assertDatabaseMissing('clients', $client->toArray());
-        $this->assertDatabaseMissing('addresses', $address->toArray());
-        $this->assertEmpty(Project::where('client_id', $client_id)->get());
+        $this->assertDatabaseHas('clients', $client->toArray());
+        $this->assertDatabaseHas('addresses', $address->toArray());
+        $this->assertDatabaseHas('conventions', $conventions->get(0)->toArray());
+        $this->assertDatabaseHas('conventions', $conventions->get(1)->toArray());
+        $this->assertNotEmpty(Project::where('client_id', $client_id)->get());
     }
 }

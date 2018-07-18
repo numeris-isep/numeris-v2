@@ -16,6 +16,7 @@ class StoreStaffTest extends TestCaseWithAuth
     {
         $data = [
             'client_id'     => 1,
+            'convention_id' => 1,
             'name'          => 'Projet de test',
             'start_at'      => now()->toDateString(),
             'is_private'    => false,
@@ -34,6 +35,8 @@ class StoreStaffTest extends TestCaseWithAuth
                 'money_received_at',
                 'created_at',
                 'updated_at',
+                'client',
+                'convention',
             ]);
 
         $this->assertDatabaseHas('projects', $data);

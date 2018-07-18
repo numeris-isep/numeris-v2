@@ -41,12 +41,10 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $this->json('PUT', route('preferences.update', ['preference_id' => $preference_id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJson([
-                'errors' => [
-                    'on_new_mission'    => ['Le champ nouvelle mission disponible est obligatoire.'],
-                    'on_acceptance'     => ['Le champ accepté sur une mission est obligatoire.'],
-                    'on_refusal'        => ['Le champ refusé sur une mission est obligatoire.'],
-                ]
+            ->assertJsonValidationErrors([
+                'on_new_mission',
+                'on_acceptance',
+                'on_refusal'
             ]);
     }
 }

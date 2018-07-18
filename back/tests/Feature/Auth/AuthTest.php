@@ -16,12 +16,7 @@ class AuthTest extends TestCase
     {
         $this->json('POST', route('login'))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJson([
-                'errors' => [
-                    'email'     => ['Le champ email est obligatoire.'],
-                    'password'  => ['Le champ mot de passe est obligatoire.']
-                ]
-            ]);
+            ->assertJsonValidationErrors(['email', 'password']);
     }
 
     /**
@@ -37,7 +32,7 @@ class AuthTest extends TestCase
         $this->json('POST', route('login'), $data)
             ->assertStatus(JsonResponse::HTTP_UNAUTHORIZED)
             ->assertJson([
-                'error' => 'Unauthorized'
+                'error' => trans('api.403')
             ]);
     }
 }

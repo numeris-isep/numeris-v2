@@ -19,9 +19,12 @@ class DeleteDeveloperTest extends TestCaseWithAuth
         $client_id = 1;
         $client = Client::find($client_id);
         $address = $client->address;
+        $conventions = $client->conventions;
 
         $this->assertDatabaseHas('clients', $client->toArray());
         $this->assertDatabaseHas('addresses', $address->toArray());
+        $this->assertDatabaseHas('conventions', $conventions->get(0)->toArray());
+        $this->assertDatabaseHas('conventions', $conventions->get(1)->toArray());
         $this->assertNotEmpty(Project::where('client_id', $client_id)->get());
 
         $this->json('DELETE', route('clients.destroy', ['client_id' => $client_id]))
@@ -29,6 +32,8 @@ class DeleteDeveloperTest extends TestCaseWithAuth
 
         $this->assertDatabaseMissing('clients', $client->toArray());
         $this->assertDatabaseMissing('addresses', $address->toArray());
+        $this->assertDatabaseMissing('conventions', $conventions->get(0)->toArray());
+        $this->assertDatabaseMissing('conventions', $conventions->get(1)->toArray());
         $this->assertEmpty(Project::where('client_id', $client_id)->get());
     }
 

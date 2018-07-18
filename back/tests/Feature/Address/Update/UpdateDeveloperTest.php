@@ -45,12 +45,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $this->json('PUT', route('addresses.update', ['address_id' => $address_id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJson([
-                'errors' => [
-                    'street'    => ['Le champ rue est obligatoire.'],
-                    'zip_code'  => ['Le champ code postal est obligatoire.'],
-                    'city'      => ['Le champ ville est obligatoire.'],
-                ]
-            ]);
+            ->assertJsonValidationErrors([ 'street', 'zip_code', 'city']);
     }
 }
