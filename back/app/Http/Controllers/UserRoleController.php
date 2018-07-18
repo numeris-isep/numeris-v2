@@ -40,7 +40,7 @@ class UserRoleController extends Controller
     public function store(UserRoleRequest $request, $user_id)
     {
         $user = User::findOrFail($user_id);
-        $role = Role::findOrFail($request->get('role'));
+        $role = Role::findOrFail($request->get('role_id'));
         $this->authorize('store', [UserRole::class, $user, $role]);
 
         // If $user->role is equals to the role to be assigned then throw

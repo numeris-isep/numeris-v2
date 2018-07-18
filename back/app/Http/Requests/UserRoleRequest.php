@@ -25,7 +25,7 @@ class UserRoleRequest extends AbstractFormRequest
     public function rules()
     {
         return [
-            'role' => 'required|integer'
+            'role_id' => 'required|exists:roles,id|integer'
         ];
     }
 }

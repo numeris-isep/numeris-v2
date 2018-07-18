@@ -8,6 +8,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -56,7 +57,7 @@ class Handler extends ExceptionHandler
             ],403);
         }
 
-        if ($exception instanceof ModelNotFoundException) {
+        if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) {
             return response()->json([
                 'error' => trans('api.404')
             ], 404);

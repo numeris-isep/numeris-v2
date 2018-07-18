@@ -26,6 +26,7 @@ class ProjectResource extends JsonResource
 
             // Relations
             'client'            => $this->whenLoaded('client', ClientResource::make($this->client)),
+            'convention'        => $this->whenLoaded('convention', ConventionResource::make($this->convention)),
         ];
     }
 }

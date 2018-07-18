@@ -20,6 +20,7 @@ class Client extends Model
     protected $hidden = [
         'address',
         'projects',
+        'conventions',
     ];
 
     public static function findByName($name)
@@ -53,5 +54,10 @@ class Client extends Model
     public function projects()
     {
         return $this->hasMany(Project::class);
+    }
+
+    public function conventions()
+    {
+        return $this->hasMany(Convention::class);
     }
 }

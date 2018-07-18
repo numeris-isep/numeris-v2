@@ -17,10 +17,18 @@ class Project extends Model
 
     const CLOSED = 'closed';
 
+    private static $steps = [
+        self::HIRING,
+        self::VALIDATED,
+        self::BILLED,
+        self::PAID,
+        self::CLOSED,
+    ];
+
     protected $fillable = [
         // One-to-One relations
         'client_id',
-//        'convention_id', TODO
+        'convention_id',
 
         // attributes
         'name',
@@ -32,14 +40,6 @@ class Project extends Model
 
     protected $hidden = [
         'client',
-    ];
-
-    private static $steps = [
-        self::HIRING,
-        self::VALIDATED,
-        self::BILLED,
-        self::PAID,
-        self::CLOSED,
     ];
 
     public static function steps()
@@ -64,5 +64,10 @@ class Project extends Model
     public function client()
     {
         return $this->belongsTo(Client::class);
+    }
+
+    public function convention()
+    {
+        return $this->belongsTo(Convention::class);
     }
 }

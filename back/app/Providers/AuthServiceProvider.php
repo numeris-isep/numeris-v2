@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Address;
 use App\Models\Client;
+use App\Models\Convention;
 use App\Models\Preference;
 use App\Models\Project;
 use App\Models\Role;
@@ -11,6 +12,7 @@ use App\Models\User;
 use App\Models\UserRole;
 use App\Policies\AddressPolicy;
 use App\Policies\ClientPolicy;
+use App\Policies\ConventionPolicy;
 use App\Policies\PreferencePolicy;
 use App\Policies\ProjectPolicy;
 use App\Policies\RolePolicy;
@@ -34,6 +36,7 @@ class AuthServiceProvider extends ServiceProvider
         UserRole::class     => UserRolePolicy::class,
         Client::class       => ClientPolicy::class,
         Project::class      => ProjectPolicy::class,
+        Convention::class   => ConventionPolicy::class,
     ];
 
     /**

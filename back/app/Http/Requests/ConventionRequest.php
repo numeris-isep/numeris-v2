@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Client;
+use App\Models\Convention;
 
-class ClientRequest extends AbstractFormRequest
+class ConventionRequest extends AbstractFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,11 +14,11 @@ class ClientRequest extends AbstractFormRequest
     public function authorize()
     {
         $current_user = auth()->user();
-        $client = Client::find($this->route('client_id'));
+        $convention = Convention::find($this->route('convention_id'));
 
         // Use ClientPolicy here to authorize before checking the fields
-        if ($current_user->can('store', Client::class)
-            || $current_user->can('update', $client)
+        if ($current_user->can('store', Convention::class)
+            || $current_user->can('update', $convention)
         ) {
             return true;
         }
@@ -33,21 +33,19 @@ class ClientRequest extends AbstractFormRequest
      */
     public function rules()
     {
-        $client_id = $this->ids;
+        $convention_id = $this->ids;
 
         switch($this->method())
         {
             case 'POST':
                 return [
-                    'name'      => 'required|string|unique:clients,name',
-                    'reference' => 'required|string|unique:clients,reference',
+                    'name' => 'required|string|unique:conventions,name',
                 ];
 
             case 'PUT':
             case 'PATCH':
                 return [
-                    'name'      => 'required|string|unique:clients,name,' . $client_id,
-                    'reference' => 'required|string|unique:clients,reference,' . $client_id,
+                    'name' => 'required|string|unique:conventions,name,' . $convention_id,
                 ];
 
             default:break;

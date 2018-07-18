@@ -44,6 +44,12 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Client resource routes
     Route::apiResource('clients', 'ClientController', ['parameters' => ['clients' => 'client_id']]);
 
+    // Convention resource routes
+    Route::post('clients/{client_id}/conventions', 'ClientConventionController@store')->name('clients.conventions.store');
+
+    Route::resource('conventions', 'ConventionController', ['parameters' => ['conventions' => 'convention_id']])
+        ->except(['index', 'create', 'store', 'show', 'edit']);
+
     // Project resource routes
     Route::apiResource('projects', 'ProjectController', ['parameters' => ['projects' => 'project_id']]);
 

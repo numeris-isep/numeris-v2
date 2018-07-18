@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Project;
+
 class ProjectRequest extends AbstractFormRequest
 {
     /**
@@ -11,7 +13,17 @@ class ProjectRequest extends AbstractFormRequest
      */
     public function authorize()
     {
-        return true;
+        $current_user = auth()->user();
+        $project = Project::find($this->route('project_id'));
+
+        // Use ProjectPolicy here to authorize before checking the fields
+        if ($current_user->can('store', Project::class)
+            || $current_user->can('update', $project)
+        ) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -24,8 +36,8 @@ class ProjectRequest extends AbstractFormRequest
         $project_id = $this->ids;
 
         $rules = [
-            'client_id'     => 'required|integer',
-//            'convention_id' => 'required|integer', TODO
+            'client_id'     => 'required|exists:clients,id|integer',
+            'convention_id' => 'required|exists:conventions,id|integer',
             'start_at'      => 'required|date',
             'is_private'    => 'boolean',
         ];

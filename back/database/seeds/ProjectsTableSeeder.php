@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Client;
+use App\Models\Convention;
 use App\Models\Project;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Seeder;
@@ -16,6 +17,9 @@ class ProjectsTableSeeder extends Seeder
     {
         if (Client::all()->isEmpty()) {
             $this->call(ClientsTableSeeder::class);
+        }
+        if (Convention::all()->isEmpty()) {
+            $this->call(ConventionsTableSeeder::class);
         }
 
         if (Project::all()->isEmpty()) {
@@ -69,6 +73,7 @@ class ProjectsTableSeeder extends Seeder
                 factory(Project::class)
                     ->create([
                         'client_id'         => $client->id,
+                        'convention_id'     => $client->conventions()->first()->id,
                         'name'              => "{$client->name} $month_name 2018",
                         'start_at'          => "2017/$month_number/01 00:00:00",
                         'money_received_at' => "2017/$month_number/25 00:00:00",

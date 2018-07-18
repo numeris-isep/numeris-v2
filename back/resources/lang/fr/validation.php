@@ -181,6 +181,7 @@ return [
         'on_refusal' => 'refusé sur une mission',
         'reference' => 'reférence',
         'start_at' => 'date de début',
+        'role_id' => 'rôle',
         'client_id' => 'client',
     ],
 ];
