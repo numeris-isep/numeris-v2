@@ -35,7 +35,28 @@ class UserController extends Controller
     {
         $this->authorize('store', User::class);
 
-        $user = User::create($request->all());
+        // Encrypt password
+        $request['password'] = bcrypt($request['password']);
+
+        $user_request = $request->only([
+            'username', 'email', 'password',
+            'first_name', 'last_name', 'student_number',
+            'promotion', 'phone', 'nationality',
+            'birth_date', 'birth_city',
+            'social_insurance_number', 'iban', 'bic',
+        ]);
+        $address_request = $request->only([
+            'street', 'zip_code', 'city',
+        ]);
+        $preference_request = $request->only([
+            'on_new_mission', 'on_acceptance', 'on_refusal',
+        ]);
+
+        $user = User::create($user_request);
+        $address = Address::create($address_request);
+        $address->user()->save($user);
+        $preference = Preference::create($preference_request);
+        $preference->user()->save($user);
 
         return response()->json(UserResource::make($user), JsonResponse::HTTP_CREATED);
     }
@@ -74,7 +95,26 @@ class UserController extends Controller
         $user = User::findOrFail($user_id);
         $this->authorize('update', $user);
 
-        $user->update($request->all());
+        // Encrypt password
+        $request['password'] = bcrypt($request['password']);
+
+        $user_request = $request->only([
+            'username', 'email', 'password',
+            'first_name', 'last_name', 'student_number',
+            'promotion', 'phone', 'nationality',
+            'birth_date', 'birth_city',
+            'social_insurance_number', 'iban', 'bic',
+        ]);
+        $address_request = $request->only([
+            'street', 'zip_code', 'city',
+        ]);
+        $preference_request = $request->only([
+            'on_new_mission', 'on_acceptance', 'on_refusal',
+        ]);
+
+        $user->update($user_request);
+        $user->address()->update($address_request);
+        $user->preference()->update($preference_request);
 
         return response()->json(UserResource::make($user), JsonResponse::HTTP_CREATED);
     }
@@ -94,23 +134,14 @@ class UserController extends Controller
 
         // Filtering the request to only update the fields an user is allowed to update
         $user_request = $request->only([
-            'phone',
-            'nationality',
-            'birth_date',
-            'birth_city',
-            'social_insurance_number',
-            'iban',
-            'bic'
+            'phone', 'nationality', 'birth_date', 'birth_city',
+            'social_insurance_number', 'iban', 'bic'
         ]);
         $address_request = $request->only([
-            'street',
-            'zip_code',
-            'city',
+            'street', 'zip_code', 'city',
         ]);
         $preference_request = $request->only([
-            'on_new_mission',
-            'on_acceptance',
-            'on_refusal',
+            'on_new_mission', 'on_acceptance', 'on_refusal',
         ]);
 
         $user->update($user_request);

@@ -42,13 +42,6 @@ class UserRequest extends AbstractFormRequest
             'last_name'                 => 'required|string',
             'student_number'            => 'nullable|numeric',
             'promotion'                 => 'nullable|numeric',
-            'phone'                     => 'nullable|string|min:10',
-            'nationality'               => 'nullable|string',
-            'birth_date'                => 'nullable|date',
-            'birth_city'                => 'nullable|string',
-            'social_insurance_number'   => 'nullable|string',
-            'iban'                      => 'nullable|string|min:13',
-            'bic'                       => 'nullable|string',
         ];
 
         $patch_rules = [
@@ -89,6 +82,8 @@ class UserRequest extends AbstractFormRequest
 
             default:break;
         }
+
+        $rules = array_merge($rules, $patch_rules);
 
         return $rules;
     }
