@@ -1,0 +1,81 @@
+<sui-sidebar-container class="ui segment">
+  <sui-sidebar class="inverted vertical" #sidebar>
+    <sui-accordion [closeOthers]="false">
+      <sui-accordion-panel [isOpen]="true" class="header item">
+        <div title>
+          <i class="dropdown icon"></i> Etudiant
+        </div>
+
+        <a content class="item">
+          <i class="tachometer alternate icon"></i> Tableau de bord
+        </a>
+        <a content class="item">
+          <i class="user outline icon"></i> Profil
+        </a>
+        <a content class="item">
+          <i class="list icon"></i> Missions
+        </a>
+        <a content class="item">
+          <i class="tasks icon"></i> Candidatures
+        </a>
+        <a content class="item">
+          <i class="book icon"></i> Conditions d'utilisation
+        </a>
+      </sui-accordion-panel>
+    </sui-accordion>
+
+    <div class="ui divider"></div>
+
+    <sui-accordion [closeOthers]="false">
+      <sui-accordion-panel [isOpen]="true" class="header item">
+        <div title>
+          <i class="dropdown icon"></i> Staff
+        </div>
+
+        <a content class="item">
+          <i class="users icon"></i> Utilisateurs
+        </a>
+        <a content class="item">
+          <i class="copy outline icon"></i> Missions
+        </a>
+        <a content class="item">
+          <i class="folder open outline icon"></i> Projets
+        </a>
+        <a content class="item">
+          <i class="home icon"></i> Clients
+        </a>
+        <a content class="item">
+          <i class="chart line icon"></i> Statistiques
+        </a>
+      </sui-accordion-panel>
+    </sui-accordion>
+
+    <div class="ui divider"></div>
+
+    <sui-accordion [closeOthers]="false">
+      <sui-accordion-panel [isOpen]="true" class="header item">
+        <div title>
+          <i class="dropdown icon"></i> Configuration
+        </div>
+
+        <a content class="item">
+          <i class="users icon"></i> Gestion
+        </a>
+        <a content class="item">
+          <i class="copy outline icon"></i> Compatibilité
+        </a>
+        <a content class="item">
+          <i class="folder open outline icon"></i> Activité
+        </a>
+      </sui-accordion-panel>
+    </sui-accordion>
+  </sui-sidebar>
+
+  <sui-sidebar-sibling [isDimmedWhenVisible]="true">
+    <app-menu [sidebar]="sidebar"></app-menu>
+
+    <!-- Content goes here -->
+    <router-outlet></router-outlet>
+
+  </sui-sidebar-sibling>
+</sui-sidebar-container>

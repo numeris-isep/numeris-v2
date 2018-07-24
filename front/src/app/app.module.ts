@@ -11,6 +11,9 @@ import { ErrorInterceptor } from "./_helpers/error-interceptor.service";
 import { JwtInterceptor } from "./_helpers/jwt-interceptor.service";
 import localeFr from "@angular/common/locales/fr";
 import { registerLocaleData } from "@angular/common";
+import { SuiModule } from 'ng2-semantic-ui';
+import { SidebarComponent } from "./partials/sidebar/sidebar.component";
+import { MenuComponent } from "./partials/menu/menu.component";
 
 // Setting to locale to 'fr'
 registerLocaleData(localeFr, 'fr');
@@ -20,13 +23,16 @@ registerLocaleData(localeFr, 'fr');
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SuiModule
   ],
   declarations: [
     AppComponent,
     AlertComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    SidebarComponent,
+    MenuComponent
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },
