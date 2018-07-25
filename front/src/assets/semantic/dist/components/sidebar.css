@@ -127,7 +127,7 @@ body.pushable {
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   overflow: hidden;
-  min-height: 100vh !important;
+  min-height: 95.5vh !important;
   -webkit-transition: -webkit-transform 500ms ease;
   transition: -webkit-transform 500ms ease;
   transition: transform 500ms ease;

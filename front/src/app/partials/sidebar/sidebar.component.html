@@ -1,5 +1,10 @@
-<sui-sidebar-container class="ui segment">
+<app-menu [sidebar]="sidebar"></app-menu>
+<sui-sidebar-container class="ui attached segment">
   <sui-sidebar class="inverted vertical" #sidebar>
+    <a class="header item" routerLink="/">
+      <img class="ui tiny centered image" src="assets/numeris-white.png">
+    </a>
+
     <sui-accordion [closeOthers]="false">
       <sui-accordion-panel [isOpen]="true" class="header item">
         <div title>
@@ -10,72 +15,129 @@
           <i class="tachometer alternate icon"></i> Tableau de bord
         </a>
         <a content class="item">
-          <i class="user outline icon"></i> Profil
+          <i class="user icon"></i> Profil
         </a>
         <a content class="item">
-          <i class="list icon"></i> Missions
+          <i class="clipboard list icon"></i> Missions
         </a>
         <a content class="item">
-          <i class="tasks icon"></i> Candidatures
+          <i class="clipboard check icon"></i> Candidatures
         </a>
         <a content class="item">
           <i class="book icon"></i> Conditions d'utilisation
         </a>
       </sui-accordion-panel>
-    </sui-accordion>
 
-    <div class="ui divider"></div>
-
-    <sui-accordion [closeOthers]="false">
       <sui-accordion-panel [isOpen]="true" class="header item">
         <div title>
-          <i class="dropdown icon"></i> Staff
+          <i class="dropdown icon"></i> Bureau
         </div>
 
         <a content class="item">
           <i class="users icon"></i> Utilisateurs
         </a>
         <a content class="item">
-          <i class="copy outline icon"></i> Missions
+          <i class="copy icon"></i> Missions
         </a>
         <a content class="item">
-          <i class="folder open outline icon"></i> Projets
+          <i class="folder open icon"></i> Projets
         </a>
         <a content class="item">
-          <i class="home icon"></i> Clients
+          <i class="building icon"></i> Clients
         </a>
         <a content class="item">
           <i class="chart line icon"></i> Statistiques
         </a>
       </sui-accordion-panel>
-    </sui-accordion>
 
-    <div class="ui divider"></div>
-
-    <sui-accordion [closeOthers]="false">
       <sui-accordion-panel [isOpen]="true" class="header item">
         <div title>
-          <i class="dropdown icon"></i> Configuration
+          <i class="dropdown icon"></i> Gestion
         </div>
 
         <a content class="item">
-          <i class="users icon"></i> Gestion
+          <i class="gavel icon"></i> Comptabilité
         </a>
         <a content class="item">
-          <i class="copy outline icon"></i> Compatibilité
+          <i class="cogs icon"></i> Paramètres
         </a>
         <a content class="item">
-          <i class="folder open outline icon"></i> Activité
+          <i class="newspaper icon"></i> Activité
         </a>
       </sui-accordion-panel>
+
+      <div class="item">
+        <a target="_blank" href="https://www.facebook.com/isepnumeris/">
+          <i class="facebook icon"></i>
+        </a>
+        <a target="_blank" href="https://www.linkedin.com/company/numerisisep/">
+          <i class="linkedin icon"></i>
+        </a>
+        <span>
+          <i class="copyright outline icon"></i> 2016-2019
+        </span>
+      </div>
     </sui-accordion>
   </sui-sidebar>
 
   <sui-sidebar-sibling [isDimmedWhenVisible]="true">
-    <app-menu [sidebar]="sidebar"></app-menu>
-
     <!-- Content goes here -->
+    <alert></alert>
     <router-outlet></router-outlet>
+
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
+    <h2>Content</h2>
 
   </sui-sidebar-sibling>
 </sui-sidebar-container>
