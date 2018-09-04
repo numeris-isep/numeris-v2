@@ -14,6 +14,7 @@ import { registerLocaleData } from "@angular/common";
 import { SuiModule } from 'ng2-semantic-ui';
 import { SidebarComponent } from "./partials/sidebar/sidebar.component";
 import { MenuComponent } from "./partials/menu/menu.component";
+import { AccordionComponent } from './partials/sidebar/accordion/accordion.component';
 
 // Setting to locale to 'fr'
 registerLocaleData(localeFr, 'fr');
@@ -32,7 +33,8 @@ registerLocaleData(localeFr, 'fr');
     LoginComponent,
     ProfileComponent,
     SidebarComponent,
-    MenuComponent
+    MenuComponent,
+    AccordionComponent
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr' },

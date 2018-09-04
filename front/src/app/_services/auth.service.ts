@@ -6,11 +6,15 @@ import { environment } from "../../environments/environment";
 import { Observable } from "rxjs/internal/Observable";
 import { User } from "../_models/user";
 import { HTTP_OPTIONS } from "../_constants/http-options";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  private loggedIn = new BehaviorSubject<boolean>(this.tokenService.isValid());
+
   constructor(
     private http: HttpClient,
     private tokenService: TokenService
@@ -22,6 +26,7 @@ export class AuthService {
         if (response && response.access_token) {
           // store username and jwt token in local storage to keep user logged in between page refreshes
           this.tokenService.set(response.access_token);
+          this.loggedIn.next(true);
         }
       }));
   }
@@ -31,7 +36,12 @@ export class AuthService {
     return this.http.post<User>(url, {}, HTTP_OPTIONS);
   }
 
+  get isLoggedIn(): Observable<boolean> {
+    return this.loggedIn.asObservable();
+  }
+
   logout() {
     this.tokenService.remove();
+    this.loggedIn.next(false);
   }
 }
