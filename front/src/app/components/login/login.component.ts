@@ -1,19 +1,20 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AlertService } from "../_services/alert.service";
+import { AlertService } from "../../services/alert.service";
 import { first } from "rxjs/operators";
-import { AuthService } from "../_services/auth.service";
-import { TokenService } from "../_services/token.service";
+import { AuthService } from "../../services/auth.service";
+import { TokenService } from "../../services/token.service";
 
 @Component({
+  selector: 'app-login',
   templateUrl: 'login.component.html'
 })
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  loading = false;
-  submitted = false;
+  loading: boolean = false;
+  submitted: boolean = false;
   returnUrl: string;
 
   constructor(
@@ -32,10 +33,13 @@ export class LoginComponent implements OnInit {
     });
 
     // reset login status
-    this.authService.logout();
+    if (this.tokenService.get()) {
+      this.authService.logout();
+      this.router.navigate(['']);
+    }
 
     // get return url from route parameters or default to '/profile'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/profile';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
   }
 
   // convenient getter for easy access to form fields

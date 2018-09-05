@@ -5,7 +5,7 @@
       <img class="ui tiny centered image" src="assets/numeris-white.png">
     </a>
 
-    <app-accordion></app-accordion>
+    <app-accordion [sidebar]="sidebar"></app-accordion>
   </sui-sidebar>
 
   <sui-sidebar-sibling [isDimmedWhenVisible]="true">
@@ -14,12 +14,13 @@
     <alert></alert>
     <router-outlet></router-outlet>
 
-    <!--<div class="ui four column grid">-->
-      <!--<div class="column">1</div>-->
-      <!--<div class="column">2</div>-->
-      <!--<div class="column">3</div>-->
-      <!--<div class="column">4</div>-->
-    <!--</div>-->
+    <div class="ui five column grid">
+      <div class="column">1</div>
+      <div class="column">2</div>
+      <div class="column">3</div>
+      <div class="column">4</div>
+      <div class="column">5</div>
+    </div>
 
   </sui-sidebar-sibling>
 </sui-sidebar-container>

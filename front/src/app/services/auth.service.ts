@@ -4,9 +4,9 @@ import { map } from 'rxjs/operators';
 import { TokenService } from "./token.service";
 import { environment } from "../../environments/environment";
 import { Observable } from "rxjs/internal/Observable";
-import { User } from "../_models/user";
-import { HTTP_OPTIONS } from "../_constants/http-options";
 import { BehaviorSubject } from "rxjs";
+import { User } from "../models/user";
+import { HTTP_OPTIONS } from "../constants/http-options";
 
 @Injectable({
   providedIn: 'root'

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from "../../environments/environment";
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -54,7 +55,11 @@ export class TokenService {
       const payload = this.payload(token);
 
       if (payload) {
-        return payload.iss === this.iss.login;
+        // To be valid, the current time be must be <= to the expiration date
+        // of the token
+        if (moment().unix() <= payload.exp) {
+          return payload.iss === this.iss.login;
+        }
       }
     }
 

@@ -1,0 +1,39 @@
+<div class="ui inverted attached menu">
+  <ng-container *ngIf="isLoggedIn; else guest">
+    <a class="header item sidebar-trigger" (click)="sidebar.toggle()">
+      <i class="sidebar icon"></i> NUMERIS
+    </a>
+
+    <div class="right menu">
+      <a class="header item" routerLink="/login">
+        Déconnexion
+      </a>
+    </div>
+  </ng-container>
+
+  <ng-template #guest>
+    <div class="left menu">
+      <a class="header item" routerLink="/">
+        NUMERIS
+      </a>
+      <a class="item">
+        Qui sommes nous ?
+      </a>
+      <a class="item">
+        L'équipe
+      </a>
+      <a class="item">
+        Podium
+      </a>
+      <a class="item">
+        Nous contacter
+      </a>
+    </div>
+
+    <div class="right menu">
+      <a class="header item" routerLink="/login" (click)="sidebar.close()">
+        Connexion
+      </a>
+    </div>
+  </ng-template>
+</div>

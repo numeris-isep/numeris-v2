@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SidebarComponent } from "../sidebar/sidebar.component";
-import { AuthService } from "../../_services/auth.service";
+import { SidebarComponent } from "../sidebar.component";
+import { AuthService } from "../../../../services/auth.service";
 
 @Component({
   selector: 'app-menu',
