@@ -129,7 +129,7 @@ body.pushable {
   position: relative;
   backface-visibility: hidden;
   overflow: hidden;
-  min-height: 95.5vh !important;
+  min-height: calc(~"100vh - 40px") !important;
   transition: transform @duration @easing;
   z-index: @middleLayer;
 }

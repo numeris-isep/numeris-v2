@@ -36833,7 +36833,7 @@ body.pushable {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   overflow: hidden;
-  min-height: 95.5vh !important;
+  min-height: calc(100vh - 40px) !important;
   -webkit-transition: -webkit-transform 500ms ease;
   transition: -webkit-transform 500ms ease;
   transition: transform 500ms ease;
