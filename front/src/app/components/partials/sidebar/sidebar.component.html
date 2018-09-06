@@ -1,6 +1,6 @@
-<app-menu [sidebar]="sidebar"></app-menu>
+<app-menu [sidebar]="sidebar" [isLoggedIn]="isLoggedIn"></app-menu>
 <sui-sidebar-container class="ui attached segment">
-  <sui-sidebar transition="slide along" class="inverted vertical" #sidebar>
+  <sui-sidebar transition="overlay" class="inverted vertical" #sidebar>
     <a class="header item" routerLink="/">
       <img class="ui tiny centered image" src="assets/numeris-white.png">
     </a>
@@ -11,15 +11,10 @@
   <sui-sidebar-sibling [isDimmedWhenVisible]="true">
     <!-- Content goes here -->
 
-    <alert></alert>
-    <router-outlet></router-outlet>
+    <div class="ui main container">
+      <alert *ngIf="isLoggedIn"></alert>
+      <router-outlet></router-outlet>
 
-    <div class="ui five column grid">
-      <div class="column">1</div>
-      <div class="column">2</div>
-      <div class="column">3</div>
-      <div class="column">4</div>
-      <div class="column">5</div>
     </div>
 
   </sui-sidebar-sibling>

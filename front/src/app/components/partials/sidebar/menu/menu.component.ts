@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SidebarComponent } from "../sidebar.component";
-import { AuthService } from "../../../../services/auth.service";
 
 @Component({
   selector: 'app-menu',
@@ -8,15 +7,12 @@ import { AuthService } from "../../../../services/auth.service";
 })
 export class MenuComponent implements OnInit {
 
-  isLoggedIn: boolean;
-
+  @Input() isLoggedIn: boolean;
   @Input() sidebar : SidebarComponent;
 
-  constructor(private authService : AuthService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.authService.isLoggedIn
-      .subscribe((value) => this.isLoggedIn = value);
   }
 
 }

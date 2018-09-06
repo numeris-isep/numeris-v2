@@ -8,7 +8,6 @@ import * as moment from 'moment';
 export class TokenService {
 
   private tokenName: string = environment.tokenName;
-
   private iss = {
     login: `${environment.apiUrl}/api/login`
   };
