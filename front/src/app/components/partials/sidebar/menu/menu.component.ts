@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SidebarComponent } from "../sidebar.component";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-menu',
@@ -7,7 +8,7 @@ import { SidebarComponent } from "../sidebar.component";
 })
 export class MenuComponent implements OnInit {
 
-  @Input() isLoggedIn: boolean;
+  @Input() isLoggedIn$: Observable<boolean>;
   @Input() sidebar : SidebarComponent;
 
   constructor() {}

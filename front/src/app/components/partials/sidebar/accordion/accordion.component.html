@@ -5,10 +5,10 @@
     </div>
 
     <div content (click)="sidebar.close()">
-      <a class="item" routerLink="/dashboard">
+      <a class="item" routerLink="/dashboard" routerLinkActive="active">
         <i class="tachometer alternate icon"></i> Tableau de bord
       </a>
-      <a class="item" routerLink="/profile">
+      <a class="item" routerLink="/profile" routerLinkActive="active">
         <i class="user icon"></i> Profil
       </a>
       <a class="item">
@@ -16,6 +16,9 @@
       </a>
       <a class="item">
         <i class="clipboard check icon"></i> Candidatures
+      </a>
+      <a class="item">
+        <i class="info circle icon"></i> Tutoriels
       </a>
       <a class="item">
         <i class="book icon"></i> Conditions d'utilisation

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AlertService } from "../../services/alert.service";
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     // reset login status
     if (this.tokenService.get()) {
       this.authService.logout();
-      this.router.navigate(['']);
+      this.router.navigate(['/']);
     }
 
     // get return url from route parameters or default to '/profile'

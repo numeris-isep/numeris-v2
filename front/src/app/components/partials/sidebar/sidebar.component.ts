@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../../services/auth.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-sidebar',
@@ -7,13 +8,11 @@ import { AuthService } from "../../../services/auth.service";
 })
 export class SidebarComponent implements OnInit {
 
-  isLoggedIn: boolean;
+  isLoggedIn$: Observable<boolean>;
 
   constructor(private authService : AuthService) { }
 
   ngOnInit() {
-    this.authService.isLoggedIn
-      .subscribe((value) => this.isLoggedIn = value);
+    this.isLoggedIn$ = this.authService.isLoggedIn;
   }
-
 }
