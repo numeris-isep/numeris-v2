@@ -1,0 +1,20 @@
+<app-menu [sidebar]="sidebar" [isLoggedIn$]="isLoggedIn$"></app-menu>
+<sui-sidebar-container class="ui attached segment">
+  <sui-sidebar transition="overlay" class="vertical" #sidebar>
+    <div *ngIf="isLoggedIn$">
+      <div class="header item">
+        <img class="ui tiny centered image" src="assets/logos/numeris-blue.png">
+      </div>
+      <app-accordion [sidebar]="sidebar"></app-accordion>
+    </div>
+  </sui-sidebar>
+
+  <sui-sidebar-sibling [isDimmedWhenVisible]="true">
+    <!-- Content goes here -->
+
+    <alert *ngIf="isLoggedIn$"></alert>
+    <router-outlet></router-outlet>
+
+
+  </sui-sidebar-sibling>
+</sui-sidebar-container>

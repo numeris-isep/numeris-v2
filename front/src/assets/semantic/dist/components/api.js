@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI undefined - API
+ * # Semantic UI 2.2.14 - API
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -10,7 +10,7 @@
 
 ;(function ($, window, document, undefined) {
 
-'use strict';
+"use strict";
 
 var
   window = (typeof window != 'undefined' && window.Math == Math)

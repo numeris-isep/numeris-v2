@@ -1,5 +1,5 @@
 /*!
- * # Semantic UI undefined - Container
+ * # Semantic UI 2.2.14 - Container
  * http://github.com/semantic-org/semantic-ui/
  *
  *
@@ -23,9 +23,9 @@
 /* Mobile */
 @media only screen and (max-width: 767px) {
   .ui.container {
-    width: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    width: auto !important;
+    margin-left: 1em !important;
+    margin-right: 1em !important;
   }
   .ui.grid.container {
     width: auto !important;
