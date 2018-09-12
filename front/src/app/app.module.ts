@@ -5,7 +5,6 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AlertComponent } from "./common/alert/alert.component";
-import { LoginComponent } from "./auth/login/login.component";
 import { ProfileComponent } from './student/profile/profile.component';
 import localeFr from "@angular/common/locales/fr";
 import { registerLocaleData } from "@angular/common";
@@ -32,7 +31,6 @@ registerLocaleData(localeFr, 'fr');
   declarations: [
     AppComponent,
     AlertComponent,
-    LoginComponent,
     ProfileComponent,
     SidebarComponent,
     MenuComponent,

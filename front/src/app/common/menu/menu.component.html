@@ -1,11 +1,11 @@
-<div class="ui large inverted menu" [ngClass]="(isLoggedIn$ | async) ? 'attached' : 'fixed'">
+<div class="ui large inverted menu" [ngClass]="(isLoggedIn$ | async) ? 'attached' : 'fixed stackable'">
   <ng-container *ngIf="isLoggedIn$ | async; else guest">
     <a class="header item sidebar-trigger" (click)="sidebar.toggle()">
       <i class="sidebar icon"></i> NUMERIS
     </a>
 
     <div class="right menu">
-      <a class="header item" routerLink="/login" (click)="sidebar.close()">
+      <a class="header item" routerLink="/" (click)="sidebar.close()">
         Déconnexion
       </a>
     </div>

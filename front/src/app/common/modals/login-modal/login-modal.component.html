@@ -2,9 +2,7 @@
   Connexion
 </div>
 
-
 <div class="content">
-
   <form class="ui large form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="field">
       <div class="ui left icon input">
@@ -32,7 +30,6 @@
       </div>
     </div>
 
-    <button [disabled]="Chargement" class="ui fluid large teal submit primary button">Connexion</button>
+    <button [disabled]="loading" class="ui fluid large teal submit primary button">Connexion</button>
   </form>
-
 </div>

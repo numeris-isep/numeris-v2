@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "../../../auth/auth.service";
 import { TokenService } from "../../../auth/token.service";
 import { AlertService } from "../../alert/alert.service";
-import { SuiModalService } from "ng2-semantic-ui";
 import { first } from "rxjs/operators";
 
 @Component({
@@ -26,8 +25,7 @@ export class LoginModalComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private tokenService: TokenService,
-    private alertService: AlertService,
-    private modalService: SuiModalService
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -60,6 +58,7 @@ export class LoginModalComponent implements OnInit {
       .subscribe(
         data => {
           this.router.navigate([this.returnUrl]);
+          this.modal.approve(undefined);
         },
         error => {
           this.alertService.error(error);
