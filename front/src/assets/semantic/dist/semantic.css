@@ -34677,7 +34677,7 @@ a.ui.nag {
 ---------------*/
 
 .pushable {
-  height: 100%;
+  min-height: calc(100vh - 42.84px) !important;
   overflow-x: hidden;
   padding: 0em !important;
 }
@@ -34726,7 +34726,7 @@ body.pushable {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   overflow: hidden;
-  min-height: calc(100vh - 42.84px) !important;
+  min-height: calc(100vh - 45px) !important;
   -webkit-transition: -webkit-transform 500ms ease;
   transition: -webkit-transform 500ms ease;
   transition: transform 500ms ease;
