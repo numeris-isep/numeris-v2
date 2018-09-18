@@ -1,7 +1,7 @@
 <app-menu [sidebar]="sidebar" [isLoggedIn$]="isLoggedIn$"></app-menu>
-<sui-sidebar-container class="ui attached segment no-border">
-  <sui-sidebar transition="slide along" class="vertical no-border" #sidebar>
-    <div *ngIf="isLoggedIn$; else guest">
+<sui-sidebar-container class="ui attached" track-scroll>
+  <sui-sidebar transition="overlay" class="vertical" #sidebar>
+    <div *ngIf="(isLoggedIn$ | async); else guest">
       <div class="header item">
         <img class="ui tiny centered image" src="assets/logos/numeris-blue.png">
       </div>
@@ -9,9 +9,15 @@
     </div>
 
     <ng-template #guest>
-      <a class="item">
-        Hello World!
-      </a>
+      <div (click)="sidebar.close()">
+        <a class="header item" (click)="scrollToElement(0)">
+          <img class="ui tiny centered image" src="assets/logos/numeris-blue.png">
+        </a>
+        <a class="item" (click)="scrollToElement(1)">À propos</a>
+        <a class="item" (click)="scrollToElement(2)">L'équipe</a>
+        <a class="item" (click)="scrollToElement(3)">Podium</a>
+        <a class="item" (click)="scrollToElement(4)">Nous contacter</a>
+      </div>
     </ng-template>
   </sui-sidebar>
 
@@ -20,7 +26,6 @@
 
     <alert *ngIf="isLoggedIn$"></alert>
     <router-outlet></router-outlet>
-
 
   </sui-sidebar-sibling>
 </sui-sidebar-container>

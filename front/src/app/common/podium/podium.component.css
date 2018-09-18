@@ -1,0 +1,17 @@
+.ui.vertical.stripe {
+  padding-top: 3.5em;
+  z-index: 1;
+}
+
+.ui.segments > .horizontal.segments {
+  background-color: white;
+  border-radius: 0 0 .28571428rem .28571428rem;
+}
+
+@media only screen and (max-width: 767px) {
+  .ui.vertical.stripe {
+    padding: 2em 0;
+  }
+}
+
+

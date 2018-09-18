@@ -1,31 +1,34 @@
-<div class="ui large inverted menu" [ngClass]="(isLoggedIn$ | async) ? 'attached' : 'fixed stackable'">
-  <ng-container *ngIf="isLoggedIn$ | async; else guest">
+<div class="ui large attached inverted menu" >
+  <ng-container *ngIf="(isLoggedIn$ | async); else guest">
     <a class="header item sidebar-trigger" (click)="sidebar.toggle()">
       <i class="sidebar icon"></i> NUMERIS
     </a>
 
     <div class="right menu">
-      <a class="header item" routerLink="/" (click)="sidebar.close()">
+      <a class="header item" (click)="logout()">
         Déconnexion
       </a>
     </div>
   </ng-container>
 
   <ng-template #guest>
+    <a class="toc item" (click)="sidebar.toggle()">
+      <i class="sidebar icon"></i>
+    </a>
     <div class="left menu">
-      <a class="header item" routerLink="/" routerLinkActive="active">
+      <a class="header item" (click)="scrollToElement(0)">
         NUMERIS
       </a>
-      <a class="item" href="">
+      <a class="item" (click)="scrollToElement(1)">
         À propos
       </a>
-      <a class="item" href="">
+      <a class="item" (click)="scrollToElement(2)">
         L'équipe
       </a>
-      <a class="item" href="">
+      <a class="item" (click)="scrollToElement(3)">
         Podium
       </a>
-      <a class="item" href="">
+      <a class="item" (click)="scrollToElement(4)">
         Nous contacter
       </a>
     </div>

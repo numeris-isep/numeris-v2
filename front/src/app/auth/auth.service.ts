@@ -6,7 +6,7 @@ import { environment } from "../../environments/environment";
 import { Observable } from "rxjs/internal/Observable";
 import { BehaviorSubject } from "rxjs";
 import { User } from "../staff/users/user";
-import { HTTP_OPTIONS } from "../common/_constants/http-options";
+import { HTTP_OPTIONS } from "../common/_constants/HTTP_OPTIONS";
 import { Router } from "@angular/router";
 
 @Injectable({
@@ -43,14 +43,9 @@ export class AuthService {
   }
 
   logout() {
-    this.tokenService.remove();
-    this.loggedIn.next(false);
-  }
-
-  resetAuthStatus() {
     if (this.tokenService.get()) {
-      this.logout();
-      this.router.navigate(['/']);
+      this.tokenService.remove();
+      this.loggedIn.next(false);
     }
   }
 }

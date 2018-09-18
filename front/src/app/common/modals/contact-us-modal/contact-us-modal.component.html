@@ -1,0 +1,62 @@
+<div class="header">
+  Nous contacter
+</div>
+
+<div class="content">
+  <form class="ui large form" [formGroup]="contactUsForm" (ngSubmit)="onSubmit()">
+    <div class="two fields">
+      <div class="required field">
+        <label>Prénom</label>
+        <div class="ui left icon input">
+          <i class="address card icon"></i>
+          <input type="text" formControlName="firstName" placeholder="Prénom"
+                 [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+        </div>
+      </div>
+
+      <div class="required field">
+        <label>Nom</label>
+        <div class="ui left icon input">
+          <i class="address card outline icon"></i>
+          <input type="text" formControlName="lastName" placeholder="Nom"
+                 [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="required field">
+      <label>Adresse email</label>
+      <div class="ui left icon input">
+        <i class="user icon"></i>
+        <input type="email" formControlName="email" placeholder="Adresse email"
+               [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+      </div>
+    </div>
+
+    <div class="required field">
+      <label>Objet</label>
+      <div class="ui left icon input">
+        <i class="pencil icon"></i>
+        <input type="text" formControlName="subject"
+               class="form-control" placeholder="Objet"
+               [ngClass]="{ 'is-invalid': submitted && f.subject.errors }"/>
+      </div>
+    </div>
+
+    <div class="required field">
+      <label>Message</label>
+      <textarea type="text" formControlName="message"
+                class="form-control" placeholder="Message"
+                [ngClass]="{ 'is-invalid': submitted && f.message.errors }">
+      </textarea>
+    </div>
+
+    <div class="ui fade animated fluid large primary button" tabindex="0">
+      <div class="visible content">Envoyer</div>
+      <div class="hidden content">
+        <i class="envelope icon"></i>
+      </div>
+    </div>
+  </form>
+</div>
+

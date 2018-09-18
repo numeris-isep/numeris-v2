@@ -1,82 +1,118 @@
-<div id="home">
-  <img class="ui centered massive fluid image" src="assets/logos/numeris-blue.png">
+<!-- Top -->
+<div class="ui vertical primary masthead center aligned segment" #top>
+  <div class="ui text container">
+    <img class="ui centered massive fluid image" src="assets/logos/numeris-white.png">
+    <h2 class="ui white inverted header">Le job service de l'ISEP</h2>
+    <button class="circular ui primary large icon button scroll-down" (click)="scrollToElement(1)">
+      <i class="icon arrow down"></i>
+    </button>
+  </div>
 </div>
 
-<div id="about-us">
-  <div class="ui container">
-    <div class="ui four doubling cards">
-      <div class="card">
-        <div class="image">
-          <img src="assets/images/default-image.png">
-        </div>
-        <div class="content">
-          <div class="header">Premier point</div>
-          <div class="meta">
-            <a>Friends</a>
-          </div>
-          <div class="description">
-            Numéris c'est cool
-          </div>
-        </div>
-      </div>
 
-      <div class="card">
-        <div class="image">
-          <img src="assets/images/default-image.png">
-        </div>
-        <div class="content">
-          <div class="header">Deuxième point</div>
-          <div class="meta">
-            <a>Friends</a>
-          </div>
-          <div class="description">
-            Numéris c'est sympa
-          </div>
-        </div>
+<!-- About us -->
+<div class="ui vertical stripe segment" #aboutUs>
+  <div class="ui middle aligned stackable grid container">
+    <div class="row">
+      <div class="eight wide column">
+        <h3 class="ui header">Pour les isépiens</h3>
+        <p>
+          Numéris permet aux isépiens d'obtenir un complément de revenu en
+          leur proposant des <strong>missions ponctuelles</strong> en intérim.
+        </p>
+        <p>
+          Avec un <strong>salaire attractif</strong> à la clé et une
+          <strong>grande diversité</strong> de missions, l'étudiant peut
+          facilement <strong>arrondir ses fins de mois</strong> tout en
+          <strong>montant en compétences</strong>.
+        </p>
+        <h3 class="ui header">Pour les entreprises</h3>
+        <p>
+          Numéris aux enteprises d'<strong>obtenir rapidement de la
+          main-d'oeuvre</strong> qualifiée pour répondre à toute demande.
+        </p>
       </div>
-
-      <div class="card">
-        <div class="image">
-          <img src="assets/images/default-image.png">
-        </div>
-        <div class="content">
-          <div class="header">Troisième point</div>
-          <div class="meta">
-            <a>Friends</a>
-          </div>
-          <div class="description">
-            Numéris c'est ouf
-          </div>
-        </div>
+      <div class="six wide right floated column">
+        <img src="assets/images/default.png" class="ui huge bordered rounded image">
       </div>
+    </div>
+  </div>
+</div>
 
-      <div class="card">
-        <div class="image">
-          <img src="assets/images/default-image.png">
+
+<!-- Desk background -->
+<div class="desk-background">
+  <div class="ui vertical stripe quote segment">
+    <div class="ui equal width stackable internally celled grid">
+      <div class="center aligned row">
+        <div class="column">
+          <i class="huge blue users icon"></i>
+          <h3>Des étudiants motivés</h3>
+          <p>
+            Plus de 1200 étudiants potentiellement disponibles.
+          </p>
         </div>
-        <div class="content">
-          <div class="header">Quatrième point</div>
-          <div class="meta">
-            <a>Friends</a>
-          </div>
-          <div class="description">
-            Numéris c'est dingue
-          </div>
+        <div class="column">
+          <i class="huge blue tasks icon"></i>
+          <h3>polivalents</h3>
+          <p>
+            Grâce à leurs formation pluridisciplinaire, ils peuvent intervenir
+            sur des tâches variées.
+          </p>
+        </div>
+        <div class="column">
+          <i class="huge blue globe icon"></i>
+          <h3>et au rayon d'action très large</h3>
+          <p>
+            Les isépiens peuvent se déplacer dans toute la France.
+          </p>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div id="team">
 
+<!-- Team -->
+<div #team>
+  <app-team></app-team>
 </div>
 
-<div id="leaderboard">
 
+<!-- ISEP buildings -->
+<div class="ui inverted vertical building segment">
+  <div class="ui equal width stackable grid">
+    <div class="center aligned row">
+      <div class="column">
+        <img src="assets/images/home/isep-building-ndc.jpg" class="ui rounded blurred image">
+      </div>
+      <div class="column">
+        <img src="assets/images/home/isep-building-ndl.jpg" class="ui rounded blurred image">
+      </div>
+    </div>
+  </div>
 </div>
 
-<div id="contact">
 
+<!-- Podium -->
+<div #podium>
+  <app-podium></app-podium>
 </div>
 
+
+<!-- Keyboard background-->
+<div class="keyboard-background"></div>
+
+
+<!-- Contact us -->
+<a class="ui blue massive fluid vertical animated button"
+   #contactUs (click)="openModal()">
+  <div class="visible content position">Nous contacter</div>
+  <div class="hidden content position">
+    <i class="large envelope icon"></i>
+  </div>
+</a>
+
+
+<!-- Footer -->
+<app-footer></app-footer>

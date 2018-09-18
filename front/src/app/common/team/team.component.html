@@ -1,0 +1,31 @@
+<div class="ui container">
+  <div class="ui vertical stripe segment">
+    <div class="ui basic center aligned segment">
+      <h1>L'équipe 2018/2019</h1>
+    </div>
+
+    <div class="ui four raised centered doubling cards">
+      <div class="ui card" *ngFor="let teamMember of teamMembers">
+        <div class="ui move up reveal image">
+          <img src="assets/images/{{ teamMember.defaultImage }}" class="visible content">
+          <img src="assets/images/{{ teamMember.otherImage }}" class="hidden content">
+        </div>
+        <div class="content">
+          <div class="header">{{ teamMember.firstName }} {{ teamMember.lastName }}</div>
+          <div class="meta">{{ teamMember.position }}</div>
+          <div class="description">
+            {{ teamMember.description }} <!-- TODO -->
+          </div>
+        </div>
+        <a class="ui bottom animated fade attached facebook button" href="http://m.me/{{ teamMember.facebookPageName }}" target="_blank">
+          <div class="visible content">
+            <i class="facebook icon"></i> Contacter
+          </div>
+          <div class="hidden content">
+            <i class="external icon"></i>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="ui inverted vertical footer segment">
+  <div class="ui center aligned container">
+    <div class="ui stackable inverted divided grid">
+      <div class="three wide column">
+        <h4 class="ui inverted header">Numéris ISEP</h4>
+        <div class="ui inverted link list">
+          <div class="item">28 rue Notre Dame des Champs, 75006 Paris</div>
+          <p class="item" suiPopup popupPlacement="bottom" popupText="Dévelopé et maintenu avec &#10084; par Eliott de Séguier">
+            <i class="copyright icon"></i> 2016-{{ currentYear }}
+          </p>
+        </div>
+      </div>
+      <div class="three wide column">
+        <h4 class="ui inverted header">Plan</h4>
+        <div class="ui inverted link list">
+          <a class="item" (click)="scrollToElement(1)">À propos</a>
+          <a class="item" (click)="scrollToElement(2)">L'équipe</a>
+          <a class="item" (click)="scrollToElement(3)">Podium</a>
+          <a class="item" (click)="scrollToElement(4)">Nous contacter</a>
+        </div>
+      </div>
+      <div class="eight wide center aligned column">
+        <h4 class="ui inverted header">Qui sommes nous ?</h4>
+        <div class="ui inverted link list">
+          <div class="item">
+            Numéris est une association étudiante de l'ISEP, créée par des
+            isépiens pour les isépiens, qui propose des missions rémunérées
+            aux étudiants et offre de la main-d'oeuvre aux entreprises.
+          </div>
+        </div>
+      </div>
+      <div class="one wide column">
+        <button class="circular ui inverted icon button scroll-up" (click)="scrollToElement(0)">
+          <i class="icon arrow up"></i>
+        </button>
+      </div>
+    </div>
+    <div class="ui inverted section divider"></div>
+    <img src="assets/logos/numeris-white.png" class="ui centered tiny image">
+    <div class="ui horizontal inverted small link list">
+      <a class="item" href="https://www.facebook.com/isepnumeris/" target="_blank">
+        <i class="icon facebook"></i>
+      </a>
+      <a class="item" href="https://www.linkedin.com/company/numerisisep/" target="_blank">
+        <i class="icon linkedin"></i>
+      </a>
+      <a class=" item" href="https://www.isep.fr/" target="_blank">
+        ISEP
+      </a>
+    </div>
+  </div>
+</div>
