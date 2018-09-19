@@ -6,7 +6,7 @@ import { environment } from "../../environments/environment";
 import { Observable } from "rxjs/internal/Observable";
 import { BehaviorSubject } from "rxjs";
 import { User } from "../staff/users/user";
-import { HTTP_OPTIONS } from "../common/_constants/HTTP_OPTIONS";
+import { HTTP_OPTIONS } from "../shared/_constants/HTTP_OPTIONS";
 import { Router } from "@angular/router";
 
 @Injectable({

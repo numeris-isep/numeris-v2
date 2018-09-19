@@ -1,7 +1,9 @@
 import { Component, ElementRef, Injectable, OnInit, ViewChild } from '@angular/core';
-import { ScrollToElementService } from "../../common/_services/scroll-to-element.service";
-import { ContactUsModal } from "../../common/modals/contact-us-modal/contact-us-modal.component";
+import { ScrollToElementService } from "../../shared/_services/scroll-to-element.service";
+import { ContactUsModal } from "../../shared/modals/contact-us-modal/contact-us-modal.component";
 import { SuiModalService } from 'ng2-semantic-ui';
+import { AuthService } from "../../auth/auth.service";
+import { Router } from "@angular/router";
 
 @Injectable()
 @Component({
@@ -23,10 +25,20 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private scrollService: ScrollToElementService,
-    private modalService: SuiModalService
+    private modalService: SuiModalService,
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
+    this.authService.isLoggedIn.subscribe(
+      isLoggedIn => {
+        if (isLoggedIn) {
+          this.router.navigate(['/dashboard']);
+        }
+      }
+    );
+
     this.elements = [
       this.top, this.aboutUs, this.team, this.podium, this.contactUs
     ];

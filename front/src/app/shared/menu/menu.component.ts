@@ -14,7 +14,8 @@ import { ScrollToElementService } from "../_services/scroll-to-element.service";
 })
 export class MenuComponent implements OnInit {
 
-  @Input() isLoggedIn$: Observable<boolean>;
+  isLoggedIn$: Observable<boolean>;
+
   @Input() sidebar: SidebarComponent;
 
   private modal: LoginModal = new LoginModal();
@@ -27,6 +28,7 @@ export class MenuComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.isLoggedIn$ = this.authService.isLoggedIn;
   }
 
   openModal() {

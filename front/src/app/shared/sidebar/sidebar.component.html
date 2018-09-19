@@ -1,4 +1,4 @@
-<app-menu [sidebar]="sidebar" [isLoggedIn$]="isLoggedIn$"></app-menu>
+<app-menu [sidebar]="sidebar"></app-menu>
 <sui-sidebar-container class="ui attached" track-scroll>
   <sui-sidebar transition="overlay" class="vertical" #sidebar>
     <div *ngIf="(isLoggedIn$ | async); else guest">
@@ -24,7 +24,7 @@
   <sui-sidebar-sibling [isDimmedWhenVisible]="true" class="no-border">
     <!-- Content goes here -->
 
-    <alert *ngIf="isLoggedIn$"></alert>
+    <alert *ngIf="isLoggedIn$ | async"></alert>
     <router-outlet></router-outlet>
 
   </sui-sidebar-sibling>

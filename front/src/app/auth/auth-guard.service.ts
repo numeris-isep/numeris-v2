@@ -3,7 +3,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { map, take } from "rxjs/operators";
 import { AuthService } from "./auth.service";
 import { SuiModalService } from "ng2-semantic-ui";
-import { LoginModal } from "../common/modals/login-modal/login-modal.component";
+import { LoginModal } from "../shared/modals/login-modal/login-modal.component";
 
 @Injectable({
   providedIn: 'root'
