@@ -2,61 +2,72 @@
   Nous contacter
 </div>
 
-<div class="content">
-  <form class="ui large form" [formGroup]="contactUsForm" (ngSubmit)="onSubmit()">
+<div class="modal content">
+  <form class="ui large form"
+        [formGroup]="contactUsForm" (ngSubmit)="onSubmit()"
+        [ngClass]="{ 'error': submitted && contactUsForm.invalid }">
     <div class="two fields">
-      <div class="required field">
+      <div class="required field"
+           [ngClass]="{ 'error': submitted && f.firstName.errors }">
         <label>Prénom</label>
-        <div class="ui left icon input">
-          <i class="address card icon"></i>
-          <input type="text" formControlName="firstName" placeholder="Prénom"
-                 [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+        <input type="text" formControlName="firstName" placeholder="Prénom"/>
+        <div *ngIf="submitted && f.firstName.errors"
+             class="ui error message">
+          Veuillez saisir un prénom.
         </div>
       </div>
 
-      <div class="required field">
+      <div class="required field"
+           [ngClass]="{ 'error': submitted && f.lastName.errors }">
         <label>Nom</label>
-        <div class="ui left icon input">
-          <i class="address card outline icon"></i>
-          <input type="text" formControlName="lastName" placeholder="Nom"
-                 [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+        <input type="text" formControlName="lastName" placeholder="Nom"/>
+        <div *ngIf="submitted && f.lastName.errors"
+             class="ui error message">
+          Veuillez saisir un nom.
         </div>
       </div>
     </div>
 
-    <div class="required field">
+    <div class="required field"
+         [ngClass]="{ 'error': submitted && f.email.errors }">
       <label>Adresse email</label>
-      <div class="ui left icon input">
-        <i class="user icon"></i>
-        <input type="email" formControlName="email" placeholder="Adresse email"
-               [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
+      <input type="email" formControlName="email" placeholder="Adresse email"/>
+      <div *ngIf="submitted && f.email.errors"
+           class="ui error message">
+        Veuillez saisir une adresse email.
       </div>
     </div>
 
-    <div class="required field">
+    <div class="required field"
+         [ngClass]="{ 'error': submitted && f.subject.errors }">
       <label>Objet</label>
-      <div class="ui left icon input">
-        <i class="pencil icon"></i>
-        <input type="text" formControlName="subject"
-               class="form-control" placeholder="Objet"
-               [ngClass]="{ 'is-invalid': submitted && f.subject.errors }"/>
+      <input type="text" formControlName="subject"
+             class="form-control" placeholder="Objet"/>
+      <div *ngIf="submitted && f.subject.errors"
+           class="ui error message">
+        Veuillez saisir l'objet du message.
       </div>
     </div>
 
-    <div class="required field">
+    <div class="required field"
+         [ngClass]="{ 'error': submitted && f.message.errors }">
       <label>Message</label>
       <textarea type="text" formControlName="message"
-                class="form-control" placeholder="Message"
-                [ngClass]="{ 'is-invalid': submitted && f.message.errors }">
+                class="form-control" placeholder="Message">
       </textarea>
+      <div *ngIf="submitted && f.message.errors"
+           class="ui error message">
+        Veuillez saisir un message.
+      </div>
     </div>
 
-    <div class="ui fade animated fluid large primary button" tabindex="0">
+    <button class="ui fade animated fluid large primary button"
+            tabindex="0" [disabled]="loading">
       <div class="visible content">Envoyer</div>
       <div class="hidden content">
         <i class="envelope icon"></i>
       </div>
-    </div>
+    </button>
   </form>
 </div>
 

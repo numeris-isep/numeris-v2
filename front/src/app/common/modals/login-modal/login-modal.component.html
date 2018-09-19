@@ -3,33 +3,41 @@
 </div>
 
 <div class="content">
-  <form class="ui large form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="required field">
+  <form class="ui large form"
+        [formGroup]="loginForm" (ngSubmit)="onSubmit()"
+        [ngClass]="{ 'error': submitted && loginForm.invalid }">
+    <div class="required field"
+         [ngClass]="{ 'error': submitted && f.email.errors }">
       <label>Adresse email</label>
       <div class="ui left icon input">
         <i class="user icon"></i>
-        <input type="email" formControlName="email" placeholder="Adresse email"
-               [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
-
-        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-          <div *ngIf="f.email.errors.required">Veuillez saisir un email</div>
-        </div>
+        <input type="email" formControlName="email" placeholder="Adresse email"/>
+      </div>
+      <div *ngIf="submitted && f.email.errors"
+           class="ui error message">
+        Veuillez saisir une adresse email.
       </div>
     </div>
 
-    <div class="required field">
+    <div class="required field"
+         [ngClass]="{ 'error': submitted && f.password.errors }">
       <label>Mot de passe</label>
       <div class="ui left icon input">
         <i class="lock icon"></i>
-        <input type="password" formControlName="password" placeholder="Mot de passe"
-               [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
-
-        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-          <div *ngIf="f.password.errors.required">Veuillez saisir un mot de passe</div>
-        </div>
+        <input type="password" formControlName="password" placeholder="Mot de passe"/>
+      </div>
+      <div *ngIf="submitted && f.password.errors"
+           class="ui error message">
+        Veuillez saisir un mot de passe.
       </div>
     </div>
 
-    <button [disabled]="loading" class="ui fluid large teal submit primary button">Connexion</button>
+    <button class="ui fade animated fluid large primary button"
+            tabindex="0" [disabled]="loading">
+      <div class="visible content">Connexion</div>
+      <div class="hidden content">
+        <i class="sign in icon"></i>
+      </div>
+    </button>
   </form>
 </div>

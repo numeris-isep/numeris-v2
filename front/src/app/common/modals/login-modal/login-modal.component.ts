@@ -48,9 +48,7 @@ export class LoginModalComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.loginForm.invalid) {
-      return;
-    }
+    if (this.loginForm.invalid) { return; }
 
     this.loading = true;
     this.authService.login(this.f.email.value, this.f.password.value)

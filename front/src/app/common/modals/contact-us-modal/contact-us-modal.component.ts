@@ -40,9 +40,7 @@ export class ContactUsModalComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.contactUsForm.invalid) {
-      return;
-    }
+    if (this.contactUsForm.invalid) { return; }
 
     this.loading = true;
     // TODO
