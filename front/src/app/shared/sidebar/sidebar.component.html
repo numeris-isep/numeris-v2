@@ -10,13 +10,13 @@
 
     <ng-template #guest>
       <div (click)="sidebar.close()">
-        <a class="header item" (click)="scrollToElement(0)">
+        <a class="header item" (click)="scrollToElement('top')">
           <img class="ui tiny centered image" src="assets/logos/numeris-blue.png">
         </a>
-        <a class="item" (click)="scrollToElement(1)">À propos</a>
-        <a class="item" (click)="scrollToElement(2)">L'équipe</a>
-        <a class="item" (click)="scrollToElement(3)">Podium</a>
-        <a class="item" (click)="scrollToElement(4)">Nous contacter</a>
+        <a class="item" (click)="scrollToElement('aboutUs')">À propos</a>
+        <a class="item" (click)="scrollToElement('team')">L'équipe</a>
+        <a class="item" (click)="scrollToElement('podium')">Podium</a>
+        <a class="item" (click)="scrollToElement('contactUs')">Nous contacter</a>
       </div>
     </ng-template>
   </sui-sidebar>

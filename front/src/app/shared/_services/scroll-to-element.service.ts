@@ -1,21 +1,31 @@
-import { ElementRef, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Router } from "@angular/router";
+import { StringService } from "./string.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScrollToElementService {
 
-  private elements: ElementRef[];
+  private elements: any;
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
-  setPageElements(elements: ElementRef[]) {
+  setPageElements(elements: any) {
     this.elements = elements;
   }
 
-  scrollToElement(id: number) {
-    this.elements[id]
-      .nativeElement
-      .scrollIntoView({ behavior: 'smooth', block: 'start' });
+  scrollToElement(anchor: string): any {
+    if (this.elements == undefined) {
+      this.router.navigate(['/']);
+      return;
+    }
+
+    return this.elements[anchor] == undefined ? null
+      : this.elements[anchor]
+        .nativeElement
+        .scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }

@@ -13,10 +13,10 @@
       <div class="three wide column">
         <h4 class="ui inverted header">Plan</h4>
         <div class="ui inverted link list">
-          <a class="item" (click)="scrollToElement(1)">À propos</a>
-          <a class="item" (click)="scrollToElement(2)">L'équipe</a>
-          <a class="item" (click)="scrollToElement(3)">Podium</a>
-          <a class="item" (click)="scrollToElement(4)">Nous contacter</a>
+          <a class="item" (click)="scrollToElement('aboutUs')">À propos</a>
+          <a class="item" (click)="scrollToElement('team')">L'équipe</a>
+          <a class="item" (click)="scrollToElement('podium')">Podium</a>
+          <a class="item" (click)="scrollToElement('contactUs')">Nous contacter</a>
         </div>
       </div>
       <div class="eight wide center aligned column">
@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="one wide column">
-        <button class="circular ui inverted icon button scroll-up" (click)="scrollToElement(0)">
+        <button class="circular ui inverted icon button scroll-up" (click)="scrollToElement('top')">
           <i class="icon arrow up"></i>
         </button>
       </div>

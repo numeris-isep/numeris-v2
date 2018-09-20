@@ -16,7 +16,7 @@ export class FooterComponent implements OnInit {
   ngOnInit() {
   }
 
-  scrollToElement(id: number) {
-    this.scrollService.scrollToElement(id);
+  scrollToElement(anchor: string) {
+    this.scrollService.scrollToElement(anchor);
   }
 }

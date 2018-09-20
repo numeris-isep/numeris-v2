@@ -41,7 +41,7 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  scrollToElement(id: number) {
-    this.scrollService.scrollToElement(id);
+  scrollToElement(anchor: string) {
+    this.scrollService.scrollToElement(anchor);
   }
 }

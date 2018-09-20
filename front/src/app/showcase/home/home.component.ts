@@ -1,9 +1,9 @@
-import { Component, ElementRef, Injectable, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ElementRef, Injectable, OnInit, ViewChild } from '@angular/core';
 import { ScrollToElementService } from "../../shared/_services/scroll-to-element.service";
 import { ContactUsModal } from "../../shared/modals/contact-us-modal/contact-us-modal.component";
 import { SuiModalService } from 'ng2-semantic-ui';
 import { AuthService } from "../../auth/auth.service";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Injectable()
 @Component({
@@ -19,14 +19,23 @@ export class HomeComponent implements OnInit {
   @ViewChild('podium') private podium: ElementRef;
   @ViewChild('contactUs') private contactUs: ElementRef;
 
-  private elements: ElementRef[];
+  private elements: {
+    top: ElementRef,
+    aboutUs: ElementRef,
+    team: ElementRef,
+    podium: ElementRef,
+    contactUs: ElementRef
+  };
 
   private modal: ContactUsModal = new ContactUsModal();
+
+  private anchor: string;
 
   constructor(
     private scrollService: ScrollToElementService,
     private modalService: SuiModalService,
     private router: Router,
+    private route: ActivatedRoute,
     private authService: AuthService
   ) { }
 
@@ -39,15 +48,19 @@ export class HomeComponent implements OnInit {
       }
     );
 
-    this.elements = [
-      this.top, this.aboutUs, this.team, this.podium, this.contactUs
-    ];
+    this.elements = {
+      top: this.top,
+      aboutUs: this.aboutUs,
+      team: this.team,
+      podium: this.podium,
+      contactUs: this.contactUs
+    };
 
     this.scrollService.setPageElements(this.elements);
   }
 
-  scrollToElement(id: number) {
-    this.scrollService.scrollToElement(id);
+  scrollToElement(anchor: string) {
+    this.scrollService.scrollToElement(anchor);
   }
 
   openModal() {

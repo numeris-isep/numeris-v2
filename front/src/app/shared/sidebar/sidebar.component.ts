@@ -22,8 +22,8 @@ export class SidebarComponent implements OnInit {
     this.isLoggedIn$ = this.authService.isLoggedIn;
   }
 
-  scrollToElement(id: number) {
-    this.scrollService.scrollToElement(id);
+  scrollToElement(anchor: string) {
+    this.scrollService.scrollToElement(anchor);
   }
 
   // This is to avoid red underlining from the IDE
