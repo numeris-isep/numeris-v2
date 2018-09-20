@@ -13,6 +13,7 @@ import { TeamComponent } from "./team/team.component";
 import { SuiModule } from 'ng2-semantic-ui';
 import { AppRoutingModule } from "../app-routing.module";
 import { ReactiveFormsModule } from "@angular/forms";
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     ConfirmModalComponent,
     ContactUsModalComponent,
     LoginModalComponent,
+    NotFoundComponent,
   ],
   exports: [
     AlertComponent,
