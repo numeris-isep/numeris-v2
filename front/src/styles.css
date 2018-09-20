@@ -1,3 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "assets/semantic/dist/semantic.min.css";
+
+
+/******************************** MAIN style ********************************/
+
+/*
+If you want to set a margin to a component template inside the
+<sui-sidebar-sibling>, you should wrap all the HTML content inside
+a <div> with the classes 'ui main content':
+
+    <div class="ui main content">
+      <!-- Content of the component template
+    </div>
+
+ */
+.ui.main.content {
+  margin: 20px;
+}

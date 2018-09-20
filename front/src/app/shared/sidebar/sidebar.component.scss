@@ -1,6 +1,10 @@
+// DISCLAIMER: theses properties make the Menu and Sidebar sticky.
+// Please modify this file carefully or you can ruin the design... :'(
+
 sui-sidebar-container sui-sidebar-sibling {
-  position: absolute;
-  top: 0;
+  position: absolute !important;
+  top: 0 !important;
+  width: 100vw !important;
 }
 sui-sidebar-container sui-sidebar,
 sui-sidebar-container.pushable:not(body) > .fixed,
