@@ -14,6 +14,9 @@ import { SuiModule } from 'ng2-semantic-ui';
 import { AppRoutingModule } from "../app-routing.module";
 import { ReactiveFormsModule } from "@angular/forms";
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ButtonContentComponent } from './button/button-content/button-content.component';
+import { ButtonComponent } from './button/button/button.component';
+import { LinkButtonComponent } from './button/link-button/link-button.component';
 
 @NgModule({
   imports: [
@@ -36,6 +39,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ContactUsModalComponent,
     LoginModalComponent,
     NotFoundComponent,
+    ButtonContentComponent,
+    ButtonComponent,
+    LinkButtonComponent,
   ],
   exports: [
     AlertComponent,

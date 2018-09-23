@@ -17,14 +17,11 @@
             {{ teamMember.description }} <!-- TODO -->
           </div>
         </div>
-        <a class="ui bottom animated fade attached facebook button" href="http://m.me/{{ teamMember.facebookPageName }}" target="_blank">
-          <div class="visible content">
-            <i class="facebook icon"></i> Contacter
-          </div>
-          <div class="hidden content">
-            <i class="external icon"></i>
-          </div>
-        </a>
+
+        <app-link-button visibleContent="Contacter" visibleIcon="facebook" hiddenIcon="external"
+                         color="facebook" attachment="bottom attached" size
+                         href="http://m.me/{{ teamMember.facebookPageName}}" target="_blank">
+        </app-link-button>
       </div>
     </div>
   </div>

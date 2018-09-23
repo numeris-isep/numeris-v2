@@ -32,12 +32,8 @@
       </div>
     </div>
 
-    <button class="ui fade animated fluid large primary button"
-            tabindex="0" [disabled]="loading">
-      <div class="visible content">Connexion</div>
-      <div class="hidden content">
-        <i class="sign in icon"></i>
-      </div>
-    </button>
+    <app-button visibleContent="Connexion" hiddenIcon="sign in"
+                [loading]="loading" behaviour="fluid">
+    </app-button>
   </form>
 </div>

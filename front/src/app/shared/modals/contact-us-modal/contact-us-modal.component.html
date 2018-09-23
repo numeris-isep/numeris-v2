@@ -61,13 +61,9 @@
       </div>
     </div>
 
-    <button class="ui fade animated fluid large primary button"
-            tabindex="0" [disabled]="loading">
-      <div class="visible content">Envoyer</div>
-      <div class="hidden content">
-        <i class="envelope icon"></i>
-      </div>
-    </button>
+    <app-button visibleContent="Envoyer" hiddenIcon="envelope"
+                [loading]="loading" behaviour="fluid">
+    </app-button>
   </form>
 </div>
 

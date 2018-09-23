@@ -1,0 +1,9 @@
+<div class="visible content">
+  <i *ngIf="visibleIcon" class="icon"
+     [ngClass]="visibleIcon"></i>
+  <span *ngIf="visibleContent"> {{ visibleContent }}</span>
+</div>
+<div *ngIf="hiddenIcon"
+     class="hidden content">
+  <i class="icon" [ngClass]="hiddenIcon"></i>
+</div>
