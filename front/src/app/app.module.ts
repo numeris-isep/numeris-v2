@@ -10,7 +10,6 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ShowcaseModule } from "./showcase/showcase.module";
 import { StudentModule } from "./student/student.module";
 import { SharedModule } from "./shared/shared.module";
-import { Router } from "@angular/router";
 
 // Setting to locale to 'fr'
 registerLocaleData(localeFr, 'fr');
