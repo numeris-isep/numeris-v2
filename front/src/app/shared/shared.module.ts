@@ -17,6 +17,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ButtonContentComponent } from './button/button-content/button-content.component';
 import { ButtonComponent } from './button/button/button.component';
 import { LinkButtonComponent } from './button/link-button/link-button.component';
+import { AlertService } from "./alert/alert.service";
 
 @NgModule({
   imports: [
@@ -62,5 +63,8 @@ import { LinkButtonComponent } from './button/link-button/link-button.component'
     ContactUsModalComponent,
     LoginModalComponent,
   ],
+  providers: [
+    AlertService
+  ]
 })
 export class SharedModule { }

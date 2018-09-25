@@ -6,6 +6,7 @@ import { LoginModal } from "../modals/login-modal/login-modal.component";
 import { AuthService } from "../../auth/auth.service";
 import { Router } from "@angular/router";
 import { ScrollToElementService } from "../_services/scroll-to-element.service";
+import { AlertService } from "../alert/alert.service";
 
 @Component({
   selector: 'app-menu',
@@ -24,7 +25,8 @@ export class MenuComponent implements OnInit {
     private modalService: SuiModalService,
     private authService: AuthService,
     private router: Router,
-    private scrollService: ScrollToElementService
+    private scrollService: ScrollToElementService,
+    private alertService: AlertService
   ) {}
 
   ngOnInit() {
@@ -36,6 +38,7 @@ export class MenuComponent implements OnInit {
   }
 
   logout() {
+    this.alertService.clear();
     this.sidebar.close();
     this.authService.logout();
     this.router.navigate(['/']);

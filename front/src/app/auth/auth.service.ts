@@ -6,8 +6,9 @@ import { environment } from "../../environments/environment";
 import { Observable } from "rxjs/internal/Observable";
 import { BehaviorSubject } from "rxjs";
 import { User } from "../staff/users/user";
-import { HTTP_OPTIONS } from "../shared/_constants/HTTP_OPTIONS";
+import { HTTP_OPTIONS } from "../shared/_constants/http_options";
 import { Router } from "@angular/router";
+import { AlertService } from "../shared/alert/alert.service";
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private tokenService: TokenService,
-    private router: Router
+    private tokenService: TokenService
   ) { }
 
   login(email: string, password: string) {

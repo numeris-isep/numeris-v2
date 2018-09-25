@@ -1,26 +1,50 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Subscription } from "rxjs/internal/Subscription";
+import { Component, OnInit } from "@angular/core";
 import { AlertService } from "./alert.service";
+import { Alert, AlertType } from "./alert";
 
 @Component({
-  selector: 'alert',
-  templateUrl: 'alert.component.html'
+  selector: 'app-alert',
+  templateUrl: './alert.component.html',
+  styleUrls: ['./alert.component.css']
 })
-export class AlertComponent implements OnInit, OnDestroy {
+export class AlertComponent implements OnInit {
 
-  private subscription: Subscription;
-
-  message: any;
+  alerts: Alert[] = [];
 
   constructor(private alertService: AlertService) { }
 
   ngOnInit() {
-    this.subscription = this.alertService.getMessage().subscribe(message => {
-      this.message = message;
+    this.alertService.getAlert().subscribe((alert: Alert) => {
+      if (!alert) {
+        // clear alerts when an empty alert is received
+        this.alerts = [];
+        return;
+      }
+
+      // add alert to array
+      this.alerts.push(alert);
     });
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  removeAlert(alert: Alert) {
+    this.alerts = this.alerts.filter(x => x !== alert);
+  }
+
+  cssClass(alert: Alert) {
+    if (!alert) {
+      return;
+    }
+
+    // return css class based on alert type
+    switch (alert.type) {
+      case AlertType.Success:
+        return 'success';
+      case AlertType.Info:
+        return 'info';
+      case AlertType.Warning:
+        return 'warning';
+      case AlertType.Error:
+        return 'error';
+    }
   }
 }

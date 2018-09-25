@@ -3,9 +3,8 @@ import { SuiModal, ComponentModalConfig, ModalSize } from "ng2-semantic-ui"
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "../../../auth/auth.service";
-import { TokenService } from "../../../auth/token.service";
-import { AlertService } from "../../alert/alert.service";
 import { first } from "rxjs/operators";
+import { AlertService } from "../../alert/alert.service";
 
 @Component({
   selector: 'login-modal',
@@ -24,7 +23,6 @@ export class LoginModalComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private tokenService: TokenService,
     private alertService: AlertService
   ) { }
 
@@ -55,11 +53,11 @@ export class LoginModalComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          this.alertService.success('Vous êtes connecté !', null, true);
           this.router.navigate([this.returnUrl]);
-          this.modal.approve(undefined);
+          this.modal.approve(undefined); // <-- make the modal disappear
         },
         error => {
-          this.alertService.error(error);
           this.loading = false;
         });
   }

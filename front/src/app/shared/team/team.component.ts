@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TeamMember } from "../_classes/TeamMember";
-import { TEAM_MEMBERS } from "../_constants/TEAM_MEMBERS";
+import { TeamMember } from "../_classes/team-member";
+import { Team_members } from "../_constants/team_members";
 
 @Component({
   selector: 'app-team',
@@ -9,7 +9,7 @@ import { TEAM_MEMBERS } from "../_constants/TEAM_MEMBERS";
 })
 export class TeamComponent implements OnInit {
 
-  teamMembers: TeamMember[] = TEAM_MEMBERS;
+  teamMembers: TeamMember[] = Team_members;
 
   constructor() { }
 

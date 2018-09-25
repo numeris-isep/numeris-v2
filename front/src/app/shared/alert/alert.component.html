@@ -1,5 +1,12 @@
-<div *ngIf="message"
-     [ngClass]="{ 'alert': message, 'alert-success': message.type === 'success', 'alert-danger': message.type === 'error' }">
-  {{message.text}}
+<div *ngFor="let alert of alerts">
+  <div class="bottom marged">
+    <sui-message class="{{ cssClass(alert) }}">
+      <div *ngIf="alert.title" class="header">
+        {{ alert.title }}
+      </div>
+      <div *ngIf="alert.content">
+        {{ alert.content }}
+      </div>
+    </sui-message>
+  </div>
 </div>
-<!--TODO: add semantic ui style classes-->

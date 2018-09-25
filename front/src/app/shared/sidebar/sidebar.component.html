@@ -24,8 +24,8 @@
   <sui-sidebar-sibling [isDimmedWhenVisible]="true" class="no-border">
     <!-- Content goes here -->
 
-    <div [ngClass]="{ 'ui main content': (isLoggedIn$ | async) && true }">
-      <alert *ngIf="isLoggedIn$ | async"></alert>
+    <div [ngClass]="{ 'ui main content': (isLoggedIn$ | async) }">
+      <app-alert></app-alert>
       <router-outlet></router-outlet>
     </div>
 

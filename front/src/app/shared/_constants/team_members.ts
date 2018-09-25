@@ -1,6 +1,6 @@
-import { TeamMember } from "../_classes/TeamMember";
+import { TeamMember } from "../_classes/team-member";
 
-export const TEAM_MEMBERS: TeamMember[] = [
+export const Team_members: TeamMember[] = [
   new TeamMember(
     'Gaël',
     'Chereau',
