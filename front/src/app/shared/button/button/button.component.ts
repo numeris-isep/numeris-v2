@@ -9,7 +9,7 @@ export class ButtonComponent
   extends Button
   implements OnInit {
 
-  @Input() loading: boolean = false;
+  @Input() isLoading: boolean = false;
 
   constructor() {
     super();
@@ -19,8 +19,7 @@ export class ButtonComponent
     this.animation = this.hiddenIcon != undefined ? 'fade animated' : '';
 
     this.classes = [
-      this.color, this.size, this.animation, this.attachment, this.behaviour
+      this.color, this.size, this.animation, this.attachment, this.behaviour,
     ];
   }
-
 }
