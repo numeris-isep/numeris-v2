@@ -2,7 +2,7 @@ import { LOCALE_ID, NgModule } from "@angular/core";
 import { AppComponent } from "./app.component";
 import { BrowserModule, Title } from "@angular/platform-browser";
 import { ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import localeFr from "@angular/common/locales/fr";
 import { registerLocaleData } from "@angular/common";
@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ShowcaseModule } from "./showcase/showcase.module";
 import { StudentModule } from "./student/student.module";
 import { SharedModule } from "./shared/shared.module";
+import { ErrorInterceptorService } from "./shared/_services/error-interceptor.service";
 
 // Setting to locale to 'fr'
 registerLocaleData(localeFr, 'fr');
@@ -32,7 +33,8 @@ registerLocaleData(localeFr, 'fr');
   ],
   providers: [
     Title,
-    { provide: LOCALE_ID, useValue: 'fr' }
+    { provide: LOCALE_ID, useValue: 'fr' },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true },
   ],
   bootstrap: [AppComponent]
 })

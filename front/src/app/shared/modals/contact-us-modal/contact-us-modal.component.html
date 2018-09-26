@@ -10,7 +10,13 @@
       <div class="required field"
            [ngClass]="{ 'error': submitted && f.firstName.errors }">
         <label>Prénom</label>
-        <input type="text" formControlName="firstName" placeholder="Prénom"/>
+        <div class="ui corner labeled input">
+          <input type="text" formControlName="firstName" placeholder="Prénom"/>
+          <div class="ui corner label">
+            <i class="asterisk icon"></i>
+          </div>
+        </div>
+
         <div *ngIf="submitted && f.firstName.errors"
              class="ui error message">
           Veuillez saisir un prénom.
@@ -20,7 +26,12 @@
       <div class="required field"
            [ngClass]="{ 'error': submitted && f.lastName.errors }">
         <label>Nom</label>
-        <input type="text" formControlName="lastName" placeholder="Nom"/>
+        <div class="ui corner labeled input">
+          <input type="text" formControlName="lastName" placeholder="Nom"/>
+          <div class="ui corner label">
+            <i class="asterisk icon"></i>
+          </div>
+        </div>
         <div *ngIf="submitted && f.lastName.errors"
              class="ui error message">
           Veuillez saisir un nom.
@@ -31,7 +42,12 @@
     <div class="required field"
          [ngClass]="{ 'error': submitted && f.email.errors }">
       <label>Adresse email</label>
-      <input type="email" formControlName="email" placeholder="Adresse email"/>
+      <div class="ui corner labeled input">
+        <input type="email" formControlName="email" placeholder="Adresse email"/>
+        <div class="ui corner label">
+          <i class="asterisk icon"></i>
+        </div>
+      </div>
       <div *ngIf="submitted && f.email.errors"
            class="ui error message">
         Veuillez saisir une adresse email.
@@ -41,8 +57,12 @@
     <div class="required field"
          [ngClass]="{ 'error': submitted && f.subject.errors }">
       <label>Objet</label>
-      <input type="text" formControlName="subject"
-             class="form-control" placeholder="Objet"/>
+      <div class="ui corner labeled input">
+        <input type="text" formControlName="subject" placeholder="Objet"/>
+        <div class="ui corner label">
+          <i class="asterisk icon"></i>
+        </div>
+      </div>
       <div *ngIf="submitted && f.subject.errors"
            class="ui error message">
         Veuillez saisir l'objet du message.
@@ -52,9 +72,13 @@
     <div class="required field"
          [ngClass]="{ 'error': submitted && f.message.errors }">
       <label>Message</label>
-      <textarea type="text" formControlName="message"
-                class="form-control" placeholder="Message">
-      </textarea>
+      <div class="ui corner labeled input">
+        <textarea type="text" formControlName="message" placeholder="Message">
+        </textarea>
+        <div class="ui corner label">
+          <i class="asterisk icon"></i>
+        </div>
+      </div>
       <div *ngIf="submitted && f.message.errors"
            class="ui error message">
         Veuillez saisir un message.
@@ -62,7 +86,7 @@
     </div>
 
     <app-button visibleContent="Envoyer" hiddenIcon="envelope"
-                [loading]="loading" behaviour="fluid">
+                [isLoading]="loading" behaviour="fluid">
     </app-button>
   </form>
 </div>

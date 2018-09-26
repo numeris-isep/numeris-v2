@@ -1,6 +1,7 @@
 <div *ngFor="let alert of alerts">
-  <div class="bottom marged">
-    <sui-message class="{{ cssClass(alert) }}">
+  <div *ngIf="target === alert.target || alert.target === 'all'"
+       class="bottom marged" #div>
+    <sui-message class="{{ cssClass(alert) }}" (dismiss)="div.remove()">
       <div *ngIf="alert.title" class="header">
         {{ alert.title }}
       </div>

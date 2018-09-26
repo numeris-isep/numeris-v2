@@ -30,25 +30,25 @@ export class AlertService {
     return this.subject.asObservable();
   }
 
-  alert(type: AlertType, content: string, title: string | null, keepAfterRouteChange = false) {
+  alert(type: AlertType, content: string, title: string | null, keepAfterRouteChange, target: string) {
     this.keepAfterRouteChange = keepAfterRouteChange;
-    this.subject.next(<Alert> { type: type, content: content, title: title });
+    this.subject.next(<Alert> { type: type, content: content, title: title, target: target });
   }
 
-  success(content: string, title: string | null = null, keepAfterRouteChange = false) {
-    this.alert(AlertType.Success, content, title, keepAfterRouteChange);
+  success(content: string, title: string | null = null, keepAfterRouteChange = false, target: string = 'all') {
+    this.alert(AlertType.Success, content, title, keepAfterRouteChange, target);
   }
 
-  info(content: string, title: string | null = null, keepAfterRouteChange = false) {
-    this.alert(AlertType.Info, content, title, keepAfterRouteChange);
+  info(content: string, title: string | null = null, keepAfterRouteChange = false, target: string = 'all') {
+    this.alert(AlertType.Info, content, title, keepAfterRouteChange, target);
   }
 
-  warning(content: string, title: string | null = null, keepAfterRouteChange = false) {
-    this.alert(AlertType.Warning, content, title, keepAfterRouteChange);
+  warning(content: string, title: string | null = null, keepAfterRouteChange = false, target: string = 'all') {
+    this.alert(AlertType.Warning, content, title, keepAfterRouteChange, target);
   }
 
-  error(content: string, title: string | null = null, keepAfterRouteChange = false) {
-    this.alert(AlertType.Error, content, title, keepAfterRouteChange);
+  error(content: string, title: string | null = null, keepAfterRouteChange = false, target: string = 'all') {
+    this.alert(AlertType.Error, content, title, keepAfterRouteChange, target);
   }
 
   clear() {

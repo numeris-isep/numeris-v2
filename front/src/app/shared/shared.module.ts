@@ -42,7 +42,7 @@ import { AlertService } from "./alert/alert.service";
     NotFoundComponent,
     ButtonContentComponent,
     ButtonComponent,
-    LinkButtonComponent,
+    LinkButtonComponent
   ],
   exports: [
     AlertComponent,

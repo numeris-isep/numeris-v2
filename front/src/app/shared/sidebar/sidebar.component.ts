@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs";
 import { AuthService } from "../../auth/auth.service";
 import { ScrollToElementService } from "../_services/scroll-to-element.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-sidebar',
@@ -14,7 +15,8 @@ export class SidebarComponent implements OnInit {
 
   constructor(
     private authService : AuthService,
-    private scrollService: ScrollToElementService
+    private scrollService: ScrollToElementService,
+    public router: Router
   ) { }
 
   ngOnInit() {

@@ -30,7 +30,7 @@ class AuthController extends Controller
         $user = User::where('email', request(['email']))->first();
 
         if (! $user) {
-            return response()->json(['error' => trans('api.403')], JsonResponse::HTTP_UNAUTHORIZED);
+            return response()->json(['error' => trans('validation.login')], JsonResponse::HTTP_UNAUTHORIZED);
         }
 
         $token = auth()->claims(['rol' => $user->role()->name])
@@ -38,7 +38,7 @@ class AuthController extends Controller
             ->attempt($credentials);
 
         if (! $token) {
-            return response()->json(['error' => trans('api.403')], JsonResponse::HTTP_UNAUTHORIZED);
+            return response()->json(['error' => trans('api.401')], JsonResponse::HTTP_UNAUTHORIZED);
         }
 
         return $this->respondWithToken($token);

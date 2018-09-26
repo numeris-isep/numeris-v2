@@ -25,8 +25,7 @@ export class MenuComponent implements OnInit {
     private modalService: SuiModalService,
     private authService: AuthService,
     private router: Router,
-    private scrollService: ScrollToElementService,
-    private alertService: AlertService
+    private scrollService: ScrollToElementService
   ) {}
 
   ngOnInit() {
@@ -38,7 +37,6 @@ export class MenuComponent implements OnInit {
   }
 
   logout() {
-    this.alertService.clear();
     this.sidebar.close();
     this.authService.logout();
     this.router.navigate(['/']);
