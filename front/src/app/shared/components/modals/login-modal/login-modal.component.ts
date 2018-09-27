@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "../../../../core/auth/auth.service";
 import { first } from "rxjs/operators";
-import { AlertService } from "../../alert/alert.service";
+import { AlertService } from "../../../../core/services/alert.service";
 
 @Component({
   selector: 'login-modal',

@@ -13,7 +13,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { ButtonContentComponent } from './components/button/button-content/button-content.component';
 import { ButtonComponent } from './components/button/button/button.component';
 import { LinkButtonComponent } from './components/button/link-button/link-button.component';
-import { AlertService } from "./components/alert/alert.service";
+import { AlertService } from "../core/services/alert.service";
 
 @NgModule({
   imports: [

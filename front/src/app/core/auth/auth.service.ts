@@ -8,7 +8,7 @@ import { BehaviorSubject } from "rxjs";
 import { User } from "../classes/models/user";
 import { HTTP_OPTIONS } from "../constants/http_options";
 import { Router } from "@angular/router";
-import { AlertService } from "../../shared/components/alert/alert.service";
+import { AlertService } from "../services/alert.service";
 
 @Injectable({
   providedIn: 'root'

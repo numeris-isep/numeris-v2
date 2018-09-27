@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertService } from "../../../shared/components/alert/alert.service";
+import { AlertService } from "../../../core/services/alert.service";
 
 @Component({
   selector: 'app-dashboard',
