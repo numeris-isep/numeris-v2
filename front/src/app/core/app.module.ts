@@ -9,13 +9,13 @@ import { registerLocaleData } from "@angular/common";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { SharedModule } from "../shared/shared.module";
 import { ErrorInterceptorService } from "./interceptors/error-interceptor.service";
-import { Router } from "@angular/router";
 import { StudentModule } from "../modules/student/student.module";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { MenuComponent } from "./components/menu/menu.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { HomeComponent } from "../modules/showcase/home/home.component";
 import { SuiModule } from 'ng2-semantic-ui';
+import { AccordionComponent } from "./components/accordion/accordion.component";
 
 // Setting to locale to 'fr'
 registerLocaleData(localeFr, 'fr');
@@ -37,6 +37,7 @@ registerLocaleData(localeFr, 'fr');
     AppComponent,
     HomeComponent,
     SidebarComponent,
+    AccordionComponent,
     MenuComponent,
     NotFoundComponent
   ],
