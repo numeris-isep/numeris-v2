@@ -8,7 +8,7 @@ import localeFr from "@angular/common/locales/fr";
 import { registerLocaleData } from "@angular/common";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { SharedModule } from "../shared/shared.module";
-import { ErrorInterceptorService } from "./interceptors/error-interceptor.service";
+import { ErrorInterceptor } from "./interceptors/error.interceptor";
 import { StudentModule } from "../modules/student/student.module";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { MenuComponent } from "./components/menu/menu.component";
@@ -16,6 +16,7 @@ import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { HomeComponent } from "../modules/showcase/home/home.component";
 import { SuiModule } from 'ng2-semantic-ui';
 import { AccordionComponent } from "./components/accordion/accordion.component";
+import { JwtInterceptor } from "./interceptors/jwt.interceptor";
 
 // Setting to locale to 'fr'
 registerLocaleData(localeFr, 'fr');
@@ -44,15 +45,9 @@ registerLocaleData(localeFr, 'fr');
   providers: [
     Title,
     { provide: LOCALE_ID, useValue: 'fr' },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true },
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  // Uncomment these following lines to display the router configuration
-  // (useful to see if the routes are in the proper order)
-
-  // constructor(router: Router) {
-  //   console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
-  // }
-}
+export class AppModule { }

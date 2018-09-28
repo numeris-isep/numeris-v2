@@ -7,7 +7,7 @@ import { AlertService } from "../services/alert.service";
 @Injectable({
   providedIn: 'root'
 })
-export class ErrorInterceptorService implements HttpInterceptor {
+export class ErrorInterceptor implements HttpInterceptor {
 
   constructor(private alertService: AlertService) { }
 
@@ -16,6 +16,7 @@ export class ErrorInterceptorService implements HttpInterceptor {
       const error = err.error.error;
       const url = err.url;
 
+      // Send the alert to the right target
       switch (true) {
         case url.includes('/api/login'):
           this.alertService.error(error, null, false, 'login-form');

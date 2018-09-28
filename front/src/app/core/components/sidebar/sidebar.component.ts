@@ -14,9 +14,9 @@ export class SidebarComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;
 
   constructor(
+    public router: Router,
     private authService : AuthService,
-    private scrollService: ScrollService,
-    public router: Router
+    private scrollService: ScrollService
   ) { }
 
   ngOnInit() {
