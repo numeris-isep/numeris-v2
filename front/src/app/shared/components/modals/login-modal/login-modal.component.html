@@ -1,0 +1,45 @@
+<div class="header">
+  Connexion
+</div>
+
+<div class="content">
+  <app-alert target="login-form"></app-alert>
+
+  <form class="ui large form"
+        [formGroup]="loginForm" (ngSubmit)="onSubmit()"
+        [ngClass]="{ 'error': submitted && loginForm.invalid }">
+    <div class="required field"
+         [ngClass]="{ 'error': submitted && f.email.errors }">
+      <label>Adresse email</label>
+      <div class="ui left icon corner labeled input">
+        <i class="user icon"></i>
+        <input type="email" formControlName="email" placeholder="Adresse email"/>
+        <div class="ui corner label">
+          <i class="asterisk icon"></i>
+        </div>
+      </div>
+      <div *ngIf="submitted && f.email.errors" class="ui error message">
+        Veuillez saisir une adresse email.
+      </div>
+    </div>
+
+    <div class="required field"
+         [ngClass]="{ 'error': submitted && f.password.errors }">
+      <label>Mot de passe</label>
+      <div class="ui left icon corner labeled input">
+        <i class="lock icon"></i>
+        <input type="password" formControlName="password" placeholder="Mot de passe"/>
+        <div class="ui corner label">
+          <i class="asterisk icon"></i>
+        </div>
+      </div>
+      <div *ngIf="submitted && f.password.errors" class="ui error message">
+        Veuillez saisir un mot de passe.
+      </div>
+    </div>
+
+    <app-button visibleContent="Connexion" hiddenIcon="sign in"
+                behaviour="fluid" [isLoading]="loading">
+    </app-button>
+  </form>
+</div>

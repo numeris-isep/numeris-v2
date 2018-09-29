@@ -1,0 +1,13 @@
+.menu .toc.item {
+  display: none;
+}
+
+@media only screen and (max-width: 767px) {
+  .left.menu {
+    display: none !important;
+  }
+
+  .menu .toc.item {
+    display: block;
+  }
+}

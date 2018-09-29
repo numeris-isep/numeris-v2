@@ -1,0 +1,82 @@
+<sui-accordion [closeOthers]="false">
+  <sui-accordion-panel [isOpen]="true" class="header item">
+    <div title>
+      <i class="dropdown icon"></i> Etudiant
+    </div>
+
+    <div content (click)="sidebar.close()">
+      <a class="item" routerLink="/dashboard" routerLinkActive="active">
+        <i class="home icon"></i> Tableau de bord
+      </a>
+      <a class="item" routerLink="/profile" routerLinkActive="active">
+        <i class="user icon"></i> Profil
+      </a>
+      <a class="item">
+        <i class="clipboard icon"></i> Missions
+      </a>
+      <a class="item">
+        <i class="file icon"></i> Candidatures
+      </a>
+      <a class="item">
+        <i class="info circle icon"></i> Tutoriels
+      </a>
+      <a class="item" routerLink="/terms-of-use" routerLinkActive="active">
+        <i class="book icon"></i> Conditions d'utilisation
+      </a>
+    </div>
+  </sui-accordion-panel>
+
+  <sui-accordion-panel [isOpen]="true" class="header item">
+    <div title>
+      <i class="dropdown icon"></i> Bureau
+    </div>
+
+    <div content (click)="sidebar.close()">
+      <a class="item">
+        <i class="chart line icon"></i> Statistiques
+      </a>
+      <a class="item">
+        <i class="users icon"></i> Utilisateurs
+      </a>
+      <a class="item">
+        <i class="copy icon"></i> Missions
+      </a>
+      <a class="item">
+        <i class="folder open icon"></i> Projets
+      </a>
+      <a class="item">
+        <i class="building icon"></i> Clients
+      </a>
+    </div>
+  </sui-accordion-panel>
+
+  <sui-accordion-panel [isOpen]="true" class="header item">
+    <div title>
+      <i class="dropdown icon"></i> Gestion
+    </div>
+
+    <div content (click)="sidebar.close()">
+      <a class="item">
+        <i class="euro icon"></i> Comptabilité
+      </a>
+      <a class="item">
+        <i class="cogs icon"></i> Paramètres
+      </a>
+      <a class="item">
+        <i class="newspaper icon"></i> Activité
+      </a>
+    </div>
+  </sui-accordion-panel>
+
+  <div class="item">
+    <a target="_blank" href="https://www.facebook.com/isepnumeris/">
+      <i class="facebook icon"></i>
+    </a>
+    <a target="_blank" href="https://www.linkedin.com/company/numerisisep/">
+      <i class="linkedin icon"></i>
+    </a>
+    <span suiPopup popupText="Dévelopé et maintenu avec &#10084; par Eliott de Séguier">
+      <i class="copyright icon"></i> 2016-2018
+    </span>
+  </div>
+</sui-accordion>

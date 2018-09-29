@@ -1,0 +1,20 @@
+.footer.segment {
+  padding: 5em 0;
+}
+
+.scroll-up {
+  position: relative;
+  animation-name: test;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
+@keyframes test {
+  from { top: 20px }
+  to { top: 0 }
+}
+
+.scroll-up:hover {
+  animation-play-state: paused;
+}
