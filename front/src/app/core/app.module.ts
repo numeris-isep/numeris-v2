@@ -17,6 +17,8 @@ import { HomeComponent } from "../modules/showcase/home/home.component";
 import { SuiModule } from 'ng2-semantic-ui';
 import { AccordionComponent } from "./components/accordion/accordion.component";
 import { JwtInterceptor } from "./interceptors/jwt.interceptor";
+import { TitleComponent } from './components/title/title.component';
+import { HeaderComponent } from './components/header/header.component';
 
 // Setting to locale to 'fr'
 registerLocaleData(localeFr, 'fr');
@@ -40,7 +42,9 @@ registerLocaleData(localeFr, 'fr');
     SidebarComponent,
     AccordionComponent,
     MenuComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    TitleComponent,
+    HeaderComponent
   ],
   providers: [
     Title,
