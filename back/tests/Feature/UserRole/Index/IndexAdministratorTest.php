@@ -21,7 +21,7 @@ class IndexAdministratorTest extends TestCaseWithAuth
             ->assertJsonStructure([[
                 'id',
                 'name',
-                'created_at'
+                'createdAt'
             ]]);
     }
 }
