@@ -12,7 +12,7 @@ class UpdateProfileStudentTest extends TestCaseWithAuth
     /**
      * @group student
      */
-    public function testAdministratorUpdatingHisOwnProfile()
+    public function testStudentUpdatingHisOwnProfile()
     {
         $user_id = 7; // Own profile
 
@@ -46,13 +46,13 @@ class UpdateProfileStudentTest extends TestCaseWithAuth
             ->assertJsonStructure([
                 'phone',
                 'nationality',
-                'birth_date',
-                'birth_city',
-                'social_insurance_number',
+                'birthDate',
+                'birthCity',
+                'socialInsuranceNumber',
                 'iban',
                 'bic',
-                'created_at',
-                'updated_at'
+                'createdAt',
+                'updatedAt',
             ]);
 
         $this->assertDatabaseHas('users', $user_data);

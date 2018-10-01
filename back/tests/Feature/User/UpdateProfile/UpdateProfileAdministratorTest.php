@@ -46,13 +46,13 @@ class UpdateProfileAdministratorTest extends TestCaseWithAuth
             ->assertJsonStructure([
                 'phone',
                 'nationality',
-                'birth_date',
-                'birth_city',
-                'social_insurance_number',
+                'birthDate',
+                'birthCity',
+                'socialInsuranceNumber',
                 'iban',
                 'bic',
-                'created_at',
-                'updated_at',
+                'createdAt',
+                'updatedAt',
             ]);
 
         $this->assertDatabaseHas('users', $user_data);
@@ -180,13 +180,13 @@ class UpdateProfileAdministratorTest extends TestCaseWithAuth
             ->assertJsonStructure([
                 'phone',
                 'nationality',
-                'birth_date',
-                'birth_city',
-                'social_insurance_number',
+                'birthDate',
+                'birthCity',
+                'socialInsuranceNumber',
                 'iban',
                 'bic',
-                'created_at',
-                'updated_at'
+                'createdAt',
+                'updatedAt',
             ]);
 
         $this->assertDatabaseHas('users', $user_data);
@@ -230,13 +230,13 @@ class UpdateProfileAdministratorTest extends TestCaseWithAuth
             ->assertJsonStructure([
                 'phone',
                 'nationality',
-                'birth_date',
-                'birth_city',
-                'social_insurance_number',
+                'birthDate',
+                'birthCity',
+                'socialInsuranceNumber',
                 'iban',
                 'bic',
-                'created_at',
-                'updated_at'
+                'createdAt',
+                'updatedAt',
             ]);
 
         $this->assertDatabaseHas('users', $user_data);

@@ -32,7 +32,7 @@ class AuthTest extends TestCase
         $this->json('POST', route('login'), $data)
             ->assertStatus(JsonResponse::HTTP_UNAUTHORIZED)
             ->assertJson([
-                'error' => trans('api.403')
+                'error' => trans('validation.login')
             ]);
     }
 }

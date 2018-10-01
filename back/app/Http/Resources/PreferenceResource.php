@@ -16,9 +16,9 @@ class PreferenceResource extends JsonResource
     {
         return [
             'id'                => $this->id,
-            'on_new_mission'    => $this->on_new_mission,
-            'on_acceptance'     => $this->on_acceptance,
-            'on_refusal'        => $this->on_refusal,
+            'onNewMission'    => $this->on_new_mission,
+            'onAcceptance'     => $this->on_acceptance,
+            'onRefusal'        => $this->on_refusal,
         ];
     }
 }

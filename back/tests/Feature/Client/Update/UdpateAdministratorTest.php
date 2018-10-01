@@ -27,11 +27,11 @@ class UdpateAdministratorTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',
-                'address_id',
+                'addressId',
                 'name',
                 'reference',
-                'created_at',
-                'updated_at',
+                'createdAt',
+                'updatedAt',
                 'address',
             ]);
 
