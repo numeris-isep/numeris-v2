@@ -19,7 +19,7 @@ class ConventionResource extends JsonResource
             'name' => $this->name,
 
             // Relations
-//            'billing_types' => $this->whenLoaded('billing_types') TODO
+//            'billingTypes' => $this->whenLoaded('billing_types') TODO
         ];
     }
 }

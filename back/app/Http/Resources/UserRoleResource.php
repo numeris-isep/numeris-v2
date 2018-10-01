@@ -21,7 +21,7 @@ class UserRoleResource extends JsonResource
                 auth()->user()->role()->name === 'developer',
                 $this->hierarchy
             ),
-            'created_at' => $this->whenPivotLoaded($this->pivot, $this->pivot->created_at->toDateTimeString()),
+            'createdAt' => $this->whenPivotLoaded($this->pivot, $this->pivot->created_at->toDateTimeString()),
         ];
     }
 }

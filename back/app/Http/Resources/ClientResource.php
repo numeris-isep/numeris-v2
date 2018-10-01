@@ -16,11 +16,11 @@ class ClientResource extends JsonResource
     {
         return [
             'id'            => $this->id,
-            'address_id'    => $this->address_id,
+            'addressId'    => $this->address_id,
             'name'          => $this->name,
             'reference'     => $this->reference,
-            'created_at'    => $this->created_at->toDateTimeString(),
-            'updated_at'    => $this->updated_at->toDateTimeString(),
+            'createdAt'    => $this->created_at->toDateTimeString(),
+            'updatedAt'    => $this->updated_at->toDateTimeString(),
 
             // Relations
             'address'       => $this->whenLoaded('address', AddressResource::make($this->address)),

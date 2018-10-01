@@ -18,11 +18,11 @@ class ProjectResource extends JsonResource
             'id'                => $this->id,
             'name'              => $this->name,
             'step'              => $this->step,
-            'start_at'          => $this->start_at,
-            'is_private'        => $this->is_private,
-            'money_received_at' => $this->money_received_at,
-            'created_at'        => $this->created_at->toDateTimeString(),
-            'updated_at'        => $this->updated_at->toDateTimeString(),
+            'startAt'          => $this->start_at,
+            'isPrivate'        => $this->is_private,
+            'moneyReceivedAt' => $this->money_received_at,
+            'createdAt'        => $this->created_at->toDateTimeString(),
+            'updatedAt'        => $this->updated_at->toDateTimeString(),
 
             // Relations
             'client'            => $this->whenLoaded('client', ClientResource::make($this->client)),
