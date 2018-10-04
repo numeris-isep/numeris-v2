@@ -19,6 +19,7 @@ import { AccordionComponent } from "./components/accordion/accordion.component";
 import { JwtInterceptor } from "./interceptors/jwt.interceptor";
 import { TitleComponent } from './components/title/title.component';
 import { HeaderComponent } from './components/header/header.component';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
 // Setting to locale to 'fr'
 registerLocaleData(localeFr, 'fr');
@@ -44,7 +45,8 @@ registerLocaleData(localeFr, 'fr');
     MenuComponent,
     NotFoundComponent,
     TitleComponent,
-    HeaderComponent
+    HeaderComponent,
+    BreadcrumbsComponent
   ],
   providers: [
     Title,

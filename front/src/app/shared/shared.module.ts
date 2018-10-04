@@ -3,7 +3,6 @@ import { CommonModule  } from '@angular/common';
 import { AlertComponent } from "./components/alert/alert.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { PodiumComponent } from "./components/podium/podium.component";
-import { AccordionComponent } from "../core/components/accordion/accordion.component";
 import { LoginModalComponent } from "./components/modals/login-modal/login-modal.component";
 import { ContactUsModalComponent } from "./components/modals/contact-us-modal/contact-us-modal.component";
 import { ConfirmModalComponent } from "./components/modals/confirm-modal/confirm-modal.component";

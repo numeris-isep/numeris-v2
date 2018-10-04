@@ -7,6 +7,7 @@ import { Observable } from "rxjs/internal/Observable";
 import { BehaviorSubject } from "rxjs";
 import { User } from "../classes/models/user";
 import { HTTP_OPTIONS } from "../constants/http_options";
+import { AlertService } from "../services/alert.service";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private alertService: AlertService
   ) { }
 
   login(email: string, password: string) {
@@ -44,6 +46,7 @@ export class AuthService {
     if (this.tokenService.get()) {
       this.tokenService.remove();
       this.loggedIn.next(false);
+      this.alertService.clear();
     }
   }
 }

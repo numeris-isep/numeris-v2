@@ -26,7 +26,7 @@
 
     <div [ngClass]="{ 'ui main content': (isLoggedIn$ | async) }">
       <app-alert target="main"></app-alert>
-      <app-header></app-header>
+      <app-header *ngIf="isLoggedIn$ | async"></app-header>
       <router-outlet></router-outlet>
     </div>
 
