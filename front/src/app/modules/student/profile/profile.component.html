@@ -1,54 +1,25 @@
-<div class="ui four column grid">
-  <div class="column">
-    <div class="ui fluid card">
-      <div class="content">
-        <div class="header">Section 1</div>
-      </div>
-      <div class="content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </div>
+<div class="ui padded grid doubling">
+  <div class="stretched row">
+    <!-- Profile summary -->
+    <div class="sixteen wide mobile eight wide tablet four wide computer column">
+      <app-profile-summary></app-profile-summary>
+    </div>
+
+    <!-- Preferences -->
+    <div class="sixteen wide mobile eight wide tablet four wide computer column">
+      <app-profile-preferences></app-profile-preferences>
+    </div>
+
+    <!-- Profile details -->
+    <div class="sixteen wide mobile eight wide computer column">
+      <app-profile-details></app-profile-details>
     </div>
   </div>
-  <div class="column">
-    <div class="ui fluid card">
-      <div class="content">
-        <div class="header">Section 2</div>
-      </div>
-      <div class="content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </div>
-    </div>
-  </div>
-  <div class="column">
-    <div class="ui fluid card">
-      <div class="content">
-        <div class="header">Section 3</div>
-      </div>
-      <div class="content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </div>
-    </div>
-  </div>
-  <div class="column">
-    <div class="ui fluid card">
-      <div class="content">
-        <div class="header">Section 4</div>
-      </div>
-      <div class="content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </div>
+
+  <div class="row">
+    <!-- Documents -->
+    <div class="column">
+      <app-profile-documents></app-profile-documents>
     </div>
   </div>
 </div>

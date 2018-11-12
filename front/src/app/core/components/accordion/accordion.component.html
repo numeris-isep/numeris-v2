@@ -2,6 +2,7 @@
   <sui-accordion-panel [isOpen]="true" class="header item">
     <div title>
       <i class="dropdown icon"></i> Etudiant
+
     </div>
 
     <div content (click)="sidebar.close()">
@@ -10,6 +11,7 @@
       </a>
       <a class="item" routerLink="/profile" routerLinkActive="active">
         <i class="user icon"></i> Profil
+        <span class="floating ui mini red label">3</span>
       </a>
       <a class="item">
         <i class="clipboard icon"></i> Missions
