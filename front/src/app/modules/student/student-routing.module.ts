@@ -5,6 +5,7 @@ import { ProfileComponent } from "./profile/profile.component";
 import { TermsOfUseComponent } from "./terms-of-use/terms-of-use.component";
 import { AuthGuard } from "../../core/guards/auth.guard";
 import { MissionComponent } from "./mission/mission.component";
+import { ApplicationComponent } from "./application/application.component";
 
 const studentRoutes: Routes = [
   {
@@ -29,6 +30,14 @@ const studentRoutes: Routes = [
     canActivate: [AuthGuard],
     data: {
       title: 'Missions disponibles',
+    }
+  },
+  {
+    path: 'applications',
+    component: ApplicationComponent,
+    canActivate: [AuthGuard],
+    data: {
+      title: 'Candidatures',
     }
   },
   {

@@ -11,6 +11,7 @@ import { SharedModule } from "../../shared/shared.module";
 import { ProfilePreferencesComponent } from './profile/profile-preferences/profile-preferences.component';
 import { ProfileDocumentsComponent } from './profile/profile-documents/profile-documents.component';
 import { MissionComponent } from './mission/mission.component';
+import { ApplicationComponent } from './application/application.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { MissionComponent } from './mission/mission.component';
     ProfileSummaryComponent,
     ProfilePreferencesComponent,
     ProfileDocumentsComponent,
-    MissionComponent
+    MissionComponent,
+    ApplicationComponent
   ]
 })
 export class StudentModule { }
