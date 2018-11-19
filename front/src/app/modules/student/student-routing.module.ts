@@ -4,6 +4,7 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { TermsOfUseComponent } from "./terms-of-use/terms-of-use.component";
 import { AuthGuard } from "../../core/guards/auth.guard";
+import { MissionComponent } from "./mission/mission.component";
 
 const studentRoutes: Routes = [
   {
@@ -20,6 +21,14 @@ const studentRoutes: Routes = [
     canActivate: [AuthGuard],
     data: {
       title: 'Profil',
+    }
+  },
+  {
+    path: 'missions',
+    component: MissionComponent,
+    canActivate: [AuthGuard],
+    data: {
+      title: 'Missions disponibles',
     }
   },
   {

@@ -10,6 +10,7 @@ import { ProfileSummaryComponent } from './profile/profile-summary/profile-summa
 import { SharedModule } from "../../shared/shared.module";
 import { ProfilePreferencesComponent } from './profile/profile-preferences/profile-preferences.component';
 import { ProfileDocumentsComponent } from './profile/profile-documents/profile-documents.component';
+import { MissionComponent } from './mission/mission.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { ProfileDocumentsComponent } from './profile/profile-documents/profile-d
     ProfileDetailsComponent,
     ProfileSummaryComponent,
     ProfilePreferencesComponent,
-    ProfileDocumentsComponent
+    ProfileDocumentsComponent,
+    MissionComponent
   ]
 })
 export class StudentModule { }
