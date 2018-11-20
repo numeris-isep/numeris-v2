@@ -12,6 +12,7 @@ import { ProfilePreferencesComponent } from './profile/profile-preferences/profi
 import { ProfileDocumentsComponent } from './profile/profile-documents/profile-documents.component';
 import { MissionComponent } from './mission/mission.component';
 import { ApplicationComponent } from './application/application.component';
+import { TutorialComponent } from './tutorial/tutorial.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { ApplicationComponent } from './application/application.component';
     ProfilePreferencesComponent,
     ProfileDocumentsComponent,
     MissionComponent,
-    ApplicationComponent
+    ApplicationComponent,
+    TutorialComponent
   ]
 })
 export class StudentModule { }

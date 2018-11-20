@@ -6,6 +6,7 @@ import { TermsOfUseComponent } from "./terms-of-use/terms-of-use.component";
 import { AuthGuard } from "../../core/guards/auth.guard";
 import { MissionComponent } from "./mission/mission.component";
 import { ApplicationComponent } from "./application/application.component";
+import { TutorialComponent } from "./tutorial/tutorial.component";
 
 const studentRoutes: Routes = [
   {
@@ -38,6 +39,14 @@ const studentRoutes: Routes = [
     canActivate: [AuthGuard],
     data: {
       title: 'Candidatures',
+    }
+  },
+  {
+    path: 'tutorials',
+    component: TutorialComponent,
+    canActivate: [AuthGuard],
+    data: {
+      title: 'Tutoriels',
     }
   },
   {
