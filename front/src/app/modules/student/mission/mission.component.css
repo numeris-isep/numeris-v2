@@ -1,7 +1,0 @@
-sui-accordion-panel:not(:first-child) .grid:not(.stackable) {
-  padding-top: 20px;
-}
-
-.right.angle.icon.divider {
-  margin: 0;
-}
