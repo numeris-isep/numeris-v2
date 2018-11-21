@@ -4,7 +4,7 @@ import { StudentRoutingModule } from "./student-routing.module";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { TermsOfUseComponent } from "./terms-of-use/terms-of-use.component";
-import { SuiModule } from "ng2-semantic-ui";
+import { SuiCheckboxModule, SuiModule } from "ng2-semantic-ui";
 import { ProfileDetailsComponent } from './profile/profile-details/profile-details.component';
 import { ProfileSummaryComponent } from './profile/profile-summary/profile-summary.component';
 import { SharedModule } from "../../shared/shared.module";
@@ -13,11 +13,14 @@ import { ProfileDocumentsComponent } from './profile/profile-documents/profile-d
 import { MissionComponent } from './mission/mission.component';
 import { ApplicationComponent } from './application/application.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
+import { SuiCheckbox } from "ng2-semantic-ui/dist";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   imports: [
     CommonModule,
     SuiModule,
+    FormsModule,
     StudentRoutingModule,
     SharedModule
   ],

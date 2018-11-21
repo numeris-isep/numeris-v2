@@ -12,7 +12,8 @@
                 Lire les conditions d'utilisation
               </div>
               <div class="field">
-                <sui-checkbox class="toggle"">
+                <sui-checkbox class="toggle" [ngModel]="allChecked"
+                              (checkChange)="mainCheckbox($event)">
                   <span>Tout marquer comme lu</span>
                 </sui-checkbox>
               </div>
@@ -22,7 +23,7 @@
                 <i class="check icon"></i>
                 Accepter les conditions d'utilisation
               </div><br>
-              <app-button visibleContent="Accepter"
+              <app-button visibleContent="Accepter" [isDisabled]="!allChecked"
                           hiddenIcon="check" size="small">
               </app-button>
             </div>
@@ -36,7 +37,7 @@
 <div class="ui padded two column grid doubling">
   <!-- Article 1 -->
   <div class="column">
-    <div class="ui fluid card">
+    <div class="ui fluid card" [ngClass]="{ 'green': checkboxes[0].isChecked}">
       <div class="content">
         <div class="header">Article 1</div>
         <div class="meta">Objet</div>
@@ -70,7 +71,8 @@
         </div>
       </div>
       <div class="center aligned extra content">
-        <sui-checkbox class="toggle">
+        <sui-checkbox class="toggle" (click)="check()"
+                      [(ngModel)]="checkboxes[0].isChecked">
           <span>Marquer comme lu</span>
         </sui-checkbox>
       </div>
@@ -79,7 +81,7 @@
 
   <!-- Article 2 -->
   <div class="column">
-    <div class="ui fluid card">
+    <div class="ui fluid card" [ngClass]="{ 'green': checkboxes[1].isChecked}">
       <div class="content">
         <div class="header">Article 2</div>
         <div class="meta">Mentions légales</div>
@@ -91,7 +93,8 @@
         </div>
       </div>
       <div class="center aligned extra content">
-        <sui-checkbox class="toggle">
+        <sui-checkbox class="toggle" (click)="check()"
+                      [(ngModel)]="checkboxes[1].isChecked">
           <span>Marquer comme lu</span>
         </sui-checkbox>
       </div>
@@ -100,7 +103,7 @@
 
   <!-- Article 3 -->
   <div class="column">
-    <div class="ui fluid card">
+    <div class="ui fluid card" [ngClass]="{ 'green': checkboxes[2].isChecked}">
       <div class="content">
         <div class="header">Article 3</div>
         <div class="meta">Définitions</div>
@@ -133,7 +136,8 @@
         </div>
       </div>
       <div class="center aligned extra content">
-        <sui-checkbox class="toggle">
+        <sui-checkbox class="toggle" (click)="check()"
+                      [(ngModel)]="checkboxes[2].isChecked">
           <span>Marquer comme lu</span>
         </sui-checkbox>
       </div>
@@ -142,7 +146,7 @@
 
   <!-- Article 4 -->
   <div class="column">
-    <div class="ui fluid card">
+    <div class="ui fluid card" [ngClass]="{ 'green': checkboxes[3].isChecked}">
       <div class="content">
         <div class="header">Article 4</div>
         <div class="meta">Accès au service</div>
@@ -195,7 +199,8 @@
         </div>
       </div>
       <div class="center aligned extra content">
-        <sui-checkbox class="toggle">
+        <sui-checkbox class="toggle" (click)="check()"
+                      [(ngModel)]="checkboxes[3].isChecked">
           <span>Marquer comme lu</span>
         </sui-checkbox>
       </div>
@@ -204,7 +209,7 @@
 
   <!-- Article 5 -->
   <div class="column">
-    <div class="ui fluid card">
+    <div class="ui fluid card" [ngClass]="{ 'green': checkboxes[4].isChecked}">
       <div class="content">
         <div class="header">Article 5</div>
         <div class="meta">Propriété intellectuelle</div>
@@ -233,7 +238,8 @@
         </div>
       </div>
       <div class="center aligned extra content">
-        <sui-checkbox class="toggle">
+        <sui-checkbox class="toggle" (click)="check()"
+                      [(ngModel)]="checkboxes[4].isChecked">
           <span>Marquer comme lu</span>
         </sui-checkbox>
       </div>
@@ -242,7 +248,7 @@
 
   <!-- Article 6 -->
   <div class="column">
-    <div class="ui fluid card">
+    <div class="ui fluid card" [ngClass]="{ 'green': checkboxes[5].isChecked}">
       <div class="content">
         <div class="header">Article 6</div>
         <div class="meta">Données personnelles</div>
@@ -283,7 +289,8 @@
         </div>
       </div>
       <div class="center aligned extra content">
-        <sui-checkbox class="toggle">
+        <sui-checkbox class="toggle" (click)="check()"
+                      [(ngModel)]="checkboxes[5].isChecked">
           <span>Marquer comme lu</span>
         </sui-checkbox>
       </div>
@@ -292,7 +299,7 @@
 
   <!-- Article 7 -->
   <div class="column">
-    <div class="ui fluid card">
+    <div class="ui fluid card" [ngClass]="{ 'green': checkboxes[6].isChecked}">
       <div class="content">
         <div class="header">Article 7</div>
         <div class="meta">Responsabilité et force majeure</div>
@@ -323,7 +330,8 @@
         </div>
       </div>
       <div class="center aligned extra content">
-        <sui-checkbox class="toggle">
+        <sui-checkbox class="toggle" (click)="check()"
+                      [(ngModel)]="checkboxes[6].isChecked">
           <span>Marquer comme lu</span>
         </sui-checkbox>
       </div>
@@ -332,7 +340,7 @@
 
   <!-- Article 8 -->
   <div class="column">
-    <div class="ui fluid card">
+    <div class="ui fluid card" [ngClass]="{ 'green': checkboxes[7].isChecked}">
       <div class="content">
         <div class="header">Article 8</div>
         <div class="meta">Évolution du contrat</div>
@@ -342,7 +350,8 @@
         </div>
       </div>
       <div class="center aligned extra content">
-        <sui-checkbox class="toggle">
+        <sui-checkbox class="toggle" (click)="check()"
+                      [(ngModel)]="checkboxes[7].isChecked">
           <span>Marquer comme lu</span>
         </sui-checkbox>
       </div>
@@ -351,7 +360,7 @@
 
   <!-- Article 9 -->
   <div class="column">
-    <div class="ui fluid card">
+    <div class="ui fluid card" [ngClass]="{ 'green': checkboxes[8].isChecked}">
       <div class="content">
         <div class="header">Article 9</div>
         <div class="meta">Durée</div>
@@ -361,7 +370,8 @@
         </div>
       </div>
       <div class="center aligned extra content">
-        <sui-checkbox class="toggle">
+        <sui-checkbox class="toggle" (click)="check()"
+                      [(ngModel)]="checkboxes[8].isChecked">
           <span>Marquer comme lu</span>
         </sui-checkbox>
       </div>
@@ -370,7 +380,7 @@
 
   <!-- Article 10 -->
   <div class="column">
-    <div class="ui fluid card">
+    <div class="ui fluid card" [ngClass]="{ 'green': checkboxes[9].isChecked}">
       <div class="content">
         <div class="header">Article 10</div>
         <div class="meta">Droit applicable et juridiction compétente</div>
@@ -381,7 +391,8 @@
         </div>
       </div>
       <div class="center aligned extra content">
-        <sui-checkbox class="toggle">
+        <sui-checkbox class="toggle" (click)="check()"
+                      [(ngModel)]="checkboxes[9].isChecked">
           <span>Marquer comme lu</span>
         </sui-checkbox>
       </div>
