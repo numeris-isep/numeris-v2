@@ -1,25 +1,27 @@
-<div class="ui padded grid doubling">
-  <div class="stretched row">
-    <!-- Profile summary -->
-    <div class="sixteen wide mobile eight wide tablet four wide computer column">
-      <app-profile-summary></app-profile-summary>
+<app-content [condition]="!user">
+  <div class="ui padded grid doubling">
+    <div class="stretched row">
+      <!-- Profile summary -->
+      <div class="sixteen wide mobile eight wide tablet four wide computer column">
+        <app-profile-summary *ngIf="user" [user]="user"></app-profile-summary>
+      </div>
+
+      <!-- Preferences -->
+      <div class="sixteen wide mobile eight wide tablet four wide computer column">
+        <app-profile-preferences></app-profile-preferences>
+      </div>
+
+      <!-- Profile details -->
+      <div class="sixteen wide mobile eight wide computer column">
+        <app-profile-details></app-profile-details>
+      </div>
     </div>
 
-    <!-- Preferences -->
-    <div class="sixteen wide mobile eight wide tablet four wide computer column">
-      <app-profile-preferences></app-profile-preferences>
-    </div>
-
-    <!-- Profile details -->
-    <div class="sixteen wide mobile eight wide computer column">
-      <app-profile-details></app-profile-details>
+    <div class="row">
+      <!-- Documents -->
+      <div class="column">
+        <app-profile-documents></app-profile-documents>
+      </div>
     </div>
   </div>
-
-  <div class="row">
-    <!-- Documents -->
-    <div class="column">
-      <app-profile-documents></app-profile-documents>
-    </div>
-  </div>
-</div>
+</app-content>

@@ -15,6 +15,7 @@ import { ApplicationComponent } from './application/application.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
 import { SuiCheckbox } from "ng2-semantic-ui/dist";
 import { FormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { FormsModule } from "@angular/forms";
     SuiModule,
     FormsModule,
     StudentRoutingModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
   declarations: [
     DashboardComponent,

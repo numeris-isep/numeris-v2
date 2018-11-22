@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs";
-import { AuthService } from "../../auth/auth.service";
+import { AuthService } from "../../http/auth/auth.service";
 import { ScrollService } from "../../services/scroll.service";
 
 @Component({

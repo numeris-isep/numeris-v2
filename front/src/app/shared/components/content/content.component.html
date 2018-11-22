@@ -1,0 +1,8 @@
+<!-- Loader -->
+<app-loader *ngIf="condition"></app-loader>
+
+<!-- Content -->
+<div *ngIf="!condition" [suiTransition]="transitionController">
+  <ng-content></ng-content>
+</div>
+
