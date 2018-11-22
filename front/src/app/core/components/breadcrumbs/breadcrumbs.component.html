@@ -10,10 +10,10 @@
          class="section" routerLink="{{ breadcrumb.url }}">
         {{ breadcrumb.title }}
       </a>
-      <div *ngIf="breadcrumb && i == breadcrumbs.length - 1"
+      <span *ngIf="breadcrumb && i == breadcrumbs.length - 1"
            class="active section">
         {{ breadcrumb.title }}
-      </div>
+      </span>
     </ng-container>
   </div>
 </div>
