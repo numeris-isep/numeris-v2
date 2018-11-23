@@ -370,7 +370,7 @@ module.exports = {
           { name: "reveal", checked: true },
           { name: "segment", checked: true },
           { name: "step", checked: true },
-          { name: "breadcrumb", checked: true },
+          { name: "breadcrumbs", checked: true },
           { name: "form", checked: true },
           { name: "grid", checked: true },
           { name: "menu", checked: true },

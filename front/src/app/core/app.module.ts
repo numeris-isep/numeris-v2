@@ -1,7 +1,7 @@
 import { LOCALE_ID, NgModule } from "@angular/core";
 import { AppComponent } from "./app.component";
 import { BrowserModule, Title } from "@angular/platform-browser";
-import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import localeFr from "@angular/common/locales/fr";
@@ -17,6 +17,9 @@ import { HomeComponent } from "../modules/showcase/home/home.component";
 import { SuiModule } from 'ng2-semantic-ui';
 import { AccordionComponent } from "./components/accordion/accordion.component";
 import { JwtInterceptor } from "./interceptors/jwt.interceptor";
+import { TitleComponent } from './components/title/title.component';
+import { HeaderComponent } from './components/header/header.component';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
 // Setting to locale to 'fr'
 registerLocaleData(localeFr, 'fr');
@@ -27,6 +30,7 @@ registerLocaleData(localeFr, 'fr');
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule,
     SuiModule,
 
     // MUST be the last imports
@@ -40,7 +44,10 @@ registerLocaleData(localeFr, 'fr');
     SidebarComponent,
     AccordionComponent,
     MenuComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    TitleComponent,
+    HeaderComponent,
+    BreadcrumbsComponent
   ],
   providers: [
     Title,

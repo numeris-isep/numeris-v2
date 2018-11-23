@@ -79,6 +79,8 @@ class UserController extends Controller
             $user->load('roles');
         }
 
+        sleep(2);
+
         return response()->json(UserResource::make($user));
     }
 

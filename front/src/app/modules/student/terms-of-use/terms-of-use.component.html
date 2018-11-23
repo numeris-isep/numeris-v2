@@ -1,325 +1,401 @@
-<div class="ui two raised centered doubling cards">
-  <div class="ui card">
-    <div class="content">
-      <div class="header">Article 1</div>
-      <div class="meta">Objet</div>
-      <div class="description">
-        <p>
-          Les présentes « conditions générales d'utilisation » ont pour objet
-          l'encadrement juridique des modalités de mise à disposition des
-          services du site <a href="http://numeris-isep.fr" target="_blank">numeris-isep</a>
-          et leur utilisation par « l'Utilisateur ».
-          Les conditions générales d'utilisation doivent être acceptées par tout
-          Utilisateur souhaitant accéder au site.
-        </p>
-        <p>
-          Les présentes « conditions générales d'utilisation » ont pour objet
-          l'encadrement juridique des modalités de mise à disposition des
-          services du site <a href="http://numeris-isep.fr" target="_blank">numeris-isep</a>
-          et leur utilisation par « l'Utilisateur ».
-        </p>
-        <p>
-          Les conditions générales d'utilisation doivent être acceptées par tout
-          Utilisateur souhaitant accéder au site. Elles constituent le contrat
-          entre le site et l'Utilisateur. L’accès au site par l’Utilisateur
-          signifie son acceptation des présentes conditions générales
-          d’utilisation. En cas de non-acceptation des conditions générales
-          d'utilisation stipulées dans le présent contrat, l'Utilisateur se doit
-          de renoncer à l'accès des services proposés par le site.
-          <a href="http://numeris-isep.fr" target="_blank">numeris-isep</a>
-          se réserve le droit de modifier unilatéralement et à tout moment le
-          contenu des présentes conditions générales d'utilisation.
-        </p>
+<div class="ui padded grid">
+  <div class="row">
+    <div class="column">
+      <div class="ui blue segment">
+        <div class="ui blue ribbon label">Actions</div>
+        <div class="ui two column center aligned grid">
+          <div class="ui vertical divider">Et</div>
+          <div class="middle aligned row">
+            <div class="column">
+              <div class="ui icon header">
+                <i class="book icon"></i>
+                Lire les conditions d'utilisation
+              </div>
+              <div class="field">
+                <sui-checkbox class="toggle" [ngModel]="allChecked"
+                              (checkChange)="mainCheckbox($event)">
+                  <span>Tout marquer comme lu</span>
+                </sui-checkbox>
+              </div>
+            </div>
+            <div class="column">
+              <div class="ui icon header">
+                <i class="check icon"></i>
+                Accepter les conditions d'utilisation
+              </div><br>
+              <app-button visibleContent="Accepter" [isDisabled]="!allChecked"
+                          hiddenIcon="check" size="small">
+              </app-button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="center aligned extra content">
-      <sui-checkbox class="toggle">
-        <span>Marquer comme lu</span>
-      </sui-checkbox>
+  </div>
+</div>
+
+<div class="ui padded two column grid doubling">
+  <!-- Article 1 -->
+  <div class="column">
+    <div class="ui fluid card" [ngClass]="{ 'green': checkboxes[0].isChecked}">
+      <div class="content">
+        <div class="header">Article 1</div>
+        <div class="meta">Objet</div>
+        <div class="description">
+          <p>
+            Les présentes « conditions générales d'utilisation » ont pour objet
+            l'encadrement juridique des modalités de mise à disposition des
+            services du site <a href="http://numeris-isep.fr" target="_blank">numeris-isep</a>
+            et leur utilisation par « l'Utilisateur ».
+            Les conditions générales d'utilisation doivent être acceptées par tout
+            Utilisateur souhaitant accéder au site.
+          </p>
+          <p>
+            Les présentes « conditions générales d'utilisation » ont pour objet
+            l'encadrement juridique des modalités de mise à disposition des
+            services du site <a href="http://numeris-isep.fr" target="_blank">numeris-isep</a>
+            et leur utilisation par « l'Utilisateur ».
+          </p>
+          <p>
+            Les conditions générales d'utilisation doivent être acceptées par tout
+            Utilisateur souhaitant accéder au site. Elles constituent le contrat
+            entre le site et l'Utilisateur. L’accès au site par l’Utilisateur
+            signifie son acceptation des présentes conditions générales
+            d’utilisation. En cas de non-acceptation des conditions générales
+            d'utilisation stipulées dans le présent contrat, l'Utilisateur se doit
+            de renoncer à l'accès des services proposés par le site.
+            <a href="http://numeris-isep.fr" target="_blank">numeris-isep</a>
+            se réserve le droit de modifier unilatéralement et à tout moment le
+            contenu des présentes conditions générales d'utilisation.
+          </p>
+        </div>
+      </div>
+      <div class="center aligned extra content">
+        <sui-checkbox class="toggle" (click)="check()"
+                      [(ngModel)]="checkboxes[0].isChecked">
+          <span>Marquer comme lu</span>
+        </sui-checkbox>
+      </div>
     </div>
   </div>
 
-  <div class="ui card">
-    <div class="content">
-      <div class="header">Article 2</div>
-      <div class="meta">Mentions légales</div>
-      <div class="description">
-        L'édition du site <a href="http://numeris-isep.fr" target="_blank">numeris-isep</a>
-        est assurée par l’association <strong>Numéris ISEP</strong> dont le
-        siège social est situé au <em>28 rue Notre Dame des Champs, 75006 PARIS</em>.
-        Le Directeur de la publication est <strong>Monsieur Gaël Chereau</strong>.
+  <!-- Article 2 -->
+  <div class="column">
+    <div class="ui fluid card" [ngClass]="{ 'green': checkboxes[1].isChecked}">
+      <div class="content">
+        <div class="header">Article 2</div>
+        <div class="meta">Mentions légales</div>
+        <div class="description">
+          L'édition du site <a href="http://numeris-isep.fr" target="_blank">numeris-isep</a>
+          est assurée par l’association <strong>Numéris ISEP</strong> dont le
+          siège social est situé au <em>28 rue Notre Dame des Champs, 75006 PARIS</em>.
+          Le Directeur de la publication est <strong>Monsieur Gaël Chereau</strong>.
+        </div>
       </div>
-    </div>
-    <div class="center aligned extra content">
-      <sui-checkbox class="toggle">
-        <span>Marquer comme lu</span>
-      </sui-checkbox>
+      <div class="center aligned extra content">
+        <sui-checkbox class="toggle" (click)="check()"
+                      [(ngModel)]="checkboxes[1].isChecked">
+          <span>Marquer comme lu</span>
+        </sui-checkbox>
+      </div>
     </div>
   </div>
 
-  <div class="ui card">
-    <div class="content">
-      <div class="header">Article 3</div>
-      <div class="meta">Définitions</div>
-      <div class="description">
-        <p>
-          La présente clause a pour objet de définir les différents termes
-          essentiels du contrat :
-        </p>
-        <ul>
-          <li>
-            <strong>Utilisateur</strong> : ce terme désigne toute personne qui
-            utilise le site ou l'un des services proposés par le site.
-          </li>
-          <li>
-            <strong>Contenu utilisateur</strong> : ce sont les données transmises
-            par l'Utilisateur au sein du site.
-          </li>
-          <li>
-            <strong>Membre</strong> : l'Utilisateur devient membre lorsqu'il est
-            identifié sur le site.
-          </li>
-          <li>
-            <strong>Identifiant et mot de passe</strong> : c'est l'ensemble des
-            informations nécessaires à l'identification d'un Utilisateur sur le
-            site. L'identifiant et le mot de passe permettent à l'Utilisateur
-            d'accéder à des services réservés aux membres du site. Le mot de
-            passe est confidentiel.
-          </li>
-        </ul>
+  <!-- Article 3 -->
+  <div class="column">
+    <div class="ui fluid card" [ngClass]="{ 'green': checkboxes[2].isChecked}">
+      <div class="content">
+        <div class="header">Article 3</div>
+        <div class="meta">Définitions</div>
+        <div class="description">
+          <p>
+            La présente clause a pour objet de définir les différents termes
+            essentiels du contrat :
+          </p>
+          <ul>
+            <li>
+              <strong>Utilisateur</strong> : ce terme désigne toute personne qui
+              utilise le site ou l'un des services proposés par le site.
+            </li>
+            <li>
+              <strong>Contenu utilisateur</strong> : ce sont les données transmises
+              par l'Utilisateur au sein du site.
+            </li>
+            <li>
+              <strong>Membre</strong> : l'Utilisateur devient membre lorsqu'il est
+              identifié sur le site.
+            </li>
+            <li>
+              <strong>Identifiant et mot de passe</strong> : c'est l'ensemble des
+              informations nécessaires à l'identification d'un Utilisateur sur le
+              site. L'identifiant et le mot de passe permettent à l'Utilisateur
+              d'accéder à des services réservés aux membres du site. Le mot de
+              passe est confidentiel.
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-    <div class="center aligned extra content">
-      <sui-checkbox class="toggle">
-        <span>Marquer comme lu</span>
-      </sui-checkbox>
+      <div class="center aligned extra content">
+        <sui-checkbox class="toggle" (click)="check()"
+                      [(ngModel)]="checkboxes[2].isChecked">
+          <span>Marquer comme lu</span>
+        </sui-checkbox>
+      </div>
     </div>
   </div>
 
-  <div class="ui card">
-    <div class="content">
-      <div class="header">Article 4</div>
-      <div class="meta">Accès au service</div>
-      <div class="description">
-        <p>
-          Le site permet à l'Utilisateur un accès gratuit aux services suivants :
-        </p>
-        <ul>
-          <li>
-            Postuler à des missions variées :
-            <ul>
-              <li>
-                Déconnexion et/ou reconnexion lors d’un déménagement informatique,
-              </li>
-              <li>
-                SAV ;
-              </li>
-            </ul>
-          </li>
-          <li>
-            Accéder à son compte personnel où il pourra suivre notamment son salaire
-            versé selon le nombre d’heures effectuées lors des missions;
-          </li>
-        </ul>
-        <p>
-          Le site est accessible gratuitement en tout lieu à tout Utilisateur ayant
-          un accès à Internet. Tous les frais supportés par l'Utilisateur pour
-          accéder au service (matériel informatique, logiciels, connexion Internet,
-          etc.) sont à sa charge.
-        </p>
-        <p>
-          L’Utilisateur non membre n'a pas accès aux services réservés aux membres.
-          Pour cela, il doit s'identifier à l'aide de son identifiant et de son
-          mot de passe. Le site met en œuvre tous les moyens mis à sa disposition
-          pour assurer un accès de qualité à ses services. L'obligation étant de
-          moyens, le site ne s'engage pas à atteindre ce résultat.
-        </p>
-        <p>
-          Tout événement dû à un cas de force majeure ayant pour conséquence un
-          dysfonctionnement du réseau ou du serveur n'engage pas la responsabilité
-          de <a href="http://numeris-isep.fr" target="_blank">numeris-isep</a>.
-          L'accès aux services du site peut à tout moment faire l'objet d'une
-          interruption, d'une suspension, d'une modification sans préavis pour une
-          maintenance ou pour tout autre cas. L'Utilisateur s'oblige à ne réclamer
-          aucune indemnisation suite à l'interruption, à la suspension ou à la
-          modification du présent contrat. L'Utilisateur a la possibilité de
-          contacter le site par messagerie électronique à l’adresse
-          <a href="mailto:numerisisep@gmail.com" target="_top">numerisisep@gmail.com</a>.
-        </p>
+  <!-- Article 4 -->
+  <div class="column">
+    <div class="ui fluid card" [ngClass]="{ 'green': checkboxes[3].isChecked}">
+      <div class="content">
+        <div class="header">Article 4</div>
+        <div class="meta">Accès au service</div>
+        <div class="description">
+          <p>
+            Le site permet à l'Utilisateur un accès gratuit aux services suivants :
+          </p>
+          <ul>
+            <li>
+              Postuler à des missions variées :
+              <ul>
+                <li>
+                  Déconnexion et/ou reconnexion lors d’un déménagement informatique,
+                </li>
+                <li>
+                  SAV ;
+                </li>
+              </ul>
+            </li>
+            <li>
+              Accéder à son compte personnel où il pourra suivre notamment son salaire
+              versé selon le nombre d’heures effectuées lors des missions;
+            </li>
+          </ul>
+          <p>
+            Le site est accessible gratuitement en tout lieu à tout Utilisateur ayant
+            un accès à Internet. Tous les frais supportés par l'Utilisateur pour
+            accéder au service (matériel informatique, logiciels, connexion Internet,
+            etc.) sont à sa charge.
+          </p>
+          <p>
+            L’Utilisateur non membre n'a pas accès aux services réservés aux membres.
+            Pour cela, il doit s'identifier à l'aide de son identifiant et de son
+            mot de passe. Le site met en œuvre tous les moyens mis à sa disposition
+            pour assurer un accès de qualité à ses services. L'obligation étant de
+            moyens, le site ne s'engage pas à atteindre ce résultat.
+          </p>
+          <p>
+            Tout événement dû à un cas de force majeure ayant pour conséquence un
+            dysfonctionnement du réseau ou du serveur n'engage pas la responsabilité
+            de <a href="http://numeris-isep.fr" target="_blank">numeris-isep</a>.
+            L'accès aux services du site peut à tout moment faire l'objet d'une
+            interruption, d'une suspension, d'une modification sans préavis pour une
+            maintenance ou pour tout autre cas. L'Utilisateur s'oblige à ne réclamer
+            aucune indemnisation suite à l'interruption, à la suspension ou à la
+            modification du présent contrat. L'Utilisateur a la possibilité de
+            contacter le site par messagerie électronique à l’adresse
+            <a href="mailto:numerisisep@gmail.com" target="_top">numerisisep@gmail.com</a>.
+          </p>
+        </div>
       </div>
-    </div>
-    <div class="center aligned extra content">
-      <sui-checkbox class="toggle">
-        <span>Marquer comme lu</span>
-      </sui-checkbox>
+      <div class="center aligned extra content">
+        <sui-checkbox class="toggle" (click)="check()"
+                      [(ngModel)]="checkboxes[3].isChecked">
+          <span>Marquer comme lu</span>
+        </sui-checkbox>
+      </div>
     </div>
   </div>
 
-  <div class="ui card">
-    <div class="content">
-      <div class="header">Article 5</div>
-      <div class="meta">Propriété intellectuelle</div>
-      <div class="description">
-        <p>
-          Les marques, logos, signes et tout autre contenu du site font l'objet d'une
-          protection par le Code de la propriété intellectuelle et plus particulièrement
-          par le droit d'auteur.
-        </p>
-        <p>
-          L'Utilisateur sollicite l'autorisation préalable du site pour toute
-          reproduction, publication, copie des différents contenus. L'Utilisateur
-          s'engage à une utilisation des contenus du site dans un cadre
-          strictement privé. Une utilisation des contenus à des fins commerciales est
-          strictement interdite. Tout contenu mis en ligne par l'Utilisateur est de sa
-          seule responsabilité. L'Utilisateur s'engage à ne pas mettre en ligne de
-          contenus pouvant porter atteinte aux intérêts de tierces personnes.
-        </p>
-        <p>
-          Tout recours en justice engagé par un tiers lésé contre le site sera pris en
-          charge par l'Utilisateur. Le contenu de l'Utilisateur peut être à tout moment
-          et pour n'importe quelle raison supprimé ou modifié par le site. L'Utilisateur
-          ne reçoit aucune justification et notification préalablement à la suppression
-          ou à la modification du contenu Utilisateur.
-        </p>
+  <!-- Article 5 -->
+  <div class="column">
+    <div class="ui fluid card" [ngClass]="{ 'green': checkboxes[4].isChecked}">
+      <div class="content">
+        <div class="header">Article 5</div>
+        <div class="meta">Propriété intellectuelle</div>
+        <div class="description">
+          <p>
+            Les marques, logos, signes et tout autre contenu du site font l'objet d'une
+            protection par le Code de la propriété intellectuelle et plus particulièrement
+            par le droit d'auteur.
+          </p>
+          <p>
+            L'Utilisateur sollicite l'autorisation préalable du site pour toute
+            reproduction, publication, copie des différents contenus. L'Utilisateur
+            s'engage à une utilisation des contenus du site dans un cadre
+            strictement privé. Une utilisation des contenus à des fins commerciales est
+            strictement interdite. Tout contenu mis en ligne par l'Utilisateur est de sa
+            seule responsabilité. L'Utilisateur s'engage à ne pas mettre en ligne de
+            contenus pouvant porter atteinte aux intérêts de tierces personnes.
+          </p>
+          <p>
+            Tout recours en justice engagé par un tiers lésé contre le site sera pris en
+            charge par l'Utilisateur. Le contenu de l'Utilisateur peut être à tout moment
+            et pour n'importe quelle raison supprimé ou modifié par le site. L'Utilisateur
+            ne reçoit aucune justification et notification préalablement à la suppression
+            ou à la modification du contenu Utilisateur.
+          </p>
+        </div>
       </div>
-    </div>
-    <div class="center aligned extra content">
-      <sui-checkbox class="toggle">
-        <span>Marquer comme lu</span>
-      </sui-checkbox>
+      <div class="center aligned extra content">
+        <sui-checkbox class="toggle" (click)="check()"
+                      [(ngModel)]="checkboxes[4].isChecked">
+          <span>Marquer comme lu</span>
+        </sui-checkbox>
+      </div>
     </div>
   </div>
 
-  <div class="ui card">
-    <div class="content">
-      <div class="header">Article 6</div>
-      <div class="meta">Données personnelles</div>
-      <div class="description">
-        <p>
-          Les informations demandées à l’inscription au site sont nécessaires et
-          obligatoires pour la création du compte de l'Utilisateur. En particulier,
-          l'adresse électronique pourra être utilisée par le site pour
-          l'administration, la gestion et l'animation du service.
-        </p>
-        <p>
-          Le site assure à l'Utilisateur une collecte et un traitement d'informations
-          personnelles dans le respect de la vie privée conformément à la loi n°78-17
-          du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés.
-        </p>
-        <p>
-          En vertu des articles 39 et 40 de la loi en date du 6 janvier 1978,
-          l'Utilisateur dispose d'un droit d'accès, de rectification, de suppression
-          et d'opposition de ses données personnelles.
-        </p>
-        <p>
-          L'Utilisateur exerce ce droit via :
-        </p>
-        <ul>
-          <li>
-            son espace personnel ;
-          </li>
-          <li>
-            un formulaire de contact ;
-          </li>
-          <li>
-            par mail à <a href="mailto:numerisisep@gmail.com" target="_top">numerisisep@gmail.com</a> ;
-          </li>
-          <li>
-            par voie postale au <em>28 rue Notre Dame des Champs, 75006 Paris</em>.
-          </li>
-        </ul>
+  <!-- Article 6 -->
+  <div class="column">
+    <div class="ui fluid card" [ngClass]="{ 'green': checkboxes[5].isChecked}">
+      <div class="content">
+        <div class="header">Article 6</div>
+        <div class="meta">Données personnelles</div>
+        <div class="description">
+          <p>
+            Les informations demandées à l’inscription au site sont nécessaires et
+            obligatoires pour la création du compte de l'Utilisateur. En particulier,
+            l'adresse électronique pourra être utilisée par le site pour
+            l'administration, la gestion et l'animation du service.
+          </p>
+          <p>
+            Le site assure à l'Utilisateur une collecte et un traitement d'informations
+            personnelles dans le respect de la vie privée conformément à la loi n°78-17
+            du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés.
+          </p>
+          <p>
+            En vertu des articles 39 et 40 de la loi en date du 6 janvier 1978,
+            l'Utilisateur dispose d'un droit d'accès, de rectification, de suppression
+            et d'opposition de ses données personnelles.
+          </p>
+          <p>
+            L'Utilisateur exerce ce droit via :
+          </p>
+          <ul>
+            <li>
+              son espace personnel ;
+            </li>
+            <li>
+              un formulaire de contact ;
+            </li>
+            <li>
+              par mail à <a href="mailto:numerisisep@gmail.com" target="_top">numerisisep@gmail.com</a> ;
+            </li>
+            <li>
+              par voie postale au <em>28 rue Notre Dame des Champs, 75006 Paris</em>.
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-    <div class="center aligned extra content">
-      <sui-checkbox class="toggle">
-        <span>Marquer comme lu</span>
-      </sui-checkbox>
+      <div class="center aligned extra content">
+        <sui-checkbox class="toggle" (click)="check()"
+                      [(ngModel)]="checkboxes[5].isChecked">
+          <span>Marquer comme lu</span>
+        </sui-checkbox>
+      </div>
     </div>
   </div>
 
-  <div class="ui card">
-    <div class="content">
-      <div class="header">Article 7</div>
-      <div class="meta">Responsabilité et force majeure</div>
-      <div class="description">
-        <p>
-          Les sources des informations diffusées sur le site sont réputées fiables.
-          Toutefois, le site se réserve la faculté d'une non-garantie de la fiabilité
-          des sources. Les informations données sur le site le sont à titre purement
-          informatif. Ainsi, l'Utilisateur assume seul l'entière responsabilité de
-          l'utilisation des informations et contenus du présent site.
-        </p>
-        <p>
-          L'Utilisateur s'assure de garder son mot de passe secret. Toute divulgation
-          du mot de passe, quelle que soit sa forme, est interdite. L'Utilisateur
-          assume les risques liés à l'utilisation de son identifiant et mot de passe.
-          Le site décline toute responsabilité. Tout usage du service par l'Utilisateur
-          ayant directement ou indirectement pour conséquence des dommages doit faire
-          l'objet d'une indemnisation au profit du site.
-        </p>
-        <p>
-          Une garantie optimale de la sécurité et de la confidentialité des données
-          transmises n'est pas assurée par le site. Toutefois, le site s'engage à
-          mettre en œuvre tous les moyens nécessaires afin de garantir au mieux la
-          sécurité et la confidentialité des données. La responsabilité du site ne peut
-          être engagée en cas de force majeure ou du fait imprévisible et insurmontable
-          d'un tiers.
-        </p>
+  <!-- Article 7 -->
+  <div class="column">
+    <div class="ui fluid card" [ngClass]="{ 'green': checkboxes[6].isChecked}">
+      <div class="content">
+        <div class="header">Article 7</div>
+        <div class="meta">Responsabilité et force majeure</div>
+        <div class="description">
+          <p>
+            Les sources des informations diffusées sur le site sont réputées fiables.
+            Toutefois, le site se réserve la faculté d'une non-garantie de la fiabilité
+            des sources. Les informations données sur le site le sont à titre purement
+            informatif. Ainsi, l'Utilisateur assume seul l'entière responsabilité de
+            l'utilisation des informations et contenus du présent site.
+          </p>
+          <p>
+            L'Utilisateur s'assure de garder son mot de passe secret. Toute divulgation
+            du mot de passe, quelle que soit sa forme, est interdite. L'Utilisateur
+            assume les risques liés à l'utilisation de son identifiant et mot de passe.
+            Le site décline toute responsabilité. Tout usage du service par l'Utilisateur
+            ayant directement ou indirectement pour conséquence des dommages doit faire
+            l'objet d'une indemnisation au profit du site.
+          </p>
+          <p>
+            Une garantie optimale de la sécurité et de la confidentialité des données
+            transmises n'est pas assurée par le site. Toutefois, le site s'engage à
+            mettre en œuvre tous les moyens nécessaires afin de garantir au mieux la
+            sécurité et la confidentialité des données. La responsabilité du site ne peut
+            être engagée en cas de force majeure ou du fait imprévisible et insurmontable
+            d'un tiers.
+          </p>
+        </div>
       </div>
-    </div>
-    <div class="center aligned extra content">
-      <sui-checkbox class="toggle">
-        <span>Marquer comme lu</span>
-      </sui-checkbox>
+      <div class="center aligned extra content">
+        <sui-checkbox class="toggle" (click)="check()"
+                      [(ngModel)]="checkboxes[6].isChecked">
+          <span>Marquer comme lu</span>
+        </sui-checkbox>
+      </div>
     </div>
   </div>
 
-  <div class="ui card">
-    <div class="content">
-      <div class="header">Article 8</div>
-      <div class="meta">Évolution du contrat</div>
-      <div class="description">
-        Le site se réserve à tout moment le droit de modifier les clauses stipulées dans
-        le présent contrat.
+  <!-- Article 8 -->
+  <div class="column">
+    <div class="ui fluid card" [ngClass]="{ 'green': checkboxes[7].isChecked}">
+      <div class="content">
+        <div class="header">Article 8</div>
+        <div class="meta">Évolution du contrat</div>
+        <div class="description">
+          Le site se réserve à tout moment le droit de modifier les clauses stipulées dans
+          le présent contrat.
+        </div>
       </div>
-    </div>
-    <div class="center aligned extra content">
-      <sui-checkbox class="toggle">
-        <span>Marquer comme lu</span>
-      </sui-checkbox>
+      <div class="center aligned extra content">
+        <sui-checkbox class="toggle" (click)="check()"
+                      [(ngModel)]="checkboxes[7].isChecked">
+          <span>Marquer comme lu</span>
+        </sui-checkbox>
+      </div>
     </div>
   </div>
 
-  <div class="ui card">
-    <div class="content">
-      <div class="header">Article 9</div>
-      <div class="meta">Durée</div>
-      <div class="description">
-        La durée du présent contrat est indéterminée. Le contrat produit ses effets à
-        l'égard de l'Utilisateur à compter de l'utilisation du service.
+  <!-- Article 9 -->
+  <div class="column">
+    <div class="ui fluid card" [ngClass]="{ 'green': checkboxes[8].isChecked}">
+      <div class="content">
+        <div class="header">Article 9</div>
+        <div class="meta">Durée</div>
+        <div class="description">
+          La durée du présent contrat est indéterminée. Le contrat produit ses effets à
+          l'égard de l'Utilisateur à compter de l'utilisation du service.
+        </div>
       </div>
-    </div>
-    <div class="center aligned extra content">
-      <sui-checkbox class="toggle">
-        <span>Marquer comme lu</span>
-      </sui-checkbox>
+      <div class="center aligned extra content">
+        <sui-checkbox class="toggle" (click)="check()"
+                      [(ngModel)]="checkboxes[8].isChecked">
+          <span>Marquer comme lu</span>
+        </sui-checkbox>
+      </div>
     </div>
   </div>
 
-  <div class="ui card">
-    <div class="content">
-      <div class="header">Article 10</div>
-      <div class="meta">Droit applicable et juridiction compétente</div>
-      <div class="description">
-        La législation française s'applique au présent contrat. En cas d'absence de
-        résolution amiable d'un litige né entre les partis, seuls les tribunaux de
-        la ville de Paris sont compétents.
+  <!-- Article 10 -->
+  <div class="column">
+    <div class="ui fluid card" [ngClass]="{ 'green': checkboxes[9].isChecked}">
+      <div class="content">
+        <div class="header">Article 10</div>
+        <div class="meta">Droit applicable et juridiction compétente</div>
+        <div class="description">
+          La législation française s'applique au présent contrat. En cas d'absence de
+          résolution amiable d'un litige né entre les partis, seuls les tribunaux de
+          la ville de Paris sont compétents.
+        </div>
       </div>
-    </div>
-    <div class="center aligned extra content">
-      <sui-checkbox class="toggle">
-        <span>Marquer comme lu</span>
-      </sui-checkbox>
+      <div class="center aligned extra content">
+        <sui-checkbox class="toggle" (click)="check()"
+                      [(ngModel)]="checkboxes[9].isChecked">
+          <span>Marquer comme lu</span>
+        </sui-checkbox>
+      </div>
     </div>
   </div>
 </div>

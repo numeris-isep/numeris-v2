@@ -1,3 +1,7 @@
 span {
   color: #989898;
 }
+
+.grid>.column {
+  display: inherit;
+}

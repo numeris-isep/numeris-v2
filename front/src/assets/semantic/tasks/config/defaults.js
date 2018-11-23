@@ -65,7 +65,7 @@ module.exports = {
     'step',
 
     // collections
-    'breadcrumb',
+    'breadcrumbs',
     'form',
     'grid',
     'menu',

@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ScrollService } from "../../../core/services/scroll.service";
 import { ContactUsModal } from "../../../shared/components/modals/contact-us-modal/contact-us-modal.component";
 import { SuiModalService } from 'ng2-semantic-ui';
-import { AuthService } from "../../../core/auth/auth.service";
+import { AuthService } from "../../../core/http/auth/auth.service";
 import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({

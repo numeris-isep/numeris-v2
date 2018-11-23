@@ -3,7 +3,6 @@ import { CommonModule  } from '@angular/common';
 import { AlertComponent } from "./components/alert/alert.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { PodiumComponent } from "./components/podium/podium.component";
-import { AccordionComponent } from "../core/components/accordion/accordion.component";
 import { LoginModalComponent } from "./components/modals/login-modal/login-modal.component";
 import { ContactUsModalComponent } from "./components/modals/contact-us-modal/contact-us-modal.component";
 import { ConfirmModalComponent } from "./components/modals/confirm-modal/confirm-modal.component";
@@ -14,6 +13,8 @@ import { ButtonContentComponent } from './components/button/button-content/butto
 import { ButtonComponent } from './components/button/button/button.component';
 import { LinkButtonComponent } from './components/button/link-button/link-button.component';
 import { AlertService } from "../core/services/alert.service";
+import { LoaderComponent } from './components/loader/loader.component';
+import { ContentComponent } from './components/content/content.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,9 @@ import { AlertService } from "../core/services/alert.service";
     LoginModalComponent,
     ButtonContentComponent,
     ButtonComponent,
-    LinkButtonComponent
+    LinkButtonComponent,
+    LoaderComponent,
+    ContentComponent
   ],
   exports: [
     AlertComponent,
@@ -47,7 +50,9 @@ import { AlertService } from "../core/services/alert.service";
     LoginModalComponent,
     ButtonContentComponent,
     ButtonComponent,
-    LinkButtonComponent
+    LinkButtonComponent,
+    LoaderComponent,
+    ContentComponent
   ],
   entryComponents: [
     ConfirmModalComponent,
