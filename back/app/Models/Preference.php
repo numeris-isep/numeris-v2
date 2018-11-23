@@ -12,12 +12,18 @@ class Preference extends Model
         'on_new_mission',
         'on_acceptance',
         'on_refusal',
+        'on_document',
+        'by_email',
+        'by_push',
     ];
 
     protected $casts = [
         'on_new_mission'    => 'boolean',
         'on_acceptance'     => 'boolean',
         'on_refusal'        => 'boolean',
+        'on_document'       => 'boolean',
+        'by_email'          => 'boolean',
+        'by_push'           => 'boolean',
     ];
 
     protected $hidden = [
