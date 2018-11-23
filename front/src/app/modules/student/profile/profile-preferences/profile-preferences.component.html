@@ -4,30 +4,43 @@
       <i class="bell icon"></i>
       Notifications
     </h4>
+
     <div class="ui horizontal divider">A chaque ...</div>
     <div class="field">
-      <sui-checkbox class="toggle">
+      <sui-checkbox class="toggle" name="onNewMission"
+                    [(ngModel)]="preference.onNewMission">
         <span>Nouvelle mission</span>
       </sui-checkbox>
     </div>
     <div class="field">
-      <sui-checkbox class="toggle">
+      <sui-checkbox class="toggle" name="onAcceptance"
+                    [(ngModel)]="preference.onAcceptance">
         <span>Candidature acceptée</span>
       </sui-checkbox>
     </div>
     <div class="field">
-      <sui-checkbox class="toggle">
+      <sui-checkbox class="toggle" name="onRefusal"
+                    [(ngModel)]="preference.onRefusal">
         <span>Candidature refusée</span>
       </sui-checkbox>
     </div>
+    <div class="field">
+      <sui-checkbox class="toggle" name="onDocument"
+                    [(ngModel)]="preference.onDocument">
+        <span>Document à signer</span>
+      </sui-checkbox>
+    </div>
+
     <div class="ui horizontal divider">Par ...</div>
     <div class="field">
-      <sui-checkbox class="toggle">
+      <sui-checkbox class="toggle" name="byEmail"
+                    [(ngModel)]="preference.byEmail">
         <span>Email</span>
       </sui-checkbox>
     </div>
     <div class="field">
-      <sui-checkbox class="toggle">
+      <sui-checkbox class="toggle" name="byPush"
+                    [(ngModel)]="preference.byPush">
         <span>Notification push</span>
       </sui-checkbox>
     </div>

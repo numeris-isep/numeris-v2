@@ -15,6 +15,8 @@ import { LinkButtonComponent } from './components/button/link-button/link-button
 import { AlertService } from "../core/services/alert.service";
 import { LoaderComponent } from './components/loader/loader.component';
 import { ContentComponent } from './components/content/content.component';
+import { AddressPipe } from './pipes/address.pipe';
+import { PhonePipe } from './pipes/phone.pipe';
 
 @NgModule({
   imports: [
@@ -36,9 +38,12 @@ import { ContentComponent } from './components/content/content.component';
     ButtonComponent,
     LinkButtonComponent,
     LoaderComponent,
-    ContentComponent
+    ContentComponent,
+    AddressPipe,
+    PhonePipe
   ],
   exports: [
+    // Components
     AlertComponent,
     FooterComponent,
     PodiumComponent,
@@ -52,7 +57,11 @@ import { ContentComponent } from './components/content/content.component';
     ButtonComponent,
     LinkButtonComponent,
     LoaderComponent,
-    ContentComponent
+    ContentComponent,
+
+    // Pipes
+    AddressPipe,
+    PhonePipe,
   ],
   entryComponents: [
     ConfirmModalComponent,

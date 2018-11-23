@@ -30,7 +30,6 @@ export class TermsOfUseComponent implements OnInit {
 
   check() {
     this.allChecked = this.checkboxes.every(checkbox => checkbox.isChecked === true);
-    console.log(this.checkboxes);
   }
 
   mainCheckbox(isChecked) {

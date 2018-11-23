@@ -22,28 +22,31 @@
           <i class="calendar alternate icon"></i>
           Date de naissance
         </td>
-        <td>29/06/1995</td>
+        <td>{{ user.birthDate | date:"dd/MM/yyyy" }}</td>
       </tr>
       <tr>
         <td class="collapsing">
           <i class="building icon"></i>
           Ville de naissance
         </td>
-        <td>Paris</td>
+        <td>{{ user.birthCity | titlecase }}</td>
       </tr>
       <tr>
         <td class="collapsing">
           <i class="globe icon"></i>
           Nationalité
         </td>
-        <td><i class="france flag"></i>Française</td>
+        <td>
+          <i class="{{ user.nationality }} flag"></i>
+          {{ user.nationality | titlecase }}
+        </td>
       </tr>
       <tr>
         <td class="collapsing">
           <i class="heartbeat icon"></i>
           Numéro de sécurité sociale
         </td>
-        <td>1964228961892</td>
+        <td>{{ user.socialInsuranceNumber }}</td>
       </tr>
       </tbody>
     </table>
@@ -110,21 +113,21 @@
           <i class="id badge icon"></i>
           Numéro étudiant
         </td>
-        <td>8740</td>
+        <td>{{ user.studentNumber }}</td>
       </tr>
       <tr>
         <td class="collapsing">
           <i class="users icon"></i>
           Promotion
         </td>
-        <td>2019</td>
+        <td>{{ user.promotion }}</td>
       </tr>
       <tr>
         <td class="collapsing">
           <i class="graduation cap icon"></i>
           Classe
         </td>
-        <td>A3</td>
+        <td>{{ user.schoolYear }}</td>
       </tr>
       </tbody>
     </table>
@@ -140,14 +143,14 @@
           <i class="euro sign icon"></i>
           IBAN
         </td>
-        <td>SINTINCIDUNT</td>
+        <td>{{ user.iban }}</td>
       </tr>
       <tr>
         <td class="collapsing">
           <i class="money bill icon"></i>
           BIC
         </td>
-        <td>KYKMFTH8N2J</td>
+        <td>{{ user.bic }}</td>
       </tr>
       </tbody>
     </table>
