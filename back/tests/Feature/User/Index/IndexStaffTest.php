@@ -29,6 +29,7 @@ class IndexStaffTest extends TestCaseWithAuth
                 'lastName',
                 'studentNumber',
                 'promotion',
+                'school_year',
                 'phone',
                 'nationality',
                 'birthDate',

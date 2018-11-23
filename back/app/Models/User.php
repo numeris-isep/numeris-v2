@@ -27,6 +27,7 @@ class User extends Authenticatable implements JWTSubject
         'last_name',
         'student_number',
         'promotion',
+        'school_year',
         'phone',
         'nationality',
         'birth_date',
@@ -43,8 +44,8 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     protected $casts = [
-        'activated'             => 'boolean',
-        'tou_accepted'          => 'boolean',
+        'activated'     => 'boolean',
+        'tou_accepted'  => 'boolean',
     ];
 
     public function getJWTIdentifier()

@@ -23,6 +23,23 @@ class UsersTableSeeder extends Seeder
             $this->empty_table = true;
         }
 
+        // Generate my account ;)
+        if (! User::where('email', 'eliottdes@gmail.com')->first()) {
+            $this->createUser(1, 'developer', 'active', [
+                'email'             => 'eliottdes@gmail.com',
+                'username'          => '2Seg',
+                'first_name'        => 'Eliott',
+                'last_name'         => 'de Séguier',
+                'student_number'    => 8740,
+                'promotion'         => '2019',
+                'school_year'       => 'A3',
+                'phone'             => '0663670680',
+                'nationality'       => 'france',
+                'birth_date'        => '1995-06-29 00:00:00',
+                'birth_city'        => 'Paris'
+            ]);
+        }
+
         // Generate 2 developer accounts
         if (! User::where('email', 'developer@numeris-isep.fr')->first()) {
             $this->createUser(1, 'developer', 'active', [
@@ -96,22 +113,6 @@ class UsersTableSeeder extends Seeder
                 'username'      => 'student2',
                 'first_name'    => 'Student2',
                 'last_name'     => 'Numeris',
-            ]);
-        }
-
-        // Generate my account ;)
-        if (! User::where('email', 'eliottdes@gmail.com')->first()) {
-            $this->createUser(1, 'developer', 'active', [
-                'email'             => 'eliottdes@gmail.com',
-                'username'          => '2Seg',
-                'first_name'        => 'Eliott',
-                'last_name'         => 'de Séguier',
-                'student_number'    => 8740,
-                'promotion'         => '2019',
-                'phone'             => '06 63 67 06 80',
-                'nationality'       => 'Française',
-                'birth_date'        => '1995-06-29 00:00:00',
-                'birth_city'        => 'Paris'
             ]);
         }
 
