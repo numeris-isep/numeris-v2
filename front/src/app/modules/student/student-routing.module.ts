@@ -7,6 +7,7 @@ import { AuthGuard } from "../../core/guards/auth.guard";
 import { MissionComponent } from "./mission/mission.component";
 import { ApplicationComponent } from "./application/application.component";
 import { TutorialComponent } from "./tutorial/tutorial.component";
+import { ContactUsComponent } from "./contact-us/contact-us.component";
 
 const studentRoutes: Routes = [
   {
@@ -47,6 +48,14 @@ const studentRoutes: Routes = [
     canActivate: [AuthGuard],
     data: {
       title: 'Tutoriels',
+    }
+  },
+  {
+    path: 'contact-us',
+    component: ContactUsComponent,
+    canActivate: [AuthGuard],
+    data: {
+      title: 'Nous contacter',
     }
   },
   {

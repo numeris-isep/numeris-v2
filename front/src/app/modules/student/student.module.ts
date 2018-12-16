@@ -16,6 +16,7 @@ import { TutorialComponent } from './tutorial/tutorial.component';
 import { SuiCheckbox } from "ng2-semantic-ui/dist";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import { HttpClientModule } from "@angular/common/http";
     ProfileDocumentsComponent,
     MissionComponent,
     ApplicationComponent,
-    TutorialComponent
+    TutorialComponent,
+    ContactUsComponent
   ]
 })
 export class StudentModule { }

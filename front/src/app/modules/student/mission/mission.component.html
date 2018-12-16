@@ -1,331 +1,333 @@
-<div class="ui padded grid">
-  <div class="sixteen wide column">
-    <sui-accordion [closeOthers]="false">
-      <div class="ui basic blue segment">
-        <sui-accordion-panel [isOpen]="true">
-          <div class="ui two column grid" title>
-            <div class="sixteen wide mobile eight wide tablet eight wide computer column">
-              <h3 class="ui basic segment">
-                <i class="dropdown icon"></i>
-                Cette semaine
-              </h3>
-            </div>
-            <div class="tablet only computer only column">
-              <h3 class="ui right aligned basic segment">
-                12/11/2018
-                <i class="right angle icon divider"></i>
-                18/11/2018
-              </h3>
-            </div>
-          </div>
-
-          <div content>
-            <div class="ui three column padded centered grid stackable">
-              <div class="column">
-                <div class="ui fluid card">
-                  <div class="content">
-                    <div class="ui blue ribbon label">
-                      <i class="clock icon"></i>Durée : 7h
-                    </div>
-                    <img class="right floated mini ui image" src="assets/logos/numeris-blue.png">
-                  </div>
-
-                  <div class="content">
-                    <div class="header">
-                      Reconnexion la Défense
-                    </div>
-                    <div class="meta">
-                      <i class="building icon"></i> AS Connect
-                    </div>
-                    <div class="description">
-                      Le 13/11/2018
-                    </div>
-                  </div>
-
-                  <div class="content">
-                    <div class="description">
-                      Ceci est une description super utile qui va être lue par tout le monde.
-                      Elle a énormément d'utilité, comme par exemple augmenter le temps de
-                      création d'une mission, ce qui est assez agréable.
-                    </div>
-                  </div>
-
-                  <div class="extra content">
-                    <i class="map pin icon"></i>64 rue Quelquepart, 47398, La Défense
-                  </div>
-
-                  <app-button visibleContent="Postuler" hiddenIcon="handshake"
-                              attachment="bottom attached" behaviour="fluid"
-                              color="none" size="small">
-                  </app-button>
-                </div>
+<app-content [condition]="false">
+  <div class="ui padded grid">
+    <div class="sixteen wide column">
+      <sui-accordion [closeOthers]="false">
+        <div class="ui basic blue segment">
+          <sui-accordion-panel [isOpen]="true">
+            <div class="ui two column grid" title>
+              <div class="sixteen wide mobile eight wide tablet eight wide computer column">
+                <h3 class="ui basic segment">
+                  <i class="dropdown icon"></i>
+                  Cette semaine
+                </h3>
               </div>
-              <div class="column">
-                <div class="ui fluid card">
-                  <div class="content">
-                    <div class="ui blue ribbon label">
-                      <i class="clock icon"></i>Durée : 10h
-                    </div>
-                    <img class="right floated mini ui image" src="assets/logos/numeris-blue.png">
-                  </div>
-
-                  <div class="content">
-                    <div class="header">
-                      SAV
-                    </div>
-                    <div class="meta">
-                      <i class="building icon"></i> ISEP
-                    </div>
-                    <div class="description">
-                      Le 14/11/2018 à 08h00
-                    </div>
-                  </div>
-
-                  <div class="content">
-                    <div class="description">
-                      Ceci est une description super petite mais néanmoins utile.
-                    </div>
-                  </div>
-
-                  <div class="extra content">
-                    <i class="map pin icon"></i>28 rue Notre Dame des Champs, 75015, Paris
-                  </div>
-
-                  <app-button visibleContent="Postuler" hiddenIcon="handshake"
-                              attachment="bottom attached" behaviour="fluid"
-                              color="none" size="small">
-                  </app-button>
-                </div>
+              <div class="tablet only computer only column">
+                <h3 class="ui right aligned basic segment">
+                  12/11/2018
+                  <i class="right angle icon divider"></i>
+                  18/11/2018
+                </h3>
               </div>
             </div>
-          </div>
-        </sui-accordion-panel>
-        <span class="ui floating blue label">2</span>
-      </div>
 
-      <div class="ui basic blue segment">
-        <sui-accordion-panel [isOpen]="true">
-          <div class="ui two column grid" title>
-            <div class="sixteen wide mobile eight wide tablet eight wide computer column">
-              <h3 class="ui basic segment">
-                <i class="dropdown icon"></i>
-                La semaine prochaine
-              </h3>
-            </div>
-            <div class="tablet only computer only column">
-              <h3 class="ui right aligned basic segment">
-                19/11/2018
-                <i class="right angle icon divider"></i>
-                25/11/2018
-              </h3>
-            </div>
-          </div>
-
-          <div content>
-            <div class="ui three column padded centered grid stackable">
-              <div class="column">
-                <div class="ui fluid card">
-                  <div class="content">
-                    <div class="ui blue ribbon label">
-                      <i class="clock icon"></i>Durée : 7h
+            <div content>
+              <div class="ui three column padded centered grid stackable">
+                <div class="column">
+                  <div class="ui fluid card">
+                    <div class="content">
+                      <div class="ui blue ribbon label">
+                        <i class="clock icon"></i>Durée : 7h
+                      </div>
+                      <img class="right floated mini ui image" src="assets/logos/numeris-blue.png">
                     </div>
-                    <img class="right floated mini ui image" src="assets/logos/numeris-blue.png">
+
+                    <div class="content">
+                      <div class="header">
+                        Reconnexion la Défense
+                      </div>
+                      <div class="meta">
+                        <i class="building icon"></i> AS Connect
+                      </div>
+                      <div class="description">
+                        Le 13/11/2018
+                      </div>
+                    </div>
+
+                    <div class="content">
+                      <div class="description">
+                        Ceci est une description super utile qui va être lue par tout le monde.
+                        Elle a énormément d'utilité, comme par exemple augmenter le temps de
+                        création d'une mission, ce qui est assez agréable.
+                      </div>
+                    </div>
+
+                    <div class="extra content">
+                      <i class="map pin icon"></i>64 rue Quelquepart, 47398, La Défense
+                    </div>
+
+                    <app-button visibleContent="Postuler" hiddenIcon="handshake"
+                                attachment="bottom attached" behaviour="fluid"
+                                color="none" size="small">
+                    </app-button>
                   </div>
-
-                  <div class="content">
-                    <div class="header">
-                      Déconnexion Opéra
-                    </div>
-                    <div class="meta">
-                      <i class="building icon"></i> Infodis
-                    </div>
-                    <div class="description">
-                      Le 21/11/2018 à 19h00
-                    </div>
-                  </div>
-
-                  <div class="content">
-                    <div class="description">
-                      Veuillez suivre les instructions du manager sous peine d'être
-                      blacklisté de Numéris. Ne pas voler le matériel mis à disposition.
-                      Amener pince-coupante et stylo.
-                    </div>
-                  </div>
-
-                  <div class="extra content">
-                    <i class="map pin icon"></i>37 boulevard de l'Opéra, 75011, Paris
-                  </div>
-
-                  <app-button visibleContent="Postuler" hiddenIcon="handshake"
-                              attachment="bottom attached" behaviour="fluid"
-                              color="none" size="small">
-                  </app-button>
                 </div>
-              </div>
-              <div class="column">
-                <div class="ui fluid card">
-                  <div class="content">
-                    <div class="ui blue ribbon label">
-                      <i class="clock icon"></i>Durée : 4h
+                <div class="column">
+                  <div class="ui fluid card">
+                    <div class="content">
+                      <div class="ui blue ribbon label">
+                        <i class="clock icon"></i>Durée : 10h
+                      </div>
+                      <img class="right floated mini ui image" src="assets/logos/numeris-blue.png">
                     </div>
-                    <img class="right floated mini ui image" src="assets/logos/numeris-blue.png">
-                  </div>
 
-                  <div class="content">
-                    <div class="header">
-                      Déconnexion / Reconnexion / SAV
+                    <div class="content">
+                      <div class="header">
+                        SAV
+                      </div>
+                      <div class="meta">
+                        <i class="building icon"></i> ISEP
+                      </div>
+                      <div class="description">
+                        Le 14/11/2018 à 08h00
+                      </div>
                     </div>
-                    <div class="meta">
-                      <i class="building icon"></i> Metalogic
-                    </div>
-                    <div class="description">
-                      Le 23/11/2018 à 03h00
-                    </div>
-                  </div>
 
-                  <div class="content">
-                    <div class="description">
-                      Ceci est une description super utile qui va être lue par tout le monde.
-                      Elle a énormément d'utilité, comme par exemple augmenter le temps de
-                      création d'une mission, ce qui est assez agréable.
+                    <div class="content">
+                      <div class="description">
+                        Ceci est une description super petite mais néanmoins utile.
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="extra content">
-                    <i class="map pin icon"></i>3277 Surfers Paradise Blvd, 4217, Gold Coast
-                  </div>
+                    <div class="extra content">
+                      <i class="map pin icon"></i>28 rue Notre Dame des Champs, 75015, Paris
+                    </div>
 
-                  <app-button visibleContent="Postuler" hiddenIcon="handshake"
-                              attachment="bottom attached" behaviour="fluid"
-                              color="none" size="small">
-                  </app-button>
-                </div>
-              </div>
-              <div class="column">
-                <div class="ui fluid card">
-                  <div class="content">
-                    <div class="ui blue ribbon label">
-                      <i class="clock icon"></i>Durée : 1h
-                    </div>
-                    <img class="right floated mini ui image" src="assets/logos/numeris-blue.png">
+                    <app-button visibleContent="Postuler" hiddenIcon="handshake"
+                                attachment="bottom attached" behaviour="fluid"
+                                color="none" size="small">
+                    </app-button>
                   </div>
-
-                  <div class="content">
-                    <div class="header">
-                      Enveloppes
-                    </div>
-                    <div class="meta">
-                      <i class="building icon"></i> ISEP
-                    </div>
-                    <div class="description">
-                      Le 24/06/1995 à 12h00
-                    </div>
-                  </div>
-
-                  <div class="content">
-                    <div class="description">
-                      Mettre des cartes postales dans une enveloppe. Pour valider
-                      une action de communication.
-                    </div>
-                  </div>
-
-                  <div class="extra content">
-                    <i class="map pin icon"></i>28 rue Notre Dame des Champs, 75007, Paris
-                  </div>
-
-                  <app-button visibleContent="Postuler" hiddenIcon="handshake"
-                              attachment="bottom attached" behaviour="fluid"
-                              color="none" size="small">
-                  </app-button>
-                </div>
-              </div>
-              <div class="column">
-                <div class="ui fluid card">
-                  <div class="content">
-                    <div class="ui blue ribbon label">
-                      <i class="clock icon"></i>Durée : 2h
-                    </div>
-                    <img class="right floated mini ui image" src="assets/logos/numeris-blue.png">
-                  </div>
-
-                  <div class="content">
-                    <div class="header">
-                      Déconnexion Cité Universitaire
-                    </div>
-                    <div class="meta">
-                      <i class="building icon"></i> Mairie de Paris
-                    </div>
-                    <div class="description">
-                      Le 25/11/2018 à 15h00
-                    </div>
-                  </div>
-
-                  <div class="content">
-                    <div class="description">
-                      Rien de bien compliqué, donc aucune description nécessaire.
-                    </div>
-                  </div>
-
-                  <div class="extra content">
-                    <i class="map pin icon"></i>273 rue Lecourbe, 75015, Paris
-                  </div>
-
-                  <app-button visibleContent="Postuler" hiddenIcon="handshake"
-                              attachment="bottom attached" behaviour="fluid"
-                              color="none" size="small">
-                  </app-button>
-                </div>
-              </div>
-              <div class="column">
-                <div class="ui fluid card">
-                  <div class="content">
-                    <div class="ui blue ribbon label">
-                      <i class="clock icon"></i>Durée : 3 jours
-                    </div>
-                    <img class="right floated mini ui image" src="assets/logos/numeris-blue.png">
-                  </div>
-
-                  <div class="content">
-                    <div class="header">
-                      Déménagement Métalogic
-                    </div>
-                    <div class="meta">
-                      <i class="building icon"></i> Métalogic
-                    </div>
-                    <div class="description">
-                      Du 25/11/2018 à 07h00 au 28/11/2018 à 19h00
-                    </div>
-                  </div>
-
-                  <div class="content">
-                    <div class="description">
-                      Ceci est une description super utile qui va être lue par tout le monde.
-                      Elle a énormément d'utilité, comme par exemple augmenter le temps de
-                      création d'une mission, ce qui est assez agréable.
-                      Ceci est une description super utile qui va être lue par tout le monde.
-                      Elle a énormément d'utilité, comme par exemple augmenter le temps de
-                      création d'une mission, ce qui est assez agréable.
-                      Ceci est une description super utile qui va être lue par tout le monde.
-                      Elle a énormément d'utilité, comme par exemple augmenter le temps de
-                      création d'une mission, ce qui est assez agréable.
-                    </div>
-                  </div>
-
-                  <div class="extra content">
-                    <i class="map pin icon"></i>17 rue Bonne Chance pour Trouver, 00000, Ici
-                  </div>
-
-                  <app-button visibleContent="Postuler" hiddenIcon="handshake"
-                              attachment="bottom attached" behaviour="fluid"
-                              color="none" size="small">
-                  </app-button>
                 </div>
               </div>
             </div>
-          </div>
-        </sui-accordion-panel>
-        <span class="ui floating blue label">4</span>
-      </div>
-    </sui-accordion>
+          </sui-accordion-panel>
+          <span class="ui floating blue label">2</span>
+        </div>
+
+        <div class="ui basic blue segment">
+          <sui-accordion-panel [isOpen]="true">
+            <div class="ui two column grid" title>
+              <div class="sixteen wide mobile eight wide tablet eight wide computer column">
+                <h3 class="ui basic segment">
+                  <i class="dropdown icon"></i>
+                  La semaine prochaine
+                </h3>
+              </div>
+              <div class="tablet only computer only column">
+                <h3 class="ui right aligned basic segment">
+                  19/11/2018
+                  <i class="right angle icon divider"></i>
+                  25/11/2018
+                </h3>
+              </div>
+            </div>
+
+            <div content>
+              <div class="ui three column padded centered grid stackable">
+                <div class="column">
+                  <div class="ui fluid card">
+                    <div class="content">
+                      <div class="ui blue ribbon label">
+                        <i class="clock icon"></i>Durée : 7h
+                      </div>
+                      <img class="right floated mini ui image" src="assets/logos/numeris-blue.png">
+                    </div>
+
+                    <div class="content">
+                      <div class="header">
+                        Déconnexion Opéra
+                      </div>
+                      <div class="meta">
+                        <i class="building icon"></i> Infodis
+                      </div>
+                      <div class="description">
+                        Le 21/11/2018 à 19h00
+                      </div>
+                    </div>
+
+                    <div class="content">
+                      <div class="description">
+                        Veuillez suivre les instructions du manager sous peine d'être
+                        blacklisté de Numéris. Ne pas voler le matériel mis à disposition.
+                        Amener pince-coupante et stylo.
+                      </div>
+                    </div>
+
+                    <div class="extra content">
+                      <i class="map pin icon"></i>37 boulevard de l'Opéra, 75011, Paris
+                    </div>
+
+                    <app-button visibleContent="Postuler" hiddenIcon="handshake"
+                                attachment="bottom attached" behaviour="fluid"
+                                color="none" size="small">
+                    </app-button>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="ui fluid card">
+                    <div class="content">
+                      <div class="ui blue ribbon label">
+                        <i class="clock icon"></i>Durée : 4h
+                      </div>
+                      <img class="right floated mini ui image" src="assets/logos/numeris-blue.png">
+                    </div>
+
+                    <div class="content">
+                      <div class="header">
+                        Déconnexion / Reconnexion / SAV
+                      </div>
+                      <div class="meta">
+                        <i class="building icon"></i> Metalogic
+                      </div>
+                      <div class="description">
+                        Le 23/11/2018 à 03h00
+                      </div>
+                    </div>
+
+                    <div class="content">
+                      <div class="description">
+                        Ceci est une description super utile qui va être lue par tout le monde.
+                        Elle a énormément d'utilité, comme par exemple augmenter le temps de
+                        création d'une mission, ce qui est assez agréable.
+                      </div>
+                    </div>
+
+                    <div class="extra content">
+                      <i class="map pin icon"></i>3277 Surfers Paradise Blvd, 4217, Gold Coast
+                    </div>
+
+                    <app-button visibleContent="Postuler" hiddenIcon="handshake"
+                                attachment="bottom attached" behaviour="fluid"
+                                color="none" size="small">
+                    </app-button>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="ui fluid card">
+                    <div class="content">
+                      <div class="ui blue ribbon label">
+                        <i class="clock icon"></i>Durée : 1h
+                      </div>
+                      <img class="right floated mini ui image" src="assets/logos/numeris-blue.png">
+                    </div>
+
+                    <div class="content">
+                      <div class="header">
+                        Enveloppes
+                      </div>
+                      <div class="meta">
+                        <i class="building icon"></i> ISEP
+                      </div>
+                      <div class="description">
+                        Le 24/06/1995 à 12h00
+                      </div>
+                    </div>
+
+                    <div class="content">
+                      <div class="description">
+                        Mettre des cartes postales dans une enveloppe. Pour valider
+                        une action de communication.
+                      </div>
+                    </div>
+
+                    <div class="extra content">
+                      <i class="map pin icon"></i>28 rue Notre Dame des Champs, 75007, Paris
+                    </div>
+
+                    <app-button visibleContent="Postuler" hiddenIcon="handshake"
+                                attachment="bottom attached" behaviour="fluid"
+                                color="none" size="small">
+                    </app-button>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="ui fluid card">
+                    <div class="content">
+                      <div class="ui blue ribbon label">
+                        <i class="clock icon"></i>Durée : 2h
+                      </div>
+                      <img class="right floated mini ui image" src="assets/logos/numeris-blue.png">
+                    </div>
+
+                    <div class="content">
+                      <div class="header">
+                        Déconnexion Cité Universitaire
+                      </div>
+                      <div class="meta">
+                        <i class="building icon"></i> Mairie de Paris
+                      </div>
+                      <div class="description">
+                        Le 25/11/2018 à 15h00
+                      </div>
+                    </div>
+
+                    <div class="content">
+                      <div class="description">
+                        Rien de bien compliqué, donc aucune description nécessaire.
+                      </div>
+                    </div>
+
+                    <div class="extra content">
+                      <i class="map pin icon"></i>273 rue Lecourbe, 75015, Paris
+                    </div>
+
+                    <app-button visibleContent="Postuler" hiddenIcon="handshake"
+                                attachment="bottom attached" behaviour="fluid"
+                                color="none" size="small">
+                    </app-button>
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="ui fluid card">
+                    <div class="content">
+                      <div class="ui blue ribbon label">
+                        <i class="clock icon"></i>Durée : 3 jours
+                      </div>
+                      <img class="right floated mini ui image" src="assets/logos/numeris-blue.png">
+                    </div>
+
+                    <div class="content">
+                      <div class="header">
+                        Déménagement Métalogic
+                      </div>
+                      <div class="meta">
+                        <i class="building icon"></i> Métalogic
+                      </div>
+                      <div class="description">
+                        Du 25/11/2018 à 07h00 au 28/11/2018 à 19h00
+                      </div>
+                    </div>
+
+                    <div class="content">
+                      <div class="description">
+                        Ceci est une description super utile qui va être lue par tout le monde.
+                        Elle a énormément d'utilité, comme par exemple augmenter le temps de
+                        création d'une mission, ce qui est assez agréable.
+                        Ceci est une description super utile qui va être lue par tout le monde.
+                        Elle a énormément d'utilité, comme par exemple augmenter le temps de
+                        création d'une mission, ce qui est assez agréable.
+                        Ceci est une description super utile qui va être lue par tout le monde.
+                        Elle a énormément d'utilité, comme par exemple augmenter le temps de
+                        création d'une mission, ce qui est assez agréable.
+                      </div>
+                    </div>
+
+                    <div class="extra content">
+                      <i class="map pin icon"></i>17 rue Bonne Chance pour Trouver, 00000, Ici
+                    </div>
+
+                    <app-button visibleContent="Postuler" hiddenIcon="handshake"
+                                attachment="bottom attached" behaviour="fluid"
+                                color="none" size="small">
+                    </app-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </sui-accordion-panel>
+          <span class="ui floating blue label">4</span>
+        </div>
+      </sui-accordion>
+    </div>
   </div>
-</div>
+</app-content>
