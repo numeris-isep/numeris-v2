@@ -8,7 +8,7 @@ abstract class TestCaseWithAuth extends TestCase
 {
     protected $username;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
