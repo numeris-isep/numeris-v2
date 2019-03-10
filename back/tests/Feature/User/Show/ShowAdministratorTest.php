@@ -31,7 +31,7 @@ class ShowAdministratorTest extends TestCaseWithAuth
                 'lastName',
                 'studentNumber',
                 'promotion',
-                'school_year',
+                'schoolYear',
                 'phone',
                 'nationality',
                 'birthDate',
