@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from "rxjs";
-import { AuthService } from "../../auth/auth.service";
+import { AuthService } from "../../http/auth/auth.service";
 import { ScrollService } from "../../services/scroll.service";
-import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-sidebar',
@@ -14,7 +13,6 @@ export class SidebarComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;
 
   constructor(
-    public router: Router,
     private authService : AuthService,
     private scrollService: ScrollService
   ) { }

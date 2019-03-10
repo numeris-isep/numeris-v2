@@ -1,67 +1,62 @@
-<div class="ui five column grid">
-  <div class="column">
-    <div class="ui fluid card">
-      <div class="content">
-        <div class="header">Section 1</div>
+<app-content [condition]="!user">
+  <div class="ui padded grid doubling">
+    <!-- Messages -->
+    <div class="sixteen wide column"
+         *ngIf="user && (!user.activated || !user.touAccepted)">
+      <!-- Activate account -->
+      <div class="ui icon info message" *ngIf="!user.activated">
+        <i class="ban icon"></i>
+        <div class="content">
+          <div class="header">
+            Votre compte n'est pas activé
+          </div>
+          <p>
+            Veuillez
+            <span *ngIf="!user.touAccepted">
+              accepter les <a routerLink="/terms-of-use">conditions d'utilisation</a>,
+            </span>
+            compléter votre profil et contacter un membre de l'équipe Numéris.
+          </p>
+          <a routerLink="/contact-us">
+            <i class="question circle icon"></i> Qui contacter ?
+          </a>
+        </div>
       </div>
-      <div class="content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+      <!-- Terms of use accepted -->
+      <div class="ui icon warning message" *ngIf="!user.touAccepted">
+        <i class="pencil icon"></i>
+        <div class="content">
+          <div class="header">
+            Veuillez accepter les <a routerLink="/terms-of-use">Conditions d'utilisation</a>
+          </div>
+          <p>Veuillez accepter les conditions d'utilisation afin de pouvoir utiliser le service.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="stretched row">
+      <!-- Profile summary -->
+      <div class="sixteen wide mobile eight wide tablet four wide computer column">
+        <app-profile-summary *ngIf="user" [user]="user"></app-profile-summary>
+      </div>
+
+      <!-- Preferences -->
+      <div class="sixteen wide mobile eight wide tablet four wide computer column">
+        <app-profile-preferences *ngIf="user" [preference]="user.preference"></app-profile-preferences>
+      </div>
+
+      <!-- Profile details -->
+      <div class="sixteen wide mobile eight wide computer column">
+        <app-profile-details *ngIf="user" [user]="user"></app-profile-details>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Documents -->
+      <div class="column">
+        <app-profile-documents></app-profile-documents>
       </div>
     </div>
   </div>
-  <div class="column">
-    <div class="ui fluid card">
-      <div class="content">
-        <div class="header">Section 2</div>
-      </div>
-      <div class="content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </div>
-    </div>
-  </div>
-  <div class="column">
-    <div class="ui fluid card">
-      <div class="content">
-        <div class="header">Section 3</div>
-      </div>
-      <div class="content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </div>
-    </div>
-  </div>
-  <div class="column">
-    <div class="ui fluid card">
-      <div class="content">
-        <div class="header">Section 4</div>
-      </div>
-      <div class="content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </div>
-    </div>
-  </div>
-  <div class="column">
-    <div class="ui fluid card">
-      <div class="content">
-        <div class="header">Section 5</div>
-      </div>
-      <div class="content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </div>
-    </div>
-  </div>
-</div>
+</app-content>

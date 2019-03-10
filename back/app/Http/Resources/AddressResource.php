@@ -17,7 +17,7 @@ class AddressResource extends JsonResource
         return [
             'id'        => $this->id,
             'street'    => $this->street,
-            'ziCode'  => $this->zip_code,
+            'zipCode'  => $this->zip_code,
             'city'      => $this->city,
         ];
     }

@@ -63,7 +63,7 @@ module.exports = {
     'accordion',
     'ad',
     'api',
-    'breadcrumb',
+    'breadcrumbs',
     'button',
     'card',
     'checkbox',

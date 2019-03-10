@@ -4,8 +4,7 @@ import { Team_members } from "../../../core/constants/team_members";
 
 @Component({
   selector: 'app-team',
-  templateUrl: './team.component.html',
-  styleUrls: ['./team.component.css']
+  templateUrl: './team.component.html'
 })
 export class TeamComponent implements OnInit {
 

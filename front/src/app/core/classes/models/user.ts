@@ -1,25 +1,32 @@
+import { Address } from "./address";
+import { Preference } from "./preference";
+
 export class User {
 
   id: number;
-  notification_id: number;
-  address_id: number;
+  notificationId: number;
+  addressId: number;
+
   activated: boolean;
-  tou_accepted: boolean;
-  membership_fee_paid: boolean;
+  touAccepted: boolean;
+  membershipFeePaid: boolean;
   email: string;
   username: string;
-  first_name: string;
-  last_name: string;
-  student_number: number;
+  firstName: string;
+  lastName: string;
+  studentNumber: number;
   promotion: string;
+  schoolYear: string;
   phone: string;
   nationality: string;
-  birth_date: string;
-  birth_city: string;
-  social_insurance_number: string;
+  birthDate: string;
+  birthCity: string;
+  socialInsuranceNumber: string;
   iban: string;
   bic: string;
-  created_at: string;
-  updated_at: string;
+  createdAt: string;
+  updatedAt: string;
 
+  address: Address;
+  preference: Preference;
 }

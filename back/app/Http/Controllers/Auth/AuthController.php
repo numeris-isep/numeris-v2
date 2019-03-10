@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Requests\AuthRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
@@ -51,7 +52,7 @@ class AuthController extends Controller
      */
     public function currentUser()
     {
-        return response()->json(auth()->user());
+        return response()->json(UserResource::make(auth()->user()));
     }
 
     /**
