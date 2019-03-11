@@ -28,7 +28,6 @@ class ShowStaffTest extends TestCaseWithAuth
                 'createdAt',
                 'updatedAt',
                 'client',
-                'convention',
             ]);
     }
 }

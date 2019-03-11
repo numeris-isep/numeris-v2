@@ -26,7 +26,6 @@ class IndexAdministratorTest extends TestCaseWithAuth
                 'createdAt',
                 'updatedAt',
                 'client',
-                'convention',
             ]]);
     }
 }

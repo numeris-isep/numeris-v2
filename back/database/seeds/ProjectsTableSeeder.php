@@ -53,7 +53,7 @@ class ProjectsTableSeeder extends Seeder
     {
         $project_collection = new Collection();
 
-        $monthes = [
+        $months = [
             '01' => 'Janvier',
             '02' => 'Février',
             '03' => 'Mars',
@@ -68,15 +68,15 @@ class ProjectsTableSeeder extends Seeder
             '12' => 'Décembre',
         ];
 
-        foreach ($monthes as $month_number => $month_name) {
+        foreach ($months as $month_number => $month_name) {
             $project_collection->add(
                 factory(Project::class)
                     ->create([
                         'client_id'         => $client->id,
                         'convention_id'     => $client->conventions()->first()->id,
                         'name'              => "{$client->name} $month_name 2018",
-                        'start_at'          => "2017/$month_number/01 00:00:00",
-                        'money_received_at' => "2017/$month_number/25 00:00:00",
+                        'start_at'          => "2018/$month_number/01 00:00:00",
+                        'money_received_at' => "2018/$month_number/25 00:00:00",
                         'is_private'        => $month_number == '12',
                     ])
             );

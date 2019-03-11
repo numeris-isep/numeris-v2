@@ -26,7 +26,6 @@ class IndexStaffTest extends TestCaseWithAuth
                 'createdAt',
                 'updatedAt',
                 'client',
-                'convention',
             ]]);
     }
 }

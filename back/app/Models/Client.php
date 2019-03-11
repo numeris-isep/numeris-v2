@@ -60,4 +60,14 @@ class Client extends Model
     {
         return $this->hasMany(Convention::class);
     }
+
+    public function missions()
+    {
+        return $this->hasManyThrough(
+            Mission::class,
+            Project::class,
+            'client_id',
+            'project_id'
+        );
+    }
 }

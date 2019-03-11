@@ -70,4 +70,9 @@ class Project extends Model
     {
         return $this->belongsTo(Convention::class);
     }
+
+    public function missions()
+    {
+        return $this->hasMany(Mission::class);
+    }
 }

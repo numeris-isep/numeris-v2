@@ -28,7 +28,6 @@ class ShowDeveloperTest extends TestCaseWithAuth
                 'createdAt',
                 'updatedAt',
                 'client',
-                'convention',
             ]);
     }
 

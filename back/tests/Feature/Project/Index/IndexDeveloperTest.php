@@ -26,7 +26,6 @@ class IndexDeveloperTest extends TestCaseWithAuth
                 'createdAt',
                 'updatedAt',
                 'client',
-                'convention',
             ]]);
     }
 }
