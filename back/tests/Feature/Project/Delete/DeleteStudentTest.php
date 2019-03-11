@@ -13,7 +13,7 @@ class DeleteStudentTest extends TestCaseWithAuth
     /**
      * @group student
      */
-    public function testStudentDeletingUser()
+    public function testStudentDeletingProject()
     {
         $project_id = 1;
         $project = Project::find($project_id);
