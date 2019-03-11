@@ -16,12 +16,19 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     {
         $client_id = 1;
 
-        $data = [
+        $client_data = [
             'name'      => 'AS Something',
-            'reference' => '00-0000'
+            'reference' => '00-0000',
         ];
+        $address_data = [
+            'street'    => '1 rue Quelquepart',
+            'zip_code'  => '75015',
+            'city'      => 'Paris',
+        ];
+        $data = array_merge($client_data, $address_data);
 
-        $this->assertDatabaseMissing('clients', $data);
+        $this->assertDatabaseMissing('clients', $client_data);
+        $this->assertDatabaseMissing('addresses', $address_data);
 
         $this->json('PUT', route('clients.update', ['client_id' => $client_id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
@@ -35,7 +42,8 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'address',
             ]);
 
-        $this->assertDatabaseHas('clients', $data);
+        $this->assertDatabaseHas('clients', $client_data);
+        $this->assertDatabaseHas('addresses', $address_data);
     }
 
     /**
@@ -45,18 +53,26 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     {
         $client_id = 1;
 
-        $data = [
+        $client_data = [
             'name'      => 'AS Connect', // Already used
             'reference' => '01-0001' // Already used
         ];
+        $address_data = [
+            'street'    => '1 rue Quelquepart',
+            'zip_code'  => '75015',
+            'city'      => 'Paris',
+        ];
+        $data = array_merge($client_data, $address_data);
 
-        $this->assertDatabaseHas('clients', $data);
+        $this->assertDatabaseHas('clients', $client_data);
+        $this->assertDatabaseMissing('addresses', $address_data);
 
         $this->json('PUT', route('clients.update', ['client_id' => $client_id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors(['name', 'reference']);
 
-        $this->assertDatabaseHas('clients', $data);
+        $this->assertDatabaseHas('clients', $client_data);
+        $this->assertDatabaseMissing('addresses', $address_data);
     }
 
     /**
@@ -68,6 +84,12 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $this->json('PUT', route('clients.update', ['client_id' => $client_id]))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJsonValidationErrors(['name', 'reference']);
+            ->assertJsonValidationErrors([
+                'name',
+                'reference',
+                'street',
+                'zip_code',
+                'city',
+            ]);
     }
 }

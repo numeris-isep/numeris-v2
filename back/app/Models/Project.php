@@ -40,6 +40,7 @@ class Project extends Model
 
     protected $hidden = [
         'client',
+        'missions',
     ];
 
     public static function steps()

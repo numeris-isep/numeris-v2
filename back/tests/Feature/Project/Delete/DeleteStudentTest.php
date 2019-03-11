@@ -17,8 +17,10 @@ class DeleteStudentTest extends TestCaseWithAuth
     {
         $project_id = 1;
         $project = Project::find($project_id);
+        $missions = $project->missions;
 
         $this->assertDatabaseHas('projects', $project->toArray());
+        $this->assertDatabaseHas('missions', $missions->first()->toArray());
 
         $this->json('DELETE', route('projects.destroy', ['project_id' => $project_id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
@@ -27,5 +29,6 @@ class DeleteStudentTest extends TestCaseWithAuth
             ]);
 
         $this->assertDatabaseHas('projects', $project->toArray());
+        $this->assertDatabaseHas('missions', $missions->first()->toArray());
     }
 }

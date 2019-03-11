@@ -21,6 +21,7 @@ class Client extends Model
         'address',
         'projects',
         'conventions',
+        'missions',
     ];
 
     public static function findByName($name)

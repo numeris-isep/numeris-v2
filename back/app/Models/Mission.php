@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mission extends Model
 {
+    use OnEventsTrait;
+
     protected $fillable = [
         // One-to-One relations
         'address_id',
@@ -20,7 +22,9 @@ class Mission extends Model
     ];
 
     protected $hidden = [
-        'project'
+        'project',
+        'client',
+        'address',
     ];
 
     public function address()
@@ -36,5 +40,14 @@ class Mission extends Model
     public function client()
     {
         return $this->project->client();
+    }
+
+    /**
+     * To be realised just after an mission is deleted
+     */
+    public static function onDeleted(self $mission)
+    {
+        // Delete all related models
+        $mission->address()->delete();
     }
 }

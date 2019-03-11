@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientRequest;
 use App\Http\Resources\ClientResource;
+use App\Models\Address;
 use App\Models\Client;
 use Illuminate\Http\JsonResponse;
 
@@ -33,7 +34,16 @@ class ClientController extends Controller
     {
         $this->authorize('store', Client::class);
 
-        $client = Client::create($request->all());
+        $client_request = $request->except([
+            'street', 'zip_code', 'city'
+        ]);
+        $address_request = $request->only([
+            'street', 'zip_code', 'city',
+        ]);
+
+        $client = Client::create($client_request);
+        $address = Address::create($address_request);
+        $address->client()->save($client);
 
         return response()->json(new ClientResource($client), JsonResponse::HTTP_CREATED);
     }
@@ -68,7 +78,15 @@ class ClientController extends Controller
         $client = Client::findOrFail($client_id);
         $this->authorize('update', $client);
 
-        $client->update($request->all());
+        $client_request = $request->except([
+            'street', 'zip_code', 'city'
+        ]);
+        $address_request = $request->only([
+            'street', 'zip_code', 'city',
+        ]);
+
+        $client->update($client_request);
+        $client->address()->update($address_request);
 
         return response()->json(ClientResource::make($client), JsonResponse::HTTP_CREATED);
     }
@@ -85,6 +103,8 @@ class ClientController extends Controller
         $client = Client::findOrFail($client_id);
         $this->authorize('destroy', $client);
 
+        // DISCLAIMER: The following line removes the client as well as its
+        // related projects and missions
         $client->delete();
 
         return response()->json(null, JsonResponse::HTTP_NO_CONTENT);

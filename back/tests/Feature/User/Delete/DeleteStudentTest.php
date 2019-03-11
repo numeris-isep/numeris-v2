@@ -41,7 +41,7 @@ class DeleteStudentTest extends TestCaseWithAuth
      */
     public function testStudentDeletingHisOwnAccount()
     {
-        $user_id = 7; // Own account
+        $user_id = 8; // Own account
         $user = User::find($user_id);
         $address = $user->address;
         $preference = $user->preference;

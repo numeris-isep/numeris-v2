@@ -17,14 +17,15 @@ class DeleteStaffTest extends TestCaseWithAuth
     {
         $project_id = 1;
         $project = Project::find($project_id);
+        $missions = $project->missions;
 
         $this->assertDatabaseHas('projects', $project->toArray());
-        // TODO: check missions
+        $this->assertDatabaseHas('missions', $missions->first()->toArray());
 
         $this->json('DELETE', route('projects.destroy', ['project_id' => $project_id]))
             ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
 
         $this->assertDatabaseMissing('projects', $project->toArray());
-        // TODO: check missions
+        $this->assertDatabaseMissing('missions', $missions->first()->toArray());
     }
 }

@@ -14,7 +14,7 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
      */
     public function testDeveloperUpdatingHisOwnProfile()
     {
-        $user_id = 1; // Own profile
+        $user_id = 2; // Own profile
 
         $user_data = [
             'phone'                     => '01 23 45 67 89',
@@ -84,7 +84,7 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
      */
     public function testDeveloperUpdatingDeveloperProfile()
     {
-        $user_id = 2; // developer
+        $user_id = 3; // developer
 
         $user_data = [
             'phone'                     => '01 23 45 67 89',

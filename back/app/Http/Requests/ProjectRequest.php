@@ -52,10 +52,6 @@ class ProjectRequest extends AbstractFormRequest
                 $rules['name'] = 'required|string|unique:projects,name,' . $project_id;
                 break;
 
-            case 'PATCH':
-                // TODO
-                break;
-
             default:break;
         }
 

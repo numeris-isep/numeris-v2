@@ -14,7 +14,7 @@ class UpdateProfileStaffTest extends TestCaseWithAuth
      */
     public function testStaffUpdatingHisOwnProfile()
     {
-        $user_id = 5; // Own profile
+        $user_id = 6; // Own profile
 
         $user_data = [
             'phone'                     => '01 23 45 67 89',
@@ -148,7 +148,7 @@ class UpdateProfileStaffTest extends TestCaseWithAuth
      */
     public function testStaffUpdatingStaffProfile()
     {
-        $user_id = 6; // staff
+        $user_id = 7; // staff
 
         $user_data = [
             'phone'                     => '01 23 45 67 89',

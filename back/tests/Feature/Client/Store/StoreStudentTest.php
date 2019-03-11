@@ -14,12 +14,19 @@ class StoreStudentTest extends TestCaseWithAuth
      */
     public function testStudentCreatingClient()
     {
-        $data = [
+        $client_data = [
             'name'      => 'AS Something',
-            'reference' => '00-0000'
+            'reference' => '00-0000',
         ];
+        $address_data = [
+            'street'    => '1 rue Quelquepart',
+            'zip_code'  => '75015',
+            'city'      => 'Paris',
+        ];
+        $data = array_merge($client_data, $address_data);
 
-        $this->assertDatabaseMissing('clients', $data);
+        $this->assertDatabaseMissing('clients', $client_data);
+        $this->assertDatabaseMissing('addresses', $address_data);
 
         $this->json('POST', route('clients.store'), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
@@ -27,6 +34,7 @@ class StoreStudentTest extends TestCaseWithAuth
                 'error' => trans('api.403')
             ]);
 
-        $this->assertDatabaseMissing('clients', $data);
+        $this->assertDatabaseMissing('clients', $client_data);
+        $this->assertDatabaseMissing('addresses', $address_data);
     }
 }

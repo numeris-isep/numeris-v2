@@ -85,6 +85,8 @@ class ProjectController extends Controller
         $project = Project::findOrFail($project_id);
         $this->authorize('destroy', $project);
 
+        // DISCLAIMER: The following line removes the project as well as its
+        // related missions
         $project->delete();
 
         return response()->json(null, JsonResponse::HTTP_NO_CONTENT);

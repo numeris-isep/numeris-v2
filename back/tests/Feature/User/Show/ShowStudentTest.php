@@ -28,7 +28,7 @@ class ShowStudentTest extends TestCaseWithAuth
      */
     public function testStudentAccessingHisProfile()
     {
-        $user_id = 7; // Own profile
+        $user_id = 8; // Own profile
 
         $this->json('GET', route('users.show', ['user_id' => $user_id]))
             ->assertStatus(JsonResponse::HTTP_OK)

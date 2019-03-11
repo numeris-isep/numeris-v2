@@ -14,7 +14,7 @@ class UpdateProfileAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorUpdatingHisOwnProfile()
     {
-        $user_id = 3; // Own profile
+        $user_id = 4; // Own profile
 
         $user_data = [
             'phone'                     => '01 23 45 67 89',
@@ -106,7 +106,7 @@ class UpdateProfileAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorUpdatingAdministratorProfile()
     {
-        $user_id = 4; // administrator
+        $user_id = 5; // administrator
 
         $user_data = [
             'phone'                     => '01 23 45 67 89',

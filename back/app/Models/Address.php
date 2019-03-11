@@ -23,6 +23,11 @@ class Address extends Model
         return $this->hasOne(User::class);
     }
 
+    public function client()
+    {
+        return $this->hasOne(Client::class);
+    }
+
     public function mission()
     {
         return $this->hasOne(Mission::class);

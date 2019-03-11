@@ -41,7 +41,7 @@ class DeleteAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorDeletingHisOwnAccount()
     {
-        $user_id = 3; // Own account
+        $user_id = 4; // Own account
         $user = User::find($user_id);
         $address = $user->address;
         $preference = $user->preference;
