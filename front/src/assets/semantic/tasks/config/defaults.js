@@ -59,13 +59,14 @@ module.exports = {
     'label',
     'list',
     'loader',
+    'placeholder',
     'rail',
     'reveal',
     'segment',
     'step',
 
     // collections
-    'breadcrumbs',
+    'breadcrumb',
     'form',
     'grid',
     'menu',
