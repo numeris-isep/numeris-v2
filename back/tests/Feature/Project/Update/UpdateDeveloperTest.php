@@ -70,7 +70,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      */
-    public function testDeveloperUpdatingUserWithoutData()
+    public function testDeveloperUpdatingProjectWithoutData()
     {
         $project_id = 1;
 
