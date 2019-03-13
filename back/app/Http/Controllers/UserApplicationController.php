@@ -38,8 +38,6 @@ class UserApplicationController extends Controller
         $mission = Mission::findOrFail($request->get('mission_id'));
         $this->authorize('store-application', User::class);
 
-        // TODO: case where the project is private (use a Gate not the Policy)
-
         $application = Application::create([
             'type'      => Application::USER_APPLICATION,
             'status'    => Application::WAITING,

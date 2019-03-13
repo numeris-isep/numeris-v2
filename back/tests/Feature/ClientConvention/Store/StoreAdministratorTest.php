@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Convention\Store;
+namespace Tests\Feature\ClientConvention\Store;
 
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;

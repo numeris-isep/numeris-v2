@@ -18,8 +18,6 @@ class ApplicationRequest extends AbstractFormRequest
         $current_user = auth()->user();
         $application = Application::find($this->route('application_id'));
 
-        dd($current_user->can('store-application', User::class));
-
         // Use ApplicationPolicy, MissionPolicy and UserPolicy here to authorize
         // before checking the fields
         if ($current_user->can('store-application', Mission::class)
@@ -40,8 +38,8 @@ class ApplicationRequest extends AbstractFormRequest
     public function rules()
     {
         $rules = [
-            'mission_id'    => 'required_without:user_id|integer|exists:missions,id',
-            'user_id'       => 'required_without:mission_id|integer|exists:users,id',
+            'mission_id'    => 'integer|exists:missions,id|unique:applications,mission_id,NULL,NULL,user_id,' . $this->user_id,
+            'user_id'       => 'integer|exists:users,id|unique:applications,user_id,NULL,NULL,mission_id,' . $this->mission_id,
         ];
 
         switch($this->method())
