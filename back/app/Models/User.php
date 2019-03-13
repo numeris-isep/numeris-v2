@@ -41,6 +41,7 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'address',
         'preference',
+        'applications',
     ];
 
     protected $casts = [
@@ -125,5 +126,28 @@ class User extends Authenticatable implements JWTSubject
     public function isStudent()
     {
         return $this->role()->name === "student";
+    }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
+    }
+
+    public function waitingApplications()
+    {
+        return $this->applications()
+            ->where('status','=', Application::WAITING);
+    }
+
+    public function acceptedApplications()
+    {
+        return $this->applications()
+            ->where('status','=', Application::ACCEPTED);
+    }
+
+    public function refusedApplications()
+    {
+        return $this->applications()
+            ->where('status','=', Application::REFUSED);
     }
 }

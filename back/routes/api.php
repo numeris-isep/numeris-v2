@@ -33,7 +33,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::resource('users.roles', 'UserRoleController', ['parameters' => [
         'users' => 'user_id',
         'roles' => 'role_id',
-    ]])->except(['create', 'show', 'edit', 'update', 'destroy']);
+    ]])->only(['index', 'store']);
 
     // Client resource routes
     Route::apiResource('clients', 'ClientController', ['parameters' => ['clients' => 'client_id']]);
@@ -42,14 +42,29 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('clients/{client_id}/conventions', 'ClientConventionController@store')->name('clients.conventions.store');
 
     Route::resource('conventions', 'ConventionController', ['parameters' => ['conventions' => 'convention_id']])
-        ->except(['index', 'create', 'store', 'show', 'edit']);
+        ->only(['update', 'destroy']);
 
     // Project resource routes
     Route::apiResource('projects', 'ProjectController', ['parameters' => ['projects' => 'project_id']]);
 
+    Route::patch('projects/{project_id}/step', 'ProjectController@updateStep')->name('projects.update.step');
+
+    Route::patch('projects/{project_id}/payment', 'ProjectController@updatePayment')->name('projects.update.payment');
+
     // Mission resource routes
     Route::apiResource('missions', 'MissionController', ['parameters' => ['missions' => 'mission_id']]);
 
+    // Application resource routes
+    Route::resource('missions.applications', 'MissionApplicationController', ['parameters' => ['missions' => 'mission_id']])
+        ->only(['index', 'store']);
+
+    Route::resource('users.applications', 'UserApplicationController', ['parameters' => ['users' => 'user_id']])
+        ->only(['index', 'store']);
+
+    Route::resource('applications', 'ApplicationController', ['parameters' => ['applications' => 'application_id']])
+        ->only(['update', 'destroy']);
+
+//    Route::get('users/{user_id}/applications', 'UserApplicationController@get')->name('users.applications.index');
 
 });
 

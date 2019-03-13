@@ -52,6 +52,12 @@ class ProjectRequest extends AbstractFormRequest
                 $rules['name'] = 'required|string|unique:projects,name,' . $project_id;
                 break;
 
+            case 'PATCH':
+                return [
+                    'step'              => 'required_without:money_received_at|string|in:' . implode(',', Project::steps()),
+                    'money_received_at' => 'required_without:step|date'
+                ];
+
             default:break;
         }
 

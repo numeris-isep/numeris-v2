@@ -41,6 +41,16 @@ class ProjectPolicy
         return false;
     }
 
+    public function updateStep(User $current_user, Project $project)
+    {
+        return false;
+    }
+
+    public function updatePayment(User $current_user, Project $project)
+    {
+        return false;
+    }
+
     public function destroy(User $current_user, Project $project)
     {
         return false;

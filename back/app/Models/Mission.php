@@ -22,9 +22,10 @@ class Mission extends Model
     ];
 
     protected $hidden = [
-        'project',
-        'client',
         'address',
+        'client',
+        'project',
+        'applications',
     ];
 
     public function address()
@@ -37,9 +38,29 @@ class Mission extends Model
         return $this->belongsTo(Project::class);
     }
 
+    public static function findByProject($project_id)
+    {
+        return Project::find($project_id)->missions;
+    }
+
+    public static function findByProjectName($project_name)
+    {
+        return Project::findByName($project_name)->missions;
+    }
+
     public function client()
     {
         return $this->project->client();
+    }
+
+    public static function findByClient($client_id)
+    {
+        return Client::find($client_id)->missions;
+    }
+
+    public static function findByClientName($client_name)
+    {
+        return Client::findByName($client_name)->missions;
     }
 
     /**
@@ -49,5 +70,28 @@ class Mission extends Model
     {
         // Delete all related models
         $mission->address()->delete();
+    }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
+    }
+
+    public function waitingApplications()
+    {
+        return $this->applications()
+            ->where('status','=', Application::WAITING);
+    }
+
+    public function acceptedApplications()
+    {
+        return $this->applications()
+            ->where('status','=', Application::ACCEPTED);
+    }
+
+    public function refusedApplications()
+    {
+        return $this->applications()
+            ->where('status','=', Application::REFUSED);
     }
 }

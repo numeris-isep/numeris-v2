@@ -74,6 +74,42 @@ class ProjectController extends Controller
     }
 
     /**
+     * Update step.
+     *
+     * @param ProjectRequest $request
+     * @param $project_id
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function updateStep(ProjectRequest $request, $project_id)
+    {
+        $project = Project::findOrFail($project_id);
+        $this->authorize('update-step', $project);
+
+        $project->update($request->only('step'));
+
+        return response()->json(ProjectResource::make($project), JsonResponse::HTTP_CREATED);
+    }
+
+    /**
+     * Update payment (when the project has been paid).
+     *
+     * @param ProjectRequest $request
+     * @param $project_id
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function updatePayment(ProjectRequest $request, $project_id)
+    {
+        $project = Project::findOrFail($project_id);
+        $this->authorize('update-payment', $project);
+
+        $project->update($request->only('money_received_at'));
+
+        return response()->json(ProjectResource::make($project), JsonResponse::HTTP_CREATED);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param $project_id
