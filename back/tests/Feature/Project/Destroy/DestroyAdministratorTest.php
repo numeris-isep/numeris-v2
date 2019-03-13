@@ -1,19 +1,19 @@
 <?php
 
-namespace Tests\Feature\Project\Delete;
+namespace Tests\Feature\Project\Destroy;
 
 use App\Models\Project;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
-class DeleteStudentTest extends TestCaseWithAuth
+class DestroyAdministratorTest extends TestCaseWithAuth
 {
-    protected $username = 'student';
+    protected $username = 'administrator';
 
     /**
-     * @group student
+     * @group administrator
      */
-    public function testStudentDeletingProject()
+    public function testAdministratorDeletingProject()
     {
         $project_id = 1;
         $project = Project::find($project_id);

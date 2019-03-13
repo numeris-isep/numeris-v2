@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Feature\Convention\Delete;
+namespace Tests\Feature\Convention\Destroy;
 
 use App\Models\Convention;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
-class DeleteDeveloperTest extends TestCaseWithAuth
+class DestroyDeveloperTest extends TestCaseWithAuth
 {
     protected $username = 'developer';
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Feature\Project\Delete;
+namespace Tests\Feature\Project\Destroy;
 
 use App\Models\Project;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
-class DeleteStaffTest extends TestCaseWithAuth
+class DestroyStaffTest extends TestCaseWithAuth
 {
     protected $username = 'staff';
 
@@ -23,9 +23,12 @@ class DeleteStaffTest extends TestCaseWithAuth
         $this->assertDatabaseHas('missions', $missions->first()->toArray());
 
         $this->json('DELETE', route('projects.destroy', ['project_id' => $project_id]))
-            ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
+            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
+            ->assertJson([
+                'error' => trans('api.403')
+            ]);
 
-        $this->assertDatabaseMissing('projects', $project->toArray());
-        $this->assertDatabaseMissing('missions', $missions->first()->toArray());
+        $this->assertDatabaseHas('projects', $project->toArray());
+        $this->assertDatabaseHas('missions', $missions->first()->toArray());
     }
 }

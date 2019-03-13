@@ -1,19 +1,19 @@
 <?php
 
-namespace Tests\Feature\Mission\Delete;
+namespace Tests\Feature\Mission\Destroy;
 
 use App\Models\Mission;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
-class DeleteStaffTest extends TestCaseWithAuth
+class DestroyAdministratorTest extends TestCaseWithAuth
 {
-    protected $username = 'staff';
+    protected $username = 'administrator';
 
     /**
-     * @group staff
+     * @group administrator
      */
-    public function testStaffDeletingMission()
+    public function testAdministratorDeletingMission()
     {
         $mission_id = 1;
         $mission = Mission::find($mission_id);

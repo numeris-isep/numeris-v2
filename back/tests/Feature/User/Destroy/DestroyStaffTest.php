@@ -1,20 +1,20 @@
 <?php
 
-namespace Tests\Feature\User\Delete;
+namespace Tests\Feature\User\Destroy;
 
 use App\Models\Preference;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
-class DeleteAdministratorTest extends TestCaseWithAuth
+class DestroyStaffTest extends TestCaseWithAuth
 {
-    protected $username = 'administrator';
+    protected $username = 'staff';
 
     /**
-     * @group administrator
+     * @group staff
      */
-    public function testAdministratorDeletingUser()
+    public function testStaffDeletingUser()
     {
         $user_id = 1;
         $user = User::find($user_id);
@@ -37,11 +37,11 @@ class DeleteAdministratorTest extends TestCaseWithAuth
     }
 
     /**
-     * @group administrator
+     * @group staff
      */
-    public function testAdministratorDeletingHisOwnAccount()
+    public function testStaffDeletingHisOwnAccount()
     {
-        $user_id = 4; // Own account
+        $user_id = 6; // Own account
         $user = User::find($user_id);
         $address = $user->address;
         $preference = $user->preference;

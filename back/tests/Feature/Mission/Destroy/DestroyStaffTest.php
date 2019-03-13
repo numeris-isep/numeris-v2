@@ -1,19 +1,19 @@
 <?php
 
-namespace Tests\Feature\Mission\Delete;
+namespace Tests\Feature\Mission\Destroy;
 
 use App\Models\Mission;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
-class DeleteDeveloperTest extends TestCaseWithAuth
+class DestroyStaffTest extends TestCaseWithAuth
 {
-    protected $username = 'developer';
+    protected $username = 'staff';
 
     /**
-     * @group developer
+     * @group staff
      */
-    public function testDeveloperDeletingMission()
+    public function testStaffDeletingMission()
     {
         $mission_id = 1;
         $mission = Mission::find($mission_id);
@@ -27,19 +27,5 @@ class DeleteDeveloperTest extends TestCaseWithAuth
 
         $this->assertDatabaseMissing('missions', $mission->toArray());
         $this->assertDatabaseMissing('addresses', $address->toArray());
-    }
-
-    /**
-     * @group developer
-     */
-    public function testDeveloperDeletingUnknownMission()
-    {
-        $mission_id = 0; // Unknown mission
-
-        $this->json('DELETE', route('missions.destroy', ['mission_id' => $mission_id]))
-            ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
-            ->assertJson([
-                'error' => trans('api.404')
-            ]);
     }
 }
