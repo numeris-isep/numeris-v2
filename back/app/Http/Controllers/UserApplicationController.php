@@ -20,7 +20,7 @@ class UserApplicationController extends Controller
     public function index($user_id)
     {
         $user = User::findOrFail($user_id);
-        // $this->authorize('index', Application::class);
+        $this->authorize('index-application', $user);
 
         return response()->json(ApplicationResource::collection($user->applications));
     }
@@ -36,7 +36,9 @@ class UserApplicationController extends Controller
     {
         $user = User::findOrFail($user_id);
         $mission = Mission::findOrFail($request->get('mission_id'));
-//        $this->authorize('store', Application::class);
+        $this->authorize('store-application', User::class);
+
+        // TODO: case where the project is private (use a Gate not the Policy)
 
         $application = Application::create([
             'type'      => Application::USER_APPLICATION,

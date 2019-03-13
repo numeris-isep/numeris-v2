@@ -2,6 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Application;
+use App\Models\Mission;
+use App\Models\User;
+
 class ApplicationRequest extends AbstractFormRequest
 {
     /**
@@ -11,7 +15,21 @@ class ApplicationRequest extends AbstractFormRequest
      */
     public function authorize()
     {
-        return true;
+        $current_user = auth()->user();
+        $application = Application::find($this->route('application_id'));
+
+        dd($current_user->can('store-application', User::class));
+
+        // Use ApplicationPolicy, MissionPolicy and UserPolicy here to authorize
+        // before checking the fields
+        if ($current_user->can('store-application', Mission::class)
+            || $current_user->can('store-application', User::class)
+            || $current_user->can('update', $application)
+        ) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -21,8 +39,23 @@ class ApplicationRequest extends AbstractFormRequest
      */
     public function rules()
     {
-        return [
-            //
+        $rules = [
+            'mission_id'    => 'required_without:user_id|integer|exists:missions,id',
+            'user_id'       => 'required_without:mission_id|integer|exists:users,id',
         ];
+
+        switch($this->method())
+        {
+            case 'PUT':
+                return [
+                    'type'      => 'required_without:status|in:' . implode(',', Application::types()),
+                    'status'    => 'required_without:type|in:' . implode(',', Application::statutes()),
+                ];
+                break;
+
+            default:break;
+        }
+
+        return $rules;
     }
 }

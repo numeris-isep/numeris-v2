@@ -122,7 +122,7 @@ class UserController extends Controller
     }
 
     /**
-     * Update profile
+     * Update profile.
      *
      * @param UserRequest $request
      * * @param $user_id

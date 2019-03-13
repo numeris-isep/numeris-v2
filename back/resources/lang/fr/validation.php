@@ -185,5 +185,7 @@ return [
         'role_id'                   => 'rôle',
         'client_id'                 => 'client',
         'step'                      => 'status',
+        'mission_id'                => 'mission',
+        'user_id'                   => 'utilisateur',
     ],
 ];

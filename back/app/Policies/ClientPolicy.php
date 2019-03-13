@@ -40,6 +40,7 @@ class ClientPolicy
 
     public function destroy(User $current_user, Client $client)
     {
+        // TODO: only if there is no billing data or user = 'developer'
         return $current_user->role()->isEquivalentTo('developer');
     }
 }

@@ -20,7 +20,7 @@ class ApplicationController extends Controller
     public function update(ApplicationRequest $request, $application_id)
     {
         $application = Application::findOrFail($application_id);
-//        $this->authorize('update', $application);
+        $this->authorize('update', $application);
 
         $application->update($request->all());
 
@@ -37,7 +37,7 @@ class ApplicationController extends Controller
     public function destroy($application_id)
     {
         $application = Application::findOrFail($application_id);
-//        $this->authorize('destroy', $application);
+        $this->authorize('destroy', $application);
 
         $application->delete();
 

@@ -21,7 +21,7 @@ class MissionApplicationController extends Controller
     public function index($mission_id)
     {
         $mission = Mission::findOrFail($mission_id);
-        // $this->authorize('index', Application::class);
+        $this->authorize('index-application', $mission);
 
         return response()->json(ApplicationResource::collection($mission->applications));
     }
@@ -37,7 +37,7 @@ class MissionApplicationController extends Controller
     {
         $mission = Mission::findOrFail($mission_id);
         $user = User::findOrFail($request->get('user_id'));
-//        $this->authorize('store', Application::class);
+        $this->authorize('store-application', Mission::class);
 
         $application = Application::create([
             'type'      => Application::STAFF_PLACEMENT,

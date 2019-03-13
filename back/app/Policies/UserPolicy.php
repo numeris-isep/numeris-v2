@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Mission;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -22,9 +23,20 @@ class UserPolicy
         return $current_user->role()->isSuperiorTo('student');
     }
 
+    public function indexApplication(User $current_user, User $user)
+    {
+        return $current_user->role()->isSuperiorOrEquivalentTo('staff')
+            || $current_user->is($user);
+    }
+
     public function store(User $current_user)
     {
         return false;
+    }
+
+    public function storeApplication(User $current_user)
+    {
+        return true;
     }
 
     public function show(User $current_user, User $user)

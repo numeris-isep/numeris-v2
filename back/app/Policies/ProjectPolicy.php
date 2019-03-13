@@ -13,12 +13,9 @@ class ProjectPolicy
     public function before(User $current_user, $ability)
     {
         // Grant everything to developers, administrators and staffs
-        if ($current_user->role()->isSuperiorOrEquivalentTo('staff')) {
+        if ($current_user->role()->isSuperiorOrEquivalentTo('staff') && $ability != 'destroy') {
             return true;
         }
-
-        // Forbid everything to students
-        return false;
     }
 
     public function index(User $current_user)
@@ -53,6 +50,7 @@ class ProjectPolicy
 
     public function destroy(User $current_user, Project $project)
     {
-        return false;
+        // TODO: only if there is no billing data or user = 'developer'
+        return $current_user->role()->isEquivalentTo('developer');
     }
 }
