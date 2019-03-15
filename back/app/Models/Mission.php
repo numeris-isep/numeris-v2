@@ -35,7 +35,7 @@ class Mission extends Model
 
     public function project()
     {
-        return $this->belongsTo(Project::class);
+        return $this->belongsTo(Project::class)->with('client');
     }
 
     public static function findByProject($project_id)
@@ -46,11 +46,6 @@ class Mission extends Model
     public static function findByProjectName($project_name)
     {
         return Project::findByName($project_name)->missions;
-    }
-
-    public function client()
-    {
-        return $this->project->client();
     }
 
     public static function findByClient($client_id)

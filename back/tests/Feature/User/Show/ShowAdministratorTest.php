@@ -43,7 +43,7 @@ class ShowAdministratorTest extends TestCaseWithAuth
                 'updatedAt',
                 'address',
                 'preference',
-                'role',
+                'roles',
             ]);
     }
 }

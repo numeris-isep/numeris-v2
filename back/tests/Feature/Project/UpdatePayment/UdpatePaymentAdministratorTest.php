@@ -31,7 +31,6 @@ class UdpatePaymentAdministratorTest extends TestCaseWithAuth
                 'moneyReceivedAt',
                 'createdAt',
                 'updatedAt',
-                'client',
             ]);
     }
 }

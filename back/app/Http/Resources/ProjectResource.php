@@ -25,7 +25,8 @@ class ProjectResource extends JsonResource
             'updatedAt'         => $this->updated_at->toDateTimeString(),
 
             // Relations
-            'client'            => $this->whenLoaded('client', ClientResource::make($this->client)),
+            'client'            => ClientResource::make($this->whenLoaded('client')),
+            'missions'          => MissionResource::collection($this->whenLoaded('missions')),
         ];
     }
 }

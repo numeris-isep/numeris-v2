@@ -55,16 +55,13 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('missions', 'MissionController', ['parameters' => ['missions' => 'mission_id']]);
 
     // Application resource routes
-    Route::resource('missions.applications', 'MissionApplicationController', ['parameters' => ['missions' => 'mission_id']])
-        ->only(['index', 'store']);
+    Route::post('missions/{mission_id}/applications', 'MissionApplicationController@store')->name('missions.applications.store');
 
     Route::resource('users.applications', 'UserApplicationController', ['parameters' => ['users' => 'user_id']])
         ->only(['index', 'store']);
 
     Route::resource('applications', 'ApplicationController', ['parameters' => ['applications' => 'application_id']])
         ->only(['update', 'destroy']);
-
-//    Route::get('users/{user_id}/applications', 'UserApplicationController@get')->name('users.applications.index');
 
 });
 

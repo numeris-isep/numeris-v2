@@ -37,7 +37,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'moneyReceivedAt',
                 'createdAt',
                 'updatedAt',
-                'client',
             ]);
 
         $this->assertDatabaseHas('projects', $data);

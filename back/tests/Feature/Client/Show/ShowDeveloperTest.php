@@ -26,6 +26,8 @@ class ShowDeveloperTest extends TestCaseWithAuth
                 'createdAt',
                 'updatedAt',
                 'address',
+                'conventions',
+                'projects',
             ]);
     }
 

@@ -43,8 +43,6 @@ class UpdateStaffTest extends TestCaseWithAuth
                 'startAt',
                 'duration',
                 'capacity',
-                'address',
-                'project',
             ]);
 
         $this->assertDatabaseHas('missions', $mission_data);

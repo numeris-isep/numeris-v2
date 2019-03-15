@@ -24,7 +24,9 @@ class IndexAdministratorTest extends TestCaseWithAuth
                 'duration',
                 'capacity',
                 'address',
-                'project',
+                'project' => [
+                    'client',
+                ],
             ]]);
     }
 }

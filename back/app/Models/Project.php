@@ -40,6 +40,7 @@ class Project extends Model
 
     protected $hidden = [
         'client',
+        'convention',
         'missions',
     ];
 

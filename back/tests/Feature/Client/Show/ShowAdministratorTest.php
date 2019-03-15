@@ -26,6 +26,8 @@ class ShowAdministratorTest extends TestCaseWithAuth
                 'createdAt',
                 'updatedAt',
                 'address',
+                'conventions',
+                'projects',
             ]);
     }
 }

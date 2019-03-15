@@ -12,21 +12,6 @@ use Illuminate\Http\JsonResponse;
 class MissionApplicationController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     * List the applications of mission
-     *
-     * @param $mission_id
-     * @return JsonResponse
-     */
-    public function index($mission_id)
-    {
-        $mission = Mission::findOrFail($mission_id);
-        $this->authorize('index-application', $mission);
-
-        return response()->json(ApplicationResource::collection($mission->applications));
-    }
-
-    /**
      * Store a newly created resource in storage.
      * Case where a staff or administrator is adding a user to a given mission
      *

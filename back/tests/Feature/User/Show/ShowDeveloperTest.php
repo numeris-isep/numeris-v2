@@ -43,7 +43,7 @@ class ShowDeveloperTest extends TestCaseWithAuth
                 'updatedAt',
                 'address',
                 'preference',
-                'role',
+                'roles',
             ]);
     }
 

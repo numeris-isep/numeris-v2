@@ -32,19 +32,18 @@ class UpdatePaymentDeveloperTest extends TestCaseWithAuth
                 'moneyReceivedAt',
                 'createdAt',
                 'updatedAt',
-                'client',
             ]);
     }
 
     /**
      * @group developer
      */
-    public function testDeveloperUpdatingProjectStepWithoutData()
+    public function testDeveloperUpdatingProjectPaymentWithoutData()
     {
         $project_id = 1;
 
-        $this->json('PATCH', route('projects.update.step', ['project_id' => $project_id]))
+        $this->json('PATCH', route('projects.update.payment', ['project_id' => $project_id]))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJsonValidationErrors(['step']);
+            ->assertJsonValidationErrors(['money_received_at']);
     }
 }

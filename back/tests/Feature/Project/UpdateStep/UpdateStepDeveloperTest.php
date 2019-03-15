@@ -32,7 +32,6 @@ class UpdateStepDeveloperTest extends TestCaseWithAuth
                 'moneyReceivedAt',
                 'createdAt',
                 'updatedAt',
-                'client',
             ]);
     }
 
@@ -44,6 +43,22 @@ class UpdateStepDeveloperTest extends TestCaseWithAuth
         $project_id = 1;
 
         $this->json('PATCH', route('projects.update.step', ['project_id' => $project_id]))
+            ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertJsonValidationErrors(['step']);
+    }
+
+    /**
+     * @group developer
+     */
+    public function testDeveloperUpdatingProjectStepWithUnknownStep()
+    {
+        $project_id = 1;
+
+        $data = [
+            'step' => 'unknown-step',
+        ];
+
+        $this->json('PATCH', route('projects.update.step', ['project_id' => $project_id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors(['step']);
     }

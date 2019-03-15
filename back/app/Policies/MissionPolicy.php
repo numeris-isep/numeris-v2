@@ -14,19 +14,11 @@ class MissionPolicy
         if ($current_user->role()->isSuperiorOrEquivalentTo('staff')) {
             return true;
         }
-
-        // Forbid everything to students
-        return false;
     }
 
     public function index(User $current_user)
     {
-        return false;
-    }
-
-    public function indexApplication(User $current_user, Mission $mission)
-    {
-        return false;
+        return true;
     }
 
     public function store(User $current_user)

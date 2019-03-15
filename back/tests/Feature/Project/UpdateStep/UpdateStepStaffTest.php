@@ -32,7 +32,6 @@ class UpdateStepStaffTest extends TestCaseWithAuth
                 'moneyReceivedAt',
                 'createdAt',
                 'updatedAt',
-                'client',
             ]);
     }
 }

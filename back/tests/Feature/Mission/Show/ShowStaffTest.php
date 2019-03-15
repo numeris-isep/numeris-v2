@@ -26,7 +26,10 @@ class ShowStaffTest extends TestCaseWithAuth
                 'duration',
                 'capacity',
                 'address',
-                'project',
+                'project' => [
+                    'client',
+                ],
+                'applications',
             ]);
     }
 }

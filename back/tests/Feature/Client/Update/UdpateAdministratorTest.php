@@ -39,7 +39,6 @@ class UdpateAdministratorTest extends TestCaseWithAuth
                 'reference',
                 'createdAt',
                 'updatedAt',
-                'address',
             ]);
 
         $this->assertDatabaseHas('clients', $client_data);

@@ -39,9 +39,9 @@ class UserResource extends JsonResource
             'updatedAt'             => $this->updated_at->toDateTimeString(),
 
             // Relation
-            'address'               => $this->whenLoaded('address', AddressResource::make($this->address)),
-            'preference'            => $this->whenLoaded('preference', PreferenceResource::make($this->preference)),
-            'role'                  => $this->whenLoaded('roles', UserRoleResource::make($this->role())),
+            'address'               => AddressResource::make($this->whenLoaded('address')),
+            'preference'            => PreferenceResource::make($this->whenLoaded('preference')),
+            'roles'                 => UserRoleResource::collection($this->whenLoaded('roles')),
         ];
     }
 }

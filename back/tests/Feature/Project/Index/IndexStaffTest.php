@@ -25,7 +25,6 @@ class IndexStaffTest extends TestCaseWithAuth
                 'moneyReceivedAt',
                 'createdAt',
                 'updatedAt',
-                'client',
             ]]);
     }
 }

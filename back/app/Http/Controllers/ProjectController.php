@@ -50,7 +50,7 @@ class ProjectController extends Controller
         $project = Project::findOrFail($project_id);
         $this->authorize('show', $project);
 
-        $project->load(['client', 'convention']);
+        $project->load(['client', 'missions']);
 
         return response()->json(ProjectResource::make($project));
     }

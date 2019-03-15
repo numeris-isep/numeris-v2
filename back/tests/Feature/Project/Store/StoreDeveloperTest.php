@@ -34,7 +34,6 @@ class StoreDeveloperTest extends TestCaseWithAuth
                 'moneyReceivedAt',
                 'createdAt',
                 'updatedAt',
-                'client',
             ]);
 
         $this->assertDatabaseHas('projects', $data);

@@ -25,7 +25,6 @@ class IndexDeveloperTest extends TestCaseWithAuth
                 'moneyReceivedAt',
                 'createdAt',
                 'updatedAt',
-                'client',
             ]]);
     }
 }

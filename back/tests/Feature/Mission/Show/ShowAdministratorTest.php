@@ -26,7 +26,10 @@ class ShowAdministratorTest extends TestCaseWithAuth
                 'duration',
                 'capacity',
                 'address',
-                'project',
+                'project' => [
+                    'client',
+                ],
+                'applications',
             ]);
     }
 }

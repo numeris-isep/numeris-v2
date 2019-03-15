@@ -23,8 +23,9 @@ class MissionResource extends JsonResource
             'capacity'      => $this->capacity,
 
             // Relations
-            'address'       => $this->whenLoaded('address', AddressResource::make($this->address)),
-            'project'       => $this->whenLoaded('project', ProjectResource::make($this->project))
+            'address'       => AddressResource::make($this->whenLoaded('address')),
+            'project'       => ProjectResource::make($this->whenLoaded('project')),
+            'applications'  => ApplicationResource::collection($this->whenLoaded('applications')),
         ];
     }
 }

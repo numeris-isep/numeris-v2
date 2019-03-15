@@ -20,7 +20,9 @@ class MissionController extends Controller
     {
         $this->authorize('index', Mission::class);
 
-        return response()->json(MissionResource::collection(Mission::all()));
+        return response()->json(MissionResource::collection(
+            Mission::all()->load('address','project')
+        ));
     }
 
     /**
@@ -60,7 +62,7 @@ class MissionController extends Controller
         $mission = Mission::findOrFail($mission_id);
         $this->authorize('show', $mission);
 
-        $mission->load(['project']);
+        $mission->load(['address', 'project', 'applications']);
 
         return response()->json(MissionResource::make($mission));
     }

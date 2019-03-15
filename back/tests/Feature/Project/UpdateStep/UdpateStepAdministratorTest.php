@@ -32,7 +32,6 @@ class UdpateStepAdministratorTest extends TestCaseWithAuth
                 'moneyReceivedAt',
                 'createdAt',
                 'updatedAt',
-                'client',
             ]);
     }
 }
