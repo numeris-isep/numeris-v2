@@ -14,7 +14,7 @@ class UserRoleRequest extends AbstractFormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->role()->isSuperiorOrEquivalentTo('staff');
     }
 
     /**
