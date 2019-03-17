@@ -17,13 +17,8 @@ class ProjectRequest extends AbstractFormRequest
         $project = Project::find($this->route('project_id'));
 
         // Use ProjectPolicy here to authorize before checking the fields
-        if ($current_user->can('store', Project::class)
-            || $current_user->can('update', $project)
-        ) {
-            return true;
-        }
-
-        return false;
+        return $current_user->can('store', Project::class)
+            || $current_user->can('update', $project);
     }
 
     /**

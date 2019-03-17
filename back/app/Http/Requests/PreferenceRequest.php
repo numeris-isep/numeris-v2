@@ -14,16 +14,10 @@ class PreferenceRequest extends AbstractFormRequest
     public function authorize()
     {
         $current_user = auth()->user();
-        $preference = Preference::find($this->route('user_id'));
+        $preference = Preference::findOrFail($this->route('preference_id'));
 
         // Use PreferencePolicy here to authorize before checking the fields
-        if ($current_user->can('store', Preference::class)
-            || $current_user->can('update', $preference)
-        ) {
-            return true;
-        }
-
-        return false;
+        return $current_user->can('update', $preference);
     }
 
     /**
@@ -37,6 +31,9 @@ class PreferenceRequest extends AbstractFormRequest
             'on_new_mission'    => 'required|boolean',
             'on_acceptance'     => 'required|boolean',
             'on_refusal'        => 'required|boolean',
+            'on_document'       => 'required|boolean',
+            'by_email'          => 'required|boolean',
+            'by_push'           => 'required|boolean',
         ];
     }
 }

@@ -17,13 +17,8 @@ class MissionRequest extends AbstractFormRequest
         $mission = Mission::find($this->route('mission_id'));
 
         // Use MissionPolicy here to authorize before checking the fields
-        if ($current_user->can('store', Mission::class)
-            || $current_user->can('update', $mission)
-        ) {
-            return true;
-        }
-
-        return false;
+        return $current_user->can('store', Mission::class)
+            || $current_user->can('update', $mission);
     }
 
     /**

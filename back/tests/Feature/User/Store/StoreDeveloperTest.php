@@ -34,17 +34,12 @@ class StoreDeveloperTest extends TestCaseWithAuth
             'zip_code'  => '75015',
             'city'      => 'Paris'
         ];
-        $preference_data = [
-            'on_new_mission'    => true,
-            'on_acceptance'     => true,
-            'on_refusal'        => true
-        ];
 
         // Add 'password' datas after init to avoid the check on unknown column
         // 'password_confirmation' and on uncrypted 'password'
         $user_data['password'] = $user_data['password_confirmation'] = 'azerty';
 
-        $data = array_merge($user_data, $address_data, $preference_data);
+        $data = array_merge($user_data, $address_data);
 
         $this->assertDatabaseMissing('users', $db_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -104,17 +99,12 @@ class StoreDeveloperTest extends TestCaseWithAuth
             'zip_code'  => '75015',
             'city'      => 'Paris'
         ];
-        $preference_data = [
-            'on_new_mission'    => true,
-            'on_acceptance'     => true,
-            'on_refusal'        => true
-        ];
 
         // Add 'password' datas after init to avoid the check on unknown column
         // 'password_confirmation' and on uncrypted 'password'
         $user_data['password'] = $user_data['password_confirmation'] = 'azerty';
 
-        $data = array_merge($user_data, $address_data, $preference_data);
+        $data = array_merge($user_data, $address_data);
 
         $this->assertDatabaseMissing('users', $db_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -140,7 +130,6 @@ class StoreDeveloperTest extends TestCaseWithAuth
                 'nationality', 'birth_date', 'birth_city',
                 'social_insurance_number', 'iban', 'bic',
                 'street', 'zip_code', 'city',
-                'on_new_mission', 'on_acceptance', 'on_refusal'
             ]);
     }
 }

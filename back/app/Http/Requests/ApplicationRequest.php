@@ -20,14 +20,9 @@ class ApplicationRequest extends AbstractFormRequest
 
         // Use ApplicationPolicy, MissionPolicy and UserPolicy here to authorize
         // before checking the fields
-        if ($current_user->can('store-application', Mission::class)
+        return $current_user->can('store-application', Mission::class)
             || $current_user->can('store-application', User::class)
-            || $current_user->can('update', $application)
-        ) {
-            return true;
-        }
-
-        return false;
+            || $current_user->can('update', $application);
     }
 
     /**

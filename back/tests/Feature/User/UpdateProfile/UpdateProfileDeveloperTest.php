@@ -30,13 +30,8 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
             'zip_code'  => '75015',
             'city'      => 'Paris'
         ];
-        $preference_data = [
-            'on_new_mission'    => true,
-            'on_acceptance'     => true,
-            'on_refusal'        => true
-        ];
 
-        $data = array_merge($user_data, $address_data, $preference_data);
+        $data = array_merge($user_data, $address_data);
 
         $this->assertDatabaseMissing('users', $user_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -100,13 +95,8 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
             'zip_code'  => '75015',
             'city'      => 'Paris'
         ];
-        $preference_data = [
-            'on_new_mission'    => true,
-            'on_acceptance'     => true,
-            'on_refusal'        => true
-        ];
 
-        $data = array_merge($user_data, $address_data, $preference_data);
+        $data = array_merge($user_data, $address_data);
 
         $this->assertDatabaseMissing('users', $user_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -150,13 +140,8 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
             'zip_code'  => '75015',
             'city'      => 'Paris'
         ];
-        $preference_data = [
-            'on_new_mission'    => true,
-            'on_acceptance'     => true,
-            'on_refusal'        => true
-        ];
 
-        $data = array_merge($user_data, $address_data, $preference_data);
+        $data = array_merge($user_data, $address_data);
 
         $this->assertDatabaseMissing('users', $user_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -200,13 +185,8 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
             'zip_code'  => '75015',
             'city'      => 'Paris'
         ];
-        $preference_data = [
-            'on_new_mission'    => true,
-            'on_acceptance'     => true,
-            'on_refusal'        => true
-        ];
 
-        $data = array_merge($user_data, $address_data, $preference_data);
+        $data = array_merge($user_data, $address_data);
 
         $this->assertDatabaseMissing('users', $user_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -250,13 +230,8 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
             'zip_code'  => '75015',
             'city'      => 'Paris'
         ];
-        $preference_data = [
-            'on_new_mission'    => true,
-            'on_acceptance'     => true,
-            'on_refusal'        => true
-        ];
 
-        $data = array_merge($user_data, $address_data, $preference_data);
+        $data = array_merge($user_data, $address_data);
 
         $this->assertDatabaseMissing('users', $user_data);
         $this->assertDatabaseMissing('addresses', $address_data);

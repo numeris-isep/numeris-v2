@@ -17,14 +17,9 @@ class UserRequest extends AbstractFormRequest
         $user = User::find($this->route('user_id'));
 
         // Use UserPolicy here to authorize before checking the fields
-        if ($current_user->can('store', User::class)
+        return $current_user->can('store', User::class)
             || $current_user->can('update', $user)
-            || $current_user->can('update-profile', $user)
-        ) {
-            return true;
-        }
-
-        return false;
+            || $current_user->can('update-profile', $user);
     }
 
     /**
@@ -57,11 +52,6 @@ class UserRequest extends AbstractFormRequest
             'street'                    => 'required|string',
             'zip_code'                  => 'required|integer',
             'city'                      => 'required|string',
-
-            // Preference
-            'on_new_mission'            => 'required|boolean',
-            'on_acceptance'             => 'required|boolean',
-            'on_refusal'                => 'required|boolean',
         ];
 
         switch($this->method())

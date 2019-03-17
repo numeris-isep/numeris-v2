@@ -35,6 +35,9 @@ Route::group(['middleware' => 'auth:api'], function () {
         'roles' => 'role_id',
     ]])->only(['index', 'store']);
 
+    // Preference resource routes
+    Route::put('preferences/{preference_id}', 'PreferenceController@update')->name('preferences.update');
+
     // Client resource routes
     Route::apiResource('clients', 'ClientController', ['parameters' => ['clients' => 'client_id']]);
 

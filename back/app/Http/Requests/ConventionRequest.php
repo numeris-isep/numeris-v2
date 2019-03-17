@@ -17,13 +17,8 @@ class ConventionRequest extends AbstractFormRequest
         $convention = Convention::find($this->route('convention_id'));
 
         // Use ClientPolicy here to authorize before checking the fields
-        if ($current_user->can('store', Convention::class)
-            || $current_user->can('update', $convention)
-        ) {
-            return true;
-        }
-
-        return false;
+        return $current_user->can('store', Convention::class)
+            || $current_user->can('update', $convention);
     }
 
     /**

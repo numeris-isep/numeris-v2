@@ -16,14 +16,9 @@ class RateRequest extends AbstractFormRequest
         $current_user = auth()->user();
         $rate = Rate::find($this->route('rate_id'));
 
-        // Use ClientPolicy here to authorize before checking the fields
-        if ($current_user->can('store', Rate::class)
-            || $current_user->can('update', $rate)
-        ) {
-            return true;
-        }
-
-        return false;
+        // Use RatePolicy here to authorize before checking the fields
+        return $current_user->can('store', Rate::class)
+            || $current_user->can('update', $rate);
     }
 
     /**

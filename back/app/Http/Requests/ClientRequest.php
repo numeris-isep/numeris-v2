@@ -17,13 +17,8 @@ class ClientRequest extends AbstractFormRequest
         $client = Client::find($this->route('client_id'));
 
         // Use ClientPolicy here to authorize before checking the fields
-        if ($current_user->can('store', Client::class)
-            || $current_user->can('update', $client)
-        ) {
-            return true;
-        }
-
-        return false;
+        return $current_user->can('store', Client::class)
+            || $current_user->can('update', $client);
     }
 
     /**

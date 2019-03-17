@@ -17,13 +17,8 @@ class AddressRequest extends AbstractFormRequest
         $address = Address::find($this->route('user_id'));
 
         // Use AddressPolicy here to authorize before checking the fields
-        if ($current_user->can('store', Address::class)
-            || $current_user->can('update', $address)
-        ) {
-            return true;
-        }
-
-        return false;
+        return $current_user->can('store', Address::class)
+            || $current_user->can('update', $address);
     }
 
     /**

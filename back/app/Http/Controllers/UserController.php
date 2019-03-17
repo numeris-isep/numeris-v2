@@ -48,15 +48,10 @@ class UserController extends Controller
         $address_request = $request->only([
             'street', 'zip_code', 'city',
         ]);
-        $preference_request = $request->only([
-            'on_new_mission', 'on_acceptance', 'on_refusal',
-        ]);
 
         $user = User::create($user_request);
         $address = Address::create($address_request);
         $address->user()->save($user);
-        $preference = Preference::create($preference_request);
-        $preference->user()->save($user);
 
         return response()->json(UserResource::make($user), JsonResponse::HTTP_CREATED);
     }
@@ -108,13 +103,9 @@ class UserController extends Controller
         $address_request = $request->only([
             'street', 'zip_code', 'city',
         ]);
-        $preference_request = $request->only([
-            'on_new_mission', 'on_acceptance', 'on_refusal',
-        ]);
 
         $user->update($user_request);
         $user->address()->update($address_request);
-        $user->preference()->update($preference_request);
 
         return response()->json(UserResource::make($user), JsonResponse::HTTP_CREATED);
     }
@@ -140,9 +131,6 @@ class UserController extends Controller
         $address_request = $request->only([
             'street', 'zip_code', 'city',
         ]);
-        $preference_request = $request->only([
-            'on_new_mission', 'on_acceptance', 'on_refusal',
-        ]);
 
         $user->update($user_request);
 
@@ -151,13 +139,6 @@ class UserController extends Controller
         } else {
             $address = Address::create($address_request);
             $address->user()->save($user);
-        }
-
-        if ($user->preference) {
-            $user->preference()->update($preference_request);
-        } else {
-            $preference = Preference::create($preference_request);
-            $preference->user()->save($user);
         }
 
         return response()->json(UserResource::make($user), JsonResponse::HTTP_CREATED);
