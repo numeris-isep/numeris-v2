@@ -28,6 +28,11 @@ class Mission extends Model
         'applications',
     ];
 
+    public static function findByTitle($title)
+    {
+        return static::where('title', $title)->first();
+    }
+
     public function address()
     {
         return $this->belongsTo(Address::class);

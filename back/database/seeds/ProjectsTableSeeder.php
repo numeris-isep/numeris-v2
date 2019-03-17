@@ -15,37 +15,39 @@ class ProjectsTableSeeder extends Seeder
      */
     public function run()
     {
-        if (Client::all()->isEmpty()) {
-            $this->call(ClientsTableSeeder::class);
-        }
-        if (Convention::all()->isEmpty()) {
-            $this->call(ConventionsTableSeeder::class);
-        }
-
         if (Project::all()->isEmpty()) {
-            // AS Connect
-            $as_connect = Client::findByName('AS Connect');
-            $this->createProjects($as_connect);
+            if (Client::all()->isEmpty()) {
+                $this->call(ClientsTableSeeder::class);
+            }
+            if (Convention::all()->isEmpty()) {
+                $this->call(ConventionsTableSeeder::class);
+            }
 
-            // AS International
-            $as_inter = Client::findByName('AS International');
-            $this->createProjects($as_inter);
+            if (Project::all()->isEmpty()) {
+                // AS Connect
+                $as_connect = Client::findByName('AS Connect');
+                $this->createProjects($as_connect);
 
-            // Infodis
-            $infodis = Client::findByName('Infodis');
-            $this->createProjects($infodis);
+                // AS International
+                $as_inter = Client::findByName('AS International');
+                $this->createProjects($as_inter);
 
-            // Métalogic
-            $metalogic = Client::findByName('Métalogic');
-            $this->createProjects($metalogic);
+                // Infodis
+                $infodis = Client::findByName('Infodis');
+                $this->createProjects($infodis);
 
-            // ISEP
-            $isep = Client::findByName('ISEP');
-            $this->createProjects($isep);
+                // Métalogic
+                $metalogic = Client::findByName('Métalogic');
+                $this->createProjects($metalogic);
 
-            // SRID Informatique
-            $srid = Client::findByName('SRID Informatique');
-            $this->createProjects($srid);
+                // ISEP
+                $isep = Client::findByName('ISEP');
+                $this->createProjects($isep);
+
+                // SRID Informatique
+                $srid = Client::findByName('SRID Informatique');
+                $this->createProjects($srid);
+            }
         }
     }
 

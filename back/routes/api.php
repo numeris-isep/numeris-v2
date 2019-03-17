@@ -30,7 +30,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('roles', 'RoleController@index')->name('roles.index');
 
     // UserRole resource routes
-    Route::resource('users.roles', 'UserRoleController', ['parameters' => [
+    Route::apiResource('users.roles', 'UserRoleController', ['parameters' => [
         'users' => 'user_id',
         'roles' => 'role_id',
     ]])->only(['index', 'store']);
@@ -41,7 +41,14 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Convention resource routes
     Route::post('clients/{client_id}/conventions', 'ClientConventionController@store')->name('clients.conventions.store');
 
-    Route::resource('conventions', 'ConventionController', ['parameters' => ['conventions' => 'convention_id']])
+    Route::apiResource('conventions', 'ConventionController', ['parameters' => ['conventions' => 'convention_id']])
+        ->only(['update', 'destroy']);
+
+    // Rate resource routes
+    Route::apiResource('conventions.rates', 'ConventionRateController', ['parameters' => ['conventions'   => 'convention_id']])
+        ->only(['store']);
+
+    Route::apiResource('rates', 'RateController', ['parameters' => ['rates' => 'rate_id']])
         ->only(['update', 'destroy']);
 
     // Project resource routes
@@ -57,10 +64,10 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Application resource routes
     Route::post('missions/{mission_id}/applications', 'MissionApplicationController@store')->name('missions.applications.store');
 
-    Route::resource('users.applications', 'UserApplicationController', ['parameters' => ['users' => 'user_id']])
+    Route::apiResource('users.applications', 'UserApplicationController', ['parameters' => ['users' => 'user_id']])
         ->only(['index', 'store']);
 
-    Route::resource('applications', 'ApplicationController', ['parameters' => ['applications' => 'application_id']])
+    Route::apiResource('applications', 'ApplicationController', ['parameters' => ['applications' => 'application_id']])
         ->only(['update', 'destroy']);
 
 });

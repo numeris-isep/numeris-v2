@@ -11,6 +11,11 @@ class Convention extends Model
         'name',
     ];
 
+    public static function findByName($name)
+    {
+        return static::where('name', $name)->first();
+    }
+
     public function client()
     {
         return $this->belongsTo(Client::class);
@@ -19,5 +24,10 @@ class Convention extends Model
     public function projects()
     {
         return $this->hasMany(Project::class);
+    }
+
+    public function rates()
+    {
+        return $this->hasMany(Rate::class);
     }
 }

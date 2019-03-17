@@ -6,9 +6,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Foundation\Http\FormRequest as LaravelFormRequest;
+use Illuminate\Foundation\Http\FormRequest;
 
-abstract class AbstractFormRequest extends LaravelFormRequest
+abstract class AbstractFormRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -16,12 +16,14 @@ abstract class AbstractFormRequest extends LaravelFormRequest
      * @return array
      */
     abstract public function rules();
+
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
     abstract public function authorize();
+
     /**
      * Handle a failed validation attempt.
      *

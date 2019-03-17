@@ -187,5 +187,10 @@ return [
         'step'                      => 'status',
         'mission_id'                => 'mission',
         'user_id'                   => 'utilisateur',
+        'is_flat'                   => 'forfait',
+        'for_student'               => 'tarif étudiant',
+        'for_staff'                 => 'tarif staff',
+        'for_client'                => 'tarif étudiant',
+        'hours'                     => 'heures',
     ],
 ];

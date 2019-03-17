@@ -15,11 +15,11 @@ class ConventionResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'name' => $this->name,
+            'id'    => $this->id,
+            'name'  => $this->name,
 
             // Relations
-//            'billingTypes' => $this->whenLoaded('billing_types') TODO
+            'rates' => RateResource::collection($this->whenLoaded('rates')),
         ];
     }
 }

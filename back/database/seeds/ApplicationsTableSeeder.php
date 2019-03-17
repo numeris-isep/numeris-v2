@@ -14,23 +14,25 @@ class ApplicationsTableSeeder extends Seeder
      */
     public function run()
     {
-        if (User::all()->isEmpty()) {
-            $this->call(UsersTableSeeder::class);
-        }
+        if (Application::all()->isEmpty()) {
+            if (User::all()->isEmpty()) {
+                $this->call(UsersTableSeeder::class);
+            }
 
-        if (Mission::all()->isEmpty()) {
-            $this->call(MissionsTableSeeder::class);
-        }
+            if (Mission::all()->isEmpty()) {
+                $this->call(MissionsTableSeeder::class);
+            }
 
-        $users = User::all()->slice(0, 14);
-        $missions = Mission::findByClientName('AS Connect');
+            $users = User::all()->slice(0, 14);
+            $missions = Mission::findByClientName('AS Connect');
 
-        foreach ($users as $user) {
-            foreach ($missions as $mission) {
-                factory(Application::class)->create([
-                    'user_id'       => $user->id,
-                    'mission_id'    => $mission->id,
-                ]);
+            foreach ($users as $user) {
+                foreach ($missions as $mission) {
+                    factory(Application::class)->create([
+                        'user_id'       => $user->id,
+                        'mission_id'    => $mission->id,
+                    ]);
+                }
             }
         }
     }

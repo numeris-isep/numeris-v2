@@ -9,6 +9,7 @@ use App\Models\Convention;
 use App\Models\Mission;
 use App\Models\Preference;
 use App\Models\Project;
+use App\Models\Rate;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserRole;
@@ -19,6 +20,7 @@ use App\Policies\ConventionPolicy;
 use App\Policies\MissionPolicy;
 use App\Policies\PreferencePolicy;
 use App\Policies\ProjectPolicy;
+use App\Policies\RatePolicy;
 use App\Policies\RolePolicy;
 use App\Policies\UserPolicy;
 use App\Policies\UserRolePolicy;
@@ -43,6 +45,7 @@ class AuthServiceProvider extends ServiceProvider
         Convention::class   => ConventionPolicy::class,
         Mission::class      => MissionPolicy::class,
         Application::class  => ApplicationPolicy::class,
+        Rate::class         => RatePolicy::class,
     ];
 
     /**

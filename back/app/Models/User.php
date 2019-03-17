@@ -59,6 +59,16 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+    public static function findByUsername($username)
+    {
+        return static::where('username', $username)->first();
+    }
+
+    public static function findByEmail($email)
+    {
+        return static::where('email', $email)->first();
+    }
+
     public function address()
     {
         return $this->belongsTo(Address::class);

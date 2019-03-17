@@ -15,11 +15,13 @@ class MissionsTableSeeder extends Seeder
      */
     public function run()
     {
-        if (Project::all()->isEmpty()) {
-            $this->call(ProjectsTableSeeder::class);
-        }
+        if (Mission::all()->isEmpty()) {
+            if (Project::all()->isEmpty()) {
+                $this->call(ProjectsTableSeeder::class);
+            }
 
-        $this->createMissions();
+            $this->createMissions();
+        }
     }
 
     private function createMissions()
