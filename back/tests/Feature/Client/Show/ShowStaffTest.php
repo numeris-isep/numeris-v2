@@ -26,7 +26,7 @@ class ShowStaffTest extends TestCaseWithAuth
                 'createdAt',
                 'updatedAt',
                 'address',
-                'conventions',
+                'conventions' => [['rates']],
                 'projects',
             ]);
     }
