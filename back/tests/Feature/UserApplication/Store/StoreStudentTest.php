@@ -16,7 +16,7 @@ class StoreStudentTest extends TestCaseWithAuth
     public function testStudentCreatingApplication()
     {
         $user_id = 8;
-        $mission_id = 40;
+        $mission_id = 43;
 
         $application = [
             'user_id'       => $user_id,

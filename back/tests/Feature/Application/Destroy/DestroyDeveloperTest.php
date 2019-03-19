@@ -15,7 +15,7 @@ class DestroyDeveloperTest extends TestCaseWithAuth
      */
     public function testDeveloperDeletingHisApplication()
     {
-        $application_id = 37;
+        $application_id = 43;
         $application = Application::find($application_id);
 
         $this->assertDatabaseHas('applications', $application->toArray());
@@ -31,7 +31,7 @@ class DestroyDeveloperTest extends TestCaseWithAuth
      */
     public function testDeveloperDeletingApplicationOfOtherUser()
     {
-        $application_id = 36;
+        $application_id = 42;
         $application = Application::find($application_id);
 
         $this->assertDatabaseHas('applications', $application->toArray());

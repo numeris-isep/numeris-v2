@@ -16,7 +16,7 @@ class StoreStaffTest extends TestCaseWithAuth
     public function testStaffCreatingApplication()
     {
         $user_id = 6;
-        $mission_id = 40;
+        $mission_id = 43;
 
         $application = [
             'user_id'       => $user_id,

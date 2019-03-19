@@ -15,7 +15,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
     public function testDeveloperCreatingApplication()
     {
         $user_id = 2;
-        $mission_id = 40;
+        $mission_id = 43;
 
         $application = [
             'user_id'       => $user_id,
