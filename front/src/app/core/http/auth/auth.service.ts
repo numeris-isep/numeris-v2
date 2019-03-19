@@ -38,6 +38,14 @@ export class AuthService {
     return this.http.post<User>(url, {}, HTTP_OPTIONS);
   }
 
+  getCurrentUserId(): number {
+    return this.tokenService.getCurrentUserId();
+  }
+
+  getCurrentUserRole(): string {
+    return this.tokenService.getCurrentUserRole();
+  }
+
   get isLoggedIn(): Observable<boolean> {
     return this.loggedIn.asObservable();
   }

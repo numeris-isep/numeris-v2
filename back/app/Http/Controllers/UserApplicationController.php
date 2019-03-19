@@ -23,7 +23,12 @@ class UserApplicationController extends Controller
         $this->authorize('index-application', $user);
 
         return response()->json(ApplicationResource::collection(
-            $user->applications->load('mission.address', 'mission.project.client')
+            $user->applications
+                ->load([
+                    'mission' => function($m) {
+                    return $m->orderBy('start_at');
+                }])
+                ->load('mission.address', 'mission.project.client')
         ));
     }
 

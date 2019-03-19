@@ -65,6 +65,30 @@ export class TokenService {
     return false;
   }
 
+  getCurrentUserId(): number {
+    const token = this.get();
+
+    if (token){
+      const payload = this.payload(token);
+
+      if (payload){
+        return payload.sub;
+      }
+    }
+  }
+
+  getCurrentUserRole(): string {
+    const token = this.get();
+
+    if (token){
+      const payload = this.payload(token);
+
+      if (payload){
+        return payload.rol;
+      }
+    }
+  }
+
   /**
    * Get the decrypted payload part of the JWT token
    *
