@@ -1,5 +1,6 @@
 import { Address } from "./address";
 import { Preference } from "./preference";
+import { Role } from "./role";
 
 export class User {
 
@@ -30,4 +31,5 @@ export class User {
 
   address: Address;
   preference: Preference;
+  roles: Role[];
 }

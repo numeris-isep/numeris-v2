@@ -52,9 +52,16 @@ class AuthController extends Controller
      */
     public function currentUser()
     {
-        return response()->json(UserResource::make(
-            auth()->user()->load(['address', 'preference'])
-        ));
+        $user = auth()->user()->load(['address', 'preference']);
+
+        if ($user->role()->isSuperiorOrEquivalentTo('staff')) {
+            $user->load([
+                'roles' => function($r) {
+                    return $r->orderBy('created_at', 'desc');
+                }
+            ]);
+        }
+        return response()->json(UserResource::make($user));
     }
 
     /**

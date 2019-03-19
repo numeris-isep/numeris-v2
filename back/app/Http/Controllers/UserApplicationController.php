@@ -26,8 +26,8 @@ class UserApplicationController extends Controller
             $user->applications
                 ->load([
                     'mission' => function($m) {
-                    return $m->orderBy('start_at');
-                }])
+                        return $m->orderBy('start_at');
+                    }])
                 ->load('mission.address', 'mission.project.client')
         ));
     }

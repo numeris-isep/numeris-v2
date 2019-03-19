@@ -71,7 +71,11 @@ class UserController extends Controller
         $user->load(['address', 'preference']);
 
         if (auth()->user()->role()->isSuperiorOrEquivalentTo('staff')) {
-            $user->load('roles');
+            $user->load([
+                'roles' => function($r) {
+                    return $r->orderBy('created_at', 'desc');
+                }
+            ]);
         }
 
         return response()->json(UserResource::make($user));

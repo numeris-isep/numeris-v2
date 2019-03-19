@@ -1,8 +1,8 @@
 <div class="ui fluid card">
   <div class="center aligned content">
     <div class="header">{{ user.firstName | titlecase }} {{ user.lastName | uppercase }}</div>
-    <div class="meta">
-      <a>RÔLE</a><!-- TODO: adminland -->
+    <div class="meta" *ngIf="currentUserRole != 'student'">
+      <a routerLink="">{{ user.roles[0] | role }}</a>
     </div>
   </div>
   <div class="image">

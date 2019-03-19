@@ -19,6 +19,7 @@ import { AddressPipe } from './pipes/address.pipe';
 import { PhonePipe } from './pipes/phone.pipe';
 import { MissionDetailsComponent } from './components/mission-details/mission-details.component';
 import { EmptyComponent } from './components/empty/empty.component';
+import { RolePipe } from './pipes/role.pipe';
 
 @NgModule({
   imports: [
@@ -44,7 +45,8 @@ import { EmptyComponent } from './components/empty/empty.component';
     AddressPipe,
     PhonePipe,
     MissionDetailsComponent,
-    EmptyComponent
+    EmptyComponent,
+    RolePipe
   ],
   exports: [
     // Components
@@ -68,6 +70,7 @@ import { EmptyComponent } from './components/empty/empty.component';
     // Pipes
     AddressPipe,
     PhonePipe,
+    RolePipe,
   ],
   entryComponents: [
     ConfirmModalComponent,
