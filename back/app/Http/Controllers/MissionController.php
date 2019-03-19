@@ -20,8 +20,12 @@ class MissionController extends Controller
     {
         $this->authorize('index', Mission::class);
 
+        $missions = auth()->user()->role()->isInferiorTo('staff')
+            ? $missions = Mission::opened()->sortBy('start_at')
+            : $missions = Mission::all()->sortBy('start_at');
+
         return response()->json(MissionResource::collection(
-            Mission::all()->load('address','project')
+            $missions->load('address','project')
         ));
     }
 
@@ -89,6 +93,24 @@ class MissionController extends Controller
 
         $mission->update($mission_request);
         $mission->address()->update($address_request);
+
+        return response()->json(MissionResource::make($mission), JsonResponse::HTTP_CREATED);
+    }
+
+    /**
+     * Update the mission lock status resource in storage.
+     *
+     * @param MissionRequest $request
+     * @param $mission_id
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function updateLock(MissionRequest $request, $mission_id)
+    {
+        $mission = Mission::findOrFail($mission_id);
+        $this->authorize('update-lock', $mission);
+
+        $mission->update($request->only(['is_locked']));
 
         return response()->json(MissionResource::make($mission), JsonResponse::HTTP_CREATED);
     }

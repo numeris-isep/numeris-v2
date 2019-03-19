@@ -8,7 +8,7 @@ import { environment } from "../../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
+export class UserService {
 
   constructor(private http: HttpClient) { }
 
@@ -16,8 +16,8 @@ export class UsersService {
     // TODO
   }
 
-  getUser(id: number): Observable<User> {
-    const url = `${environment.apiUrl}/api/users/${id}`;
+  getUser(user_id: number): Observable<User> {
+    const url = `${environment.apiUrl}/api/users/${user_id}`;
     return this.http.get<User>(url, HTTP_OPTIONS);
   }
 
@@ -29,7 +29,7 @@ export class UsersService {
     // TODO
   }
 
-  deleteUser(id: number) {
+  destroyUser(id: number) {
     // TODO
   }
 }

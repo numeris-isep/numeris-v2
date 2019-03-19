@@ -1,0 +1,37 @@
+<app-content [condition]="!mission">
+  <div class="ui fluid card" [ngClass]="color">
+    <div class="content">
+      <div class="ui ribbon label" [ngClass]="color">
+        <i class="clock icon"></i>Durée : {{ mission.duration }}h
+      </div>
+      <img class="right floated mini ui image" src="assets/logos/numeris-blue.png" alt="Logo de Numéris">
+    </div>
+
+    <div class="content">
+      <div class="header">
+        {{ mission.title }}
+      </div>
+      <div class="meta">
+        <i class="building icon"></i> {{ mission.project.client.name }}
+      </div>
+      <div class="description">
+        {{ mission.startAt | date: "\'Le\' dd/MM/yy à HH\'h\'mm" }}
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="description">
+        {{ mission.description }}
+      </div>
+    </div>
+
+    <div class="extra content">
+      <i class="map pin icon"></i> {{ mission.address | address }}
+    </div>
+
+    <app-button visibleContent="Postuler" hiddenIcon="handshake"
+                attachment="bottom attached" behaviour="fluid"
+                color="none" size="small">
+    </app-button>
+  </div>
+</app-content>

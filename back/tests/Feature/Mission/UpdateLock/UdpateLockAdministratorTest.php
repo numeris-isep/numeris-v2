@@ -1,23 +1,27 @@
 <?php
 
-namespace Tests\Feature\Mission\Show;
+namespace Tests\Feature\Mission\Update;
 
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
-class ShowAdministratorTest extends TestCaseWithAuth
+class UdpateLockAdministratorTest extends TestCaseWithAuth
 {
     protected $username = 'administrator';
 
     /**
      * @group administrator
      */
-    public function testAdministratorAccessingMissionShow()
+    public function testAdministratorUpdatingMissionLock()
     {
         $mission_id = 1;
 
-        $this->json('GET', route('missions.show', ['mission_id' => $mission_id]))
-            ->assertStatus(JsonResponse::HTTP_OK)
+        $data = [
+            'is_locked' => true,
+        ];
+
+        $this->json('PATCH', route('missions.update.lock', ['mission_id' => $mission_id]), $data)
+            ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',
                 'isLocked',
@@ -26,11 +30,6 @@ class ShowAdministratorTest extends TestCaseWithAuth
                 'startAt',
                 'duration',
                 'capacity',
-                'address',
-                'project' => [
-                    'client',
-                ],
-                'applications',
             ]);
     }
 }

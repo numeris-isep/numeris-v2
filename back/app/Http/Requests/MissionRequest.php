@@ -28,6 +28,17 @@ class MissionRequest extends AbstractFormRequest
      */
     public function rules()
     {
+        switch ($this->method())
+        {
+            case 'PATCH':
+                return [
+                    'is_locked' => 'required|boolean'
+                ];
+
+            default: break;
+        }
+
+
         return [
             'project_id'    => 'required|exists:projects,id|integer',
             'title'         => 'required|string',

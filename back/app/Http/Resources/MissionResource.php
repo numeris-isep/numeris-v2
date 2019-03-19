@@ -16,6 +16,7 @@ class MissionResource extends JsonResource
     {
         return [
             'id'            => $this->id,
+            'isLocked'      => $this->is_locked,
             'title'         => $this->title,
             'description'   => $this->description,
             'startAt'       => $this->start_at,

@@ -41,6 +41,11 @@ class MissionPolicy
         return false;
     }
 
+    public function updateLock(User $current_user, Mission $mission)
+    {
+        return false;
+    }
+
     public function destroy(User $current_user, Mission $mission)
     {
         return false;

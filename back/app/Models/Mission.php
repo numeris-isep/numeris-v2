@@ -14,6 +14,7 @@ class Mission extends Model
         'project_id',
 
         // Attributes
+        'is_locked',
         'title',
         'description',
         'start_at',
@@ -31,6 +32,18 @@ class Mission extends Model
     public static function findByTitle($title)
     {
         return static::where('title', $title)->first();
+    }
+
+    public static function opened()
+    {
+        return static::query()
+            ->where('is_locked', false)->get();
+    }
+
+    public static function locked()
+    {
+        return static::query()
+            ->where('is_locked', true)->get();
     }
 
     public function address()

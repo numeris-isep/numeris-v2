@@ -3,6 +3,7 @@
 use App\Models\Client;
 use App\Models\Convention;
 use App\Models\Project;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Seeder;
 
@@ -71,19 +72,37 @@ class ProjectsTableSeeder extends Seeder
         ];
 
         foreach ($months as $month_number => $month_name) {
-            $project_collection->add(
-                factory(Project::class)
-                    ->create([
-                        'client_id'         => $client->id,
-                        'convention_id'     => $client->conventions()->first()->id,
-                        'name'              => "{$client->name} $month_name 2018",
-                        'start_at'          => "2018/$month_number/01 00:00:00",
-                        'money_received_at' => "2018/$month_number/25 00:00:00",
-                        'is_private'        => $month_number == '12',
-                    ])
-            );
+            factory(Project::class)
+                ->create([
+                    'client_id'         => $client->id,
+                    'convention_id'     => $client->conventions()->first()->id,
+                    'name'              => "{$client->name} $month_name 2018",
+                    'start_at'          => "2018/$month_number/01 00:00:00",
+                    'money_received_at' => "2018/$month_number/25 00:00:00",
+                    'is_private'        => $month_number == '12',
+                ]);
         }
 
-        return $project_collection;
+        // This month
+        factory(Project::class)
+            ->create([
+                'client_id'         => $client->id,
+                'convention_id'     => $client->conventions()->first()->id,
+                'name'              => "{$client->name} " . Carbon::now()->format('F Y'),
+                'start_at'          => Carbon::now()->toDateTimeString(),
+                'money_received_at' => Carbon::now()->toDateTimeString(),
+                'is_private'        => false,
+            ]);
+
+        // Next month
+        factory(Project::class)
+            ->create([
+                'client_id'         => $client->id,
+                'convention_id'     => $client->conventions()->first()->id,
+                'name'              => "{$client->name} " . Carbon::now()->addMonth()->format('F Y'),
+                'start_at'          => Carbon::now()->addMonth()->toDateTimeString(),
+                'money_received_at' => Carbon::now()->addMonth()->toDateTimeString(),
+                'is_private'        => true,
+            ]);
     }
 }

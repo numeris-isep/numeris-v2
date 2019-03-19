@@ -4,13 +4,14 @@ import { Preference } from "./preference";
 export class User {
 
   id: number;
-  notificationId: number;
+  preferenceId: number;
   addressId: number;
 
   activated: boolean;
   touAccepted: boolean;
-  membershipFeePaid: boolean;
+  subscriptionPaidAt: boolean;
   email: string;
+  password: string;
   username: string;
   firstName: string;
   lastName: string;

@@ -192,5 +192,6 @@ return [
         'for_staff'                 => 'tarif staff',
         'for_client'                => 'tarif étudiant',
         'hours'                     => 'heures',
+        'is_locked'                 => 'fermer',
     ],
 ];

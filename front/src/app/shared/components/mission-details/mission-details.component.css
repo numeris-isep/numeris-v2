@@ -1,0 +1,15 @@
+.ui.card.disabled,
+.ui.cards>.card.disabled {
+  background-color: #F1F1F1;
+}
+
+.ui.card.disabled>.content>.header,
+.ui.cards>.card.disabled>.content>.header,
+.ui.card.disabled .meta,
+.ui.cards>.card.disabled .meta,
+.ui.card.disabled>.content>.description,
+.ui.cards>.card.disabled>.content>.description,
+.ui.card.disabled>.extra a:not(.ui),
+.ui.cards>.card.disabled>.extra a:not(.ui) {
+  color: grey;
+}

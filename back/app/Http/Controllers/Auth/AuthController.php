@@ -52,7 +52,9 @@ class AuthController extends Controller
      */
     public function currentUser()
     {
-        return response()->json(UserResource::make(auth()->user()));
+        return response()->json(UserResource::make(
+            auth()->user()->load(['address', 'preference'])
+        ));
     }
 
     /**

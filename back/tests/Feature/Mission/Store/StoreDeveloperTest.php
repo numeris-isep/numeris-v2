@@ -35,6 +35,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',
+                'isLocked',
                 'title',
                 'description',
                 'startAt',

@@ -18,6 +18,7 @@ class IndexAdministratorTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([[
                 'id',
+                'isLocked',
                 'title',
                 'description',
                 'startAt',

@@ -17,6 +17,8 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { ContentComponent } from './components/content/content.component';
 import { AddressPipe } from './pipes/address.pipe';
 import { PhonePipe } from './pipes/phone.pipe';
+import { MissionDetailsComponent } from './components/mission-details/mission-details.component';
+import { EmptyComponent } from './components/empty/empty.component';
 
 @NgModule({
   imports: [
@@ -40,7 +42,9 @@ import { PhonePipe } from './pipes/phone.pipe';
     LoaderComponent,
     ContentComponent,
     AddressPipe,
-    PhonePipe
+    PhonePipe,
+    MissionDetailsComponent,
+    EmptyComponent
   ],
   exports: [
     // Components
@@ -58,6 +62,8 @@ import { PhonePipe } from './pipes/phone.pipe';
     LinkButtonComponent,
     LoaderComponent,
     ContentComponent,
+    MissionDetailsComponent,
+    EmptyComponent,
 
     // Pipes
     AddressPipe,

@@ -16,8 +16,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     {
         $mission_id = 1;
 
-        $mission_id = 1;
-
         $mission_data = [
             'project_id'    => 1,
             'title'         => 'Mission de test',
@@ -40,6 +38,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',
+                'isLocked',
                 'title',
                 'description',
                 'startAt',

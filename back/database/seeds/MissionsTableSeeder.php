@@ -54,7 +54,7 @@ class MissionsTableSeeder extends Seeder
         ]);
 
         // SAV
-        factory(Mission::class)->create([
+        factory(Mission::class)->state('locked')->create([
             'project_id'    => $project->id,
             'title'         => "SAV {$project->name}",
             'start_at'      => Carbon::parse($project->start_at)->addDays(19),

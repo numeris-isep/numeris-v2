@@ -22,7 +22,9 @@ class UserApplicationController extends Controller
         $user = User::findOrFail($user_id);
         $this->authorize('index-application', $user);
 
-        return response()->json(ApplicationResource::collection($user->applications));
+        return response()->json(ApplicationResource::collection(
+            $user->applications->load('mission.address', 'mission.project.client')
+        ));
     }
 
     /**

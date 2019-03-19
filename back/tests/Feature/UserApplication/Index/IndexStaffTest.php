@@ -21,11 +21,15 @@ class IndexStaffTest extends TestCaseWithAuth
             ->assertJsonStructure([[
                 'id',
                 'userId',
-                'userId',
+                'missionId',
                 'type',
                 'status',
                 'createdAt',
                 'updatedAt',
+                'mission' => [
+                    'address',
+                    'project' => ['client']
+                ],
             ]]);
     }
 }
