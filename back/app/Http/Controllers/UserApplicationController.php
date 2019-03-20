@@ -8,6 +8,7 @@ use App\Models\Application;
 use App\Models\Mission;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Gate;
 
 class UserApplicationController extends Controller
 {
@@ -43,7 +44,7 @@ class UserApplicationController extends Controller
     {
         $user = User::findOrFail($user_id);
         $mission = Mission::findOrFail($request->get('mission_id'));
-        $this->authorize('store-application', User::class);
+        $this->authorize('store-application', $mission);
 
         $application = Application::create([
             'type'      => Application::USER_APPLICATION,

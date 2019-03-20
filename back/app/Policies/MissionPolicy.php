@@ -26,11 +26,6 @@ class MissionPolicy
         return false;
     }
 
-    public function storeApplication(User $current_user)
-    {
-        return false;
-    }
-
     public function show(User $current_user, Mission $mission)
     {
         return false;

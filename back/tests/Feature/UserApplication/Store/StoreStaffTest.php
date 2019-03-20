@@ -3,6 +3,7 @@
 namespace Tests\Feature\UserApplication\Store;
 
 use App\Models\Application;
+use App\Models\Mission;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
@@ -16,7 +17,7 @@ class StoreStaffTest extends TestCaseWithAuth
     public function testStaffCreatingApplication()
     {
         $user_id = 6;
-        $mission_id = 43;
+        $mission_id = factory(Mission::class)->create()->id;
 
         $application = [
             'user_id'       => $user_id,

@@ -34,11 +34,6 @@ class UserPolicy
         return false;
     }
 
-    public function storeApplication(User $current_user)
-    {
-        return true;
-    }
-
     public function show(User $current_user, User $user)
     {
         // $user1 whose $role < 'developer' can't show the profile of $user2

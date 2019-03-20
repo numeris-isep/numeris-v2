@@ -143,6 +143,18 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Application::class);
     }
 
+    public function appliedMissions()
+    {
+        return $this->applications()
+            ->with('mission')->get()
+            ->pluck('mission')->flatten();
+    }
+
+    public function hasAppliedTo(Mission $mission)
+    {
+        return $this->appliedMissions()->contains($mission);
+    }
+
     public function waitingApplications()
     {
         return $this->applications()

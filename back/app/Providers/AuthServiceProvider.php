@@ -24,6 +24,7 @@ use App\Policies\RatePolicy;
 use App\Policies\RolePolicy;
 use App\Policies\UserPolicy;
 use App\Policies\UserRolePolicy;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -57,6 +58,16 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('store-application', function(User $user, Mission $mission) {
+            return ! $user->hasAppliedTo($mission)
+                && ! $mission->is_locked
+                && Carbon::parse($mission->start_at)->isAfter(now());
+//                || $mission->project->visibility ? $user->belongsToProject($mission->project) : false; // TODO
+        });
+
+        Gate::define('store-mission-application', function(User $user, Mission $mission) {
+            return $user->role()->isSuperiorOrEquivalentTo('staff')
+                && Gate::allows('store-application', $mission);
+        });
     }
 }

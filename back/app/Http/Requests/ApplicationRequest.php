@@ -18,11 +18,12 @@ class ApplicationRequest extends AbstractFormRequest
         $current_user = auth()->user();
         $application = Application::find($this->route('application_id'));
 
-        // Use ApplicationPolicy, MissionPolicy and UserPolicy here to authorize
-        // before checking the fields
-        return $current_user->can('store-application', Mission::class)
-            || $current_user->can('store-application', User::class)
-            || $current_user->can('update', $application);
+        if ($application) {
+            // Use ApplicationPolicy here to authorize before checking the fields
+            return $current_user->can('update', $application);
+        }
+
+        return true;
     }
 
     /**
@@ -33,8 +34,8 @@ class ApplicationRequest extends AbstractFormRequest
     public function rules()
     {
         $rules = [
-            'mission_id'    => 'integer|exists:missions,id|unique:applications,mission_id,NULL,NULL,user_id,' . $this->user_id,
-            'user_id'       => 'integer|exists:users,id|unique:applications,user_id,NULL,NULL,mission_id,' . $this->mission_id,
+            'mission_id'    => 'integer|exists:missions,id|unique:applications,mission_id,NULL,id,user_id,' . $this->user_id,
+            'user_id'       => 'integer|exists:users,id|unique:applications,user_id,NULL,id,mission_id,' . $this->mission_id,
         ];
 
         switch($this->method())

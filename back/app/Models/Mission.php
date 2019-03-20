@@ -29,6 +29,10 @@ class Mission extends Model
         'applications',
     ];
 
+    protected $casts = [
+        'is_locked' => 'boolean',
+    ];
+
     public static function findByTitle($title)
     {
         return static::where('title', $title)->first();

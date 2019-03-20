@@ -54,8 +54,6 @@ class ProjectsTableSeeder extends Seeder
 
     private function createProjects($client)
     {
-        $project_collection = new Collection();
-
         $months = [
             '01' => 'Janvier',
             '02' => 'Février',

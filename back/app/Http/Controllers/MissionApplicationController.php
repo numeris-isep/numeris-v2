@@ -22,7 +22,7 @@ class MissionApplicationController extends Controller
     {
         $mission = Mission::findOrFail($mission_id);
         $user = User::findOrFail($request->get('user_id'));
-        $this->authorize('store-application', Mission::class);
+        $this->authorize('store-mission-application', $mission);
 
         $application = Application::create([
             'type'      => Application::STAFF_PLACEMENT,
