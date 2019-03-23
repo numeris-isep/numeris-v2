@@ -6,7 +6,6 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ButtonContentComponent implements OnInit {
 
-  @Input() visibleContent: string;
   @Input() visibleIcon: string;
   @Input() hiddenIcon: string;
 

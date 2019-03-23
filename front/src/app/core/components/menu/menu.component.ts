@@ -6,7 +6,6 @@ import { LoginModal } from "../../../shared/components/modals/login-modal/login-
 import { AuthService } from "../../http/auth/auth.service";
 import { Router } from "@angular/router";
 import { ScrollService } from "../../services/scroll.service";
-import { AlertService } from "../../services/alert.service";
 
 @Component({
   selector: 'app-menu',

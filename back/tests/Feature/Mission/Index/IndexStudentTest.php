@@ -28,6 +28,7 @@ class IndexStudentTest extends TestCaseWithAuth
                 'project' => [
                     'client',
                 ],
+                'applications'
             ]]);
     }
 }

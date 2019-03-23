@@ -3,6 +3,7 @@ import { Mission } from "../../../core/classes/models/mission";
 import { MissionService } from "../../../core/http/mission.service";
 import * as moment from 'moment';
 import { Moment } from "moment";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-mission',
@@ -67,7 +68,11 @@ export class MissionComponent implements OnInit {
                 break;
               default: break;
             }
-        })
+        });
+        // Remove groups with no mission
+        this.sortedMissionGroups = this.sortedMissionGroups.filter(
+          (group) => group.missions.length > 0 ? group : null
+        );
     });
   }
 }

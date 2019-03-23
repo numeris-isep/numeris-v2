@@ -17,8 +17,8 @@ export class MissionService {
     return this.http.get<Mission[]>(url, HTTP_OPTIONS);
   }
 
-  getMission(mission_id: number): Observable<Mission> {
-    const url = `${environment.apiUrl}/api/missions/${mission_id}`;
+  getMission(mission: Mission): Observable<Mission> {
+    const url = `${environment.apiUrl}/api/missions/${mission.id}`;
     return this.http.get<Mission>(url, HTTP_OPTIONS);
   }
 
@@ -34,7 +34,7 @@ export class MissionService {
     // TODO
   }
 
-  destroyMission(id: number) {
+  destroyMission() {
     // TODO
   }
 }

@@ -17,7 +17,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { ContentComponent } from './components/content/content.component';
 import { AddressPipe } from './pipes/address.pipe';
 import { PhonePipe } from './pipes/phone.pipe';
-import { MissionDetailsComponent } from './components/mission-details/mission-details.component';
+import { MissionDetailsComponent } from '../modules/student/mission/mission-details/mission-details.component';
 import { EmptyComponent } from './components/empty/empty.component';
 import { RolePipe } from './pipes/role.pipe';
 
@@ -44,9 +44,8 @@ import { RolePipe } from './pipes/role.pipe';
     ContentComponent,
     AddressPipe,
     PhonePipe,
-    MissionDetailsComponent,
     EmptyComponent,
-    RolePipe
+    RolePipe,
   ],
   exports: [
     // Components
@@ -64,7 +63,6 @@ import { RolePipe } from './pipes/role.pipe';
     LinkButtonComponent,
     LoaderComponent,
     ContentComponent,
-    MissionDetailsComponent,
     EmptyComponent,
 
     // Pipes

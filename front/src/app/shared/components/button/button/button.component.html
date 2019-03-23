@@ -1,8 +1,8 @@
 <button class="ui button {{ isLoading == true ? 'loading' : '' }}"
         [ngClass]="classes" [disabled]="(isLoading || isDisabled)">
-  <app-button-content [visibleContent]="visibleContent"
-                      [visibleIcon]="visibleIcon"
+  <app-button-content [visibleIcon]="visibleIcon"
                       [hiddenIcon]="hiddenIcon">
+    <ng-content></ng-content>
   </app-button-content>
 </button>
 

@@ -1,5 +1,6 @@
 import { Project } from "./project";
 import { Address } from "./address";
+import { Application } from "./application";
 
 export class Mission {
 
@@ -18,5 +19,6 @@ export class Mission {
 
   project: Project;
   address: Address;
+  applications: Application[];
 
 }

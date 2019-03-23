@@ -13,10 +13,10 @@ import { ProfileDocumentsComponent } from './profile/profile-documents/profile-d
 import { MissionComponent } from './mission/mission.component';
 import { ApplicationComponent } from './application/application.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
-import { SuiCheckbox } from "ng2-semantic-ui/dist";
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { MissionDetailsComponent } from "./mission/mission-details/mission-details.component";
 
 @NgModule({
   imports: [
@@ -38,7 +38,8 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     MissionComponent,
     ApplicationComponent,
     TutorialComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    MissionDetailsComponent,
   ]
 })
 export class StudentModule { }

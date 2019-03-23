@@ -35,7 +35,7 @@ export class LoginModalComponent implements OnInit {
     // reset auth status
     this.authService.logout();
 
-    // get return url from route parameters or default to '/profile'
+    // get return url from route parameters or default to '/dashboard'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
   }
 
@@ -52,7 +52,7 @@ export class LoginModalComponent implements OnInit {
     this.authService.login(this.f.email.value, this.f.password.value)
       .pipe(first())
       .subscribe(
-        data => {
+        _ => {
           this.alertService.success('Vous êtes connecté !', null, true);
           this.router.navigate([this.returnUrl]);
           this.modal.approve(undefined); // <-- make the modal disappear

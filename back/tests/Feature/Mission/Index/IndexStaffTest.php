@@ -28,6 +28,7 @@ class IndexStaffTest extends TestCaseWithAuth
                 'project' => [
                     'client',
                 ],
+                'applications'
             ]]);
     }
 }

@@ -36,7 +36,7 @@ var
 *******************************/
 
 gulp.task('default', false, [
-  'watch'
+  'build'
 ]);
 
 gulp.task('watch', 'Watch for site/theme changes', watch);

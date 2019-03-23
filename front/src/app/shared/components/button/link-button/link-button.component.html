@@ -1,7 +1,7 @@
 <a class="ui button" [ngClass]="classes"
    href="{{ href }}" target="{{ target }}">
-  <app-button-content [visibleContent]="visibleContent"
-                      [visibleIcon]="visibleIcon"
+  <app-button-content [visibleIcon]="visibleIcon"
                       [hiddenIcon]="hiddenIcon">
+    <ng-content></ng-content>
   </app-button-content>
 </a>

@@ -1,6 +1,12 @@
 .ui.card.disabled,
 .ui.cards>.card.disabled {
-  background-color: #F1F1F1;
+  background: repeating-linear-gradient(
+    135deg,
+    #FAFAFA,
+    #FAFAFA 10px,
+    #F1F1F1 10px,
+    #F1F1F1 20px
+  )
 }
 
 .ui.card.disabled>.content>.header,

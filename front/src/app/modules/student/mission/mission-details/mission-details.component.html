@@ -1,5 +1,5 @@
 <app-content [condition]="!mission">
-  <div class="ui fluid card" [ngClass]="color">
+  <div class="ui fluid {{color}} card" [ngClass]="{ 'disabled': mission.isLocked || isMissionExpired() }">
     <div class="content">
       <div class="ui ribbon label" [ngClass]="color">
         <i class="clock icon"></i>Durée : {{ mission.duration }}h
@@ -29,9 +29,17 @@
       <i class="map pin icon"></i> {{ mission.address | address }}
     </div>
 
-    <app-button visibleContent="Postuler" hiddenIcon="handshake"
-                attachment="bottom attached" behaviour="fluid"
-                color="none" size="small">
-    </app-button>
+    <ng-container *ngIf="! (mission.isLocked || isMissionExpired())">
+      <app-button *ngIf="! userApplication" hiddenIcon="handshake"
+                  attachment="bottom attached" behaviour="fluid"
+                  color="none" size="small" (click)="openModal(mission, userApplication)">
+        Postuler
+      </app-button>
+      <app-button *ngIf="userApplication" hiddenIcon="frown"
+                  attachment="bottom attached" behaviour="fluid"
+                  color="none" size="small" (click)="openModal(mission, userApplication)">
+        Retirer votre candidature
+      </app-button>
+    </ng-container>
   </div>
 </app-content>

@@ -28,6 +28,7 @@ class IndexDeveloperTest extends TestCaseWithAuth
                 'project' => [
                     'client',
                 ],
+                'applications'
             ]]);
     }
 }

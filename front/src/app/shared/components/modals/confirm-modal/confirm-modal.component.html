@@ -7,6 +7,12 @@
 </div>
 
 <div class="actions">
-  <button class="ui red button" (click)="modal.deny(undefined)">Cancel</button>
-  <button class="ui green button" (click)="modal.approve(undefined)" autofocus>OK</button>
+  <app-button hiddenIcon="cancel" color="red" size="small"
+              (click)="modal.deny(undefined)">
+    Annuler
+  </app-button>
+  <app-button hiddenIcon="check" color="green" size="small" [isLoading]="loading"
+              (click)="onClick(mission, application)">
+    Je suis sûr(e)
+  </app-button>
 </div>

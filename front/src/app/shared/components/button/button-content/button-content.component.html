@@ -1,7 +1,7 @@
 <div class="visible content">
   <i *ngIf="visibleIcon" class="icon"
      [ngClass]="visibleIcon"></i>
-  <span *ngIf="visibleContent"> {{ visibleContent }}</span>
+  <ng-content></ng-content>
 </div>
 <div *ngIf="hiddenIcon"
      class="hidden content">
