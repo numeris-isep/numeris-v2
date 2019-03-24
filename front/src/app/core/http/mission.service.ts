@@ -17,6 +17,11 @@ export class MissionService {
     return this.http.get<Mission[]>(url, HTTP_OPTIONS);
   }
 
+  getAvailableMissions(): Observable<Mission[]> {
+    const url = `${environment.apiUrl}/api/missions-available`;
+    return this.http.get<Mission[]>(url, HTTP_OPTIONS);
+  }
+
   getMission(mission: Mission): Observable<Mission> {
     const url = `${environment.apiUrl}/api/missions/${mission.id}`;
     return this.http.get<Mission>(url, HTTP_OPTIONS);

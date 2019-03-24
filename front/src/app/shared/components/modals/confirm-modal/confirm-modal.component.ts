@@ -44,7 +44,7 @@ export class ConfirmModalComponent implements OnInit {
     if (! this.application) {
       this.storeUserApplication(this.mission).subscribe(
         _ => {
-          this.router.navigate(['/'])
+          this.router.navigate(['/profile'])
             .then(() => { this.router.navigate([this.returnUrl]) } );
           this.alertService.success(`Vous avez bien postulé à la mission ${this.mission.title}.`, null, true);
           this.modal.approve(undefined);
@@ -57,7 +57,7 @@ export class ConfirmModalComponent implements OnInit {
     } else {
       this.destroyUserApplication(this.application).subscribe(
         _ => {
-          this.router.navigate(['/'])
+          this.router.navigate(['/profile'])
             .then(() => { this.router.navigate([this.returnUrl]) } );
           this.alertService.success(`Candidature à la mission ${this.mission.title} retirée.`, null, true);
           this.modal.approve(undefined);

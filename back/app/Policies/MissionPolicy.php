@@ -18,6 +18,11 @@ class MissionPolicy
 
     public function index(User $current_user)
     {
+        return false;
+    }
+
+    public function indexAvailable(User $current_user)
+    {
         return true;
     }
 

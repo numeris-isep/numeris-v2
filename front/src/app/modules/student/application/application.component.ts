@@ -32,7 +32,7 @@ export class ApplicationComponent implements OnInit {
    * Get and sort missions to make an user friendly display
    */
   getMissions() {
-    this.missionService.getMissions().subscribe(
+    this.missionService.getAvailableMissions().subscribe(
       missions => {
         this.missions = missions;
         missions

@@ -13,16 +13,29 @@ class MissionController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return JsonResponse
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index()
     {
         $this->authorize('index', Mission::class);
 
-        $missions = auth()->user()->role()->isInferiorTo('staff')
-            ? $missions = Mission::opened()->sortBy('start_at')
-            : $missions = Mission::all()->sortBy('start_at');
+        $missions = Mission::with('applications')->paginate();
+
+        return MissionResource::collection($missions);
+    }
+
+    /**
+     * Display a listing of the available missions.
+     *
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function indexAvailable()
+    {
+        $this->authorize('index-available', Mission::class);
+
+        $missions = $missions = Mission::available()->sortBy('start_at');
 
         return response()->json(MissionResource::collection(
             $missions->load('address', 'project', 'applications')

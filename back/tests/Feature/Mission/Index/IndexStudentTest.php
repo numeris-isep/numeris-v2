@@ -15,20 +15,9 @@ class IndexStudentTest extends TestCaseWithAuth
     public function testStudentAccesingMissionIndex()
     {
         $this->json('GET', route('missions.index'))
-            ->assertStatus(JsonResponse::HTTP_OK)
-            ->assertJsonStructure([[
-                'id',
-                'isLocked',
-                'title',
-                'description',
-                'startAt',
-                'duration',
-                'capacity',
-                'address',
-                'project' => [
-                    'client',
-                ],
-                'applications'
-            ]]);
+            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
+            ->assertJson([
+                'error' => trans('api.403'),
+            ]);
     }
 }

@@ -64,6 +64,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     // Mission resource routes
     Route::apiResource('missions', 'MissionController', ['parameters' => ['missions' => 'mission_id']]);
+    Route::get('missions-available', 'MissionController@indexAvailable')->name('missions.index.available');
 
     Route::patch('missions/{mission_id}/lock', 'MissionController@updateLock')->name('missions.update.lock');
 

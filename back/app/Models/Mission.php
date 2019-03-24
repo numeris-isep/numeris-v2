@@ -50,6 +50,11 @@ class Mission extends Model
             ->where('is_locked', true)->get();
     }
 
+    public static function available()
+    {
+        return static::opened(); // TODO: where user belongsTo project_user
+    }
+
     public function address()
     {
         return $this->belongsTo(Address::class);

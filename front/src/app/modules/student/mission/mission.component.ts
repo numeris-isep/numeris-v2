@@ -44,11 +44,10 @@ export class MissionComponent implements OnInit {
    * Get and sort missions to make an user friendly display
    */
   getMissions() {
-    this.missionService.getMissions().subscribe(
+    this.missionService.getAvailableMissions().subscribe(
       missions => {
         this.missions = missions;
         missions
-          .filter(mission => moment(mission.startAt).isAfter(moment()))
           .map(mission => {
             this.counter++;
             let missionDate = moment(mission.startAt);
