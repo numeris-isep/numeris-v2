@@ -13,7 +13,7 @@
         <i class="user icon"></i> Profil
         <span class="floating ui mini red label">3</span>
       </a>
-      <a class="item" routerLink="/missions" routerLinkActive="active">
+      <a class="item" routerLink="/available-missions" routerLinkActive="active">
         <i class="th list icon"></i> Missions
         <span class="floating ui mini blue label">7</span>
       </a>
@@ -33,32 +33,35 @@
   </sui-accordion-panel>
 
   <sui-accordion-panel [isOpen]="true" class="header item"
-                       *ngIf="currentUserRole != 'student'">
+                       *ngIf="currentUserRole == 'staff'
+                       || currentUserRole == 'administrator'
+                       || currentUserRole == 'developer'">
     <div title>
       <i class="dropdown icon"></i> Bureau
     </div>
 
     <div content (click)="sidebar.close()">
-      <a class="item">
+      <a class="item" routerLink="/statistics" routerLinkActive="active">
         <i class="chart line icon"></i> Statistiques
       </a>
-      <a class="item">
+      <a class="item" routerLink="/users" routerLinkActive="active">
         <i class="users icon"></i> Utilisateurs
       </a>
-      <a class="item">
+      <a class="item" routerLink="/missions" routerLinkActive="active">
         <i class="copy icon"></i> Missions
       </a>
-      <a class="item">
+      <a class="item" routerLink="/projects" routerLinkActive="active">
         <i class="folder open icon"></i> Projets
       </a>
-      <a class="item">
+      <a class="item" routerLink="/clients" routerLinkActive="active">
         <i class="building icon"></i> Clients
       </a>
     </div>
   </sui-accordion-panel>
 
   <sui-accordion-panel [isOpen]="true" class="header item"
-                       *ngIf="currentUserRole != 'student' && currentUserRole != 'staff'">
+                       *ngIf="currentUserRole == 'administrator'
+                       || currentUserRole == 'developer'">
     <div title>
       <i class="dropdown icon"></i> Gestion
     </div>

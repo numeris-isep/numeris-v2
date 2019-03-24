@@ -20,6 +20,8 @@ import { JwtInterceptor } from "./interceptors/jwt.interceptor";
 import { TitleComponent } from './components/title/title.component';
 import { HeaderComponent } from './components/header/header.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { StaffModule } from "../modules/staff/staff.module";
+import { Router } from "@angular/router";
 
 // Setting to locale to 'fr'
 registerLocaleData(localeFr, 'fr');
@@ -35,6 +37,7 @@ registerLocaleData(localeFr, 'fr');
 
     // MUST be the last imports
     StudentModule,
+    StaffModule,
     SharedModule,
     AppRoutingModule,
   ],
@@ -57,4 +60,11 @@ registerLocaleData(localeFr, 'fr');
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  // Uncomment these following lines to display the router configuration
+  // (useful to see if the routes are in the proper order)
+
+  // constructor(router: Router) {
+  //   console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+  // }
+}

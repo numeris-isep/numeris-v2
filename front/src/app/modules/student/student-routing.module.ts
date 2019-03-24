@@ -28,7 +28,7 @@ const studentRoutes: Routes = [
     }
   },
   {
-    path: 'missions',
+    path: 'available-missions',
     component: MissionComponent,
     canActivate: [AuthGuard, ActivatedGuard],
     data: {
