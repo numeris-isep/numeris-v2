@@ -17,7 +17,6 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { ContentComponent } from './components/content/content.component';
 import { AddressPipe } from './pipes/address.pipe';
 import { PhonePipe } from './pipes/phone.pipe';
-import { MissionDetailsComponent } from '../modules/student/mission/mission-details/mission-details.component';
 import { EmptyComponent } from './components/empty/empty.component';
 import { RolePipe } from './pipes/role.pipe';
 

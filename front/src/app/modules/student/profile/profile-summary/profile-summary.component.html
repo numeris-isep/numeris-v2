@@ -15,7 +15,7 @@
     <i class="mail envelope icon"></i> {{ user.email }}
   </div>
   <div class="content">
-    <i class="map pin icon"></i> {{ user.address | address }}
+    <i class="map marker alternate icon"></i> {{ user.address | address }}
   </div>
   <div class="center aligned extra content">
     Membre depuis le {{ user.createdAt | date:"dd/MM/yyyy" }}

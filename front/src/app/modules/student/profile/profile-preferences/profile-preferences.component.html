@@ -1,4 +1,4 @@
-<form class="ui form fluid card">
+<form class="ui form fluid card" [formGroup]="preferenceForm" (ngSubmit)="updatePreference()">
   <div class="content">
     <h4>
       <i class="bell icon"></i>
@@ -7,47 +7,43 @@
 
     <div class="ui horizontal divider">A chaque ...</div>
     <div class="field">
-      <sui-checkbox class="toggle" name="onNewMission"
-                    [(ngModel)]="preference.onNewMission">
+      <sui-checkbox class="toggle" formControlName="on_new_mission">
         <span>Nouvelle mission</span>
       </sui-checkbox>
     </div>
     <div class="field">
-      <sui-checkbox class="toggle" name="onAcceptance"
-                    [(ngModel)]="preference.onAcceptance">
+      <sui-checkbox class="toggle" formControlName="on_acceptance">
         <span>Candidature acceptée</span>
       </sui-checkbox>
     </div>
     <div class="field">
-      <sui-checkbox class="toggle" name="onRefusal"
-                    [(ngModel)]="preference.onRefusal">
+      <sui-checkbox class="toggle" formControlName="on_refusal">
         <span>Candidature refusée</span>
       </sui-checkbox>
     </div>
     <div class="field">
-      <sui-checkbox class="toggle" name="onDocument"
-                    [(ngModel)]="preference.onDocument">
+      <sui-checkbox class="toggle" formControlName="on_document">
         <span>Document à signer</span>
       </sui-checkbox>
     </div>
 
     <div class="ui horizontal divider">Par ...</div>
     <div class="field">
-      <sui-checkbox class="toggle" name="byEmail"
-                    [(ngModel)]="preference.byEmail">
+      <sui-checkbox class="toggle" formControlName="by_email">
         <span>Email</span>
       </sui-checkbox>
     </div>
     <div class="field">
-      <sui-checkbox class="toggle" name="byPush"
-                    [(ngModel)]="preference.byPush">
+      <sui-checkbox class="toggle" formControlName="by_push">
         <span>Notification push</span>
       </sui-checkbox>
     </div>
   </div>
-  <app-button hiddenIcon="save"
-              attachment="bottom attached" behaviour="fluid"
-              color="positive" size="small">
+
+  <app-button hiddenIcon="save" attachment="bottom attached"
+              behaviour="fluid" color="positive" size="small"
+              [isDisabled]="preferenceForm.pristine" [isLoading]="loading"
+              (submit)="updatePreference()">
     Sauvegarder
   </app-button>
 </form>

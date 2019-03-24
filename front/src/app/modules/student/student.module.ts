@@ -13,7 +13,7 @@ import { ProfileDocumentsComponent } from './profile/profile-documents/profile-d
 import { MissionComponent } from './mission/mission.component';
 import { ApplicationComponent } from './application/application.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { MissionDetailsComponent } from "./mission/mission-details/mission-details.component";
@@ -23,6 +23,7 @@ import { MissionDetailsComponent } from "./mission/mission-details/mission-detai
     CommonModule,
     SuiModule,
     FormsModule,
+    ReactiveFormsModule,
     StudentRoutingModule,
     SharedModule,
     HttpClientModule
