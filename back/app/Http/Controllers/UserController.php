@@ -8,6 +8,7 @@ use App\Models\Address;
 use App\Models\Preference;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -144,6 +145,25 @@ class UserController extends Controller
             $address = Address::create($address_request);
             $address->user()->save($user);
         }
+
+        return response()->json(UserResource::make($user), JsonResponse::HTTP_CREATED);
+    }
+
+    /**
+     * Update terms of use acceptance.
+     *
+     * @param Request $request
+     * @param $user_id
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function updateTermsOfUse(Request $request, $user_id) {
+        $user = User::findOrFail($user_id);
+        $this->authorize('update-terms-of-use', $user);
+
+        $request->validate(['tou_accepted' => 'required|boolean|accepted']);
+
+        $user->update($request->only('tou_accepted'));
 
         return response()->json(UserResource::make($user), JsonResponse::HTTP_CREATED);
     }

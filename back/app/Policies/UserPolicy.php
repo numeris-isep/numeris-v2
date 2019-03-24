@@ -13,7 +13,7 @@ class UserPolicy
     public function before(User $current_user, $ability)
     {
         // Grant everything to developers
-        if ($current_user->role()->isEquivalentTo('developer')) {
+        if ($current_user->role()->isEquivalentTo('developer') && $ability != 'update-terms-of-use') {
             return true;
         }
     }
@@ -55,6 +55,17 @@ class UserPolicy
         // or       $user1->role > $user2->role
         return $current_user->is($user)
             || $current_user->role()->isSuperiorTo($user->role()->name);
+    }
+
+    public function updateTermsOfUse(User $current_user, User $user)
+    {
+        // $user1 whose $role < 'developer' can't update the profile of $user2
+        // unless   $user1 == $user2
+        // or       $user1->role > $user2->role
+        // AND      $user->tou_accepted != true
+        return ($current_user->is($user)
+            || $current_user->role()->isSuperiorTo($user->role()->name))
+            && ! $user->tou_accepted;
     }
 
     public function destroy(User $current_user, User $user)

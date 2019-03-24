@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from "../../../core/http/user.service";
+import { User } from "../../../core/classes/models/user";
+import { AuthService } from "../../../core/http/auth/auth.service";
+import { AlertService } from "../../../core/services/alert.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-terms-of-use',
@@ -7,25 +12,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TermsOfUseComponent implements OnInit {
 
-  public allChecked: boolean = false;
+  user: User;
+  loading: boolean =  false;
+  accepted: boolean = false;
+  allDisabled: boolean = false;
+  allChecked: boolean = false;
 
-  public checkboxes = [
-    { isChecked: false }, // checkbox 1
-    { isChecked: false }, // checkbox 2
-    { isChecked: false }, // checkbox 3
-    { isChecked: false }, // checkbox 4
-    { isChecked: false }, // checkbox 5
-    { isChecked: false }, // checkbox 6
-    { isChecked: false }, // checkbox 7
-    { isChecked: false }, // checkbox 8
-    { isChecked: false }, // checkbox 9
-    { isChecked: false }, // checkbox 10
+  checkboxes = [
+    { isChecked: false, isDisabled: false }, // checkbox 1
+    { isChecked: false, isDisabled: false }, // checkbox 2
+    { isChecked: false, isDisabled: false }, // checkbox 3
+    { isChecked: false, isDisabled: false }, // checkbox 4
+    { isChecked: false, isDisabled: false }, // checkbox 5
+    { isChecked: false, isDisabled: false }, // checkbox 6
+    { isChecked: false, isDisabled: false }, // checkbox 7
+    { isChecked: false, isDisabled: false }, // checkbox 8
+    { isChecked: false, isDisabled: false }, // checkbox 9
+    { isChecked: false, isDisabled: false }, // checkbox 10
   ];
 
-  constructor() { }
+  constructor(
+    private userService: UserService,
+    private authService: AuthService,
+    private alertService: AlertService,
+    private router: Router,
+  ) { }
 
   ngOnInit() {
+    this.getCurrentUser();
     this.check();
+  }
+
+  getCurrentUser() {
+    this.authService.getCurrentUser().subscribe(user => {
+      this.user = user;
+      this.accepted = this.user.touAccepted;
+      this.allCheckboxes(this.accepted, this.accepted);
+    });
   }
 
   check() {
@@ -33,9 +56,31 @@ export class TermsOfUseComponent implements OnInit {
   }
 
   mainCheckbox(isChecked) {
-    for (let i = 0; i < this.checkboxes.length; i++) {
-      this.checkboxes[i].isChecked = isChecked;
-    }
+    this.allCheckboxes(isChecked);
     this.check();
+  }
+
+  allCheckboxes(areChecked: boolean, areDisabled?: boolean) {
+    this.allChecked = areChecked;
+    this.allDisabled = areDisabled;
+    for (let i = 0; i < this.checkboxes.length; i++) {
+      this.checkboxes[i].isChecked = areChecked;
+      this.checkboxes[i].isDisabled = areDisabled;
+    }
+  }
+
+  updateTermsOfUse() {
+    this.loading = true;
+
+    this.userService.updateUserTermsOfUse(this.user).subscribe(
+      _ => {
+        this.router.navigate(['/'])
+          .then(() => { this.router.navigate(['/terms-of-use']) } );
+        this.alertService.success('Conditions d\'utilisations acceptées.', null, true);
+      },
+      error => {
+        this.loading = false;
+      }
+    );
   }
 }

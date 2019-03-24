@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
       .pipe(
         take(1),
         map((isLoggedIn: boolean) => {
-          if (!isLoggedIn) {
+          if (! isLoggedIn) {
             // not logged in so redirect to home page with the return url
             this.router.navigate(['/'], { queryParams: { returnUrl: state.url }});
             this.modalService.open(this.modal);

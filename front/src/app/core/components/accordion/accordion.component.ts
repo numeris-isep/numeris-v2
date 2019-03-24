@@ -11,6 +11,7 @@ export class AccordionComponent implements OnInit {
 
   currentYear = moment().year();
   currentUserRole: string;
+  touAccepted: boolean;
 
   @Input() sidebar: SidebarComponent;
 
@@ -19,5 +20,4 @@ export class AccordionComponent implements OnInit {
   ngOnInit() {
     this.currentUserRole = this.authService.getCurrentUserRole();
   }
-
 }

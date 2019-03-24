@@ -2,14 +2,14 @@
   <div class="column">
     <div class="ui segments">
       <div class="ui very padded center aligned segment">
-        <h1>Oups ...</h1>
+        <h1><i class="meh outline loading icon"></i> Oups ...</h1>
         <h2>La page demandée n'existe pas ou plus</h2>
         <img class="ui large centered image" src="assets/logos/numeris-blue.png">
       </div>
       <div class="ui padded center aligned segment">
-        <app-button visibleContent="Retour à la page précédente"
-                    hiddenIcon="arrow left" size="medium"
+        <app-button hiddenIcon="arrow left" size="medium"
                     (click)="goBack()">
+          Retour à la page précédente
         </app-button>
       </div>
     </div>

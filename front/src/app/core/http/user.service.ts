@@ -16,8 +16,8 @@ export class UserService {
     // TODO
   }
 
-  getUser(user_id: number): Observable<User> {
-    const url = `${environment.apiUrl}/api/users/${user_id}`;
+  getUser(user: User): Observable<User> {
+    const url = `${environment.apiUrl}/api/users/${user.id}`;
     return this.http.get<User>(url, HTTP_OPTIONS);
   }
 
@@ -29,7 +29,12 @@ export class UserService {
     // TODO
   }
 
-  destroyUser(id: number) {
+  updateUserTermsOfUse(user: User) {
+    const url = `${environment.apiUrl}/api/users/${user.id}/terms-of-use`;
+    return this.http.patch(url, { tou_accepted: true }, HTTP_OPTIONS);
+  }
+
+  destroyUser(user: User) {
     // TODO
   }
 }
