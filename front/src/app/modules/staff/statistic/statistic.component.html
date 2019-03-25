@@ -1,6 +1,14 @@
 <app-content [condition]="!true">
-  <p>
-    statistic works!
-  </p>
+  <div class="ui padded grid">
+    <div class="sixteen wide column">
+      <p *ngIf="false; else empty">
+        mission works!
+      </p>
+
+      <ng-template #empty>
+        <app-empty>Aucune statistique à afficher</app-empty>
+      </ng-template>
+    </div>
+  </div>
 </app-content>
 

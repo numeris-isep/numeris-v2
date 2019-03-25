@@ -1,0 +1,14 @@
+.ui.grid>.row>.ui.segment.column,
+.ui.grid>.ui.segment.column,
+.ui.page.grid.segment {
+  padding-top: 1rem;
+  padding-bottom: 0;
+}
+
+@media only screen and (max-width: 767px) {
+  .ui.grid>.row>.ui.segment.column,
+  .ui.grid>.ui.segment.column,
+  .ui.page.grid.segment {
+    padding-bottom: 1rem;
+  }
+}

@@ -14,7 +14,7 @@
         <span class="floating ui mini red label">3</span>
       </a>
       <a class="item" routerLink="/available-missions" routerLinkActive="active">
-        <i class="th list icon"></i> Missions
+        <i class="tasks icon"></i> Missions
         <span class="floating ui mini blue label">7</span>
       </a>
       <a class="item" routerLink="/applications" routerLinkActive="active">
@@ -59,7 +59,7 @@
     </div>
   </sui-accordion-panel>
 
-  <sui-accordion-panel [isOpen]="true" class="header item"
+  <sui-accordion-panel [isOpen]="false" class="header item"
                        *ngIf="currentUserRole == 'administrator'
                        || currentUserRole == 'developer'">
     <div title>

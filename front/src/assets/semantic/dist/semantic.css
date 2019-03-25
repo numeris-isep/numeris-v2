@@ -24113,6 +24113,13 @@ Floated Menu / Item
   vertical-align: top;
 }
 
+@media screen and (max-width: 767px) {
+  .ui.pagination.menu .item:last-child,
+  .ui.pagination.menu .item:first-child {
+    display: none;
+  }
+}
+
 /* Active */
 
 .ui.pagination.menu .active.item {

@@ -5,6 +5,7 @@ import { AuthGuard } from "../../core/guards/auth.guard";
 import { UserComponent } from "./user/user.component";
 import { ProjectComponent } from "./project/project.component";
 import { ClientComponent } from "./client/client.component";
+import { MissionComponent } from "./mission/mission.component";
 
 const staffRoutes: Routes = [
   {
@@ -25,7 +26,7 @@ const staffRoutes: Routes = [
   },
   {
     path: 'missions',
-    component: UserComponent,
+    component: MissionComponent,
     canActivate: [AuthGuard],
     data: {
       title: 'Missions',

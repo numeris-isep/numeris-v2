@@ -1,5 +1,182 @@
 <app-content [condition]="!true">
-  <p>
-    mission works!
-  </p>
+  <!-- Actions -->
+  <div class="ui padded grid">
+    <div class="column">
+      <div class="ui blue segment">
+        <div class="ui blue ribbon label">Actions</div>
+        <div class="ui two column center aligned grid">
+          <div class="ui vertical divider">Ou</div>
+          <div class="middle aligned row">
+            <div class="column">
+              <div class="ui icon header">
+                <i class="tasks icon"></i>
+                Prévenir des missions disponibles
+              </div><br>
+              <app-link-button hiddenIcon="bullhorn" size="small">
+                Missions disponibles
+              </app-link-button>
+            </div>
+            <div class="column">
+              <div class="ui icon header">
+                <i class="file alternate outline icon"></i>
+                Ajouter une mission
+              </div><br>
+              <app-link-button hiddenIcon="plus" size="small">
+                Nouvelle mission
+              </app-link-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Missions -->
+  <div class="ui padded grid">
+    <div class="column">
+      <div *ngIf="true; else empty" class="ui segments">
+        <!-- Selection -->
+        <div class="ui horizontal segments form grid">
+          <div class="ui segment column">
+            <div class="field">
+              <label>Filtre</label>
+              <sui-select class="selection" label="filter" placeholder="Sélectionner une option">
+                <sui-select-option value="Toutes les missions"></sui-select-option>
+                <sui-select-option value="Missions en cours"></sui-select-option>
+                <sui-select-option value="Missions terminées"></sui-select-option>
+              </sui-select>
+            </div>
+          </div>
+          <div class="ui segment computer tablet only column">
+            <div class="two fields">
+              <div class="field">
+                <label>De</label>
+                <div class="ui left icon input">
+                  <i class="calendar outline icon"></i>
+                  <input suiDatepicker pickerMode="month" placeholder="Début"
+                         [pickerUseNativeOnMobile]="true">
+                </div>
+              </div>
+              <div class="field">
+                <label>À</label>
+                <div class="ui left icon input">
+                  <i class="calendar icon"></i>
+                  <input suiDatepicker pickerMode="month" placeholder="Fin"
+                         [pickerUseNativeOnMobile]="true">
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="ui segment">
+          <table class="ui celled striped selectable table">
+            <thead>
+            <tr>
+              <th>
+                <i class="calendar outline icon"></i>
+                Date
+              </th>
+              <th>
+                <i class="clipboard outline icon"></i>
+                Référence
+              </th>
+              <th>
+                <i class="tag icon"></i>
+                Titre
+              </th>
+              <th>
+                <i class="map marker alternate icon"></i>
+                Adresse
+              </th>
+              <th>
+                <i class="clock outline icon"></i>
+                Durée
+              </th>
+              <th>
+                <i class="users icon"></i>
+                Capacité
+              </th>
+              <th>
+                <i class="hand pointer outline icon"></i>
+                Action
+              </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+              <td>28/04/2019 à 8h00</td>
+              <td>10-004-ZZBO</td>
+              <td>Reconnexion La défense</td>
+              <td>1 rue Quelquepart, 75015 Paris</td>
+              <td>5h</td>
+              <td>
+                <sui-progress class="tiny active indicating"
+                              [value]="2" [maximum]="3">
+                  2/3
+                </sui-progress>
+              </td>
+              <td class="center aligned">
+                <a href="">
+                  <i class="eye large blue link icon"></i>
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>29/04/2019 à 8h00</td>
+              <td>17-120-AUZE</td>
+              <td>Déconnexion La défense</td>
+              <td>1 rue Quelquepart, 75015 Paris</td>
+              <td>9h</td>
+              <td>
+                <sui-progress class="tiny active indicating"
+                              [value]="1" [maximum]="4">
+                  1/4
+                </sui-progress>
+              </td>
+              <td class="center aligned">
+                <a href="">
+                  <i class="eye large blue link icon"></i>
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>31/04/2019 à 8h00</td>
+              <td>10-004-ZZBO</td>
+              <td>SAV La défense</td>
+              <td>1 rue Quelquepart, 75015 Paris</td>
+              <td>8h</td>
+              <td>
+                <sui-progress class="tiny active indicating"
+                              [value]="2" [maximum]="2">
+                  2/2
+                </sui-progress>
+              </td>
+              <td class="center aligned">
+                <a href="">
+                  <i class="eye large blue link icon"></i>
+                </a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="ui center aligned segment">
+          <sui-pagination [collectionSize]="200" [pageSize]="10" [maxSize]="4" [(page)]="page"
+                          [hasNavigationLinks]="true" [hasBoundaryLinks]="true"
+                          [hasEllipses]="false" [canRotate]="true">
+          </sui-pagination>
+        </div>
+      </div>
+
+      <ng-template #empty>
+        <app-empty>Aucune mission</app-empty>
+      </ng-template>
+    </div>
+  </div>
 </app-content>

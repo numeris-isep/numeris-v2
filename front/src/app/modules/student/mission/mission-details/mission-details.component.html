@@ -26,7 +26,7 @@
     </div>
 
     <div class="extra content">
-      <i class="map pin icon"></i> {{ mission.address | address }}
+      <i class="map marker alternate icon"></i> {{ mission.address | address }}
     </div>
 
     <ng-container *ngIf="! (mission.isLocked || isMissionExpired())">

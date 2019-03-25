@@ -1,5 +1,13 @@
 <app-content [condition]="!true">
-  <p>
-    project works!
-  </p>
+  <div class="ui padded grid">
+    <div class="sixteen wide column">
+      <p *ngIf="false; else empty">
+        project works!
+      </p>
+
+      <ng-template #empty>
+        <app-empty>Aucun project</app-empty>
+      </ng-template>
+    </div>
+  </div>
 </app-content>
