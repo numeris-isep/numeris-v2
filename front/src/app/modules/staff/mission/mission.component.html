@@ -40,31 +40,45 @@
           <div class="ui segment column">
             <div class="field">
               <label>Filtre</label>
-              <sui-select class="selection" label="filter" placeholder="Sélectionner une option">
-                <sui-select-option value="Toutes les missions"></sui-select-option>
-                <sui-select-option value="Missions en cours"></sui-select-option>
-                <sui-select-option value="Missions terminées"></sui-select-option>
-              </sui-select>
+              <div class="ui action fluid input">
+                <sui-select class="selection" label="filter"
+                            placeholder="Sélectionner une option"
+                            [(ngModel)]="selectedFilter">
+                  <sui-select-option value="Toutes les missions"></sui-select-option>
+                  <sui-select-option value="Missions en cours"></sui-select-option>
+                  <sui-select-option value="Missions terminées"></sui-select-option>
+                </sui-select>
+                <button class="ui icon button" (click)="reset('selectedFilter')">
+                  <i class="x icon"></i>
+                </button>
+              </div>
             </div>
           </div>
           <div class="ui segment computer tablet only column">
             <div class="two fields">
               <div class="field">
                 <label>De</label>
-                <div class="ui left icon input">
+                <div class="ui left icon action input">
                   <i class="calendar outline icon"></i>
                   <input suiDatepicker pickerMode="month" placeholder="Début"
+                         [(ngModel)]="minDate" [pickerMaxDate]="maxDate"
                          [pickerUseNativeOnMobile]="true">
+                  <button class="ui icon button" (click)="reset('minDate')">
+                    <i class="x icon"></i>
+                  </button>
                 </div>
               </div>
               <div class="field">
                 <label>À</label>
-                <div class="ui left icon input">
+                <div class="ui left icon action input">
                   <i class="calendar icon"></i>
                   <input suiDatepicker pickerMode="month" placeholder="Fin"
+                         [(ngModel)]="maxDate" [pickerMinDate]="minDate"
                          [pickerUseNativeOnMobile]="true">
+                  <button class="ui icon button" (click)="reset('maxDate')">
+                    <i class="x icon"></i>
+                  </button>
                 </div>
-
               </div>
             </div>
           </div>
@@ -100,6 +114,10 @@
                 Capacité
               </th>
               <th>
+                <i class="user secret icon"></i>
+                Visibilité
+              </th>
+              <th>
                 <i class="hand pointer outline icon"></i>
                 Action
               </th>
@@ -120,9 +138,13 @@
                 </sui-progress>
               </td>
               <td class="center aligned">
-                <a href="">
-                  <i class="eye large blue link icon"></i>
-                </a>
+                <i class="eye icon"></i>
+              </td>
+              <td class="center aligned">
+                <app-link-button size="tiny" color="basic"
+                                 hiddenIcon="zoom-in">
+                  Voir
+                </app-link-button>
               </td>
             </tr>
             <tr>
@@ -137,10 +159,14 @@
                   1/4
                 </sui-progress>
               </td>
+              <td class="center aligned warning">
+                <i class="eye slash icon"></i>
+              </td>
               <td class="center aligned">
-                <a href="">
-                  <i class="eye large blue link icon"></i>
-                </a>
+                <app-link-button size="tiny" color="basic"
+                                 hiddenIcon="zoom-in">
+                  Voir
+                </app-link-button>
               </td>
             </tr>
             <tr>
@@ -156,9 +182,13 @@
                 </sui-progress>
               </td>
               <td class="center aligned">
-                <a href="">
-                  <i class="eye large blue link icon"></i>
-                </a>
+                <i class="eye icon"></i>
+              </td>
+              <td class="center aligned">
+                <app-link-button size="tiny" color="basic"
+                                 hiddenIcon="zoom-in">
+                  Voir
+                </app-link-button>
               </td>
             </tr>
             </tbody>

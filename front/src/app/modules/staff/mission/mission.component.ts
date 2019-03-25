@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MissionComponent implements OnInit {
 
+  selectedFilter: string;
+  minDate: string;
+  maxDate: string;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  reset(field: string) {
+    this[field] = null;
   }
 
 }

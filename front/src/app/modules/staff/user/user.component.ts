@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
+  search: string;
+  selectedUserType: string;
+  selectedPromotion: string;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  reset(field: string) {
+    this[field] = null;
   }
 
 }

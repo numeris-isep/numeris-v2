@@ -12,3 +12,12 @@
     padding-bottom: 1rem;
   }
 }
+
+.ui.action.input .ui.selection.dropdown {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.ui.search.input .prompt {
+  max-width: 196px;
+}
