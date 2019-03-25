@@ -1,9 +1,148 @@
 <app-content [condition]="!true">
+  <!-- Users -->
   <div class="ui padded grid">
-    <div class="sixteen wide column">
-      <p *ngIf="false; else empty">
-        user works!
-      </p>
+    <div class="column">
+      <div *ngIf="true; else empty" class="ui segments">
+        <!-- Selection -->
+        <div class="ui horizontal segments form grid">
+          <div class="ui segment column">
+            <div class="field">
+              <label>Rechercher</label>
+              <div class="ui left icon input">
+                <i class="filter icon"></i>
+                <sui-search class="ui search" placeholder="Rechercher ..."
+                            [options]="options" optionsField="title"
+                            [resultTemplate]="template"
+                            [retainSelectedResult]="false"
+                            (resultSelected)="alert($event.title)">
+                </sui-search>
+              </div>
+            </div>
+          </div>
+          <div class="ui segment computer tablet only column">
+            <div class="two fields">
+              <div class="field">
+                <label>Type d'utilisateur</label>
+                <sui-select class="fluid selection" label="userType" placeholder="Sélectionner une option">
+                  <sui-select-option value="Utilisateur"></sui-select-option>
+                  <sui-select-option value="Staff"></sui-select-option>
+                  <sui-select-option value="Administrateur"></sui-select-option>
+                  <sui-select-option value="Développeur"></sui-select-option>
+                </sui-select>
+              </div>
+              <div class="field">
+                <label>Promotion</label>
+                <sui-select class="fluid selection" label="promotion" placeholder="Sélectionner une option">
+                  <sui-select-option value="2016"></sui-select-option>
+                  <sui-select-option value="2017"></sui-select-option>
+                  <sui-select-option value="2018"></sui-select-option>
+                  <sui-select-option value="2019"></sui-select-option>
+                  <sui-select-option value="2020"></sui-select-option>
+                  <sui-select-option value="2021"></sui-select-option>
+                  <sui-select-option value="2022"></sui-select-option>
+                  <sui-select-option value="2023"></sui-select-option>
+                  <sui-select-option value="2024"></sui-select-option>
+                  <sui-select-option value="2025"></sui-select-option>
+                  <sui-select-option value="2026"></sui-select-option>
+                </sui-select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="ui segment">
+          <table class="ui celled striped selectable table">
+            <thead>
+            <tr>
+              <th>
+                <i class="tag icon"></i>
+                Nom
+              </th>
+              <th>
+                <i class="id badge icon"></i>
+                Numéro étudiant
+              </th>
+              <th>
+                <i class="mail alternate icon"></i>
+                E-mail
+              </th>
+              <th>
+                <i class="phone icon"></i>
+                Téléphone
+              </th>
+              <th>
+                <i class="user secret icon"></i>
+                Rôle
+              </th>
+              <th>
+                <i class="hand pointer outline icon"></i>
+                Action
+              </th>
+            </tr>
+            </thead>
+
+            <tbody>
+              <tr class="positive">
+                <td>Eliott DE SEGUIER</td>
+                <td>8740</td>
+                <td>eliottdes@gmail.com</td>
+                <td>06 63 67 06 80</td>
+                <td>Développeur</td>
+                <td class="center aligned">
+                  <a href="">
+                    <i class="eye large blue link icon"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr class="warning">
+                <td>Gaël CHEREAU</td>
+                <td>35280</td>
+                <td>gael-chereau@yahoo.fr</td>
+                <td>06 63 82 74 82</td>
+                <td>Administrator</td>
+                <td class="center aligned">
+                  <a href="">
+                    <i class="eye large blue link icon"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>Pidanou EANG</td>
+                <td>9302</td>
+                <td>pida-nou@hotmail.com</td>
+                <td>06 13 41 89 01</td>
+                <td>Staff</td>
+                <td class="center aligned">
+                  <a href="">
+                    <i class="eye large blue link icon"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr class="negative">
+                <td>John John FLORENCE</td>
+                <td>6391</td>
+                <td>jjf@wsl.com</td>
+                <td>06 86 71 92 93</td>
+                <td>Étudiant</td>
+                <td class="center aligned">
+                  <a href="">
+                    <i class="eye large blue link icon"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="ui center aligned segment">
+          <sui-pagination [collectionSize]="200" [pageSize]="10" [maxSize]="4" [(page)]="page"
+                          [hasNavigationLinks]="true" [hasBoundaryLinks]="true"
+                          [hasEllipses]="false" [canRotate]="true">
+          </sui-pagination>
+        </div>
+      </div>
 
       <ng-template #empty>
         <app-empty>Aucun utilisateur</app-empty>
