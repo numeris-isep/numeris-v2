@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { StaffRoutingModule } from "./staff-routing.module";
 import { SharedModule } from "../../shared/shared.module";
 import { HttpClientModule } from "@angular/common/http";
+import { ClientDetailsComponent } from './client/client-details/client-details.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { HttpClientModule } from "@angular/common/http";
     UserComponent,
     ProjectComponent,
     ClientComponent,
+    ClientDetailsComponent,
   ]
 })
 export class StaffModule { }

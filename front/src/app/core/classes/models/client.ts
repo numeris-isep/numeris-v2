@@ -10,6 +10,10 @@ export class Client {
   createdAt: string;
   updatedAt: string;
 
+  conventionsCount: number = null;
+  projectsCount: number = null;
+  missionsCount: number = null;
+
   address: Address;
 
 }

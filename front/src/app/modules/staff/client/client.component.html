@@ -1,13 +1,51 @@
 <app-content [condition]="!true">
+  <!-- Action -->
   <div class="ui padded grid">
     <div class="column">
-      <p *ngIf="false; else empty">
-        client works!
-      </p>
-
-      <ng-template #empty>
-        <app-empty>Aucun client</app-empty>
-      </ng-template>
+      <div class="ui blue segment">
+        <div class="ui blue ribbon label">Action</div>
+        <div class="ui two column center aligned grid">
+          <div class="middle aligned row">
+            <div class="column">
+              <div class="ui icon header">
+                <i class="file alternate outline icon"></i>
+                Ajouter un client
+              </div><br>
+              <app-link-button hiddenIcon="plus" size="small">
+                Nouveau client
+              </app-link-button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Clients -->
+  <div *ngIf="true; else empty" class="ui three column padded centered grid stackable">
+    <div class="column">
+      <app-client-details></app-client-details>
+    </div>
+    <div class="column">
+      <app-client-details></app-client-details>
+    </div>
+    <div class="column">
+      <app-client-details></app-client-details>
+    </div>
+    <div class="column">
+      <app-client-details></app-client-details>
+    </div>
+    <div class="column">
+      <app-client-details></app-client-details>
+    </div>
+  </div>
+
+  <!-- Empty -->
+  <ng-template #empty>
+    <div class="ui padded grid">
+      <div class="column">
+        <app-empty>Aucun client</app-empty>
+      </div>
+    </div>
+  </ng-template>
 </app-content>
