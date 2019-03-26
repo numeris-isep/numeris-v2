@@ -1,52 +1,54 @@
-<a class="ui fluid link card" href="#">
-  <div class="content">
-    <div class="ui blue ribbon label">
-      <i class="building icon"></i>Client
+<app-content [condition]="!client">
+  <a class="ui fluid link card" [routerLink]="client.id">
+    <div class="content">
+      <div class="ui blue ribbon label">
+        <i class="building icon"></i> Client
+      </div>
+      <img class="right floated mini ui image" src="assets/logos/numeris-blue.png" alt="Logo de Numéris">
     </div>
-    <img class="right floated mini ui image" src="assets/logos/numeris-blue.png" alt="Logo de Numéris">
-  </div>
 
-  <div class="content">
-    <div class="header">
-      AS Connect
-    </div>
-    <div class="meta">
-      <i class="edit icon"></i> Dernière modification le 24/01/2019
-    </div>
-    <div class="description center aligned marged">
-      <div class="ui mini black statistic"
-           suiPopup popupText="Conventions" [popupPlacement]="'bottom'">
-        <div class="value">
-          <i class="tag brown icon"></i> 2
+    <div class="content">
+      <div class="header">
+        {{ client.name }}
+      </div>
+      <div class="meta">
+        <i class="historyblue icon"></i> Modifié le {{ client.updatedAt | date:"dd/MM/y" }}
+      </div>
+      <div class="description center aligned marged">
+        <div class="ui mini black statistic"
+             suiPopup popupText="Conventions" [popupPlacement]="'bottom'">
+          <div class="value">
+            <i class="tag blue icon"></i> {{ client.conventionsCount }}
+          </div>
+        </div>
+        <div class="ui mini black statistic"
+             suiPopup popupText="Projets" [popupPlacement]="'bottom'">
+          <div class="value">
+            <i class="folder open blue icon"></i> {{ client.projectsCount }}
+          </div>
+        </div>
+        <div class="ui mini black statistic"
+             suiPopup popupText="Missions" [popupPlacement]="'bottom'">
+          <div class="value">
+            <i class="copy blue icon"></i> {{ client.missionsCount }}
+          </div>
         </div>
       </div>
-      <div class="ui mini black statistic"
-           suiPopup popupText="Projets" [popupPlacement]="'bottom'">
-        <div class="value">
-          <i class="folder open brown icon"></i> 33
-        </div>
-      </div>
-      <div class="ui mini black statistic"
-           suiPopup popupText="Missions" [popupPlacement]="'bottom'">
-        <div class="value">
-          <i class="copy brown icon"></i> 218
-        </div>
+    </div>
+
+    <div class="content">
+      <div class="description">
+        <p>
+          <i class="user md icon"></i> Sébastien MARRY
+        </p>
+        <p>
+          <i class="phone icon"></i> 01 23 45 67 89
+        </p>
       </div>
     </div>
-  </div>
 
-  <div class="content">
-    <div class="description">
-      <p>
-        <i class="user md icon"></i> Sébastien MARRY
-      </p>
-      <p>
-        <i class="phone icon"></i> 01 23 45 67 89
-      </p>
+    <div class="extra content">
+      <i class="map marker alternate icon"></i> {{ client.address | address }}
     </div>
-  </div>
-
-  <div class="extra content">
-    <i class="map marker alternate icon"></i> 1 rue Quelquepart, 75015 Paris
-  </div>
-</a>
+  </a>
+</app-content>

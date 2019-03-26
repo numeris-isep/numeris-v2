@@ -1,4 +1,4 @@
-<app-content [condition]="!true">
+<app-content [condition]="!clients">
   <!-- Action -->
   <div class="ui padded grid">
     <div class="column">
@@ -22,21 +22,9 @@
   </div>
 
   <!-- Clients -->
-  <div *ngIf="true; else empty" class="ui three column padded centered grid stackable">
-    <div class="column">
-      <app-client-details></app-client-details>
-    </div>
-    <div class="column">
-      <app-client-details></app-client-details>
-    </div>
-    <div class="column">
-      <app-client-details></app-client-details>
-    </div>
-    <div class="column">
-      <app-client-details></app-client-details>
-    </div>
-    <div class="column">
-      <app-client-details></app-client-details>
+  <div *ngIf="clients; else empty" class="ui three column padded centered grid stackable">
+    <div *ngFor="let client of clients" class="column">
+      <app-client-details [client]="client"></app-client-details>
     </div>
   </div>
 

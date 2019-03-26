@@ -20,7 +20,10 @@ class ClientController extends Controller
     {
         $this->authorize('index', Client::class);
 
-        return response()->json(ClientResource::collection(Client::all()));
+        return response()->json(ClientResource::collection(
+            Client::withCount('conventions', 'projects', 'missions')
+                ->get()->load('address')
+        ));
     }
 
     /**

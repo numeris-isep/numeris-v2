@@ -8,7 +8,7 @@ $factory->define(Project::class, function (Faker $faker) {
     $steps = Project::steps();
 
     return [
-        'client_id'         => factory(Client::class)->create(),
+        'client_id'         => factory(Client::class),
         'name'              => $faker->colorName,
         'step'              => $steps[$faker->numberBetween(0, count($steps) - 1)],
         'start_at'          => $faker->dateTime(),

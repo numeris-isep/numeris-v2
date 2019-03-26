@@ -15,17 +15,23 @@ class ClientResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'            => $this->id,
-            'addressId'    => $this->address_id,
-            'name'          => $this->name,
-            'reference'     => $this->reference,
-            'createdAt'    => $this->created_at->toDateTimeString(),
-            'updatedAt'    => $this->updated_at->toDateTimeString(),
+            'id'                => $this->id,
+            'addressId'         => $this->address_id,
+            'name'              => $this->name,
+            'reference'         => $this->reference,
+            'createdAt'         => $this->created_at->toDateTimeString(),
+            'updatedAt'         => $this->updated_at->toDateTimeString(),
+
+            // Counts
+            'conventionsCount'  => $this->conventions_count,
+            'projectsCount'     => $this->projects_count,
+            'missionsCount'     => $this->missions_count,
 
             // Relations
-            'address'       => AddressResource::make($this->whenLoaded('address')),
-            'conventions'   => ConventionResource::collection($this->whenLoaded('conventions')),
-            'projects'      => ProjectResource::collection($this->whenLoaded('projects')),
+            'address'           => AddressResource::make($this->whenLoaded('address')),
+            'conventions'       => ConventionResource::collection($this->whenLoaded('conventions')),
+            'projects'          => ProjectResource::collection($this->whenLoaded('projects')),
+            'missions'          => MissionResource::collection($this->whenLoaded('missions')),
         ];
     }
 }

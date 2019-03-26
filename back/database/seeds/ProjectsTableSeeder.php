@@ -24,31 +24,29 @@ class ProjectsTableSeeder extends Seeder
                 $this->call(ConventionsTableSeeder::class);
             }
 
-            if (Project::all()->isEmpty()) {
-                // AS Connect
-                $as_connect = Client::findByName('AS Connect');
-                $this->createProjects($as_connect);
+            // AS Connect
+            $as_connect = Client::findByName('AS Connect');
+            $this->createProjects($as_connect);
 
-                // AS International
-                $as_inter = Client::findByName('AS International');
-                $this->createProjects($as_inter);
+            // AS International
+            $as_inter = Client::findByName('AS International');
+            $this->createProjects($as_inter);
 
-                // Infodis
-                $infodis = Client::findByName('Infodis');
-                $this->createProjects($infodis);
+            // Infodis
+            $infodis = Client::findByName('Infodis');
+            $this->createProjects($infodis);
 
-                // Métalogic
-                $metalogic = Client::findByName('Métalogic');
-                $this->createProjects($metalogic);
+            // Métalogic
+            $metalogic = Client::findByName('Métalogic');
+            $this->createProjects($metalogic);
 
-                // ISEP
-                $isep = Client::findByName('ISEP');
-                $this->createProjects($isep);
+            // ISEP
+            $isep = Client::findByName('ISEP');
+            $this->createProjects($isep);
 
-                // SRID Informatique
-                $srid = Client::findByName('SRID Informatique');
-                $this->createProjects($srid);
-            }
+            // SRID Informatique
+            $srid = Client::findByName('SRID Informatique');
+            $this->createProjects($srid);
         }
     }
 
