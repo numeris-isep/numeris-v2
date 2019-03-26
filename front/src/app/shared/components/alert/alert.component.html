@@ -1,11 +1,14 @@
 <div *ngFor="let alert of alerts">
   <div *ngIf="target === alert.target || alert.target === 'all'" class="padded" #div>
-    <sui-message class="{{ cssClass(alert) }}" (dismiss)="div.remove()">
-      <div *ngIf="alert.title" class="header">
-        {{ alert.title }}
-      </div>
-      <div *ngIf="alert.content">
-        {{ alert.content }}
+    <sui-message class="{{ cssClass(alert) }} icon" (dismiss)="div.remove()">
+      <i *ngIf="alert.title" class="frown outline loading icon"></i>
+      <div class="content">
+        <div *ngIf="alert.title" class="header">
+          {{ alert.title }}
+        </div>
+        <div *ngIf="alert.content">
+          {{ alert.content }}
+        </div>
       </div>
     </sui-message>
   </div>
