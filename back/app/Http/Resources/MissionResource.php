@@ -25,7 +25,7 @@ class MissionResource extends JsonResource
             'capacity'              => $this->capacity,
 
             // Count
-            'applications_count'    => $this->applications_count,
+            'applicationsCount'    => $this->applications_count,
 
             // Relations
             'address'               => AddressResource::make($this->whenLoaded('address')),

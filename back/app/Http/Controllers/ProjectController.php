@@ -12,14 +12,27 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return JsonResponse
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function index()
     {
         $this->authorize('index', Project::class);
 
-        return response()->json(ProjectResource::collection(Project::all()));
+        $this->validate(request(), [
+            'page'      => 'integer|min:1',
+            'status'    => 'string|in:' . implode(',', Project::steps()),
+            'minDate'   => 'date|string',
+            'maxDate'   => 'date|string',
+        ]);
+
+        $projects = Project::filtered(
+            request()->step,
+            [request()->minDate, request()->maxDate]
+        )->withCount('missions')->with('client')->paginate(10);
+
+        return ProjectResource::collection($projects);
     }
 
     /**

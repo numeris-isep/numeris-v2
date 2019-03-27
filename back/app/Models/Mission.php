@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use App\Models\Traits\OnEventsTrait;
-use App\Models\Traits\QueryDateTrait;
+use App\Models\Traits\DateQueryTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Mission extends Model
 {
     use OnEventsTrait,
-        QueryDateTrait;
+        DateQueryTrait;
 
     protected $fillable = [
         // One-to-One relations
@@ -63,7 +63,7 @@ class Mission extends Model
     {
         return static::whereDate('start_at', $range)
             ->when($is_locked != null, function ($query) use ($is_locked) {
-                return $query->where('is_locked', '=', $is_locked === 'true' ? true : false);
+                return $query->where('is_locked', $is_locked === 'true' ? true : false);
             });
     }
 

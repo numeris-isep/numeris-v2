@@ -9,11 +9,13 @@ export class Project {
 
   name: string;
   step: string;
-  start_at: string;
+  startAt: string;
   isPrivate: boolean;
   moneyReceivedAt: string;
   createdAt: string;
   updatedAt: string;
+
+  missionsCount: number;
 
   client: Client;
   convention: Convention;

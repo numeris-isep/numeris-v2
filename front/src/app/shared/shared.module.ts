@@ -20,6 +20,7 @@ import { PhonePipe } from './pipes/phone.pipe';
 import { EmptyComponent } from './components/empty/empty.component';
 import { RolePipe } from './pipes/role.pipe';
 import { RouterModule } from '@angular/router';
+import { StatusPipe } from './pipes/status.pipe';
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import { RouterModule } from '@angular/router';
     PhonePipe,
     EmptyComponent,
     RolePipe,
+    StatusPipe,
   ],
   exports: [
     // Components
@@ -70,6 +72,7 @@ import { RouterModule } from '@angular/router';
     AddressPipe,
     PhonePipe,
     RolePipe,
+    StatusPipe,
   ],
   entryComponents: [
     ConfirmModalComponent,

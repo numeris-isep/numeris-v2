@@ -85,7 +85,7 @@
         </div>
 
         <!-- Table -->
-        <div class="ui segment">
+        <div class="ui segment" [ngClass]="{'loading': loading}">
           <table class="ui celled striped selectable table">
             <thead>
               <tr>
@@ -101,16 +101,16 @@
             </thead>
 
             <tbody>
-              <tr *ngFor="let mission of paginatedMission.data" [ngClass]="{'locked': mission.isLocked}">
+              <tr *ngFor="let mission of paginatedMission.data" [ngClass]="{'hatched': mission.isLocked}">
                 <td>{{ mission.startAt | date:'dd/MM/y H\'h\'mm' }}</td>
                 <td>{{ mission.reference }}</td>
                 <td>{{ mission.title }}</td>
                 <td>{{ mission.address | address }}</td>
-                <td>{{ mission.duration }}h</td>
+                <td class="center aligned">{{ mission.duration }}h</td>
                 <td>
                   <sui-progress class="tiny active indicating"
-                                [value]="mission.applications_count" [maximum]="mission.capacity">
-                    {{ mission.applications_count }}/{{ mission.capacity }}
+                                [value]="mission.applicationsCount" [maximum]="mission.capacity">
+                    {{ mission.applicationsCount }}/{{ mission.capacity }}
                   </sui-progress>
                 </td>
                 <td class="center aligned" [ngClass]="{'warning': mission.project.isPrivate}">

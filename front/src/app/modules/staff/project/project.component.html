@@ -1,30 +1,30 @@
-<app-content [condition]="!true">
-  <!-- Action -->
-  <div class="ui padded grid">
-    <div class="column">
-      <div class="ui blue segment">
-        <div class="ui blue ribbon label">Action</div>
-        <div class="ui two column center aligned grid">
-          <div class="middle aligned row">
-            <div class="column">
-              <div class="ui icon header">
-                <i class="file alternate outline icon"></i>
-                Ajouter un projet
-              </div><br>
-              <app-link-button hiddenIcon="plus" size="small">
-                Nouveau projet
-              </app-link-button>
-            </div>
+<!-- Action -->
+<div class="ui padded grid">
+  <div class="column">
+    <div class="ui blue segment">
+      <div class="ui blue ribbon label">Action</div>
+      <div class="ui two column center aligned grid">
+        <div class="middle aligned row">
+          <div class="column">
+            <div class="ui icon header">
+              <i class="file alternate outline icon"></i>
+              Ajouter un projet
+            </div><br>
+            <app-link-button hiddenIcon="plus" size="small">
+              Nouveau projet
+            </app-link-button>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
+<app-content [condition]="!paginatedProject">
   <!-- Projects -->
   <div class="ui padded grid">
     <div class="column">
-      <div *ngIf="true; else empty" class="ui segments">
+      <div *ngIf="paginatedProject; else empty" class="ui segments">
         <!-- Selection -->
         <div class="ui horizontal segments form grid">
           <div class="ui segment column">
@@ -33,12 +33,10 @@
               <div class="ui action input">
                 <sui-select class="selection" label="step"
                             placeholder="Sélectionner une option"
-                            [(ngModel)]="selectedStep">
-                  <sui-select-option value="Ouvert"></sui-select-option>
-                  <sui-select-option value="Validé"></sui-select-option>
-                  <sui-select-option value="Facturé"></sui-select-option>
-                  <sui-select-option value="Payé"></sui-select-option>
-                  <sui-select-option value="Fermé"></sui-select-option>
+                            [options]="options" [(ngModel)]="selectedStep"
+                            (ngModelChange)="setFilter()"
+                            #select>
+                  <sui-select-option *ngFor="let option of select.filteredOptions" [value]="option"></sui-select-option>
                 </sui-select>
                 <button class="ui icon button" (click)="reset('selectedStep')">
                   <i class="x icon"></i>
@@ -54,7 +52,7 @@
                   <i class="calendar outline icon"></i>
                   <input suiDatepicker pickerMode="month" placeholder="Début"
                          [(ngModel)]="minDate" [pickerMaxDate]="maxDate"
-                         [pickerUseNativeOnMobile]="true">
+                         [pickerUseNativeOnMobile]="true" (ngModelChange)="setFilter()">
                   <button class="ui icon button" (click)="reset('minDate')">
                     <i class="x icon"></i>
                   </button>
@@ -66,7 +64,7 @@
                   <i class="calendar icon"></i>
                   <input suiDatepicker pickerMode="month" placeholder="Fin"
                          [(ngModel)]="maxDate" [pickerMinDate]="minDate"
-                         [pickerUseNativeOnMobile]="true">
+                         [pickerUseNativeOnMobile]="true" (ngModelChange)="setFilter()">
                   <button class="ui icon button" (click)="reset('maxDate')">
                     <i class="x icon"></i>
                   </button>
@@ -77,91 +75,35 @@
         </div>
 
         <!-- Table -->
-        <div class="ui segment">
+        <div class="ui segment" [ngClass]="{'loading': loading}">
           <table class="ui celled striped selectable table">
             <thead>
               <tr>
-                <th>
-                  <i class="calendar outline icon"></i>
-                  Date de début
-                </th>
-                <th>
-                  <i class="address book outline icon"></i>
-                  Nom
-                </th>
-                <th>
-                  <i class="clipboard list icon"></i>
-                  Status
-                </th>
-                <th>
-                  <i class="building icon"></i>
-                  Client
-                </th>
-                <th>
-                  <i class="copy icon"></i>
-                  Missions
-                </th>
-                <th>
-                  <i class="user secret icon"></i>
-                  Visibilité
-                </th>
-                <th>
-                  <i class="hand pointer outline icon"></i>
-                  Action
-                </th>
+                <th><i class="calendar outline icon"></i> Date de début</th>
+                <th><i class="address book outline icon"></i> Nom</th>
+                <th><i class="clipboard list icon"></i> Status</th>
+                <th><i class="building icon"></i> Client</th>
+                <th><i class="copy icon"></i> Missions</th>
+                <th><i class="user secret icon"></i> Visibilité</th>
+                <th><i class="hand pointer outline icon"></i> Action</th>
               </tr>
             </thead>
 
             <tbody>
-              <tr>
-                <td>01/01/2019</td>
-                <td>AS Connect Janvier 2019</td>
-                <td class="negative">
-                  Fermé
+              <tr *ngFor="let project of paginatedProject.data" [ngClass]="{'hatched': project.step == 'closed'}">
+                <td>{{ project.startAt | date:'dd/MM/y' }}</td>
+                <td>{{ project.name }}</td>
+                <td [ngClass]="{'warning': project.step == 'hiring', 'positive': project.step == 'paid' }">
+                  {{ project.step | status }}
                 </td>
-                <td>AS Connect</td>
-                <td>26</td>
-                <td class="center aligned">
-                  <i class="eye icon"></i>
-                </td>
-                <td class="center aligned">
-                  <app-link-button size="tiny" color="basic"
-                                   hiddenIcon="zoom-in">
-                    Voir
-                  </app-link-button>
-                </td>
-              </tr>
-              <tr>
-                <td>01/02/2019</td>
-                <td>AS Connect Février 2019</td>
-                <td class="warning">
-                  Facturé
-                </td>
-                <td>AS Connect</td>
-                <td>19</td>
-                <td class="center aligned warning">
-                  <i class="eye slash icon"></i>
+                <td>{{ project.client.name }}</td>
+                <td class="center aligned">{{ project.missionsCount }}</td>
+                <td class="center aligned" [ngClass]="{'warning': project.isPrivate}">
+                  <i class="eye icon" [ngClass]="{'slash': project.isPrivate}"></i>
                 </td>
                 <td class="center aligned">
-                  <app-link-button size="tiny" color="basic"
-                                   hiddenIcon="zoom-in">
-                    Voir
-                  </app-link-button>
-                </td>
-              </tr>
-              <tr>
-                <td>01/03/2019</td>
-                <td>AS Connect Mars 2019</td>
-                <td class="positive">
-                  Ouvert
-                </td>
-                <td>AS Connect</td>
-                <td>26</td>
-                <td class="center aligned">
-                  <i class="eye icon"></i>
-                </td>
-                <td class="center aligned">
-                  <app-link-button size="tiny" color="basic"
+                  <app-link-button [routerLink]="project.id"
+                                   size="tiny" color="basic"
                                    hiddenIcon="zoom-in">
                     Voir
                   </app-link-button>
@@ -173,9 +115,12 @@
 
         <!-- Pagination -->
         <div class="ui center aligned segment">
-          <sui-pagination [collectionSize]="200" [pageSize]="10" [maxSize]="4" [(page)]="page"
+          <sui-pagination [collectionSize]="paginatedProject.meta.total"
+                          [pageSize]="paginatedProject.meta.per_page" [maxSize]="4"
+                          [(page)]="paginatedProject.meta.current_page"
                           [hasNavigationLinks]="true" [hasBoundaryLinks]="true"
-                          [hasEllipses]="false" [canRotate]="true">
+                          [hasEllipses]="false" [canRotate]="true"
+                          (pageChange)="getProjectsPerPage($event)">
           </sui-pagination>
         </div>
       </div>

@@ -17,7 +17,7 @@ export class Mission {
   createdAt: string;
   updatedAt: string;
 
-  applications_count: number;
+  applicationsCount: number;
 
   project: Project;
   address: Address;

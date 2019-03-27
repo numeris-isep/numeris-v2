@@ -22,7 +22,7 @@
   max-width: 196px;
 }
 
-tr.locked {
+tr.hatched {
   background: repeating-linear-gradient(
     135deg,
     #FAFAFA,
@@ -32,7 +32,7 @@ tr.locked {
   )
 }
 
-table.selectable tr.locked:hover {
+table.selectable tr.hatched:hover {
   background: repeating-linear-gradient(
     135deg,
     #F4F4F4,

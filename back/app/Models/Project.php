@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\DateQueryTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Project extends Model
 {
+    use DateQueryTrait;
+
     const HIRING = 'hiring';
 
     const VALIDATED = 'validated';
@@ -61,6 +64,13 @@ class Project extends Model
         }
 
         throw new ModelNotFoundException();
+    }
+
+    public static function filtered($step, array $range) {
+        return static::whereDate('start_at', $range)
+            ->when($step != null, function($query) use ($step) {
+                return $query->where('step', $step);
+            });
     }
 
     public function client()

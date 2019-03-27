@@ -23,8 +23,10 @@ export class MissionService {
 
     if (pageId) url += `&page=${pageId}`;
     if (isLocked != null) url += `&isLocked=${isLocked}`;
-    if (range[0]) url += `&minDate=${range[0]}`;
-    if (range[1]) url += `&maxDate=${range[1]}`;
+    if (range) {
+      if (range[0]) url += `&minDate=${range[0]}`;
+      if (range[1]) url += `&maxDate=${range[1]}`;
+    }
 
     return this.http.get<PaginatedMission>(url, HTTP_OPTIONS);
   }

@@ -3,7 +3,7 @@
 namespace App\Models\Traits;
 
 
-trait QueryDateTrait
+trait DateQueryTrait
 {
     protected static function whereDate($attribute, array $range)
     {

@@ -24,6 +24,9 @@ class ProjectResource extends JsonResource
             'createdAt'         => $this->created_at->toDateTimeString(),
             'updatedAt'         => $this->updated_at->toDateTimeString(),
 
+            // Counts
+            'missionsCount'    => $this->missions_count,
+
             // Relations
             'client'            => ClientResource::make($this->whenLoaded('client')),
             'missions'          => MissionResource::collection($this->whenLoaded('missions')),
