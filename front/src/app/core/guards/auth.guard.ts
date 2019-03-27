@@ -4,6 +4,7 @@ import { map, take } from "rxjs/operators";
 import { AuthService } from "../http/auth/auth.service";
 import { SuiModalService } from "ng2-semantic-ui";
 import { LoginModal } from "../../shared/components/modals/login-modal/login-modal.component";
+import { TokenService } from "../services/token.service";
 
 @Injectable({
   providedIn: 'root'

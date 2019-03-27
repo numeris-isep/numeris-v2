@@ -50,7 +50,7 @@ registerLocaleData(localeFr, 'fr');
     NotFoundComponent,
     TitleComponent,
     HeaderComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
   ],
   providers: [
     Title,

@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\OnEventsTrait;
+use App\Models\Traits\QueryDateTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Mission extends Model
 {
-    use OnEventsTrait;
+    use OnEventsTrait,
+        QueryDateTrait;
 
     protected $fillable = [
         // One-to-One relations
@@ -15,6 +18,7 @@ class Mission extends Model
 
         // Attributes
         'is_locked',
+        'reference',
         'title',
         'description',
         'start_at',
@@ -53,6 +57,14 @@ class Mission extends Model
     public static function available()
     {
         return static::opened(); // TODO: where user belongsTo project_user
+    }
+
+    public static function filtered($is_locked, array $range)
+    {
+        return static::whereDate('start_at', $range)
+            ->when($is_locked != null, function ($query) use ($is_locked) {
+                return $query->where('is_locked', '=', $is_locked === 'true' ? true : false);
+            });
     }
 
     public function address()

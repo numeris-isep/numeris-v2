@@ -39,6 +39,7 @@ class UpdateStaffTest extends TestCaseWithAuth
             ->assertJsonStructure([
                 'id',
                 'isLocked',
+                'reference',
                 'title',
                 'description',
                 'startAt',

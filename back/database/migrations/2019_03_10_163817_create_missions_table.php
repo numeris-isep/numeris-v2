@@ -22,6 +22,7 @@ class CreateMissionsTable extends Migration
             $table->foreign('address_id')->references('id')->on('addresses')->onDelete('set null');
 
             $table->boolean('is_locked')->default(false);
+            $table->string('reference')->unique()->nullable();
             $table->string('title');
             $table->string('description');
             $table->timestamp('start_at')->nullable();

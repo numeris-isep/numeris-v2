@@ -9,7 +9,7 @@ export class LinkButtonComponent
   extends Button
   implements OnInit {
 
-  @Input() href: string = '#';
+  @Input() routerLink: string = '#';
   @Input() target: string = '';
 
   constructor() {

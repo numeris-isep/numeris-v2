@@ -20,7 +20,19 @@ class MissionController extends Controller
     {
         $this->authorize('index', Mission::class);
 
-        $missions = Mission::with('applications')->paginate();
+        $this->validate(request(), [
+            'page'      => 'integer|min:1',
+            'isLocked'  => 'string',
+            'minDate'   => 'date|string',
+            'maxDate'   => 'date|string',
+        ]);
+
+        $missions = Mission::filtered(
+            request()->isLocked,
+            [request()->minDate, request()->maxDate]
+        )->withCount(['applications' => function($query) {
+            return $query->where('status', 'accepted');
+        }])->with('address', 'project', 'applications')->paginate(10);
 
         return MissionResource::collection($missions);
     }

@@ -1,5 +1,5 @@
 <a class="ui button" [ngClass]="classes"
-   href="{{ href }}" target="{{ target }}">
+   [routerLink]="routerLink" target="{{ target }}">
   <app-button-content [visibleIcon]="visibleIcon"
                       [hiddenIcon]="hiddenIcon">
     <ng-content></ng-content>

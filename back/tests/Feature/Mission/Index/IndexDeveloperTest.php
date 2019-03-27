@@ -20,6 +20,7 @@ class IndexDeveloperTest extends TestCaseWithAuth
                 'data' => [[
                     'id',
                     'isLocked',
+                    'reference',
                     'title',
                     'description',
                     'startAt',

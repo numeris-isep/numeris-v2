@@ -19,9 +19,11 @@ import { AddressPipe } from './pipes/address.pipe';
 import { PhonePipe } from './pipes/phone.pipe';
 import { EmptyComponent } from './components/empty/empty.component';
 import { RolePipe } from './pipes/role.pipe';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
+    RouterModule,
     CommonModule,
     SuiModule,
     ReactiveFormsModule,

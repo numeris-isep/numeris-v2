@@ -36,6 +36,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
             ->assertJsonStructure([
                 'id',
                 'isLocked',
+                'reference',
                 'title',
                 'description',
                 'startAt',

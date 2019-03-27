@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { Mission } from "../classes/models/mission";
 import { environment } from "../../../environments/environment";
 import { HTTP_OPTIONS } from "../constants/http_options";
+import { PaginatedMission } from "../classes/pagination/paginated-mission";
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,20 @@ export class MissionService {
 
   constructor(private http: HttpClient) { }
 
-  getMissions(): Observable<Mission[]> {
+  getMissions(): Observable<PaginatedMission> {
     const url = `${environment.apiUrl}/api/missions`;
-    return this.http.get<Mission[]>(url, HTTP_OPTIONS);
+    return this.http.get<PaginatedMission>(url, HTTP_OPTIONS);
+  }
+
+  getMissionsPerPage(pageId?: number, isLocked?: any, range?: [string, string]): Observable<PaginatedMission> {
+    let url = `${environment.apiUrl}/api/missions?`;
+
+    if (pageId) url += `&page=${pageId}`;
+    if (isLocked != null) url += `&isLocked=${isLocked}`;
+    if (range[0]) url += `&minDate=${range[0]}`;
+    if (range[1]) url += `&maxDate=${range[1]}`;
+
+    return this.http.get<PaginatedMission>(url, HTTP_OPTIONS);
   }
 
   getAvailableMissions(): Observable<Mission[]> {

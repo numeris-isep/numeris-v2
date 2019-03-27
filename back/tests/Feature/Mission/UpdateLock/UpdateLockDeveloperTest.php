@@ -25,6 +25,7 @@ class UpdateLockDeveloperTest extends TestCaseWithAuth
             ->assertJsonStructure([
                 'id',
                 'isLocked',
+                'reference',
                 'title',
                 'description',
                 'startAt',
