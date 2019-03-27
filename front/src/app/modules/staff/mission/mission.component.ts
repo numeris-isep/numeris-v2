@@ -12,8 +12,8 @@ export class MissionComponent implements OnInit {
 
   paginatedMission: PaginatedMission;
   selectedOption: string;
-  minDate: string;
-  maxDate: string;
+  from: string;
+  to: string;
   loading: boolean = false;
   options = ["Missions ouvertes", "Missions fermées"];
 
@@ -33,7 +33,7 @@ export class MissionComponent implements OnInit {
     this.missionService.getMissionsPerPage(
       pageId,
       this.selectedOptionToIsLocked(),
-      [this.dateToISO(this.minDate), this.dateToISO(this.maxDate)]
+      [this.dateToISO(this.from), this.dateToISO(this.to)]
     ).subscribe(paginatedMission => {
       this.paginatedMission = paginatedMission;
       this.loading = false;
@@ -42,8 +42,8 @@ export class MissionComponent implements OnInit {
 
   setFilter() {
     if (this.selectedOption !== undefined
-      || this.minDate !== undefined
-      || this.maxDate !== undefined
+      || this.from !== undefined
+      || this.to !== undefined
     ) {
       this.getMissionsPerPage(1);
     }

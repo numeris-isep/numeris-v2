@@ -23,8 +23,8 @@ class ProjectController extends Controller
         $this->validate(request(), [
             'page'      => 'integer|min:1',
             'status'    => 'string|in:' . implode(',', Project::steps()),
-            'minDate'   => 'date|string',
-            'maxDate'   => 'date|string',
+            'from'      => 'date|string',
+            'to'        => 'date|string',
         ]);
 
         $projects = Project::filtered(

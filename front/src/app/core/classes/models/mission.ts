@@ -9,6 +9,7 @@ export class Mission {
   addressId: number;
 
   isLocked: boolean;
+  reference: string;
   title: string;
   description: string;
   startAt: string;

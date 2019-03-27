@@ -12,8 +12,8 @@ export class ProjectComponent implements OnInit {
 
   paginatedProject: PaginatedProject;
   selectedStep: string;
-  minDate: string;
-  maxDate: string;
+  from: string;
+  to: string;
   loading: boolean = false;
   options = [
     "Ouvert", "Validé",
@@ -40,7 +40,7 @@ export class ProjectComponent implements OnInit {
     this.projectService.getProjectsPerPage(
       pageId,
       this.selectedOptionToStep(),
-      [this.dateToISO(this.minDate), this.dateToISO(this.maxDate)]
+      [this.dateToISO(this.from), this.dateToISO(this.to)]
     ).subscribe(paginatedProject => {
       this.paginatedProject = paginatedProject;
       this.loading = false;
@@ -49,8 +49,8 @@ export class ProjectComponent implements OnInit {
 
   setFilter() {
     if (this.selectedStep !== undefined
-      || this.minDate !== undefined
-      || this.maxDate !== undefined
+      || this.from !== undefined
+      || this.to !== undefined
     ) {
       this.getProjectsPerPage(1);
     }

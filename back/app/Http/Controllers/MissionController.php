@@ -24,8 +24,8 @@ class MissionController extends Controller
         $this->validate(request(), [
             'page'      => 'integer|min:1',
             'isLocked'  => 'string',
-            'minDate'   => 'date|string',
-            'maxDate'   => 'date|string',
+            'from'      => 'date|string',
+            'to'        => 'date|string',
         ]);
 
         $missions = Mission::filtered(
