@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('users', 'UserController', ['parameters' => ['users' => 'user_id']]);
     Route::patch('users/{user_id}/profile', 'UserController@updateProfile')->name('users.update.profile');
     Route::patch('users/{user_id}/terms-of-use', 'UserController@updateTermsOfUse')->name('users.update.terms-of-use');
+    Route::get('users-promotion', 'UserController@indexPromotion')->name('users.index.promotion');
 
     // Role resource routes
     Route::get('roles', 'RoleController@index')->name('roles.index');

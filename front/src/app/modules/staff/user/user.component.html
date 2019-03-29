@@ -1,8 +1,8 @@
-<app-content [condition]="!true">
+<app-content [condition]="!(paginatedUser && promotions)">
   <!-- Users -->
   <div class="ui padded grid">
     <div class="column">
-      <div *ngIf="true; else empty" class="ui segments">
+      <div *ngIf="paginatedUser; else empty" class="ui segments">
         <!-- Selection -->
         <div class="ui horizontal segments form grid">
           <div class="ui segment column">
@@ -10,7 +10,8 @@
               <label>Rechercher</label>
               <div class="ui left icon action search input">
                 <i class="search icon"></i>
-                <input class="prompt" type="text" placeholder="Rechercher ..." [(ngModel)]="search">
+                <input class="prompt" type="text" placeholder="Rechercher ..."
+                       [value]="search" [formControl]="searchControl" (keydown)="loading = true">
                 <button class="ui icon button" (click)="reset('search')">
                   <i class="x icon"></i>
                 </button>
@@ -20,17 +21,17 @@
           <div class="ui segment computer tablet only column">
             <div class="two fields">
               <div class="field">
-                <label>Type d'utilisateur</label>
+                <label>Rôle</label>
                 <div class="ui action input">
                   <sui-select class="fluid selection" label="userType"
                               placeholder="Sélectionner une option"
-                              [(ngModel)]="selectedUserType">
-                    <sui-select-option value="Utilisateur"></sui-select-option>
-                    <sui-select-option value="Staff"></sui-select-option>
-                    <sui-select-option value="Administrateur"></sui-select-option>
-                    <sui-select-option value="Développeur"></sui-select-option>
+                              [options]="roles" [(ngModel)]="selectedRole"
+                              (ngModelChange)="setFilter()"
+                              #selectRole>
+                    <sui-select-option *ngFor="let option of selectRole.filteredOptions"
+                                       [value]="option"></sui-select-option>
                   </sui-select>
-                  <button class="ui icon button" (click)="reset('selectedUserType')">
+                  <button class="ui icon button" (click)="reset('selectedRole')">
                     <i class="x icon"></i>
                   </button>
                 </div>
@@ -40,18 +41,11 @@
                 <div class="ui action input">
                   <sui-select class="fluid selection" label="promotion"
                               placeholder="Sélectionner une option"
-                              [(ngModel)]="selectedPromotion">
-                    <sui-select-option value="2016"></sui-select-option>
-                    <sui-select-option value="2017"></sui-select-option>
-                    <sui-select-option value="2018"></sui-select-option>
-                    <sui-select-option value="2019"></sui-select-option>
-                    <sui-select-option value="2020"></sui-select-option>
-                    <sui-select-option value="2021"></sui-select-option>
-                    <sui-select-option value="2022"></sui-select-option>
-                    <sui-select-option value="2023"></sui-select-option>
-                    <sui-select-option value="2024"></sui-select-option>
-                    <sui-select-option value="2025"></sui-select-option>
-                    <sui-select-option value="2026"></sui-select-option>
+                              [options]="promotions" [(ngModel)]="selectedPromotion"
+                              (ngModelChange)="setFilter()"
+                              #selectPromotion>
+                    <sui-select-option *ngFor="let option of selectPromotion.filteredOptions"
+                                        [value]="option"></sui-select-option>
                   </sui-select>
                   <button class="ui icon button" (click)="reset('selectedPromotion')">
                     <i class="x icon"></i>
@@ -63,85 +57,35 @@
         </div>
 
         <!-- Table -->
-        <div class="ui segment">
+        <div class="ui segment" [ngClass]="{'loading': loading}">
           <table class="ui celled striped selectable table">
             <thead>
             <tr>
-              <th>
-                <i class="tag icon"></i>
-                Nom
-              </th>
-              <th>
-                <i class="id badge icon"></i>
-                Numéro étudiant
-              </th>
-              <th>
-                <i class="mail alternate icon"></i>
-                E-mail
-              </th>
-              <th>
-                <i class="phone icon"></i>
-                Téléphone
-              </th>
-              <th>
-                <i class="unlock alternate icon"></i>
-                Rôle
-              </th>
-              <th>
-                <i class="hand pointer outline icon"></i>
-                Action
-              </th>
+              <th><i class="tag icon"></i> Nom</th>
+              <th><i class="id badge icon"></i> Numéro étudiant</th>
+              <th><i class="mail alternate icon"></i> E-mail</th>
+              <th><i class="phone icon"></i> Téléphone</th>
+              <th><i class="users icon"></i> Promotion</th>
+              <th><i class="graduation icon"></i> Classe</th>
+              <th><i class="unlock alternate icon"></i> Rôle</th>
+              <th><i class="hand pointer outline icon"></i> Action</th>
             </tr>
             </thead>
 
             <tbody>
-              <tr class="positive">
-                <td>Eliott DE SEGUIER</td>
-                <td>8740</td>
-                <td>eliottdes@gmail.com</td>
-                <td>06 63 67 06 80</td>
-                <td>Développeur</td>
+              <tr *ngFor="let user of paginatedUser.data" [ngClass]="{'negative': ! user.activated}"
+                  suiPopup popupText="À valider" popupPlacement="left" popupTrigger="manual" #popup="suiPopup"
+                  (mouseenter)="togglePopup(popup, !user.activated)" (mouseleave)="togglePopup(popup, !user.activated)">
+                <td>{{ user.firstName || '-' }} {{ user.lastName | uppercase }}</td>
+                <td>{{ user.studentNumber || '-' }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ (user.phone | phone) || '-' }}</td>
+                <td>{{ user.promotion || '-' }}</td>
+                <td>{{ user.schoolYear || '-' }}</td>
+                <td>{{ user.roles[0] | role }}</td>
                 <td class="center aligned">
-                  <app-link-button size="tiny" color="basic"
-                                   hiddenIcon="zoom-in">
-                    Voir
-                  </app-link-button>
-                </td>
-              </tr>
-              <tr class="warning">
-                <td>Gaël CHEREAU</td>
-                <td>35280</td>
-                <td>gael-chereau@yahoo.fr</td>
-                <td>06 63 82 74 82</td>
-                <td>Administrator</td>
-                <td class="center aligned">
-                  <app-link-button size="tiny" color="basic"
-                                   hiddenIcon="zoom-in">
-                    Voir
-                  </app-link-button>
-                </td>
-              </tr>
-              <tr>
-                <td>Pidanou EANG</td>
-                <td>9302</td>
-                <td>pida-nou@hotmail.com</td>
-                <td>06 13 41 89 01</td>
-                <td>Staff</td>
-                <td class="center aligned">
-                  <app-link-button size="tiny" color="basic"
-                                   hiddenIcon="zoom-in">
-                    Voir
-                  </app-link-button>
-                </td>
-              </tr>
-              <tr class="negative">
-                <td>John John FLORENCE</td>
-                <td>6391</td>
-                <td>jjf@wsl.com</td>
-                <td>06 86 71 92 93</td>
-                <td>Étudiant</td>
-                <td class="center aligned">
-                  <app-link-button size="tiny" color="basic"
+                  <app-link-button [routerLink]="user.id"
+                                   size="tiny" color="basic"
                                    hiddenIcon="zoom-in">
                     Voir
                   </app-link-button>
@@ -153,9 +97,12 @@
 
         <!-- Pagination -->
         <div class="ui center aligned segment">
-          <sui-pagination [collectionSize]="200" [pageSize]="10" [maxSize]="4" [(page)]="page"
+          <sui-pagination [collectionSize]="paginatedUser.meta.total"
+                          [pageSize]="paginatedUser.meta.per_page" [maxSize]="4"
+                          [(page)]="paginatedUser.meta.current_page"
                           [hasNavigationLinks]="true" [hasBoundaryLinks]="true"
-                          [hasEllipses]="false" [canRotate]="true">
+                          [hasEllipses]="false" [canRotate]="true"
+                          (pageChange)="getUsersPerPage($event)">
           </sui-pagination>
         </div>
       </div>

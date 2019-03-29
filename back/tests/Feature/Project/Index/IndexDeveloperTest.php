@@ -16,15 +16,19 @@ class IndexDeveloperTest extends TestCaseWithAuth
     {
         $this->json('GET', route('projects.index'))
             ->assertStatus(JsonResponse::HTTP_OK)
-            ->assertJsonStructure([[
-                'id',
-                'name',
-                'step',
-                'startAt',
-                'isPrivate',
-                'moneyReceivedAt',
-                'createdAt',
-                'updatedAt',
-            ]]);
+            ->assertJsonStructure([
+                'data' => [[
+                    'id',
+                    'name',
+                    'step',
+                    'startAt',
+                    'isPrivate',
+                    'moneyReceivedAt',
+                    'createdAt',
+                    'updatedAt',
+                ]],
+                'links',
+                'meta',
+            ]);
     }
 }

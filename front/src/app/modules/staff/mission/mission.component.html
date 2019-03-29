@@ -101,7 +101,9 @@
             </thead>
 
             <tbody>
-              <tr *ngFor="let mission of paginatedMission.data" [ngClass]="{'hatched': mission.isLocked}">
+              <tr *ngFor="let mission of paginatedMission.data" [ngClass]="{'hatched': mission.isLocked}"
+                  suiPopup popupText="Fermée" popupPlacement="left" popupTrigger="manual" #popup="suiPopup"
+                  (mouseenter)="togglePopup(popup, mission.isLocked)" (mouseleave)="togglePopup(popup, mission.isLocked)">
                 <td>{{ mission.startAt | date:'dd/MM/y H\'h\'mm' }}</td>
                 <td>{{ mission.reference }}</td>
                 <td>{{ mission.title }}</td>

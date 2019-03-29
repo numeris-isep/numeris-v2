@@ -12,19 +12,23 @@ class IndexStaffTest extends TestCaseWithAuth
     /**
      * @group staff
      */
-    public function testStaffAccesingProjectIndex()
+    public function testStaffAccessingProjectIndex()
     {
         $this->json('GET', route('projects.index'))
             ->assertStatus(JsonResponse::HTTP_OK)
-            ->assertJsonStructure([[
-                'id',
-                'name',
-                'step',
-                'startAt',
-                'isPrivate',
-                'moneyReceivedAt',
-                'createdAt',
-                'updatedAt',
-            ]]);
+            ->assertJsonStructure([
+                'data' => [[
+                    'id',
+                    'name',
+                    'step',
+                    'startAt',
+                    'isPrivate',
+                    'moneyReceivedAt',
+                    'createdAt',
+                    'updatedAt',
+                ]],
+                'links',
+                'meta',
+            ]);
     }
 }

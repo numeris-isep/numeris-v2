@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ProjectService } from "../../../core/http/project.service";
 import * as moment from "moment";
 import { PaginatedProject } from "../../../core/classes/pagination/paginated-project";
+import { IPopup } from "ng2-semantic-ui";
 
 @Component({
   selector: 'app-project',
@@ -10,16 +11,23 @@ import { PaginatedProject } from "../../../core/classes/pagination/paginated-pro
 })
 export class ProjectComponent implements OnInit {
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.windowWidth = event.target.innerWidth;
+  }
+
+  windowWidth: number = window.innerWidth;
+
   paginatedProject: PaginatedProject;
   selectedStep: string;
   from: string;
   to: string;
   loading: boolean = false;
-  options = [
+  options: string[] = [
     "Ouvert", "Validé",
     "Facturé", "Payé", "Cloturé"
   ];
-  stepTranslations = [
+  stepTranslations: string[] = [
     'hiring', 'validated',
     'billed', 'paid',
     'closed'
@@ -31,7 +39,7 @@ export class ProjectComponent implements OnInit {
   }
 
   reset(field: string) {
-    this[field] = null;
+    if (this[field] !== undefined) this[field] = null;
     if (field == 'selectedStep') this.setFilter();
   }
 
@@ -69,5 +77,14 @@ export class ProjectComponent implements OnInit {
 
   dateToISO(date: string) {
     return date ? moment(date).toISOString() : null;
+  }
+
+  togglePopup(popup: IPopup, condition) {
+    const widthCondition = this.windowWidth >= 1287
+      || (this.windowWidth < 1200 && this.windowWidth > 1093);
+
+    if (condition && widthCondition) {
+      popup.toggle();
+    }
   }
 }

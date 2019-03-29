@@ -15,14 +15,46 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return JsonResponse
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function index()
     {
         $this->authorize('index', User::class);
 
-        return response()->json(UserResource::collection(User::all()));
+        $this->validate(request(), [
+            'page'      => 'integer|min:1',
+            'search'    => 'string',
+            'role'      => 'string',
+            'promotion' => 'string',
+        ]);
+
+        $users = User::filtered(
+            request()->search,
+            request()->role,
+            request()->promotion
+        )->load(['roles'])
+            ->sortByDesc('created_at')
+            ->paginate(10, request()->page)
+            ->withPath(route('users.index'));
+
+        return UserResource::collection($users);
+    }
+
+    /**
+     * Display a listing of promotions.
+     *
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function indexPromotion() {
+        $this->authorize('index-promotion', User::class);
+
+        return response()->json(
+            User::all()->sortBy('promotion')
+                ->pluck('promotion')->unique()->filter()->values()
+        );
     }
 
     /**

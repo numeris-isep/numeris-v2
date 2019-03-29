@@ -90,7 +90,9 @@
             </thead>
 
             <tbody>
-              <tr *ngFor="let project of paginatedProject.data" [ngClass]="{'hatched': project.step == 'closed'}">
+              <tr *ngFor="let project of paginatedProject.data" [ngClass]="{'hatched': project.step == 'closed'}"
+                  suiPopup popupText="Cloturé" popupPlacement="left" popupTrigger="manual" #popup="suiPopup"
+                  (mouseenter)="togglePopup(popup, project.step == 'closed')" (mouseleave)="togglePopup(popup, project.step == 'closed')">
                 <td>{{ project.startAt | date:'dd/MM/y' }}</td>
                 <td>{{ project.name }}</td>
                 <td [ngClass]="{'warning': project.step == 'hiring', 'positive': project.step == 'paid' }">

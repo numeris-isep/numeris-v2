@@ -16,29 +16,33 @@ class IndexAdministratorTest extends TestCaseWithAuth
     {
         $this->json('GET', route('users.index'))
             ->assertStatus(JsonResponse::HTTP_OK)
-            ->assertJsonStructure([[
-                'id',
-                'preferenceId',
-                'addressId',
-                'activated',
-                'touAccepted',
-                'subscriptionPaidAt',
-                'email',
-                'username',
-                'firstName',
-                'lastName',
-                'studentNumber',
-                'promotion',
-                'schoolYear',
-                'phone',
-                'nationality',
-                'birthDate',
-                'birthCity',
-                'socialInsuranceNumber',
-                'iban',
-                'bic',
-                'createdAt',
-                'updatedAt',
-            ]]);
+            ->assertJsonStructure([
+                'data' => [[
+                    'id',
+                    'preferenceId',
+                    'addressId',
+                    'activated',
+                    'touAccepted',
+                    'subscriptionPaidAt',
+                    'email',
+                    'username',
+                    'firstName',
+                    'lastName',
+                    'studentNumber',
+                    'promotion',
+                    'schoolYear',
+                    'phone',
+                    'nationality',
+                    'birthDate',
+                    'birthCity',
+                    'socialInsuranceNumber',
+                    'iban',
+                    'bic',
+                    'createdAt',
+                    'updatedAt',
+                ]],
+                'links',
+                'meta',
+            ]);
     }
 }

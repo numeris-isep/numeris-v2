@@ -40,7 +40,7 @@ $factory->state(User::class, 'active', function (Faker $faker) {
         'first_name'                => $faker->firstName,
         'last_name'                 => $faker->lastName,
         'student_number'            => $faker->numberBetween(1000, 99999),
-        'promotion'                 => $faker->year('now'),
+        'promotion'                 => $faker->numberBetween(2015, 2025),
         'school_year'               => $school_years[$faker->numberBetween(0, count($school_years) - 1)],
         'phone'                     => "0" . (string) $faker->numberBetween(600000000, 699999999),
         'nationality'               => 'france',

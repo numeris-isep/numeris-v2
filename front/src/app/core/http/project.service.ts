@@ -12,7 +12,7 @@ export class ProjectService {
 
   constructor(private http: HttpClient) { }
 
-  getMissions(): Observable<PaginatedProject> {
+  getProjects(): Observable<PaginatedProject> {
     const url = `${environment.apiUrl}/api/projects`;
     return this.http.get<PaginatedProject>(url, HTTP_OPTIONS);
   }

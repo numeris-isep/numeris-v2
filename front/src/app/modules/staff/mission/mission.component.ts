@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { MissionService } from 'src/app/core/http/mission.service';
 import { PaginatedMission } from "../../../core/classes/pagination/paginated-mission";
 import * as moment from 'moment';
+import { IPopup } from "ng2-semantic-ui";
 
 @Component({
   selector: 'app-mission',
@@ -9,6 +10,13 @@ import * as moment from 'moment';
   styleUrls: ['./mission.component.css']
 })
 export class MissionComponent implements OnInit {
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.windowWidth = event.target.innerWidth;
+  }
+
+  windowWidth: number = window.innerWidth;
 
   paginatedMission: PaginatedMission;
   selectedOption: string;
@@ -58,5 +66,14 @@ export class MissionComponent implements OnInit {
 
   dateToISO(date: string) {
     return date ? moment(date).toISOString() : null;
+  }
+
+  togglePopup(popup: IPopup, condition) {
+    const widthCondition = this.windowWidth >= 1287
+      || (this.windowWidth < 1200 && this.windowWidth > 1093);
+
+    if (condition && widthCondition) {
+      popup.toggle();
+    }
   }
 }

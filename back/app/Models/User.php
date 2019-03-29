@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\DateQueryTrait;
 use App\Models\Traits\OnEventsTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -70,6 +71,24 @@ class User extends Authenticatable implements JWTSubject
         return static::where('email', $email)->first();
     }
 
+    public static function filtered($search, $role, $promotion) {
+        return static::when($search != null, function($query) use ($search) {
+            return $query->where('first_name', 'LIKE', "%{$search}%")
+                ->orWhere('last_name', 'LIKE', "%{$search}%")
+                ->orWhere('email', 'LIKE', "%{$search}%")
+                ->orWhere('student_number', 'LIKE', "%{$search}%");
+        })
+            ->when($promotion != null, function ($query) use ($promotion) {
+                return $query->where('promotion', $promotion);
+            })
+            ->get()
+            ->when($role != null, function($query) use ($role) {
+                return $query->filter(function($user) use ($role) {
+                    return $user->role()->name == $role;
+                });
+            });
+    }
+
     public function address()
     {
         return $this->belongsTo(Address::class);
@@ -99,6 +118,7 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsToMany(Role::class)
             ->using(UserRole::class)
+            ->orderBy('role_user.created_at', 'DESC') // IMPORTANT
             ->withTimestamps();
     }
 
