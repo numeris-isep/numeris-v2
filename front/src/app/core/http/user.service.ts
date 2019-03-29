@@ -26,8 +26,6 @@ export class UserService {
     if (role != null) url += `&role=${role}`;
     if (promotion != null) url += `&promotion=${promotion}`;
 
-    console.log(url);
-
     return this.http.get<PaginatedUser>(url, HTTP_OPTIONS);
   }
 
