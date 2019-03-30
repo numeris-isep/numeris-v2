@@ -7,7 +7,7 @@
     <ng-container *ngFor="let breadcrumb of breadcrumbs; let i = index">
       <i class="right angle icon divider"></i>
       <a *ngIf="breadcrumb && i < breadcrumbs.length - 1"
-         class="section" routerLink="{{ breadcrumb.url }}">
+         class="active section" routerLink="{{ breadcrumb.url }}">
         {{ breadcrumb.title }}
       </a>
       <span *ngIf="breadcrumb && i == breadcrumbs.length - 1"

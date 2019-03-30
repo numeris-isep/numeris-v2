@@ -34,9 +34,6 @@ const appRoutes: Routes = [
 })
 export class AppRoutingModule {
 
-  baseTitle: string = 'Numéris ISEP';
-  separator: string = ' - ';
-
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -60,23 +57,10 @@ export class AppRoutingModule {
         return null;
       })).subscribe( (child: any) => {
         if (child.data['title']) {
-          let finalTitle = this.baseTitle;
-
           const title: string = child.data['title'];
 
-          if (title != null) {
-            finalTitle += this.separator + title;
-          }
-
-          this.titleService.setHeaderTitle(title); // Set header title
-          this.titleService.setTabTitle(finalTitle); // Set browser tab title
-
-          if (child.url) {
-            // TODO: manage child routes
-            let url: UrlSegment = child.url[0];
-
-            this.breadcrumbsService.addBreadcrumb({title: title, url: url.path})
-          }
+          this.titleService.setTitles(title);
+          this.breadcrumbsService.setBreadcrumb(child);
         }
     });
   }

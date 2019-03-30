@@ -21,7 +21,7 @@ import { TitleComponent } from './components/title/title.component';
 import { HeaderComponent } from './components/header/header.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { StaffModule } from "../modules/staff/staff.module";
-import { Router } from "@angular/router";
+import { ActivatedRouteSnapshot, Router } from "@angular/router";
 
 // Setting to locale to 'fr'
 registerLocaleData(localeFr, 'fr');

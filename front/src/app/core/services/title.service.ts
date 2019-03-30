@@ -7,12 +7,20 @@ import { BehaviorSubject, Observable, Subject } from "rxjs";
 })
 export class TitleService {
 
+  baseTitle: string = 'Numéris ISEP';
+  separator: string = ' - ';
+
   private headerTitle: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
   constructor(private titleService: Title) { }
 
   setTabTitle(title: string) {
-    this.titleService.setTitle(title);
+    let finalTitle = this.baseTitle;
+    if (title != null) {
+      finalTitle += this.separator + title;
+    }
+
+    this.titleService.setTitle(finalTitle);
   }
 
   getTabTitle(): string {
@@ -25,5 +33,10 @@ export class TitleService {
 
   getHeaderTitle(): Observable<string> {
     return this.headerTitle.asObservable();
+  }
+
+  setTitles(title: string) {
+    this.setHeaderTitle(title);
+    this.setTabTitle(title);
   }
 }

@@ -17,8 +17,9 @@ export class ClientService {
     return this.http.get<Client[]>(url, HTTP_OPTIONS);
   }
 
-  getClient(client: Client) {
-    //
+  getClient(clientId: string): Observable<Client> {
+    const url = `${environment.apiUrl}/api/clients/${clientId}`;
+    return this.http.get<Client>(url, HTTP_OPTIONS);
   }
 
   addClient() {

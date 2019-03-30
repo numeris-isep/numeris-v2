@@ -4,8 +4,7 @@ import { BreadcrumbsService } from "../../services/breadcrumbs.service";
 
 @Component({
   selector: 'app-breadcrumb',
-  templateUrl: './breadcrumbs.component.html',
-  styleUrls: ['./breadcrumbs.component.css']
+  templateUrl: './breadcrumbs.component.html'
 })
 export class BreadcrumbsComponent implements OnInit {
 
@@ -15,7 +14,7 @@ export class BreadcrumbsComponent implements OnInit {
 
   ngOnInit() {
     this.breadcrumbsService.getBreadcrumbs().subscribe((breadcrumb) => {
-      this.breadcrumbs = [ breadcrumb ];
+      this.breadcrumbs = breadcrumb;
     })
   }
 
