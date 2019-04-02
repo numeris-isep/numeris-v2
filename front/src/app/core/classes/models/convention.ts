@@ -1,4 +1,5 @@
 import { Client } from "./client";
+import { Rate } from "./rate";
 
 export class Convention {
 
@@ -10,5 +11,6 @@ export class Convention {
   updatedAt: string;
 
   client: Client;
+  rates: Rate[];
 
 }

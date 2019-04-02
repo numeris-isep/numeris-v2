@@ -1,5 +1,15 @@
 <app-content [condition]="!client">
-  <a class="ui fluid link card" [routerLink]="client.id">
+  <a *ngIf="isLink; else isNotLink" class="ui fluid link card" routerLink="/clients/{{client.id}}">
+    <ng-container [ngTemplateOutlet]="content"></ng-container>
+  </a>
+
+  <ng-template #isNotLink>
+    <div class="ui fluid card">
+      <ng-container [ngTemplateOutlet]="content"></ng-container>
+    </div>
+  </ng-template>
+
+  <ng-template #content>
     <div class="content">
       <div class="ui blue ribbon label">
         <i class="building icon"></i> Client
@@ -12,13 +22,13 @@
         {{ client.name }}
       </div>
       <div class="meta">
-        <i class="historyblue icon"></i> Modifié le {{ client.updatedAt | date:"dd/MM/y" }}
+        <i class="history icon"></i> Modifié le {{ client.updatedAt | date:"dd/MM/y" }}
       </div>
       <div class="description center aligned marged">
         <div class="ui mini black statistic"
              suiPopup popupText="Conventions" [popupPlacement]="'bottom'">
           <div class="value">
-            <i class="tag blue icon"></i> {{ client.conventionsCount }}
+            <i class="tags blue icon"></i> {{ client.conventionsCount }}
           </div>
         </div>
         <div class="ui mini black statistic"
@@ -50,5 +60,21 @@
     <div class="extra content">
       <i class="map marker alternate icon"></i> {{ client.address | address }}
     </div>
-  </a>
+
+    <div *ngIf="!isLink" class="ui small bottom attached buttons">
+      <div class="ui animated fade orange button">
+        <div class="visible content">Modifier</div>
+        <div class="hidden content">
+          <i class="edit icon"></i>
+        </div>
+      </div>
+      <div class="or" data-text="ou"></div>
+      <div class="ui animated fade negative button">
+        <div class="visible content">Supprimer</div>
+        <div class="hidden content">
+          <i class="trash alternate icon"></i>
+        </div>
+      </div>
+    </div>
+  </ng-template>
 </app-content>

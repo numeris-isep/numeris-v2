@@ -58,6 +58,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     // Project resource routes
     Route::apiResource('projects', 'ProjectController', ['parameters' => ['projects' => 'project_id']]);
+    Route::get('clients/{client_id}/projects', 'ClientProjectController@index')->name('client.convention.index');
 
     Route::patch('projects/{project_id}/step', 'ProjectController@updateStep')->name('projects.update.step');
 

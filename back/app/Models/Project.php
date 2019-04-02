@@ -66,10 +66,12 @@ class Project extends Model
         throw new ModelNotFoundException();
     }
 
-    public static function filtered($step, array $range) {
+    public static function filtered($step, array $range, $client_id = null) {
         return static::whereDate('start_at', $range)
             ->when($step != null, function($query) use ($step) {
                 return $query->where('step', $step);
+            })->when($client_id != null, function ($query) use ($client_id) {
+                return $query->where('client_id', $client_id);
             });
     }
 

@@ -4,6 +4,7 @@ import { environment } from "../../../environments/environment";
 import { Observable } from "rxjs";
 import { PaginatedProject } from "../classes/pagination/paginated-project";
 import { HTTP_OPTIONS } from "../constants/http_options";
+import { Client } from "../classes/models/client";
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,26 @@ export class ProjectService {
 
   constructor(private http: HttpClient) { }
 
-  getProjects(): Observable<PaginatedProject> {
-    const url = `${environment.apiUrl}/api/projects`;
+  getProjects(client?: number | Client): Observable<PaginatedProject> {
+    let clientPath: string = '';
+
+    if (client) {
+      const clientId = typeof client === 'number' ? client : client.id;
+      clientPath = `/clients/${clientId}`
+    }
+    const url = `${environment.apiUrl}/api${clientPath}/projects`;
     return this.http.get<PaginatedProject>(url, HTTP_OPTIONS);
   }
 
-  getProjectsPerPage(pageId?: number, step?: any, range?: [string, string]): Observable<PaginatedProject> {
-    let url = `${environment.apiUrl}/api/projects?`;
+  getProjectsPerPage(client?: number | Client, pageId?: number, step?: any, range?: [string, string]): Observable<PaginatedProject> {
+    let clientPath: string = '';
+
+    if (client) {
+      const clientId = typeof client === 'number' ? client : client.id;
+      clientPath = `/clients/${clientId}`
+    }
+
+    let url = `${environment.apiUrl}/api${clientPath}/projects?`;
 
     if (pageId) url += `&page=${pageId}`;
     if (step != null) url += `&step=${step}`;
@@ -27,6 +41,12 @@ export class ProjectService {
       if (range[1]) url += `&maxDate=${range[1]}`;
     }
 
+    return this.http.get<PaginatedProject>(url, HTTP_OPTIONS);
+  }
+
+  getClientProjects(client: number | Client): Observable<PaginatedProject> {
+    const clientId = typeof client === 'number' ? client : client.id;
+    const url = `${environment.apiUrl}/api/clients/${clientId}/projects`;
     return this.http.get<PaginatedProject>(url, HTTP_OPTIONS);
   }
 

@@ -1,0 +1,63 @@
+<app-content *ngIf="client" [condition]="!client">
+  <div class="ui padded grid doubling">
+    <div class="stretched row">
+      <div class="sixteen wide mobile five wide computer column">
+        <app-client-details [client]="client" [isLink]="false"></app-client-details>
+      </div>
+
+      <div class="sixteen wide mobile eleven wide computer column">
+        <div class="ui blue segment">
+          <div class="ui blue ribbon label">Actions</div>
+          <div class="ui two column center aligned grid">
+            <div class="ui vertical divider">Ou</div>
+            <div class="middle aligned row">
+              <div class="column">
+                <div class="ui icon header">
+                  <i class="tag icon"></i>
+                  Ajouter une convention
+                </div><br>
+                <app-link-button hiddenIcon="plus" size="small">
+                  Nouvelle convention
+                </app-link-button>
+              </div>
+              <div class="column">
+                <div class="ui icon header">
+                  <i class="folder open icon"></i>
+                  Ajouter un projet
+                </div><br>
+                <app-link-button hiddenIcon="plus" size="small">
+                  Nouveau projet
+                </app-link-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui padded grid">
+    <div class="column">
+      <sui-tabset>
+        <div class="ui top pointing secondary menu">
+          <a class="item" suiTabHeader="1">
+            <i class="tags icon"></i> Conventions
+            <span class="ui tiny blue label">{{ client.conventionsCount }}</span>
+          </a>
+          <a class="item" suiTabHeader="2">
+            <i class="folder open icon"></i> Projets
+            <span class="ui tiny blue label">{{ client.projectsCount }}</span>
+          </a>
+        </div>
+
+        <div class="ui" suiTabContent="1">
+          <app-client-convention [conventions]="client.conventions"></app-client-convention>
+        </div>
+
+        <div class="ui" suiTabContent="2">
+          <app-project-list [client]="client"></app-project-list>
+        </div>
+      </sui-tabset>
+    </div>
+  </div>
+</app-content>

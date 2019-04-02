@@ -1,0 +1,3 @@
+.ui.table tfoot tr:first-child > th:only-child {
+  border-top: none;
+}

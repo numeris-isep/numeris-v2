@@ -1,4 +1,7 @@
 import { Address } from "./address";
+import { Convention } from "./convention";
+import { Project } from "./project";
+import { Mission } from "./mission";
 
 export class Client {
 
@@ -15,5 +18,8 @@ export class Client {
   missionsCount: number = null;
 
   address: Address;
+  conventions: Convention[];
+  projects: Project[];
+  missions: Mission[];
 
 }

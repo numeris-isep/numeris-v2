@@ -9,6 +9,7 @@ import { Client } from "../../../../core/classes/models/client";
 export class ClientDetailsComponent implements OnInit {
 
   @Input() client: Client;
+  @Input() isLink: boolean = false;
 
   constructor() { }
 

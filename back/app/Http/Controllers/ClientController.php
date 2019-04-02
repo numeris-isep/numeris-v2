@@ -60,10 +60,11 @@ class ClientController extends Controller
      */
     public function show($client_id)
     {
-        $client = Client::findOrFail($client_id);
+        $client = Client::withCount('conventions', 'projects', 'missions')
+            ->findOrFail($client_id);
         $this->authorize('show', $client);
 
-        $client->load(['address', 'conventions', 'conventions.rates', 'projects']);
+        $client->load(['address', 'conventions', 'conventions.rates']);
 
         return response()->json(ClientResource::make($client));
     }
