@@ -8,7 +8,7 @@
             <div class="ui vertical divider">Et</div>
             <div class="middle aligned row">
               <div class="column">
-                <div class="ui icon header">
+                <div class="ui small icon header">
                   <i class="book icon"></i>
                   Lire les conditions d'utilisation
                 </div>
@@ -26,12 +26,12 @@
                   Conditions d'utilisations acceptées
                 </div>
                 <ng-template #toAccept>
-                  <div class="ui icon header">
+                  <div class="ui small icon header">
                     <i class="check icon"></i>
                     Accepter les conditions d'utilisation
                   </div><br>
                   <app-button *ngIf="!accepted"
-                              hiddenIcon="check" size="small"
+                              hiddenIcon="check" size="tiny"
                               [isDisabled]="! allChecked || user.touAccepted"
                               [isLoading]="loading">
                     Accepter

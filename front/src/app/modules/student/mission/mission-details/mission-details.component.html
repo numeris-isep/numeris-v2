@@ -32,12 +32,12 @@
     <ng-container *ngIf="! (mission.isLocked || isMissionExpired())">
       <app-button *ngIf="! userApplication" hiddenIcon="handshake"
                   attachment="bottom attached" behaviour="fluid"
-                  color="none" size="small" (click)="openModal(mission, userApplication)">
+                  color="none" size="tiny" (click)="openModal(mission, userApplication)">
         Postuler
       </app-button>
-      <app-button *ngIf="userApplication" hiddenIcon="frown"
+      <app-button *ngIf="userApplication" hiddenIcon="frown outline"
                   attachment="bottom attached" behaviour="fluid"
-                  color="none" size="small" (click)="openModal(mission, userApplication)">
+                  color="none" size="tiny" (click)="openModal(mission, userApplication)">
         Retirer votre candidature
       </app-button>
     </ng-container>

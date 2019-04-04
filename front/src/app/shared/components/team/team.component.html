@@ -12,10 +12,14 @@
       </div>
     </div>
 
-    <app-link-button visibleIcon="facebook" hiddenIcon="external"
-                     color="facebook" attachment="bottom attached" size
-                     routerLink="http://m.me/{{ teamMember.facebookPageName}}" target="_blank">
-      Contacter
-    </app-link-button>
+    <a class="ui bottom attached fade animated facebook tiny button"
+       href="http://m.me/{{ teamMember.facebookPageName}}" target="_blank">
+      <div class="visible content">
+        Contacter
+      </div>
+      <div class="hidden content">
+        <i class="external icon"></i>
+      </div>
+    </a>
   </div>
 </div>

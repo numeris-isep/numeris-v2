@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { PaginatedProject } from "../classes/pagination/paginated-project";
 import { HTTP_OPTIONS } from "../constants/http_options";
 import { Client } from "../classes/models/client";
+import { Project } from "../classes/models/project";
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,11 @@ export class ProjectService {
     const clientId = typeof client === 'number' ? client : client.id;
     const url = `${environment.apiUrl}/api/clients/${clientId}/projects`;
     return this.http.get<PaginatedProject>(url, HTTP_OPTIONS);
+  }
+
+  getProject(projectId: number): Observable<Project> {
+    const url = `${environment.apiUrl}/api/projects/${projectId}`;
+    return this.http.get<Project>(url, HTTP_OPTIONS);
   }
 
   addProject() {

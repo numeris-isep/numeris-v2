@@ -10,7 +10,6 @@ export class LinkButtonComponent
   implements OnInit {
 
   @Input() routerLink: string = '#';
-  @Input() target: string = '';
 
   constructor() {
     super();
