@@ -22,14 +22,6 @@ const staffRoutes: Routes = [
       title: 'Utilisateurs',
     }
   },
-  {
-    path: 'missions',
-    component: MissionComponent,
-    canActivate: [AuthGuard],
-    data: {
-      title: 'Missions',
-    }
-  },
 ];
 
 @NgModule({

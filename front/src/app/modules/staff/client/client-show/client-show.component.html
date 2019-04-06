@@ -41,21 +41,21 @@
       <sui-tabset>
         <div class="ui top pointing secondary menu">
           <a class="item" suiTabHeader="1">
-            <i class="tags icon"></i> Conventions
-            <span class="ui tiny blue label">{{ client.conventionsCount }}</span>
-          </a>
-          <a class="item" suiTabHeader="2">
             <i class="folder open icon"></i> Projets
             <span class="ui tiny blue label">{{ client.projectsCount }}</span>
+          </a>
+          <a class="item" suiTabHeader="2">
+            <i class="tags icon"></i> Conventions
+            <span class="ui tiny blue label">{{ client.conventionsCount }}</span>
           </a>
         </div>
 
         <div class="ui" suiTabContent="1">
-          <app-client-convention [conventions]="client.conventions"></app-client-convention>
+          <app-project-list [client]="client"></app-project-list>
         </div>
 
         <div class="ui" suiTabContent="2">
-          <app-project-list [client]="client"></app-project-list>
+          <app-client-convention [conventions]="client.conventions"></app-client-convention>
         </div>
       </sui-tabset>
     </div>

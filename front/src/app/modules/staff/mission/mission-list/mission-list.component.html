@@ -1,20 +1,20 @@
-<app-content [condition]="!paginatedProject">
-  <!-- Projects -->
-  <div *ngIf="paginatedProject; else empty" class="ui segments">
+<app-content [condition]="!paginatedMission">
+  <!-- Missions -->
+  <div *ngIf="paginatedMission; else empty" class="ui segments">
     <!-- Selection -->
     <div class="ui horizontal segments form grid">
       <div class="ui segment column">
         <div class="field">
-          <label>Status</label>
-          <div class="ui action input">
-            <sui-select class="selection" label="step"
+          <label>Filtre</label>
+          <div class="ui action fluid input">
+            <sui-select class="selection" label="filter"
                         placeholder="Sélectionner une option"
-                        [options]="options" [(ngModel)]="selectedStep"
+                        [options]="options" [(ngModel)]="selectedOption"
                         (ngModelChange)="setFilter()"
                         #select>
               <sui-select-option *ngFor="let option of select.filteredOptions" [value]="option"></sui-select-option>
             </sui-select>
-            <button class="ui icon button" (click)="reset('selectedStep')">
+            <button class="ui icon button" (click)="reset('selectedOption')">
               <i class="x icon"></i>
             </button>
           </div>
@@ -55,34 +55,37 @@
       <table class="ui celled striped selectable table">
         <thead>
         <tr>
-          <th><i class="calendar outline icon"></i> Date de début</th>
-          <th><i class="address book outline icon"></i> Nom</th>
-          <th><i class="clipboard list icon"></i> Status</th>
-          <th><i class="building icon"></i> Client</th>
-          <th><i class="copy icon"></i> Missions</th>
+          <th><i class="calendar outline icon"></i> Date</th>
+          <th><i class="clipboard outline icon"></i> Référence</th>
+          <th><i class="address book outline icon"></i> Titre</th>
+          <th><i class="folder open icon"></i> Projet</th>
+          <th><i class="clock outline icon"></i> Durée</th>
+          <th><i class="users icon"></i> Capacité</th>
           <th><i class="user secret icon"></i> Visibilité</th>
           <th><i class="hand pointer outline icon"></i> Action</th>
         </tr>
         </thead>
 
-        <tbody *ngIf="paginatedProject.data.length > 0; else noProject">
-        <tr *ngFor="let project of paginatedProject.data" [ngClass]="{'hatched': project.step == 'closed'}"
-            suiPopup popupText="Cloturé" popupPlacement="left" popupTrigger="manual" #popup="suiPopup"
-            (mouseenter)="togglePopup(popup, project.step == 'closed')" (mouseleave)="togglePopup(popup, project.step == 'closed')">
-          <td>{{ project.startAt | date:'dd/MM/y' }}</td>
-          <td>{{ project.name }}</td>
-          <td [ngClass]="(project.step != 'hiring' && project.step != 'closed') ? project.step : ''">
-            {{ project.step | status }}
-          </td>
+        <tbody *ngIf="paginatedMission.data.length > 0; else noMission">
+        <tr *ngFor="let mission of paginatedMission.data" [ngClass]="{'hatched': mission.isLocked}"
+            suiPopup popupText="Fermée" popupPlacement="left" popupTrigger="manual" #popup="suiPopup"
+            (mouseenter)="togglePopup(popup, mission.isLocked)" (mouseleave)="togglePopup(popup, mission.isLocked)">
+          <td>{{ mission.startAt | date:'dd/MM/y H\'h\'mm' }}</td>
+          <td>{{ mission.reference }}</td>
+          <td>{{ mission.title }}</td>
+          <td><a routerLink="/projects/{{ mission.project.id }}">{{ mission.project.name }}</a></td>
+          <td class="center aligned">{{ mission.duration }}h</td>
           <td>
-            <a routerLink="/clients/{{ project.client.id }}">{{ project.client.name }}</a>
+            <sui-progress class="tiny active indicating"
+                          [value]="mission.applicationsCount" [maximum]="mission.capacity">
+              {{ mission.applicationsCount }}/{{ mission.capacity }}
+            </sui-progress>
           </td>
-          <td class="center aligned">{{ project.missionsCount }}</td>
-          <td class="center aligned" [ngClass]="{'warning': project.isPrivate}">
-            <i class="eye icon" [ngClass]="{'slash': project.isPrivate}"></i>
+          <td class="center aligned" [ngClass]="{'warning': mission.project.isPrivate}">
+            <i class="eye icon" [ngClass]="{'slash': mission.project.isPrivate}"></i>
           </td>
           <td class="center aligned">
-            <app-link-button routerLink="/projects/{{project.id}}"
+            <app-link-button routerLink="/missions/{{mission.id}}"
                              size="tiny" color="basic"
                              hiddenIcon="zoom-in">
               Voir
@@ -90,12 +93,12 @@
           </td>
         </tr>
         </tbody>
-        <ng-template #noProject>
+        <ng-template #noMission>
           <tfoot class="full-width">
           <tr>
-            <th colspan="7">
+            <th colspan="8">
               <app-empty>
-                Aucun projet à afficher avec le filtre sélectionné.
+                Aucune mission à afficher avec le filtre sélectionné.
               </app-empty>
             </th>
           </tr>
@@ -106,17 +109,17 @@
 
     <!-- Pagination -->
     <div class="ui center aligned segment">
-      <sui-pagination [collectionSize]="paginatedProject.meta.total"
-                      [pageSize]="paginatedProject.meta.per_page" [maxSize]="4"
-                      [(page)]="paginatedProject.meta.current_page"
+      <sui-pagination [collectionSize]="paginatedMission.meta.total"
+                      [pageSize]="paginatedMission.meta.per_page" [maxSize]="4"
+                      [(page)]="paginatedMission.meta.current_page"
                       [hasNavigationLinks]="true" [hasBoundaryLinks]="true"
                       [hasEllipses]="false" [canRotate]="true"
-                      (pageChange)="getProjectsPerPage($event)">
+                      (pageChange)="getMissionsPerPage($event)">
       </sui-pagination>
     </div>
   </div>
 
   <ng-template #empty>
-    <app-empty>Aucun projet</app-empty>
+    <app-empty>Aucune mission</app-empty>
   </ng-template>
 </app-content>

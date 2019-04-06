@@ -60,10 +60,11 @@ class ProjectController extends Controller
      */
     public function show($project_id)
     {
-        $project = Project::findOrFail($project_id);
+        $project = Project::withCount('missions')
+            ->findOrFail($project_id);
         $this->authorize('show', $project);
 
-        $project->load(['client', 'missions']);
+        $project->load(['client', 'convention', 'missions']);
 
         return response()->json(ProjectResource::make($project));
     }

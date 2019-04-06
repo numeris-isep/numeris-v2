@@ -1,0 +1,123 @@
+<app-content *ngIf="project" [condition]="!project">
+  <div class="ui padded grid doubling">
+    <div class="row">
+      <div class="sixteen wide mobile five wide computer column">
+        <app-project-details [project]="project"></app-project-details>
+      </div>
+
+      <div class="sixteen wide mobile eleven wide computer column">
+        <div class="ui segments">
+          <div class="ui blue segment">
+            <div class="ui blue ribbon label">Actions</div>
+            <div class="ui two column center aligned grid">
+              <div *ngIf="project.isPrivate" class="ui vertical divider">Ou</div>
+              <div class="middle aligned row">
+                <div class="column">
+                  <div class="ui small icon header">
+                    <i class="file outline alternate icon"></i>
+                    Ajouter une mission
+                  </div><br>
+                  <app-link-button hiddenIcon="plus" size="tiny">
+                    Nouvelle mission
+                  </app-link-button>
+                </div>
+                <div *ngIf="project.isPrivate" class="column">
+                  <div class="ui small icon header">
+                    <i class="user secret icon"></i>
+                    Ajouter un étudiant
+                  </div><br>
+                  <app-link-button hiddenIcon="plus" size="tiny">
+                    Nouvelle mission
+                  </app-link-button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ui form segment">
+            <div class="ui two column grid">
+              <div class="ui vertical divider">Ou</div>
+              <div class="middle aligned row">
+                <div class="padded column">
+                  <div class="field">
+                    <label>Documents étudiants</label>
+                    <app-button size="small" hiddenIcon="id card" behaviour="fluid"
+                                [isDisabled]="false" [isLoading]="false">
+                        Générer
+                    </app-button>
+                  </div>
+                  <div class="field">
+                    <label>Facture client</label>
+                    <app-button size="small" hiddenIcon="file outline" behaviour="fluid" color="grey"
+                                [isDisabled]="false" [isLoading]="false">
+                      Générer
+                    </app-button>
+                  </div>
+                </div>
+                <div class="padded column">
+                  <div class="field">
+                    <label>Status</label>
+                    <sui-select class="selection" label="step"
+                                placeholder="Sélectionner une option"
+                                [options]="options" [(ngModel)]="project.step"
+                                #select>
+                      <sui-select-option *ngFor="let option of select.filteredOptions" [value]="option"></sui-select-option>
+                    </sui-select>
+                  </div>
+                  <div class="field">
+                    <label *ngIf="!project.moneyReceivedAt; else paid">Marquer comme payé</label>
+                    <ng-template #paid>
+                      <label>Paiment reçu le {{ project.moneyReceivedAt | date:'dd/MM/y' }}</label>
+                    </ng-template>
+                    <app-button size="small" hiddenIcon="money bill" behaviour="fluid"
+                                [visibleIcon]="project.moneyReceivedAt ? 'check' : null"
+                                [color]="project.moneyReceivedAt ? 'green' : 'blue'"
+                                [isDisabled]="project.moneyReceivedAt">
+                      <span *ngIf="!project.moneyReceivedAt">
+                        Marquer comme payé
+                      </span>
+                    </app-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui padded grid">
+    <div class="column">
+      <sui-tabset>
+        <div class="ui top pointing secondary menu">
+          <a class="item" suiTabHeader="1">
+            <i class="tags icon"></i> Missions
+            <span class="ui tiny blue label">{{ project.missionsCount }}</span>
+          </a>
+          <a class="item" suiTabHeader="3">
+            <i class="folder open icon"></i> Documents
+            <span class="ui tiny blue label">23</span>
+          </a>
+          <a *ngIf="project.isPrivate" class="item" suiTabHeader="2">
+            <i class="users icon"></i> Étudiants
+            <span class="ui tiny blue label">15</span>
+          </a>
+        </div>
+
+        <div class="ui" suiTabContent="1">
+          <app-mission-list [project]="project"></app-mission-list>
+        </div>
+
+        <div class="ui" suiTabContent="3">
+          <h1>Documents</h1>
+          <!--TODO-->
+        </div>
+
+        <div *ngIf="project.isPrivate" class="ui" suiTabContent="2">
+          <h1>Étudiants</h1>
+          <!--TODO-->
+        </div>
+      </sui-tabset>
+    </div>
+  </div>
+</app-content>

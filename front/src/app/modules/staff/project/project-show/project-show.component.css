@@ -1,0 +1,16 @@
+.ui.selection.dropdown {
+  min-width: inherit;
+  margin: auto;
+}
+
+.padded.column {
+  padding-left: 4rem !important;
+  padding-right: 4rem !important;
+}
+
+@media screen and (max-width: 767px) {
+  .padded.column {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}

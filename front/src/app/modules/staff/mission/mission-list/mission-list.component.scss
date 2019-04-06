@@ -22,16 +22,6 @@
   max-width: 196px;
 }
 
-tr.hatched {
-  background: repeating-linear-gradient(
-    135deg,
-    #FAFAFA,
-    #FAFAFA 10px,
-    #F1F1F1 10px,
-    #F1F1F1 20px
-  )
-}
-
 table.selectable tr.hatched:hover {
   background: repeating-linear-gradient(
     135deg,
@@ -40,4 +30,16 @@ table.selectable tr.hatched:hover {
     #EAEAEA 10px,
     #EAEAEA 20px
   ) !important;
+}
+
+table.selectable tr:hover td.validated {
+  background-color: #eefafd !important;
+}
+
+table.selectable tr:hover td.billed {
+  background-color: #FFF4E4 !important;
+}
+
+table.selectable tr:hover td.paid {
+  background-color: #F7FFE6 !important;
 }

@@ -1,0 +1,24 @@
+.validated {
+  background-color: #f8ffff !important;
+  color: #276f86 !important;
+}
+
+.billed {
+  background-color: #FFFAF3 !important;
+  color: #573A08 !important;
+}
+
+.paid {
+  background-color: #fcfff5 !important;
+  color: #2c662d !important;
+}
+
+.closed, .hatched {
+  background: repeating-linear-gradient(
+    135deg,
+    #FAFAFA,
+    #FAFAFA 10px,
+    #F1F1F1 10px,
+    #F1F1F1 20px
+  ) !important;
+}

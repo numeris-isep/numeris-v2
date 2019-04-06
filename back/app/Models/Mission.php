@@ -59,11 +59,13 @@ class Mission extends Model
         return static::opened(); // TODO: where user belongsTo project_user
     }
 
-    public static function filtered($is_locked, array $range)
+    public static function filtered($is_locked, array $range, $project_id = null)
     {
         return static::whereDate('start_at', $range)
             ->when($is_locked != null, function ($query) use ($is_locked) {
                 return $query->where('is_locked', $is_locked === 'true' ? true : false);
+            })->when($project_id != null, function ($query) use ($project_id) {
+                return $query->where('project_id', $project_id);
             });
     }
 

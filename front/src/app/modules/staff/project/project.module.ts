@@ -8,6 +8,9 @@ import { HttpClientModule } from "@angular/common/http";
 import { ProjectRoutingModule } from "./project-routing.module";
 import { ProjectListComponent } from './project-list/project-list.component';
 import { ProjectIndexComponent } from './project-index/project-index.component';
+import { ProjectShowComponent } from './project-show/project-show.component';
+import { ProjectDetailsComponent } from './project-details/project-details.component';
+import { MissionModule } from "../mission/mission.module";
 
 @NgModule({
   imports: [
@@ -18,12 +21,15 @@ import { ProjectIndexComponent } from './project-index/project-index.component';
     SharedModule,
     HttpClientModule,
     ProjectRoutingModule,
+    MissionModule,
   ],
-
   declarations: [
     ProjectComponent,
     ProjectListComponent,
-    ProjectIndexComponent
-  ], exports: [ProjectListComponent]
+    ProjectIndexComponent,
+    ProjectShowComponent,
+    ProjectDetailsComponent
+  ],
+  exports: [ProjectListComponent]
 })
 export class ProjectModule { }

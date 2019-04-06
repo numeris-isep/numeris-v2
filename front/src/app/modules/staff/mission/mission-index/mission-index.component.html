@@ -1,17 +1,27 @@
-<!-- Action -->
+<!-- Actions -->
 <div class="ui padded grid">
   <div class="column">
     <div class="ui blue segment">
-      <div class="ui blue ribbon label">Action</div>
+      <div class="ui blue ribbon label">Actions</div>
       <div class="ui two column center aligned grid">
+        <div class="ui vertical divider">Ou</div>
         <div class="middle aligned row">
           <div class="column">
             <div class="ui small icon header">
+              <i class="tasks icon"></i>
+              Prévenir des missions disponibles
+            </div><br>
+            <app-link-button hiddenIcon="bullhorn" size="tiny">
+              Missions disponibles
+            </app-link-button>
+          </div>
+          <div class="column">
+            <div class="ui small icon header">
               <i class="file alternate outline icon"></i>
-              Ajouter un projet
+              Ajouter une mission
             </div><br>
             <app-link-button hiddenIcon="plus" size="tiny">
-              Nouveau projet
+              Nouvelle mission
             </app-link-button>
           </div>
         </div>
@@ -20,9 +30,8 @@
   </div>
 </div>
 
-<!-- Project list -->
 <div class="ui padded grid">
   <div class="column">
-    <app-project-list></app-project-list>
+    <app-mission-list></app-mission-list>
   </div>
 </div>

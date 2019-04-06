@@ -21,6 +21,7 @@ export class ProjectService {
       const clientId = typeof client === 'number' ? client : client.id;
       clientPath = `/clients/${clientId}`
     }
+
     const url = `${environment.apiUrl}/api${clientPath}/projects`;
     return this.http.get<PaginatedProject>(url, HTTP_OPTIONS);
   }
@@ -45,10 +46,10 @@ export class ProjectService {
     return this.http.get<PaginatedProject>(url, HTTP_OPTIONS);
   }
 
-  getClientProjects(client: number | Client): Observable<PaginatedProject> {
+  getClientProjects(client: number | Client): Observable<Project[]> {
     const clientId = typeof client === 'number' ? client : client.id;
     const url = `${environment.apiUrl}/api/clients/${clientId}/projects`;
-    return this.http.get<PaginatedProject>(url, HTTP_OPTIONS);
+    return this.http.get<Project[]>(url, HTTP_OPTIONS);
   }
 
   getProject(projectId: number): Observable<Project> {

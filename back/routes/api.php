@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     // Client resource routes
     Route::apiResource('clients', 'ClientController', ['parameters' => ['clients' => 'client_id']]);
+    Route::get('clients/{client_id}/projects', 'ClientProjectController@index')->name('client.project.index');
 
     // Convention resource routes
     Route::post('clients/{client_id}/conventions', 'ClientConventionController@store')->name('clients.conventions.store');
@@ -58,7 +59,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     // Project resource routes
     Route::apiResource('projects', 'ProjectController', ['parameters' => ['projects' => 'project_id']]);
-    Route::get('clients/{client_id}/projects', 'ClientProjectController@index')->name('client.convention.index');
+    Route::get('projects/{project_id}/missions', 'ProjectMissionController@index')->name('project.mission.index');
 
     Route::patch('projects/{project_id}/step', 'ProjectController@updateStep')->name('projects.update.step');
 

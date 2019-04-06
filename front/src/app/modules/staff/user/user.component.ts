@@ -9,7 +9,7 @@ import { Subscription } from "rxjs";
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['../mission/mission.component.css']
+  styleUrls: ['../mission/mission-list/mission-list.component.scss']
 })
 export class UserComponent implements OnInit, OnDestroy {
 

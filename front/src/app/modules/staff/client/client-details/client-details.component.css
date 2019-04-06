@@ -1,4 +1,5 @@
 .description.center.aligned.marged {
   margin-top: 15px;
   margin-bottom: -10px;
+  min-height: 36px;
 }

@@ -33,7 +33,7 @@ class MissionController extends Controller
             [request()->minDate, request()->maxDate]
         )->withCount(['applications' => function($query) {
             return $query->where('status', 'accepted');
-        }])->with('address', 'project', 'applications')->paginate(10);
+        }])->with('project', 'applications')->paginate(10);
 
         return MissionResource::collection($missions);
     }

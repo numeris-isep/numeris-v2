@@ -10,6 +10,7 @@ import { SharedModule } from "../../shared/shared.module";
 import { HttpClientModule } from "@angular/common/http";
 import { ClientModule } from "./client/client.module";
 import { ProjectModule } from "./project/project.module";
+import { MissionModule } from "./mission/mission.module";
 
 @NgModule({
   imports: [
@@ -24,9 +25,9 @@ import { ProjectModule } from "./project/project.module";
     // MUST be the last imports
     ClientModule,
     ProjectModule,
+    MissionModule,
   ],
   declarations: [
-    MissionComponent,
     StatisticComponent,
     UserComponent,
   ]

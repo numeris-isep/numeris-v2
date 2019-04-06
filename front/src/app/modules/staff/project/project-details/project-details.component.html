@@ -1,0 +1,75 @@
+<app-content [condition]="!project">
+  <div class="ui fluid card" [ngClass]="project.step != 'hiring' ? project.step : ''">
+    <div class="content">
+      <div class="ui blue ribbon label">
+        <i class="folder open icon"></i> Projet
+      </div>
+      <img class="right floated mini ui image" src="assets/logos/numeris-blue.png" alt="Logo de Numéris">
+    </div>
+
+    <div class="content">
+      <div class="header">
+        {{ project.name }}
+      </div>
+      <div class="meta">
+        <i class="history icon"></i> Modifié le {{ project.updatedAt | date:"dd/MM/y" }}
+      </div>
+      <div class="description center aligned marged">
+        <div class="ui mini black statistic"
+             suiPopup popupText="Missions" [popupPlacement]="'bottom'">
+          <div class="value">
+            <i class="copy blue icon"></i> {{ project.missionsCount }}
+          </div>
+        </div>
+        <div *ngIf="project.isPrivate" class="ui mini black statistic"
+             suiPopup popupText="Étudiants du projet" [popupPlacement]="'bottom'">
+          <div class="value">
+            <i class="users blue icon"></i> 12
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="description">
+        <p>
+          <i class="building icon"></i>
+          <a routerLink="/clients/{{ project.client.id }}">{{ project.client.name }}</a>
+        </p>
+        <p>
+          <i class="tag icon"></i> {{ project.convention.name }}
+        </p>
+        <p>
+          <i class="calendar outline icon"></i> {{ project.startAt | date:'yy/MM/y' }}
+        </p>
+      </div>
+    </div>
+
+    <div class="center aligned extra content" [ngClass]="{'warning': project.isPrivate}">
+      <i *ngIf="!project.isPrivate; else private"
+         class="eye big icon" suiPopup popupPlacement="top" popupHeader="Public"
+         popupText="Missions du projet visibles par tous les étudiants"></i>
+      <ng-template #private>
+        <i class="eye slash big icon" suiPopup popupPlacement="top" popupHeader="Privé"
+           popupText="Missions du projet seulement visibles par les étudiants sélectionnés"></i>
+      </ng-template>
+    </div>
+
+    <div class="ui small bottom attached buttons">
+      <div class="ui animated fade orange button">
+        <div class="visible content">Modifier</div>
+        <div class="hidden content">
+          <i class="edit icon"></i>
+        </div>
+      </div>
+      <div class="or" data-text="ou"></div>
+      <div class="ui animated fade negative button">
+        <div class="visible content">Supprimer</div>
+        <div class="hidden content">
+          <i class="trash alternate icon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-content>
+
