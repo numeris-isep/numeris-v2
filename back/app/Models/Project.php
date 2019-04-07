@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\DateQueryTrait;
+use App\ProjectUser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -66,6 +67,16 @@ class Project extends Model
         throw new ModelNotFoundException();
     }
 
+    public static function public()
+    {
+        return static::where('is_private', false);
+    }
+
+    public static function private()
+    {
+        return static::where('is_private', true);
+    }
+
     public static function filtered($step, array $range, $client_id = null) {
         return static::whereDate('start_at', $range)
             ->when($step != null, function($query) use ($step) {
@@ -88,5 +99,21 @@ class Project extends Model
     public function missions()
     {
         return $this->hasMany(Mission::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class)
+            ->using(ProjectUser::class);
+    }
+
+    public function addUser(User $user)
+    {
+        $this->users()->attach($user);
+    }
+
+    public function removeUser(User $user)
+    {
+        $this->users()->detach($user);
     }
 }

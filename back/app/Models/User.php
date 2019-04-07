@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\DateQueryTrait;
 use App\Models\Traits\OnEventsTrait;
+use App\ProjectUser;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -71,7 +72,7 @@ class User extends Authenticatable implements JWTSubject
         return static::where('email', $email)->first();
     }
 
-    public static function filtered($search, $role, $promotion) {
+    public static function filtered($search, $role, $promotion, $project_id = null) {
         return static::when($search != null, function($query) use ($search) {
             return $query->where('first_name', 'LIKE', "%{$search}%")
                 ->orWhere('last_name', 'LIKE', "%{$search}%")
@@ -80,6 +81,10 @@ class User extends Authenticatable implements JWTSubject
         })
             ->when($promotion != null, function ($query) use ($promotion) {
                 return $query->where('promotion', $promotion);
+            })->when($project_id != null, function ($query) use ($project_id) {
+                return $query->whereHas('projects', function($query) use ($project_id) {
+                    return $query->where('project_id', $project_id);
+                });
             })
             ->get()
             ->when($role != null, function($query) use ($role) {
@@ -192,5 +197,11 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->applications()
             ->where('status','=', Application::REFUSED);
+    }
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class)
+            ->using(ProjectUser::class);
     }
 }

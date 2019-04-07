@@ -60,6 +60,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Project resource routes
     Route::apiResource('projects', 'ProjectController', ['parameters' => ['projects' => 'project_id']]);
     Route::get('projects/{project_id}/missions', 'ProjectMissionController@index')->name('projects.missions.index');
+    Route::apiResource('projects.users', 'ProjectUserController')
+        ->only(['index', 'store', 'destroy']);
 
     Route::patch('projects/{project_id}/step', 'ProjectController@updateStep')->name('projects.update.step');
 

@@ -20,10 +20,12 @@ use App\Policies\ConventionPolicy;
 use App\Policies\MissionPolicy;
 use App\Policies\PreferencePolicy;
 use App\Policies\ProjectPolicy;
+use App\Policies\ProjectUserPolicy;
 use App\Policies\RatePolicy;
 use App\Policies\RolePolicy;
 use App\Policies\UserPolicy;
 use App\Policies\UserRolePolicy;
+use App\ProjectUser;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -47,6 +49,7 @@ class AuthServiceProvider extends ServiceProvider
         Mission::class      => MissionPolicy::class,
         Application::class  => ApplicationPolicy::class,
         Rate::class         => RatePolicy::class,
+        ProjectUser::class  => ProjectUserPolicy::class,
     ];
 
     /**

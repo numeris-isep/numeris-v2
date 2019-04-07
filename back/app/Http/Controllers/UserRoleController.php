@@ -46,7 +46,9 @@ class UserRoleController extends Controller
         // If $user->role is equals to the role to be assigned then throw
         // an exception to avoid the creation of the same role twice
         if ($role->name === $user->role()->name) {
-            throw new AuthorizationException("The user '$user->username' is already '$role->name'");
+            throw new AuthorizationException(
+                "Le rôle de l'utilisateur '$user->username' est déjà '$role->name'"
+            );
         }
 
         $user->setRole($role);
