@@ -18,7 +18,7 @@ class ProjectUserTableSeeder extends Seeder
             && ProjectUser::all()->isEmpty()
         ) {
             $user = User::find(1);
-            $projects = Project::private();
+            $projects = Project::private()->get();
 
             foreach ($projects as $project) {
                 $project->users()->attach($user);
