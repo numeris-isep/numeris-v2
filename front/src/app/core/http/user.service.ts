@@ -50,8 +50,8 @@ export class UserService {
     return this.http.get<Project[]>(url, HTTP_OPTIONS);
   }
 
-  getUser(user: User): Observable<User> {
-    const url = `${environment.apiUrl}/api/users/${user.id}`;
+  getUser(userId: number): Observable<User> {
+    const url = `${environment.apiUrl}/api/users/${userId}`;
     return this.http.get<User>(url, HTTP_OPTIONS);
   }
 

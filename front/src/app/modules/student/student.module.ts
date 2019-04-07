@@ -41,6 +41,12 @@ import { MissionDetailsComponent } from "./mission/mission-details/mission-detai
     TutorialComponent,
     ContactUsComponent,
     MissionDetailsComponent,
+  ],
+  exports: [
+    ProfileDetailsComponent,
+    ProfileSummaryComponent,
+    ProfilePreferencesComponent,
+    ProfileDocumentsComponent,
   ]
 })
 export class StudentModule { }

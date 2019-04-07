@@ -1,0 +1,52 @@
+
+<app-content [condition]="!user">
+  <div class="ui padded grid doubling">
+    <!-- Messages -->
+    <div class="sixteen wide column"
+         *ngIf="user && (!user.activated || !user.touAccepted)">
+      <!-- Activate account -->
+      <div class="ui icon info message" *ngIf="!user.activated">
+        <i class="ban icon"></i>
+        <div class="content">
+          <div class="header">
+            Ce compte n'est pas activé
+          </div>
+          <div class="ui list">
+            <div class="item">Vérifier que :</div>
+            <ul>
+              <li *ngIf="!user.touAccepted">
+                les <a routerLink="/terms-of-use">conditions d'utilisation</a> sont acceptées
+              </li>
+              <li>le profil est complété</li>
+              <li>les informations fournies sont exactes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stretched row">
+      <!-- Profile summary -->
+      <div class="sixteen wide mobile eight wide tablet four wide computer column">
+        <app-profile-summary *ngIf="user" [user]="user"></app-profile-summary>
+      </div>
+
+      <!-- Preferences -->
+      <div class="sixteen wide mobile eight wide tablet four wide computer column">
+        <app-profile-preferences *ngIf="user" [preference]="user.preference"></app-profile-preferences>
+      </div>
+
+      <!-- Profile details -->
+      <div class="sixteen wide mobile eight wide computer column">
+        <app-profile-details *ngIf="user" [user]="user"></app-profile-details>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Documents -->
+      <div class="column">
+        <app-profile-documents></app-profile-documents>
+      </div>
+    </div>
+  </div>
+</app-content>

@@ -8,6 +8,8 @@ import { UserRoutingModule } from "./user-routing.module";
 import { UserComponent } from "./user.component";
 import { UserIndexComponent } from './user-index/user-index.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { UserShowComponent } from "./user-show/user-show.component";
+import { StudentModule } from "../../student/student.module";
 
 @NgModule({
   imports: [
@@ -18,11 +20,13 @@ import { UserListComponent } from './user-list/user-list.component';
     SharedModule,
     HttpClientModule,
     UserRoutingModule,
+    StudentModule,
   ],
   declarations: [
     UserComponent,
     UserIndexComponent,
     UserListComponent,
+    UserShowComponent,
   ],
   exports: [
     UserListComponent
