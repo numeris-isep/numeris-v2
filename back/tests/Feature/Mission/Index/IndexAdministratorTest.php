@@ -26,7 +26,8 @@ class IndexAdministratorTest extends TestCaseWithAuth
                     'startAt',
                     'duration',
                     'capacity',
-                    'applications'
+                    'applicationsCount',
+                    'project',
                 ]],
                 'links',
                 'meta',

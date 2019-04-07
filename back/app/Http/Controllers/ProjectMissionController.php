@@ -34,7 +34,7 @@ class ProjectMissionController extends Controller
             $project->id
         )->withCount(['applications' => function($query) {
             return $query->where('status', 'accepted');
-        }])->with('project', 'applications')->paginate(10);
+        }])->with('project')->paginate(10);
 
         return MissionResource::collection($missions);
     }

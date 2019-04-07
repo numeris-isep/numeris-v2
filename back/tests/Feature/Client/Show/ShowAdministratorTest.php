@@ -27,7 +27,6 @@ class ShowAdministratorTest extends TestCaseWithAuth
                 'updatedAt',
                 'address',
                 'conventions' => [['rates']],
-                'projects',
             ]);
     }
 }

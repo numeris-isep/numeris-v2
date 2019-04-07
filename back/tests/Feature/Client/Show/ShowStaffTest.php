@@ -27,7 +27,6 @@ class ShowStaffTest extends TestCaseWithAuth
                 'updatedAt',
                 'address',
                 'conventions' => [['rates']],
-                'projects',
             ]);
     }
 }

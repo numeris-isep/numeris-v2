@@ -27,7 +27,6 @@ class ShowDeveloperTest extends TestCaseWithAuth
                 'updatedAt',
                 'address',
                 'conventions' => [['rates']],
-                'projects',
             ]);
     }
 

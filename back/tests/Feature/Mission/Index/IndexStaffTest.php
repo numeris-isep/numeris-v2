@@ -26,7 +26,8 @@ class IndexStaffTest extends TestCaseWithAuth
                     'startAt',
                     'duration',
                     'capacity',
-                    'applications'
+                    'applicationsCount',
+                    'project',
                 ]],
                 'links',
                 'meta',

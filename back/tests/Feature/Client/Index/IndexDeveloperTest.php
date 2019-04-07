@@ -23,6 +23,10 @@ class IndexDeveloperTest extends TestCaseWithAuth
                 'reference',
                 'createdAt',
                 'updatedAt',
+                'conventionsCount',
+                'projectsCount',
+                'missionsCount',
+                'address',
             ]]);
     }
 }

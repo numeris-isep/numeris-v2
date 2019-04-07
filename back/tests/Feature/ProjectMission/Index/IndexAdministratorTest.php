@@ -1,20 +1,22 @@
 <?php
 
-namespace Tests\Feature\Mission\Index;
+namespace Tests\Feature\ProjectMission\Index;
 
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
-class IndexDeveloperTest extends TestCaseWithAuth
+class IndexAdministratorTest extends TestCaseWithAuth
 {
-    protected $username = 'developer';
+    protected $username = 'administrator';
 
     /**
-     * @group developer
+     * @group administrator
      */
-    public function testDeveloperAccessingMissionIndex()
+    public function testAdministratorAccessingProjectMissionxIndex()
     {
-        $this->json('GET', route('missions.index'))
+        $project_id = 1;
+
+        $this->json('GET', route('projects.missions.index', ['project_id' => $project_id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'data' => [[
