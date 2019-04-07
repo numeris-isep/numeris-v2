@@ -64,8 +64,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('store-application', function(User $user, Mission $mission) {
             return ! $user->hasAppliedTo($mission)
                 && ! $mission->is_locked
-                && Carbon::parse($mission->start_at)->isAfter(now());
-//                || $mission->project->visibility ? $user->belongsToProject($mission->project) : false; // TODO
+                && Carbon::parse($mission->start_at)->isAfter(now())
+                && $mission->project->isPrivate ? $user->belongsToProject($mission->project) : true;
         });
 
         Gate::define('store-mission-application', function(User $user, Mission $mission) {

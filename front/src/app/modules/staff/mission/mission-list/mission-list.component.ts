@@ -10,7 +10,8 @@ import { Project } from "../../../../core/classes/models/project";
   templateUrl: './mission-list.component.html',
   styleUrls: [
     './mission-list.component.scss',
-    './../../client/client-convention/client-convention.component.css'
+    '../../project/project.component.css',
+    '../../client/client-convention/client-convention.component.css'
   ]
 })
 export class MissionListComponent implements OnInit {

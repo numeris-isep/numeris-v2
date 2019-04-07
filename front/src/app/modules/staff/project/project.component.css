@@ -1,3 +1,7 @@
+.ui.segment.overflowing {
+  overflow-y: auto;
+}
+
 .validated {
   background-color: #f8ffff !important;
   color: #276f86 !important;

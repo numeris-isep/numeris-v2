@@ -30,7 +30,7 @@ class ProjectController extends Controller
         $projects = Project::filtered(
             request()->step,
             [request()->minDate, request()->maxDate]
-        )->withCount('missions')->with('client')->paginate(10);
+        )->withCount('missions', 'users')->with('client')->paginate(10);
 
         return ProjectResource::collection($projects);
     }
@@ -60,7 +60,7 @@ class ProjectController extends Controller
      */
     public function show($project_id)
     {
-        $project = Project::withCount('missions')
+        $project = Project::withCount('missions', 'users')
             ->findOrFail($project_id);
         $this->authorize('show', $project);
 

@@ -19,7 +19,7 @@ export class ProjectService {
 
     if (client) {
       const clientId = typeof client === 'number' ? client : client.id;
-      clientPath = `/clients/${clientId}`
+      clientPath = `/clients/${clientId}`;
     }
 
     const url = `${environment.apiUrl}/api${clientPath}/projects`;

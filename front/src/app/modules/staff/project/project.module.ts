@@ -11,6 +11,7 @@ import { ProjectIndexComponent } from './project-index/project-index.component';
 import { ProjectShowComponent } from './project-show/project-show.component';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { MissionModule } from "../mission/mission.module";
+import { UserModule } from "../user/user.module";
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { MissionModule } from "../mission/mission.module";
     HttpClientModule,
     ProjectRoutingModule,
     MissionModule,
+    UserModule,
   ],
   declarations: [
     ProjectComponent,

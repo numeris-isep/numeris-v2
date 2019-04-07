@@ -107,6 +107,11 @@ class Project extends Model
             ->using(ProjectUser::class);
     }
 
+    public function hasUser(User $user)
+    {
+        return $this->users->contains($user);
+    }
+
     public function addUser(User $user)
     {
         $this->users()->attach($user);

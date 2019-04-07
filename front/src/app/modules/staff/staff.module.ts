@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MissionComponent } from './mission/mission.component';
 import { StatisticComponent } from './statistic/statistic.component';
-import { UserComponent } from './user/user.component';
 import { SuiModule } from "ng2-semantic-ui";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { StaffRoutingModule } from "./staff-routing.module";
@@ -11,6 +9,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { ClientModule } from "./client/client.module";
 import { ProjectModule } from "./project/project.module";
 import { MissionModule } from "./mission/mission.module";
+import { UserModule } from "./user/user.module";
 
 @NgModule({
   imports: [
@@ -26,10 +25,10 @@ import { MissionModule } from "./mission/mission.module";
     ClientModule,
     ProjectModule,
     MissionModule,
+    UserModule,
   ],
   declarations: [
     StatisticComponent,
-    UserComponent,
   ]
 })
 export class StaffModule { }

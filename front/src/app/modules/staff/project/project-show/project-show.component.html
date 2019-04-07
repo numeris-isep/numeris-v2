@@ -94,13 +94,13 @@
             <i class="tags icon"></i> Missions
             <span class="ui tiny blue label">{{ project.missionsCount }}</span>
           </a>
-          <a class="item" suiTabHeader="3">
+          <a class="item" suiTabHeader="2">
             <i class="folder open icon"></i> Documents
             <span class="ui tiny blue label">23</span>
           </a>
-          <a *ngIf="project.isPrivate" class="item" suiTabHeader="2">
+          <a *ngIf="project.isPrivate" class="item" suiTabHeader="3">
             <i class="users icon"></i> Étudiants
-            <span class="ui tiny blue label">15</span>
+            <span class="ui tiny blue label">{{ project.usersCount }}</span>
           </a>
         </div>
 
@@ -108,14 +108,13 @@
           <app-mission-list [project]="project"></app-mission-list>
         </div>
 
-        <div class="ui" suiTabContent="3">
+        <div class="ui" suiTabContent="2">
           <h1>Documents</h1>
           <!--TODO-->
         </div>
 
-        <div *ngIf="project.isPrivate" class="ui" suiTabContent="2">
-          <h1>Étudiants</h1>
-          <!--TODO-->
+        <div *ngIf="project.isPrivate" class="ui" suiTabContent="3">
+          <app-user-list [project]="project"></app-user-list>
         </div>
       </sui-tabset>
     </div>

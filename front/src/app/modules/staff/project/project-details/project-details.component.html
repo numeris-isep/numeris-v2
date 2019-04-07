@@ -24,7 +24,7 @@
         <div *ngIf="project.isPrivate" class="ui mini black statistic"
              suiPopup popupText="Étudiants du projet" [popupPlacement]="'bottom'">
           <div class="value">
-            <i class="users blue icon"></i> 12
+            <i class="users blue icon"></i> {{ project.usersCount }}
           </div>
         </div>
       </div>

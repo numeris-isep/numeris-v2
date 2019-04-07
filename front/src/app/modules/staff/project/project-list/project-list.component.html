@@ -51,17 +51,17 @@
     </div>
 
     <!-- Table -->
-    <div class="ui segment" [ngClass]="{'loading': loading}">
+    <div class="ui segment overflowing" [ngClass]="{'loading': loading}">
       <table class="ui celled striped selectable table">
         <thead>
         <tr>
-          <th><i class="calendar outline icon"></i> Date de début</th>
-          <th><i class="address book outline icon"></i> Nom</th>
-          <th><i class="clipboard list icon"></i> Status</th>
-          <th><i class="building icon"></i> Client</th>
-          <th><i class="copy icon"></i> Missions</th>
-          <th><i class="user secret icon"></i> Visibilité</th>
-          <th><i class="hand pointer outline icon"></i> Action</th>
+          <th class="collapsing"><i class="calendar outline icon"></i> Date de début</th>
+          <th class="collapsing"><i class="address book outline icon"></i> Nom</th>
+          <th class="collapsing"><i class="clipboard list icon"></i> Status</th>
+          <th class="collapsing"><i class="building icon"></i> Client</th>
+          <th class="collapsing"><i class="copy icon"></i> Missions</th>
+          <th class="collapsing"><i class="user secret icon"></i> Visibilité</th>
+          <th class="collapsing"><i class="hand pointer outline icon"></i> Action</th>
         </tr>
         </thead>
 
@@ -83,6 +83,7 @@
           </td>
           <td class="center aligned">
             <app-link-button routerLink="/projects/{{project.id}}"
+                             behaviour="compact"
                              size="tiny" color="basic"
                              hiddenIcon="zoom-in">
               Voir

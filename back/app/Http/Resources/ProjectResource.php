@@ -25,7 +25,8 @@ class ProjectResource extends JsonResource
             'updatedAt'         => $this->updated_at->toDateTimeString(),
 
             // Counts
-            'missionsCount'    => $this->missions_count,
+            'missionsCount'     => $this->missions_count,
+            'usersCount'        => $this->users_count,
 
             // Relations
             'client'            => ClientResource::make($this->whenLoaded('client')),

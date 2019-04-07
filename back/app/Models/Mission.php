@@ -45,18 +45,29 @@ class Mission extends Model
     public static function opened()
     {
         return static::query()
-            ->where('is_locked', false)->get();
+            ->where('is_locked', false);
     }
 
     public static function locked()
     {
         return static::query()
-            ->where('is_locked', true)->get();
+            ->where('is_locked', true);
     }
 
-    public static function available()
+    public static function available(User $user = null)
     {
-        return static::opened(); // TODO: where user belongsTo project_user
+        $user = $user ?: auth()->user();
+
+        return static::opened()
+            ->whereDate('start_at', '>', now())
+            ->get()
+            ->filter(function($mission) use ($user) {
+                if ($mission->project->is_private) {
+                    return $mission->project->hasUser($user) ? $mission : null;
+                }
+
+                return $mission;
+            });
     }
 
     public static function filtered($is_locked, array $range, $project_id = null)

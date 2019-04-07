@@ -5,6 +5,7 @@ import { User } from "../classes/models/user";
 import { HTTP_OPTIONS } from "../constants/http_options";
 import { environment } from "../../../environments/environment";
 import { PaginatedUser } from "../classes/pagination/paginated-user";
+import { Project } from "../classes/models/project";
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +14,27 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(): Observable<PaginatedUser> {
-    const url = `${environment.apiUrl}/api/users`;
+  getUsers(project?: number | Project): Observable<PaginatedUser> {
+    let projectPath: string = '';
+
+    if (project) {
+      const projectId = typeof project === 'number' ? project : project.id;
+      projectPath = `/projects/${projectId}`;
+    }
+
+    const url = `${environment.apiUrl}/api${projectPath}/users`;
     return this.http.get<PaginatedUser>(url, HTTP_OPTIONS);
   }
 
-  getUsersPerPage(pageId?: number, search?: string, role?: string, promotion?: string): Observable<PaginatedUser> {
-    let url = `${environment.apiUrl}/api/users?`;
+  getUsersPerPage(project?: number | Project, pageId?: number, search?: string, role?: string, promotion?: string): Observable<PaginatedUser> {
+    let projectPath: string = '';
+
+    if (project) {
+      const projectId = typeof project === 'number' ? project : project.id;
+      projectPath = `/projects/${projectId}`;
+    }
+
+    let url = `${environment.apiUrl}/api${projectPath}/users?`;
 
     if (pageId) url += `&page=${pageId}`;
     if (search) url += `&search=${search}`;
@@ -27,6 +42,12 @@ export class UserService {
     if (promotion != null) url += `&promotion=${promotion}`;
 
     return this.http.get<PaginatedUser>(url, HTTP_OPTIONS);
+  }
+
+  getProjectUsers(project: number | Project): Observable<Project[]> {
+    const projectId = typeof project === 'number' ? project : project.id;
+    const url = `${environment.apiUrl}/api/projects/${projectId}/users`;
+    return this.http.get<Project[]>(url, HTTP_OPTIONS);
   }
 
   getUser(user: User): Observable<User> {

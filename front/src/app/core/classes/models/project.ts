@@ -16,6 +16,7 @@ export class Project {
   updatedAt: string;
 
   missionsCount: number;
+  usersCount: number;
 
   client: Client;
   convention: Convention;
