@@ -68,7 +68,6 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   getUsersPerPage(pageId?: number) {
-    console.log(this.search);
     this.loading = true;
     let results: Observable<PaginatedUser>;
 

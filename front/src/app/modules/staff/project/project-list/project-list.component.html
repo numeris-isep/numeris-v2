@@ -70,11 +70,11 @@
             suiPopup popupText="Cloturé" popupPlacement="left" popupTrigger="manual" #popup="suiPopup"
             (mouseenter)="togglePopup(popup, project.step == 'closed')" (mouseleave)="togglePopup(popup, project.step == 'closed')">
           <td>{{ project.startAt | date:'dd/MM/y' }}</td>
-          <td>{{ project.name }}</td>
+          <td class="collapsing">{{ project.name }}</td>
           <td [ngClass]="(project.step != 'hiring' && project.step != 'closed') ? project.step : ''">
             {{ project.step | status }}
           </td>
-          <td>
+          <td class="collapsing">
             <a routerLink="/clients/{{ project.client.id }}">{{ project.client.name }}</a>
           </td>
           <td class="center aligned">{{ project.missionsCount }}</td>
@@ -103,6 +103,10 @@
           </tfoot>
         </ng-template>
       </table>
+
+      <div class="caption">
+        Affichage des résultats {{ paginatedProject.meta.from }} à {{ paginatedProject.meta.to }} sur {{ paginatedProject.meta.total }}
+      </div>
     </div>
 
     <!-- Pagination -->
