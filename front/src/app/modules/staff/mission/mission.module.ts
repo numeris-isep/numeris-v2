@@ -8,6 +8,11 @@ import { MissionRoutingModule } from "./mission-routing.module";
 import { MissionIndexComponent } from './mission-index/mission-index.component';
 import { MissionListComponent } from './mission-list/mission-list.component';
 import { MissionComponent } from "./mission.component";
+import { MissionShowComponent } from './mission-show/mission-show.component';
+import { StudentModule } from "../../student/student.module";
+import { MissionApplicationsComponent } from './mission-applications/mission-applications.component';
+import { ApplicationListComponent } from './mission-applications/application-list/application-list.component';
+import { UserModule } from "../user/user.module";
 
 @NgModule({
   imports: [
@@ -18,11 +23,16 @@ import { MissionComponent } from "./mission.component";
     SharedModule,
     HttpClientModule,
     MissionRoutingModule,
+    StudentModule,
+    UserModule,
   ],
   declarations: [
     MissionComponent,
     MissionIndexComponent,
-    MissionListComponent
+    MissionListComponent,
+    MissionShowComponent,
+    MissionApplicationsComponent,
+    ApplicationListComponent
   ],
   exports: [MissionListComponent]
 })

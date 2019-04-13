@@ -11,7 +11,6 @@ import { Client } from "../../../../core/classes/models/client";
   styleUrls: [
     '../project.component.css',
     '../../mission/mission-list/mission-list.component.scss',
-    './../../client/client-convention/client-convention.component.css'
   ]
 })
 export class ProjectListComponent implements OnInit {

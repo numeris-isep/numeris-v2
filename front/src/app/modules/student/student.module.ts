@@ -47,6 +47,7 @@ import { MissionDetailsComponent } from "./mission/mission-details/mission-detai
     ProfileSummaryComponent,
     ProfilePreferencesComponent,
     ProfileDocumentsComponent,
+    MissionDetailsComponent,
   ]
 })
 export class StudentModule { }

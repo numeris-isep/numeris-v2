@@ -21,9 +21,6 @@
       <div class="header">
         {{ client.name }}
       </div>
-      <div class="meta">
-        <i class="history icon"></i> Modifié le {{ client.updatedAt | date:"dd/MM/y" }}
-      </div>
       <div class="description center aligned marged">
         <div class="ui mini black statistic"
              suiPopup popupText="Conventions" [popupPlacement]="'bottom'">
@@ -53,6 +50,9 @@
         </p>
         <p>
           <i class="phone icon"></i> 01 23 45 67 89
+        </p>
+        <p>
+          <i class="history icon"></i> Modifié le {{ client.updatedAt | date:"dd/MM/y" }}
         </p>
       </div>
     </div>

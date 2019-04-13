@@ -4,6 +4,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { MissionComponent } from "./mission.component";
 import { AuthGuard } from "../../../core/guards/auth.guard";
 import { MissionIndexComponent } from "./mission-index/mission-index.component";
+import { MissionShowComponent } from "./mission-show/mission-show.component";
 
 const missionRoute: Routes = [
   {
@@ -18,10 +19,10 @@ const missionRoute: Routes = [
         path: '',
         component: MissionIndexComponent,
       },
-      // {
-      //   path: ':id',
-      //   component: MissionShowComponent,
-      // },
+      {
+        path: ':id',
+        component: MissionShowComponent,
+      },
     ]
   },
 ];

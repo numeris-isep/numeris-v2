@@ -1,0 +1,98 @@
+<div class="ui segment">
+  <div class="ui ribbon label" [ngClass]="{'green': statuses == 'acceptées', 'blue': statuses == 'en attente', 'red': statuses == 'refusées' }">
+    <i class="icon" [ngClass]="{'handshake': statuses == 'acceptées', 'hand paper': statuses == 'en attente', 'thumbs down': statuses == 'refusées' }"></i>
+    Candidatures {{ statuses }}
+  </div>
+  <app-button *ngIf="statuses == 'acceptées'" size="mini" color="green"
+              behaviour="right floated" hiddenIcon="save">
+    Enregistrer
+  </app-button>
+  <table class="ui celled striped selectable form table">
+    <thead>
+    <tr>
+      <th><i class="user icon"></i> Nom</th>
+      <ng-container *ngIf="statuses == 'acceptées'">
+        <th>Heures de jours</th>
+        <th>Heures de nuit</th>
+        <th>Heures dimanches et jours fériés</th>
+        <th>Forfait 7h</th>
+      </ng-container>
+      <th class="collapsing"><i class="hand pointer outline icon"></i> Actions</th>
+    </tr>
+    </thead>
+
+    <tbody *ngIf="applications.length > 0; else noApplication">
+    <tr *ngFor="let application of applications">
+      <td>{{ application.user.firstName }} {{ application.user.lastName | uppercase }}</td>
+      <!-- TODO -->
+      <ng-container *ngIf="statuses == 'acceptées'">
+        <td class="center aligned">
+          <div class="ui left icon mini input">
+            <i class="clock icon"></i>
+            <input type="number" name="test" min="0" step="0.5"
+                   placeholder="h" value="0">
+          </div>
+        </td>
+        <td class="center aligned">
+          <div class="ui left icon mini input">
+            <i class="clock icon"></i>
+            <input type="number" name="test" min="0" step="0.5"
+                   placeholder="h" value="0">
+          </div>
+        </td>
+        <td class="center aligned">
+          <div class="ui left icon mini input">
+            <i class="clock icon"></i>
+            <input type="number" name="test" min="0" step="0.5"
+                   placeholder="h" value="0">
+          </div>
+        </td>
+        <td class="center aligned">
+          <div class="ui left icon mini input">
+            <i class="clock icon"></i>
+            <input type="number" name="test" min="0" step="0.5"
+                   placeholder="h" value="0">
+          </div>
+        </td>
+      </ng-container>
+      <td class="center aligned collapsing">
+        <app-link-button routerLink="/users/{{application.user.id}}"
+                         behaviour="compact"
+                         size="tiny" color="basic"
+                         hiddenIcon="zoom-in">
+          Voir
+        </app-link-button>
+        <app-button *ngIf="application.status != 'accepted'" behaviour="compact"
+                    size="tiny" color="basic positive"
+                    hiddenIcon="handshake">
+          Inscrire
+        </app-button>
+        <app-button *ngIf="application.status == 'accepted'" behaviour="compact"
+                    size="tiny" color="basic negative"
+                    hiddenIcon="trash alternate">
+          Retirer
+        </app-button>
+        <app-button *ngIf="application.status == 'waiting'" behaviour="compact"
+                         size="tiny" color="basic negative"
+                         hiddenIcon="trash alternate">
+          Refuser
+        </app-button>
+      </td>
+    </tr>
+    </tbody>
+    <ng-template #noApplication>
+      <tfoot class="full-width">
+      <tr>
+        <th colspan="20">
+          <app-empty [icon]="false">
+            Aucune candidature
+            <ng-container *ngIf="statuses == 'acceptées'">acceptée.</ng-container>
+            <ng-container *ngIf="statuses == 'en attente'">en attente.</ng-container>
+            <ng-container *ngIf="statuses == 'refusées'">refusée.</ng-container>
+          </app-empty>
+        </th>
+      </tr>
+      </tfoot>
+    </ng-template>
+  </table>
+</div>

@@ -31,9 +31,9 @@ class MissionController extends Controller
         $missions = Mission::filtered(
             request()->isLocked,
             [request()->minDate, request()->maxDate]
-        )->withCount(['applications' => function($query) {
+        )->withCount(['applications as accepted_applications_count' => function($query) {
             return $query->where('status', 'accepted');
-        }])->with('project')->paginate(10);
+        }])->with('project')->orderByDesc('start_at')->paginate(10);
 
         return MissionResource::collection($missions);
     }
@@ -89,7 +89,7 @@ class MissionController extends Controller
      */
     public function show($mission_id)
     {
-        $mission = Mission::findOrFail($mission_id);
+        $mission = Mission::withApplicationsCounts()->findOrFail($mission_id);
         $this->authorize('show', $mission);
 
         $mission->load(['address', 'project', 'applications']);

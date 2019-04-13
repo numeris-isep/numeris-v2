@@ -26,6 +26,16 @@ class MissionPolicy
         return true;
     }
 
+    public function indexMissionApplication(User $current_user)
+    {
+        return false;
+    }
+
+    public function indexNotApplied(User $current_user, Mission $mission)
+    {
+        return false;
+    }
+
     public function store(User $current_user)
     {
         return false;
