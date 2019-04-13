@@ -1,5 +1,5 @@
-<div class="ui icon warning message">
-  <i class="meh outline loading icon"></i>
+<div class="ui warning message" [ngClass]="{'icon': icon}">
+  <i *ngIf="icon" class="meh outline loading icon"></i>
   <div class="content">
     <div class="header">
       Rien à afficher

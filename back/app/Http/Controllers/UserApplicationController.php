@@ -21,7 +21,7 @@ class UserApplicationController extends Controller
     public function index($user_id)
     {
         $user = User::findOrFail($user_id);
-        $this->authorize('index-application', $user);
+        $this->authorize('index-user-application', $user);
 
         return response()->json(ApplicationResource::collection(
             $user->applications

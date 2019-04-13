@@ -19,6 +19,9 @@ export class Mission {
   updatedAt: string;
 
   applicationsCount: number;
+  waitingApplicationsCount: number;
+  acceptedApplicationsCount: number;
+  refusedApplications: boolean;
 
   project: Project;
   address: Address;

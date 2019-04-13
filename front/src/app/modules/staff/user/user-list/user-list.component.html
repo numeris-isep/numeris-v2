@@ -70,7 +70,7 @@
         </tr>
         </thead>
 
-        <tbody>
+        <tbody *ngIf="paginatedUser.data.length > 0; else noUser">
         <tr *ngFor="let user of paginatedUser.data" [ngClass]="{'negative': ! user.activated}"
             suiPopup popupText="À valider" popupPlacement="left" popupTrigger="manual" #popup="suiPopup"
             (mouseenter)="togglePopup(popup, !user.activated)" (mouseleave)="togglePopup(popup, !user.activated)">
@@ -88,7 +88,12 @@
                              hiddenIcon="zoom-in">
               Voir
             </app-link-button>
-            <app-link-button *ngIf="project" behaviour="compact"
+            <app-link-button *ngIf="page == 'mission-show'" behaviour="compact"
+                             size="tiny" color="basic positive"
+                             hiddenIcon="handshake">
+              Inscrire
+            </app-link-button>
+            <app-link-button *ngIf="project && page == 'project-show'" behaviour="compact"
                              size="tiny" color="basic negative"
                              hiddenIcon="trash alternate">
               Retirer
@@ -96,6 +101,17 @@
           </td>
         </tr>
         </tbody>
+        <ng-template #noUser>
+          <tfoot class="full-width">
+          <tr>
+            <th colspan="8">
+              <app-empty>
+                Aucun utilisateur à afficher avec le filtre sélectionné.
+              </app-empty>
+            </th>
+          </tr>
+          </tfoot>
+        </ng-template>
       </table>
     </div>
 

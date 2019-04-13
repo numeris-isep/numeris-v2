@@ -51,7 +51,7 @@
     </div>
 
     <!-- Table -->
-    <div class="ui segment overflowing" [ngClass]="{'loading': loading}">
+    <div class="ui segment overflowing" *ngIf="paginatedMission" [ngClass]="{'loading': loading }">
       <table class="ui celled striped selectable table">
         <thead>
         <tr>
@@ -67,9 +67,9 @@
         </thead>
 
         <tbody *ngIf="paginatedMission.data.length > 0; else noMission">
-        <tr *ngFor="let mission of paginatedMission.data" [ngClass]="{'hatched': mission.isLocked}"
-            suiPopup popupText="Fermée" popupPlacement="left" popupTrigger="manual" #popup="suiPopup"
-            (mouseenter)="togglePopup(popup, mission.isLocked)" (mouseleave)="togglePopup(popup, mission.isLocked)">
+        <tr *ngFor="let mission of paginatedMission.data" [ngClass]="{'hatched': mission.isLocked || isMissionExpired(mission)}"
+            suiPopup popupText="{{ isMissionExpired(mission) ? 'Expirée' : 'Fermée' }}" popupPlacement="left" popupTrigger="manual" #popup="suiPopup"
+            (mouseenter)="togglePopup(popup, mission)" (mouseleave)="togglePopup(popup, mission)">
           <td>{{ mission.startAt | date:'dd/MM/y H\'h\'mm' }}</td>
           <td>{{ mission.reference }}</td>
           <td>{{ mission.title }}</td>
@@ -77,8 +77,8 @@
           <td class="center aligned">{{ mission.duration }}h</td>
           <td>
             <sui-progress class="tiny active indicating"
-                          [value]="mission.applicationsCount" [maximum]="mission.capacity">
-              {{ mission.applicationsCount }}/{{ mission.capacity }}
+                          [value]="mission.acceptedApplicationsCount" [maximum]="mission.capacity">
+              {{ mission.acceptedApplicationsCount }}/{{ mission.capacity }}
             </sui-progress>
           </td>
           <td class="center aligned" [ngClass]="{'warning': mission.project.isPrivate}">

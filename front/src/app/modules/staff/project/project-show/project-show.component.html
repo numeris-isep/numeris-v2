@@ -1,11 +1,11 @@
-<app-content *ngIf="project" [condition]="!project">
+<app-content [condition]="!project">
   <div class="ui padded grid doubling">
     <div class="row">
       <div class="sixteen wide mobile five wide computer column">
-        <app-project-details [project]="project"></app-project-details>
+        <app-project-details *ngIf="project" [project]="project"></app-project-details>
       </div>
 
-      <div class="sixteen wide mobile eleven wide computer column">
+      <div *ngIf="project" class="sixteen wide mobile eleven wide computer column">
         <div class="ui segments">
           <div class="ui blue segment">
             <div class="ui blue ribbon label">Actions</div>
@@ -47,7 +47,7 @@
                   </div>
                   <div class="field">
                     <label>Facture client</label>
-                    <app-button size="small" hiddenIcon="file outline" behaviour="fluid" color="grey"
+                    <app-button size="small" hiddenIcon="money bill" behaviour="fluid" color="grey"
                                 [isDisabled]="false" [isLoading]="false">
                       Générer
                     </app-button>
@@ -86,7 +86,7 @@
     </div>
   </div>
 
-  <div class="ui padded grid">
+  <div *ngIf="project" class="ui padded grid">
     <div class="column">
       <sui-tabset>
         <div class="ui top pointing secondary menu">
@@ -114,7 +114,7 @@
         </div>
 
         <div *ngIf="project.isPrivate" class="ui" suiTabContent="3">
-          <app-user-list [project]="project"></app-user-list>
+          <app-user-list [project]="project" page="project-show"></app-user-list>
         </div>
       </sui-tabset>
     </div>

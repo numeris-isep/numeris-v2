@@ -7,7 +7,7 @@
   color: #276f86 !important;
 }
 
-.billed {
+.billed, .warning {
   background-color: #FFFAF3 !important;
   color: #573A08 !important;
 }
@@ -25,4 +25,8 @@
     #F1F1F1 10px,
     #F1F1F1 20px
   ) !important;
+}
+
+.ui.table tfoot tr:first-child > th:only-child {
+  border-top: none;
 }

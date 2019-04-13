@@ -4,6 +4,8 @@ import { MissionService } from "../../../../core/http/mission.service";
 import * as moment from "moment";
 import { IPopup } from "ng2-semantic-ui";
 import { Project } from "../../../../core/classes/models/project";
+import { Mission } from "../../../../core/classes/models/mission";
+import { now } from "moment";
 
 @Component({
   selector: 'app-mission-list',
@@ -11,7 +13,6 @@ import { Project } from "../../../../core/classes/models/project";
   styleUrls: [
     './mission-list.component.scss',
     '../../project/project.component.css',
-    '../../client/client-convention/client-convention.component.css'
   ]
 })
 export class MissionListComponent implements OnInit {
@@ -30,6 +31,7 @@ export class MissionListComponent implements OnInit {
   to: string;
   loading: boolean = false;
   options = ["Missions ouvertes", "Missions fermées"];
+  popupText: string = 'Fermée';
 
   constructor(private missionService: MissionService) { }
 
@@ -75,11 +77,16 @@ export class MissionListComponent implements OnInit {
     return date ? moment(date).toISOString() : null;
   }
 
-  togglePopup(popup: IPopup, condition) {
+  isMissionExpired(mission: Mission) {
+    return moment(mission.startAt).isBefore(now());
+  }
+
+  togglePopup(popup: IPopup, mission: Mission) {
     const widthCondition = this.windowWidth >= 1287
       || (this.windowWidth < 1200 && this.windowWidth > 1093);
+    const dateCondition = this.isMissionExpired(mission);
 
-    if (condition && widthCondition) {
+    if (widthCondition && (mission.isLocked || dateCondition)) {
       popup.toggle();
     }
   }

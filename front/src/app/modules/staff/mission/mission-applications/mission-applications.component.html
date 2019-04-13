@@ -1,0 +1,18 @@
+<app-content [condition]="!applications">
+  <div class="ui grid doubling">
+    <div class="row">
+      <div class="sixteen wide column">
+        <app-application-list [applications]="acceptedApplications" statuses="acceptées"></app-application-list>
+      </div>
+    </div>
+
+    <div class="stretched row">
+      <div class="sixteen wide mobile eight wide computer column">
+        <app-application-list [applications]="waitingApplications" statuses="en attente"></app-application-list>
+      </div>
+      <div class="sixteen wide mobile eight wide computer column">
+        <app-application-list [applications]="refusedApplications" statuses="refusées"></app-application-list>
+      </div>
+    </div>
+  </div>
+</app-content>

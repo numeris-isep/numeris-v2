@@ -1,0 +1,93 @@
+<app-content [condition]="!mission">
+  <div class="ui padded grid doubling">
+    <div class="row">
+      <!-- Mission details -->
+      <div class="sixteen wide mobile five wide computer column">
+        <app-mission-details *ngIf="mission" [mission]="mission" page="show"></app-mission-details>
+      </div>
+
+      <!-- Actions -->
+      <div class="sixteen wide mobile eleven wide computer column">
+        <div class="ui segments">
+          <div class="ui blue segment">
+            <div class="ui blue ribbon label">Actions</div>
+            <div class="ui two column center aligned grid">
+              <div class="middle aligned row">
+                <div class="column">
+                  <div class="ui small icon header">
+                    <i class="lock icon"></i>
+                    Fermer les candidatures
+                  </div><br>
+                  <app-link-button hiddenIcon="lock" size="tiny">
+                    Marquer comme fermée
+                  </app-link-button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ui form segment">
+            <div class="ui two column center aligned grid">
+              <div class="ui vertical divider">Ou</div>
+              <div class="middle aligned row">
+                <div class="column">
+                  <div class="ui small icon header">
+                    <i class="users icon"></i>
+                    Liste effectif
+                  </div><br>
+                  <app-button size="tiny" hiddenIcon="users"
+                              [isDisabled]="false" [isLoading]="false">
+                    Générer
+                  </app-button>
+                </div>
+                <div class="padded column">
+                  <div class="ui small icon header">
+                    <i class="mail icon"></i>
+                    E-mail pré-mission
+                  </div><br>
+                  <app-button size="tiny" hiddenIcon="mail"
+                              [isDisabled]="false" [isLoading]="false">
+                    Éditer puis envoyer
+                  </app-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabset -->
+  <div *ngIf="mission" class="ui padded grid">
+    <div class="column">
+      <sui-tabset>
+        <div class="ui top pointing secondary menu">
+          <a class="item" suiTabHeader="1">
+            <i class="handshake icon"></i> Candidatures
+            <span class="ui tiny blue label">{{ mission.applicationsCount }}</span>
+          </a>
+          <a class="item" suiTabHeader="2">
+            <i class="clock icon"></i> Heures
+          </a>
+          <a class="item" suiTabHeader="3">
+            <i class="users icon"></i> Étudiants
+          </a>
+        </div>
+
+        <div class="ui" suiTabContent="1">
+          <app-mission-applications *ngIf="mission" [mission]="mission"></app-mission-applications>
+        </div>
+
+        <div class="ui" suiTabContent="2">
+          <h1>Heures</h1>
+          <!--TODO-->
+        </div>
+
+        <div class="ui" suiTabContent="3">
+          <h1>Étudiants</h1>
+          <app-user-list page="mission-show" [mission]="mission"></app-user-list>
+        </div>
+      </sui-tabset>
+    </div>
+  </div>
+</app-content>

@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::patch('users/{user_id}/profile', 'UserController@updateProfile')->name('users.update.profile');
     Route::patch('users/{user_id}/terms-of-use', 'UserController@updateTermsOfUse')->name('users.update.terms-of-use');
     Route::get('users-promotion', 'UserController@indexPromotion')->name('users.index.promotion');
+    Route::apiResource('users.applications', 'UserApplicationController', ['parameters' => ['users' => 'user_id']])
+        ->only(['index', 'store']);
 
     // Role resource routes
     Route::get('roles', 'RoleController@index')->name('roles.index');
@@ -43,17 +45,15 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Client resource routes
     Route::apiResource('clients', 'ClientController', ['parameters' => ['clients' => 'client_id']]);
     Route::get('clients/{client_id}/projects', 'ClientProjectController@index')->name('clients.projects.index');
-
-    // Convention resource routes
     Route::post('clients/{client_id}/conventions', 'ClientConventionController@store')->name('clients.conventions.store');
 
+    // Convention resource routes
     Route::apiResource('conventions', 'ConventionController', ['parameters' => ['conventions' => 'convention_id']])
         ->only(['update', 'destroy']);
-
-    // Rate resource routes
     Route::apiResource('conventions.rates', 'ConventionRateController', ['parameters' => ['conventions'   => 'convention_id']])
         ->only(['store']);
 
+    // Rate resource routes
     Route::apiResource('rates', 'RateController', ['parameters' => ['rates' => 'rate_id']])
         ->only(['update', 'destroy']);
 
@@ -62,23 +62,18 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('projects/{project_id}/missions', 'ProjectMissionController@index')->name('projects.missions.index');
     Route::apiResource('projects.users', 'ProjectUserController')
         ->only(['index', 'store', 'destroy']);
-
     Route::patch('projects/{project_id}/step', 'ProjectController@updateStep')->name('projects.update.step');
-
     Route::patch('projects/{project_id}/payment', 'ProjectController@updatePayment')->name('projects.update.payment');
 
     // Mission resource routes
     Route::apiResource('missions', 'MissionController', ['parameters' => ['missions' => 'mission_id']]);
     Route::get('missions-available', 'MissionController@indexAvailable')->name('missions.index.available');
-
     Route::patch('missions/{mission_id}/lock', 'MissionController@updateLock')->name('missions.update.lock');
+    Route::apiResource('missions.applications', 'MissionApplicationController', ['parameters' => ['missions' => 'mission_id']])
+        ->only(['index', 'store']);
+    Route::get('missions/{mission_id}/users', 'MissionUserController@indexNotApplied')->name('missions.users.index.not-applied');
 
     // Application resource routes
-    Route::post('missions/{mission_id}/applications', 'MissionApplicationController@store')->name('missions.applications.store');
-
-    Route::apiResource('users.applications', 'UserApplicationController', ['parameters' => ['users' => 'user_id']])
-        ->only(['index', 'store']);
-
     Route::apiResource('applications', 'ApplicationController', ['parameters' => ['applications' => 'application_id']])
         ->only(['update', 'destroy']);
 

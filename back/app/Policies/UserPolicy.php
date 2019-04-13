@@ -28,7 +28,7 @@ class UserPolicy
         return $current_user->role()->isSuperiorTo('student');
     }
 
-    public function indexApplication(User $current_user, User $user)
+    public function indexUserApplication(User $current_user, User $user)
     {
         return $current_user->role()->isSuperiorOrEquivalentTo('staff')
             || $current_user->is($user);

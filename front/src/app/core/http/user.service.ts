@@ -6,6 +6,7 @@ import { HTTP_OPTIONS } from "../constants/http_options";
 import { environment } from "../../../environments/environment";
 import { PaginatedUser } from "../classes/pagination/paginated-user";
 import { Project } from "../classes/models/project";
+import { Mission } from "../classes/models/mission";
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,24 @@ export class UserService {
     const projectId = typeof project === 'number' ? project : project.id;
     const url = `${environment.apiUrl}/api/projects/${projectId}/users`;
     return this.http.get<Project[]>(url, HTTP_OPTIONS);
+  }
+
+  getMissionUsersPerPage(mission?: number | Mission, pageId?: number, search?: string, role?: string, promotion?: string): Observable<PaginatedUser> {
+    let missionPath: string = '';
+
+    if (mission) {
+      const missionId = typeof mission === 'number' ? mission : mission.id;
+      missionPath = `/missions/${missionId}`;
+    }
+
+    let url = `${environment.apiUrl}/api${missionPath}/users?`;
+
+    if (pageId) url += `&page=${pageId}`;
+    if (search) url += `&search=${search}`;
+    if (role != null) url += `&role=${role}`;
+    if (promotion != null) url += `&promotion=${promotion}`;
+
+    return this.http.get<PaginatedUser>(url, HTTP_OPTIONS);
   }
 
   getUser(userId: number): Observable<User> {

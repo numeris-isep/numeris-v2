@@ -10,12 +10,16 @@ import { AuthService } from "../../../../core/http/auth/auth.service";
 @Component({
   selector: 'app-mission-details',
   templateUrl: './mission-details.component.html',
-  styleUrls: ['./mission-details.component.css']
+  styleUrls: [
+    './mission-details.component.css',
+    '../../../staff/project/project.component.css'
+  ]
 })
 export class MissionDetailsComponent implements OnInit {
 
   @Input() mission: Mission;
   @Input() color: string = 'blue';
+  @Input() page: string;
   userApplication: Application;
   currentUserId: number;
 

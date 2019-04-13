@@ -1,5 +1,5 @@
 <app-content [condition]="!mission">
-  <div class="ui fluid {{color}} card" [ngClass]="{ 'disabled': mission.isLocked || isMissionExpired() }">
+  <div class="ui fluid {{ page == 'show' ? '' : color }} card" [ngClass]="{ 'disabled': mission.isLocked || isMissionExpired() }">
     <div class="content">
       <div class="ui ribbon label" [ngClass]="color">
         <i class="clock icon"></i>Durée : {{ mission.duration }}h
@@ -12,7 +12,17 @@
         {{ mission.title }}
       </div>
       <div class="meta">
-        <i class="building icon"></i> {{ mission.project.client.name }}
+        <span *ngIf="page != 'show'; else clientLink">
+          <i class="building icon"></i> {{ mission.project.client.name }}
+        </span>
+        <ng-template #clientLink>
+          <a routerLink="/clients/{{ mission.project.client.id }}">
+            <i class="building icon"></i> {{ mission.project.client.name }}
+          </a>
+          <a routerLink="/projects/{{ mission.project.id }}">
+            <i class="folder open icon"></i> {{ mission.project.name }}
+          </a>
+        </ng-template>
       </div>
       <div class="description">
         {{ mission.startAt | date: "\'Le\' dd/MM/yy à H\'h\'mm" }}
@@ -29,15 +39,50 @@
       <i class="map marker alternate icon"></i> {{ mission.address | address }}
     </div>
 
-    <ng-container *ngIf="! (mission.isLocked || isMissionExpired())">
+    <ng-container *ngIf="page == 'show'">
+      <div class="content">
+        <sui-progress class="small indicating" [showProgress]="false"
+                      [value]="mission.acceptedApplicationsCount" [maximum]="mission.capacity">
+          <i class="users icon"></i> {{ mission.acceptedApplicationsCount }}/{{ mission.capacity }}
+        </sui-progress>
+      </div>
+
+      <div class="center aligned extra content" [ngClass]="{'warning': mission.project.isPrivate}">
+        <i *ngIf="!mission.project.isPrivate; else private"
+           class="eye big icon" suiPopup popupPlacement="top" popupHeader="Public"
+           popupText="Mission visible par tous les étudiants"></i>
+        <ng-template #private>
+          <i class="eye slash big icon" suiPopup popupPlacement="top" popupHeader="Privé"
+             popupText="Mission seulement visible par les étudiants du projet"></i>
+        </ng-template>
+      </div>
+
+      <div class="ui small bottom attached buttons">
+        <div class="ui animated fade orange button">
+          <div class="visible content">Modifier</div>
+          <div class="hidden content">
+            <i class="edit icon"></i>
+          </div>
+        </div>
+        <div class="or" data-text="ou"></div>
+        <div class="ui animated fade negative button">
+          <div class="visible content">Supprimer</div>
+          <div class="hidden content">
+            <i class="trash alternate icon"></i>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="page != 'show' && ! (mission.isLocked || isMissionExpired())">
       <app-button *ngIf="! userApplication" hiddenIcon="handshake"
                   attachment="bottom attached" behaviour="fluid"
-                  color="none" size="tiny" (click)="openModal(mission, userApplication)">
+                  color="none" size="tiny" (click)="openModal()">
         Postuler
       </app-button>
       <app-button *ngIf="userApplication" hiddenIcon="frown outline"
                   attachment="bottom attached" behaviour="fluid"
-                  color="none" size="tiny" (click)="openModal(mission, userApplication)">
+                  color="none" size="tiny" (click)="openModal()">
         Retirer votre candidature
       </app-button>
     </ng-container>

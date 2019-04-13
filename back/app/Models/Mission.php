@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Traits\OnEventsTrait;
 use App\Models\Traits\DateQueryTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Mission extends Model
 {
@@ -140,5 +141,28 @@ class Mission extends Model
     {
         return $this->applications()
             ->where('status','=', Application::REFUSED);
+    }
+
+    public static function withApplicationsCounts()
+    {
+        return static::withCount([
+            'applications',
+            'applications as waiting_applications_count' => function($query) {
+                $query->where('status', '=', Application::WAITING);
+            },
+            'applications as accepted_applications_count' => function($query) {
+                $query->where('status', '=', Application::ACCEPTED);
+            },
+            'applications as refused_applications_count' => function($query) {
+                $query->where('status', '=', Application::REFUSED);
+            },
+        ]);
+    }
+
+    public function users()
+    {
+        return $this->applications->map(function($a) {
+            return $a->user;
+        });
     }
 }

@@ -1,11 +1,12 @@
 import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { PaginatedUser } from "../../../../core/classes/pagination/paginated-user";
 import { FormControl } from "@angular/forms";
-import { Subscription } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { UserService } from "../../../../core/http/user.service";
 import { debounceTime } from "rxjs/operators";
 import { IPopup } from "ng2-semantic-ui";
 import { Project } from "../../../../core/classes/models/project";
+import { Mission } from "../../../../core/classes/models/mission";
 
 @Component({
   selector: 'app-user-list',
@@ -24,7 +25,9 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   windowWidth: number = window.innerWidth;
 
+  @Input() page: string = "user-list";
   @Input() project: Project = null;
+  @Input() mission: Mission = null;
   paginatedUser: PaginatedUser;
   search: string = '';
   searchControl: FormControl = new FormControl();
@@ -46,7 +49,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.searchControlSubscription = this.searchControl.valueChanges.pipe(
-      debounceTime(1000)
+      debounceTime(400)
     ).subscribe(value => {
       this.search = value;
       this.setFilter();
@@ -66,13 +69,21 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   getUsersPerPage(pageId?: number) {
     this.loading = true;
-    this.userService.getUsersPerPage(
-      this.project,
-      pageId,
-      this.search,
-      this.selectedRoleToRole(),
-      this.selectedPromotion,
-    ).subscribe(paginatedUser => {
+    let results: Observable<PaginatedUser>;
+
+    if (this.page != 'mission-show') {
+      results = this.userService.getUsersPerPage(
+        this.project, pageId, this.search,
+        this.selectedRoleToRole(), this.selectedPromotion
+      );
+    } else {
+      results = this.userService.getMissionUsersPerPage(
+        this.mission, pageId, this.search,
+        this.selectedRoleToRole(), this.selectedPromotion,
+      );
+    }
+
+    results.subscribe(paginatedUser => {
       this.paginatedUser = paginatedUser;
       this.loading = false;
     });

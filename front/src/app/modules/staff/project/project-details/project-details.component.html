@@ -12,7 +12,9 @@
         {{ project.name }}
       </div>
       <div class="meta">
-        <i class="history icon"></i> Modifié le {{ project.updatedAt | date:"dd/MM/y" }}
+        <a routerLink="/clients/{{ project.client.id }}">
+          <i class="building icon"></i> {{ project.client.name }}
+        </a>
       </div>
       <div class="description center aligned marged">
         <div class="ui mini black statistic"
@@ -33,14 +35,13 @@
     <div class="content">
       <div class="description">
         <p>
-          <i class="building icon"></i>
-          <a routerLink="/clients/{{ project.client.id }}">{{ project.client.name }}</a>
-        </p>
-        <p>
           <i class="tag icon"></i> {{ project.convention.name }}
         </p>
         <p>
           <i class="calendar outline icon"></i> {{ project.startAt | date:'yy/MM/y' }}
+        </p>
+        <p>
+          <i class="history icon"></i> Modifié le {{ project.updatedAt | date:"dd/MM/y" }}
         </p>
       </div>
     </div>
