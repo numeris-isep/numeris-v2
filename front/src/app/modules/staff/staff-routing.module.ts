@@ -5,7 +5,7 @@ import { AuthGuard } from "../../core/guards/auth.guard";
 
 const staffRoutes: Routes = [
   {
-    path: 'statistics',
+    path: 'statistiques',
     component: StatisticComponent,
     canActivate: [AuthGuard],
     data: {

@@ -8,11 +8,11 @@ import { ProjectShowComponent } from "./project-show/project-show.component";
 
 const projectRoutes: Routes = [
   {
-    path: 'projects',
+    path: 'projets',
     component: ProjectComponent,
     canActivate: [AuthGuard],
     data: {
-      title: 'Projects',
+      title: 'Projets',
     },
     children: [
       {

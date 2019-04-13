@@ -12,7 +12,7 @@ import { ActivatedGuard } from "../../core/guards/activated.guard";
 
 const studentRoutes: Routes = [
   {
-    path: 'dashboard',
+    path: 'tableau-de-bord',
     component: DashboardComponent,
     canActivate: [AuthGuard],
     data: {
@@ -20,7 +20,7 @@ const studentRoutes: Routes = [
     }
   },
   {
-    path: 'profile',
+    path: 'profil',
     component: ProfileComponent,
     canActivate: [AuthGuard],
     data: {
@@ -28,7 +28,7 @@ const studentRoutes: Routes = [
     }
   },
   {
-    path: 'available-missions',
+    path: 'missions-disponibles',
     component: MissionComponent,
     canActivate: [AuthGuard, ActivatedGuard],
     data: {
@@ -36,7 +36,7 @@ const studentRoutes: Routes = [
     }
   },
   {
-    path: 'applications',
+    path: 'candidatures',
     component: ApplicationComponent,
     canActivate: [AuthGuard, ActivatedGuard],
     data: {
@@ -44,7 +44,7 @@ const studentRoutes: Routes = [
     }
   },
   {
-    path: 'tutorials',
+    path: 'tutoriels',
     component: TutorialComponent,
     canActivate: [AuthGuard],
     data: {
@@ -52,7 +52,7 @@ const studentRoutes: Routes = [
     }
   },
   {
-    path: 'contact-us',
+    path: 'nous-contacter',
     component: ContactUsComponent,
     canActivate: [AuthGuard],
     data: {
@@ -60,7 +60,7 @@ const studentRoutes: Routes = [
     }
   },
   {
-    path: 'terms-of-use',
+    path: 'conditions-dutilisation',
     component: TermsOfUseComponent,
     canActivate: [AuthGuard],
     data: {

@@ -8,7 +8,7 @@ import { UserShowComponent } from "./user-show/user-show.component";
 
 const userRoutes: Routes = [
   {
-    path: 'users',
+    path: 'utilisateurs',
     component: UserComponent,
     canActivate: [AuthGuard],
     data: {
