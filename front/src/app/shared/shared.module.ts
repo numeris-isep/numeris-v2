@@ -21,6 +21,7 @@ import { EmptyComponent } from './components/empty/empty.component';
 import { RolePipe } from './pipes/role.pipe';
 import { RouterModule } from '@angular/router';
 import { StatusPipe } from './pipes/status.pipe';
+import { FormErrorComponent } from './components/form-error/form-error.component';
 
 @NgModule({
   imports: [
@@ -49,6 +50,7 @@ import { StatusPipe } from './pipes/status.pipe';
     EmptyComponent,
     RolePipe,
     StatusPipe,
+    FormErrorComponent,
   ],
   exports: [
     // Components
@@ -67,6 +69,7 @@ import { StatusPipe } from './pipes/status.pipe';
     LoaderComponent,
     ContentComponent,
     EmptyComponent,
+    FormErrorComponent,
 
     // Pipes
     AddressPipe,

@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "../../../../core/http/auth/auth.service";
 import { first } from "rxjs/operators";
 import { AlertService } from "../../../../core/services/alert.service";
+import { handleFormErrors } from "../../../../core/functions/form-error-handler";
 
 @Component({
   selector: 'login-modal',
@@ -46,18 +47,19 @@ export class LoginModalComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.loginForm.invalid) { return; }
+    if (this.loginForm.invalid) return;
 
     this.loading = true;
     this.authService.login(this.f.email.value, this.f.password.value)
       .pipe(first())
       .subscribe(
         _ => {
-          this.alertService.success('Vous êtes connecté !', null, true);
+          this.alertService.success(['Vous êtes connecté !'], null, true);
           this.router.navigate([this.returnUrl]);
           this.modal.approve(undefined); // <-- make the modal disappear
         },
-        error => {
+        errors => {
+          handleFormErrors(this.loginForm, errors);
           this.loading = false;
         });
   }

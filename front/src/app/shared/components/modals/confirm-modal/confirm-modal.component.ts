@@ -46,7 +46,7 @@ export class ConfirmModalComponent implements OnInit {
         _ => {
           this.router.navigate(['/profile'])
             .then(() => { this.router.navigate([this.returnUrl]) } );
-          this.alertService.success(`Vous avez bien postulé à la mission ${this.mission.title}.`, null, true);
+          this.alertService.success([`Vous avez bien postulé à la mission ${this.mission.title}.`], null, true);
           this.modal.approve(undefined);
         },
         error => {
@@ -59,7 +59,7 @@ export class ConfirmModalComponent implements OnInit {
         _ => {
           this.router.navigate(['/profile'])
             .then(() => { this.router.navigate([this.returnUrl]) } );
-          this.alertService.success(`Candidature à la mission ${this.mission.title} retirée.`, null, true);
+          this.alertService.success([`Candidature à la mission ${this.mission.title} retirée.`], null, true);
           this.modal.approve(undefined);
         },
         error => {

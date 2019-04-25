@@ -4,6 +4,7 @@ import { ClientComponent } from "./client.component";
 import { AuthGuard } from "../../../core/guards/auth.guard";
 import { ClientIndexComponent } from "./client-index/client-index.component";
 import { ClientShowComponent } from "./client-show/client-show.component";
+import { ClientCreateComponent } from "./client-create/client-create.component";
 
 const clientRoutes: Routes = [
   {
@@ -19,9 +20,16 @@ const clientRoutes: Routes = [
         component: ClientIndexComponent,
       },
       {
+        path: 'nouveau',
+        component: ClientCreateComponent,
+        data: {
+          title: 'Nouveau client'
+        }
+      },
+      {
         path: ':id',
         component: ClientShowComponent,
-      }
+      },
     ]
   },
 ];

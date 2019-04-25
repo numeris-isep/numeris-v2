@@ -22,8 +22,9 @@ export class ClientService {
     return this.http.get<Client>(url, HTTP_OPTIONS);
   }
 
-  addClient() {
-    //
+  addClient(client: Client): Observable<Client> {
+    const url = `${environment.apiUrl}/api/clients`;
+    return this.http.post<Client>(url, client, HTTP_OPTIONS);
   }
 
  updateClient(client: Client) {

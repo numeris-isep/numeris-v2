@@ -1,8 +1,9 @@
 export class Alert {
   type: AlertType;
-  content: string;
+  content: string[];
   title: string | null = null;
   target: string;
+  dismissable: boolean = false;
 }
 
 export enum AlertType {

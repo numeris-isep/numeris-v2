@@ -12,7 +12,7 @@ return [
     |
     */
 
-    'login' => 'L\'utilisateur ou le mot de passe ne correspondent pas.',
+    'login' => 'L\'utilisateur et le mot de passe ne correspondent pas.',
     'accepted' => 'Le champ :attribute doit être accepté.',
     'active_url' => "Le champ :attribute n'est pas une URL valide.",
     'after' => 'Le champ :attribute doit être une date postérieure au :date.',
@@ -155,8 +155,9 @@ return [
         'city'                      => 'ville',
         'country'                   => 'pays',
         'address'                   => 'adresse',
-        'street'                    => 'rue',
-        'zip_code'                  => 'code postal',
+        'address.street'            => 'rue',
+        'address.zip_code'          => 'code postal',
+        'address.city'              => 'ville',
         'phone'                     => 'téléphone',
         'mobile'                    => 'portable',
         'social_insurance_number'   => 'numéro de sécurité sociale',

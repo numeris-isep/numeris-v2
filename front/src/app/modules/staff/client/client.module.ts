@@ -12,6 +12,8 @@ import { SharedModule } from "../../../shared/shared.module";
 import { ClientRoutingModule } from "./client-routing.module";
 import { ProjectModule } from "../project/project.module";
 import { ClientConventionComponent } from './client-convention/client-convention.component';
+import { ClientCreateComponent } from './client-create/client-create.component';
+import { ClientFormComponent } from './client-form/client-form.component';
 
 @NgModule({
   imports: [
@@ -31,6 +33,8 @@ import { ClientConventionComponent } from './client-convention/client-convention
     ClientListComponent,
     ClientIndexComponent,
     ClientConventionComponent,
+    ClientCreateComponent,
+    ClientFormComponent,
   ],
 })
 export class ClientModule { }

@@ -1,0 +1,7 @@
+.ui.error.message {
+  margin: 1em 0 0;
+}
+
+.ui.error.message.main {
+  margin: 0 0 1em;
+}

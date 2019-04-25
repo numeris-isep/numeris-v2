@@ -32,9 +32,9 @@ class ClientRequest extends AbstractFormRequest
 
         $rules = [
             // Address
-            'street'        => 'required|string',
-            'zip_code'      => 'required|integer',
-            'city'          => 'required|string',
+            'address.street'        => 'required|string',
+            'address.zip_code'      => 'required|integer',
+            'address.city'          => 'required|string',
         ];
 
         switch($this->method())

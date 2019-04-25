@@ -18,3 +18,10 @@ a <div> with the classes 'ui main content':
 .ui.main.content {
   margin: 10px;
 }
+
+/*
+Padding of ul tags inside an error message segment
+ */
+.ui.error.message ul {
+  padding-inline-start: 1em;
+}

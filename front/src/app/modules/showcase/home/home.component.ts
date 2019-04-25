@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
     this.authService.isLoggedIn.subscribe(
       isLoggedIn => {
         if (isLoggedIn) {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/tableau-de-bord']);
         }
       }
     );

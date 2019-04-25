@@ -7,7 +7,12 @@
           {{ alert.title }}
         </div>
         <div *ngIf="alert.content">
-          {{ alert.content }}
+          <span *ngIf="alert.content.length == 1; else contents">{{ alert.content }}</span>
+          <ng-template #contents>
+            <ul>
+              <li *ngFor="let message of content">{{ message }}</li>
+            </ul>
+          </ng-template>
         </div>
       </div>
     </sui-message>

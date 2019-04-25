@@ -76,7 +76,7 @@ export class TermsOfUseComponent implements OnInit {
       _ => {
         this.router.navigate(['/'])
           .then(() => { this.router.navigate(['/terms-of-use']) } );
-        this.alertService.success('Conditions d\'utilisations acceptées.', null, true);
+        this.alertService.success(['Conditions d\'utilisations acceptées.'], null, true);
       },
       error => {
         this.loading = false;

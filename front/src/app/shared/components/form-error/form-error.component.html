@@ -1,0 +1,11 @@
+<div class="ui error message {{ type }}">
+  <span *ngIf="errors.required; else notRequired">Champ requis.</span>
+  <ng-template #notRequired>
+    <span *ngIf="errors.length == 1; else multiple">{{ errors }}</span>
+    <ng-template #multiple>
+      <ul>
+        <li *ngFor="let error of errors">{{ error }}</li>
+      </ul>
+    </ng-template>
+  </ng-template>
+</div>
