@@ -5,7 +5,7 @@
 <div class="content">
   <form class="ui large form"
         [formGroup]="loginForm" (ngSubmit)="onSubmit()"
-        [ngClass]="{ 'error': submitted && loginForm.invalid, 'loading': loading }">
+        [ngClass]="{ 'error': submitted && loginForm.invalid }">
     <app-form-error *ngIf="submitted && loginForm.errors" [errors]="loginForm.errors" type="main"></app-form-error>
     <div class="required field"
          [ngClass]="{ 'error': submitted && (f.email.errors) }">

@@ -22,13 +22,15 @@ export class ClientService {
     return this.http.get<Client>(url, HTTP_OPTIONS);
   }
 
-  addClient(client: Client): Observable<Client> {
+  addClient(data: Client): Observable<Client> {
     const url = `${environment.apiUrl}/api/clients`;
-    return this.http.post<Client>(url, client, HTTP_OPTIONS);
+    return this.http.post<Client>(url, data, HTTP_OPTIONS);
   }
 
- updateClient(client: Client) {
-    //
+ updateClient(data: Client, client: Client | number): Observable<Client> {
+    const clientId: number = typeof client === 'number' ? client : client.id;
+    const url = `${environment.apiUrl}/api/clients/${clientId}`;
+    return this.http.put<Client>(url, data, HTTP_OPTIONS);
  }
 
  deleteClient(client: Client) {

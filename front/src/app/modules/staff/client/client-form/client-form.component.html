@@ -66,7 +66,7 @@
       </div>
     </div>
     <div class="field">
-      <div class="ui buttons">
+      <div *ngIf="!client; else edit" class="ui buttons">
         <a class="ui animated fade button" routerLink="/clients">
           <div class="visible content">Annuler</div>
           <div class="hidden content">
@@ -82,6 +82,25 @@
           </div>
         </button>
       </div>
+
+      <ng-template #edit>
+        <div class="ui buttons">
+          <a class="ui animated fade button" routerLink="/clients/{{ client.id }}">
+            <div class="visible content">Annuler</div>
+            <div class="hidden content">
+              <i class="cancel icon"></i>
+            </div>
+          </a>
+          <div class="or" data-text="ou"></div>
+          <button class="ui animated fade orange button"
+                  [ngClass]="{'loading': loading, 'disabled': clientForm.invalid}">
+            <div class="visible content">Modifier</div>
+            <div class="hidden content">
+              <i class="plus icon"></i>
+            </div>
+          </button>
+        </div>
+      </ng-template>
     </div>
   </form>
 </div>

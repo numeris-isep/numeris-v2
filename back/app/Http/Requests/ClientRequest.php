@@ -28,7 +28,7 @@ class ClientRequest extends AbstractFormRequest
      */
     public function rules()
     {
-        $client_id = $this->ids;
+        $client_id = $this->route('client_id');
 
         $rules = [
             // Address

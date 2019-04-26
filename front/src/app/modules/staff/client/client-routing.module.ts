@@ -5,6 +5,7 @@ import { AuthGuard } from "../../../core/guards/auth.guard";
 import { ClientIndexComponent } from "./client-index/client-index.component";
 import { ClientShowComponent } from "./client-show/client-show.component";
 import { ClientCreateComponent } from "./client-create/client-create.component";
+import { ClientEditComponent } from "./client-edit/client-edit.component";
 
 const clientRoutes: Routes = [
   {
@@ -25,6 +26,10 @@ const clientRoutes: Routes = [
         data: {
           title: 'Nouveau client'
         }
+      },
+      {
+        path: ':id/modifier',
+        component: ClientEditComponent,
       },
       {
         path: ':id',

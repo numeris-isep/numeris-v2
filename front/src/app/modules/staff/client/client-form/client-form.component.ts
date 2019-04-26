@@ -5,6 +5,7 @@ import { ClientService } from "../../../../core/http/client.service";
 import { first } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { handleFormErrors } from "../../../../core/functions/form-error-handler";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-client-form',
@@ -61,8 +62,15 @@ export class ClientFormComponent implements OnInit {
     if (this.clientForm.invalid) return;
 
     this.loading = true;
-    this.clientService.addClient(this.clientForm.value as Client)
-      .pipe(first())
+    let clientRequest: Observable<Client>;
+
+    if (!this.client) {
+      clientRequest = this.clientService.addClient(this.clientForm.value as Client)
+    } else {
+      clientRequest = this.clientService.updateClient(this.clientForm.value as Client, this.client);
+    }
+
+    clientRequest.pipe(first())
       .subscribe(
         client => {
           this.loading = false;

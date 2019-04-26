@@ -83,9 +83,7 @@ class ClientController extends Controller
         $client_request = $request->except([
             'street', 'zip_code', 'city'
         ]);
-        $address_request = $request->only([
-            'street', 'zip_code', 'city',
-        ]);
+        $address_request = $request->only(['address'])['address'];
 
         $client->update($client_request);
         $client->address()->update($address_request);

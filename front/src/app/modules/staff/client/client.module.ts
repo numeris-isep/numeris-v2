@@ -14,6 +14,7 @@ import { ProjectModule } from "../project/project.module";
 import { ClientConventionComponent } from './client-convention/client-convention.component';
 import { ClientCreateComponent } from './client-create/client-create.component';
 import { ClientFormComponent } from './client-form/client-form.component';
+import { ClientEditComponent } from './client-edit/client-edit.component';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { ClientFormComponent } from './client-form/client-form.component';
     ClientConventionComponent,
     ClientCreateComponent,
     ClientFormComponent,
+    ClientEditComponent,
   ],
 })
 export class ClientModule { }
