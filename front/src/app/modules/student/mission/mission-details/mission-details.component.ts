@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Mission } from "../../../../core/classes/models/mission";
 import * as moment from "moment";
-import { ConfirmModal } from "../../../../shared/components/modals/confirm-modal/confirm-modal.component";
+import { ConfirmModal } from "../../application/application-confirm-modal/application-confirm-modal.component";
 import { SuiModalService } from "ng2-semantic-ui";
 import { ApplicationService } from "../../../../core/http/application.service";
 import { Application } from "../../../../core/classes/models/application";

@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SuiModal, ComponentModalConfig, ModalSize } from "ng2-semantic-ui"
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AuthService } from "../../../../core/http/auth/auth.service";
-import { TokenService } from "../../../../core/services/token.service";
-import { AlertService } from "../../../../core/services/alert.service";
-import { first } from "rxjs/operators";
 
 @Component({
   selector: 'contact-us-modal',

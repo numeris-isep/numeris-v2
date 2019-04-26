@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { MissionDetailsComponent } from "./mission/mission-details/mission-details.component";
+import { ApplicationConfirmModalComponent } from "./application/application-confirm-modal/application-confirm-modal.component";
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { MissionDetailsComponent } from "./mission/mission-details/mission-detai
     ProfileDocumentsComponent,
     MissionComponent,
     ApplicationComponent,
+    ApplicationConfirmModalComponent,
     TutorialComponent,
     ContactUsComponent,
     MissionDetailsComponent,
@@ -48,6 +50,9 @@ import { MissionDetailsComponent } from "./mission/mission-details/mission-detai
     ProfilePreferencesComponent,
     ProfileDocumentsComponent,
     MissionDetailsComponent,
+  ],
+  entryComponents: [
+    ApplicationConfirmModalComponent,
   ]
 })
 export class StudentModule { }

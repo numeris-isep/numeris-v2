@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { SidebarComponent } from "../sidebar/sidebar.component";
 import { Observable } from "rxjs";
 import { SuiModalService } from "ng2-semantic-ui";
-import { LoginModal } from "../../../shared/components/modals/login-modal/login-modal.component";
+import { LoginModal } from "../../../modules/showcase/modals/login-modal/login-modal.component";
 import { AuthService } from "../../http/auth/auth.service";
 import { Router } from "@angular/router";
 import { ScrollService } from "../../services/scroll.service";

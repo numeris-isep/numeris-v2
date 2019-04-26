@@ -13,7 +13,6 @@ import { StudentModule } from "../modules/student/student.module";
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
 import { MenuComponent } from "./components/menu/menu.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
-import { HomeComponent } from "../modules/showcase/home/home.component";
 import { SuiModule } from 'ng2-semantic-ui';
 import { AccordionComponent } from "./components/accordion/accordion.component";
 import { JwtInterceptor } from "./interceptors/jwt.interceptor";
@@ -21,6 +20,7 @@ import { TitleComponent } from './components/title/title.component';
 import { HeaderComponent } from './components/header/header.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { StaffModule } from "../modules/staff/staff.module";
+import { ShowcaseModule } from "../modules/showcase/showcase.module";
 import { ActivatedRouteSnapshot, Router } from "@angular/router";
 
 // Setting to locale to 'fr'
@@ -36,6 +36,7 @@ registerLocaleData(localeFr, 'fr');
     SuiModule,
 
     // MUST be the last imports
+    ShowcaseModule,
     StudentModule,
     StaffModule,
     SharedModule,
@@ -43,7 +44,6 @@ registerLocaleData(localeFr, 'fr');
   ],
   declarations: [
     AppComponent,
-    HomeComponent,
     SidebarComponent,
     AccordionComponent,
     MenuComponent,

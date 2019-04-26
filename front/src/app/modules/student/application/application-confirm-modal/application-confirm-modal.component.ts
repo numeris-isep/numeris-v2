@@ -17,9 +17,9 @@ export interface IConfirmModalContext {
 
 @Component({
   selector: 'confirm-modal',
-  templateUrl: './confirm-modal.component.html'
+  templateUrl: './application-confirm-modal.component.html'
 })
-export class ConfirmModalComponent implements OnInit {
+export class ApplicationConfirmModalComponent implements OnInit {
 
   mission: Mission = this.modal.context.mission;
   application: Application = this.modal.context.application;
@@ -44,27 +44,29 @@ export class ConfirmModalComponent implements OnInit {
     if (! this.application) {
       this.storeUserApplication(this.mission).subscribe(
         _ => {
-          this.router.navigate(['/profile'])
+          this.router.navigate(['/profil'])
             .then(() => { this.router.navigate([this.returnUrl]) } );
           this.alertService.success([`Vous avez bien postulé à la mission ${this.mission.title}.`], null, true);
           this.modal.approve(undefined);
         },
         error => {
           this.loading = false;
-          console.log(error);
+          this.alertService.error(error, null, true);
+          this.modal.deny(undefined);
         }
       );
     } else {
       this.destroyUserApplication(this.application).subscribe(
         _ => {
-          this.router.navigate(['/profile'])
+          this.router.navigate(['/profil'])
             .then(() => { this.router.navigate([this.returnUrl]) } );
           this.alertService.success([`Candidature à la mission ${this.mission.title} retirée.`], null, true);
           this.modal.approve(undefined);
         },
         error => {
           this.loading = false;
-          console.log(error);
+          this.alertService.error(error, null, true);
+          this.modal.deny(undefined);
         }
       );
     }
@@ -93,7 +95,7 @@ export class ConfirmModal extends ComponentModalConfig<IConfirmModalContext, voi
     isClosable: boolean = true,
     transitionDuration: number = 200
   ) {
-    super(ConfirmModalComponent, { title, question, mission, application });
+    super(ApplicationConfirmModalComponent, { title, question, mission, application });
 
     this.isClosable = isClosable;
     this.transitionDuration = transitionDuration;
