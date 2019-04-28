@@ -56,7 +56,7 @@ export class ApplicationConfirmModalComponent implements OnInit {
         }
       );
     } else {
-      this.destroyUserApplication(this.application).subscribe(
+      this.deleteUserApplication(this.application).subscribe(
         _ => {
           this.router.navigate(['/profil'])
             .then(() => { this.router.navigate([this.returnUrl]) } );
@@ -79,8 +79,8 @@ export class ApplicationConfirmModalComponent implements OnInit {
     );
   }
 
-  destroyUserApplication(application: Application): Observable<Application> {
-    return this.applicationService.destroyApplication(application);
+  deleteUserApplication(application: Application): Observable<Application> {
+    return this.applicationService.deleteApplication(application);
   }
 }
 

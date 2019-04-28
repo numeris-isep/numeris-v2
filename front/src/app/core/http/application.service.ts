@@ -18,7 +18,7 @@ export class ApplicationService {
     //
   }
 
-  destroyApplication(application: Application): Observable<Application> {
+  deleteApplication(application: Application): Observable<Application> {
     const url = `${environment.apiUrl}/api/applications/${application.id}`;
     return this.http.delete<Application>(url, HTTP_OPTIONS);
   }

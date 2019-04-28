@@ -15,6 +15,7 @@ import { ClientConventionComponent } from './client-convention/client-convention
 import { ClientCreateComponent } from './client-create/client-create.component';
 import { ClientFormComponent } from './client-form/client-form.component';
 import { ClientEditComponent } from './client-edit/client-edit.component';
+import { ClientDeleteModalComponent } from './client-delete-modal/client-delete-modal.component';
 
 @NgModule({
   imports: [
@@ -37,6 +38,10 @@ import { ClientEditComponent } from './client-edit/client-edit.component';
     ClientCreateComponent,
     ClientFormComponent,
     ClientEditComponent,
+    ClientDeleteModalComponent,
   ],
+  entryComponents: [
+    ClientDeleteModalComponent,
+  ]
 })
 export class ClientModule { }

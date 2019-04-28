@@ -74,7 +74,7 @@ export class MissionService {
     // TODO
   }
 
-  destroyMission() {
+  deleteMission() {
     // TODO
   }
 }

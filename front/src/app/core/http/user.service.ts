@@ -92,7 +92,7 @@ export class UserService {
     return this.http.patch(url, { tou_accepted: true }, HTTP_OPTIONS);
   }
 
-  destroyUser(user: User) {
+  deleteUser(user: User) {
     // TODO
   }
 }

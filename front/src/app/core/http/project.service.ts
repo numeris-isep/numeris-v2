@@ -73,7 +73,7 @@ export class ProjectService {
     // TODO
   }
 
-  destroyProject() {
+  deleteProject() {
     // TODO
   }
 }

@@ -33,8 +33,10 @@ export class ClientService {
     return this.http.put<Client>(url, data, HTTP_OPTIONS);
  }
 
- deleteClient(client: Client) {
-    //
+ deleteClient(client: Client): Observable<Client> {
+   const clientId: number = typeof client === 'number' ? client : client.id;
+   const url = `${environment.apiUrl}/api/clients/${clientId}`;
+   return this.http.delete<Client>(url, HTTP_OPTIONS);
  }
 
 }

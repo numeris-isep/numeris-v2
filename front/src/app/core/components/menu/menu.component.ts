@@ -18,7 +18,7 @@ export class MenuComponent implements OnInit {
 
   @Input() sidebar: SidebarComponent;
 
-  private modal: LoginModal = new LoginModal();
+  private loginModal: LoginModal = new LoginModal();
 
   constructor(
     private modalService: SuiModalService,
@@ -32,7 +32,7 @@ export class MenuComponent implements OnInit {
   }
 
   openModal() {
-    this.modalService.open(this.modal);
+    this.modalService.open(this.loginModal);
   }
 
   logout() {
