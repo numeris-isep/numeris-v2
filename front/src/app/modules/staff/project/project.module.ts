@@ -36,6 +36,9 @@ import { ProjectFormComponent } from './project-form/project-form.component';
     ProjectCreateComponent,
     ProjectFormComponent
   ],
-  exports: [ProjectListComponent]
+  exports: [
+    ProjectListComponent,
+    ProjectFormComponent,
+  ]
 })
 export class ProjectModule { }

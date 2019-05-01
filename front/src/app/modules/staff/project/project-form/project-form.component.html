@@ -43,7 +43,7 @@
             <sui-select class="selection fluid" labelField="name" valueField="id"
                         placeholder="Sélectionner une option" formControlName="client_id"
                         (ngModelChange)="getConventions(f.client_id.value)"
-                        [options]="clients"
+                        [options]="clients" [isDisabled]="!!client"
                         #clientSelect>
               <sui-select-option *ngFor="let option of clientSelect.filteredOptions" [value]="option"></sui-select-option>
             </sui-select>
@@ -81,12 +81,20 @@
       </div>
       <div class="field">
         <div *ngIf="!project; else edit" class="ui buttons">
-          <a class="ui animated fade button" routerLink="/projets">
+          <a *ngIf="!client; else clientProject" class="ui animated fade button" routerLink="/projets">
             <div class="visible content">Annuler</div>
             <div class="hidden content">
               <i class="cancel icon"></i>
             </div>
           </a>
+          <ng-template #clientProject>
+            <a class="ui animated fade button" routerLink="/clients/{{client.id}}">
+              <div class="visible content">Annuler</div>
+              <div class="hidden content">
+                <i class="cancel icon"></i>
+              </div>
+            </a>
+          </ng-template>
           <div class="or" data-text="ou"></div>
           <button class="ui animated fade positive button"
                   [ngClass]="{'loading': loading, 'disabled': projectForm.invalid}">

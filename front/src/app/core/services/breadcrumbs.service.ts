@@ -20,7 +20,7 @@ export class BreadcrumbsService {
     return this.breadcrumbs;
   }
 
-  setBreadcrumb(route: ActivatedRouteSnapshot, breadcrumb?: Breadcrumb) {
+  setBreadcrumb(route: ActivatedRouteSnapshot, breadcrumb?: Breadcrumb | Breadcrumb[]) {
     if (route.url) {
       let title: string = route.data['title'];
       let url: UrlSegment = route.url[0];
@@ -37,7 +37,13 @@ export class BreadcrumbsService {
         breadcrumbs = [BreadcrumbsService.getAncestorBreadcrumbs(route)[0]];
 
         if (breadcrumb) {
-          breadcrumbs.push(breadcrumb);
+          if (Array.isArray(breadcrumb)) {
+            for (let br of breadcrumb) {
+              breadcrumbs.push(br);
+            }
+          } else {
+            breadcrumbs.push(breadcrumb);
+          }
         }
 
         this.addBreadcrumb(breadcrumbs);

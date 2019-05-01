@@ -16,6 +16,7 @@ import { ClientCreateComponent } from './client-create/client-create.component';
 import { ClientFormComponent } from './client-form/client-form.component';
 import { ClientEditComponent } from './client-edit/client-edit.component';
 import { ClientDeleteModalComponent } from './client-delete-modal/client-delete-modal.component';
+import { ClientProjectCreateComponent } from './client-project-create/client-project-create.component';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { ClientDeleteModalComponent } from './client-delete-modal/client-delete-
     ClientFormComponent,
     ClientEditComponent,
     ClientDeleteModalComponent,
+    ClientProjectCreateComponent,
   ],
   entryComponents: [
     ClientDeleteModalComponent,

@@ -9,7 +9,7 @@ import { ConventionService } from "../../../../core/http/convention.service";
 import { Convention } from "../../../../core/classes/models/convention";
 import * as moment from "moment";
 import { Observable } from "rxjs";
-import { dateToISO, dateToString } from "../../../../shared/utils";
+import { dateToString } from "../../../../shared/utils";
 import { first } from "rxjs/operators";
 import { handleFormErrors } from "../../../../core/functions/form-error-handler";
 
@@ -39,6 +39,7 @@ export class ProjectFormComponent implements OnInit {
 
   ngOnInit() {
     this.getClients();
+    this.getConventions(this.client);
 
     this.projectForm = this.fb.group({
       name: [

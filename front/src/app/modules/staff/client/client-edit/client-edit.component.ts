@@ -33,7 +33,7 @@ export class ClientEditComponent implements OnInit {
       this.titleService.setTitles(`${client.name} - Modifier`);
       this.breadcrumbsService.setBreadcrumb(
         this.route.snapshot,
-        { title: client.name, url: '' }
+        [{ title: client.name, url: `/clients/${client.id}` }, { title: 'Modifier', url: '' }]
       );
     });
   }
