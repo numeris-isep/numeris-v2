@@ -28,7 +28,7 @@ class ProjectRequest extends AbstractFormRequest
      */
     public function rules()
     {
-        $project_id = $this->ids;
+        $project_id = $this->route('project_id');
 
         $rules = [
             'client_id'     => 'required|exists:clients,id|integer',

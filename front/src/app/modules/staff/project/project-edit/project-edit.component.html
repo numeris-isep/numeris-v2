@@ -1,0 +1,7 @@
+<app-content [condition]="!project">
+  <div class="ui padded centered grid doubling">
+    <div class="twelve wide column">
+      <app-project-form *ngIf="project" [project]="project"></app-project-form>
+    </div>
+  </div>
+</app-content>

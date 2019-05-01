@@ -28,7 +28,7 @@
             <i class="calendar outline icon"></i>
             <input suiDatepicker pickerMode="month"
                    placeholder="Date de début" formControlName="start_at"
-                   [pickerMinDate]="currentDate" [pickerUseNativeOnMobile]="true">
+                   [pickerUseNativeOnMobile]="true">
             <div class="ui corner label">
               <i class="asterisk icon"></i>
             </div>
@@ -43,7 +43,7 @@
             <sui-select class="selection fluid" labelField="name" valueField="id"
                         placeholder="Sélectionner une option" formControlName="client_id"
                         (ngModelChange)="getConventions(f.client_id.value)"
-                        [options]="clients" [isDisabled]="!!client"
+                        [options]="clients" [isDisabled]="!!client || !!project"
                         #clientSelect>
               <sui-select-option *ngFor="let option of clientSelect.filteredOptions" [value]="option"></sui-select-option>
             </sui-select>
@@ -106,7 +106,6 @@
         </div>
 
         <ng-template #edit>
-          <!-- TODO: trigger modal to warn the user that changing the visibility will destroy project users if visibility is changed -->
           <div class="ui buttons">
             <a class="ui animated fade button" routerLink="/projets/{{ project.id }}">
               <div class="visible content">Annuler</div>
@@ -115,13 +114,22 @@
               </div>
             </a>
             <div class="or" data-text="ou"></div>
-            <button class="ui animated fade orange button"
-                    [ngClass]="{'loading': loading, 'disabled': projectForm.invalid}">
+            <button *ngIf="project.isPrivate == true && f.is_private.value == false; else noModal" class="ui animated fade orange button"
+                 [ngClass]="{'loading': loading, 'disabled': projectForm.invalid}">
               <div class="visible content">Modifier</div>
               <div class="hidden content">
                 <i class="plus icon"></i>
               </div>
             </button>
+            <ng-template #noModal>
+              <button class="ui animated fade orange button"
+                      [ngClass]="{'loading': loading, 'disabled': projectForm.invalid}">
+                <div class="visible content">Modifier</div>
+                <div class="hidden content">
+                  <i class="plus icon"></i>
+                </div>
+              </button>
+            </ng-template>
           </div>
         </ng-template>
       </div>

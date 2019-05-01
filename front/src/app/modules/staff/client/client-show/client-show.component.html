@@ -25,10 +25,17 @@
                   <i class="folder open icon"></i>
                   Ajouter un projet
                 </div><br>
-                <app-link-button hiddenIcon="plus" size="tiny"
+                <app-link-button *ngIf="client.conventions.length > 0; else noConvention"
+                                 hiddenIcon="plus" size="tiny"
                                  routerLink="projets/nouveau">
                   Nouveau projet
                 </app-link-button>
+                <ng-template #noConvention>
+                  <app-link-button hiddenIcon="plus" size="tiny" behaviour="disabled"
+                                   suiPopup popupPlacement="bottom" popupText="Veuillez ajouter une convention pour pouvoir créer un projet">
+                    Nouveau projet
+                  </app-link-button>
+                </ng-template>
               </div>
             </div>
           </div>

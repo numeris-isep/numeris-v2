@@ -14,8 +14,7 @@ export interface IClientDeleteModalContext {
 
 @Component({
   selector: 'app-client-delete-modal',
-  templateUrl: './client-delete-modal.component.html',
-  styleUrls: ['./client-delete-modal.component.css']
+  templateUrl: './client-delete-modal.component.html'
 })
 export class ClientDeleteModalComponent implements OnInit {
 
@@ -36,11 +35,16 @@ export class ClientDeleteModalComponent implements OnInit {
   onClick() {
     this.loading = true;
 
-    this.deleteClient().subscribe(() => {
-      this.alertService.success([`Le client ${this.client.name} a bien été supprimé.`], null, true);
-      this.router.navigate(['/clients']);
-      this.modal.approve(undefined);
-    });
+    this.deleteClient().subscribe(
+      () => {
+        this.router.navigate(['/clients']);
+        this.alertService.success([`Le client ${this.client.name} a bien été supprimé.`]);
+        this.modal.approve(undefined);
+    },
+      error => {
+        this.modal.deny(undefined);
+      }
+    );
   }
 
   deleteClient(): Observable<Client> {

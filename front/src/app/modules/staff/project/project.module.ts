@@ -14,6 +14,9 @@ import { MissionModule } from "../mission/mission.module";
 import { UserModule } from "../user/user.module";
 import { ProjectCreateComponent } from './project-create/project-create.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
+import { ProjectEditComponent } from './project-edit/project-edit.component';
+import { ProjectEditModalComponent } from './project-edit-modal/project-edit-modal.component';
+import { DeleteProjectModalComponent } from './delete-project-modal/delete-project-modal.component';
 
 @NgModule({
   imports: [
@@ -34,11 +37,17 @@ import { ProjectFormComponent } from './project-form/project-form.component';
     ProjectShowComponent,
     ProjectDetailsComponent,
     ProjectCreateComponent,
-    ProjectFormComponent
+    ProjectFormComponent,
+    ProjectEditComponent,
+    ProjectEditModalComponent,
+    DeleteProjectModalComponent
   ],
   exports: [
     ProjectListComponent,
     ProjectFormComponent,
+  ],
+  entryComponents: [
+    ProjectEditModalComponent,
   ]
 })
 export class ProjectModule { }

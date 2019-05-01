@@ -6,6 +6,7 @@ import { first } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { handleFormErrors } from "../../../../core/functions/form-error-handler";
 import { Observable } from "rxjs";
+import { AlertService } from "../../../../core/services/alert.service";
 
 @Component({
   selector: 'app-client-form',
@@ -22,6 +23,7 @@ export class ClientFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private clientService: ClientService,
+    private alertService: AlertService,
     private router: Router,
   ) { }
 
@@ -75,6 +77,7 @@ export class ClientFormComponent implements OnInit {
         client => {
           this.loading = false;
           this.router.navigate([`/clients/${client.id}`]);
+          if (this.client) this.alertService.success([`Le client ${client.name} a bien été modifié.`]);
         },
         errors => {
           handleFormErrors(this.clientForm, errors);

@@ -6,6 +6,7 @@ import { AuthGuard } from "../../../core/guards/auth.guard";
 import { ProjectIndexComponent } from "./project-index/project-index.component";
 import { ProjectShowComponent } from "./project-show/project-show.component";
 import { ProjectCreateComponent } from "./project-create/project-create.component";
+import { ProjectEditComponent } from "./project-edit/project-edit.component";
 
 const projectRoutes: Routes = [
   {
@@ -26,6 +27,10 @@ const projectRoutes: Routes = [
         data: {
           title: 'Nouveau projet'
         }
+      },
+      {
+        path: ':id/modifier',
+        component: ProjectEditComponent,
       },
       {
         path: ':id',

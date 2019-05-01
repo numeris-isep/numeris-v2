@@ -7,11 +7,13 @@ import { Client } from "../../../../core/classes/models/client";
 import { ClientService } from "../../../../core/http/client.service";
 import { ConventionService } from "../../../../core/http/convention.service";
 import { Convention } from "../../../../core/classes/models/convention";
-import * as moment from "moment";
 import { Observable } from "rxjs";
 import { dateToString } from "../../../../shared/utils";
 import { first } from "rxjs/operators";
 import { handleFormErrors } from "../../../../core/functions/form-error-handler";
+import { ProjectEditModal } from "../project-edit-modal/project-edit-modal.component";
+import { SuiModalService } from "ng2-semantic-ui";
+import { AlertService } from "../../../../core/services/alert.service";
 
 @Component({
   selector: 'app-project-form',
@@ -27,19 +29,22 @@ export class ProjectFormComponent implements OnInit {
   projectForm: FormGroup;
   loading: boolean = false;
   submitted: boolean = false;
-  currentDate: Date = moment().subtract(1, 'month').toDate();
+
+  private editModal: ProjectEditModal;
 
   constructor(
     private fb: FormBuilder,
     private projectService: ProjectService,
     private clientService: ClientService,
     private conventionService: ConventionService,
-    private router: Router
+    private alertService: AlertService,
+    private modalService: SuiModalService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
     this.getClients();
-    this.getConventions(this.client);
+    this.getConventions(this.client || (this.project ? this.project.client : null));
 
     this.projectForm = this.fb.group({
       name: [
@@ -47,15 +52,15 @@ export class ProjectFormComponent implements OnInit {
         Validators.required,
       ],
       client_id: [
-        this.project ? this.project.clientId : (this.client ? this.client.id : ''),
+        this.project ? this.project.client.id : (this.client ? this.client.id : ''),
         Validators.required,
       ],
       convention_id: [
-        this.project ? this.project.conventionId : '',
+        this.project ? this.project.convention.id : '',
         Validators.required,
       ],
       start_at: [
-        this.project ? this.project.startAt : '',
+        this.project ? new Date(this.project.startAt) : '',
         Validators.required,
       ],
       is_private: [this.project ? this.project.isPrivate : false],
@@ -73,8 +78,6 @@ export class ProjectFormComponent implements OnInit {
     this.f.start_at.setValue(dateToString(this.f.start_at.value)); // Handle date
     this.f.is_private.setValue(!!this.f.is_private.value);
 
-    console.log(this.projectForm.value);
-
     let projectRequest: Observable<Project>;
 
     if (!this.project) {
@@ -83,17 +86,30 @@ export class ProjectFormComponent implements OnInit {
       projectRequest = this.projectService.updateProject(this.projectForm.value as Project, this.project);
     }
 
-    projectRequest.pipe(first())
-      .subscribe(
-        project => {
-          this.loading = false;
-          this.router.navigate([`/projets/${project.id}`]);
-        },
-        errors => {
-          handleFormErrors(this.projectForm, errors);
-          this.loading = false;
-        }
-      )
+    if (this.project && this.project.isPrivate == true && this.f.is_private.value == false) {
+      this.editModal = new ProjectEditModal(
+        this.project.name,
+        `Voulez-vous vraiment modifier le projet ${this.project.name} ?`,
+        this.project,
+        projectRequest,
+        this.projectForm
+      );
+
+      this.openModal();
+    } else {
+      projectRequest.pipe(first())
+        .subscribe(
+          project => {
+            this.loading = false;
+            this.router.navigate([`/projets/${project.id}`]);
+            if (this.project) this.alertService.success([`Le projet ${project.name} a bien été modifié.`]);
+          },
+          errors => {
+            handleFormErrors(this.projectForm, errors);
+            this.loading = false;
+          }
+        )
+    }
   }
 
   getClients() {
@@ -101,9 +117,13 @@ export class ProjectFormComponent implements OnInit {
   }
 
   getConventions(client: Client | number) {
-    if (client !== undefined) {
+    if (client) {
       this.conventionService.getClientConventions(client).subscribe(conventions => this.conventions = conventions);
     }
+  }
+
+  openModal() {
+    this.modalService.open(this.editModal);
   }
 
 }

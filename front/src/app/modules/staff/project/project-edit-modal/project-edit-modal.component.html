@@ -1,0 +1,27 @@
+<div class="header">
+  {{ modal.context.title }}
+</div>
+
+<div class="content">
+  <div class="ui warning message">
+    <div class="header">
+      Attention !
+    </div>
+    <p>
+      Passer la visibilité d'un projet de <b>privée</b> à <b>publique</b>
+      détachera les éventuels étudiants associés au projet.
+    </p>
+    <p>{{ modal.context.question }}</p>
+  </div>
+</div>
+
+<div class="actions">
+  <app-button hiddenIcon="cancel" color="red" size="tiny"
+              (click)="modal.deny(undefined)">
+    Annuler
+  </app-button>
+  <app-button hiddenIcon="check" color="green" size="tiny"
+              [isLoading]="loading" (click)="onClick()">
+    Je suis sûr(e)
+  </app-button>
+</div>
