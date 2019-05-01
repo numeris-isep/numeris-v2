@@ -38,7 +38,6 @@ export class ApplicationComponent implements OnInit {
         missions
           .map(mission => {
             const currentUserId: number = this.authService.getCurrentUserId();
-            this.counter++;
             mission.applications
               .filter((application) => {
                 if (application.userId == currentUserId) {
@@ -55,6 +54,7 @@ export class ApplicationComponent implements OnInit {
                       default: break;
                     }
                   }
+                  if (application.status != 'refused') this.counter++;
                 }
               });
           });

@@ -9,15 +9,38 @@
     <img src="assets/logos/numeris-blue.png">
   </div>
   <div class="content">
-    <i class="phone icon"></i> {{ user.phone | phone }}
+    <div class="description">
+      <p>
+        <i class="phone icon"></i>
+        <a href="tel:{{ user.phone }}" target="_blank"> {{ user.phone | phone }}</a>
+      </p>
+      <p>
+        <i class="mail envelope icon"></i>
+        <a href="mailto:{{ user.email }}" target="_blank"> {{ user.email }}</a>
+      </p>
+      <p>
+        <i class="history icon"></i> Membre depuis le {{ user.createdAt | date:"dd/MM/yyyy" }}
+      </p>
+    </div>
   </div>
-  <div class="content">
-    <i class="mail envelope icon"></i> {{ user.email }}
-  </div>
-  <div class="content">
+
+  <div class="extra content">
     <i class="map marker alternate icon"></i> {{ user.address | address }}
   </div>
-  <div class="center aligned extra content">
-    Membre depuis le {{ user.createdAt | date:"dd/MM/yyyy" }}
+
+  <div class="ui small bottom attached buttons">
+    <div class="ui animated fade orange button">
+      <div class="visible content">Modifier</div>
+      <div class="hidden content">
+        <i class="edit icon"></i>
+      </div>
+    </div>
+    <div class="or" data-text="ou"></div>
+    <div class="ui animated fade negative button">
+      <div class="visible content">Supprimer</div>
+      <div class="hidden content">
+        <i class="trash alternate icon"></i>
+      </div>
+    </div>
   </div>
 </div>
