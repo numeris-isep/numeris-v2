@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Project } from "../../../../core/classes/models/project";
+import { ProjectDeleteModal } from "../project-delete-modal/project-delete-modal.component";
+import { SuiModalService } from "ng2-semantic-ui";
 
 @Component({
   selector: 'app-project-details',
@@ -13,9 +15,20 @@ export class ProjectDetailsComponent implements OnInit {
 
   @Input() project: Project;
 
-  constructor() { }
+  private deleteModal: ProjectDeleteModal;
+
+  constructor(private modalService: SuiModalService) { }
 
   ngOnInit() {
+    this.deleteModal =  new ProjectDeleteModal(
+      this.project.name,
+      `Voulez-vous vraiment supprimer le projet ${this.project.name} ?`,
+      this.project
+    );
+  }
+
+  openModal() {
+    this.modalService.open(this.deleteModal);
   }
 
 }

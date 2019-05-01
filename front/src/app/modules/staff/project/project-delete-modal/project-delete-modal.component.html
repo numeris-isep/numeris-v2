@@ -1,0 +1,20 @@
+<div class="header">
+  {{ modal.context.title }}
+</div>
+
+<div class="content">
+  <p>{{ modal.context.question }}</p>
+</div>
+
+<div class="actions">
+  <app-button hiddenIcon="cancel" color="red" size="tiny"
+              (click)="modal.deny(undefined)">
+    Annuler
+  </app-button>
+  <app-button hiddenIcon="check" color="green" size="tiny"
+              [isLoading]="loading" (click)="onClick()"
+              suiPopup popupPlacement="left" popupHeader="Attention !"
+              popupText="Cela supprimera également toutes les données éventuelles associées au projet (missions, candidatures)">
+    Je suis sûr(e)
+  </app-button>
+</div>

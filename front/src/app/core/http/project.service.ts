@@ -76,7 +76,9 @@ export class ProjectService {
     // TODO
   }
 
-  deleteProject() {
-    // TODO
+  deleteProject(project: Project): Observable<Project> {
+    const projectId: number = typeof project === 'number' ? project : project.id;
+    const url = `${environment.apiUrl}/api/projects/${projectId}`;
+    return this.http.delete<Project>(url, HTTP_OPTIONS);
   }
 }

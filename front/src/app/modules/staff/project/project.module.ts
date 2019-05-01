@@ -16,7 +16,7 @@ import { ProjectCreateComponent } from './project-create/project-create.componen
 import { ProjectFormComponent } from './project-form/project-form.component';
 import { ProjectEditComponent } from './project-edit/project-edit.component';
 import { ProjectEditModalComponent } from './project-edit-modal/project-edit-modal.component';
-import { DeleteProjectModalComponent } from './delete-project-modal/delete-project-modal.component';
+import { ProjectDeleteModalComponent } from './project-delete-modal/project-delete-modal.component';
 
 @NgModule({
   imports: [
@@ -40,7 +40,7 @@ import { DeleteProjectModalComponent } from './delete-project-modal/delete-proje
     ProjectFormComponent,
     ProjectEditComponent,
     ProjectEditModalComponent,
-    DeleteProjectModalComponent
+    ProjectDeleteModalComponent
   ],
   exports: [
     ProjectListComponent,
@@ -48,6 +48,7 @@ import { DeleteProjectModalComponent } from './delete-project-modal/delete-proje
   ],
   entryComponents: [
     ProjectEditModalComponent,
+    ProjectDeleteModalComponent,
   ]
 })
 export class ProjectModule { }
