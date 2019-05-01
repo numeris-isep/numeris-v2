@@ -45,6 +45,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Client resource routes
     Route::apiResource('clients', 'ClientController', ['parameters' => ['clients' => 'client_id']]);
     Route::get('clients/{client_id}/projects', 'ClientProjectController@index')->name('clients.projects.index');
+    Route::get('clients/{client_id}/conventions', 'ClientConventionController@index')->name('clients.conventions.index');
     Route::post('clients/{client_id}/conventions', 'ClientConventionController@store')->name('clients.conventions.store');
 
     // Convention resource routes

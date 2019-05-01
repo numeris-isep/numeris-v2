@@ -12,6 +12,8 @@ import { ProjectShowComponent } from './project-show/project-show.component';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { MissionModule } from "../mission/mission.module";
 import { UserModule } from "../user/user.module";
+import { ProjectCreateComponent } from './project-create/project-create.component';
+import { ProjectFormComponent } from './project-form/project-form.component';
 
 @NgModule({
   imports: [
@@ -30,7 +32,9 @@ import { UserModule } from "../user/user.module";
     ProjectListComponent,
     ProjectIndexComponent,
     ProjectShowComponent,
-    ProjectDetailsComponent
+    ProjectDetailsComponent,
+    ProjectCreateComponent,
+    ProjectFormComponent
   ],
   exports: [ProjectListComponent]
 })

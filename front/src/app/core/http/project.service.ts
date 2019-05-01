@@ -57,12 +57,15 @@ export class ProjectService {
     return this.http.get<Project>(url, HTTP_OPTIONS);
   }
 
-  addProject() {
-    // TODO
+  addProject(data: Project): Observable<Project> {
+    const url = `${environment.apiUrl}/api/projects`;
+    return this.http.post<Project>(url, data, HTTP_OPTIONS);
   }
 
-  updateProject() {
-    // TODO
+  updateProject(data: Project, project: Project | number): Observable<Project> {
+    const projectId: number = typeof project === 'number' ? project : project.id;
+    const url = `${environment.apiUrl}/api/projects/${projectId}`;
+    return this.http.put<Project>(url, data, HTTP_OPTIONS);
   }
 
   udpateProjectStep() {

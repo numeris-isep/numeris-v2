@@ -21,6 +21,11 @@ class ConventionPolicy
         return false;
     }
 
+    public function index(User $current_user)
+    {
+        return false;
+    }
+
     public function store(User $current_user)
     {
         return false;

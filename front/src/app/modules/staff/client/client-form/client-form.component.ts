@@ -78,7 +78,6 @@ export class ClientFormComponent implements OnInit {
         },
         errors => {
           handleFormErrors(this.clientForm, errors);
-
           this.loading = false;
         }
       );

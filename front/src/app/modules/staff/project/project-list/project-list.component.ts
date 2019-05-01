@@ -1,9 +1,9 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { PaginatedProject } from "../../../../core/classes/pagination/paginated-project";
 import { ProjectService } from "../../../../core/http/project.service";
-import * as moment from "moment";
 import { IPopup } from "ng2-semantic-ui";
 import { Client } from "../../../../core/classes/models/client";
+import { dateToISO } from "../../../../shared/utils";
 
 @Component({
   selector: 'app-project-list',
@@ -54,7 +54,7 @@ export class ProjectListComponent implements OnInit {
       this.client,
       pageId,
       this.selectedOptionToStep(),
-      [this.dateToISO(this.from), this.dateToISO(this.to)]
+      [dateToISO(this.from), dateToISO(this.to)]
     ).subscribe(paginatedProject => {
       this.paginatedProject = paginatedProject;
       this.loading = false;
@@ -79,10 +79,6 @@ export class ProjectListComponent implements OnInit {
     }
 
     return this.selectedStep;
-  }
-
-  dateToISO(date: string) {
-    return date ? moment(date).toISOString() : null;
   }
 
   togglePopup(popup: IPopup, condition) {

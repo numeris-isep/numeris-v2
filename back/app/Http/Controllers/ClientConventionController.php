@@ -11,6 +11,21 @@ use Illuminate\Http\JsonResponse;
 class ClientConventionController extends Controller
 {
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function index($client_id)
+    {
+        $project = Client::findOrFail($client_id);
+        $this->authorize('index', Convention::class);
+
+        return response()->json(ConventionResource::collection($project->conventions));
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param ConventionRequest $request

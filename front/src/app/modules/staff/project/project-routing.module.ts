@@ -5,6 +5,7 @@ import { ProjectComponent } from "./project.component";
 import { AuthGuard } from "../../../core/guards/auth.guard";
 import { ProjectIndexComponent } from "./project-index/project-index.component";
 import { ProjectShowComponent } from "./project-show/project-show.component";
+import { ProjectCreateComponent } from "./project-create/project-create.component";
 
 const projectRoutes: Routes = [
   {
@@ -18,6 +19,13 @@ const projectRoutes: Routes = [
       {
         path: '',
         component: ProjectIndexComponent,
+      },
+      {
+        path: 'nouveau',
+        component: ProjectCreateComponent,
+        data: {
+          title: 'Nouveau projet'
+        }
       },
       {
         path: ':id',

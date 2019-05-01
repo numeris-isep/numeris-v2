@@ -25,3 +25,10 @@ Padding of ul tags inside an error message segment
 .ui.error.message ul {
   padding-inline-start: 1em;
 }
+
+/*
+Style of checkboxes labels
+ */
+label > span {
+  color: #989898;
+}

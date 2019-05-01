@@ -3,7 +3,7 @@ import { ClientService } from "../../../../core/http/client.service";
 import { TitleService } from "../../../../core/services/title.service";
 import { BreadcrumbsService } from "../../../../core/services/breadcrumbs.service";
 import { Client } from "../../../../core/classes/models/client";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-client-show',
@@ -17,7 +17,8 @@ export class ClientShowComponent implements OnInit {
     private route: ActivatedRoute,
     private clientService: ClientService,
     private titleService: TitleService,
-    private breadcrumbsService: BreadcrumbsService
+    private breadcrumbsService: BreadcrumbsService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -27,15 +28,20 @@ export class ClientShowComponent implements OnInit {
   }
 
   getClient(clientId: number) {
-    return this.clientService.getClient(clientId).subscribe(client => {
-      this.client = client;
+    return this.clientService.getClient(clientId).subscribe(
+      client => {
+        this.client = client;
 
-      this.titleService.setTitles(client.name);
-      this.breadcrumbsService.setBreadcrumb(
-        this.route.snapshot,
-        { title: client.name, url: '' }
-      );
-    });
+        this.titleService.setTitles(client.name);
+        this.breadcrumbsService.setBreadcrumb(
+          this.route.snapshot,
+          { title: client.name, url: '' }
+        );
+      },
+        error =>{
+          this.router.navigate(['erreur'])
+      },
+    );
   }
 
 }

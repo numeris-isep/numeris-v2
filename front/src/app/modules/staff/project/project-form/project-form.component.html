@@ -1,0 +1,122 @@
+<app-content [condition]="!clients">
+  <div class="ui segments">
+    <div class="ui segment">
+      <div class="ui blue ribbon label">
+        <i class="building icon"></i> Nouveau projet
+      </div>
+    </div>
+
+    <form class="ui form segment"
+          [formGroup]="projectForm" (ngSubmit)="onSubmit()"
+          [ngClass]="{'error': submitted && projectForm.invalid, 'loading': loading}">
+      <h4 class="ui dividing header">Informations</h4>
+      <div class="two required fields">
+        <div class="ten wide required field" [ngClass]="{ 'error': submitted && f.name.errors }">
+          <label>Nom</label>
+          <div class="ui left icon corner labeled input">
+            <i class="address book outline icon"></i>
+            <input type="text" formControlName="name" placeholder="Nom">
+            <div class="ui corner label">
+              <i class="asterisk icon"></i>
+            </div>
+          </div>
+          <app-form-error *ngIf="submitted && f.name.errors" [errors]="f.name.errors"></app-form-error>
+        </div>
+        <div class="six wide required field" [ngClass]="{ 'error': submitted && f.start_at.errors }">
+          <label>Date de début</label>
+          <div class="ui left icon corner labeled input">
+            <i class="calendar outline icon"></i>
+            <input suiDatepicker pickerMode="month"
+                   placeholder="Date de début" formControlName="start_at"
+                   [pickerMinDate]="currentDate" [pickerUseNativeOnMobile]="true">
+            <div class="ui corner label">
+              <i class="asterisk icon"></i>
+            </div>
+          </div>
+          <app-form-error *ngIf="submitted && f.start_at.errors" [errors]="f.start_at.errors"></app-form-error>
+        </div>
+      </div>
+      <div class="two required fields">
+        <div class="field" [ngClass]="{ 'error': submitted && f.client_id.errors }">
+          <label>Client</label>
+          <div class="ui input">
+            <sui-select class="selection fluid" labelField="name" valueField="id"
+                        placeholder="Sélectionner une option" formControlName="client_id"
+                        (ngModelChange)="getConventions(f.client_id.value)"
+                        [options]="clients"
+                        #clientSelect>
+              <sui-select-option *ngFor="let option of clientSelect.filteredOptions" [value]="option"></sui-select-option>
+            </sui-select>
+          </div>
+          <app-form-error *ngIf="submitted && f.client_id.errors" [errors]="f.client_id.errors"></app-form-error>
+        </div>
+        <div class="field" [ngClass]="{ 'error': submitted && f.convention_id.errors }">
+          <label>Convention</label>
+          <div class="ui input">
+            <sui-select class="selection fluid" labelField="name" valueField="id"
+                        placeholder="Sélectionner une option" formControlName="convention_id"
+                        [options]="conventions" [isDisabled]="!conventions"
+                        #conventionSelect>
+              <sui-select-option *ngFor="let option of conventionSelect.filteredOptions" [value]="option"></sui-select-option>
+            </sui-select>
+          </div>
+          <app-form-error *ngIf="submitted && f.convention_id.errors" [errors]="f.convention_id.errors"></app-form-error>
+        </div>
+      </div>
+      <div class="field" [ngClass]="{ 'error': submitted && f.is_private.errors }">
+        <label>Visibilité</label>
+        <sui-checkbox class="toggle" formControlName="is_private">
+          <span *ngIf="!f.is_private.value; else private"
+                suiPopup popupPlacement="right"
+                popupText="Missions du projet visibles par tous les étudiants">
+            Publique
+          </span>
+          <ng-template #private>
+            <span suiPopup popupPlacement="right"
+                  popupText="Missions du projet seulement visibles par les étudiants sélectionnés">
+              Privée
+            </span>
+          </ng-template>
+        </sui-checkbox>
+      </div>
+      <div class="field">
+        <div *ngIf="!project; else edit" class="ui buttons">
+          <a class="ui animated fade button" routerLink="/projets">
+            <div class="visible content">Annuler</div>
+            <div class="hidden content">
+              <i class="cancel icon"></i>
+            </div>
+          </a>
+          <div class="or" data-text="ou"></div>
+          <button class="ui animated fade positive button"
+                  [ngClass]="{'loading': loading, 'disabled': projectForm.invalid}">
+            <div class="visible content">Ajouter</div>
+            <div class="hidden content">
+              <i class="plus icon"></i>
+            </div>
+          </button>
+        </div>
+
+        <ng-template #edit>
+          <!-- TODO: trigger modal to warn the user that changing the visibility will destroy project users if visibility is changed -->
+          <div class="ui buttons">
+            <a class="ui animated fade button" routerLink="/projets/{{ project.id }}">
+              <div class="visible content">Annuler</div>
+              <div class="hidden content">
+                <i class="cancel icon"></i>
+              </div>
+            </a>
+            <div class="or" data-text="ou"></div>
+            <button class="ui animated fade orange button"
+                    [ngClass]="{'loading': loading, 'disabled': projectForm.invalid}">
+              <div class="visible content">Modifier</div>
+              <div class="hidden content">
+                <i class="plus icon"></i>
+              </div>
+            </button>
+          </div>
+        </ng-template>
+      </div>
+    </form>
+  </div>
+</app-content>
