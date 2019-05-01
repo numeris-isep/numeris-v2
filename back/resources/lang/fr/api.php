@@ -11,10 +11,10 @@ return [
     |
     */
 
-    'auth'  => 'Veuillez vous connecter pour accéder à cette page',
+    'auth'  => 'Veuillez vous connecter pour accéder à cette page.',
 
-    '401'   => 'Non autorisé',
-    '403'   => 'Accès interdit',
-    '404'   => 'La page demandée n\'existe pas ou plus',
-    '405'   => 'Méthode non autorisée',
+    '401'   => 'Non autorisé.',
+    '403'   => 'Accès interdit.',
+    '404'   => 'La page demandée n\'existe pas ou plus.',
+    '405'   => 'Méthode non autorisée.',
 ];

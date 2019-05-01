@@ -53,19 +53,19 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof AuthorizationException) {
             return response()->json([
-                'error' => trans('api.403')
+                'errors' => [trans('api.403')]
             ],403);
         }
 
         if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) {
             return response()->json([
-                'error' => trans('api.404')
+                'errors' => [trans('api.404')]
             ], 404);
         }
 
         if ($exception instanceof MethodNotAllowedHttpException) {
             return response()->json([
-                'error' => trans('api.405')
+                'errors' => [trans('api.405')]
             ],405);
         }
 
@@ -81,6 +81,6 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        return response()->json(['error' => trans('api.auth')], 401);
+        return response()->json(['errors' => [trans('api.auth')]], 401);
     }
 }

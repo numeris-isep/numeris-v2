@@ -13,13 +13,26 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(err => {
-      if (err.status == 500) {
-        this.alertService.error(
-          ['Le serveur a rencontré une erreur, veuillez nous contacter si le problème persiste.'],
-          'Erreur',
-          false,
-          'main'
-        )
+      this.alertService.clear();
+
+      switch (err.status) {
+        case 500:
+          this.alertService.error(
+            ['Le serveur a rencontré une erreur, veuillez nous contacter si le problème persiste.'],
+            'Erreur',
+            false,
+            'main'
+          );
+          break;
+
+        default:
+          this.alertService.warning(
+            err.error.errors,
+            'Erreur',
+            false,
+            'main'
+          );
+          break;
       }
 
       return throwError(err.error.errors)
