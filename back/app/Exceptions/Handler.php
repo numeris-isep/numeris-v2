@@ -7,8 +7,12 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Middleware\ThrottleRequests;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -54,19 +58,25 @@ class Handler extends ExceptionHandler
         if ($exception instanceof AuthorizationException) {
             return response()->json([
                 'errors' => [trans('api.403')]
-            ],403);
+            ],JsonResponse::HTTP_FORBIDDEN);
         }
 
         if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) {
             return response()->json([
                 'errors' => [trans('api.404')]
-            ], 404);
+            ], JsonResponse::HTTP_NOT_FOUND);
         }
 
         if ($exception instanceof MethodNotAllowedHttpException) {
             return response()->json([
                 'errors' => [trans('api.405')]
-            ],405);
+            ],JsonResponse::HTTP_METHOD_NOT_ALLOWED);
+        }
+
+        if ($exception instanceof ThrottleRequestsException) {
+            return response()->json([
+                'errors' => [trans('api.429')]
+            ],JsonResponse::HTTP_TOO_MANY_REQUESTS);
         }
 
         return parent::render($request, $exception);

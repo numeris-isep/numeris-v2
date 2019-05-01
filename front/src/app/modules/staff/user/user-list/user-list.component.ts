@@ -83,10 +83,13 @@ export class UserListComponent implements OnInit, OnDestroy {
       );
     }
 
-    results.subscribe(paginatedUser => {
+    results.subscribe(
+      paginatedUser => {
       this.paginatedUser = paginatedUser;
       this.loading = false;
-    });
+    },
+      error => {}
+    );
   }
 
   getPromotions() {

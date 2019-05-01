@@ -51,10 +51,13 @@ export class MissionListComponent implements OnInit {
       pageId,
       this.selectedOptionToIsLocked(),
       [this.dateToISO(this.from), this.dateToISO(this.to)]
-    ).subscribe(paginatedMission => {
+    ).subscribe(
+      paginatedMission => {
       this.paginatedMission = paginatedMission;
       this.loading = false;
-    });
+    },
+      error => {}
+    );
   }
 
   setFilter() {

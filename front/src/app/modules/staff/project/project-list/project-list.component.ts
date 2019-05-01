@@ -55,10 +55,13 @@ export class ProjectListComponent implements OnInit {
       pageId,
       this.selectedOptionToStep(),
       [dateToISO(this.from), dateToISO(this.to)]
-    ).subscribe(paginatedProject => {
+    ).subscribe(
+      paginatedProject => {
       this.paginatedProject = paginatedProject;
       this.loading = false;
-    });
+    },
+      error => {}
+    );
   }
 
   setFilter() {
