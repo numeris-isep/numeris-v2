@@ -48,9 +48,9 @@ class MissionRequest extends AbstractFormRequest
             'capacity'      => 'required|integer|min:0',
 
             // Address
-            'street'        => 'required|string',
-            'zip_code'      => 'required|integer',
-            'city'          => 'required|string',
+            'address.street'        => 'required|string',
+            'address.zip_code'      => 'required|integer',
+            'address.city'          => 'required|string',
         ];
     }
 }

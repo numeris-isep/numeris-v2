@@ -33,17 +33,10 @@ export class ErrorInterceptor implements HttpInterceptor {
           );
           break;
 
-        default:
-          this.alertService.warning(
-            err.error.errors,
-            'Erreur',
-            false,
-            'main'
-          );
-          break;
+        default: break;
       }
 
-      return throwError(err.error.errors[0])
+      return throwError(err.error.errors)
     }));
   }
 }

@@ -27,12 +27,18 @@ class ProjectController extends Controller
             'to'        => 'date|string',
         ]);
 
-        $projects = Project::filtered(
-            request()->step,
-            [request()->minDate, request()->maxDate]
-        )->withCount('missions', 'users')->with('client')->paginate(10);
-
-        return ProjectResource::collection($projects);
+        if (request()->page) {
+            return ProjectResource::collection(
+                Project::filtered(
+                    request()->step,
+                    [request()->minDate, request()->maxDate]
+                )->withCount('missions', 'users')->with('client')->paginate(10)
+            );
+        } else {
+            return response()->json(
+                ProjectResource::collection(Project::all()->sortByDesc('start_at')
+            ));
+        }
     }
 
     /**

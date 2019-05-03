@@ -58,7 +58,7 @@ class Handler extends ExceptionHandler
         if ($exception instanceof AuthorizationException) {
             return response()->json([
                 'errors' => [trans('api.403')]
-            ],JsonResponse::HTTP_FORBIDDEN);
+            ], JsonResponse::HTTP_FORBIDDEN);
         }
 
         if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) {

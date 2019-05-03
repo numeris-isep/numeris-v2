@@ -5,6 +5,7 @@ import { MissionComponent } from "./mission.component";
 import { AuthGuard } from "../../../core/guards/auth.guard";
 import { MissionIndexComponent } from "./mission-index/mission-index.component";
 import { MissionShowComponent } from "./mission-show/mission-show.component";
+import { MissionCreateComponent } from "./mission-create/mission-create.component";
 
 const missionRoute: Routes = [
   {
@@ -18,6 +19,13 @@ const missionRoute: Routes = [
       {
         path: '',
         component: MissionIndexComponent,
+      },
+      {
+        path: 'nouvelle',
+        component: MissionCreateComponent,
+        data: {
+          title: 'Nouvelle mission',
+        },
       },
       {
         path: ':id',

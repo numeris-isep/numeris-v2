@@ -14,7 +14,7 @@ export class ProjectService {
 
   constructor(private http: HttpClient) { }
 
-  getProjects(client?: number | Client): Observable<PaginatedProject> {
+  getProjects(client?: number | Client): Observable<Project[]> {
     let clientPath: string = '';
 
     if (client) {
@@ -23,7 +23,7 @@ export class ProjectService {
     }
 
     const url = `${environment.apiUrl}/api${clientPath}/projects`;
-    return this.http.get<PaginatedProject>(url, HTTP_OPTIONS);
+    return this.http.get<Project[]>(url, HTTP_OPTIONS);
   }
 
   getProjectsPerPage(client?: number | Client, pageId?: number, step?: any, range?: [string, string]): Observable<PaginatedProject> {

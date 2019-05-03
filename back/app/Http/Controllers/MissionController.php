@@ -69,9 +69,7 @@ class MissionController extends Controller
         $mission_request = $request->except([
             'street', 'zip_code', 'city'
         ]);
-        $address_request = $request->only([
-            'street', 'zip_code', 'city',
-        ]);
+        $address_request = $request->only(['address'])['address'];
 
         $mission = Mission::create($mission_request);
         $address = Address::create($address_request);
@@ -113,9 +111,7 @@ class MissionController extends Controller
         $mission_request = $request->except([
             'street', 'zip_code', 'city'
         ]);
-        $address_request = $request->only([
-            'street', 'zip_code', 'city',
-        ]);
+        $address_request = $request->only(['address'])['address'];
 
         $mission->update($mission_request);
         $mission->address()->update($address_request);

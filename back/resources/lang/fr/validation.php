@@ -194,5 +194,7 @@ return [
         'for_client'                => 'tarif étudiant',
         'hours'                     => 'heures',
         'is_locked'                 => 'fermer',
+        'duration'                  => 'durée',
+        'capacity'                  => 'capicité',
     ],
 ];

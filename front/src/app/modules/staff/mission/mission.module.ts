@@ -13,6 +13,8 @@ import { StudentModule } from "../../student/student.module";
 import { MissionApplicationsComponent } from './mission-applications/mission-applications.component';
 import { ApplicationListComponent } from './mission-applications/application-list/application-list.component';
 import { UserModule } from "../user/user.module";
+import { MissionCreateComponent } from './mission-create/mission-create.component';
+import { MissionFormComponent } from './mission-form/mission-form.component';
 
 @NgModule({
   imports: [
@@ -32,7 +34,9 @@ import { UserModule } from "../user/user.module";
     MissionListComponent,
     MissionShowComponent,
     MissionApplicationsComponent,
-    ApplicationListComponent
+    ApplicationListComponent,
+    MissionCreateComponent,
+    MissionFormComponent
   ],
   exports: [MissionListComponent]
 })

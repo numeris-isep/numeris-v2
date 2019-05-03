@@ -62,12 +62,15 @@ export class MissionService {
     return this.http.get<Mission>(url, HTTP_OPTIONS);
   }
 
-  addMission() {
-    // TODO
+  addMission(data: Mission): Observable<Mission> {
+    const url = `${environment.apiUrl}/api/missions`;
+    return this.http.post<Mission>(url, data, HTTP_OPTIONS);
   }
 
-  updateMission() {
-    // TODO
+  updateMission(data: Mission, mission: Mission | number): Observable<Mission> {
+    const missionId: number = typeof mission === 'number' ? mission : mission.id;
+    const url = `${environment.apiUrl}/api/missions/${missionId}`;
+    return this.http.put<Mission>(url, data, HTTP_OPTIONS);
   }
 
   updateMissionLock() {
