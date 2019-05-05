@@ -7,6 +7,7 @@ import { environment } from "../../../environments/environment";
 import { PaginatedUser } from "../classes/pagination/paginated-user";
 import { Project } from "../classes/models/project";
 import { Mission } from "../classes/models/mission";
+import { Role } from '../classes/models/role';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class UserService {
     return this.http.get<PaginatedUser>(url, HTTP_OPTIONS);
   }
 
-  getUsersPerPage(project?: number | Project, pageId?: number, search?: string, role?: string, promotion?: string): Observable<PaginatedUser> {
+  getUsersPerPage(project?: number | Project, pageId?: number, search?: string, role?: Role, promotion?: string): Observable<PaginatedUser> {
     let projectPath: string = '';
 
     if (project) {
@@ -39,7 +40,7 @@ export class UserService {
 
     if (pageId) url += `&page=${pageId}`;
     if (search) url += `&search=${search}`;
-    if (role != null) url += `&role=${role}`;
+    if (role != null) url += `&role=${role.name}`;
     if (promotion != null) url += `&promotion=${promotion}`;
 
     return this.http.get<PaginatedUser>(url, HTTP_OPTIONS);
@@ -51,7 +52,7 @@ export class UserService {
     return this.http.get<Project[]>(url, HTTP_OPTIONS);
   }
 
-  getMissionUsersPerPage(mission?: number | Mission, pageId?: number, search?: string, role?: string, promotion?: string): Observable<PaginatedUser> {
+  getMissionUsersPerPage(mission?: number | Mission, pageId?: number, search?: string, role?: Role, promotion?: string): Observable<PaginatedUser> {
     let missionPath: string = '';
 
     if (mission) {
@@ -63,7 +64,7 @@ export class UserService {
 
     if (pageId) url += `&page=${pageId}`;
     if (search) url += `&search=${search}`;
-    if (role != null) url += `&role=${role}`;
+    if (role != null) url += `&role=${role.name}`;
     if (promotion != null) url += `&promotion=${promotion}`;
 
     return this.http.get<PaginatedUser>(url, HTTP_OPTIONS);

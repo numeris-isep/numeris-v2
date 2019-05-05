@@ -1,4 +1,4 @@
-<app-content [condition]="!(paginatedUser && promotions)">
+<app-content [condition]="!(paginatedUser && promotions && roles)">
   <!-- Users -->
   <div *ngIf="paginatedUser; else empty" class="ui segments">
     <!-- Selection -->
@@ -21,7 +21,7 @@
           <div class="field">
             <label>Rôle</label>
             <div class="ui action input">
-              <sui-select class="fluid selection" label="userType"
+              <sui-select class="fluid selection" labelField="nameFr" valueField="name"
                           placeholder="Sélectionner une option"
                           [options]="roles" [(ngModel)]="selectedRole"
                           (ngModelChange)="setFilter()"

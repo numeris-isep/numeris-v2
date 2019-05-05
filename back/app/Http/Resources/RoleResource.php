@@ -17,6 +17,7 @@ class RoleResource extends JsonResource
         return [
             'id'        => $this->id,
             'name'      => $this->name,
+            'nameFr'    => $this->name_fr,
             'hierarchy' => $this->when(
                 auth()->user()->role()->name === 'developer',
                 $this->hierarchy

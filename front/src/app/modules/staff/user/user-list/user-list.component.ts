@@ -7,6 +7,8 @@ import { debounceTime } from "rxjs/operators";
 import { IPopup } from "ng2-semantic-ui";
 import { Project } from "../../../../core/classes/models/project";
 import { Mission } from "../../../../core/classes/models/mission";
+import { RoleService } from "../../../../core/http/role.service";
+import { Role } from "../../../../core/classes/models/role";
 
 @Component({
   selector: 'app-user-list',
@@ -32,20 +34,16 @@ export class UserListComponent implements OnInit, OnDestroy {
   search: string = '';
   searchControl: FormControl = new FormControl();
   searchControlSubscription: Subscription;
-  selectedRole: string;
+  selectedRole: Role;
   selectedPromotion: string;
-  roles: string[] = [
-    "Étudiant", "Staff",
-    "Administrateur", "Développeur"
-  ];
-  roleTranslations: string[] = [
-    'student', 'staff',
-    'administrator', 'developer'
-  ];
+  roles: Role[];
   promotions: string[];
   loading: boolean = false;
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private roleService: RoleService,
+  ) { }
 
   ngOnInit() {
     this.searchControlSubscription = this.searchControl.valueChanges.pipe(
@@ -55,6 +53,7 @@ export class UserListComponent implements OnInit, OnDestroy {
       this.setFilter();
     });
     this.getUsersPerPage(1);
+    this.getRoles();
     this.getPromotions();
   }
 
@@ -64,6 +63,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   reset(field: string) {
     if (this[field] !== undefined) this[field] = null;
+    if (field == 'search') this.getUsersPerPage(1);
     this.setFilter();
   }
 
@@ -74,12 +74,12 @@ export class UserListComponent implements OnInit, OnDestroy {
     if (this.page != 'mission-show') {
       results = this.userService.getUsersPerPage(
         this.project, pageId, this.search,
-        this.selectedRoleToRole(), this.selectedPromotion
+        this.selectedRole, this.selectedPromotion
       );
     } else {
       results = this.userService.getMissionUsersPerPage(
         this.mission, pageId, this.search,
-        this.selectedRoleToRole(), this.selectedPromotion,
+        this.selectedRole, this.selectedPromotion,
       );
     }
 
@@ -92,32 +92,21 @@ export class UserListComponent implements OnInit, OnDestroy {
     );
   }
 
+  getRoles() {
+    this.roleService.getRoles().subscribe(roles => this.roles = roles);
+  }
+
   getPromotions() {
-    this.userService.getPromotions().subscribe(promotions => {this.promotions = promotions})
+    this.userService.getPromotions().subscribe(promotions => this.promotions = promotions);
   }
 
   setFilter() {
-    if (this.search !== undefined
+    if (this.search !== undefined && this.search != null && this.search == this.search.trim()
       || this.selectedRole !== undefined
       || this.selectedPromotion !== undefined
     ) {
-      if (this.search === null) {
-        this.getUsersPerPage(1);
-      } else if (this.search.trim() != '') {
-        this.getUsersPerPage(1);
-      }
+      this.getUsersPerPage(1);
     }
-  }
-
-  selectedRoleToRole() {
-    if (this.selectedRole !== undefined && this.selectedRole !== null) {
-      const key = Object.keys(this.roles)
-        .find(key => this.roles[key] === this.selectedRole);
-
-      return this.roleTranslations[key];
-    }
-
-    return this.selectedRole;
   }
 
   togglePopup(popup: IPopup, condition) {
