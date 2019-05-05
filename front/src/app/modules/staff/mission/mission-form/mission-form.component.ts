@@ -46,7 +46,7 @@ export class MissionFormComponent implements OnInit {
         Validators.required,
       ],
       project_id: [
-        this.mission ? this.mission.project.id : '',
+        this.mission ? this.mission.project.id : (this.project ? this.project.id : ''),
         Validators.required,
       ],
       start_at: [

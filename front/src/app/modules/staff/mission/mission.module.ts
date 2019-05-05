@@ -40,6 +40,9 @@ import { MissionEditComponent } from './mission-edit/mission-edit.component';
     MissionFormComponent,
     MissionEditComponent
   ],
-  exports: [MissionListComponent]
+  exports: [
+    MissionListComponent,
+    MissionFormComponent,
+  ]
 })
 export class MissionModule { }

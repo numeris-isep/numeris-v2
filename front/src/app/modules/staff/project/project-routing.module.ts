@@ -7,6 +7,7 @@ import { ProjectIndexComponent } from "./project-index/project-index.component";
 import { ProjectShowComponent } from "./project-show/project-show.component";
 import { ProjectCreateComponent } from "./project-create/project-create.component";
 import { ProjectEditComponent } from "./project-edit/project-edit.component";
+import { ProjectMissionCreateComponent } from "./project-mission-create/project-mission-create.component";
 
 const projectRoutes: Routes = [
   {
@@ -31,6 +32,10 @@ const projectRoutes: Routes = [
       {
         path: ':id/modifier',
         component: ProjectEditComponent,
+      },
+      {
+        path: ':id/missions/nouvelle',
+        component: ProjectMissionCreateComponent,
       },
       {
         path: ':id',

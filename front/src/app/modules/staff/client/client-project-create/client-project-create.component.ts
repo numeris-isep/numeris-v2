@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { ClientService } from "../../../../core/http/client.service";
 import { TitleService } from "../../../../core/services/title.service";
 import { BreadcrumbsService } from "../../../../core/services/breadcrumbs.service";
@@ -18,7 +18,6 @@ export class ClientProjectCreateComponent implements OnInit {
     private clientService: ClientService,
     private titleService: TitleService,
     private breadcrumbsService: BreadcrumbsService,
-    private router: Router
   ) { }
 
   ngOnInit() {
@@ -38,9 +37,7 @@ export class ClientProjectCreateComponent implements OnInit {
           [{ title: client.name, url: `/clients/${client.id}` }, { title: 'Nouveau projet', url: '' }]
         );
       },
-      error =>{
-        this.router.navigate(['erreur'])
-      },
+      errors => {},
     );
   }
 
