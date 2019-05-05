@@ -1,0 +1,7 @@
+<app-content [condition]="!mission">
+  <div class="ui padded centered grid doubling">
+    <div class="twelve wide column">
+      <app-mission-form *ngIf="mission" [mission]="mission"></app-mission-form>
+    </div>
+  </div>
+</app-content>

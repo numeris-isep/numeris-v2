@@ -15,6 +15,7 @@ import { ApplicationListComponent } from './mission-applications/application-lis
 import { UserModule } from "../user/user.module";
 import { MissionCreateComponent } from './mission-create/mission-create.component';
 import { MissionFormComponent } from './mission-form/mission-form.component';
+import { MissionEditComponent } from './mission-edit/mission-edit.component';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import { MissionFormComponent } from './mission-form/mission-form.component';
     MissionApplicationsComponent,
     ApplicationListComponent,
     MissionCreateComponent,
-    MissionFormComponent
+    MissionFormComponent,
+    MissionEditComponent
   ],
   exports: [MissionListComponent]
 })

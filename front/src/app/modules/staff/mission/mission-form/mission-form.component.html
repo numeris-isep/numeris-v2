@@ -119,14 +119,14 @@
       </div>
       <div class="field">
         <div *ngIf="!mission; else edit" class="ui buttons">
-          <a *ngIf="!project; else projectMission" class="ui animated fade button" routerLink="/projets">
+          <a *ngIf="!project; else projectMission" class="ui animated fade button" routerLink="/missions">
             <div class="visible content">Annuler</div>
             <div class="hidden content">
               <i class="cancel icon"></i>
             </div>
           </a>
           <ng-template #projectMission>
-            <a class="ui animated fade button" routerLink="/projects/{{project.id}}">
+            <a class="ui animated fade button" routerLink="/projets/{{project.id}}">
               <div class="visible content">Annuler</div>
               <div class="hidden content">
                 <i class="cancel icon"></i>
@@ -145,7 +145,7 @@
 
         <ng-template #edit>
           <div class="ui buttons">
-            <a class="ui animated fade button" routerLink="/projets/{{ mission.id }}">
+            <a class="ui animated fade button" routerLink="/missions/{{ mission.id }}">
               <div class="visible content">Annuler</div>
               <div class="hidden content">
                 <i class="cancel icon"></i>

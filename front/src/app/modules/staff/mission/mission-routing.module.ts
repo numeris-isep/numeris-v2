@@ -6,6 +6,7 @@ import { AuthGuard } from "../../../core/guards/auth.guard";
 import { MissionIndexComponent } from "./mission-index/mission-index.component";
 import { MissionShowComponent } from "./mission-show/mission-show.component";
 import { MissionCreateComponent } from "./mission-create/mission-create.component";
+import { MissionEditComponent } from "./mission-edit/mission-edit.component";
 
 const missionRoute: Routes = [
   {
@@ -26,6 +27,10 @@ const missionRoute: Routes = [
         data: {
           title: 'Nouvelle mission',
         },
+      },
+      {
+        path: ':id/modifier',
+        component: MissionEditComponent,
       },
       {
         path: ':id',

@@ -103,7 +103,7 @@ export class MissionFormComponent implements OnInit {
         mission => {
           this.loading = false;
           this.router.navigate([`/missions/${mission.id}`]);
-          if (this.mission) this.alertService.success([`La mission ${mission.title} a bien été modifié.`]);
+          if (this.mission) this.alertService.success([`La mission ${mission.title} a bien été modifiée.`]);
         },
         errors => {
           handleFormErrors(this.missionForm, errors);
