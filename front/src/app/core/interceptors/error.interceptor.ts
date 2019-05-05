@@ -4,15 +4,20 @@ import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 import { AlertService } from "../services/alert.service";
 import { Router } from "@angular/router";
+import { LoginModal } from "../../modules/showcase/modals/login-modal/login-modal.component";
+import { SuiModalService } from "ng2-semantic-ui";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorInterceptor implements HttpInterceptor {
 
+  private loginModal: LoginModal;
+
   constructor(
     private alertService: AlertService,
     private router: Router,
+    private modalService: SuiModalService,
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -20,6 +25,14 @@ export class ErrorInterceptor implements HttpInterceptor {
       this.alertService.clear();
 
       switch (err.status) {
+        case 401:
+          this.loginModal = new LoginModal(
+            'Veuillez vous connecter pour accéder à cette page',
+            this.router.url
+          );
+          this.modalService.open(this.loginModal);
+          break;
+
         case 404:
           this.router.navigate(['/not-found']);
           break;

@@ -7,6 +7,11 @@ import { first } from "rxjs/operators";
 import { AlertService } from "../../../../core/services/alert.service";
 import { handleFormErrors } from "../../../../core/functions/form-error-handler";
 
+export interface ILoginModalContext {
+  question: string;
+  returnUrl: string;
+}
+
 @Component({
   selector: 'login-modal',
   templateUrl: './login-modal.component.html'
@@ -16,10 +21,11 @@ export class LoginModalComponent implements OnInit {
   loginForm: FormGroup;
   loading: boolean = false;
   submitted: boolean = false;
-  returnUrl: string;
+  question: string = this.loginModal.context.question;
+  returnUrl: string = this.loginModal.context.returnUrl;
 
   constructor(
-    public modal: SuiModal<void, void, void>,
+    public loginModal: SuiModal<ILoginModalContext, void, void>,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -36,8 +42,8 @@ export class LoginModalComponent implements OnInit {
     // reset auth status
     this.authService.logout();
 
-    // get return url from route parameters or default to '/dashboard'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/tableau-de-bord';
+    // get return url from route parameters or default to home
+    if (!this.returnUrl) this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   // convenient getter for easy access to form fields
@@ -55,8 +61,9 @@ export class LoginModalComponent implements OnInit {
       .subscribe(
         _ => {
           this.alertService.success(['Vous êtes connecté !'], null, true);
-          this.router.navigate([this.returnUrl]);
-          this.modal.approve(undefined); // <-- make the modal disappear
+          this.router.navigate(['/profil'])
+            .then(() => { this.router.navigate([this.returnUrl]) } );
+          this.loginModal.approve(undefined); // <-- make the modal disappear
         },
         errors => {
           handleFormErrors(this.loginForm, errors);
@@ -65,14 +72,16 @@ export class LoginModalComponent implements OnInit {
   }
 }
 
-export class LoginModal extends ComponentModalConfig<void, void, void> {
+export class LoginModal extends ComponentModalConfig<ILoginModalContext, void, void> {
 
   constructor(
+    question = null,
+    returnUrl = '/',
     size = ModalSize.Small,
     isClosable: boolean = true,
     transitionDuration: number = 200
   ) {
-    super(LoginModalComponent);
+    super(LoginModalComponent, { question, returnUrl });
 
     this.isClosable = isClosable;
     this.transitionDuration = transitionDuration;
