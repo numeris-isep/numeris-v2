@@ -4,7 +4,8 @@ import { BreadcrumbsService } from "../../services/breadcrumbs.service";
 
 @Component({
   selector: 'app-breadcrumb',
-  templateUrl: './breadcrumbs.component.html'
+  templateUrl: './breadcrumbs.component.html',
+  styleUrls: ['./breadcrumbs.component.css']
 })
 export class BreadcrumbsComponent implements OnInit {
 
