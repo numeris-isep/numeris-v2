@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Address;
 use App\Models\Application;
 use App\Models\Client;
+use App\Models\Contact;
 use App\Models\Convention;
 use App\Models\Mission;
 use App\Models\Preference;
@@ -16,6 +17,7 @@ use App\Models\UserRole;
 use App\Policies\AddressPolicy;
 use App\Policies\ApplicationPolicy;
 use App\Policies\ClientPolicy;
+use App\Policies\ContactPolicy;
 use App\Policies\ConventionPolicy;
 use App\Policies\MissionPolicy;
 use App\Policies\PreferencePolicy;
@@ -50,6 +52,7 @@ class AuthServiceProvider extends ServiceProvider
         Application::class  => ApplicationPolicy::class,
         Rate::class         => RatePolicy::class,
         ProjectUser::class  => ProjectUserPolicy::class,
+        Contact::class      => ContactPolicy::class,
     ];
 
     /**

@@ -22,7 +22,7 @@ class ClientController extends Controller
 
         return response()->json(ClientResource::collection(
             Client::withCount('conventions', 'projects', 'missions')
-                ->get()->load('address')
+                ->get()->load('address', 'contact')
         ));
     }
 
@@ -62,7 +62,7 @@ class ClientController extends Controller
             ->findOrFail($client_id);
         $this->authorize('show', $client);
 
-        $client->load(['address', 'conventions', 'conventions.rates']);
+        $client->load(['address', 'contact', 'conventions', 'conventions.rates']);
 
         return response()->json(ClientResource::make($client));
     }

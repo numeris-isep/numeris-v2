@@ -12,6 +12,7 @@ class Client extends Model
     protected $fillable = [
         // One-to-One relations
         'address_id',
+        'contact_id',
 
         // attributes
         'name',
@@ -71,5 +72,10 @@ class Client extends Model
             'client_id',
             'project_id'
         );
+    }
+
+    public function contact()
+    {
+        return $this->belongsTo(Contact::class);
     }
 }

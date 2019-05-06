@@ -17,6 +17,7 @@ class ClientResource extends JsonResource
         return [
             'id'                => $this->id,
             'addressId'         => $this->address_id,
+            'contactId'         => $this->contact_id,
             'name'              => $this->name,
             'reference'         => $this->reference,
             'createdAt'         => $this->created_at->toDateTimeString(),
@@ -29,6 +30,7 @@ class ClientResource extends JsonResource
 
             // Relations
             'address'           => AddressResource::make($this->whenLoaded('address')),
+            'contact'           => ContactResource::make($this->whenLoaded('contact')),
             'conventions'       => ConventionResource::collection($this->whenLoaded('conventions')),
             'projects'          => ProjectResource::collection($this->whenLoaded('projects')),
             'missions'          => MissionResource::collection($this->whenLoaded('missions')),

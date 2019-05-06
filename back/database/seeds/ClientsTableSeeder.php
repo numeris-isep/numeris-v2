@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Client;
+use App\Models\Contact;
 use Illuminate\Database\Seeder;
 
 class ClientsTableSeeder extends Seeder
@@ -16,7 +17,7 @@ class ClientsTableSeeder extends Seeder
             if (! Client::where('name', 'AS Connect')->first()) {
                 factory(Client::class)->create([
                     'name'      => 'AS Connect',
-                    'reference' => '01-0001'
+                    'reference' => '01-0001',
                 ]);
             }
 
