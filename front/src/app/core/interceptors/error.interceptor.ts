@@ -34,7 +34,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           break;
 
         case 404:
-          this.router.navigate(['/not-found']);
+          this.router.navigate(['/page-inconnue']);
           break;
 
         case 500:

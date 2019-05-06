@@ -42,9 +42,7 @@ export class ProjectDeleteModalComponent implements OnInit {
         this.alertService.success([`Le projet ${this.project.name} a bien été supprimé.`]);
         this.modal.approve(undefined);
       },
-      error => {
-        this.modal.deny(undefined);
-      }
+      errors => this.modal.deny(undefined)
     )
   }
 

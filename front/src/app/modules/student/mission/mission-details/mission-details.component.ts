@@ -6,6 +6,7 @@ import { SuiModalService } from "ng2-semantic-ui";
 import { ApplicationService } from "../../../../core/http/application.service";
 import { Application } from "../../../../core/classes/models/application";
 import { AuthService } from "../../../../core/http/auth/auth.service";
+import { MissionDeleteModal } from "../../../staff/mission/mission-delete-modal/mission-delete-modal.component";
 
 @Component({
   selector: 'app-mission-details',
@@ -23,7 +24,8 @@ export class MissionDetailsComponent implements OnInit {
   userApplication: Application;
   currentUserId: number;
 
-  private modal: ConfirmModal;
+  private applicationModal: ConfirmModal;
+  private deleteModal: MissionDeleteModal;
 
   constructor(
     private modalService: SuiModalService,
@@ -40,14 +42,22 @@ export class MissionDetailsComponent implements OnInit {
         }
       });
 
-    this.modal = new ConfirmModal(
-      'Continuer ?',
-      ! this.userApplication
-        ? `Êtes-vous sûr de vouloir postuler pour la mission ${this.mission.title} ?`
-        : `Êtes-vous sûr de vouloir retirer votre candidature de la mission ${this.mission.title} ?`,
-      this.mission,
-      this.userApplication
-    )
+    if (this.page == 'show') {
+      this.deleteModal = new MissionDeleteModal(
+        this.mission.title,
+        `Voulez-vous vraiment supprimer la mission ${this.mission.title} ?`,
+        this.mission
+      )
+    } else {
+      this.applicationModal = new ConfirmModal(
+        'Continuer ?',
+        ! this.userApplication
+          ? `Êtes-vous sûr de vouloir postuler pour la mission ${this.mission.title} ?`
+          : `Êtes-vous sûr de vouloir retirer votre candidature de la mission ${this.mission.title} ?`,
+        this.mission,
+        this.userApplication
+      )
+    }
   }
 
   isMissionExpired() {
@@ -55,6 +65,8 @@ export class MissionDetailsComponent implements OnInit {
   }
 
   openModal() {
-    this.modalService.open(this.modal);
+    this.modalService.open(
+      this.page == 'show' ? this.deleteModal : this.applicationModal
+    );
   }
 }

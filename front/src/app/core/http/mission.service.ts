@@ -77,7 +77,9 @@ export class MissionService {
     // TODO
   }
 
-  deleteMission() {
-    // TODO
+  deleteMission(mission: Mission): Observable<Mission> {
+    const missionId: number = typeof mission === 'number' ? mission : mission.id;
+    const url = `${environment.apiUrl}/api/missions/${missionId}`;
+    return this.http.delete<Mission>(url, HTTP_OPTIONS);
   }
 }
