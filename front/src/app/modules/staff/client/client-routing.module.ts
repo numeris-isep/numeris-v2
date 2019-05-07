@@ -7,6 +7,7 @@ import { ClientShowComponent } from "./client-show/client-show.component";
 import { ClientCreateComponent } from "./client-create/client-create.component";
 import { ClientEditComponent } from "./client-edit/client-edit.component";
 import { ClientProjectCreateComponent } from "./client-project-create/client-project-create.component";
+import { ContactCreateComponent } from "./contact-create/contact-create.component";
 
 const clientRoutes: Routes = [
   {
@@ -27,6 +28,13 @@ const clientRoutes: Routes = [
         data: {
           title: 'Nouveau client'
         }
+      },
+      {
+        path: 'contacts/nouveau',
+        component: ContactCreateComponent,
+        data: {
+          title: 'Nouveau contact client'
+        },
       },
       {
         path: ':id/modifier',

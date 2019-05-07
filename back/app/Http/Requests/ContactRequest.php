@@ -31,8 +31,8 @@ class ContactRequest extends AbstractFormRequest
         return [
             'first_name'    => 'required|string',
             'last_name'     => 'required|string',
-            'email'         => 'email',
-            'phone'         => 'string|min:10',
+            'email'         => 'nullable|email',
+            'phone'         => 'nullable|string|min:10',
         ];
     }
 }

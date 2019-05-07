@@ -17,9 +17,16 @@ export class ContactService {
     return this.http.get<Contact[]>(url, HTTP_OPTIONS);
   }
 
-  // addContact(): Observable<Contact> {}
+  addContact(data: Contact): Observable<Contact> {
+    const url = `${environment.apiUrl}/api/contacts`;
+    return this.http.post<Contact>(url, data, HTTP_OPTIONS);
+  }
 
-  // updateContact(): Observable<Contact> {}
+  updateContact(data: Contact, contact: Contact): Observable<Contact> {
+    const contactId: number = typeof contact === 'number' ? contact : contact.id;
+    const url = `${environment.apiUrl}/api/contacts/${contactId}`;
+    return this.http.put<Contact>(url, data, HTTP_OPTIONS);
+  }
 
   // deleteContact(): Observable<Contact> {}
 
