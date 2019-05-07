@@ -48,18 +48,20 @@
 
     <div class="content">
       <div class="description">
-        <p>
-          <i class="user md icon"></i>
-          Sébastien MARRY (TODO)
-        </p>
-        <p>
-          <i class="phone icon"></i>
-          <a href="tel:0123456789" target="_blank"> 01 23 45 67 89 (TODO)</a>
-        </p>
-        <p>
-          <i class="mail envelope icon"></i>
-          <a href="mailto:client@numeris-isep.fr" target="_blank"> client@numeris-isep.fr (TODO)</a>
-        </p>
+        <ng-container *ngIf="client.contact">
+          <p *ngIf="client.contact.firstName && client.contact.lastName">
+            <i class="user md icon"></i>
+            {{ client.contact.firstName }} {{ client.contact.lastName | uppercase }}
+          </p>
+          <p *ngIf="client.contact.phone">
+            <i class="phone icon"></i>
+            <a href="tel:{{ client.contact.phone }}" target="_blank"> {{ client.contact.phone | phone }}</a>
+          </p>
+          <p *ngIf="client.contact.email">
+            <i class="mail envelope icon"></i>
+            <a href="mailto:{{ client.contact.email }}" target="_blank"> {{ client.contact.email }}</a>
+          </p>
+        </ng-container>
         <p>
           <i class="history icon"></i> Modifié le {{ client.updatedAt | date:"dd/MM/y" }}
         </p>

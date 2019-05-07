@@ -1,0 +1,50 @@
+<app-content [condition]="!contacts">
+  <div *ngIf="contacts; else empty" class="ui three column padded centered grid stackable">
+    <div class="ui segment overflowing" [ngClass]="{'loading': loading}">
+      <table class="ui celled striped selectable table">
+        <thead>
+          <tr>
+            <th><i class="tag icon"></i> Nom</th>
+            <th class="collapsing"><i class="mail alternate icon"></i> E-mail</th>
+            <th class="collapsing"><i class="phone icon"></i> Téléphone</th>
+            <th class="collapsing"><i class="hand pointer outline icon"></i> Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let contact of contacts">
+          <td>{{ contact.firstName }} {{ contact.lastName | uppercase }}</td>
+          <td>
+            <a *ngIf="contact.email; else noEmail" href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+            <ng-template #noEmail>-</ng-template>
+          </td>
+          <td>
+            <a *ngIf="contact.phone; else noPhone" href="tel:{{ contact.phone }}">{{ contact.phone | phone }}</a>
+            <ng-template #noPhone>-</ng-template>
+          </td>
+          <td class="center aligned collapsing">
+            <app-link-button behaviour="compact" size="tiny" color="basic orange"
+                             hiddenIcon="edit">
+              Modifier
+            </app-link-button>
+            <app-link-button behaviour="compact" size="tiny" color="basic negative"
+                             hiddenIcon="trash alternate" suiPopup popupPlacement="top" popupHeader="Attention !"
+                             popupText="Cette action retirera le contact de tous les clients auxquels il est associé">
+              Supprimer
+            </app-link-button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Empty -->
+  <ng-template #empty>
+    <div class="ui padded grid">
+      <div class="column">
+        <app-empty>Aucun contact client</app-empty>
+      </div>
+    </div>
+  </ng-template>
+</app-content>

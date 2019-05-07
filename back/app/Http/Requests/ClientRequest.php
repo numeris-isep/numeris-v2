@@ -31,6 +31,8 @@ class ClientRequest extends AbstractFormRequest
         $client_id = $this->route('client_id');
 
         $rules = [
+            'contact_id'     => 'exists:contacts,id|integer',
+
             // Address
             'address.street'        => 'required|string',
             'address.zip_code'      => 'required|integer',
