@@ -41,9 +41,10 @@ class ApplicationRequest extends AbstractFormRequest
         switch($this->method())
         {
             case 'PUT':
+            case 'PATCH':
                 return [
                     'type'      => 'required_without:status|in:' . implode(',', Application::types()),
-                    'status'    => 'required_without:type|in:' . implode(',', Application::statutes()),
+                    'status'    => 'required_without:type|in:' . implode(',', Application::statuses()),
                 ];
                 break;
 

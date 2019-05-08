@@ -16,3 +16,11 @@ export class Application {
   mission: Mission;
 
 }
+
+export class ApplicationStatus {
+
+  status: string;
+  translation: string;
+  translationPlural: string;
+
+}

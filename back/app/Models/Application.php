@@ -21,10 +21,28 @@ class Application extends Model
 
     const REFUSED = 'refused';
 
-    private static $statutes = [
+    private static $statuses = [
         self::WAITING,
         self::ACCEPTED,
         self::REFUSED,
+    ];
+
+    private static $statusTranslations = [
+        [
+            'status'            => self::WAITING,
+            'translation'       => 'en attente',
+            'translationPlural' => 'en attente',
+        ],
+        [
+            'status'            => self::ACCEPTED,
+            'translation'       => 'acceptée',
+            'translationPlural' => 'acceptées',
+        ],
+        [
+            'status'            => self::REFUSED,
+            'translation'       => 'refusée',
+            'translationPlural' => 'refusées',
+        ],
     ];
 
     protected $fillable = [
@@ -42,9 +60,14 @@ class Application extends Model
         return static::$types;
     }
 
-    public static function statutes()
+    public static function statuses()
     {
-        return static::$statutes;
+        return static::$statuses;
+    }
+
+    public static function statusTranslations()
+    {
+        return static::$statusTranslations;
     }
 
     public function mission()

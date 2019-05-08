@@ -3,9 +3,9 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 import { environment } from "../../../environments/environment";
 import { HTTP_OPTIONS } from "../constants/http_options";
-import { Application } from "../classes/models/application";
+import { Application, ApplicationStatus } from "../classes/models/application";
 import { User } from "../classes/models/user";
-import { Mission } from "../classes/models/mission";
+import { Mission } from '../classes/models/mission';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,15 @@ export class ApplicationService {
 
   constructor(private http: HttpClient) { }
 
-  updateApplication() {
-    //
+  getApplicationStatuses(): Observable<ApplicationStatus[]> {
+    const url = `${environment.apiUrl}/api/applications-statuses`;
+    return this.http.get<ApplicationStatus[]>(url, HTTP_OPTIONS);
+  }
+
+  updateApplication(status: string, application: Application | number): Observable<Application> {
+    const missionId: number = typeof application === 'number' ? application : application.id;
+    const url = `${environment.apiUrl}/api/applications/${missionId}`;
+    return this.http.patch<Application>(url, {status: status}, HTTP_OPTIONS);
   }
 
   deleteApplication(application: Application): Observable<Application> {

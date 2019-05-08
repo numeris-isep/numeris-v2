@@ -18,6 +18,11 @@ class ApplicationPolicy
         }
     }
 
+    public function indexStatus(User $current_user)
+    {
+        return false;
+    }
+
     public function update(User $current_user, Application $application)
     {
         return false;

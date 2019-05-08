@@ -79,6 +79,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('missions/{mission_id}/users', 'MissionUserController@indexNotApplied')->name('missions.users.index.not-applied');
 
     // Application resource routes
+    Route::get('applications-statuses', 'ApplicationController@indexStatus')->name('applications.statuses.index');
     Route::apiResource('applications', 'ApplicationController', ['parameters' => ['applications' => 'application_id']])
         ->only(['update', 'destroy']);
 

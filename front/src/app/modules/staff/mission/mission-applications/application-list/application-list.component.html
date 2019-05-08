@@ -1,7 +1,7 @@
 <div class="ui segment">
-  <div class="ui ribbon label" [ngClass]="{'green': statuses == 'acceptées', 'blue': statuses == 'en attente', 'red': statuses == 'refusées' }">
-    <i class="icon" [ngClass]="{'handshake': statuses == 'acceptées', 'hand paper': statuses == 'en attente', 'thumbs down': statuses == 'refusées' }"></i>
-    Candidatures {{ statuses }}
+  <div class="ui ribbon label" [ngClass]="{'green': status.status == 'accepted', 'blue': status.status == 'waiting', 'red': status.status == 'refused' }">
+    <i class="icon" [ngClass]="{'handshake': status.status == 'accepted', 'hand paper': status.status == 'waiting', 'thumbs down': status.status == 'refused' }"></i>
+    Candidatures {{ status.translationPlural }}
   </div>
   <app-button *ngIf="statuses == 'acceptées'" size="mini" color="green"
               behaviour="right floated" hiddenIcon="save">
@@ -11,7 +11,7 @@
     <thead>
     <tr>
       <th><i class="user icon"></i> Nom</th>
-      <ng-container *ngIf="statuses == 'acceptées'">
+      <ng-container *ngIf="status.status == 'accepted'">
         <th>Heures de jours</th>
         <th>Heures de nuit</th>
         <th>Heures dimanches et jours fériés</th>
@@ -25,7 +25,7 @@
     <tr *ngFor="let application of applications">
       <td>{{ application.user.firstName }} {{ application.user.lastName | uppercase }}</td>
       <!-- TODO -->
-      <ng-container *ngIf="statuses == 'acceptées'">
+      <ng-container *ngIf="status.status == 'accepted'">
         <td class="center aligned">
           <div class="ui left icon mini input">
             <i class="clock icon"></i>
@@ -63,17 +63,17 @@
           Voir
         </app-link-button>
         <app-button *ngIf="application.status != 'accepted'" behaviour="compact"
-                    size="tiny" color="basic positive"
+                    size="tiny" color="basic positive" (click)="updateApplication('accepted', application)"
                     hiddenIcon="handshake">
           Inscrire
         </app-button>
         <app-button *ngIf="application.status == 'accepted'" behaviour="compact"
-                    size="tiny" color="basic negative"
+                    size="tiny" color="basic negative" (click)="updateApplication('waiting', application)"
                     hiddenIcon="trash alternate">
           Retirer
         </app-button>
         <app-button *ngIf="application.status == 'waiting'" behaviour="compact"
-                         size="tiny" color="basic negative"
+                         size="tiny" color="basic negative" (click)="updateApplication('refused', application)"
                          hiddenIcon="trash alternate">
           Refuser
         </app-button>
@@ -85,10 +85,7 @@
       <tr>
         <th colspan="20">
           <app-empty [icon]="false">
-            Aucune candidature
-            <ng-container *ngIf="statuses == 'acceptées'">acceptée.</ng-container>
-            <ng-container *ngIf="statuses == 'en attente'">en attente.</ng-container>
-            <ng-container *ngIf="statuses == 'refusées'">refusée.</ng-container>
+            Aucune candidature {{ status.translationPlural }}
           </app-empty>
         </th>
       </tr>

@@ -7,12 +7,12 @@ use Faker\Generator as Faker;
 
 $factory->define(Application::class, function (Faker $faker) {
     $types = Application::types();
-    $statutes = Application::statutes();
+    $statuses = Application::statuses();
 
     return [
         'user_id'       => factory(User::class),
         'mission_id'    => factory(Mission::class),
         'type'          => $types[$faker->numberBetween(0, count($types) - 1)],
-        'status'        => $statutes[$faker->numberBetween(0, count($statutes) - 1)],
+        'status'        => $statuses[$faker->numberBetween(0, count($statuses) - 1)],
     ];
 });

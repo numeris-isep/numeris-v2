@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Mission } from "../../../../core/classes/models/mission";
-import { Application } from "../../../../core/classes/models/application";
+import { Application, ApplicationStatus } from "../../../../core/classes/models/application";
 import { ApplicationService } from "../../../../core/http/application.service";
 
 @Component({
@@ -11,13 +11,20 @@ export class MissionApplicationsComponent implements OnInit {
 
   @Input() mission: Mission;
   applications: Application[];
+  applicationStatuses: ApplicationStatus[];
+
   waitingApplications: Application[] = [];
   acceptedApplications: Application[] = [];
   refusedApplications: Application[] = [];
 
+  waitingStatus: ApplicationStatus;
+  acceptedStatus: ApplicationStatus;
+  refusedStatus: ApplicationStatus;
+
   constructor(private applicationService: ApplicationService) { }
 
   ngOnInit() {
+    this.getApplicationStatuses();
     this.getMissionApplications(this.mission);
   }
 
@@ -41,6 +48,25 @@ export class MissionApplicationsComponent implements OnInit {
             }
           })
       });
+  }
+
+  getApplicationStatuses() {
+    this.applicationService.getApplicationStatuses().subscribe(statuses => {
+      this.applicationStatuses = statuses;
+      statuses.map(status => {
+        switch (status.status) {
+          case 'waiting':
+            this.waitingStatus = status;
+            break;
+          case 'accepted':
+            this.acceptedStatus = status;
+            break;
+          case 'refused':
+            this.refusedStatus = status;
+            break;
+        }
+      });
+    });
   }
 
 }

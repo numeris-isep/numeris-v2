@@ -10,6 +10,19 @@ use Illuminate\Http\JsonResponse;
 class ApplicationController extends Controller
 {
     /**
+     * Display a listing of the status with their translation.
+     *
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function indexStatus()
+    {
+        $this->authorize('index-status', Application::class);
+
+        return response()->json(Application::statusTranslations());
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param ApplicationRequest $request
