@@ -55,8 +55,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         ->only(['store']);
 
     // Contact resource routes
-    Route::apiResource('contacts', 'ContactController', ['parameters' => ['contacts' => 'contact_id']])
-        ->only(['index', 'store', 'update', 'destroy']);
+    Route::apiResource('contacts', 'ContactController', ['parameters' => ['contacts' => 'contact_id']]);
 
     // Rate resource routes
     Route::apiResource('rates', 'RateController', ['parameters' => ['rates' => 'rate_id']])

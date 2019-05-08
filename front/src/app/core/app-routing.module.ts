@@ -55,6 +55,7 @@ export class AppRoutingModule {
           }
         }
         return null;
+
       })).subscribe( (child: any) => {
         if (child.data['title']) {
           const title: string = child.data['title'];

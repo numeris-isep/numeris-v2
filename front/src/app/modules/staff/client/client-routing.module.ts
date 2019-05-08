@@ -8,6 +8,7 @@ import { ClientCreateComponent } from "./client-create/client-create.component";
 import { ClientEditComponent } from "./client-edit/client-edit.component";
 import { ClientProjectCreateComponent } from "./client-project-create/client-project-create.component";
 import { ContactCreateComponent } from "./contact-create/contact-create.component";
+import { ContactEditComponent } from "./contact-edit/contact-edit.component";
 
 const clientRoutes: Routes = [
   {
@@ -30,11 +31,27 @@ const clientRoutes: Routes = [
         }
       },
       {
-        path: 'contacts/nouveau',
-        component: ContactCreateComponent,
+        path: 'contacts',
         data: {
-          title: 'Nouveau contact client'
+          title: 'Contacts',
         },
+        children: [
+          {
+            path: '',
+            component: ClientIndexComponent,
+          },
+          {
+            path: 'nouveau',
+            component: ContactCreateComponent,
+            data: {
+              title: 'Nouveau contact client'
+            },
+          },
+          {
+            path: ':id/modifier',
+            component: ContactEditComponent,
+          }
+        ]
       },
       {
         path: ':id/modifier',
@@ -50,6 +67,11 @@ const clientRoutes: Routes = [
       },
     ]
   },
+  {
+    path: 'contacts',
+    redirectTo: '/clients/contacts',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

@@ -41,6 +41,21 @@ class ContactController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param $contact_id
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function show($contact_id)
+    {
+        $contact = Contact::findOrFail($contact_id);
+        $this->authorize('show', $contact);
+
+        return response()->json(ContactResource::make($contact));
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param ContactRequest $request

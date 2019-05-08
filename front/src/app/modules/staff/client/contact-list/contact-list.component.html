@@ -1,5 +1,5 @@
 <app-content [condition]="!contacts">
-  <div *ngIf="contacts; else empty" class="ui three column padded centered grid stackable">
+  <div *ngIf="contacts.length > 0; else empty" class="ui three column padded centered grid stackable">
     <div class="ui segment overflowing" [ngClass]="{'loading': loading}">
       <table class="ui celled striped selectable table">
         <thead>
@@ -24,14 +24,15 @@
           </td>
           <td class="center aligned collapsing">
             <app-link-button behaviour="compact" size="tiny" color="basic orange"
-                             hiddenIcon="edit">
+                             hiddenIcon="edit" routerLink="/clients/contacts/{{ contact.id }}/modifier">
               Modifier
             </app-link-button>
-            <app-link-button behaviour="compact" size="tiny" color="basic negative"
-                             hiddenIcon="trash alternate" suiPopup popupPlacement="top" popupHeader="Attention !"
-                             popupText="Cette action retirera le contact de tous les clients auxquels il est associé">
+            <app-button behaviour="compact" size="tiny" color="basic negative" (click)="deleteContact(contact)"
+                        hiddenIcon="trash alternate" suiPopup popupPlacement="left" popupHeader="Attention !"
+                        popupText="Cette action retirera le contact de tous les clients auxquels il est associé">
               Supprimer
-            </app-link-button>
+            </app-button>
+            {{ loading }}
           </td>
         </tr>
         </tbody>

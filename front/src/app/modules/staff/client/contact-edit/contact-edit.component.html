@@ -1,0 +1,7 @@
+<app-content [condition]="!contact">
+  <div class="ui padded centered grid doubling">
+    <div class="twelve wide column">
+      <app-contact-form *ngIf="contact" [contact]="contact"></app-contact-form>
+    </div>
+  </div>
+</app-content>

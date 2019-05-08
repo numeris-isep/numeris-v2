@@ -55,17 +55,18 @@ export class ContactFormComponent implements OnInit {
     if (!this.contact) {
       contactRequest = this.contactService.addContact(this.contactForm.value as Contact);
     } else {
-      contactRequest = this.contactService.addContact(this.contactForm.value as Contact);
+      contactRequest = this.contactService.updateContact(this.contactForm.value as Contact, this.contact);
     }
 
     contactRequest.pipe(first())
       .subscribe(
         contact => {
           this.loading = false;
-          this.router.navigate(['/clients']);
           if (!this.contact) {
+            this.router.navigate(['/contacts']);
             this.alertService.success([`Le contact client ${contact.firstName} ${contact.lastName.toUpperCase()} a bien été créé.`]);
           } else {
+            this.router.navigate(['/contacts']);
             this.alertService.success([`Le contact client ${contact.firstName} ${contact.lastName.toLocaleUpperCase()} a bien été modifié.`]);
           }
         },

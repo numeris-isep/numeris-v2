@@ -20,6 +20,7 @@ import { ClientProjectCreateComponent } from './client-project-create/client-pro
 import { ContactListComponent } from './contact-list/contact-list.component';
 import { ContactCreateComponent } from './contact-create/contact-create.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
+import { ContactEditComponent } from './contact-edit/contact-edit.component';
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
     ContactListComponent,
     ContactCreateComponent,
     ContactFormComponent,
+    ContactEditComponent,
   ],
   entryComponents: [
     ClientDeleteModalComponent,

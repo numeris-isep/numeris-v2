@@ -28,6 +28,11 @@ class ContactPolicy
         return false;
     }
 
+    public function show(User $current_user, Contact $contact)
+    {
+        return false;
+    }
+
     public function update(User $current_user, Contact $contact)
     {
         return false;
