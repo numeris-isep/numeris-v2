@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Mission } from "../../../../core/classes/models/mission";
-import { Application, ApplicationStatus } from "../../../../core/classes/models/application";
+import { ApplicationStatus } from "../../../../core/classes/models/application";
+import { ApplicationHandlerService } from "../../../../core/services/application-handler.service";
 import { ApplicationService } from "../../../../core/http/application.service";
 
 @Component({
@@ -10,44 +11,24 @@ import { ApplicationService } from "../../../../core/http/application.service";
 export class MissionApplicationsComponent implements OnInit {
 
   @Input() mission: Mission;
-  applications: Application[];
   applicationStatuses: ApplicationStatus[];
-
-  waitingApplications: Application[] = [];
-  acceptedApplications: Application[] = [];
-  refusedApplications: Application[] = [];
 
   waitingStatus: ApplicationStatus;
   acceptedStatus: ApplicationStatus;
   refusedStatus: ApplicationStatus;
 
-  constructor(private applicationService: ApplicationService) { }
+  constructor(
+    private applicationService: ApplicationService,
+    private applicationHandlerService: ApplicationHandlerService,
+  ) { }
 
   ngOnInit() {
     this.getApplicationStatuses();
-    this.getMissionApplications(this.mission);
+    this.setMissionApplications(this.mission);
   }
 
-  getMissionApplications(mission: Mission) {
-    return this.applicationService.getMissionApplications(mission)
-      .subscribe(applications => {
-        this.applications = applications;
-        applications
-          .map(application => {
-            switch (application.status) {
-              case 'waiting':
-                this.waitingApplications.push(application);
-                break;
-              case 'accepted':
-                this.acceptedApplications.push(application);
-                break;
-              case 'refused':
-                this.refusedApplications.push(application);
-                break;
-              default: break;
-            }
-          })
-      });
+  setMissionApplications(mission: Mission) {
+    this.applicationHandlerService.setApplications(mission);
   }
 
   getApplicationStatuses() {

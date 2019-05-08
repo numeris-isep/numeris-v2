@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Breadcrumb } from "../classes/breadcrumb";
 import { BehaviorSubject } from "rxjs";
-import { ActivatedRoute, ActivatedRouteSnapshot, UrlSegment } from "@angular/router";
+import { ActivatedRouteSnapshot, UrlSegment } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'

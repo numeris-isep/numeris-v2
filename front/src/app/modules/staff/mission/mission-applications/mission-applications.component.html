@@ -1,17 +1,17 @@
-<app-content [condition]="!applications">
-  <div *ngIf="applications && applicationStatuses" class="ui grid doubling">
+<app-content [condition]="!applicationStatuses">
+  <div *ngIf="applicationStatuses" class="ui grid doubling">
     <div class="row">
       <div class="sixteen wide column">
-        <app-application-list [applications]="acceptedApplications" [statuses]="applicationStatuses" [status]="acceptedStatus"></app-application-list>
+        <app-application-list [statuses]="applicationStatuses" [status]="acceptedStatus" [mission]="mission"></app-application-list>
       </div>
     </div>
 
     <div class="stretched row">
       <div class="sixteen wide mobile eight wide computer column">
-        <app-application-list [applications]="waitingApplications" [statuses]="applicationStatuses" [status]="waitingStatus"></app-application-list>
+        <app-application-list [statuses]="applicationStatuses" [status]="waitingStatus" [mission]="mission"></app-application-list>
       </div>
       <div class="sixteen wide mobile eight wide computer column">
-        <app-application-list [applications]="refusedApplications" [statuses]="applicationStatuses" [status]="refusedStatus"></app-application-list>
+        <app-application-list [statuses]="applicationStatuses" [status]="refusedStatus" [mission]="mission"></app-application-list>
       </div>
     </div>
   </div>

@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Application, ApplicationStatus } from "../../../../../core/classes/models/application";
 import { ApplicationService } from "../../../../../core/http/application.service";
 import { AlertService } from "../../../../../core/services/alert.service";
+import { ApplicationHandlerService } from "../../../../../core/services/application-handler.service";
+import { Mission } from "../../../../../core/classes/models/mission";
 
 @Component({
   selector: 'app-application-list',
@@ -10,28 +12,35 @@ import { AlertService } from "../../../../../core/services/alert.service";
 })
 export class ApplicationListComponent implements OnInit {
 
-  @Input() applications: Application[];
   @Input() statuses: ApplicationStatus[];
   @Input() status: ApplicationStatus;
+  @Input() mission: Mission;
+
+  applications: Application[];
 
   loading: boolean = false;
 
   constructor(
     private applicationService: ApplicationService,
+    private applicationHandlerService: ApplicationHandlerService,
     private alertService: AlertService,
   ) { }
 
   ngOnInit() {
+    this.getApplications();
+  }
+
+  getApplications() {
+    this.applicationHandlerService.getApplications(this.status.status).subscribe(applications => this.applications = applications);
   }
 
   updateApplication(status: string, application: Application) {
     this.loading = true;
     this.applicationService.updateApplication(status, application).subscribe(
       () => {
-        this.applications = this.applications.filter(a => a !== application);
-
-        const statusTranslation = this.statuses.filter(object => object.status === status)[0].translation;
-        this.alertService.success([`Candidature de l'utilisateur ${application.user.firstName} ${application.user.lastName.toUpperCase()} marquée comme ${statusTranslation}.`]);
+        // Here we know that the application is in the new list on a backend look.
+        // Now we need to do the same on the front end
+        this.applicationHandlerService.setApplication(status, application); // Handle application in frontend
         this.loading = false;
       },
       errors => {
