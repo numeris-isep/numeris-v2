@@ -45,6 +45,8 @@ class MissionApplicationController extends Controller
         $mission->applications()->save($application);
         $user->applications()->save($application);
 
+        $application->load(['user', 'mission']);
+
         return response()->json(new ApplicationResource($application), JsonResponse::HTTP_CREATED);
     }
 }

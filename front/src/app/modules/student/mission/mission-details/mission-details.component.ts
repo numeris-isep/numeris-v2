@@ -66,9 +66,7 @@ export class MissionDetailsComponent implements OnInit {
   }
 
   getAcceptedApplications() {
-    if (this.applicationHandlerService.getApplications('accepted')) {
-      this.applicationHandlerService.getApplications('accepted').subscribe(applications => this.acceptedApplications = applications);
-    }
+    this.applicationHandlerService.getApplications('accepted').subscribe(applications => this.acceptedApplications = applications);
   }
 
   isMissionExpired() {

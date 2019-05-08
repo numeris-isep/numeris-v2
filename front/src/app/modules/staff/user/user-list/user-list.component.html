@@ -88,11 +88,11 @@
                              hiddenIcon="zoom-in">
               Voir
             </app-link-button>
-            <app-link-button *ngIf="page == 'mission-show'" behaviour="compact"
+            <app-button *ngIf="page == 'mission-show'" behaviour="compact"
                              size="tiny" color="basic positive"
-                             hiddenIcon="handshake">
+                             hiddenIcon="handshake" (click)="enrolUser(user)">
               Inscrire
-            </app-link-button>
+            </app-button>
             <app-link-button *ngIf="project && page == 'project-show'" behaviour="compact"
                              size="tiny" color="basic negative"
                              hiddenIcon="trash alternate">

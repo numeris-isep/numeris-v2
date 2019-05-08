@@ -61,10 +61,7 @@ export class MissionShowComponent implements OnInit, OnDestroy {
 
   updateLock() {
     this.missionService.updateMissionLock(!this.mission.isLocked, this.mission).subscribe(
-      () => {
-        this.mission.isLocked = !this.mission.isLocked;
-        this.alertService.success([`Mission marquée comme ${this.mission.isLocked ? 'fermée' : 'ouverte'} aux candidatures.`]);
-      },
+      () => this.mission.isLocked = !this.mission.isLocked,
       errors => this.alertService.error(errors.isLocked || errors)
     );
   }

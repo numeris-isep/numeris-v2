@@ -44,23 +44,24 @@ export class ApplicationHandlerService {
               default: break;
             }
           });
-        this.setCounts();
       });
   }
 
   setApplication(newStatus: string, application: Application) {
     // Remove application from old list
-    switch (application.status) {
-      case 'waiting':
-        this.waitingApplications.next([...this.waitingApplications.getValue()].filter(a => a !== application));
-        break;
-      case 'accepted':
-        this.acceptedApplications.next([...this.acceptedApplications.getValue()].filter(a => a !== application));
-        break;
-      case 'refused':
-        this.refusedApplications.next([...this.refusedApplications.getValue()].filter(a => a !== application));
-        break;
-      default: break;
+    if (newStatus != application.status) {
+      switch (application.status) {
+        case 'waiting':
+          this.waitingApplications.next([...this.waitingApplications.getValue()].filter(a => a !== application));
+          break;
+        case 'accepted':
+          this.acceptedApplications.next([...this.acceptedApplications.getValue()].filter(a => a !== application));
+          break;
+        case 'refused':
+          this.refusedApplications.next([...this.refusedApplications.getValue()].filter(a => a !== application));
+          break;
+        default: break;
+      }
     }
 
     // Add application to new list
@@ -77,8 +78,9 @@ export class ApplicationHandlerService {
       default: break;
     }
 
-    // Set new status
-    application.status = newStatus;
+    this.applications.next([...this.applications.getValue(), application]);
+
+    application.status = newStatus; // Set new status
   }
 
   resetAll() {

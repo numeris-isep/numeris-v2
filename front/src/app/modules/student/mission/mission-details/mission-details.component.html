@@ -42,8 +42,8 @@
     <ng-container *ngIf="page == 'show'">
       <div class="content">
         <sui-progress class="small indicating" [showProgress]="false"
-                      [value]="acceptedApplications ? acceptedApplications.length : mission.acceptedApplicationsCount" [maximum]="mission.capacity">
-          <i class="users icon"></i> {{ acceptedApplications ? acceptedApplications.length : mission.acceptedApplicationsCount }}/{{ mission.capacity }}
+                      [value]="acceptedApplications.length" [maximum]="mission.capacity">
+          <i class="users icon"></i> {{ acceptedApplications.length }}/{{ mission.capacity }}
         </sui-progress>
       </div>
 

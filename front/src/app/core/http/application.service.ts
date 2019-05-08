@@ -47,7 +47,10 @@ export class ApplicationService {
     return this.http.get<Application[]>(url, HTTP_OPTIONS);
   }
 
-  storeMissionApplication() {
-    //
+  storeMissionApplication(mission: Mission | number, user: User) {
+    const missionId = typeof mission === 'number' ? mission : mission.id;
+    const url = `${environment.apiUrl}/api/missions/${missionId}/applications`;
+    const data = { user_id: user.id };
+    return this.http.post<Application>(url, data, HTTP_OPTIONS);
   }
 }

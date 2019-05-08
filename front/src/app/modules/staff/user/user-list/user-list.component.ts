@@ -9,6 +9,10 @@ import { Project } from "../../../../core/classes/models/project";
 import { Mission } from "../../../../core/classes/models/mission";
 import { RoleService } from "../../../../core/http/role.service";
 import { Role } from "../../../../core/classes/models/role";
+import { ApplicationService } from "../../../../core/http/application.service";
+import { User } from 'src/app/core/classes/models/user';
+import { AlertService } from "../../../../core/services/alert.service";
+import { ApplicationHandlerService } from "../../../../core/services/application-handler.service";
 
 @Component({
   selector: 'app-user-list',
@@ -41,8 +45,11 @@ export class UserListComponent implements OnInit, OnDestroy {
   loading: boolean = false;
 
   constructor(
+    private alertService: AlertService,
     private userService: UserService,
     private roleService: RoleService,
+    private applicationService: ApplicationService,
+    private applicationHandlerService: ApplicationHandlerService,
   ) { }
 
   ngOnInit() {
@@ -116,6 +123,21 @@ export class UserListComponent implements OnInit, OnDestroy {
     if (condition && widthCondition) {
       popup.toggle();
     }
+  }
+
+  enrolUser(user: User) {
+    this.loading = true;
+    this.applicationService.storeMissionApplication(this.mission, user).subscribe(
+      application => {
+        this.paginatedUser.data = this.paginatedUser.data.filter(u => u !== user);
+        this.applicationHandlerService.setApplication('accepted', application); // Handle application in frontend
+        this.loading = false;
+      },
+      errors => {
+        this.alertService.error(errors);
+        this.loading = false;
+      }
+    )
   }
 
 }

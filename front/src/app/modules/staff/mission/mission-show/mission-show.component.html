@@ -100,13 +100,11 @@
         </div>
 
         <div class="ui" suiTabContent="2">
-          <h1>Heures</h1>
           <!--TODO-->
         </div>
 
         <div class="ui" suiTabContent="3">
-          <h1>Étudiants</h1>
-          <app-user-list page="mission-show" [mission]="mission"></app-user-list>
+          <app-user-list *ngIf="mission" page="mission-show" [mission]="mission"></app-user-list>
         </div>
       </sui-tabset>
     </div>
