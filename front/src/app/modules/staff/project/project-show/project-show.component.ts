@@ -55,10 +55,7 @@ export class ProjectShowComponent implements OnInit {
 
   updateStep() {
     this.projectService.updateProjectStep(this.selectedStep, this.project).subscribe(
-      () => {
-        this.project.step = this.selectedStep;
-        this.alertService.success(['Status du projet mis à jour.']);
-      },
+      () => this.project.step = this.selectedStep,
       errors => this.alertService.error(errors.step || errors)
     )
   }
@@ -67,10 +64,7 @@ export class ProjectShowComponent implements OnInit {
     this.currentDate = dateToString(new Date());
 
     this.projectService.updateProjectPayment(this.currentDate, this.project).subscribe(
-      () => {
-        this.project.moneyReceivedAt = this.currentDate;
-        this.alertService.success(['Paiement marqué comme reçu.']);
-      },
+      () => this.project.moneyReceivedAt = this.currentDate,
       errors => this.alertService.error(errors.money_received_at || errors)
     )
   }

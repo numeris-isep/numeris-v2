@@ -38,9 +38,15 @@
                       <i class="lock icon"></i>
                       Fermée aux candidatures
                     </div><br>
-                    <app-button hiddenIcon="unlock" size="tiny" (click)="updateLock()">
+                    <app-button *ngIf="mission && !isMissionExpired(mission); else expired" hiddenIcon="unlock" size="tiny" (click)="updateLock()">
                       Ouvrir les candidatures
                     </app-button>
+                    <ng-template #expired>
+                      <app-button hiddenIcon="unlock" size="tiny" [isDisabled]="true"
+                                  suiPopup popupPlacement="bottom" popupText="Impossible d'ouvrir les candidatures à une mission expirée">
+                        Ouvrir les candidatures
+                      </app-button>
+                    </ng-template>
                   </div>
                 </ng-template>
               </div>
