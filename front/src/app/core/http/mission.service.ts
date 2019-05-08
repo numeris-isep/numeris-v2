@@ -73,8 +73,10 @@ export class MissionService {
     return this.http.put<Mission>(url, data, HTTP_OPTIONS);
   }
 
-  updateMissionLock() {
-    // TODO
+  updateMissionLock(isLocked: boolean, mission: Mission | number): Observable<Mission> {
+    const missionId: number = typeof mission === 'number' ? mission : mission.id;
+    const url = `${environment.apiUrl}/api/missions/${missionId}/lock`;
+    return this.http.patch<Mission>(url, {is_locked: isLocked}, HTTP_OPTIONS);
   }
 
   deleteMission(mission: Mission): Observable<Mission> {

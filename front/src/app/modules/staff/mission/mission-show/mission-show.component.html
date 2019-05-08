@@ -1,5 +1,14 @@
 <app-content [condition]="!mission">
   <div class="ui padded grid doubling">
+    <div *ngIf="mission && isMissionExpired(mission)" class="row">
+      <div class="column">
+        <div class="ui icon message">
+          <i class="info circle icon"></i>
+          <div class="content">Cette mission a expirée.</div>
+        </div>
+      </div>
+    </div>
+
     <div class="row">
       <!-- Mission details -->
       <div class="sixteen wide mobile five wide computer column">
@@ -13,15 +22,27 @@
             <div class="ui blue ribbon label">Actions</div>
             <div class="ui two column center aligned grid">
               <div class="middle aligned row">
-                <div class="column">
+                <div *ngIf="mission && !mission.isLocked; else isLocked" class="column">
                   <div class="ui small icon header">
-                    <i class="lock icon"></i>
-                    Fermer les candidatures
+                    <i class="unlock icon"></i>
+                    Ouverte aux candidatures
                   </div><br>
-                  <app-link-button hiddenIcon="lock" size="tiny">
-                    Marquer comme fermée
-                  </app-link-button>
+                  <app-button hiddenIcon="lock" size="tiny" (click)="updateLock()">
+                    Fermer les candidatures
+                  </app-button>
                 </div>
+
+                <ng-template #isLocked>
+                  <div class="column">
+                    <div class="ui small icon header">
+                      <i class="lock icon"></i>
+                      Fermée aux candidatures
+                    </div><br>
+                    <app-button hiddenIcon="unlock" size="tiny" (click)="updateLock()">
+                      Ouvrir les candidatures
+                    </app-button>
+                  </div>
+                </ng-template>
               </div>
             </div>
           </div>
