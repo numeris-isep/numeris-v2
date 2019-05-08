@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Button } from "../button";
 
 @Component({
@@ -7,7 +7,7 @@ import { Button } from "../button";
 })
 export class ButtonComponent
   extends Button
-  implements OnInit {
+  implements OnInit, OnChanges {
 
   @Input() isLoading: boolean = false;
   @Input() isDisabled: boolean = false;
@@ -22,5 +22,9 @@ export class ButtonComponent
     this.classes = [
       this.color, this.size, this.animation, this.attachment, this.behaviour,
     ];
+  }
+
+  ngOnChanges() {
+    this.ngOnInit();
   }
 }

@@ -74,7 +74,7 @@ class ProjectsTableSeeder extends Seeder
                     'convention_id'     => $client->conventions()->first()->id,
                     'name'              => "{$client->name} $month_name 2018",
                     'start_at'          => "2018/$month_number/01 00:00:00",
-                    'money_received_at' => "2018/$month_number/25 00:00:00",
+                    'money_received_at' => null,
                     'is_private'        => $month_number == '12',
                 ]);
         }

@@ -5,6 +5,7 @@ import { ProjectService } from "../../../../core/http/project.service";
 import { TitleService } from "../../../../core/services/title.service";
 import { BreadcrumbsService } from "../../../../core/services/breadcrumbs.service";
 import { AlertService } from "../../../../core/services/alert.service";
+import { dateToString } from "../../../../shared/utils";
 
 @Component({
   selector: 'app-project-show',
@@ -17,6 +18,7 @@ export class ProjectShowComponent implements OnInit {
   steps: ProjectStep[];
 
   selectedStep: string;
+  currentDate: string;
   loading: boolean = false;
 
   constructor(
@@ -51,13 +53,25 @@ export class ProjectShowComponent implements OnInit {
     this.projectService.getProjectSteps().subscribe(steps => this.steps = steps);
   }
 
-  setStep() {
+  updateStep() {
     this.projectService.updateProjectStep(this.selectedStep, this.project).subscribe(
       () => {
         this.project.step = this.selectedStep;
         this.alertService.success(['Status du projet mis à jour.']);
       },
       errors => this.alertService.error(errors.step || errors)
+    )
+  }
+
+  updatePayment() {
+    this.currentDate = dateToString(new Date());
+
+    this.projectService.updateProjectPayment(this.currentDate, this.project).subscribe(
+      () => {
+        this.project.moneyReceivedAt = this.currentDate;
+        this.alertService.success(['Paiement marqué comme reçu.']);
+      },
+      errors => this.alertService.error(errors.money_received_at || errors)
     )
   }
 

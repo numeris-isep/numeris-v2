@@ -6,6 +6,7 @@ import { PaginatedProject } from "../classes/pagination/paginated-project";
 import { HTTP_OPTIONS } from "../constants/http_options";
 import { Client } from "../classes/models/client";
 import { Project, ProjectStep } from "../classes/models/project";
+import { dateToString } from "../../shared/utils";
 
 @Injectable({
   providedIn: 'root'
@@ -76,11 +77,13 @@ export class ProjectService {
   updateProjectStep(step: string, project: Project | number): Observable<Project> {
     const projectId: number = typeof project === 'number' ? project : project.id;
     const url = `${environment.apiUrl}/api/projects/${projectId}/step`;
-    return this.http.patch<Project>(url, step, HTTP_OPTIONS);
+    return this.http.patch<Project>(url, {step: step}, HTTP_OPTIONS);
   }
 
-  updateProjectPayment() {
-    // TODO
+  updateProjectPayment(moneyReceivedAt: string, project: Project | number): Observable<Project> {
+    const projectId: number = typeof project === 'number' ? project : project.id;
+    const url = `${environment.apiUrl}/api/projects/${projectId}/payment`;
+    return this.http.patch<Project>(url, {money_received_at: moneyReceivedAt}, HTTP_OPTIONS);
   }
 
   deleteProject(project: Project): Observable<Project> {
