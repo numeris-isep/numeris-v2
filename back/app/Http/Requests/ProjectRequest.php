@@ -49,8 +49,8 @@ class ProjectRequest extends AbstractFormRequest
 
             case 'PATCH':
                 return [
-                    'step'              => 'required_without:money_received_at|string|in:' . implode(',', Project::steps()),
-                    'money_received_at' => 'required_without:step|date'
+                    'step'              => 'nullable|string|in:' . implode(',', Project::steps()),
+                    'money_received_at' => 'nullable|date'
                 ];
 
             default:break;

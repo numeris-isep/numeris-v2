@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 import { PaginatedProject } from "../classes/pagination/paginated-project";
 import { HTTP_OPTIONS } from "../constants/http_options";
 import { Client } from "../classes/models/client";
-import { Project } from "../classes/models/project";
+import { Project, ProjectStep } from "../classes/models/project";
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +57,11 @@ export class ProjectService {
     return this.http.get<Project>(url, HTTP_OPTIONS);
   }
 
+  getProjectSteps(): Observable<ProjectStep[]> {
+    const url = `${environment.apiUrl}/api/projects-steps`;
+    return this.http.get<ProjectStep[]>(url, HTTP_OPTIONS);
+  }
+
   addProject(data: Project): Observable<Project> {
     const url = `${environment.apiUrl}/api/projects`;
     return this.http.post<Project>(url, data, HTTP_OPTIONS);
@@ -68,8 +73,10 @@ export class ProjectService {
     return this.http.put<Project>(url, data, HTTP_OPTIONS);
   }
 
-  udpateProjectStep() {
-    // TODO
+  updateProjectStep(step: string, project: Project | number): Observable<Project> {
+    const projectId: number = typeof project === 'number' ? project : project.id;
+    const url = `${environment.apiUrl}/api/projects/${projectId}/step`;
+    return this.http.patch<Project>(url, step, HTTP_OPTIONS);
   }
 
   updateProjectPayment() {

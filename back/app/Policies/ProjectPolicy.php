@@ -23,6 +23,11 @@ class ProjectPolicy
         return false;
     }
 
+    public function indexStep(User $current_user)
+    {
+        return false;
+    }
+
     public function store(User $current_user)
     {
         return false;

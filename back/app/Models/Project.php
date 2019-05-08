@@ -29,6 +29,14 @@ class Project extends Model
         self::CLOSED,
     ];
 
+    private static $stepTranslations = [
+        ['step' => self::HIRING,    'translation' => 'Ouvert'],
+        ['step' => self::VALIDATED, 'translation' => 'Validé'],
+        ['step' => self::BILLED,    'translation' => 'Facturé'],
+        ['step' => self::PAID,      'translation' => 'Payé'],
+        ['step' => self::CLOSED,    'translation' => 'Cloturé'],
+    ];
+
     protected $fillable = [
         // One-to-One relations
         'client_id',
@@ -51,6 +59,11 @@ class Project extends Model
     public static function steps()
     {
         return static::$steps;
+    }
+
+    public static function stepTranslations()
+    {
+        return static::$stepTranslations;
     }
 
     public static function findByName($name)

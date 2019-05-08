@@ -63,6 +63,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     // Project resource routes
     Route::apiResource('projects', 'ProjectController', ['parameters' => ['projects' => 'project_id']]);
+    Route::get('projects-steps', 'ProjectController@indexStep')->name('projects.steps.index');
     Route::get('projects/{project_id}/missions', 'ProjectMissionController@index')->name('projects.missions.index');
     Route::apiResource('projects.users', 'ProjectUserController')
         ->only(['index', 'store', 'destroy']);

@@ -1,4 +1,4 @@
-<app-content [condition]="!project">
+<app-content [condition]="!(project && steps)">
   <div class="ui padded grid doubling">
     <div class="row">
       <div class="sixteen wide mobile five wide computer column">
@@ -34,7 +34,7 @@
               </div>
             </div>
           </div>
-          <div class="ui form segment">
+          <div class="ui form segment" [ngClass]="{'loading': loading}">
             <div class="ui two column grid">
               <div class="ui vertical divider">Ou</div>
               <div class="middle aligned row">
@@ -55,11 +55,12 @@
                   </div>
                 </div>
                 <div class="padded column">
-                  <div class="field">
+                  <div class="field" *ngIf="steps">
                     <label>Status</label>
-                    <sui-select class="selection" label="step"
+                    <sui-select class="selection" labelField="translation" valueField="step"
                                 placeholder="Sélectionner une option"
-                                [options]="options" [(ngModel)]="project.step"
+                                [options]="steps" [(ngModel)]="selectedStep"
+                                (ngModelChange)="setStep()"
                                 #select>
                       <sui-select-option *ngFor="let option of select.filteredOptions" [value]="option"></sui-select-option>
                     </sui-select>
@@ -67,7 +68,7 @@
                   <div class="field">
                     <label *ngIf="!project.moneyReceivedAt; else paid">Marquer comme payé</label>
                     <ng-template #paid>
-                      <label>Paiment reçu le {{ project.moneyReceivedAt | date:'dd/MM/y' }}</label>
+                      <label>Paiement reçu le {{ project.moneyReceivedAt | date:'dd/MM/y' }}</label>
                     </ng-template>
                     <app-button size="small" hiddenIcon="money bill" behaviour="fluid"
                                 [visibleIcon]="project.moneyReceivedAt ? 'check' : null"

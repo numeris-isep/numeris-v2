@@ -22,3 +22,10 @@ export class Project {
   convention: Convention;
 
 }
+
+export class ProjectStep {
+
+  step: string;
+  translation: string;
+
+}

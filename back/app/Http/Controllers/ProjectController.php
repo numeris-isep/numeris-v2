@@ -42,6 +42,19 @@ class ProjectController extends Controller
     }
 
     /**
+     * Display a listing of the steps with their translation.
+     *
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function indexStep()
+    {
+        $this->authorize('index-step', Project::class);
+
+        return response()->json(Project::stepTranslations());
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param ProjectRequest $request

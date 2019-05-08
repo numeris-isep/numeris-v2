@@ -197,5 +197,6 @@ return [
         'duration'                  => 'durée',
         'capacity'                  => 'capicité',
         'contact_id'                => 'contact',
+        'money_received_at'         => 'paiement reçu',
     ],
 ];

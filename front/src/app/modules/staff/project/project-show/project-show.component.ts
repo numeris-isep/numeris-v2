@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from "../../../../core/classes/models/project";
+import { Project, ProjectStep } from "../../../../core/classes/models/project";
 import { ActivatedRoute } from "@angular/router";
 import { ProjectService } from "../../../../core/http/project.service";
 import { TitleService } from "../../../../core/services/title.service";
 import { BreadcrumbsService } from "../../../../core/services/breadcrumbs.service";
+import { AlertService } from "../../../../core/services/alert.service";
 
 @Component({
   selector: 'app-project-show',
@@ -13,19 +14,21 @@ import { BreadcrumbsService } from "../../../../core/services/breadcrumbs.servic
 export class ProjectShowComponent implements OnInit {
 
   project: Project;
-  options: string[] = [
-    "Ouvert", "Validé",
-    "Facturé", "Payé", "Cloturé"
-  ];
+  steps: ProjectStep[];
+
+  selectedStep: string;
+  loading: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private projectService: ProjectService,
     private titleService: TitleService,
-    private breadcrumbService: BreadcrumbsService
+    private breadcrumbService: BreadcrumbsService,
+    private alertService: AlertService,
   ) { }
 
   ngOnInit() {
+    this.getProjectSteps();
     this.route.params.subscribe(param => {
       this.getProject(parseInt(param.id));
     });
@@ -34,6 +37,7 @@ export class ProjectShowComponent implements OnInit {
   getProject(projectId: number) {
     return this.projectService.getProject(projectId).subscribe(project => {
       this.project = project;
+      this.selectedStep = project.step;
 
       this.titleService.setTitles(project.name);
       this.breadcrumbService.setBreadcrumb(
@@ -41,6 +45,20 @@ export class ProjectShowComponent implements OnInit {
         { title: project.name, url: ''}
       )
     });
+  }
+
+  getProjectSteps() {
+    this.projectService.getProjectSteps().subscribe(steps => this.steps = steps);
+  }
+
+  setStep() {
+    this.projectService.updateProjectStep(this.selectedStep, this.project).subscribe(
+      () => {
+        this.project.step = this.selectedStep;
+        this.alertService.success(['Status du projet mis à jour.']);
+      },
+      errors => this.alertService.error(errors.step || errors)
+    )
   }
 
 }
