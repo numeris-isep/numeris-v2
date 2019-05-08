@@ -196,5 +196,6 @@ return [
         'is_locked'                 => 'fermer',
         'duration'                  => 'durée',
         'capacity'                  => 'capicité',
+        'contact_id'                => 'contact',
     ],
 ];

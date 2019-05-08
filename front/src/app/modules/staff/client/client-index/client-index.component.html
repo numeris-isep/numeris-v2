@@ -48,11 +48,11 @@
         </div>
 
         <div class="ui" suiTabContent="1">
-          <app-client-list [clients]="clients"></app-client-list>
+          <app-client-list *ngIf="clients" [clients]="clients"></app-client-list>
         </div>
 
         <div class="ui" suiTabContent="2">
-          <app-contact-list [contacts]="contacts"></app-contact-list>
+          <app-contact-list *ngIf="contacts" [contacts]="contacts"></app-contact-list>
         </div>
       </sui-tabset>
     </div>

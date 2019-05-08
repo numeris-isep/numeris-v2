@@ -7,6 +7,8 @@ import { Router } from "@angular/router";
 import { handleFormErrors } from "../../../../core/functions/form-error-handler";
 import { Observable } from "rxjs";
 import { AlertService } from "../../../../core/services/alert.service";
+import { Contact } from "../../../../core/classes/models/contact";
+import { ContactService } from "../../../../core/http/contact.service";
 
 @Component({
   selector: 'app-client-form',
@@ -19,15 +21,19 @@ export class ClientFormComponent implements OnInit {
   clientForm: FormGroup;
   loading: boolean = false;
   submitted: boolean = false;
+  contacts: Contact[];
 
   constructor(
     private fb: FormBuilder,
     private clientService: ClientService,
+    private contactService: ContactService,
     private alertService: AlertService,
     private router: Router,
   ) { }
 
   ngOnInit() {
+    this.getContacts();
+
     this.clientForm = this.fb.group({
       name: [
         this.client ? this.client.name : '',
@@ -37,6 +43,7 @@ export class ClientFormComponent implements OnInit {
         this.client ? this.client.reference : '',
         Validators.required,
       ],
+      contact_id: [this.client ? (this.client.contact ? this.client.contact.id : '') : ''],
       address: this.fb.group({
         street: [
           this.client ? this.client.address.street : '',
@@ -84,6 +91,14 @@ export class ClientFormComponent implements OnInit {
           this.loading = false;
         }
       );
+  }
+
+  getContacts() {
+    this.contactService.getContacts().subscribe(contacts => this.contacts = contacts);
+  }
+
+  fullName(option: Contact, query?: string): string {
+    return `${option.firstName} ${option.lastName.toUpperCase()}`;
   }
 
 }

@@ -1,109 +1,124 @@
-<div class="ui segments">
-  <div class="ui segment">
-    <div class="ui blue ribbon label">
-      <i class="building icon"></i> Nouveau client
-    </div>
-  </div>
-
-  <form class="ui form segment"
-        [formGroup]="clientForm" (ngSubmit)="onSubmit()"
-        [ngClass]="{'error': submitted && clientForm.invalid, 'loading': loading}">
-    <h4 class="ui dividing header">Informations</h4>
-    <div class="two fields">
-      <div class="required field" [ngClass]="{ 'error': submitted && f.name.errors }">
-        <label>Nom</label>
-        <div class="ui left icon corner labeled input">
-          <i class="address book outline icon"></i>
-          <input type="text" formControlName="name" placeholder="Nom">
-          <div class="ui corner label">
-            <i class="asterisk icon"></i>
-          </div>
-        </div>
-        <app-form-error *ngIf="submitted && f.name.errors" [errors]="f.name.errors"></app-form-error>
-      </div>
-      <div class="required field" [ngClass]="{ 'error': submitted && f.reference.errors }">
-        <label>Référence</label>
-        <div class="ui left icon corner labeled input">
-          <i class="clipboard outline icon"></i>
-          <input type="text" formControlName="reference" placeholder="Référence">
-          <div class="ui corner label">
-            <i class="asterisk icon"></i>
-          </div>
-        </div>
-        <app-form-error *ngIf="submitted && f.reference.errors" [errors]="f.reference.errors"></app-form-error>
+<app-content [condition]="!contacts">
+  <div class="ui segments">
+    <div class="ui segment">
+      <div class="ui blue ribbon label">
+        <i class="building icon"></i> Nouveau client
       </div>
     </div>
 
-    <h4 class="ui dividing header">Adresse</h4>
-    <div class="three required fields" formGroupName="address">
-      <div class="eight wide field" [ngClass]="{ 'error': submitted && fa('street').errors }">
-        <label>Rue</label>
-        <div class="ui corner labeled input">
-          <input type="text" formControlName="street" placeholder="Rue">
-          <div class="ui corner label">
-            <i class="asterisk icon"></i>
+    <form class="ui form segment"
+          [formGroup]="clientForm" (ngSubmit)="onSubmit()"
+          [ngClass]="{'error': submitted && clientForm.invalid, 'loading': loading}">
+      <h4 class="ui dividing header">Informations</h4>
+      <div class="three fields">
+        <div class="required field" [ngClass]="{ 'error': submitted && f.name.errors }">
+          <label>Nom</label>
+          <div class="ui left icon corner labeled input">
+            <i class="address book outline icon"></i>
+            <input type="text" formControlName="name" placeholder="Nom">
+            <div class="ui corner label">
+              <i class="asterisk icon"></i>
+            </div>
           </div>
+          <app-form-error *ngIf="submitted && f.name.errors" [errors]="f.name.errors"></app-form-error>
         </div>
-        <app-form-error *ngIf="submitted && fa('street').errors" [errors]="fa('street').errors"></app-form-error>
-      </div>
-      <div class="four wide field" [ngClass]="{ 'error': submitted && fa('zip_code').errors }">
-        <label>Code postal</label>
-        <div class="ui corner labeled input">
-          <input type="text" formControlName="zip_code" placeholder="Code postal">
-          <div class="ui corner label">
-            <i class="asterisk icon"></i>
+        <div class="required field" [ngClass]="{ 'error': submitted && f.reference.errors }">
+          <label>Référence</label>
+          <div class="ui left icon corner labeled input">
+            <i class="clipboard outline icon"></i>
+            <input type="text" formControlName="reference" placeholder="Référence">
+            <div class="ui corner label">
+              <i class="asterisk icon"></i>
+            </div>
           </div>
+          <app-form-error *ngIf="submitted && f.reference.errors" [errors]="f.reference.errors"></app-form-error>
         </div>
-        <app-form-error *ngIf="submitted && fa('zip_code').errors" [errors]="fa('zip_code').errors"></app-form-error>
-      </div>
-      <div class="four wide field" [ngClass]="{ 'error': submitted && fa('city').errors }">
-        <label>Ville</label>
-        <div class="ui corner labeled input">
-          <input type="text" formControlName="city" placeholder="Ville">
-          <div class="ui corner label">
-            <i class="asterisk icon"></i>
+        <div class="field" [ngClass]="{ 'error': submitted && f.contact_id.errors }">
+          <label>Contact</label>
+          <div class="ui input">
+            <sui-select class="selection fluid" labelField="lastName" valueField="id"
+                        placeholder="Sélectionner une option" formControlName="contact_id"
+                        [options]="contacts" [optionFormatter]="fullName"
+                        #contactSelect>
+              <sui-select-option *ngFor="let option of contactSelect.filteredOptions" [value]="option"></sui-select-option>
+            </sui-select>
           </div>
+          <app-form-error *ngIf="submitted && f.contact_id.errors" [errors]="f.contact_id.errors"></app-form-error>
         </div>
-        <app-form-error *ngIf="submitted && fa('city').errors" [errors]="fa('city').errors"></app-form-error>
-      </div>
-    </div>
-
-    <div class="field">
-      <div *ngIf="!client; else edit" class="ui buttons">
-        <a class="ui animated fade button" routerLink="/clients">
-          <div class="visible content">Annuler</div>
-          <div class="hidden content">
-            <i class="cancel icon"></i>
-          </div>
-        </a>
-        <div class="or" data-text="ou"></div>
-        <button class="ui animated fade positive button"
-                [ngClass]="{'loading': loading, 'disabled': clientForm.invalid}">
-          <div class="visible content">Ajouter</div>
-          <div class="hidden content">
-            <i class="plus icon"></i>
-          </div>
-        </button>
       </div>
 
-      <ng-template #edit>
-        <div class="ui buttons">
-          <a class="ui animated fade button" routerLink="/clients/{{ client.id }}">
+      <h4 class="ui dividing header">Adresse</h4>
+      <div class="three required fields" formGroupName="address">
+        <div class="eight wide field" [ngClass]="{ 'error': submitted && fa('street').errors }">
+          <label>Rue</label>
+          <div class="ui corner labeled input">
+            <input type="text" formControlName="street" placeholder="Rue">
+            <div class="ui corner label">
+              <i class="asterisk icon"></i>
+            </div>
+          </div>
+          <app-form-error *ngIf="submitted && fa('street').errors" [errors]="fa('street').errors"></app-form-error>
+        </div>
+        <div class="four wide field" [ngClass]="{ 'error': submitted && fa('zip_code').errors }">
+          <label>Code postal</label>
+          <div class="ui corner labeled input">
+            <input type="text" formControlName="zip_code" placeholder="Code postal">
+            <div class="ui corner label">
+              <i class="asterisk icon"></i>
+            </div>
+          </div>
+          <app-form-error *ngIf="submitted && fa('zip_code').errors" [errors]="fa('zip_code').errors"></app-form-error>
+        </div>
+        <div class="four wide field" [ngClass]="{ 'error': submitted && fa('city').errors }">
+          <label>Ville</label>
+          <div class="ui corner labeled input">
+            <input type="text" formControlName="city" placeholder="Ville">
+            <div class="ui corner label">
+              <i class="asterisk icon"></i>
+            </div>
+          </div>
+          <app-form-error *ngIf="submitted && fa('city').errors" [errors]="fa('city').errors"></app-form-error>
+        </div>
+      </div>
+
+      <div class="field">
+        <div *ngIf="!client; else edit" class="ui buttons">
+          <a class="ui animated fade button" routerLink="/clients">
             <div class="visible content">Annuler</div>
             <div class="hidden content">
               <i class="cancel icon"></i>
             </div>
           </a>
           <div class="or" data-text="ou"></div>
-          <button class="ui animated fade orange button"
+          <button class="ui animated fade positive button"
                   [ngClass]="{'loading': loading, 'disabled': clientForm.invalid}">
-            <div class="visible content">Modifier</div>
+            <div class="visible content">Ajouter</div>
             <div class="hidden content">
               <i class="plus icon"></i>
             </div>
           </button>
         </div>
-      </ng-template>
-    </div>
-  </form>
-</div>
+
+        <ng-template #edit>
+          <div class="ui buttons">
+            <a class="ui animated fade button" routerLink="/clients/{{ client.id }}">
+              <div class="visible content">Annuler</div>
+              <div class="hidden content">
+                <i class="cancel icon"></i>
+              </div>
+            </a>
+            <div class="or" data-text="ou"></div>
+            <button class="ui animated fade orange button"
+                    [ngClass]="{'loading': loading, 'disabled': clientForm.invalid}">
+              <div class="visible content">Modifier</div>
+              <div class="hidden content">
+                <i class="plus icon"></i>
+              </div>
+            </button>
+          </div>
+        </ng-template>
+      </div>
+    </form>
+  </div>
+
+</app-content>
