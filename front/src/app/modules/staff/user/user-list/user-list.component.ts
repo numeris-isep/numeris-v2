@@ -112,6 +112,7 @@ export class UserListComponent implements OnInit, OnDestroy {
       || this.selectedRole !== undefined
       || this.selectedPromotion !== undefined
     ) {
+      console.log(this.selectedRole);
       this.getUsersPerPage(1);
     }
   }

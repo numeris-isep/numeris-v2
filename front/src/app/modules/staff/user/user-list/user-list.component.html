@@ -76,8 +76,18 @@
             (mouseenter)="togglePopup(popup, !user.activated)" (mouseleave)="togglePopup(popup, !user.activated)">
           <td>{{ user.firstName || '-' }} {{ user.lastName | uppercase }}</td>
           <td>{{ user.studentNumber || '-' }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ (user.phone | phone) || '-' }}</td>
+          <td>
+            <a *ngIf="user.email; else noEmail" href="mailto:{{ user.email }}">
+              {{ user.email }}
+            </a>
+            <ng-template #noEmail>-</ng-template>
+          </td>
+          <td>
+            <a *ngIf="user.phone; else noPhone" href="tel:{{ user.phone }}">
+              {{ user.phone | phone }}
+            </a>
+            <ng-template #noPhone>-</ng-template>
+          </td>
           <td>{{ user.promotion || '-' }}</td>
           <td>{{ user.schoolYear || '-' }}</td>
           <td>{{ user.roles[0] | role }}</td>
