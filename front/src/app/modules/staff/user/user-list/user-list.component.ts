@@ -38,7 +38,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   search: string = '';
   searchControl: FormControl = new FormControl();
   searchControlSubscription: Subscription;
-  selectedRole: Role;
+  selectedRole: string;
   selectedPromotion: string;
   roles: Role[];
   promotions: string[];
