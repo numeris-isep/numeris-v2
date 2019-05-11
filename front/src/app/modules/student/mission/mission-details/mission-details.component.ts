@@ -7,7 +7,7 @@ import { ApplicationService } from "../../../../core/http/application.service";
 import { Application } from "../../../../core/classes/models/application";
 import { AuthService } from "../../../../core/http/auth/auth.service";
 import { MissionDeleteModal } from "../../../staff/mission/mission-delete-modal/mission-delete-modal.component";
-import { ApplicationHandlerService } from "../../../../core/services/application-handler.service";
+import { ApplicationHandlerService } from "../../../../core/services/handlers/application-handler.service";
 
 @Component({
   selector: 'app-mission-details',
@@ -33,7 +33,7 @@ export class MissionDetailsComponent implements OnInit {
   constructor(
     private modalService: SuiModalService,
     private applicationService: ApplicationService,
-    private applicationHandlerService: ApplicationHandlerService,
+    private applicationHandler: ApplicationHandlerService,
     private authService: AuthService
   ) { }
 
@@ -66,7 +66,7 @@ export class MissionDetailsComponent implements OnInit {
   }
 
   getAcceptedApplications() {
-    this.applicationHandlerService.getApplications('accepted').subscribe(applications => this.acceptedApplications = applications);
+    this.applicationHandler.getApplications('accepted').subscribe(applications => this.acceptedApplications = applications);
   }
 
   isMissionExpired() {

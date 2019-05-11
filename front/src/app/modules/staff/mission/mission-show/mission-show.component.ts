@@ -7,7 +7,7 @@ import { Mission } from "../../../../core/classes/models/mission";
 import * as moment from "moment";
 import { now } from "moment";
 import { AlertService } from "../../../../core/services/alert.service";
-import { ApplicationHandlerService } from "../../../../core/services/application-handler.service";
+import { ApplicationHandlerService } from "../../../../core/services/handlers/application-handler.service";
 import { Application } from 'src/app/core/classes/models/application';
 
 @Component({
@@ -22,7 +22,7 @@ export class MissionShowComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private missionService: MissionService,
-    private applicationHandlerService: ApplicationHandlerService,
+    private applicationHandler: ApplicationHandlerService,
     private titleService: TitleService,
     private breadcrumbsService: BreadcrumbsService,
     private alertService: AlertService,
@@ -36,7 +36,7 @@ export class MissionShowComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.applicationHandlerService.resetAll();
+    this.applicationHandler.resetAll();
   }
 
   getMission(missionId: number) {
@@ -52,7 +52,7 @@ export class MissionShowComponent implements OnInit, OnDestroy {
   }
 
   getApplications() {
-    this.applicationHandlerService.getApplications().subscribe(applications => this.applications = applications);
+    this.applicationHandler.getApplications().subscribe(applications => this.applications = applications);
   }
 
   isMissionExpired(mission: Mission) {

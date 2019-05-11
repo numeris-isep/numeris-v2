@@ -40,7 +40,7 @@ export class ProjectListComponent implements OnInit {
   constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
-    this.getProjectsPerPage(1);
+    this.getPaginatedProjects(1);
   }
 
   reset(field: string) {
@@ -48,9 +48,9 @@ export class ProjectListComponent implements OnInit {
     if (field == 'selectedStep') this.setFilter();
   }
 
-  getProjectsPerPage(pageId?: number) {
+  getPaginatedProjects(pageId?: number) {
     this.loading = true;
-    this.projectService.getProjectsPerPage(
+    this.projectService.getPaginatedProjects(
       this.client,
       pageId,
       this.selectedOptionToStep(),
@@ -69,7 +69,7 @@ export class ProjectListComponent implements OnInit {
       || this.from !== undefined
       || this.to !== undefined
     ) {
-      this.getProjectsPerPage(1);
+      this.getPaginatedProjects(1);
     }
   }
 

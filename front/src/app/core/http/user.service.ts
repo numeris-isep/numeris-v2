@@ -28,7 +28,7 @@ export class UserService {
     return this.http.get<PaginatedUser>(url, HTTP_OPTIONS);
   }
 
-  getUsersPerPage(project?: number | Project, pageId?: number, search?: string, role?: string, promotion?: string): Observable<PaginatedUser> {
+  getPaginatedUsers(project?: number | Project, pageId?: number, search?: string, role?: string, promotion?: string, inProject: boolean = null): Observable<PaginatedUser> {
     let projectPath: string = '';
 
     if (project) {
@@ -42,17 +42,22 @@ export class UserService {
     if (search) url += `&search=${search}`;
     if (role != null) url += `&role=${role}`;
     if (promotion != null) url += `&promotion=${promotion}`;
+    if (inProject) url += `&inProject=false`;
 
     return this.http.get<PaginatedUser>(url, HTTP_OPTIONS);
   }
 
-  getProjectUsers(project: number | Project): Observable<Project[]> {
-    const projectId = typeof project === 'number' ? project : project.id;
-    const url = `${environment.apiUrl}/api/projects/${projectId}/users`;
-    return this.http.get<Project[]>(url, HTTP_OPTIONS);
+  getPaginatedUsersNotInProject(project: Project, pageId?: number, search?: string, role?: string, promotion?: string): Observable<PaginatedUser> {
+    return this.getPaginatedUsers(project, pageId, search, role, promotion, true);
   }
 
-  getMissionUsersPerPage(mission?: number | Mission, pageId?: number, search?: string, role?: string, promotion?: string): Observable<PaginatedUser> {
+  getProjectUsers(project: number | Project): Observable<User[]> {
+    const projectId = typeof project === 'number' ? project : project.id;
+    const url = `${environment.apiUrl}/api/projects/${projectId}/users`;
+    return this.http.get<User[]>(url, HTTP_OPTIONS);
+  }
+
+  getPaginatedMissionUsers(mission?: number | Mission, pageId?: number, search?: string, role?: string, promotion?: string): Observable<PaginatedUser> {
     let missionPath: string = '';
 
     if (mission) {

@@ -116,7 +116,7 @@
                       [(page)]="paginatedProject.meta.current_page"
                       [hasNavigationLinks]="true" [hasBoundaryLinks]="true"
                       [hasEllipses]="false" [canRotate]="true"
-                      (pageChange)="getProjectsPerPage($event)">
+                      (pageChange)="getPaginatedProjects($event)">
       </sui-pagination>
     </div>
   </div>

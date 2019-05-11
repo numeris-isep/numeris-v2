@@ -32,7 +32,7 @@ class ProjectMissionController extends Controller
             request()->isLocked,
             [request()->minDate, request()->maxDate],
             $project->id
-        )->withCount(['applications' => function($query) {
+        )->withCount(['applications as accepted_applications_count' => function($query) {
             return $query->where('status', 'accepted');
         }])->with('project')->paginate(10);
 

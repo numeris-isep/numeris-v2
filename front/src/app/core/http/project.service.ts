@@ -6,7 +6,7 @@ import { PaginatedProject } from "../classes/pagination/paginated-project";
 import { HTTP_OPTIONS } from "../constants/http_options";
 import { Client } from "../classes/models/client";
 import { Project, ProjectStep } from "../classes/models/project";
-import { dateToString } from "../../shared/utils";
+import { User } from "../classes/models/user";
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +27,7 @@ export class ProjectService {
     return this.http.get<Project[]>(url, HTTP_OPTIONS);
   }
 
-  getProjectsPerPage(client?: number | Client, pageId?: number, step?: any, range?: [string, string]): Observable<PaginatedProject> {
+  getPaginatedProjects(client?: number | Client, pageId?: number, step?: any, range?: [string, string]): Observable<PaginatedProject> {
     let clientPath: string = '';
 
     if (client) {
@@ -90,5 +90,19 @@ export class ProjectService {
     const projectId: number = typeof project === 'number' ? project : project.id;
     const url = `${environment.apiUrl}/api/projects/${projectId}`;
     return this.http.delete<Project>(url, HTTP_OPTIONS);
+  }
+
+  addProjectUser(project: Project, user: User): Observable<User> {
+    const projectId: number = typeof project === 'number' ? project : project.id;
+    const userId: number = typeof user === 'number' ? user : user.id;
+    const url = `${environment.apiUrl}/api/projects/${projectId}/users`;
+    return this.http.post<User>(url, {user_id: userId}, HTTP_OPTIONS);
+  }
+
+  removeProjectUser(project: Project, user: User): Observable<User> {
+    const projectId: number = typeof project === 'number' ? project : project.id;
+    const userId: number = typeof user === 'number' ? user : user.id;
+    const url = `${environment.apiUrl}/api/projects/${projectId}/users/${userId}`;
+    return this.http.delete<User>(url, HTTP_OPTIONS);
   }
 }

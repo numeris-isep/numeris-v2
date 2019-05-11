@@ -119,7 +119,7 @@
                       [(page)]="paginatedMission.meta.current_page"
                       [hasNavigationLinks]="true" [hasBoundaryLinks]="true"
                       [hasEllipses]="false" [canRotate]="true"
-                      (pageChange)="getMissionsPerPage($event)">
+                      (pageChange)="getPaginatedMissions($event)">
       </sui-pagination>
     </div>
   </div>

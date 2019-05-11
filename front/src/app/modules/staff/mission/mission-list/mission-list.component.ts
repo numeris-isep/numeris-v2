@@ -36,7 +36,7 @@ export class MissionListComponent implements OnInit {
   constructor(private missionService: MissionService) { }
 
   ngOnInit() {
-    this.getMissionsPerPage(1);
+    this.getPaginatedMissions(1);
   }
 
   reset(field: string) {
@@ -44,9 +44,9 @@ export class MissionListComponent implements OnInit {
     if (field == 'selectedOption') this.setFilter();
   }
 
-  getMissionsPerPage(pageId?: number) {
+  getPaginatedMissions(pageId?: number) {
     this.loading = true;
-    this.missionService.getMissionsPerPage(
+    this.missionService.getPaginatedMissions(
       this.project,
       pageId,
       this.selectedOptionToIsLocked(),
@@ -65,7 +65,7 @@ export class MissionListComponent implements OnInit {
       || this.from !== undefined
       || this.to !== undefined
     ) {
-      this.getMissionsPerPage(1);
+      this.getPaginatedMissions(1);
     }
   }
 

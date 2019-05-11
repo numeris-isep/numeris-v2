@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ApplicationService } from "../http/application.service";
+import { ApplicationService } from "../../http/application.service";
 import { BehaviorSubject } from "rxjs";
-import { Application } from "../classes/models/application";
-import { Mission } from '../classes/models/mission';
+import { Application } from "../../classes/models/application";
+import { Mission } from '../../classes/models/mission';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class ApplicationHandlerService {
     }
   }
 
-  setApplications(mission: Mission) {
+  watchApplications(mission: Mission) {
     this.applicationService.getMissionApplications(mission)
       .subscribe(applications => {
         this.applications.next(applications);
@@ -84,6 +84,11 @@ export class ApplicationHandlerService {
   }
 
   resetAll() {
+    this.applications.unsubscribe();
+    this.waitingApplications.unsubscribe();
+    this.acceptedApplications.unsubscribe();
+    this.refusedApplications.unsubscribe();
+
     this.applications = new BehaviorSubject<Application[]>([]);
     this.waitingApplications = new BehaviorSubject<Application[]>([]);
     this.acceptedApplications = new BehaviorSubject<Application[]>([]);

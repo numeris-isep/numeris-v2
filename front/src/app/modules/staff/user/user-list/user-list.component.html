@@ -61,7 +61,7 @@
         <tr>
           <th class="collapsing"><i class="tag icon"></i> Nom</th>
           <th class="collapsing"><i class="id badge icon"></i> Numéro étudiant</th>
-          <th class="collapsing"><i class="mail alternate icon"></i> E-mail</th>
+          <th *ngIf="page != 'project-user-modal'" class="collapsing"><i class="mail alternate icon"></i> E-mail</th>
           <th class="collapsing"><i class="phone icon"></i> Téléphone</th>
           <th class="collapsing"><i class="users icon"></i> Promotion</th>
           <th class="collapsing"><i class="graduation icon"></i> Classe</th>
@@ -76,7 +76,7 @@
             (mouseenter)="togglePopup(popup, !user.activated)" (mouseleave)="togglePopup(popup, !user.activated)">
           <td>{{ user.firstName || '-' }} {{ user.lastName | uppercase }}</td>
           <td>{{ user.studentNumber || '-' }}</td>
-          <td>
+          <td *ngIf="page != 'project-user-modal'">
             <a *ngIf="user.email; else noEmail" href="mailto:{{ user.email }}">
               {{ user.email }}
             </a>
@@ -103,11 +103,16 @@
                              hiddenIcon="handshake" (click)="enrolUser(user)">
               Inscrire
             </app-button>
-            <app-link-button *ngIf="project && page == 'project-show'" behaviour="compact"
+            <app-button *ngIf="project && page == 'project-user-modal'" behaviour="compact"
+                             size="tiny" color="basic positive"
+                             hiddenIcon="handshake" (click)="enrolProjectUser(user)">
+              Inscrire
+            </app-button>
+            <app-button *ngIf="project && page == 'project-show'" behaviour="compact"
                              size="tiny" color="basic negative"
-                             hiddenIcon="trash alternate">
+                             hiddenIcon="trash alternate" (click)="removeProjectUser(user)">
               Retirer
-            </app-link-button>
+            </app-button>
           </td>
         </tr>
         </tbody>
@@ -136,7 +141,7 @@
                       [(page)]="paginatedUser.meta.current_page"
                       [hasNavigationLinks]="true" [hasBoundaryLinks]="true"
                       [hasEllipses]="false" [canRotate]="true"
-                      (pageChange)="getUsersPerPage($event)">
+                      (pageChange)="getPaginatedUsers($event)">
       </sui-pagination>
     </div>
   </div>

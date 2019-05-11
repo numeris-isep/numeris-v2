@@ -23,33 +23,44 @@ class ProjectUserController extends Controller
     public function index($project_id)
     {
         $project = Project::private()->findOrFail($project_id);
-        $this->authorize('index', User::class);
+        $this->authorize('index', ProjectUser::class);
 
         $this->validate(request(), [
             'page'      => 'integer|min:1',
             'search'    => 'string',
             'role'      => 'string',
             'promotion' => 'string',
+            'inProject' => 'string',
         ]);
 
         $users = User::filtered(
             request()->search,
             request()->role,
             request()->promotion,
-            $project->id
+            $project->id,
+            request()->inProject ? true : false
         )->load(['roles'])
             ->sortByDesc('created_at')
             ->paginate(10, request()->page)
             ->withPath(route('users.index'));
 
-        return UserResource::collection($users);
+        if (request()->page) {
+            return UserResource::collection(
+                $users->paginate(10, request()->page)
+                    ->withPath(route('users.index'))
+            );
+        } else {
+            return response()->json(UserResource::collection($users));
+        }
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param ProjectUserRequest $request
+     * @param $project_id
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(ProjectUserRequest $request, $project_id)
     {
@@ -65,8 +76,10 @@ class ProjectUserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $project_id
+     * @param $user_id
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy($project_id, $user_id)
     {

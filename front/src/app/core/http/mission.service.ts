@@ -26,7 +26,7 @@ export class MissionService {
     return this.http.get<PaginatedMission>(url, HTTP_OPTIONS);
   }
 
-  getMissionsPerPage(project?: number | Project, pageId?: number, isLocked?: any, range?: [string, string]): Observable<PaginatedMission> {
+  getPaginatedMissions(project?: number | Project, pageId?: number, isLocked?: any, range?: [string, string]): Observable<PaginatedMission> {
     let projectPath: string = '';
 
     if (project) {

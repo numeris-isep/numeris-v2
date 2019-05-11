@@ -72,19 +72,28 @@ class User extends Authenticatable implements JWTSubject
         return static::where('email', $email)->first();
     }
 
-    public static function filtered($search, $role, $promotion, $project_id = null) {
-        return static::when($search != null, function($query) use ($search) {
-            return $query->where('first_name', 'LIKE', "%{$search}%")
-                ->orWhere('last_name', 'LIKE', "%{$search}%")
-                ->orWhere('email', 'LIKE', "%{$search}%")
-                ->orWhere('student_number', 'LIKE', "%{$search}%");
+    public static function filtered($search, $role, $promotion, $project_id = null, $in_project = null) {
+        return static::where('activated', true)
+        -> when($search != null, function($query) use ($search) {
+            return $query->where(function ($query) use ($search) {
+                return $query->where('first_name', 'LIKE', "%{$search}%")
+                    ->orWhere('last_name', 'LIKE', "%{$search}%")
+                    ->orWhere('email', 'LIKE', "%{$search}%")
+                    ->orWhere('student_number', 'LIKE', "%{$search}%");
+            });
         })
             ->when($promotion != null, function ($query) use ($promotion) {
                 return $query->where('promotion', $promotion);
-            })->when($project_id != null, function ($query) use ($project_id) {
-                return $query->whereHas('projects', function($query) use ($project_id) {
-                    return $query->where('project_id', $project_id);
-                });
+            })->when($project_id != null, function ($query) use ($project_id, $in_project) {
+                if (!$in_project) {
+                    return $query->whereHas('projects', function($query) use ($project_id) {
+                        return $query->where('project_id', $project_id);
+                    });
+                } else {
+                    return $query->whereDoesntHave('projects', function($query) use ($project_id) {
+                        return $query->where('project_id', $project_id);
+                    });
+                }
             })
             ->get()
             ->when($role != null, function($query) use ($role) {

@@ -2,7 +2,7 @@
   <div class="ui padded grid doubling">
     <div class="row">
       <div class="sixteen wide mobile five wide computer column">
-        <app-project-details *ngIf="project" [project]="project"></app-project-details>
+        <app-project-details *ngIf="project" [project]="project" [users]="projectUsers"></app-project-details>
       </div>
 
       <div *ngIf="project" class="sixteen wide mobile eleven wide computer column">
@@ -25,11 +25,11 @@
                 <div *ngIf="project.isPrivate" class="column">
                   <div class="ui small icon header">
                     <i class="user secret icon"></i>
-                    Ajouter un étudiant
+                    Ajouter un étudiant au projet
                   </div><br>
-                  <app-link-button hiddenIcon="plus" size="tiny">
+                  <app-button hiddenIcon="plus" size="tiny" (click)="openModal()">
                     Nouvel étudiant
-                  </app-link-button>
+                  </app-button>
                 </div>
               </div>
             </div>
@@ -98,11 +98,11 @@
           </a>
           <a class="item" suiTabHeader="2">
             <i class="folder open icon"></i> Documents
-            <span class="ui tiny blue label">23</span>
+            <span class="ui tiny blue label">0</span>
           </a>
-          <a *ngIf="project.isPrivate" class="item" suiTabHeader="3">
+          <a *ngIf="project.isPrivate && projectUsers" class="item" suiTabHeader="3">
             <i class="users icon"></i> Étudiants
-            <span class="ui tiny blue label">{{ project.usersCount }}</span>
+            <span class="ui tiny blue label">{{ projectUsers.length }}</span>
           </a>
         </div>
 

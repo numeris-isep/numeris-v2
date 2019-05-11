@@ -12,7 +12,9 @@ import { Role } from "../../../../core/classes/models/role";
 import { ApplicationService } from "../../../../core/http/application.service";
 import { User } from 'src/app/core/classes/models/user';
 import { AlertService } from "../../../../core/services/alert.service";
-import { ApplicationHandlerService } from "../../../../core/services/application-handler.service";
+import { ApplicationHandlerService } from "../../../../core/services/handlers/application-handler.service";
+import { ProjectUserHandlerService } from "../../../../core/services/handlers/project-user-handler.service";
+import { ProjectService } from "../../../../core/http/project.service";
 
 @Component({
   selector: 'app-user-list',
@@ -49,7 +51,9 @@ export class UserListComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private roleService: RoleService,
     private applicationService: ApplicationService,
-    private applicationHandlerService: ApplicationHandlerService,
+    private projectService: ProjectService,
+    private applicationHandler: ApplicationHandlerService,
+    private projectUserHandler: ProjectUserHandlerService,
   ) { }
 
   ngOnInit() {
@@ -59,9 +63,13 @@ export class UserListComponent implements OnInit, OnDestroy {
       this.search = value;
       this.setFilter();
     });
-    this.getUsersPerPage(1);
+    this.getPaginatedUsers(1);
     this.getRoles();
     this.getPromotions();
+
+    if (this.project) {
+      this.getProjectUsers();
+    }
   }
 
   ngOnDestroy() {
@@ -70,24 +78,37 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   reset(field: string) {
     if (this[field] !== undefined) this[field] = null;
-    if (field == 'search') this.getUsersPerPage(1);
+    if (field == 'search') this.getPaginatedUsers(1);
     this.setFilter();
   }
 
-  getUsersPerPage(pageId?: number) {
+  getProjectUsers() {
+    return this.projectUserHandler.getProjectUsers().subscribe(() => this.getPaginatedUsers());
+  }
+
+  getPaginatedUsers(pageId: number = 1) {
     this.loading = true;
     let results: Observable<PaginatedUser>;
 
-    if (this.page != 'mission-show') {
-      results = this.userService.getUsersPerPage(
-        this.project, pageId, this.search,
-        this.selectedRole, this.selectedPromotion
-      );
-    } else {
-      results = this.userService.getMissionUsersPerPage(
-        this.mission, pageId, this.search,
-        this.selectedRole, this.selectedPromotion,
-      );
+    switch (this.page) {
+      case 'mission-show':
+        results = this.userService.getPaginatedMissionUsers(
+          this.mission, pageId, this.search,
+          this.selectedRole, this.selectedPromotion,
+        );
+        break;
+      case 'project-user-modal':
+        results = this.userService.getPaginatedUsersNotInProject(
+          this.project, pageId, this.search,
+          this.selectedRole, this.selectedPromotion
+        );
+        break;
+      default:
+        results = this.userService.getPaginatedUsers(
+          this.project, pageId, this.search,
+          this.selectedRole, this.selectedPromotion
+        );
+        break;
     }
 
     results.subscribe(
@@ -112,8 +133,7 @@ export class UserListComponent implements OnInit, OnDestroy {
       || this.selectedRole !== undefined
       || this.selectedPromotion !== undefined
     ) {
-      console.log(this.selectedRole);
-      this.getUsersPerPage(1);
+      this.getPaginatedUsers(1);
     }
   }
 
@@ -130,8 +150,36 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.applicationService.storeMissionApplication(this.mission, user).subscribe(
       application => {
-        this.paginatedUser.data = this.paginatedUser.data.filter(u => u !== user);
-        this.applicationHandlerService.setApplication('accepted', application); // Handle application in frontend
+        this.applicationHandler.setApplication('accepted', application); // Handle application in frontend
+        this.loading = false;
+      },
+      errors => {
+        this.alertService.error(errors);
+        this.loading = false;
+      }
+    )
+  }
+
+  enrolProjectUser(user: User) {
+    this.loading = true;
+    this.projectService.addProjectUser(this.project, user).subscribe(
+      user => {
+        this.projectUserHandler.addProjectUser(user);
+        this.loading = false;
+      },
+      errors => {
+        this.alertService.error(errors);
+        this.loading = false;
+      }
+    )
+  }
+
+  removeProjectUser(user: User) {
+    this.loading = true;
+    this.projectService.removeProjectUser(this.project, user).subscribe(
+      () => {
+        this.getPaginatedUsers();
+        this.projectUserHandler.removeProjectUser(user);
         this.loading = false;
       },
       errors => {

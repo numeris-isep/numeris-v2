@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Application, ApplicationStatus } from "../../../../../core/classes/models/application";
 import { ApplicationService } from "../../../../../core/http/application.service";
 import { AlertService } from "../../../../../core/services/alert.service";
-import { ApplicationHandlerService } from "../../../../../core/services/application-handler.service";
+import { ApplicationHandlerService } from "../../../../../core/services/handlers/application-handler.service";
 import { Mission } from "../../../../../core/classes/models/mission";
 
 @Component({
@@ -22,7 +22,7 @@ export class ApplicationListComponent implements OnInit {
 
   constructor(
     private applicationService: ApplicationService,
-    private applicationHandlerService: ApplicationHandlerService,
+    private applicationHandler: ApplicationHandlerService,
     private alertService: AlertService,
   ) { }
 
@@ -31,7 +31,7 @@ export class ApplicationListComponent implements OnInit {
   }
 
   getApplications() {
-    this.applicationHandlerService.getApplications(this.status.status).subscribe(applications => this.applications = applications);
+    this.applicationHandler.getApplications(this.status.status).subscribe(applications => this.applications = applications);
   }
 
   updateApplication(status: string, application: Application) {
@@ -40,7 +40,7 @@ export class ApplicationListComponent implements OnInit {
       () => {
         // Here we know that the application is in the new list on a backend look.
         // Now we need to do the same on the front end
-        this.applicationHandlerService.setApplication(status, application); // Handle application in frontend
+        this.applicationHandler.setApplication(status, application); // Handle application in frontend
         this.loading = false;
       },
       errors => {

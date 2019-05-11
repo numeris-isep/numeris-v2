@@ -23,10 +23,10 @@
             <i class="copy blue icon"></i> {{ project.missionsCount }}
           </div>
         </div>
-        <div *ngIf="project.isPrivate" class="ui mini black statistic"
+        <div *ngIf="project.isPrivate && users" class="ui mini black statistic"
              suiPopup popupText="Étudiants du projet" [popupPlacement]="'bottom'">
           <div class="value">
-            <i class="users blue icon"></i> {{ project.usersCount }}
+            <i class="users blue icon"></i> {{ users.length }}
           </div>
         </div>
       </div>

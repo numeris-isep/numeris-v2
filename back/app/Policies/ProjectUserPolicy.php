@@ -12,7 +12,7 @@ class ProjectUserPolicy
 
     public function before(User $current_user, $ability)
     {
-        // Grant everything to developers and administrators
+        // Forbid everything to students
         if ($current_user->role()->isInferiorTo('staff')) {
             return false;
         }
@@ -20,7 +20,7 @@ class ProjectUserPolicy
 
     public function index(User $current_user)
     {
-        return false;
+        return true;
     }
 
     public function store(User $current_user, Project $project, User $user)

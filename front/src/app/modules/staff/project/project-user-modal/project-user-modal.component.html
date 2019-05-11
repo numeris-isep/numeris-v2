@@ -1,0 +1,14 @@
+<div class="header">
+  <i class="user secret icon"></i> Ajouter au projet
+</div>
+
+<div class="content">
+  <app-user-list [project]="project" page="project-user-modal"></app-user-list>
+</div>
+
+<div class="actions">
+  <app-button hiddenIcon="check" color="green" size="tiny" [isLoading]="loading"
+              (click)="modal.approve(undefined)">
+    Ok
+  </app-button>
+</div>
