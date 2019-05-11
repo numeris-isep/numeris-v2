@@ -3,9 +3,6 @@ import { CommonModule  } from '@angular/common';
 import { AlertComponent } from "./components/alert/alert.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { PodiumComponent } from "./components/podium/podium.component";
-import { LoginModalComponent } from "../modules/showcase/modals/login-modal/login-modal.component";
-import { ContactUsModalComponent } from "../modules/showcase/modals/contact-us-modal/contact-us-modal.component";
-import { ApplicationConfirmModalComponent } from "../modules/student/application/application-confirm-modal/application-confirm-modal.component";
 import { TeamComponent } from "./components/team/team.component";
 import { SuiModule } from 'ng2-semantic-ui';
 import { ReactiveFormsModule } from "@angular/forms";
@@ -22,6 +19,7 @@ import { RolePipe } from './pipes/role.pipe';
 import { RouterModule } from '@angular/router';
 import { StatusPipe } from './pipes/status.pipe';
 import { FormErrorComponent } from './components/form-error/form-error.component';
+import { PaginationCaptionComponent } from "./components/pagination-caption/pagination-caption.component";
 
 @NgModule({
   imports: [
@@ -48,6 +46,7 @@ import { FormErrorComponent } from './components/form-error/form-error.component
     RolePipe,
     StatusPipe,
     FormErrorComponent,
+    PaginationCaptionComponent,
   ],
   exports: [
     // Components
@@ -64,6 +63,7 @@ import { FormErrorComponent } from './components/form-error/form-error.component
     ContentComponent,
     EmptyComponent,
     FormErrorComponent,
+    PaginationCaptionComponent,
 
     // Pipes
     AddressPipe,

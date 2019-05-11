@@ -54,9 +54,9 @@ registerLocaleData(localeFr, 'fr');
   ],
   providers: [
     Title,
-    { provide: LOCALE_ID, useValue: 'fr' },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi:true },
+    {provide: LOCALE_ID, useValue: 'fr'},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })

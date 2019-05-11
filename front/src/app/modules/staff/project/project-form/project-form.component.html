@@ -114,22 +114,13 @@
               </div>
             </a>
             <div class="or" data-text="ou"></div>
-            <button *ngIf="project.isPrivate == true && f.is_private.value == false; else noModal" class="ui animated fade orange button"
-                 [ngClass]="{'loading': loading, 'disabled': projectForm.invalid}">
+            <button class="ui animated fade orange button"
+                    [ngClass]="{'loading': loading, 'disabled': projectForm.invalid}">
               <div class="visible content">Modifier</div>
               <div class="hidden content">
                 <i class="plus icon"></i>
               </div>
             </button>
-            <ng-template #noModal>
-              <button class="ui animated fade orange button"
-                      [ngClass]="{'loading': loading, 'disabled': projectForm.invalid}">
-                <div class="visible content">Modifier</div>
-                <div class="hidden content">
-                  <i class="plus icon"></i>
-                </div>
-              </button>
-            </ng-template>
           </div>
         </ng-template>
       </div>

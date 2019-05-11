@@ -1,0 +1,8 @@
+<div class="caption">
+  <ng-container *ngIf="paginatedObject.meta.total > 0; else noResults">
+    Affichage des résultats {{ paginatedObject.meta.from }} à {{ paginatedObject.meta.to }} sur {{ paginatedObject.meta.total }}
+  </ng-container>
+  <ng-template #noResults>
+    Aucun résultat
+  </ng-template>
+</div>

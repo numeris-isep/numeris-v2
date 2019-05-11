@@ -15,7 +15,6 @@ import { UserModule } from "../user/user.module";
 import { ProjectCreateComponent } from './project-create/project-create.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
 import { ProjectEditComponent } from './project-edit/project-edit.component';
-import { ProjectEditModalComponent } from './project-edit-modal/project-edit-modal.component';
 import { ProjectDeleteModalComponent } from './project-delete-modal/project-delete-modal.component';
 import { ProjectMissionCreateComponent } from './project-mission-create/project-mission-create.component';
 import { ProjectUserModalComponent } from './project-user-modal/project-user-modal.component';
@@ -41,7 +40,6 @@ import { ProjectUserModalComponent } from './project-user-modal/project-user-mod
     ProjectCreateComponent,
     ProjectFormComponent,
     ProjectEditComponent,
-    ProjectEditModalComponent,
     ProjectDeleteModalComponent,
     ProjectMissionCreateComponent,
     ProjectUserModalComponent
@@ -51,7 +49,6 @@ import { ProjectUserModalComponent } from './project-user-modal/project-user-mod
     ProjectFormComponent,
   ],
   entryComponents: [
-    ProjectEditModalComponent,
     ProjectDeleteModalComponent,
     ProjectUserModalComponent,
   ]

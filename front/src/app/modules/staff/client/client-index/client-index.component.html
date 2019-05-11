@@ -32,30 +32,28 @@
   </div>
 </div>
 
-<app-content [condition]="!(clients && contacts)">
   <div class="ui padded grid">
-    <div class="column">
-      <sui-tabset>
-        <div class="ui top pointing secondary menu">
-          <a class="item" suiTabHeader="1">
-            <i class="folder open icon"></i> Clients
-            <span class="ui tiny blue label">{{ clients?.length }}</span>
-          </a>
-          <a class="item" suiTabHeader="2" [(isActive)]="secondTabActive">
-            <i class="user md icon"></i> Contacts
-            <span class="ui tiny blue label">{{ contacts?.length }}</span>
-          </a>
-        </div>
+  <div class="column">
+    <sui-tabset>
+      <div class="ui top pointing secondary menu">
+        <a class="item" suiTabHeader="1">
+          <i class="folder open icon"></i> Clients
+          <span class="ui tiny blue label">{{ clients?.length }}</span>
+        </a>
+        <a class="item" suiTabHeader="2" [(isActive)]="secondTabActive">
+          <i class="user md icon"></i> Contacts
+          <span class="ui tiny blue label">{{ contacts?.length }}</span>
+        </a>
+      </div>
 
-        <div class="ui" suiTabContent="1">
-          <app-client-list *ngIf="clients" [clients]="clients"></app-client-list>
-        </div>
+      <div class="ui" suiTabContent="1">
+        <app-client-list *ngIf="clients" [clients]="clients"></app-client-list>
+      </div>
 
-        <div class="ui" suiTabContent="2">
-          <app-contact-list *ngIf="contacts" [contacts]="contacts"></app-contact-list>
-        </div>
-      </sui-tabset>
-    </div>
+      <div class="ui" suiTabContent="2">
+        <app-contact-list *ngIf="contacts" [contacts]="contacts"></app-contact-list>
+      </div>
+    </sui-tabset>
   </div>
-</app-content>
+</div>
 

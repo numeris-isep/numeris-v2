@@ -71,7 +71,7 @@
             suiPopup popupText="{{ isMissionExpired(mission) ? 'Expirée' : 'Fermée' }}" popupPlacement="left" popupTrigger="manual" #popup="suiPopup"
             (mouseenter)="togglePopup(popup, mission)" (mouseleave)="togglePopup(popup, mission)">
           <td>{{ mission.startAt | date:'dd/MM/y H\'h\'mm' }}</td>
-          <td>{{ mission.reference }}</td>
+          <td>{{ mission.reference || '-' }}</td>
           <td>{{ mission.title }}</td>
           <td><a routerLink="/projets/{{ mission.project.id }}">{{ mission.project.name }}</a></td>
           <td class="center aligned">{{ mission.duration }}h</td>
@@ -107,9 +107,7 @@
         </ng-template>
       </table>
 
-      <div class="caption">
-        Affichage des résultats {{ paginatedMission.meta.from }} à {{ paginatedMission.meta.to }} sur {{ paginatedMission.meta.total }}
-      </div>
+      <app-pagination-caption [paginatedObject]="paginatedMission"></app-pagination-caption>
     </div>
 
     <!-- Pagination -->

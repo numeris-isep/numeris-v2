@@ -38,7 +38,7 @@
           <div class="ui input">
             <sui-select class="selection fluid" labelField="lastName" valueField="id"
                         placeholder="Sélectionner une option" formControlName="contact_id"
-                        [options]="contacts" [optionFormatter]="fullName"
+                        [options]="contacts" [optionFormatter]="fullName" [isDisabled]="!contacts.length > 0"
                         #contactSelect>
               <sui-select-option *ngFor="let option of contactSelect.filteredOptions" [value]="option"></sui-select-option>
             </sui-select>

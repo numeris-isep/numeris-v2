@@ -104,9 +104,7 @@
         </ng-template>
       </table>
 
-      <div class="caption">
-        Affichage des résultats {{ paginatedProject.meta.from }} à {{ paginatedProject.meta.to }} sur {{ paginatedProject.meta.total }}
-      </div>
+      <app-pagination-caption [paginatedObject]="paginatedProject"></app-pagination-caption>
     </div>
 
     <!-- Pagination -->

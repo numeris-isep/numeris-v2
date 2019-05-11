@@ -11,8 +11,6 @@ import { Observable } from "rxjs";
 import { dateToString } from "../../../../shared/utils";
 import { first } from "rxjs/operators";
 import { handleFormErrors } from "../../../../core/functions/form-error-handler";
-import { ProjectEditModal } from "../project-edit-modal/project-edit-modal.component";
-import { SuiModalService } from "ng2-semantic-ui";
 import { AlertService } from "../../../../core/services/alert.service";
 
 @Component({
@@ -30,15 +28,12 @@ export class ProjectFormComponent implements OnInit {
   loading: boolean = false;
   submitted: boolean = false;
 
-  private editModal: ProjectEditModal;
-
   constructor(
     private fb: FormBuilder,
     private projectService: ProjectService,
     private clientService: ClientService,
     private conventionService: ConventionService,
     private alertService: AlertService,
-    private modalService: SuiModalService,
     private router: Router,
   ) { }
 
@@ -86,30 +81,18 @@ export class ProjectFormComponent implements OnInit {
       projectRequest = this.projectService.updateProject(this.projectForm.value as Project, this.project);
     }
 
-    if (this.project && this.project.isPrivate == true && this.f.is_private.value == false) {
-      this.editModal = new ProjectEditModal(
-        this.project.name,
-        `Voulez-vous vraiment modifier le projet ${this.project.name} ?`,
-        this.project,
-        projectRequest,
-        this.projectForm
-      );
-
-      this.openModal();
-    } else {
-      projectRequest.pipe(first())
-        .subscribe(
-          project => {
-            this.loading = false;
-            this.router.navigate([`/projets/${project.id}`]);
-            if (this.project) this.alertService.success([`Le projet ${project.name} a bien été modifié.`]);
-          },
-          errors => {
-            handleFormErrors(this.projectForm, errors);
-            this.loading = false;
-          }
-        )
-    }
+    projectRequest.pipe(first())
+      .subscribe(
+        project => {
+          this.loading = false;
+          this.router.navigate([`/projets/${project.id}`]);
+          if (this.project) this.alertService.success([`Le projet ${project.name} a bien été modifié.`]);
+        },
+        errors => {
+          handleFormErrors(this.projectForm, errors);
+          this.loading = false;
+        }
+      )
   }
 
   getClients() {
@@ -120,10 +103,6 @@ export class ProjectFormComponent implements OnInit {
     if (client) {
       this.conventionService.getClientConventions(client).subscribe(conventions => this.conventions = conventions);
     }
-  }
-
-  openModal() {
-    this.modalService.open(this.editModal);
   }
 
 }

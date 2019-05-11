@@ -1,16 +1,14 @@
-<app-content [condition]="!clients">
-  <div *ngIf="clients; else empty" class="ui three column padded centered grid stackable">
-    <div *ngFor="let client of clients" class="column">
-      <app-client-details [client]="client" [isLink]="true"></app-client-details>
+<div *ngIf="clients.length > 0; else empty" class="ui three column padded centered grid stackable">
+  <div *ngFor="let client of clients" class="column">
+    <app-client-details [client]="client" [isLink]="true"></app-client-details>
+  </div>
+</div>
+
+<!-- Empty -->
+<ng-template #empty>
+  <div class="ui padded grid">
+    <div class="column">
+      <app-empty>Aucun client</app-empty>
     </div>
   </div>
-
-  <!-- Empty -->
-  <ng-template #empty>
-    <div class="ui padded grid">
-      <div class="column">
-        <app-empty>Aucun client</app-empty>
-      </div>
-    </div>
-  </ng-template>
-</app-content>
+</ng-template>
