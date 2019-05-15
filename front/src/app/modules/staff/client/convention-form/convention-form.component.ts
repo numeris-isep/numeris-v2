@@ -43,10 +43,6 @@ export class ConventionFormComponent implements OnInit {
         this.convention ? this.convention.name : '',
         Validators.required,
       ],
-      client_id: [
-        this.client ? this.client.id : '',
-        Validators.required,
-      ],
       rates : this.ratesFormArray,
     });
   }

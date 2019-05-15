@@ -13,29 +13,16 @@
         [formGroup]="conventionForm"
         [ngClass]="{'error': submitted && conventionForm.invalid, 'loading': loading}">
     <h4 class="ui dividing header">Informations</h4>
-    <div class="two fields">
-      <div class="required field" [ngClass]="{ 'error': submitted && f.name.errors }">
-        <label>Nom</label>
-        <div class="ui left icon corner labeled input">
-          <i class="address book outline icon"></i>
-          <input type="text" formControlName="name" placeholder="Nom">
-          <div class="ui corner label">
-            <i class="asterisk icon"></i>
-          </div>
+    <div class="required field" [ngClass]="{ 'error': submitted && f.name.errors }">
+      <label>Nom</label>
+      <div class="ui left icon corner labeled input">
+        <i class="address book outline icon"></i>
+        <input type="text" formControlName="name" placeholder="Nom">
+        <div class="ui corner label">
+          <i class="asterisk icon"></i>
         </div>
-        <app-form-error *ngIf="submitted && f.name.errors" [errors]="f.name.errors"></app-form-error>
       </div>
-      <div class="required field" [ngClass]="{ 'error': submitted && f.client_id.errors }">
-        <label>Client</label>
-        <div class="ui input">
-          <sui-select *ngIf="client" class="selection fluid" labelField="name" valueField="id"
-                      placeholder="Sélectionner une option" formControlName="client_id"
-                      [options]="[client]" [isDisabled]="true" #clientSelect>
-            <sui-select-option *ngFor="let option of clientSelect.filteredOptions" [value]="option"></sui-select-option>
-          </sui-select>
-        </div>
-        <app-form-error *ngIf="submitted && f.client_id.errors" [errors]="f.client_id.errors"></app-form-error>
-      </div>
+      <app-form-error *ngIf="submitted && f.name.errors" [errors]="f.name.errors"></app-form-error>
     </div>
 
     <app-button size="mini" color="green" behaviour="right floated"

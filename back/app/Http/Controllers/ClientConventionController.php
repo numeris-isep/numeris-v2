@@ -6,6 +6,7 @@ use App\Http\Requests\ConventionRequest;
 use App\Http\Resources\ConventionResource;
 use App\Models\Client;
 use App\Models\Convention;
+use App\Models\Rate;
 use Illuminate\Http\JsonResponse;
 
 class ClientConventionController extends Controller
@@ -38,7 +39,16 @@ class ClientConventionController extends Controller
         $client = Client::findOrFail($client_id);
         $this->authorize('store', Convention::class);
 
-        $convention = Convention::create($request->all());
+        $convention_request = $request->only(['name']);
+        $rates_request = $request->only(['rates'])['rates'];
+
+        $convention = Convention::create($convention_request);
+
+        foreach ($rates_request as $rate) {
+            $rate = Rate::create($rate);
+            $convention->rates()->save($rate);
+        }
+
         $client->conventions()->save($convention);
 
         return response()->json(ConventionResource::make($convention), JsonResponse::HTTP_CREATED);
