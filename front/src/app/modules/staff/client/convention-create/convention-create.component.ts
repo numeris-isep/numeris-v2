@@ -22,7 +22,7 @@ export class ConventionCreateComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(param => {
-      this.getClient(parseInt(param.id));
+      this.getClient(parseInt(param.clientId));
     });
   }
 

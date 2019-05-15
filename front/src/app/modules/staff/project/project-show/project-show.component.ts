@@ -42,7 +42,7 @@ export class ProjectShowComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getProjectSteps();
     this.route.params.subscribe(param => {
-      this.getProject(parseInt(param.id));
+      this.getProject(parseInt(param.projectId));
     });
   }
 

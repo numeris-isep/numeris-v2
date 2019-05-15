@@ -11,6 +11,18 @@ use Illuminate\Http\JsonResponse;
 class ConventionController extends Controller
 {
     /**
+     * Display the specified resource.
+     *
+     */
+    public function show($convention_id)
+    {
+        $convention = Convention::findOrFail($convention_id);
+        $this->authorize('show', $convention);
+
+        return response()->json(ConventionResource::make($convention->load('rates')));
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param ConventionRequest $request
@@ -23,9 +35,35 @@ class ConventionController extends Controller
         $convention = Convention::findOrFail($convention_id);
         $this->authorize('update', $convention);
 
-        $convention->update($request->all());
+        $convention_request = $request->only('name');
+        $rates_request = $request->only('rates')['rates'];
 
-        return response()->json(ConventionResource::make($convention), JsonResponse::HTTP_CREATED);
+        $convention->update($convention_request);
+
+        $old_rates = $convention->rates->keyBy('id');
+
+        foreach ($rates_request as $rate_request) {
+            if ($rate_request['id']) {
+                // If rate exists, update it
+                $rate = Rate::find($rate_request['id']);
+
+                if ($rate) {
+                    $rate->update($rate_request);
+                    $old_rates->forget($rate->id);
+                }
+            } else {
+                // If rate does not exists, create it
+                $rate = Rate::create($rate_request);
+                $convention->rates()->save($rate);
+            }
+        }
+
+        // Delete the remaining rates
+        foreach ($old_rates as $old_rate) {
+            $old_rate->delete();
+        }
+
+        return response()->json(ConventionResource::make($convention->load('rates')), JsonResponse::HTTP_CREATED);
     }
 
     /**

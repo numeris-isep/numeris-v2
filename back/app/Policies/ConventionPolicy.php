@@ -31,6 +31,11 @@ class ConventionPolicy
         return false;
     }
 
+    public function show(User $current_user, Convention $convention)
+    {
+        return false;
+    }
+
     public function update(User $current_user, Convention $convention)
     {
         return false;

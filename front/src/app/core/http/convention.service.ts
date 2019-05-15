@@ -19,14 +19,20 @@ export class ConventionService {
     return this.http.get<Convention[]>(url, HTTP_OPTIONS);
   }
 
+  getConvention(conventionId: number): Observable<Convention> {
+    const url = `${environment.apiUrl}/api/conventions/${conventionId}`;
+    return this.http.get<Convention>(url, HTTP_OPTIONS);
+  }
+
   addClientConvention(client: number | Client, data: Convention): Observable<Convention> {
     const clientId = typeof client === 'number' ? client : client.id;
     const url = `${environment.apiUrl}/api/clients/${clientId}/conventions`;
-    console.log(data);
     return this.http.post<Convention>(url, data, HTTP_OPTIONS);
   }
 
-  updateClientConvention() {
-
+  updateConvention(convention: number | Convention, data: Convention) {
+    const conventionId = typeof convention === 'number' ? convention : convention.id;
+    const url = `${environment.apiUrl}/api/conventions/${conventionId}`;
+    return this.http.put<Convention>(url, data, HTTP_OPTIONS);
   }
 }

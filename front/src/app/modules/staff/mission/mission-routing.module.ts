@@ -29,11 +29,11 @@ const missionRoute: Routes = [
         },
       },
       {
-        path: ':id/modifier',
+        path: ':missionId/modifier',
         component: MissionEditComponent,
       },
       {
-        path: ':id',
+        path: ':missionId',
         component: MissionShowComponent,
       },
     ]

@@ -30,7 +30,7 @@ export class MissionShowComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.params.subscribe(param => {
-      this.getMission(parseInt(param.id));
+      this.getMission(parseInt(param.missionId));
     });
     this.getApplications();
   }

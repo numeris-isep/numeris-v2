@@ -65,7 +65,7 @@
       </thead>
 
       <tbody class="center aligned">
-      <tr *ngFor="let rate of fr.controls; let i = index" [formGroupName]="i">
+      <tr *ngFor="let rate of fr.controls; let i = index" [formGroupName]="i" [ngClass]="{'warning': frg(i).controls['is_flat'].value}">
         <td class="center aligned">
           <div class="required field" [ngClass]="{ 'error': submitted && frg(i).controls['name'].dirty && frg(i).controls['name'].errors }">
               <div class="ui left icon mini corner labeled input">

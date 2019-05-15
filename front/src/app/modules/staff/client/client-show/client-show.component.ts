@@ -27,7 +27,7 @@ export class ClientShowComponent implements OnInit {
     this.route.data.subscribe(data => this.conventionTabActive = data['tab'] === 'conventions');
 
     this.route.params.subscribe(param => {
-      this.getClient(parseInt(param.id));
+      this.getClient(parseInt(param.clientId));
     });
   }
 

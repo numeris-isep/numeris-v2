@@ -8,6 +8,7 @@ import { Client } from '../../../../core/classes/models/client';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { handleFormErrors } from '../../../../core/functions/form-error-handler';
+import { Rate } from '../../../../core/classes/models/rate';
 
 @Component({
   selector: 'app-convention-form',
@@ -20,7 +21,7 @@ export class ConventionFormComponent implements OnInit {
   @Input() convention: Convention;
 
   conventionForm: FormGroup;
-  ratesFormArray: FormArray;
+  ratesFormArray: FormArray = this.fb.array([]);
   loading: boolean = false;
   submitted: boolean = false;
 
@@ -32,12 +33,6 @@ export class ConventionFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.convention) {
-      // Populate rates FormArray
-    } else {
-      this.ratesFormArray = this.fb.array([this.createRate()]);
-    }
-
     this.conventionForm = this.fb.group({
       name: [
         this.convention ? this.convention.name : '',
@@ -45,6 +40,14 @@ export class ConventionFormComponent implements OnInit {
       ],
       rates : this.ratesFormArray,
     });
+
+    if (this.convention) {
+      for (let rate of this.convention.rates) {
+        this.addRate(rate);
+      }
+    } else {
+      this.addRate();
+    }
   }
 
   get f() { return this.conventionForm.controls; }
@@ -53,23 +56,20 @@ export class ConventionFormComponent implements OnInit {
 
   frg(index: number) { return this.fr.controls[index] as FormGroup; }
 
-  createRate(
-    name: string = '', for_student: string = '', for_staff: string = '',
-    for_client: string = '', is_flat: boolean = false, hours: number = null,
-  ) {
+  createRate(rate: Rate = null) {
     return this.fb.group({
-      id: [null], // for update: put the id of the rate
-      name: [name, Validators.required],
-      for_student: [for_student, Validators.required],
-      for_staff: [for_staff, Validators.required],
-      for_client: [for_client, Validators.required],
-      is_flat: [is_flat],
-      hours: [hours],
+      id: [rate ? rate.id : null],
+      name: [rate ? rate.name : '', Validators.required],
+      for_student: [rate ? rate.forStudent : '', Validators.required],
+      for_staff: [rate ? rate.forStaff : '', Validators.required],
+      for_client: [rate ? rate.forClient : '', Validators.required],
+      is_flat: [rate ? rate.isFlat : false],
+      hours: [rate ? rate.hours : null],
     });
   }
 
-  addRate() {
-    this.ratesFormArray.push(this.createRate());
+  addRate(rate: Rate = null) {
+    this.ratesFormArray.push(this.createRate(rate));
   }
 
   removeRate(index: number) {
@@ -84,22 +84,23 @@ export class ConventionFormComponent implements OnInit {
     this.loading = true;
     let conventionRequest: Observable<Convention>;
 
+    this.conventionForm.value.rates.map(rate => {
+      if (!rate.is_flat && rate.hours) { rate.hours = null; } // Remove hours when rate is flat
+      return rate;
+    });
+
     if (!this.convention) {
       conventionRequest = this.conventionService.addClientConvention(this.client, this.conventionForm.value as Convention);
     } else {
-      // Update
+      conventionRequest = this.conventionService.updateConvention(this.convention, this.conventionForm.value as Convention);
     }
 
     conventionRequest.pipe(first())
       .subscribe(
         convention => {
           this.loading = false;
-          if (!this.convention) {
-            this.router.navigate([`/clients/${this.client.id}`]); // TODO: change to '/conventions'
-            this.alertService.success([`La convention ${convention.name} a bien été créée.`]);
-          } else {
-            // Update
-          }
+          this.router.navigate([`/clients/${this.client.id}/conventions`]);
+          if (this.convention) { this.alertService.success([`La convention ${convention.name} a bien été modifiée.`]); }
         },
         errors => {
           handleFormErrors(this.conventionForm, errors);

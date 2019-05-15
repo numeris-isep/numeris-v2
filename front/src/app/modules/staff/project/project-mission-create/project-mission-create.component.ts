@@ -22,7 +22,7 @@ export class ProjectMissionCreateComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(param => {
-      this.getProject(parseInt(param.id));
+      this.getProject(parseInt(param.projectId));
     })
   }
 

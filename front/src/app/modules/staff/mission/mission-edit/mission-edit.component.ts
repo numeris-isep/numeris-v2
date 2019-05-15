@@ -22,7 +22,7 @@ export class MissionEditComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(param => {
-      this.getMission(parseInt(param.id));
+      this.getMission(parseInt(param.missionId));
     })
   }
 

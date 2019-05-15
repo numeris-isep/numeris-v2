@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Convention } from '../../../../core/classes/models/convention';
+import { Client } from '../../../../core/classes/models/client';
 
 @Component({
   selector: 'app-client-convention',
@@ -7,7 +7,7 @@ import { Convention } from '../../../../core/classes/models/convention';
 })
 export class ConventionListComponent implements OnInit {
 
-  @Input() conventions: Convention[];
+  @Input() client: Client;
 
   constructor() { }
 

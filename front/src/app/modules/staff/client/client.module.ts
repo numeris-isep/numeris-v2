@@ -23,6 +23,7 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { ContactEditComponent } from './contact-edit/contact-edit.component';
 import { ConventionCreateComponent } from './convention-create/convention-create.component';
 import { ConventionFormComponent } from './convention-form/convention-form.component';
+import { ConventionEditComponent } from './convention-edit/convention-edit.component';
 
 @NgModule({
   imports: [
@@ -53,6 +54,7 @@ import { ConventionFormComponent } from './convention-form/convention-form.compo
     ContactEditComponent,
     ConventionCreateComponent,
     ConventionFormComponent,
+    ConventionEditComponent,
   ],
   entryComponents: [
     ClientDeleteModalComponent,

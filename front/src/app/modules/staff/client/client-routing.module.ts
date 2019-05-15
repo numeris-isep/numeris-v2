@@ -9,7 +9,8 @@ import { ClientEditComponent } from './client-edit/client-edit.component';
 import { ClientProjectCreateComponent } from './client-project-create/client-project-create.component';
 import { ContactCreateComponent } from './contact-create/contact-create.component';
 import { ContactEditComponent } from './contact-edit/contact-edit.component';
-import {ConventionCreateComponent} from "./convention-create/convention-create.component";
+import { ConventionCreateComponent } from './convention-create/convention-create.component';
+import { ConventionEditComponent } from './convention-edit/convention-edit.component';
 
 const clientRoutes: Routes = [
   {
@@ -49,32 +50,36 @@ const clientRoutes: Routes = [
             },
           },
           {
-            path: ':id/modifier',
+            path: ':contactId/modifier',
             component: ContactEditComponent,
           }
         ]
       },
       {
-        path: ':id/modifier',
+        path: ':clientId/modifier',
         component: ClientEditComponent,
       },
       {
-        path: ':id/projets/nouveau',
+        path: ':clientId/projets/nouveau',
         component: ClientProjectCreateComponent,
       },
       {
-        path: ':id/conventions/nouvelle',
+        path: ':clientId/conventions/:conventionId/modifier',
+        component: ConventionEditComponent,
+      },
+      {
+        path: ':clientId/conventions/nouvelle',
         component: ConventionCreateComponent,
       },
       {
-        path: ':id/conventions',
+        path: ':clientId/conventions',
         component: ClientShowComponent,
         data: {
           tab: 'conventions'
         }
       },
       {
-        path: ':id',
+        path: ':clientId',
         component: ClientShowComponent,
       },
     ]
@@ -83,7 +88,7 @@ const clientRoutes: Routes = [
     path: 'contacts',
     redirectTo: '/clients/contacts',
     pathMatch: 'full'
-  }
+  },
 ];
 
 @NgModule({

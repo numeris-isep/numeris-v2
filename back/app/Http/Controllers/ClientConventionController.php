@@ -44,8 +44,8 @@ class ClientConventionController extends Controller
 
         $convention = Convention::create($convention_request);
 
-        foreach ($rates_request as $rate) {
-            $rate = Rate::create($rate);
+        foreach ($rates_request as $rate_request) {
+            $rate = Rate::create($rate_request);
             $convention->rates()->save($rate);
         }
 

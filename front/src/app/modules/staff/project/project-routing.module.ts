@@ -30,15 +30,15 @@ const projectRoutes: Routes = [
         }
       },
       {
-        path: ':id/modifier',
+        path: ':projectId/modifier',
         component: ProjectEditComponent,
       },
       {
-        path: ':id/missions/nouvelle',
+        path: ':projectId/missions/nouvelle',
         component: ProjectMissionCreateComponent,
       },
       {
-        path: ':id',
+        path: ':projectId',
         component: ProjectShowComponent,
       },
     ]

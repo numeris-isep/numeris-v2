@@ -20,7 +20,7 @@ const userRoutes: Routes = [
         component: UserIndexComponent,
       },
       {
-        path: ':id',
+        path: ':userId',
         component: UserShowComponent,
       }
     ]

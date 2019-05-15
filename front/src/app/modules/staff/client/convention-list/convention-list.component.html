@@ -1,7 +1,7 @@
-<app-content [condition]="!conventions">
-  <div *ngIf="conventions; else empty" class="ui segment">
+<app-content [condition]="!client">
+  <div *ngIf="client.conventions; else empty" class="ui segment">
     <div class="ui centered grid doubling">
-      <div *ngFor="let convention of conventions" class="sixteen wide column">
+      <div *ngFor="let convention of client.conventions" class="sixteen wide column">
         <h5 class="ui title">
           <i class="tag icon"></i> {{ convention.name }}
         </h5>
@@ -11,12 +11,12 @@
           <tr class="collapsing">
             <th class="center aligned">
               <div class="ui mini buttons">
-                <div class="ui animated fade orange button">
+                <a class="ui animated fade orange button" routerLink="/clients/{{ client.id }}/conventions/{{ convention.id }}/modifier">
                   <div class="visible content">Modifier</div>
                   <div class="hidden content">
                     <i class="edit icon"></i>
                   </div>
-                </div>
+                </a>
                 <div class="or" data-text="ou"></div>
                 <div class="ui animated fade negative button">
                   <div class="visible content">Supprimer</div>
@@ -72,7 +72,7 @@
               <th colspan="6">
                 <app-empty>
                   Aucun tarif pour cette convention.
-                  <a href="/conventions/{{ convention.id }}/modifier">Ajouter un tarif</a>
+                  <a href="/clients/{{ client.id }}/conventions/{{ convention.id }}/modifier">Ajouter un tarif</a>
                 </app-empty>
               </th>
             </tr>

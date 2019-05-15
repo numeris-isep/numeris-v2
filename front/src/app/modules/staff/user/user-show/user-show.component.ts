@@ -23,7 +23,7 @@ export class UserShowComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(param => {
-      this.getUser(parseInt(param.id))
+      this.getUser(parseInt(param.userId));
     });
   }
 
