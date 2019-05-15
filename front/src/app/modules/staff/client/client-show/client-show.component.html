@@ -52,7 +52,7 @@
             <i class="folder open icon"></i> Projets
             <span class="ui tiny blue label">{{ client.projectsCount }}</span>
           </a>
-          <a class="item" suiTabHeader="2">
+          <a class="item" suiTabHeader="2" [(isActive)]="conventionTabActive">
             <i class="tags icon"></i> Conventions
             <span class="ui tiny blue label">{{ client.conventionsCount }}</span>
           </a>

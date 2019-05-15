@@ -13,6 +13,8 @@ export class ClientShowComponent implements OnInit {
 
   client: Client;
 
+  conventionTabActive: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private clientService: ClientService,
@@ -22,9 +24,11 @@ export class ClientShowComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.route.data.subscribe(data => this.conventionTabActive = data['tab'] === 'conventions');
+
     this.route.params.subscribe(param => {
       this.getClient(parseInt(param.id));
-    })
+    });
   }
 
   getClient(clientId: number) {
@@ -32,15 +36,16 @@ export class ClientShowComponent implements OnInit {
       client => {
         this.client = client;
 
+        const breadcrumbs = [{ title: client.name, url: `/clients/${client.id}` }];
+        if (this.conventionTabActive) { breadcrumbs.push({ title: 'Conventions', url: '' }); }
+
         this.titleService.setTitles(client.name);
         this.breadcrumbsService.setBreadcrumb(
           this.route.snapshot,
-          { title: client.name, url: '' }
+          breadcrumbs
         );
       },
-        error =>{
-          this.router.navigate(['erreur'])
-      },
+        error => this.router.navigate(['erreur'])
     );
   }
 

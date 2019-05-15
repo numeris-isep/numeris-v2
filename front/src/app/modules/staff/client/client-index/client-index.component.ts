@@ -14,7 +14,7 @@ export class ClientIndexComponent implements OnInit {
   clients: Client[];
   contacts: Contact[];
 
-  secondTabActive: boolean = false;
+  contactTabActive: boolean = false;
 
   constructor(
     private clientService: ClientService,
@@ -26,9 +26,7 @@ export class ClientIndexComponent implements OnInit {
     this.getClients();
     this.getContacts();
 
-    this.route.data.subscribe(data => {
-      this.secondTabActive = data['title'] == 'Contacts';
-    });
+    this.route.data.subscribe(data => this.contactTabActive = data['tab'] === 'Contacts');
   }
 
 

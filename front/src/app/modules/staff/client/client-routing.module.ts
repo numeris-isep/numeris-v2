@@ -34,7 +34,7 @@ const clientRoutes: Routes = [
       {
         path: 'contacts',
         data: {
-          title: 'Contacts',
+          tab: 'Contacts',
         },
         children: [
           {
@@ -65,6 +65,13 @@ const clientRoutes: Routes = [
       {
         path: ':id/conventions/nouvelle',
         component: ConventionCreateComponent,
+      },
+      {
+        path: ':id/conventions',
+        component: ClientShowComponent,
+        data: {
+          tab: 'conventions'
+        }
       },
       {
         path: ':id',
