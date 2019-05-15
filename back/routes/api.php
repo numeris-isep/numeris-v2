@@ -50,9 +50,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     // Convention resource routes
     Route::apiResource('conventions', 'ConventionController', ['parameters' => ['conventions' => 'convention_id']])
-        ->only(['update', 'destroy']);
-    Route::apiResource('conventions.rates', 'ConventionRateController', ['parameters' => ['conventions'   => 'convention_id']])
-        ->only(['store']);
+        ->only(['store', 'update', 'destroy']);
 
     // Contact resource routes
     Route::apiResource('contacts', 'ContactController', ['parameters' => ['contacts' => 'contact_id']]);

@@ -42,17 +42,14 @@ class ProjectRequest extends AbstractFormRequest
             case 'POST':
                 $rules['name'] = 'required|string|unique:projects,name';
                 break;
-
             case 'PUT':
                 $rules['name'] = 'required|string|unique:projects,name,' . $project_id;
                 break;
-
             case 'PATCH':
                 return [
                     'step'              => 'nullable|string|in:' . implode(',', Project::steps()),
                     'money_received_at' => 'nullable|date'
                 ];
-
             default:break;
         }
 

@@ -28,22 +28,16 @@ class ConventionRequest extends AbstractFormRequest
      */
     public function rules()
     {
-        $convention_id = $this->ids;
-
-        switch($this->method())
-        {
-            case 'POST':
-                return [
-                    'name' => 'required|string|unique:conventions,name',
-                ];
-
-            case 'PUT':
-            case 'PATCH':
-                return [
-                    'name' => 'required|string|unique:conventions,name,' . $convention_id,
-                ];
-
-            default:break;
-        }
+        return [
+            'client_id'             => 'required|integer|exists:clients,id',
+            'name'                  => 'required|string',
+            'rates'                 => 'required|array|min:1',
+            'rates.*.name'          => 'required|distinct|string',
+            'rates.*.for_student'   => 'required|numeric|min:0',
+            'rates.*.for_staff'     => 'required|numeric|min:0',
+            'rates.*.for_client'    => 'required|numeric|min:0',
+            'rates.*.is_flat'       => 'required|boolean',
+            'rates.*.hours'         => 'required_if:rates.*.is_flat,true|numeric|min:0|nullable',
+        ];
     }
 }

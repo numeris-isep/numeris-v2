@@ -60,16 +60,13 @@ class UserRequest extends AbstractFormRequest
                 $rules['email'] = 'required|email|unique:users,email';
                 $rules['username'] = 'required|string|alpha|unique:users,username';
                 break;
-
             case 'PUT':
                 $rules['email'] = 'required|email|unique:users,email,' . $user_id;
                 $rules['username'] = 'required|string|alpha|unique:users,username,' . $user_id;
                 break;
-
             case 'PATCH':
                 return $patch_rules;
                 break;
-
             default:break;
         }
 

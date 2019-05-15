@@ -198,5 +198,12 @@ return [
         'capacity'                  => 'capicité',
         'contact_id'                => 'contact',
         'money_received_at'         => 'paiement reçu',
+        'rates'                     => 'tarifs',
+        'rates.*.name'              => 'nom',
+        'rates.*.for_student'       => 'tarif étudiant',
+        'rates.*.for_staff'         => 'tarif staff',
+        'rates.*.for_client'        => 'tarif client',
+        'rates.*.is_flat'           => 'forfait',
+        'rates.*.hours'             => 'heures'
     ],
 ];

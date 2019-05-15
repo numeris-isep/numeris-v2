@@ -34,7 +34,6 @@ class MissionRequest extends AbstractFormRequest
                 return [
                     'is_locked' => 'required|boolean'
                 ];
-
             default: break;
         }
 

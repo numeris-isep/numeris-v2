@@ -1,7 +1,11 @@
 <div class="ui segments">
   <div class="ui segment">
     <div class="ui blue ribbon label">
-      <i class="user md icon"></i> Nouveau contact client
+      <i class="user md icon"></i>
+      <ng-container *ngIf="contact; else new">
+        {{ contact.firstName }} {{ contact.lastName | uppercase }} - Modifier
+      </ng-container>
+      <ng-template #new>Nouveau contact client</ng-template>
     </div>
   </div>
 

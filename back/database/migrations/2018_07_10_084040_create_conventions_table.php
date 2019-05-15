@@ -19,7 +19,7 @@ class CreateConventionsTable extends Migration
             $table->integer('client_id')->unsigned()->nullable();
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
 
-            $table->string('name')->unique();
+            $table->string('name');
 
             $table->timestamps();
         });

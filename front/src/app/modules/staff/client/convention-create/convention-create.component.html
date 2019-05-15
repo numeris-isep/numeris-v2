@@ -1,0 +1,7 @@
+<app-content [condition]="!client">
+  <div class="ui padded centered grid doubling">
+    <div class="column">
+      <app-convention-form *ngIf="client" [client]="client"></app-convention-form>
+    </div>
+  </div>
+</app-content>

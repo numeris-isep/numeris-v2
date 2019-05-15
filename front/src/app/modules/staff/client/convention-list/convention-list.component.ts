@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Convention } from "../../../../core/classes/models/convention";
+import { Convention } from '../../../../core/classes/models/convention';
 
 @Component({
   selector: 'app-client-convention',
-  templateUrl: './client-convention.component.html'
+  templateUrl: './convention-list.component.html'
 })
-export class ClientConventionComponent implements OnInit {
+export class ConventionListComponent implements OnInit {
 
   @Input() conventions: Convention[];
 

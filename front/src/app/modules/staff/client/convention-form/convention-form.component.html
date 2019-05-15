@@ -1,0 +1,192 @@
+<div class="ui segments">
+  <div class="ui segment">
+    <div class="ui blue ribbon label">
+      <i class="user md icon"></i>
+      <ng-container *ngIf="convention; else new">
+        {{ convention.name }} - Modifier
+      </ng-container>
+      <ng-template #new>Nouvelle convention</ng-template>
+    </div>
+  </div>
+
+  <form class="ui form segment"
+        [formGroup]="conventionForm"
+        [ngClass]="{'error': submitted && conventionForm.invalid, 'loading': loading}">
+    <h4 class="ui dividing header">Informations</h4>
+    <div class="two fields">
+      <div class="required field" [ngClass]="{ 'error': submitted && f.name.errors }">
+        <label>Nom</label>
+        <div class="ui left icon corner labeled input">
+          <i class="address book outline icon"></i>
+          <input type="text" formControlName="name" placeholder="Nom">
+          <div class="ui corner label">
+            <i class="asterisk icon"></i>
+          </div>
+        </div>
+        <app-form-error *ngIf="submitted && f.name.errors" [errors]="f.name.errors"></app-form-error>
+      </div>
+      <div class="required field" [ngClass]="{ 'error': submitted && f.client_id.errors }">
+        <label>Client</label>
+        <div class="ui input">
+          <sui-select *ngIf="client" class="selection fluid" labelField="name" valueField="id"
+                      placeholder="Sélectionner une option" formControlName="client_id"
+                      [options]="[client]" [isDisabled]="true" #clientSelect>
+            <sui-select-option *ngFor="let option of clientSelect.filteredOptions" [value]="option"></sui-select-option>
+          </sui-select>
+        </div>
+        <app-form-error *ngIf="submitted && f.client_id.errors" [errors]="f.client_id.errors"></app-form-error>
+      </div>
+    </div>
+
+    <app-button size="mini" color="green" behaviour="right floated"
+                hiddenIcon="plus" (click)="addRate()">
+      Ajouter un tarif
+    </app-button>
+    <h4 class="ui dividing header">
+      Tarifs
+    </h4>
+    <table class="ui celled striped selectable very compact table"
+           formArrayName="rates">
+      <thead class="full-width center aligned">
+      <tr>
+        <th><i class="address book outline icon"></i> Nom</th>
+        <th>
+          <i class="icons">
+            <i class="user icon"></i>
+            <i class="top right corner euro sign icon"></i>
+          </i>
+          Tarif étudiant
+        </th>
+        <th>
+          <i class="icons">
+            <i class="user md icon"></i>
+            <i class="top right corner euro sign icon"></i>
+          </i>
+          Tarif staff
+        </th>
+        <th>
+          <i class="icons">
+            <i class="building icon"></i>
+            <i class="top right corner euro sign icon"></i>
+          </i>
+          Tarif client
+        </th>
+        <th class="collapsing"><i class="money bill alternate icon"></i> Forfait ?</th>
+        <th><i class="clock outline icon"></i> Heures forfaits</th>
+        <th class="collapsing"><i class="hand pointer outline icon"></i> Actions</th>
+      </tr>
+      </thead>
+
+      <tbody class="center aligned">
+      <tr *ngFor="let rate of fr.controls; let i = index" [formGroupName]="i">
+        <td class="center aligned">
+          <div class="required field" [ngClass]="{ 'error': submitted && frg(i).controls['name'].dirty && frg(i).controls['name'].errors }">
+              <div class="ui left icon mini corner labeled input">
+              <i class="address book outline icon"></i>
+              <input type="text" formControlName="name" placeholder="Nom">
+              <div class="ui corner label">
+                <i class="asterisk icon"></i>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="required field" [ngClass]="{ 'error': submitted && frg(i).controls['for_student'].dirty && frg(i).controls['for_student'].errors }">
+            <div class="ui left icon mini corner labeled input">
+              <i class="euro sign icon"></i>
+              <input type="number" formControlName="for_student"
+                     min="0" step="0.5" placeholder="Montant">
+              <div class="ui corner label">
+                <i class="asterisk icon"></i>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="required field" [ngClass]="{ 'error': submitted && frg(i).controls['for_staff'].dirty && frg(i).controls['for_staff'].errors }">
+            <div class="ui left icon mini corner labeled input">
+              <i class="euro sign icon"></i>
+              <input type="number" formControlName="for_staff"
+                     min="0" step="0.5" placeholder="Montant">
+              <div class="ui corner label">
+                <i class="asterisk icon"></i>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="required field" [ngClass]="{ 'error': submitted && frg(i).controls['for_client'].dirty && frg(i).controls['for_client'].errors }">
+            <div class="ui left icon mini corner labeled input">
+              <i class="euro sign icon"></i>
+              <input type="number" formControlName="for_client"
+                     min="0" step="0.5" placeholder="Montant">
+              <div class="ui corner label">
+                <i class="asterisk icon"></i>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <sui-checkbox formControlName="is_flat" class="toggle"></sui-checkbox>
+        </td>
+        <td>
+          <div class="required field" [ngClass]="{ 'error': submitted && frg(i).controls['is_flat'].value && frg(i).controls['hours'].errors }">
+            <div class="ui left icon mini corner labeled input" [ngClass]="{'disabled': !frg(i).controls['is_flat'].value}">
+              <i class="clock icon"></i>
+              <input type="number" formControlName="hours" min="0" step="0.5"
+                     placeholder="Heures">
+              <div class="ui corner label">
+                <i class="asterisk icon"></i>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <app-button behaviour="compact" size="mini" color="basic negative"
+                      hiddenIcon="trash alternate" (click)="removeRate(i)" [isDisabled]="fr.controls.length == 1">
+            Retirer
+          </app-button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="field">
+      <div *ngIf="!convention; else edit" class="ui buttons">
+        <a class="ui animated fade button" routerLink="/clients/{{ client.id }}">
+          <div class="visible content">Annuler</div>
+          <div class="hidden content">
+            <i class="cancel icon"></i>
+          </div>
+        </a>
+        <div class="or" data-text="ou"></div>
+        <button class="ui animated fade positive button" (click)="onSubmit()"
+                [ngClass]="{'loading': loading, 'disabled': conventionForm.invalid}">
+          <div class="visible content">Ajouter</div>
+          <div class="hidden content">
+            <i class="plus icon"></i>
+          </div>
+        </button>
+      </div>
+
+      <ng-template #edit>
+        <div class="ui buttons">
+          <a class="ui animated fade button" routerLink="/clients/{{ client.id }}">
+            <div class="visible content">Annuler</div>
+            <div class="hidden content">
+              <i class="cancel icon"></i>
+            </div>
+          </a>
+          <div class="or" data-text="ou"></div>
+          <button class="ui animated fade orange button" (click)="onSubmit()"
+                  [ngClass]="{'loading': loading, 'disabled': conventionForm.invalid}">
+            <div class="visible content">Modifier</div>
+            <div class="hidden content">
+              <i class="plus icon"></i>
+            </div>
+          </button>
+        </div>
+      </ng-template>
+    </div>
+  </form>
+</div>

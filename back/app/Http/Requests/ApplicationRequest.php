@@ -47,7 +47,6 @@ class ApplicationRequest extends AbstractFormRequest
                     'status'    => 'required_without:type|in:' . implode(',', Application::statuses()),
                 ];
                 break;
-
             default:break;
         }
 

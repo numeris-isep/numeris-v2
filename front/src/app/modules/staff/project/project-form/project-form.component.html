@@ -2,7 +2,11 @@
   <div class="ui segments">
     <div class="ui segment">
       <div class="ui blue ribbon label">
-        <i class="building icon"></i> Nouveau projet
+        <i class="building icon"></i>
+        <ng-container *ngIf="project; else new">
+          {{ project.name }} - Modifier
+        </ng-container>
+        <ng-template #new>Nouveau projet</ng-template>
       </div>
     </div>
 

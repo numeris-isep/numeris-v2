@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Contact } from "../../../../core/classes/models/contact";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ContactService } from "../../../../core/http/contact.service";
-import { AlertService } from "../../../../core/services/alert.service";
-import { Router } from "@angular/router";
-import { Observable } from "rxjs";
-import { first } from "rxjs/operators";
-import { handleFormErrors } from "../../../../core/functions/form-error-handler";
+import { Contact } from '../../../../core/classes/models/contact';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ContactService } from '../../../../core/http/contact.service';
+import { AlertService } from '../../../../core/services/alert.service';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { first } from 'rxjs/operators';
+import { handleFormErrors } from '../../../../core/functions/form-error-handler';
 
 @Component({
   selector: 'app-contact-form',
@@ -47,7 +47,7 @@ export class ContactFormComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    if (this.contactForm.invalid) return;
+    if (this.contactForm.invalid) { return; }
 
     this.loading = true;
     let contactRequest: Observable<Contact>;
@@ -74,7 +74,7 @@ export class ContactFormComponent implements OnInit {
           handleFormErrors(this.contactForm, errors);
           this.loading = false;
         },
-      )
+      );
   }
 
 }

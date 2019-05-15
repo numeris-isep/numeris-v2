@@ -45,13 +45,11 @@ class ClientRequest extends AbstractFormRequest
                 $rules['name'] = 'required|string|unique:clients,name';
                 $rules['reference'] = 'required|string|unique:clients,reference';
                 break;
-
             case 'PUT':
             case 'PATCH':
                 $rules['name'] = 'required|string|unique:clients,name,' . $client_id;
                 $rules['reference'] = 'required|string|unique:clients,reference,' . $client_id;
                 break;
-
             default:break;
         }
 
