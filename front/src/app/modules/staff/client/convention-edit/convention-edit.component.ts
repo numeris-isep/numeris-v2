@@ -4,6 +4,8 @@ import { Client } from '../../../../core/classes/models/client';
 import { ClientService } from '../../../../core/http/client.service';
 import { ConventionService } from '../../../../core/http/convention.service';
 import { ActivatedRoute } from '@angular/router';
+import { TitleService } from '../../../../core/services/title.service';
+import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.service';
 
 @Component({
   selector: 'app-convention-edit',
@@ -18,6 +20,8 @@ export class ConventionEditComponent implements OnInit {
     private route: ActivatedRoute,
     private clientService: ClientService,
     private conventionService: ConventionService,
+    private titleService: TitleService,
+    private breadcrumbsService: BreadcrumbsService,
   ) { }
 
   ngOnInit() {
@@ -32,7 +36,19 @@ export class ConventionEditComponent implements OnInit {
   }
 
   getConvention(conventionId: number) {
-    this.conventionService.getConvention(conventionId).subscribe(convention => this.convention = convention);
+    this.conventionService.getConvention(conventionId).subscribe(convention => {
+      this.convention = convention;
+
+      this.titleService.setTitles(`${convention.name} - Modifier`);
+      this.breadcrumbsService.addBreadcrumb(
+        [
+          { title: 'Clients', url: '/clients' },
+          { title: this.client.name, url: `/clients/${this.client.id}`},
+          { title: convention.name, url: `/clients/${this.client.id}/conventions` },
+          { title: 'Modifier', url: '' },
+        ]
+      );
+    });
   }
 
 }

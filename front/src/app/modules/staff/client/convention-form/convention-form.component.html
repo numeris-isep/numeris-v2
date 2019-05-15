@@ -1,7 +1,7 @@
 <div class="ui segments">
   <div class="ui segment">
     <div class="ui blue ribbon label">
-      <i class="user md icon"></i>
+      <i class="tag icon"></i>
       <ng-container *ngIf="convention; else new">
         {{ convention.name }} - Modifier
       </ng-container>
@@ -16,7 +16,7 @@
     <div class="required field" [ngClass]="{ 'error': submitted && f.name.errors }">
       <label>Nom</label>
       <div class="ui left icon corner labeled input">
-        <i class="address book outline icon"></i>
+        <i class="tag icon"></i>
         <input type="text" formControlName="name" placeholder="Nom">
         <div class="ui corner label">
           <i class="asterisk icon"></i>
