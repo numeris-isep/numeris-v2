@@ -12,13 +12,10 @@ class ConventionPolicy
 
     public function before(User $current_user, $ability)
     {
-        // Grant everything to developers, administrators and staffs
-        if ($current_user->role()->isSuperiorOrEquivalentTo('staff')) {
+        // Grant everything to developers, administrators and staffs (expect destroy)
+        if ($current_user->role()->isSuperiorOrEquivalentTo('staff') && $ability != 'destroy') {
             return true;
         }
-
-        // Forbid everything to students
-        return false;
     }
 
     public function index(User $current_user)
@@ -43,6 +40,6 @@ class ConventionPolicy
 
     public function destroy(User $current_user, Convention $convention)
     {
-        return false;
+        return $current_user->role()->isSuperiorOrEquivalentTo('administrator');
     }
 }

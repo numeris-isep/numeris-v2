@@ -17,7 +17,7 @@ class CreateRatesTable extends Migration
             $table->increments('id');
 
             $table->integer('convention_id')->unsigned()->nullable();
-            $table->foreign('convention_id')->references('id')->on('conventions')->onDelete('set null');
+            $table->foreign('convention_id')->references('id')->on('conventions')->onDelete('cascade');
 
             $table->string('name');
             $table->boolean('is_flat');

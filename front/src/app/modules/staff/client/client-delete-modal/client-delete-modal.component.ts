@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { SuiModal, ComponentModalConfig, ModalSize } from "ng2-semantic-ui";
-import { Client } from "../../../../core/classes/models/client";
-import { ClientService } from "../../../../core/http/client.service";
-import { AlertService } from "../../../../core/services/alert.service";
-import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { SuiModal, ComponentModalConfig, ModalSize } from 'ng2-semantic-ui';
+import { Client } from '../../../../core/classes/models/client';
+import { ClientService } from '../../../../core/http/client.service';
+import { AlertService } from '../../../../core/services/alert.service';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 export interface IClientDeleteModalContext {
   title: string;
@@ -41,9 +41,7 @@ export class ClientDeleteModalComponent implements OnInit {
         this.alertService.success([`Le client ${this.client.name} a bien été supprimé.`]);
         this.modal.approve(undefined);
     },
-      error => {
-        this.modal.deny(undefined);
-      }
+      error => this.modal.deny(undefined)
     );
   }
 

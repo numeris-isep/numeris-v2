@@ -58,6 +58,7 @@ class ConventionController extends Controller
             }
         }
 
+        // TODO: delete only if there is no billing value
         // Delete the remaining rates
         foreach ($old_rates as $old_rate) {
             $old_rate->delete();
@@ -78,6 +79,7 @@ class ConventionController extends Controller
         $convention = Convention::findOrFail($convention_id);
         $this->authorize('destroy', $convention);
 
+        // This action will delete all the associated rates as well
         $convention->delete();
 
         return response()->json(null, JsonResponse::HTTP_NO_CONTENT);

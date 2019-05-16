@@ -30,9 +30,15 @@ export class ConventionService {
     return this.http.post<Convention>(url, data, HTTP_OPTIONS);
   }
 
-  updateConvention(convention: number | Convention, data: Convention) {
+  updateConvention(convention: number | Convention, data: Convention): Observable<Convention> {
     const conventionId = typeof convention === 'number' ? convention : convention.id;
     const url = `${environment.apiUrl}/api/conventions/${conventionId}`;
     return this.http.put<Convention>(url, data, HTTP_OPTIONS);
+  }
+
+  deleteConvention(convention: number | Convention): Observable<Convention> {
+    const conventionId = typeof convention === 'number' ? convention : convention.id;
+    const url = `${environment.apiUrl}/api/conventions/${conventionId}`;
+    return this.http.delete<Convention>(url, HTTP_OPTIONS);
   }
 }
