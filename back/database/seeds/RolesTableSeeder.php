@@ -18,7 +18,7 @@ class RolesTableSeeder extends Seeder
                 ['developer', 'Développeur', 1],
                 ['administrator', 'Administrateur', 2],
                 ['staff', 'Staff', 3],
-                ['student', 'Student', 4],
+                ['student', 'Étudiant', 4],
             ];
 
             foreach ($roles as $role) {

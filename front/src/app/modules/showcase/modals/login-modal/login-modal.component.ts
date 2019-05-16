@@ -43,7 +43,7 @@ export class LoginModalComponent implements OnInit {
     this.authService.logout();
 
     // get return url from route parameters or default to home
-    if (!this.returnUrl) this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    if (!this.returnUrl) { this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/'; }
   }
 
   // convenient getter for easy access to form fields
@@ -62,7 +62,7 @@ export class LoginModalComponent implements OnInit {
         _ => {
           this.alertService.success(['Vous êtes connecté !'], null, true);
           this.router.navigate(['/profil'])
-            .then(() => { this.router.navigate([this.returnUrl]) } );
+            .then(() => { this.router.navigate([this.returnUrl]); } );
           this.loginModal.approve(undefined); // <-- make the modal disappear
         },
         errors => {
