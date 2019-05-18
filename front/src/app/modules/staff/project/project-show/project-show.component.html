@@ -100,7 +100,7 @@
             <i class="folder open icon"></i> Documents
             <span class="ui tiny blue label">0</span>
           </a>
-          <a *ngIf="project.isPrivate && projectUsers" class="item" suiTabHeader="3">
+          <a *ngIf="project.isPrivate" class="item" suiTabHeader="3">
             <i class="users icon"></i> Étudiants
             <span class="ui tiny blue label">{{ projectUsers.length }}</span>
           </a>

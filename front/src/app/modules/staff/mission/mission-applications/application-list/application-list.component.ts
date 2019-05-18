@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Application, ApplicationStatus } from "../../../../../core/classes/models/application";
-import { ApplicationService } from "../../../../../core/http/application.service";
-import { AlertService } from "../../../../../core/services/alert.service";
-import { ApplicationHandlerService } from "../../../../../core/services/handlers/application-handler.service";
-import { Mission } from "../../../../../core/classes/models/mission";
+import { Application, ApplicationStatus } from '../../../../../core/classes/models/application';
+import { ApplicationService } from '../../../../../core/http/application.service';
+import { AlertService } from '../../../../../core/services/alert.service';
+import { ApplicationHandlerService } from '../../../../../core/services/handlers/application-handler.service';
+import { Mission } from '../../../../../core/classes/models/mission';
 
 @Component({
   selector: 'app-application-list',
@@ -47,7 +47,7 @@ export class ApplicationListComponent implements OnInit {
         this.alertService.error(errors.status || errors);
         this.loading = false;
       }
-    )
+    );
   }
 
 }

@@ -14,7 +14,7 @@ export class ProjectUserHandlerService {
 
   constructor(private userService: UserService) { }
 
-  getProjectUsers() {
+  getProjectUsersSubject(): BehaviorSubject<User[]> {
     return this.$projectUsers;
   }
 
@@ -32,7 +32,7 @@ export class ProjectUserHandlerService {
 
   removeProjectUser(user: User) {
     this.projectUsers = this.projectUsers.filter(u => u.id !== user.id);
-    this.$projectUsers.next([...this.projectUsers, user]);
+    this.$projectUsers.next([...this.projectUsers]);
   }
 
   resetAll() {

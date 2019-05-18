@@ -33,6 +33,10 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.modalService.open(this.loginModal);
           break;
 
+        case 403:
+          this.alertService.error(err.error.errors);
+          break;
+
         case 404:
           this.router.navigate(['/page-inconnue']);
           break;
@@ -49,7 +53,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         default: break;
       }
 
-      return throwError(err.error.errors)
+      return throwError(err.error.errors);
     }));
   }
 }

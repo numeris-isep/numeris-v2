@@ -49,10 +49,10 @@
 
       <div class="center aligned extra content" [ngClass]="{'warning': mission.project.isPrivate}">
         <i *ngIf="!mission.project.isPrivate; else private"
-           class="eye big icon" suiPopup popupPlacement="top" popupHeader="Public"
+           class="eye big icon" suiPopup popupPlacement="top" popupHeader="Publique"
            popupText="Mission visible par tous les étudiants"></i>
         <ng-template #private>
-          <i class="eye slash big icon" suiPopup popupPlacement="top" popupHeader="Privé"
+          <i class="eye slash big icon" suiPopup popupPlacement="top" popupHeader="Privée"
              popupText="Mission seulement visible par les étudiants du projet"></i>
         </ng-template>
       </div>

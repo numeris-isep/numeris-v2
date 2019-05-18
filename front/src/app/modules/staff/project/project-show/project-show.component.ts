@@ -1,16 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Project, ProjectStep } from "../../../../core/classes/models/project";
-import { ActivatedRoute } from "@angular/router";
-import { ProjectService } from "../../../../core/http/project.service";
-import { TitleService } from "../../../../core/services/title.service";
-import { BreadcrumbsService } from "../../../../core/services/breadcrumbs.service";
-import { AlertService } from "../../../../core/services/alert.service";
-import { dateToString } from "../../../../shared/utils";
-import { ProjectUserModal } from "../project-user-modal/project-user-modal.component";
-import { SuiModalService } from "ng2-semantic-ui";
-import { ProjectUserHandlerService } from "../../../../core/services/handlers/project-user-handler.service";
+import { Project, ProjectStep } from '../../../../core/classes/models/project';
+import { ActivatedRoute } from '@angular/router';
+import { ProjectService } from '../../../../core/http/project.service';
+import { TitleService } from '../../../../core/services/title.service';
+import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.service';
+import { AlertService } from '../../../../core/services/alert.service';
+import { dateToString } from '../../../../shared/utils';
+import { ProjectUserModal } from '../project-user-modal/project-user-modal.component';
+import { SuiModalService } from 'ng2-semantic-ui';
+import { ProjectUserHandlerService } from '../../../../core/services/handlers/project-user-handler.service';
 import { User } from 'src/app/core/classes/models/user';
-import { BehaviorSubject } from "rxjs";
 
 @Component({
   selector: 'app-project-show',
@@ -74,7 +73,7 @@ export class ProjectShowComponent implements OnInit, OnDestroy {
   }
 
   getProjectUsers() {
-    this.projectUserHandler.getProjectUsers().subscribe(users => this.projectUsers = users);
+    this.projectUserHandler.getProjectUsersSubject().subscribe(users => this.projectUsers = users);
   }
 
   getProjectSteps() {
@@ -85,7 +84,7 @@ export class ProjectShowComponent implements OnInit, OnDestroy {
     this.projectService.updateProjectStep(this.selectedStep, this.project).subscribe(
       () => this.project.step = this.selectedStep,
       errors => this.alertService.error(errors.step || errors)
-    )
+    );
   }
 
   updatePayment() {
@@ -94,7 +93,7 @@ export class ProjectShowComponent implements OnInit, OnDestroy {
     this.projectService.updateProjectPayment(this.currentDate, this.project).subscribe(
       () => this.project.moneyReceivedAt = this.currentDate,
       errors => this.alertService.error(errors.money_received_at || errors)
-    )
+    );
   }
 
   openModal() {

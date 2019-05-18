@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TitleService } from "../../../../core/services/title.service";
-import { BreadcrumbsService } from "../../../../core/services/breadcrumbs.service";
-import { ActivatedRoute } from "@angular/router";
-import { MissionService } from "../../../../core/http/mission.service";
-import { Mission } from "../../../../core/classes/models/mission";
-import * as moment from "moment";
-import { now } from "moment";
-import { AlertService } from "../../../../core/services/alert.service";
-import { ApplicationHandlerService } from "../../../../core/services/handlers/application-handler.service";
+import { TitleService } from '../../../../core/services/title.service';
+import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.service';
+import { ActivatedRoute } from '@angular/router';
+import { MissionService } from '../../../../core/http/mission.service';
+import { Mission } from '../../../../core/classes/models/mission';
+import * as moment from 'moment';
+import { now } from 'moment';
+import { AlertService } from '../../../../core/services/alert.service';
+import { ApplicationHandlerService } from '../../../../core/services/handlers/application-handler.service';
 import { Application } from 'src/app/core/classes/models/application';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ApplicationService } from "../../http/application.service";
-import { BehaviorSubject } from "rxjs";
-import { Application } from "../../classes/models/application";
+import { ApplicationService } from '../../http/application.service';
+import { BehaviorSubject } from 'rxjs';
+import { Application } from '../../classes/models/application';
 import { Mission } from '../../classes/models/mission';
 
 @Injectable({
@@ -49,7 +49,7 @@ export class ApplicationHandlerService {
 
   setApplication(newStatus: string, application: Application) {
     // Remove application from old list
-    if (newStatus != application.status) {
+    if (newStatus !== application.status) {
       switch (application.status) {
         case 'waiting':
           this.waitingApplications.next([...this.waitingApplications.getValue()].filter(a => a !== application));
@@ -62,6 +62,8 @@ export class ApplicationHandlerService {
           break;
         default: break;
       }
+
+      this.applications.next([...this.applications.getValue()].filter(a => a !== application));
     }
 
     // Add application to new list

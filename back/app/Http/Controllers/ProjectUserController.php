@@ -40,9 +40,7 @@ class ProjectUserController extends Controller
             $project->id,
             request()->inProject ? true : false
         )->load(['roles'])
-            ->sortByDesc('created_at')
-            ->paginate(10, request()->page)
-            ->withPath(route('users.index'));
+            ->sortByDesc('created_at');
 
         if (request()->page) {
             return UserResource::collection(

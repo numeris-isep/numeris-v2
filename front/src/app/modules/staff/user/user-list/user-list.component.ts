@@ -1,20 +1,20 @@
 import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
-import { PaginatedUser } from "../../../../core/classes/pagination/paginated-user";
-import { FormControl } from "@angular/forms";
-import { Observable, Subscription } from "rxjs";
-import { UserService } from "../../../../core/http/user.service";
-import { debounceTime } from "rxjs/operators";
-import { IPopup } from "ng2-semantic-ui";
-import { Project } from "../../../../core/classes/models/project";
-import { Mission } from "../../../../core/classes/models/mission";
-import { RoleService } from "../../../../core/http/role.service";
-import { Role } from "../../../../core/classes/models/role";
-import { ApplicationService } from "../../../../core/http/application.service";
+import { PaginatedUser } from '../../../../core/classes/pagination/paginated-user';
+import { FormControl } from '@angular/forms';
+import { Observable, Subscription } from 'rxjs';
+import { UserService } from '../../../../core/http/user.service';
+import { debounceTime } from 'rxjs/operators';
+import { IPopup } from 'ng2-semantic-ui';
+import { Project } from '../../../../core/classes/models/project';
+import { Mission } from '../../../../core/classes/models/mission';
+import { RoleService } from '../../../../core/http/role.service';
+import { Role } from '../../../../core/classes/models/role';
+import { ApplicationService } from '../../../../core/http/application.service';
 import { User } from 'src/app/core/classes/models/user';
-import { AlertService } from "../../../../core/services/alert.service";
-import { ApplicationHandlerService } from "../../../../core/services/handlers/application-handler.service";
-import { ProjectUserHandlerService } from "../../../../core/services/handlers/project-user-handler.service";
-import { ProjectService } from "../../../../core/http/project.service";
+import { AlertService } from '../../../../core/services/alert.service';
+import { ApplicationHandlerService } from '../../../../core/services/handlers/application-handler.service';
+import { ProjectUserHandlerService } from '../../../../core/services/handlers/project-user-handler.service';
+import { ProjectService } from '../../../../core/http/project.service';
 
 @Component({
   selector: 'app-user-list',
@@ -26,25 +26,25 @@ import { ProjectService } from "../../../../core/http/project.service";
 })
 export class UserListComponent implements OnInit, OnDestroy {
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.windowWidth = event.target.innerWidth;
-  }
-
   windowWidth: number = window.innerWidth;
 
-  @Input() page: string = "user-list";
+  @Input() page = 'user-list';
   @Input() project: Project = null;
   @Input() mission: Mission = null;
   paginatedUser: PaginatedUser;
-  search: string = '';
+  search = '';
   searchControl: FormControl = new FormControl();
   searchControlSubscription: Subscription;
   selectedRole: string;
   selectedPromotion: string;
   roles: Role[];
   promotions: string[];
-  loading: boolean = false;
+  loading = false;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.windowWidth = event.target.innerWidth;
+  }
 
   constructor(
     private alertService: AlertService,
@@ -73,17 +73,17 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.searchControlSubscription.unsubscribe()
+    this.searchControlSubscription.unsubscribe();
   }
 
   reset(field: string) {
-    if (this[field] !== undefined) this[field] = null;
-    if (field == 'search') this.getPaginatedUsers(1);
+    if (this[field] !== undefined) { this[field] = null; }
+    if (field === 'search') { this.getPaginatedUsers(1); }
     this.setFilter();
   }
 
   getProjectUsers() {
-    return this.projectUserHandler.getProjectUsers().subscribe(() => this.getPaginatedUsers());
+    return this.projectUserHandler.getProjectUsersSubject().subscribe(() => this.getPaginatedUsers());
   }
 
   getPaginatedUsers(pageId: number = 1) {
@@ -115,9 +115,7 @@ export class UserListComponent implements OnInit, OnDestroy {
       paginatedUser => {
       this.paginatedUser = paginatedUser;
       this.loading = false;
-    },
-      error => {}
-    );
+    });
   }
 
   getRoles() {
@@ -129,7 +127,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   setFilter() {
-    if (this.search !== undefined && this.search != null && this.search == this.search.trim()
+    if (this.search !== undefined && this.search != null && this.search === this.search.trim()
       || this.selectedRole !== undefined
       || this.selectedPromotion !== undefined
     ) {
@@ -151,13 +149,14 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.applicationService.storeMissionApplication(this.mission, user).subscribe(
       application => {
         this.applicationHandler.setApplication('accepted', application); // Handle application in frontend
+        this.getPaginatedUsers();
         this.loading = false;
       },
       errors => {
         this.alertService.error(errors);
         this.loading = false;
       }
-    )
+    );
   }
 
   enrolProjectUser(user: User) {
@@ -171,7 +170,7 @@ export class UserListComponent implements OnInit, OnDestroy {
         this.alertService.error(errors);
         this.loading = false;
       }
-    )
+    );
   }
 
   removeProjectUser(user: User) {
@@ -186,7 +185,7 @@ export class UserListComponent implements OnInit, OnDestroy {
         this.alertService.error(errors);
         this.loading = false;
       }
-    )
+    );
   }
 
 }

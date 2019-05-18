@@ -40,6 +40,7 @@ class ConventionPolicy
 
     public function destroy(User $current_user, Convention $convention)
     {
-        return $current_user->role()->isSuperiorOrEquivalentTo('administrator');
+        return $current_user->role()->isSuperiorOrEquivalentTo('administrator')
+            && $convention->projects()->count() == 0;
     }
 }

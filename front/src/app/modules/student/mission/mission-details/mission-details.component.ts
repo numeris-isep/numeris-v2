@@ -41,12 +41,12 @@ export class MissionDetailsComponent implements OnInit {
     this.currentUserId = this.authService.getCurrentUserId();
     this.mission.applications
       .filter((application) => {
-        if (application.userId == this.currentUserId) {
+        if (application.userId === this.currentUserId) {
           this.userApplication =  application;
         }
       });
 
-    if (this.page == 'show') {
+    if (this.page === 'show') {
       this.deleteModal = new MissionDeleteModal(
         this.mission.title,
         `Voulez-vous vraiment supprimer la mission ${this.mission.title} ?`,
@@ -75,7 +75,7 @@ export class MissionDetailsComponent implements OnInit {
 
   openModal() {
     this.modalService.open(
-      this.page == 'show' ? this.deleteModal : this.applicationModal
+      this.page === 'show' ? this.deleteModal : this.applicationModal
     );
   }
 }

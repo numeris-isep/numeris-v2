@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Project } from "../../../../core/classes/models/project";
-import { ProjectDeleteModal } from "../project-delete-modal/project-delete-modal.component";
-import { SuiModalService } from "ng2-semantic-ui";
-import { User } from "../../../../core/classes/models/user";
+import { Project } from '../../../../core/classes/models/project';
+import { ProjectDeleteModal } from '../project-delete-modal/project-delete-modal.component';
+import { SuiModalService } from 'ng2-semantic-ui';
+import { User } from '../../../../core/classes/models/user';
 
 @Component({
   selector: 'app-project-details',
