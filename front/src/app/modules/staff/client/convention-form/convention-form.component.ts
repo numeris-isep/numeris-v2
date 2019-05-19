@@ -42,7 +42,7 @@ export class ConventionFormComponent implements OnInit {
     });
 
     if (this.convention) {
-      for (let rate of this.convention.rates) {
+      for (const rate of this.convention.rates) {
         this.addRate(rate);
       }
     } else {

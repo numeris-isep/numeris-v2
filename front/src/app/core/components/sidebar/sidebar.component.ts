@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;
 
   constructor(
-    private authService : AuthService,
+    private authService: AuthService,
     private scrollService: ScrollService
   ) { }
 

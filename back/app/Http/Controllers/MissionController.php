@@ -90,7 +90,13 @@ class MissionController extends Controller
         $mission = Mission::withApplicationsCounts()->findOrFail($mission_id);
         $this->authorize('show', $mission);
 
-        $mission->load(['address', 'project', 'applications']);
+        $mission->load([
+            'address',
+            'project',
+            'project.convention',
+            'project.convention.rates',
+            'applications'
+        ]);
 
         return response()->json(MissionResource::make($mission));
     }

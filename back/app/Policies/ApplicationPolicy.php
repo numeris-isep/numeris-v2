@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Application;
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -13,19 +14,21 @@ class ApplicationPolicy
     public function before(User $current_user, $ability)
     {
         // Grant everything to developers, administrators and staffs
-        if ($current_user->role()->isSuperiorOrEquivalentTo('staff') && $ability != 'destroy') {
-            return true;
+        if ($current_user->role()->isInferiorTo('staff') && $ability != 'destroy') {
+            return false;
         }
     }
 
     public function indexStatus(User $current_user)
     {
-        return false;
+        return true;
     }
 
     public function update(User $current_user, Application $application)
     {
-        return false;
+        // Impossible to update an application if the step of the project is
+        // different than 'open'
+        return $application->mission->project->step == Project::HIRING;
     }
 
     public function destroy(User $current_user, Application $application)

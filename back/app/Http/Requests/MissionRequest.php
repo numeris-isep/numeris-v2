@@ -43,7 +43,7 @@ class MissionRequest extends AbstractFormRequest
             'title'         => 'required|string',
             'description'   => 'required|string',
             'start_at'      => 'required|date',
-            'duration'      => 'required|integer|min:0',
+            'duration'      => 'required|numeric|min:0',
             'capacity'      => 'required|integer|min:0',
 
             // Address

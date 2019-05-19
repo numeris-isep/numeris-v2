@@ -1,4 +1,13 @@
 <app-content [condition]="!applicationStatuses">
+  <div *ngIf="mission.project.step != 'hiring'" class="ui message">
+    <div class="ui header">
+      Information
+    </div>
+    Les candidatures de cette mission ne peuvent plus être modifiées car le status du projet
+    <a routerLink="/projets/{{ mission.project.id }}">{{ mission.project.name }}</a>
+    n'est plus <b>Ouvert</b>.
+  </div>
+
   <div *ngIf="applicationStatuses" class="ui grid doubling">
     <div class="row">
       <div class="sixteen wide column">

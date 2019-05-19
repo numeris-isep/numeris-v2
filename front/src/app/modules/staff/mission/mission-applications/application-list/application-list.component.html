@@ -18,10 +18,9 @@
       <tr>
         <th><i class="user icon"></i> Nom</th>
         <ng-container *ngIf="status.status == 'accepted'">
-          <th>Heures de jours</th>
-          <th>Heures de nuit</th>
-          <th>Heures dimanches et jours fériés</th>
-          <th>Forfait 7h</th>
+          <th *ngFor="let rate of mission.project.convention.rates">
+            {{ rate.name }}
+          </th>
         </ng-container>
         <th class="collapsing"><i class="hand pointer outline icon"></i> Actions</th>
       </tr>
@@ -32,32 +31,12 @@
         <td>{{ application.user.firstName }} {{ application.user.lastName | uppercase }}</td>
         <!-- TODO -->
         <ng-container *ngIf="status.status == 'accepted'">
-          <td class="center aligned">
+          <td *ngFor="let rate of mission.project.convention.rates"
+              class="center aligned">
             <div class="ui left icon mini input">
               <i class="clock icon"></i>
               <input type="number" name="test" min="0" step="0.5"
-                     placeholder="h" value="0">
-            </div>
-          </td>
-          <td class="center aligned">
-            <div class="ui left icon mini input">
-              <i class="clock icon"></i>
-              <input type="number" name="test" min="0" step="0.5"
-                     placeholder="h" value="0">
-            </div>
-          </td>
-          <td class="center aligned">
-            <div class="ui left icon mini input">
-              <i class="clock icon"></i>
-              <input type="number" name="test" min="0" step="0.5"
-                     placeholder="h" value="0">
-            </div>
-          </td>
-          <td class="center aligned">
-            <div class="ui left icon mini input">
-              <i class="clock icon"></i>
-              <input type="number" name="test" min="0" step="0.5"
-                     placeholder="h" value="0">
+                     placeholder="h" value="0" [readOnly]="mission.project.step != 'hiring'">
             </div>
           </td>
         </ng-container>
@@ -68,21 +47,23 @@
                            hiddenIcon="zoom-in">
             Voir
           </app-link-button>
-          <app-button *ngIf="application.status != 'accepted'" behaviour="compact"
-                      size="tiny" color="basic positive" (click)="updateApplication('accepted', application)"
-                      hiddenIcon="handshake">
-            Inscrire
-          </app-button>
-          <app-button *ngIf="application.status == 'accepted'" behaviour="compact"
-                      size="tiny" color="basic negative" (click)="updateApplication('waiting', application)"
-                      hiddenIcon="trash alternate">
-            Retirer
-          </app-button>
-          <app-button *ngIf="application.status == 'waiting'" behaviour="compact"
-                      size="tiny" color="basic negative" (click)="updateApplication('refused', application)"
-                      hiddenIcon="trash alternate">
-            Refuser
-          </app-button>
+          <ng-container *ngIf="mission.project.step == 'hiring'">
+            <app-button *ngIf="application.status != 'accepted'" behaviour="compact"
+                        size="tiny" color="basic positive" (click)="updateApplication('accepted', application)"
+                        hiddenIcon="handshake">
+              Inscrire
+            </app-button>
+            <app-button *ngIf="application.status == 'accepted'" behaviour="compact"
+                        size="tiny" color="basic negative" (click)="updateApplication('waiting', application)"
+                        hiddenIcon="trash alternate">
+              Retirer
+            </app-button>
+            <app-button *ngIf="application.status == 'waiting'" behaviour="compact"
+                        size="tiny" color="basic negative" (click)="updateApplication('refused', application)"
+                        hiddenIcon="trash alternate">
+              Refuser
+            </app-button>
+          </ng-container>
         </td>
       </tr>
       </tbody>
