@@ -1,0 +1,46 @@
+<app-content [condition]="!applications">
+  <form class="ui segment" *ngIf="applications" [formGroup]="billsForm" [ngClass]="{ 'loading': loading }">
+    <div class="ui blue ribbon label">
+      <i class="sort numeric up icon"></i> Heures sur la mission
+      <div class="detail">{{ applications.length }}</div>
+    </div>
+
+    <app-button (click)="onSubmit()" size="mini" color="green"
+                behaviour="right floated" hiddenIcon="save">
+      Sauvegarder
+    </app-button>
+
+    <table class="ui celled striped selectable table">
+      <thead>
+      <tr>
+        <th><i class="user icon"></i> Nom</th>
+        <th *ngFor="let rate of mission.project.convention.rates">
+          {{ rate.name }}
+        </th>
+        <th class="collapsing"><i class="hand pointer outline icon"></i> Actions</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let application of fa.controls; let i = index">
+        <td>{{ fag(i, 'user_name').value }}</td>
+        <td class="collapsing" *ngFor="let bill of fag(i, 'bills').controls; let j = index">
+          <div class="ui mini left icon input">
+            <i class="clock icon"></i>
+            <input type="number" [formControl]="fbg(i, j, 'amount')"
+                   placeholder="Heures" min="0" step="0.5">
+          </div>
+        </td>
+        <td class="center aligned collapsing">
+          <app-link-button routerLink="/utilisateurs/{{ fag(i, 'user_id').value }}"
+                           behaviour="compact"
+                           size="tiny" color="basic"
+                           hiddenIcon="zoom-in">
+            Voir
+          </app-link-button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+</app-content>

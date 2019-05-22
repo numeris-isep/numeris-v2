@@ -1,0 +1,86 @@
+<table class="ui celled striped selectable very compact definition table"
+       [ngClass]="{ 'top-marged': page == 'mission-show' }">
+  <thead class="full-width center aligned">
+  <tr class="collapsing">
+    <th class="center aligned">
+      <div class="ui mini buttons" *ngIf="page == 'client-show'; else missionShow">
+        <a class="ui animated fade orange button" routerLink="/clients/{{ client.id }}/conventions/{{ convention.id }}/modifier">
+          <div class="visible content">Modifier</div>
+          <div class="hidden content">
+            <i class="edit icon"></i>
+          </div>
+        </a>
+        <div class="or" data-text="ou"></div>
+        <div class="ui animated fade negative button" (click)="openModal(convention)">
+          <div class="visible content">Supprimer</div>
+          <div class="hidden content">
+            <i class="trash alternate icon"></i>
+          </div>
+        </div>
+      </div>
+      <ng-template #missionShow>
+        <i class="euro sign icon"></i> Tarifs
+      </ng-template>
+    </th>
+    <th>
+      <i class="icons">
+        <i class="user icon"></i>
+        <i class="top right corner euro sign icon"></i>
+      </i>
+      Tarif étudiant
+    </th>
+    <th>
+      <i class="icons">
+        <i class="user md icon"></i>
+        <i class="top right corner euro sign icon"></i>
+      </i>
+      Tarif staff
+    </th>
+    <th>
+      <i class="icons">
+        <i class="building icon"></i>
+        <i class="top right corner euro sign icon"></i>
+      </i>
+      Tarif client
+    </th>
+    <th><i class="money bill alternate icon"></i> Forfait ?</th>
+    <th><i class="clock outline icon"></i> Heures forfaits</th>
+    <th class="collapsing" *ngIf="page == 'mission-show'">
+      <i class="sort numeric up icon"></i> Heures
+    </th>
+  </tr>
+  </thead>
+
+  <tbody class="center aligned" *ngIf="convention.rates.length != 0; else noRate">
+  <tr *ngFor="let rate of convention.rates" [ngClass]="{'warning': rate.isFlat}">
+    <td class="collapsing">{{ rate.name }}</td>
+    <td>{{ rate.forStudent | currency:'€' }}</td>
+    <td>{{ rate.forStaff | currency:'€' }}</td>
+    <td>{{ rate.forClient | currency:'€' }}</td>
+    <td>
+      <sui-checkbox class="toggle" [isReadonly]="true" [ngModel]="rate.isFlat"></sui-checkbox>
+    </td>
+    <td>
+      {{ (rate.hours | number) || '-' }}{{ rate.hours ? 'h' : '' }}
+    </td>
+    <td *ngIf="page == 'mission-show'">
+      <div class="ui mini left icon input">
+        <i class="clock icon"></i>
+        <input type="number" placeholder="Heures" min="0" step="0.5">
+      </div>
+    </td>
+  </tr>
+  </tbody>
+  <ng-template #noRate>
+    <tfoot class="full-width">
+    <tr>
+      <th colspan="6">
+        <app-empty>
+          Aucun tarif pour cette convention.
+          <a href="/clients/{{ client.id }}/conventions/{{ convention.id }}/modifier">Ajouter un tarif</a>
+        </app-empty>
+      </th>
+    </tr>
+    </tfoot>
+  </ng-template>
+</table>

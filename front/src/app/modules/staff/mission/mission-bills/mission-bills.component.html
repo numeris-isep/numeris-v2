@@ -1,0 +1,27 @@
+<app-content [condition]="!mission">
+  <div class="ui grid">
+    <div class="row">
+      <div class="column">
+        <div class="ui segment">
+          <div class="ui ribbon blue label">
+            <i class="tag icon"></i> Convention
+          </div>
+          <app-button size="mini" color="green"
+                      behaviour="right floated" hiddenIcon="down arrow">
+            Appliquer à tous les étudiants
+          </app-button>
+          <app-convention-details *ngIf="mission"
+                                  [client]="mission.project.client"
+                                  [convention]="mission.project.convention"
+                                  page="mission-show"></app-convention-details>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <app-bills-form *ngIf="mission" [mission]="mission"></app-bills-form>
+      </div>
+    </div>
+  </div>
+</app-content>

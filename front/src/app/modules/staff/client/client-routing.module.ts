@@ -36,6 +36,7 @@ const clientRoutes: Routes = [
         path: 'contacts',
         data: {
           tab: 'Contacts',
+          title: 'Contacts',
         },
         children: [
           {

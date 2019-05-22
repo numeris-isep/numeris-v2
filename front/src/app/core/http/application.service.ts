@@ -42,8 +42,11 @@ export class ApplicationService {
     return this.http.post<Application>(url, data, HTTP_OPTIONS);
   }
 
-  getMissionApplications(mission: Mission): Observable<Application[]> {
-    const url = `${environment.apiUrl}/api/missions/${mission.id}/applications`;
+  getMissionApplications(mission: Mission, status: string = null): Observable<Application[]> {
+    let url = `${environment.apiUrl}/api/missions/${mission.id}/applications?`;
+
+    if (status) { url += `status=${status}`; }
+
     return this.http.get<Application[]>(url, HTTP_OPTIONS);
   }
 

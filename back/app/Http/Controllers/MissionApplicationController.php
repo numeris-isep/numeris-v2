@@ -22,7 +22,13 @@ class MissionApplicationController extends Controller
         $mission = Mission::findOrFail($mission_id);
         $this->authorize('index-mission-application', $mission);
 
-        return response()->json(ApplicationResource::collection($mission->applications->load('user')));
+        $this->validate(request(), [
+            'status' => 'string|in:' . implode(',', Application::statuses()),
+        ]);
+
+        return response()->json(ApplicationResource::collection(
+            $mission->applicationsWhoseStatusIs(request()->status)->load('user'))
+        );
     }
 
     /**

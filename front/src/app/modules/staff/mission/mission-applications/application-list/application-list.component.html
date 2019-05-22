@@ -18,9 +18,7 @@
       <tr>
         <th><i class="user icon"></i> Nom</th>
         <ng-container *ngIf="status.status == 'accepted'">
-          <th *ngFor="let rate of mission.project.convention.rates">
-            {{ rate.name }}
-          </th>
+          <th><i class="calendar icon"></i> Dernière modification</th>
         </ng-container>
         <th class="collapsing"><i class="hand pointer outline icon"></i> Actions</th>
       </tr>
@@ -29,19 +27,11 @@
       <tbody *ngIf="applications.length > 0; else noApplication">
       <tr *ngFor="let application of applications">
         <td>{{ application.user.firstName }} {{ application.user.lastName | uppercase }}</td>
-        <!-- TODO -->
         <ng-container *ngIf="status.status == 'accepted'">
-          <td *ngFor="let rate of mission.project.convention.rates"
-              class="center aligned">
-            <div class="ui left icon mini input">
-              <i class="clock icon"></i>
-              <input type="number" name="test" min="0" step="0.5"
-                     placeholder="h" value="0" [readOnly]="mission.project.step != 'hiring'">
-            </div>
-          </td>
+          <td>{{ application.updatedAt | date:'dd/MM/yyyy' }}</td>
         </ng-container>
         <td class="center aligned collapsing">
-          <app-link-button routerLink="/utilisateurs/{{application.user.id}}"
+          <app-link-button routerLink="/utilisateurs/{{ application.user.id }}"
                            behaviour="compact"
                            size="tiny" color="basic"
                            hiddenIcon="zoom-in">

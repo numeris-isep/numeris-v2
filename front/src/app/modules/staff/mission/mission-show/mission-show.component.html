@@ -93,24 +93,24 @@
             <i class="handshake icon"></i> Candidatures
             <span class="ui tiny blue label">{{ applications.length }}</span>
           </a>
-          <a class="item" suiTabHeader="2">
-            <i class="clock icon"></i> Heures
-          </a>
-          <a class="item" suiTabHeader="3">
+          <a class="item" suiTabHeader="2" [isDisabled]="mission.project.step != 'hiring'">
             <i class="users icon"></i> Étudiants
+          </a>
+          <a class="item" suiTabHeader="3" [isDisabled]="mission.project.step == 'hiring'">
+            <i class="clock icon"></i> Heures
           </a>
         </div>
 
         <div class="ui" suiTabContent="1">
-          <app-mission-applications *ngIf="mission" [mission]="mission"></app-mission-applications>
+          <app-mission-applications [mission]="mission"></app-mission-applications>
         </div>
 
         <div class="ui" suiTabContent="2">
-          <!--TODO-->
+          <app-user-list *ngIf="mission.project.step == 'hiring'" page="mission-show" [mission]="mission"></app-user-list>
         </div>
 
         <div class="ui" suiTabContent="3">
-          <app-user-list *ngIf="mission" page="mission-show" [mission]="mission"></app-user-list>
+          <app-mission-bills *ngIf="applications && mission.project.step != 'hiring'" [mission]="mission" [applications]="applications"></app-mission-bills>
         </div>
       </sui-tabset>
     </div>

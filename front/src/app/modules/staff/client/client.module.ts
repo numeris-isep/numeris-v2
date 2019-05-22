@@ -25,6 +25,7 @@ import { ConventionCreateComponent } from './convention-create/convention-create
 import { ConventionFormComponent } from './convention-form/convention-form.component';
 import { ConventionEditComponent } from './convention-edit/convention-edit.component';
 import { ConventionDeleteModalComponent } from './convention-delete-modal/convention-delete-modal.component';
+import { ConventionDetailsComponent } from './convention-details/convention-details.component';
 
 @NgModule({
   imports: [
@@ -61,6 +62,6 @@ import { ConventionDeleteModalComponent } from './convention-delete-modal/conven
   entryComponents: [
     ClientDeleteModalComponent,
     ConventionDeleteModalComponent,
-  ]
+  ],
 })
 export class ClientModule { }

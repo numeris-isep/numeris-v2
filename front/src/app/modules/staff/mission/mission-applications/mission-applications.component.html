@@ -8,9 +8,9 @@
     n'est plus <b>Ouvert</b>.
   </div>
 
-  <div *ngIf="applicationStatuses" class="ui grid doubling">
+  <div *ngIf="applicationStatuses" class="ui centered grid doubling">
     <div class="row">
-      <div class="sixteen wide column">
+      <div class="ten wide column">
         <app-application-list [statuses]="applicationStatuses" [status]="acceptedStatus" [mission]="mission"></app-application-list>
       </div>
     </div>

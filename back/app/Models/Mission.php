@@ -125,6 +125,14 @@ class Mission extends Model
         return $this->hasMany(Application::class);
     }
 
+    public function applicationsWhoseStatusIs($status =  null)
+    {
+        return $this->hasMany(Application::class)
+            ->when($status, function ($query) use ($status) {
+                return $query->where('status', '=', $status);
+            })->get();
+    }
+
     public function waitingApplications()
     {
         return $this->applications()
