@@ -70,6 +70,21 @@ class Application extends Model
         return static::$statusTranslations;
     }
 
+    public static function waiting()
+    {
+        return static::where('status', self::WAITING)->get();
+    }
+
+    public static function accepted()
+    {
+        return static::where('status', self::ACCEPTED)->get();
+    }
+
+    public static function refused()
+    {
+        return static::where('status', self::REFUSED)->get();
+    }
+
     public function mission()
     {
         return $this->belongsTo(Mission::class);
@@ -78,5 +93,10 @@ class Application extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function bills()
+    {
+        return $this->hasMany(Bill::class);
     }
 }

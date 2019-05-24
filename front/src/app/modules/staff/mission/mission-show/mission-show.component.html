@@ -96,7 +96,8 @@
           <a class="item" suiTabHeader="2" [isDisabled]="mission.project.step != 'hiring'">
             <i class="users icon"></i> Étudiants
           </a>
-          <a class="item" suiTabHeader="3" [isDisabled]="mission.project.step == 'hiring'">
+          <a class="item" suiTabHeader="3" [isDisabled]="mission.project.step == 'hiring'"
+             [isActive]="hoursTabActive">
             <i class="clock icon"></i> Heures
           </a>
         </div>

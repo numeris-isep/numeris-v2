@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SocialContributionsTableSeeder::class);
         $this->call(RatesTableSeeder::class);
         $this->call(ProjectUserTableSeeder::class);
+        $this->call(BillsTableSeeder::class);
     }
 }

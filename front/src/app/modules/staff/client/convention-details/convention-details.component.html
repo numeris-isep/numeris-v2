@@ -45,7 +45,7 @@
     </th>
     <th><i class="money bill alternate icon"></i> Forfait ?</th>
     <th><i class="clock outline icon"></i> Heures forfaits</th>
-    <th class="collapsing" *ngIf="page == 'mission-show'">
+    <th class="collapsing" *ngIf="page == 'mission-show' && mission && mission.project.step == 'validated'">
       <i class="sort numeric up icon"></i> Heures
     </th>
   </tr>
@@ -63,7 +63,7 @@
     <td>
       {{ (rate.hours | number) || '-' }}{{ rate.hours ? 'h' : '' }}
     </td>
-    <td *ngIf="page == 'mission-show'">
+    <td *ngIf="page == 'mission-show' && mission && mission.project.step == 'validated'">
       <div class="ui mini left icon input">
         <i class="clock icon"></i>
         <input type="number" placeholder="Heures" min="0" step="0.5">

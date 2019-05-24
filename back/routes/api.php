@@ -55,10 +55,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Contact resource routes
     Route::apiResource('contacts', 'ContactController', ['parameters' => ['contacts' => 'contact_id']]);
 
-    // Rate resource routes
-    Route::apiResource('rates', 'RateController', ['parameters' => ['rates' => 'rate_id']])
-        ->only(['update', 'destroy']);
-
     // Project resource routes
     Route::apiResource('projects', 'ProjectController', ['parameters' => ['projects' => 'project_id']]);
     Route::get('projects-steps', 'ProjectController@indexStep')->name('projects.steps.index');
@@ -75,6 +71,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('missions.applications', 'MissionApplicationController', ['parameters' => ['missions' => 'mission_id']])
         ->only(['index', 'store']);
     Route::get('missions/{mission_id}/users', 'MissionUserController@indexNotApplied')->name('missions.users.index.not-applied');
+    Route::put('missions/{mission_id}/bills', 'MissionBillController@update')->name('missions.bills.update');
 
     // Application resource routes
     Route::get('applications-statuses', 'ApplicationController@indexStatus')->name('applications.statuses.index');

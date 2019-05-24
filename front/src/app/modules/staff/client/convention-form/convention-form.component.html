@@ -68,7 +68,7 @@
       <tr *ngFor="let rate of fr.controls; let i = index" [formGroupName]="i" [ngClass]="{'warning': frg(i).controls['is_flat'].value}">
         <td class="center aligned">
           <div class="required field" [ngClass]="{ 'error': submitted && frg(i).controls['name'].dirty && frg(i).controls['name'].errors }">
-              <div class="ui left icon mini corner labeled input">
+            <div class="ui left icon mini corner labeled input">
               <i class="address book outline icon"></i>
               <input type="text" formControlName="name" placeholder="Nom">
               <div class="ui corner label">

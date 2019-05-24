@@ -3,9 +3,9 @@
     <div class="ui header">
       Information
     </div>
-    Les candidatures de cette mission ne peuvent plus être modifiées car le status du projet
+    Les candidatures de cette mission ne peuvent pas être modifiées car le projet
     <a routerLink="/projets/{{ mission.project.id }}">{{ mission.project.name }}</a>
-    n'est plus <b>Ouvert</b>.
+    n'a plus le status <b>Ouvert</b>.
   </div>
 
   <div *ngIf="applicationStatuses" class="ui centered grid doubling">

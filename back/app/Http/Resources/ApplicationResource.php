@@ -26,6 +26,7 @@ class ApplicationResource extends JsonResource
             // Relations
             'user'      => UserResource::make($this->whenLoaded('user')),
             'mission'   => MissionResource::make($this->whenLoaded('mission')),
+            'bills'     => BillResource::collection($this->whenLoaded('bills')),
         ];
     }
 }

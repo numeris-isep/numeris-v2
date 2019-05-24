@@ -35,7 +35,7 @@ const clientRoutes: Routes = [
       {
         path: 'contacts',
         data: {
-          tab: 'Contacts',
+          tab: 'contacts',
           title: 'Contacts',
         },
         children: [

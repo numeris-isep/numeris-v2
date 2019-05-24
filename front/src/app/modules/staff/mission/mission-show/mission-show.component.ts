@@ -18,6 +18,7 @@ export class MissionShowComponent implements OnInit, OnDestroy {
 
   mission: Mission;
   applications: Application[];
+  hoursTabActive: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +30,8 @@ export class MissionShowComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.route.data.subscribe(data => this.hoursTabActive = data['tab'] === 'heures');
+
     this.route.params.subscribe(param => {
       this.getMission(parseInt(param.missionId));
     });

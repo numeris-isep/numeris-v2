@@ -5,6 +5,10 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Rate } from '../../../../../core/classes/models/rate';
 import { Bill } from '../../../../../core/classes/models/bill';
 import { ApplicationService } from '../../../../../core/http/application.service';
+import { MissionService } from '../../../../../core/http/mission.service';
+import { first } from 'rxjs/operators';
+import { handleFormErrors } from '../../../../../core/functions/form-error-handler';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bills-form',
@@ -21,7 +25,9 @@ export class BillsFormComponent implements OnInit {
   submitted: boolean = false;
 
   constructor(
+    private router: Router,
     private applicationService: ApplicationService,
+    private missionService: MissionService,
     private fb: FormBuilder,
   ) { }
 
@@ -44,10 +50,15 @@ export class BillsFormComponent implements OnInit {
 
   get fa() { return this.billsForm.get('applications') as FormArray; }
 
-  fag(index: number, control: string) { return this.fa.controls[index].controls[control]; }
+  fag(index: number, control: string) {
+    const fa: FormGroup = this.fa.controls[index] as FormGroup;
+    return fa.controls[control] as FormGroup;
+  }
 
   fbg(indexA: number, indexB: number, control: string) {
-    return this.fag(indexA, 'bills').controls[indexB].controls[control];
+    const fb: FormGroup = this.fag(indexA, 'bills') as FormGroup;
+    const fbg: FormGroup = fb.controls[indexB] as FormGroup;
+    return fbg.controls[control];
   }
 
   initApplicationsForm() {
@@ -56,11 +67,12 @@ export class BillsFormComponent implements OnInit {
     }
   }
 
-  initBillsForm() {
+  initBillsForm(bills: Bill[]) {
     const billsFormArray = this.fb.array([]);
 
     for (const rate of this.mission.project.convention.rates) {
-      billsFormArray.push(this.createBill(rate));
+      const bill = bills.filter(b => b.rateId === rate.id)[0];
+      billsFormArray.push(this.createBill(rate, bill));
     }
 
     return billsFormArray;
@@ -73,7 +85,7 @@ export class BillsFormComponent implements OnInit {
       application_id: [application.id],
       user_id: [application.user.id],
       user_name: [`${application.user.firstName} ${application.user.lastName.toUpperCase()}`],
-      bills: this.initBillsForm(),
+      bills: this.initBillsForm(application.bills),
     });
   }
 
@@ -83,17 +95,32 @@ export class BillsFormComponent implements OnInit {
 
   createBill(rate: Rate, bill: Bill = null) {
     return this.fb.group({
+      id: [bill ? bill.id : null],
       rate_id: [rate.id, Validators.required],
-      amount: [bill ? bill.amount : Math.round(Math.random() * 10)],
+      amount: [bill ? bill.amount : '', Validators.required],
     });
   }
 
   onSubmit() {
     this.submitted = true;
-
-    if (this.billsForm.invalid) { return; }
-
     this.loading = true;
+
+    this.missionService.updateMissionBills(this.billsForm.value, this.mission).pipe(first())
+      .subscribe(
+        () => {
+          this.router.navigate(['/profil'])
+            .then(() => { this.router.navigate([`/missions/${this.mission.id}/heures`]); } );
+          this.loading = false;
+        },
+        errors => {
+          for (let i = 0; i < this.applications.length; i++) {
+            for (let j = 0; j < this.mission.project.convention.rates.length; j++) {
+              handleFormErrors(this.fbg(i, j, 'amount') as FormGroup, errors);
+            }
+          }
+          this.loading = false;
+        }
+      );
   }
 
 }

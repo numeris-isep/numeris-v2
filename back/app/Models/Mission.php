@@ -63,11 +63,10 @@ class Mission extends Model
             ->whereDate('start_at', '>', now())
             ->get()
             ->filter(function($mission) use ($user) {
-                if ($mission->project->is_private) {
-                    return $mission->project->hasUser($user) ? $mission : null;
+                if ($mission->project->is_private && ! $mission->project->hasUser($user)) {
+                    return null;
                 }
-
-                return $mission;
+                return $mission->project->step == Project::HIRING ? $mission : null;
             });
     }
 

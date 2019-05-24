@@ -1,11 +1,11 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { ActivatedRoute, NavigationEnd, Router, RouterModule, Routes, UrlSegment } from "@angular/router";
-import { NotFoundComponent } from "./components/not-found/not-found.component";
-import { HomeComponent } from "../modules/showcase/home/home.component";
-import { distinctUntilChanged, filter, map } from "rxjs/operators";
-import { TitleService } from "./services/title.service";
-import { BreadcrumbsService } from "./services/breadcrumbs.service";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ActivatedRoute, NavigationEnd, Router, RouterModule, Routes } from '@angular/router';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { HomeComponent } from '../modules/showcase/home/home.component';
+import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { TitleService } from './services/title.service';
+import { BreadcrumbsService } from './services/breadcrumbs.service';
 
 const appRoutes: Routes = [
   {
@@ -26,7 +26,7 @@ const appRoutes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes, {onSameUrlNavigation: 'reload'})
   ],
   exports: [
     RouterModule

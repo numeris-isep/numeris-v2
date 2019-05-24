@@ -22,6 +22,9 @@ class RateResource extends JsonResource
             'forStudent'    => $this->for_student,
             'forStaff'      => $this->for_staff,
             'forClient'     => $this->for_client,
+
+            // Relations
+            'bills'         => BillResource::collection($this->whenLoaded('bills')),
         ];
     }
 }

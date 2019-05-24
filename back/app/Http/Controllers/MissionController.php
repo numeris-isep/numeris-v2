@@ -95,7 +95,8 @@ class MissionController extends Controller
             'project',
             'project.convention',
             'project.convention.rates',
-            'applications'
+            'applications',
+            'applications.bills',
         ]);
 
         return response()->json(MissionResource::make($mission));

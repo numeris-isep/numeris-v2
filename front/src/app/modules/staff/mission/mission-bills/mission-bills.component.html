@@ -1,4 +1,13 @@
 <app-content [condition]="!mission">
+  <div *ngIf="mission && mission.project.step != 'validated'" class="ui message">
+    <div class="ui header">
+      Information
+    </div>
+    Les heures de cette mission ne peuvent pas être modifiées car le projet
+    <a routerLink="/projets/{{ mission.project.id }}">{{ mission.project.name }}</a>
+    n'a plus le status <b>Validé</b>.
+  </div>
+
   <div class="ui grid">
     <div class="row">
       <div class="column">
@@ -6,11 +15,12 @@
           <div class="ui ribbon blue label">
             <i class="tag icon"></i> Convention
           </div>
-          <app-button size="mini" color="green"
+          <app-button *ngIf="mission && mission.project.step == 'validated'" size="mini" color="green"
                       behaviour="right floated" hiddenIcon="down arrow">
             Appliquer à tous les étudiants
           </app-button>
           <app-convention-details *ngIf="mission"
+                                  [mission]="mission"
                                   [client]="mission.project.client"
                                   [convention]="mission.project.convention"
                                   page="mission-show"></app-convention-details>

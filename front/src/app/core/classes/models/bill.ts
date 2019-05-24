@@ -1,13 +1,14 @@
 import { Application } from './application';
+import { Rate } from './rate';
 
 export class Bill {
 
   id: number;
-  billId: number;
   applicationId: number;
+  rateId: number;
 
-  bill: Bill;
   application: Application;
+  rate: Rate;
   amount: number;
 
 }

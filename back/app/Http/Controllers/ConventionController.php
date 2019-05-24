@@ -52,16 +52,17 @@ class ConventionController extends Controller
                     $old_rates->forget($rate->id);
                 }
             } else {
-                // If rate does not exists, create it
+                // If rate does not exist, create it
                 $rate = Rate::create($rate_request);
                 $convention->rates()->save($rate);
             }
         }
 
-        // TODO: delete only if there is no billing value
-        // Delete the remaining rates
+        // Delete the remaining rates if no bills
         foreach ($old_rates as $old_rate) {
-            $old_rate->delete();
+            if ($old_rate->bills->isEmpty()) {
+                $old_rate->delete();
+            }
         }
 
         return response()->json(ConventionResource::make($convention->load('rates')), JsonResponse::HTTP_CREATED);

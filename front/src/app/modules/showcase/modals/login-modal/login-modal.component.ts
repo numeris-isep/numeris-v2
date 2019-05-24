@@ -13,7 +13,7 @@ export interface ILoginModalContext {
 }
 
 @Component({
-  selector: 'login-modal',
+  selector: 'app-login-modal',
   templateUrl: './login-modal.component.html'
 })
 export class LoginModalComponent implements OnInit {
@@ -43,7 +43,7 @@ export class LoginModalComponent implements OnInit {
     this.authService.logout();
 
     // get return url from route parameters or default to home
-    if (!this.returnUrl) { this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/'; }
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   // convenient getter for easy access to form fields
@@ -53,7 +53,7 @@ export class LoginModalComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.loginForm.invalid) return;
+    if (this.loginForm.invalid) { return; }
 
     this.loading = true;
     this.authService.login(this.f.email.value, this.f.password.value)

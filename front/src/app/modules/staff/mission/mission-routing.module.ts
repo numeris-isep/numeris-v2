@@ -33,6 +33,13 @@ const missionRoute: Routes = [
         component: MissionEditComponent,
       },
       {
+        path: ':missionId/heures',
+        component: MissionShowComponent,
+        data: {
+          tab: 'heures'
+        }
+      },
+      {
         path: ':missionId',
         component: MissionShowComponent,
       },

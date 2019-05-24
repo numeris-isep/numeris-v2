@@ -34,4 +34,9 @@ class Rate extends Model
     {
         return $this->belongsTo(Convention::class);
     }
+
+    public function bills()
+    {
+        return $this->hasMany(Bill::class);
+    }
 }

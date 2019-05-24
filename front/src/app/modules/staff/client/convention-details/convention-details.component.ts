@@ -3,6 +3,7 @@ import { Client } from '../../../../core/classes/models/client';
 import { Convention } from '../../../../core/classes/models/convention';
 import { ConventionDeleteModal } from '../convention-delete-modal/convention-delete-modal.component';
 import { SuiModalService } from 'ng2-semantic-ui';
+import { Mission } from '../../../../core/classes/models/mission';
 
 @Component({
   selector: 'app-convention-details',
@@ -13,6 +14,7 @@ export class ConventionDetailsComponent implements OnInit {
 
   @Input() page: string = 'client-show';
   @Input() client: Client;
+  @Input() mission: Mission;
   @Input() convention: Convention;
 
   deleteModal: ConventionDeleteModal;

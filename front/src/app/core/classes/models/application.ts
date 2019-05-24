@@ -1,5 +1,6 @@
 import { User } from "./user";
 import { Mission } from "./mission";
+import { Bill } from './bill';
 
 export class Application {
 
@@ -14,6 +15,7 @@ export class Application {
 
   user: User;
   mission: Mission;
+  bills: Bill[];
 
 }
 

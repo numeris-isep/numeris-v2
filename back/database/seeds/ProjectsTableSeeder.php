@@ -99,6 +99,7 @@ class ProjectsTableSeeder extends Seeder
                 'start_at'          => Carbon::now()->addMonth()->toDateTimeString(),
                 'money_received_at' => Carbon::now()->addMonth()->toDateTimeString(),
                 'is_private'        => true,
+                'step'              => Project::HIRING,
             ]);
     }
 }

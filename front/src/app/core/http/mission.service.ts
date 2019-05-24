@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { Mission } from "../classes/models/mission";
-import { environment } from "../../../environments/environment";
-import { HTTP_OPTIONS } from "../constants/http_options";
-import { PaginatedMission } from "../classes/pagination/paginated-mission";
-import { Project } from "../classes/models/project";
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Mission } from '../classes/models/mission';
+import { environment } from '../../../environments/environment';
+import { HTTP_OPTIONS } from '../constants/http_options';
+import { PaginatedMission } from '../classes/pagination/paginated-mission';
+import { Project } from '../classes/models/project';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class MissionService {
   constructor(private http: HttpClient) { }
 
   getMissions(project?: number | Project): Observable<PaginatedMission> {
-    let projectPath: string = '';
+    let projectPath = '';
 
     if (project) {
       const projectId = typeof project === 'number' ? project : project.id;
@@ -26,8 +26,13 @@ export class MissionService {
     return this.http.get<PaginatedMission>(url, HTTP_OPTIONS);
   }
 
-  getPaginatedMissions(project?: number | Project, pageId?: number, isLocked?: any, range?: [string, string]): Observable<PaginatedMission> {
-    let projectPath: string = '';
+  getPaginatedMissions(
+    project?: number | Project,
+    pageId?: number,
+    isLocked?: any,
+    range?: [string, string]
+  ): Observable<PaginatedMission> {
+    let projectPath = '';
 
     if (project) {
       const projectId = typeof project === 'number' ? project : project.id;
@@ -36,11 +41,11 @@ export class MissionService {
 
     let url = `${environment.apiUrl}/api${projectPath}/missions?`;
 
-    if (pageId) url += `&page=${pageId}`;
-    if (isLocked != null) url += `&isLocked=${isLocked}`;
+    if (pageId) { url += `&page=${pageId}`; }
+    if (isLocked != null) { url += `&isLocked=${isLocked}`; }
     if (range) {
-      if (range[0]) url += `&minDate=${range[0]}`;
-      if (range[1]) url += `&maxDate=${range[1]}`;
+      if (range[0]) { url += `&minDate=${range[0]}`; }
+      if (range[1]) { url += `&maxDate=${range[1]}`; }
     }
 
     return this.http.get<PaginatedMission>(url, HTTP_OPTIONS);
@@ -77,6 +82,12 @@ export class MissionService {
     const missionId: number = typeof mission === 'number' ? mission : mission.id;
     const url = `${environment.apiUrl}/api/missions/${missionId}/lock`;
     return this.http.patch<Mission>(url, {is_locked: isLocked}, HTTP_OPTIONS);
+  }
+
+  updateMissionBills(data: any, mission: Mission | number): Observable<Mission> {
+    const missionId: number = typeof mission === 'number' ? mission : mission.id;
+    const url = `${environment.apiUrl}/api/missions/${missionId}/bills`;
+    return this.http.put<Mission>(url, data, HTTP_OPTIONS);
   }
 
   deleteMission(mission: Mission | number): Observable<Mission> {

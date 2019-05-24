@@ -26,7 +26,7 @@ export class ClientIndexComponent implements OnInit {
     this.getClients();
     this.getContacts();
 
-    this.route.data.subscribe(data => this.contactTabActive = data['tab'] === 'Contacts');
+    this.route.data.subscribe(data => this.contactTabActive = data['tab'] === 'contacts');
   }
 
 
