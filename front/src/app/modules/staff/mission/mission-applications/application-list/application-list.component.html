@@ -9,10 +9,6 @@
       Candidatures {{ status.translationPlural }}
       <div class="detail">{{ applications.length }}</div>
     </div>
-    <app-button *ngIf="status.status == 'accepted'" size="mini" color="green"
-                behaviour="right floated" hiddenIcon="save">
-      Enregistrer
-    </app-button>
     <table class="ui celled striped selectable table">
       <thead>
       <tr>
@@ -25,7 +21,7 @@
       </thead>
 
       <tbody *ngIf="applications.length > 0; else noApplication">
-      <tr *ngFor="let application of applications">
+      <tr *ngFor="let application of applications" draggable="true">
         <td>{{ application.user.firstName }} {{ application.user.lastName | uppercase }}</td>
         <ng-container *ngIf="status.status == 'accepted'">
           <td>{{ application.updatedAt | date:'dd/MM/yyyy' }}</td>

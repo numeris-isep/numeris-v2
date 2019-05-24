@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BillRequest;
+use App\Http\Resources\ApplicationResource;
 use App\Http\Resources\MissionResource;
 use App\Models\Application;
 use App\Models\Bill;
@@ -45,6 +46,6 @@ class MissionBillController extends Controller
             }
         }
 
-        return response()->json(MissionResource::make($mission->load('applications.bills')));
+        return response()->json(ApplicationResource::collection($mission->applicationsWhoseStatusIs('accepted')->load('bills')));
     }
 }

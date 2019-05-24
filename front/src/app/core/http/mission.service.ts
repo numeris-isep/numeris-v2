@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { HTTP_OPTIONS } from '../constants/http_options';
 import { PaginatedMission } from '../classes/pagination/paginated-mission';
 import { Project } from '../classes/models/project';
+import { Application } from '../classes/models/application';
 
 @Injectable({
   providedIn: 'root'
@@ -84,10 +85,10 @@ export class MissionService {
     return this.http.patch<Mission>(url, {is_locked: isLocked}, HTTP_OPTIONS);
   }
 
-  updateMissionBills(data: any, mission: Mission | number): Observable<Mission> {
+  updateMissionBills(data: any, mission: Mission | number): Observable<Application[]> {
     const missionId: number = typeof mission === 'number' ? mission : mission.id;
     const url = `${environment.apiUrl}/api/missions/${missionId}/bills`;
-    return this.http.put<Mission>(url, data, HTTP_OPTIONS);
+    return this.http.put<Application[]>(url, data, HTTP_OPTIONS);
   }
 
   deleteMission(mission: Mission | number): Observable<Mission> {

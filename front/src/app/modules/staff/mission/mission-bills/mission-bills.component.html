@@ -15,10 +15,6 @@
           <div class="ui ribbon blue label">
             <i class="tag icon"></i> Convention
           </div>
-          <app-button *ngIf="mission && mission.project.step == 'validated'" size="mini" color="green"
-                      behaviour="right floated" hiddenIcon="down arrow">
-            Appliquer à tous les étudiants
-          </app-button>
           <app-convention-details *ngIf="mission"
                                   [mission]="mission"
                                   [client]="mission.project.client"

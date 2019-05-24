@@ -4,11 +4,11 @@ import { Mission } from '../../../../../core/classes/models/mission';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Rate } from '../../../../../core/classes/models/rate';
 import { Bill } from '../../../../../core/classes/models/bill';
-import { ApplicationService } from '../../../../../core/http/application.service';
 import { MissionService } from '../../../../../core/http/mission.service';
 import { first } from 'rxjs/operators';
 import { handleFormErrors } from '../../../../../core/functions/form-error-handler';
 import { Router } from '@angular/router';
+import { ApplicationService } from '../../../../../core/http/application.service';
 
 @Component({
   selector: 'app-bills-form',
@@ -20,19 +20,24 @@ export class BillsFormComponent implements OnInit {
   applications: Application[];
 
   billsForm: FormGroup;
-  applicationsFormArray: FormArray = this.fb.array([]);
-  loading: boolean = false;
-  submitted: boolean = false;
+  applicationsFormArray: FormArray;
+  loading  = false;
+  submitted = false;
 
   constructor(
     private router: Router,
-    private applicationService: ApplicationService,
     private missionService: MissionService,
+    private applicationService: ApplicationService,
     private fb: FormBuilder,
   ) { }
 
   ngOnInit() {
-    this.getApplications().subscribe(applications => {
+    this.applicationsFormArray = this.fb.array([]);
+    this.getApplications();
+  }
+
+  getApplications() {
+    this.applicationService.getMissionApplications(this.mission, 'accepted').subscribe(applications => {
       this.applications = applications;
 
       this.initApplicationsForm();
@@ -40,10 +45,6 @@ export class BillsFormComponent implements OnInit {
         applications: this.applicationsFormArray
       });
     });
-  }
-
-  getApplications() {
-    return this.applicationService.getMissionApplications(this.mission, 'accepted');
   }
 
   get f() { return this.billsForm.controls; }
@@ -67,17 +68,6 @@ export class BillsFormComponent implements OnInit {
     }
   }
 
-  initBillsForm(bills: Bill[]) {
-    const billsFormArray = this.fb.array([]);
-
-    for (const rate of this.mission.project.convention.rates) {
-      const bill = bills.filter(b => b.rateId === rate.id)[0];
-      billsFormArray.push(this.createBill(rate, bill));
-    }
-
-    return billsFormArray;
-  }
-
   createApplication(
     application: Application
   ) {
@@ -87,6 +77,17 @@ export class BillsFormComponent implements OnInit {
       user_name: [`${application.user.firstName} ${application.user.lastName.toUpperCase()}`],
       bills: this.initBillsForm(application.bills),
     });
+  }
+
+  initBillsForm(bills: Bill[]) {
+    const billsFormArray = this.fb.array([]);
+
+    for (const rate of this.mission.project.convention.rates) {
+      const bill = bills.filter(b => b.rateId === rate.id)[0];
+      billsFormArray.push(this.createBill(rate, bill));
+    }
+
+    return billsFormArray;
   }
 
   addApplication(application: Application) {
@@ -108,8 +109,7 @@ export class BillsFormComponent implements OnInit {
     this.missionService.updateMissionBills(this.billsForm.value, this.mission).pipe(first())
       .subscribe(
         () => {
-          this.router.navigate(['/profil'])
-            .then(() => { this.router.navigate([`/missions/${this.mission.id}/heures`]); } );
+          this.ngOnInit();
           this.loading = false;
         },
         errors => {
