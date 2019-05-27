@@ -82,9 +82,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
         $this->json('POST', route('missions.applications.store', ['mission_id' => $mission_id]))
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
-            ->assertJson([
-                'error' => trans('api.404')
-            ]);
+            ->assertJson(['errors' => [trans('api.404')]]);
     }
 
     /**

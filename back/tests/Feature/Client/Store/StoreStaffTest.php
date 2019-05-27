@@ -23,7 +23,7 @@ class StoreStaffTest extends TestCaseWithAuth
             'zip_code'  => '75015',
             'city'      => 'Paris',
         ];
-        $data = array_merge($client_data, $address_data);
+        $data = array_merge($client_data, ['address' => $address_data]);
 
         $this->assertDatabaseMissing('clients', $client_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -33,10 +33,14 @@ class StoreStaffTest extends TestCaseWithAuth
             ->assertJsonStructure([
                 'id',
                 'addressId',
+                'contactId',
                 'name',
                 'reference',
                 'createdAt',
                 'updatedAt',
+                'conventionsCount',
+                'projectsCount',
+                'missionsCount',
             ]);
 
         $this->assertDatabaseHas('clients', $client_data);

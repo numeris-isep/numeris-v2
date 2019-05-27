@@ -21,11 +21,16 @@ class ShowDeveloperTest extends TestCaseWithAuth
             ->assertJsonStructure([
                 'id',
                 'addressId',
+                'contactId',
                 'name',
                 'reference',
                 'createdAt',
                 'updatedAt',
+                'conventionsCount',
+                'projectsCount',
+                'missionsCount',
                 'address',
+                'contact',
                 'conventions' => [['rates']],
             ]);
     }
@@ -39,8 +44,6 @@ class ShowDeveloperTest extends TestCaseWithAuth
 
         $this->json('GET', route('clients.show', ['client_id' => $client_id]))
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
-            ->assertJson([
-                'error' => trans('api.404')
-            ]);
+                ->assertJson(['errors' => [trans('api.404')]]);
     }
 }

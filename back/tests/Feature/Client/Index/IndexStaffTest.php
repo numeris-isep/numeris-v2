@@ -1,24 +1,22 @@
 <?php
 
-namespace Tests\Feature\Client\Show;
+namespace Tests\Feature\Client\Index;
 
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
-class ShowStaffTest extends TestCaseWithAuth
+class IndexStaffTest extends TestCaseWithAuth
 {
     protected $username = 'staff';
 
     /**
      * @group staff
      */
-    public function testStaffAccessingClientShow()
+    public function testStaffAccessingClientIndex()
     {
-        $client_id = 1;
-
-        $this->json('GET', route('clients.show', ['client_id' => $client_id]))
+        $this->json('GET', route('clients.index'))
             ->assertStatus(JsonResponse::HTTP_OK)
-            ->assertJsonStructure([
+            ->assertJsonStructure([[
                 'id',
                 'addressId',
                 'contactId',
@@ -31,7 +29,7 @@ class ShowStaffTest extends TestCaseWithAuth
                 'missionsCount',
                 'address',
                 'contact',
-                'conventions' => [['rates']],
-            ]);
+            ]]);
+
     }
 }

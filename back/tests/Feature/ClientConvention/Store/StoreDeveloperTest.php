@@ -63,9 +63,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
         $this->json('POST', route('clients.conventions.store', ['client_id' => $client_id]), $data)
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
-            ->assertJson([
-                'error' => trans('api.404')
-            ]);
+            ->assertJson(['errors' => [trans('api.404')]]);
     }
 
     /**

@@ -166,9 +166,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $this->json('PUT', route('preferences.update', ['preference_id' => $preference_id]), $data)
 //            ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
-            ->assertJson([
-                'error' => trans('api.404')
-            ]);
+            ->assertJson(['errors' => [trans('api.404')]]);
     }
 
     /**

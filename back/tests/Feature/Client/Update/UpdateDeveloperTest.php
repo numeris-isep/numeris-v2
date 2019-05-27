@@ -25,7 +25,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             'zip_code'  => '75015',
             'city'      => 'Paris',
         ];
-        $data = array_merge($client_data, $address_data);
+        $data = array_merge($client_data, ['address' => $address_data]);
 
         $this->assertDatabaseMissing('clients', $client_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -35,10 +35,14 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             ->assertJsonStructure([
                 'id',
                 'addressId',
+                'contactId',
                 'name',
                 'reference',
                 'createdAt',
                 'updatedAt',
+                'conventionsCount',
+                'projectsCount',
+                'missionsCount',
             ]);
 
         $this->assertDatabaseHas('clients', $client_data);
@@ -50,7 +54,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
      */
     public function testDeveloperUpdatingClientWithAlreadyUsedData()
     {
-        $client_id = 1;
+        $client_id = 2;
 
         $client_data = [
             'name'      => 'AS Connect', // Already used
@@ -61,7 +65,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             'zip_code'  => '75015',
             'city'      => 'Paris',
         ];
-        $data = array_merge($client_data, $address_data);
+        $data = array_merge($client_data, ['address' => $address_data]);
 
         $this->assertDatabaseHas('clients', $client_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -77,7 +81,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      */
-    public function testDeveloperUpdatingUserWithoutData()
+    public function testDeveloperUpdatingClientWithoutData()
     {
         $client_id = 1;
 
@@ -86,9 +90,9 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             ->assertJsonValidationErrors([
                 'name',
                 'reference',
-                'street',
-                'zip_code',
-                'city',
+                'address.street',
+                'address.zip_code',
+                'address.city',
             ]);
     }
 }

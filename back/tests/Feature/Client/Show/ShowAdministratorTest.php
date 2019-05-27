@@ -21,11 +21,16 @@ class ShowAdministratorTest extends TestCaseWithAuth
             ->assertJsonStructure([
                 'id',
                 'addressId',
+                'contactId',
                 'name',
                 'reference',
                 'createdAt',
                 'updatedAt',
+                'conventionsCount',
+                'projectsCount',
+                'missionsCount',
                 'address',
+                'contact',
                 'conventions' => [['rates']],
             ]);
     }
