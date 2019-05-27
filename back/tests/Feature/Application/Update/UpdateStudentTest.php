@@ -23,8 +23,6 @@ class UpdateUpdateStudentTest extends TestCaseWithAuth
 
         $this->json('PUT', route('applications.update', ['application_id' => $application_id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson([
-                'error' => trans('api.403')
-            ]);
+            ->assertJson(['errors' => [trans('api.403')]]);
     }
 }

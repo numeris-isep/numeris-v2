@@ -12,16 +12,18 @@ class UpdateStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
+     *
+     * @dataProvider hiringProjectWithAvailableMissionProvider
      */
-    public function testStaffUpdatingApplication()
+    public function testStaffUpdatingApplication($project, $mission)
     {
-        $application_id = 1;
+        $application = factory(Application::class)->create(['mission_id' => $mission->id]);
 
         $data = [
             'status' => Application::ACCEPTED,
         ];
 
-        $this->json('PUT', route('applications.update', ['application_id' => $application_id]), $data)
+        $this->json('PUT', route('applications.update', ['application_id' => $application->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',
@@ -31,6 +33,7 @@ class UpdateStaffTest extends TestCaseWithAuth
                 'status',
                 'createdAt',
                 'updatedAt',
+                'mission' => ['project'],
             ]);
     }
 }

@@ -83,9 +83,7 @@ class UpdateProfileStudentTest extends TestCaseWithAuth
 
         $this->json('PATCH', route('users.update.profile', ['user' => $user_id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson([
-                'error' => trans('api.403')
-            ]);
+            ->assertJson(['errors' => [trans('api.403')]]);
 
         $this->assertDatabaseMissing('users', $user_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -120,9 +118,7 @@ class UpdateProfileStudentTest extends TestCaseWithAuth
 
         $this->json('PATCH', route('users.update.profile', ['user' => $user_id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson([
-                'error' => trans('api.403')
-            ]);
+            ->assertJson(['errors' => [trans('api.403')]]);
 
         $this->assertDatabaseMissing('users', $user_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -157,9 +153,7 @@ class UpdateProfileStudentTest extends TestCaseWithAuth
 
         $this->json('PATCH', route('users.update.profile', ['user' => $user_id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson([
-                'error' => trans('api.403')
-            ]);
+            ->assertJson(['errors' => [trans('api.403')]]);
 
         $this->assertDatabaseMissing('users', $user_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -194,9 +188,7 @@ class UpdateProfileStudentTest extends TestCaseWithAuth
 
         $this->json('PATCH', route('users.update.profile', ['user' => $user_id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson([
-                'error' => trans('api.403')
-            ]);
+            ->assertJson(['errors' => [trans('api.403')]]);
 
         $this->assertDatabaseMissing('users', $user_data);
         $this->assertDatabaseMissing('addresses', $address_data);

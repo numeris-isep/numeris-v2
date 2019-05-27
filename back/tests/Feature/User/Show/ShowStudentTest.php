@@ -18,9 +18,7 @@ class ShowStudentTest extends TestCaseWithAuth
 
         $this->json('GET', route('users.show', ['user_id' => $user_id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson([
-                'error' => trans('api.403')
-            ]);
+            ->assertJson(['errors' => [trans('api.403')]]);
     }
 
     /**

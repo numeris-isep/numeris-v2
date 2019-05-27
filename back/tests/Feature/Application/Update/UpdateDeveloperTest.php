@@ -11,16 +11,18 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider hiringProjectWithAvailableMissionProvider
      */
-    public function testDeveloperUpdatingApplication()
+    public function testDeveloperUpdatingApplication($project, $mission)
     {
-        $application_id = 1;
+        $application = factory(Application::class)->create(['mission_id' => $mission->id]);
 
         $data = [
             'status' => Application::ACCEPTED,
         ];
 
-        $this->json('PUT', route('applications.update', ['application_id' => $application_id]), $data)
+        $this->json('PUT', route('applications.update', ['application_id' => $application->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',
@@ -30,6 +32,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'status',
                 'createdAt',
                 'updatedAt',
+                'mission' => ['project'],
             ]);
     }
 
@@ -46,23 +49,24 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $this->json('PUT', route('applications.update', ['application_id' => $application_id]), $data)
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
-            ->assertJson([
-                'error' => trans('api.404')
-            ]);
+            ->assertJson(['errors' => [trans('api.404')]]);
     }
 
     /**
      * @group developer
+     *
+     * @dataProvider validatedProjectWithAvailableMissionProvider
      */
-    public function testDeveloperUpdatingApplicationWithoutData()
+    public function testDeveloperUpdatingApplicationWhoseProjectIsNotHiring($project, $mission)
     {
-        $application_id = 1;
+        $application = factory(Application::class)->create(['mission_id' => $mission->id]);
 
-        $this->json('PUT', route('applications.update', ['application_id' => $application_id]))
-            ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJsonValidationErrors([
-                'type',
-                'status'
-            ]);
+        $data = [
+            'status' => Application::ACCEPTED,
+        ];
+
+        $this->json('PUT', route('applications.update', ['application_id' => $application->id]), $data)
+            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
+            ->assertJson(['errors' => [trans('api.403')]]);
     }
 }

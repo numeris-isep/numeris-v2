@@ -27,7 +27,7 @@ class ApplicationPolicy
     public function update(User $current_user, Application $application)
     {
         // Impossible to update an application if the step of the project is
-        // different than 'open'
+        // different than 'hiring'
         return $application->mission->project->step == Project::HIRING;
     }
 

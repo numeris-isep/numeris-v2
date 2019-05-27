@@ -31,8 +31,6 @@ class AuthTest extends TestCase
 
         $this->json('POST', route('login'), $data)
             ->assertStatus(JsonResponse::HTTP_UNAUTHORIZED)
-            ->assertJson([
-                'error' => trans('validation.login')
-            ]);
+            ->assertJson(['errors' => ['login' => [trans('validation.login')]]]);
     }
 }

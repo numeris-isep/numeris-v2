@@ -9,7 +9,7 @@ $factory->define(Project::class, function (Faker $faker) {
 
     return [
         'client_id'         => factory(Client::class),
-        'name'              => $faker->colorName,
+        'name'              => $faker->colorName . $faker->randomLetter,
         'step'              => $steps[$faker->numberBetween(0, count($steps) - 1)],
         'start_at'          => $faker->dateTime(),
         'is_private'        => false,

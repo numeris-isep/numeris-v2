@@ -32,9 +32,7 @@ class StoreStudentTest extends TestCaseWithAuth
 
         $this->json('POST', route('missions.applications.store', ['mission_id' => $mission_id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson([
-                'error' => trans('api.403')
-            ]);
+            ->assertJson(['errors' => [trans('api.403')]]);
 
         $this->assertDatabaseMissing('applications', $application);
     }

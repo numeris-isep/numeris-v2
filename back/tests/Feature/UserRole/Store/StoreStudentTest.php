@@ -160,9 +160,7 @@ class IndexStudentTest extends TestCaseWithAuth
 
         $this->json('POST', route('users.roles.store', ['user_id' => $user_id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson([
-                'error' => trans('api.403')
-            ]);
+            ->assertJson(['errors' => [trans('api.403')]]);
 
         $this->assertTrue($user->role()->name == $role_name);
     }
@@ -290,9 +288,7 @@ class IndexStudentTest extends TestCaseWithAuth
 
         $this->json('POST', route('users.roles.store', ['user_id' => $user_id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson([
-                'error' => trans('api.403')
-            ]);
+            ->assertJson(['errors' => [trans('api.403')]]);
 
         $this->assertTrue($user->role()->name == $role_name);
     }
@@ -420,9 +416,7 @@ class IndexStudentTest extends TestCaseWithAuth
 
         $this->json('POST', route('users.roles.store', ['user_id' => $user_id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson([
-                'error' => trans('api.403')
-            ]);
+            ->assertJson(['errors' => [trans('api.403')]]);
 
         $this->assertTrue($user->role()->name == $role_name);
     }

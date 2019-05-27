@@ -38,9 +38,7 @@ class DestroyStaffTest extends TestCaseWithAuth
 
         $this->json('DELETE', route('applications.destroy', ['application_id' => $application_id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson([
-                'error' => trans('api.403')
-            ]);
+            ->assertJson(['errors' => [trans('api.403')]]);
 
         $this->assertDatabaseHas('applications', $application->toArray());
     }
