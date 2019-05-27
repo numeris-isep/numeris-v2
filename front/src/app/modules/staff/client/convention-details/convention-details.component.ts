@@ -25,7 +25,7 @@ export class ConventionDetailsComponent implements OnInit {
 
   deleteModal: ConventionDeleteModal;
 
-  billsForm: FormGroup;
+  billsForm: FormGroup = this.fb.group({});
   billsFormArray: FormArray = this.fb.array([]);
 
   loading: boolean = false;
