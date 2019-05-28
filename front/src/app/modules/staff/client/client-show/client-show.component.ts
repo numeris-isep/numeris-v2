@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientService } from "../../../../core/http/client.service";
-import { TitleService } from "../../../../core/services/title.service";
-import { BreadcrumbsService } from "../../../../core/services/breadcrumbs.service";
-import { Client } from "../../../../core/classes/models/client";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ClientService } from '../../../../core/http/client.service';
+import { TitleService } from '../../../../core/services/title.service';
+import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.service';
+import { Client } from '../../../../core/classes/models/client';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-show',
@@ -13,7 +13,7 @@ export class ClientShowComponent implements OnInit {
 
   client: Client;
 
-  conventionTabActive: boolean = false;
+  conventionTabActive = false;
 
   constructor(
     private route: ActivatedRoute,

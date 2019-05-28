@@ -1,5 +1,5 @@
-<app-content *ngIf="client" [condition]="!client">
-  <div class="ui padded grid doubling">
+<app-content [condition]="!client">
+  <div *ngIf="client" class="ui padded grid doubling">
     <div class="stretched row">
       <div class="sixteen wide mobile five wide computer column">
         <app-client-details [client]="client" [isLink]="false"></app-client-details>
@@ -46,7 +46,7 @@
 
   <div class="ui padded grid">
     <div class="column">
-      <sui-tabset>
+      <sui-tabset *ngIf="client">
         <div class="ui top pointing secondary menu">
           <a class="item" suiTabHeader="1">
             <i class="folder open icon"></i> Projets
