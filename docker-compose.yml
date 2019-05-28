@@ -40,3 +40,18 @@ services:
       - mysql
     depends_on:
       - mysql
+
+  front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    volumes:
+      - ./front/src:/home/numeris/src
+      - /home/numeris/node_modules
+    links:
+      - back
+    expose:
+      - 4200
+    ports:
+      - "4200:4200"
+    command: ng s --host 0.0.0.0
