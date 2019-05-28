@@ -15,7 +15,6 @@ RUN docker-php-ext-install pdo_mysql
 # Install composer
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 # Enable apache conf
-#COPY docker/php/numeris.ini /usr/local/etc/apache/conf.d
 COPY docker/apache/numeris.conf /etc/apache2/sites-available/numeris.conf
 RUN a2dissite 000-default.conf && a2ensite numeris.conf && a2enmod rewrite && service apache2 restart
 

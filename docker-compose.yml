@@ -18,12 +18,12 @@ services:
       MYSQL_PASSWORD: ''
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
 
-  app:
+  back:
     build:
-      context: .
+      context: ./back
       dockerfile: Dockerfile
     env_file:
-      - .env
+      - back/.env
     environment:
       DB_HOST: 'mysql'
       DB_PORT: 3306
@@ -31,7 +31,7 @@ services:
       DB_USERNAME: 'root'
       DB_PASSWORD: ''
     volumes:
-      - .:/home/numeris
+      - ./back:/home/numeris
       - /home/numeris/vendor
       - /home/numeris/public
     ports:
