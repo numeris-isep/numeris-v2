@@ -22,7 +22,7 @@ COPY . /home/numeris
 
 # Composer install
 WORKDIR /home/numeris
-RUN composer install --no-interaction
+RUN composer install --optimize-autoloader --no-dev --no-interaction
 
 # Final touch
 RUN . ~/.bashrc
@@ -33,3 +33,6 @@ RUN chown -R www-data:www-data /home/numeris
 RUN chown -R www-data:www-data /var/log/apache2/
 
 WORKDIR /home/numeris
+
+RUN php artisan config:cache
+RUN php artisan route:cache

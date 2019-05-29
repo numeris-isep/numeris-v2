@@ -1,0 +1,32 @@
+version: '3'
+services:
+
+  back:
+    build:
+      context: ./back
+      dockerfile: Dockerfile.production
+    env_file:
+      - .env
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+    volumes:
+      - ./back:/home/numeris
+      - /home/numeris/vendor
+      - /home/numeris/public
+    ports:
+      - ${BACK_PORT}:80
+
+  front:
+    build:
+      context: ./front
+      dockerfile: Dockerfile.production
+    volumes:
+      - ./front/src:/home/numeris/src
+      - /home/numeris/node_modules
+    links:
+      - back
+    ports:
+      - ${FRONT_PORT}:80
+    expose:
+      - ${FRONT_PORT}

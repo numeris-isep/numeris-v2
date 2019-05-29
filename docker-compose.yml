@@ -4,7 +4,7 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     ports:
-      - "3000:80"
+      - ${PHPMYADMIN_PORT}:80
     links:
       - mysql:db
     depends_on:
@@ -13,10 +13,10 @@ services:
   mysql:
     image: mysql:5.7
     environment:
-      MYSQL_DATABASE: 'numeris-v2'
-      MYSQL_USER: 'root'
-      MYSQL_PASSWORD: ''
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ALLOW_EMPTY_PASSWORD: ${MYSQL_ALLOW_EMPTY_PASSWORD}
 
   back:
     build:
@@ -24,18 +24,12 @@ services:
       dockerfile: Dockerfile
     env_file:
       - back/.env
-    environment:
-      DB_HOST: 'mysql'
-      DB_PORT: 3306
-      DB_DATABASE: 'numeris-v2'
-      DB_USERNAME: 'root'
-      DB_PASSWORD: ''
     volumes:
       - ./back:/home/numeris
       - /home/numeris/vendor
       - /home/numeris/public
     ports:
-      - "8080:80"
+      - ${BACK_PORT}:80
     links:
       - mysql
     depends_on:
@@ -51,7 +45,7 @@ services:
     links:
       - back
     expose:
-      - 4200
+      - ${FRONT_PORT}
     ports:
-      - "4200:4200"
+      - ${FRONT_PORT}:${FRONT_PORT}
     command: ng s --host 0.0.0.0

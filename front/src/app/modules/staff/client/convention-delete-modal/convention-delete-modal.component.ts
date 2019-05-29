@@ -26,7 +26,7 @@ export class ConventionDeleteModalComponent implements OnInit {
   loading: boolean = false;
 
   constructor(
-    private modal: SuiModal<IConventionDeleteContext, void>,
+    public modal: SuiModal<IConventionDeleteContext, void>,
     private conventionService: ConventionService,
     private alertService: AlertService,
     private router: Router

@@ -1,6 +1,6 @@
 FROM node:11.9.0
 
-WORKDIR mkdir -p /home/numeris
+RUN mkdir -p /home/numeris
 
 ENV PATH /home/numeris/node_modules/.bin:$PATH
 
