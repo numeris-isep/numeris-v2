@@ -1,4 +1,17 @@
 .git
 .gitignore
+.idea
+.vscode
 .DS_Store
-.env
+docker-compose*.yml
+
+# Back
+back/.DS_Store
+back/vendor
+back/public/storage
+back/public/build
+
+# Front
+front/.DS_Store
+front/node_modules/
+front/dist/
