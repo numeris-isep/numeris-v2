@@ -4,9 +4,12 @@ namespace Tests;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Schema;
+use Tests\Traits\ApplicationProviderTrait;
 
 abstract class TestCaseWithAuth extends TestCase
 {
+    use ApplicationProviderTrait;
+
     protected $username;
 
     protected function setUp(): void

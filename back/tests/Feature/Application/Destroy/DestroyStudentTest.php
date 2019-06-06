@@ -12,15 +12,14 @@ class DestroyStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
+     *
+     * @dataProvider ownApplicationProvider
      */
-    public function testStudentDeletingHisApplication()
+    public function testStudentDeletingHisApplication($application)
     {
-        $application_id = 295;
-        $application = Application::find($application_id);
-
         $this->assertDatabaseHas('applications', $application->toArray());
 
-        $this->json('DELETE', route('applications.destroy', ['application_id' => $application_id]))
+        $this->json('DELETE', route('applications.destroy', ['application_id' => $application->id]))
             ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
 
         $this->assertDatabaseMissing('applications', $application->toArray());
@@ -28,15 +27,14 @@ class DestroyStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
+     *
+     * @dataProvider otherUserApplicationProvider
      */
-    public function testStudentDeletingApplicationOfOtherUser()
+    public function testStudentDeletingApplicationOfOtherUser($application)
     {
-        $application_id = 294;
-        $application = Application::find($application_id);
-
         $this->assertDatabaseHas('applications', $application->toArray());
 
-        $this->json('DELETE', route('applications.destroy', ['application_id' => $application_id]))
+        $this->json('DELETE', route('applications.destroy', ['application_id' => $application->id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 
