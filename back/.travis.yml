@@ -1,0 +1,11 @@
+os:
+  - linux
+language: php
+php:
+  - '7.2'
+
+before_script:
+  - cd back
+  - composer self-update
+  - composer install --no-interaction
+  - cp .env.travis .env
