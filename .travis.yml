@@ -13,5 +13,5 @@ before_script:
   - php artisan migrate:refresh --seed --database testing
 
 script:
-  - back/vendor/bin/phpunit
+  - vendor/bin/phpunit
 
