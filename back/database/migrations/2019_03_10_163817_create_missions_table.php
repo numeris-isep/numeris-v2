@@ -24,7 +24,7 @@ class CreateMissionsTable extends Migration
             $table->boolean('is_locked')->default(false);
             $table->string('reference')->unique()->nullable();
             $table->string('title');
-            $table->string('description');
+            $table->text('description');
             $table->timestamp('start_at')->nullable();
             $table->integer('duration');
             $table->integer('capacity')->default(1);
