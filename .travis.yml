@@ -5,6 +5,7 @@ php:
   - '7.2'
 
 before_script:
+  - cd back
   - composer self-update
   - composer install --no-interaction
   - mysql -e 'create database numeris-v2-testing'
@@ -12,5 +13,5 @@ before_script:
   - php artisan migrate:refresh --seed --database testing
 
 script:
-  - vendor/bin/phpunit
+  - back/vendor/bin/phpunit
 
