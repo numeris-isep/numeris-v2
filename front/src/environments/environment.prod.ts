@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:8080',
+  apiUrl: 'https://api.numeris-isep.fr',
   tokenName: 'numeris_token',
 };
