@@ -4,6 +4,10 @@ language: php
 php:
   - '7.2'
 
+notifications:
+  email:
+    on_success: never
+
 before_script:
   - cd back
   - composer self-update
@@ -14,4 +18,11 @@ before_script:
 
 script:
   - vendor/bin/phpunit tests/Feature/Auth
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: git push numeris-isep.fr production
+  on:
+    branch: production
 

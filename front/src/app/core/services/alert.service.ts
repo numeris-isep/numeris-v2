@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { Alert, AlertType } from "../classes/alert";
-import { forEach } from "@angular/router/src/utils/collection";
+import { Alert, AlertType } from '../classes/alert';
 
 @Injectable({
   providedIn: 'root'
@@ -54,8 +53,8 @@ export class AlertService {
   }
 
   errors(errors: object, keepAfterRouteChange = false, target: string = null) {
-    for (let key of Object.keys(errors)) {
-      this.error(errors[key], null, keepAfterRouteChange, target || key)
+    for (const key of Object.keys(errors)) {
+      this.error(errors[key], null, keepAfterRouteChange, target || key);
     }
   }
 
