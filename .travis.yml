@@ -18,6 +18,9 @@ before_script:
 script:
   - vendor/bin/phpunit tests/Feature/Auth
 
+before_deploy:
+  - git remote add numeris-isep.fr numeris-dsi@numeris-isep.fr:numeris-isep.git
+
 deploy:
   provider: script
   skip_cleanup: true
