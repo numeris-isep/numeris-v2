@@ -1,8 +1,11 @@
 os:
   - linux
+
 language: php
+
 php:
   - '7.2'
+
 notifications:
   email:
     on_success: never
@@ -18,13 +21,20 @@ before_script:
 script:
   - vendor/bin/phpunit tests/Feature/Auth
 
+addons:
+  ssh_known_hosts: numeris-isep.fr
+
 before_deploy:
+  - openssl aes-256-cbc -K $encrypted_<...>_key -iv $encrypted_<...>_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
+  - eval "$(ssh-agent -s)"
+  - chmod 600 /tmp/deploy_rsa
+  - ssh-add /tmp/deploy_rsa
   - git remote add numeris-isep.fr numeris-dsi@numeris-isep.fr:numeris-isep.git
 
 deploy:
   provider: script
   skip_cleanup: true
-  github_token: $GITHUB_TOKEN
+  github_token: "$GITHUB_TOKEN"
   script: git push numeris-isep.fr production
   on:
     branch: production
@@ -32,3 +42,7 @@ deploy:
 env:
   global:
     secure: PM0frMDhuWTNGuDm/TOpTNOMI+8ZFsHmZ7l5tznmFcWsMidSfq6eATDMsWdHbAa6wLypbrGtScyp0pbOBKy8VUt1yBOW9dTDixKc/VTezksVko5QK8potfb0HXOMzIWdMCvsocTNQlbW/50CSkDMtTS7mpUOY9neZTRiGW55WTmBe0VxsRE3eh1kK6t2qIDOzAYs8BuZRnKsmiNrJLWSPLxPT1SsecrBtLzxY1c/2nmdyEdrnFP3sXnlGotBBoU4rQABa9meLVGDElU0+GgHp23tptlWD1yP+6ZWBF/gAAjpKS7NC5QduFlGi15tMGO8gUFIeHok0tnwbrU/Z7mYmaG4vy5LyX3pYrsHuL6vQyihzMByg9qXELUSsjH+yJvA0peWF9y/itKU/si/zatV8XnnvYQG3lRRjF2vsrW9BBVcQcAuJmzWB5WBpfUFLPluGmhLM4VlKTwByJhGibTN2fH2qYke+0ImoAHlcSGN9Y5W2DrWaUsc+WpAGJWc6gNvm/vGGUJQWEbqNph4tLhK5/rgCLVTpUnF19JB0iYJWnOqbBiQ3RcdkaJwjyTjIg8pmtBDdi4YHS1VykEwTb9s1wqSh0zgs3CzFqXF7X+1xDHTv/GMk5+YavSu2svIyG+fJ6PbjJK9p2lQh6ieTDnX1FSGLEtL8NFN0eqVFrEAnOc=
+
+before_install:
+  - openssl aes-256-cbc -K $encrypted_c7be85da5d6e_key -iv $encrypted_c7be85da5d6e_iv
+    -in deploy_rsa.enc -out deploy_rsa -d
