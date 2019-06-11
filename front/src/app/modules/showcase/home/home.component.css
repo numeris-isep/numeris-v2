@@ -95,15 +95,6 @@
   background: url('../../../../assets/images/home/isep-building-ndl.jpg');
 }
 
-.blurred {
-  transition-duration: 0.3s;
-}
-
-.blurred:hover {
-  transition-duration: 0.3s;
-  filter: blur(1px);
-}
-
 .keyboard-background {
   min-height: 500px;
   position: relative;

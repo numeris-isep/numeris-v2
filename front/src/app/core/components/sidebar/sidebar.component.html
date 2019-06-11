@@ -3,7 +3,7 @@
   <sui-sidebar transition="overlay" class="vertical" #sidebar>
     <div *ngIf="(isLoggedIn$ | async); else guest">
       <div class="header item">
-        <img class="ui tiny centered image" src="assets/logos/numeris-blue.png">
+        <img class="ui tiny centered image" src="assets/logos/numeris-blue.png" alt="Logo de Numéris">
       </div>
       <app-accordion [sidebar]="sidebar"></app-accordion>
     </div>
@@ -11,7 +11,7 @@
     <ng-template #guest>
       <div (click)="sidebar.close()">
         <a class="header item" (click)="scrollToElement('top')">
-          <img class="ui tiny centered image" src="assets/logos/numeris-blue.png">
+          <img class="ui tiny centered image" src="assets/logos/numeris-blue.png" alt="Logo de Numéris">
         </a>
         <a class="item" (click)="scrollToElement('aboutUs')">À propos</a>
         <a class="item" (click)="scrollToElement('team')">L'équipe</a>

@@ -20,7 +20,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     'Mary',
     'Secrétaire général',
     'aurelien.mary',
-    '../logos/numeris-blue.png'
+    '../logos/numeris-blue-square.png'
   ),
   new TeamMember(
     'Pierre',
