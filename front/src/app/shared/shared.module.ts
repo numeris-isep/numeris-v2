@@ -21,6 +21,7 @@ import { StatusPipe } from './pipes/status.pipe';
 import { FormErrorComponent } from './components/form-error/form-error.component';
 import { PaginationCaptionComponent } from './components/pagination-caption/pagination-caption.component';
 import { ConventionDetailsComponent } from '../modules/staff/client/convention-details/convention-details.component';
+import { DeferLoadModule } from '@trademe/ng-defer-load';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { ConventionDetailsComponent } from '../modules/staff/client/convention-d
     SuiModule,
     FormsModule,
     ReactiveFormsModule,
+    DeferLoadModule,
   ],
   declarations: [
     AlertComponent,
@@ -74,6 +76,9 @@ import { ConventionDetailsComponent } from '../modules/staff/client/convention-d
     PhonePipe,
     RolePipe,
     StatusPipe,
+
+    // Modules
+    DeferLoadModule,
   ],
   providers: [
     AlertService

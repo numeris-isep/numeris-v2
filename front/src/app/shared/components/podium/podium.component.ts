@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class PodiumComponent implements OnInit {
 
   currentMonth: string = 'Septembre';
-  currentYear: string = '2018';
+  currentYear: string = '2018-2019';
 
   constructor() { }
 

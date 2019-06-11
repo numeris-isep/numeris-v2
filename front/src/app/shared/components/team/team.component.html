@@ -1,15 +1,11 @@
 <div class="ui four raised centered doubling cards">
-  <div class="ui card" *ngFor="let teamMember of teamMembers">
-    <div class="ui move up reveal image">
-      <img src="assets/images/{{ teamMember.defaultImage }}" class="visible content">
-      <img src="assets/images/{{ teamMember.otherImage }}" class="hidden content">
+  <div class="ui card" *ngFor="let teamMember of teamMembers" (deferLoad)="teamMember.show=true">
+    <div class="ui image" *ngIf="teamMember.show">
+      <img src="assets/images/{{ teamMember.defaultImage }}" alt="Membre de l'équipe">
     </div>
     <div class="content">
       <div class="header">{{ teamMember.firstName }} {{ teamMember.lastName }}</div>
       <div class="meta">{{ teamMember.position }}</div>
-      <div class="description">
-        {{ teamMember.description }} <!-- TODO -->
-      </div>
     </div>
 
     <a class="ui bottom attached fade animated facebook tiny button"

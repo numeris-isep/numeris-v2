@@ -1,111 +1,81 @@
-import { TeamMember } from "../classes/team-member";
+import { TeamMember } from '../classes/team-member';
 
-export const Team_members: TeamMember[] = [
+export const TEAM_MEMBERS: TeamMember[] = [
   new TeamMember(
     'Gaël',
     'Chereau',
     'Président',
-    'Ceci est une description', /* TODO */
     'gael.chereau',
-    'default',
-    'default-distorded'
+    'team/2018-2019/gael-chereau.JPG'
   ),
   new TeamMember(
     'Candice',
     'Rumeau',
     'Vice-présidente',
-    'Ceci est une description', /* TODO */
     'candylol17',
-    'default',
-    'default-distorded'
+    'team/2018-2019/candice-rumeau.JPG'
   ),
   new TeamMember(
     'Aurélien',
     'Mary',
     'Secrétaire général',
-    'Ceci est une description', /* TODO */
     'aurelien.mary',
-    'default',
-    'default-distorded'
+    '../logos/numeris-blue.png'
   ),
   new TeamMember(
-
     'Pierre',
     'Berger',
     'Trésorier',
-    'Ceci est une description', /* TODO */
     'pierre.berger07',
-    'default',
-    'default-distorded'
+    'team/2018-2019/pierre-berger.JPG'
   ),
   new TeamMember(
-
     'Eliott',
     'de Séguier',
     'DSI',
-    'Ceci est une description', /* TODO */
     'eliott.deseguier',
-    'default',
-    'default-distorded'
+    'team/2018-2019/eliott-deseguier.JPG'
   ),
   new TeamMember(
-
     'Pidanou',
     'Eang',
     'Responsable communication',
-    'Ceci est une description', /* TODO */
     'pidanou.eang',
-    'default',
-    'default-distorded'
+    'team/2018-2019/pidanou-eang.JPG'
   ),
   new TeamMember(
-
     'Elise',
     'Savornin',
     'Vice-trésorière',
-    'Ceci est une description', /* TODO */
     'elise.savornin',
-    'default',
-    'default-distorded'
+    'team/2018-2019/elise-savornin.JPG'
   ),
   new TeamMember(
-
     'Franck',
     'NGuyen',
     'Vice-trésorier',
-    'Ceci est une description', /* TODO */
     'franck.nguyen.923',
-    'default',
-    'default-distorded'
+    'team/2018-2019/franck-nguyen.JPG'
   ),
   new TeamMember(
-
     'Toan',
     'Dang Ngoc',
     'Chargé de contrat',
-    'Ceci est une description', /* TODO */
     'toan.dangngoc.94',
-    'default',
-    'default-distorded'
+    'team/2018-2019/toan-dang-ngoc.jpg'
   ),
   new TeamMember(
-
     'Julien',
     'Badoche Rousseau',
     'Chargé de contrat',
-    'Ceci est une description', /* TODO */
     '100010400981153',
-    'default',
-    'default-distorded'
+    'team/2018-2019/julien-badoche-rousseau.JPG'
   ),
   new TeamMember(
-
     'Lorrain',
     'Saillenfest',
     'Chargé de contrat',
-    'Ceci est une description', /* TODO */
     'lorrain.saillenfest.3',
-    'default',
-    'default-distorded'
+    'team/2018-2019/lorrain-saillenfest.JPG'
   ),
 ];

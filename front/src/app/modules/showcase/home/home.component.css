@@ -105,11 +105,11 @@
 }
 
 .keyboard-background {
-  min-height: 700px;
+  min-height: 300px;
   position: relative;
   top: -100px;
   z-index: -1;
-  background: url('../../../../assets/images/home/keyboard.jpg');
+  background: url('../../../../assets/images/home/keyboard.jpg') fixed;
 }
 
 .ui.blue.massive.fluid.button {

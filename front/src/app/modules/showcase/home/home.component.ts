@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ScrollService } from "../../../core/services/scroll.service";
-import { ContactUsModal } from "../modals/contact-us-modal/contact-us-modal.component";
+import { ScrollService } from '../../../core/services/scroll.service';
+import { ContactUsModal } from '../modals/contact-us-modal/contact-us-modal.component';
 import { SuiModalService } from 'ng2-semantic-ui';
-import { AuthService } from "../../../core/http/auth/auth.service";
-import { ActivatedRoute, Router } from "@angular/router";
+import { AuthService } from '../../../core/http/auth/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -27,8 +27,6 @@ export class HomeComponent implements OnInit {
   };
 
   private modal: ContactUsModal = new ContactUsModal();
-
-  private anchor: string;
 
   constructor(
     private scrollService: ScrollService,
