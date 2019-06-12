@@ -6,76 +6,113 @@ export const TEAM_MEMBERS: TeamMember[] = [
     'Chereau',
     'Président',
     'gael.chereau',
-    'team/2018-2019/gael-chereau.JPG'
+    'team/2018-2019/gael-chereau.jpg',
+    'team/2018-2019/gael-chereau-freestyle.jpg',
   ),
   new TeamMember(
     'Candice',
     'Rumeau',
     'Vice-présidente',
     'candylol17',
-    'team/2018-2019/candice-rumeau.JPG'
+    'team/2018-2019/candice-rumeau.jpg',
+    'team/2018-2019/candice-rumeau-freestyle.jpg',
   ),
   new TeamMember(
     'Aurélien',
     'Mary',
     'Secrétaire général',
     'aurelien.mary',
-    '../logos/numeris-blue-square.png'
   ),
   new TeamMember(
     'Pierre',
     'Berger',
     'Trésorier',
     'pierre.berger07',
-    'team/2018-2019/pierre-berger.JPG'
+    'team/2018-2019/pierre-berger.jpg',
+    'team/2018-2019/pierre-berger-freestyle.jpg',
   ),
   new TeamMember(
     'Eliott',
     'de Séguier',
     'DSI',
     'eliott.deseguier',
-    'team/2018-2019/eliott-deseguier.JPG'
+    'team/2018-2019/eliott-deseguier.jpg',
+    'team/2018-2019/eliott-deseguier-freestyle.jpg',
   ),
   new TeamMember(
     'Pidanou',
     'Eang',
     'Responsable communication',
     'pidanou.eang',
-    'team/2018-2019/pidanou-eang.JPG'
+    'team/2018-2019/pidanou-eang.jpg',
+    'team/2018-2019/pidanon-eang-freestyle.jpg',
   ),
   new TeamMember(
     'Elise',
     'Savornin',
     'Vice-trésorière',
     'elise.savornin',
-    'team/2018-2019/elise-savornin.JPG'
+    'team/2018-2019/elise-savornin.jpg',
+    'team/2018-2019/elise-savornin-freestyle.jpg',
   ),
   new TeamMember(
     'Franck',
     'NGuyen',
     'Vice-trésorier',
     'franck.nguyen.923',
-    'team/2018-2019/franck-nguyen.JPG'
+    'team/2018-2019/franck-nguyen.jpg',
+    'team/2018-2019/franck-nguyen-freestyle.jpg',
   ),
   new TeamMember(
     'Toan',
     'Dang Ngoc',
     'Chargé de contrat',
     'toan.dangngoc.94',
-    'team/2018-2019/toan-dang-ngoc.jpg'
+    'team/2018-2019/toan-dang-ngoc.jpg',
+    'team/2018-2019/toan-dang-ngoc-freestyle.jpg',
   ),
   new TeamMember(
     'Julien',
     'Badoche Rousseau',
     'Chargé de contrat',
     '100010400981153',
-    'team/2018-2019/julien-badoche-rousseau.JPG'
+    'team/2018-2019/julien-badoche-rousseau.jpg',
+    'team/2018-2019/julien-badoche-rousseau-freestyle.jpg',
   ),
   new TeamMember(
     'Lorrain',
     'Saillenfest',
     'Chargé de contrat',
     'lorrain.saillenfest.3',
-    'team/2018-2019/lorrain-saillenfest.JPG'
+    'team/2018-2019/lorrain-saillenfest.jpg',
+    'team/2018-2019/lorrain-sallenfeist-freestyle.jpg'
+  ),
+  new TeamMember(
+    'Valentin',
+    'Guilhem',
+    'Chargé de contrat',
+    'valentin.guilhem',
+    'team/2018-2019/valentin-guilhem.jpg',
+  ),
+  new TeamMember(
+    'Amine',
+    'Bensoud',
+    'Chargé de contrat',
+    'amine.bensoud',
+    'team/2018-2019/amine-bensoud.jpg',
+  ),
+  new TeamMember(
+    'Arthur',
+    'Odin',
+    'Responsable démarchage',
+    'arthur.odin',
+    'team/2018-2019/arthur-odin.jpg',
+  ),
+  new TeamMember(
+    'Tchong-kite',
+    'Huam',
+    'Responsable démarchage',
+    'tchong.kite.h',
+    'team/2018-2019/tchong-kite-huam.jpg',
   ),
 ];

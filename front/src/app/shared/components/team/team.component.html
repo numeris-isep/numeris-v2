@@ -1,7 +1,9 @@
 <div class="ui four raised centered doubling cards">
   <div class="ui card" *ngFor="let teamMember of teamMembers">
-    <div class="ui image">
-      <img src="assets/images/{{ teamMember.defaultImage }}" alt="Membre de l'équipe">
+    <div class="ui image" [ngClass]="{ 'move up reveal': teamMember.otherImage }">
+      <img class="visible content" src="assets/images/{{ teamMember.defaultImage }}" alt="Membre de l'équipe">
+      <img *ngIf="teamMember.otherImage" class="hidden content"
+           src="assets/images/{{ teamMember.otherImage }}" alt="Membre de l'équipe">
     </div>
     <div class="content">
       <div class="header">{{ teamMember.firstName }} {{ teamMember.lastName }}</div>
