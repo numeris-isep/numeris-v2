@@ -5,7 +5,6 @@ export class TeamMember {
   position: string;
   facebookPageName: string;
   defaultImage: string;
-  show: boolean;
 
   constructor(
     firstName: string,

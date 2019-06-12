@@ -1,6 +1,6 @@
 <div class="ui four raised centered doubling cards">
-  <div class="ui card" *ngFor="let teamMember of teamMembers" (deferLoad)="teamMember.show=true">
-    <div class="ui image" *ngIf="teamMember.show">
+  <div class="ui card" *ngFor="let teamMember of teamMembers">
+    <div class="ui image">
       <img src="assets/images/{{ teamMember.defaultImage }}" alt="Membre de l'équipe">
     </div>
     <div class="content">
