@@ -29,6 +29,7 @@ class IndexAdministratorTest extends TestCaseWithAuth
                     'createdAt',
                     'updatedAt',
                     'missionsCount',
+                    'usersCount',
                     'client',
                 ]],
                 'links',

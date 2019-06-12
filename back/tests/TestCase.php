@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\Traits\ApplicationProviderTrait;
 use Tests\Traits\ClientProviderTrait;
+use Tests\Traits\ConventionProviderTrait;
 use Tests\Traits\ProjectProviderTrait;
 
 abstract class TestCase extends BaseTestCase
@@ -16,5 +17,6 @@ abstract class TestCase extends BaseTestCase
         DatabaseTransactions,
         ProjectProviderTrait,
         ClientProviderTrait,
-        ApplicationProviderTrait;
+        ApplicationProviderTrait,
+        ConventionProviderTrait;
 }
