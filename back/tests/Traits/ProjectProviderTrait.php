@@ -7,7 +7,7 @@ use App\Models\Project;
 
 trait ProjectProviderTrait
 {
-    public function hiringProjectWithAvailableMissionProvider()
+    public function hiringProjectAndAvailableMissionProvider()
     {
         $this->refreshApplication();
 
@@ -22,7 +22,7 @@ trait ProjectProviderTrait
         return [[$project, $mission]];
     }
 
-    public function validatedProjectWithAvailableMissionProvider()
+    public function validatedProjectAndAvailableMissionProvider()
     {
         $this->refreshApplication();
 

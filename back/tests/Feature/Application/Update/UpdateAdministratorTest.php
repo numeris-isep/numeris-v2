@@ -13,7 +13,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
     /**
      * @group administrator
      *
-     * @dataProvider hiringProjectWithAvailableMissionProvider
+     * @dataProvider hiringProjectAndAvailableMissionProvider
      */
     public function testAdministratorUpdatingApplication($project, $mission)
     {

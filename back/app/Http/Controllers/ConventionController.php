@@ -47,7 +47,8 @@ class ConventionController extends Controller
                 // If rate exists, update it
                 $rate = Rate::find($rate_request['id']);
 
-                if ($rate) {
+                // Update only if no bills
+                if ($rate && $rate->bills->isEmpty()) {
                     $rate->update($rate_request);
                     $old_rates->forget($rate->id);
                 }

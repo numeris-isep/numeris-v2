@@ -13,7 +13,7 @@ class UpdateStaffTest extends TestCaseWithAuth
     /**
      * @group staff
      *
-     * @dataProvider hiringProjectWithAvailableMissionProvider
+     * @dataProvider hiringProjectAndAvailableMissionProvider
      */
     public function testStaffUpdatingApplication($project, $mission)
     {

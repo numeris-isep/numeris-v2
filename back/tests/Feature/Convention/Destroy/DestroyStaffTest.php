@@ -12,17 +12,17 @@ class DestroyStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
+     *
+     * @dataProvider ConventionProvider
      */
-    public function testStaffDeletingConvention()
+    public function testStaffDeletingConvention($convention)
     {
-        $convention_id = 1;
-        $convention = Convention::find($convention_id);
-
         $this->assertDatabaseHas('conventions', $convention->toArray());
 
-        $this->json('DELETE', route('conventions.destroy', ['convention_id' => $convention_id]))
-            ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
+        $this->json('DELETE', route('conventions.destroy', ['convention_id' => $convention->id]))
+            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
+            ->assertJson(['errors' => [trans('api.403')]]);
 
-        $this->assertDatabaseMissing('conventions', $convention->toArray());
+        $this->assertDatabaseHas('conventions', $convention->toArray());
     }
 }

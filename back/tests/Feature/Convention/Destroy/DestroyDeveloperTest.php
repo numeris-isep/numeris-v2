@@ -12,18 +12,33 @@ class DestroyDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider conventionProvider
      */
-    public function testDeveloperDeletingConvention()
+    public function testDeveloperDeletingConvention($convention)
     {
-        $convention_id = 1;
-        $convention = Convention::find($convention_id);
-
         $this->assertDatabaseHas('conventions', $convention->toArray());
 
-        $this->json('DELETE', route('conventions.destroy', ['convention_id' => $convention_id]))
+        $this->json('DELETE', route('conventions.destroy', ['convention_id' => $convention->id]))
             ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
 
         $this->assertDatabaseMissing('conventions', $convention->toArray());
+    }
+
+    /**
+     * @group developer
+     *
+     * @dataProvider conventionAndProjectProvider
+     */
+    public function testDeveloperDeletingConventionWithAssociatedProject($convention)
+    {
+        $this->assertDatabaseHas('conventions', $convention->toArray());
+
+        $this->json('DELETE', route('conventions.destroy', ['convention_id' => $convention->id]))
+            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
+            ->assertJson(['errors' => [trans('api.403')]]);
+
+        $this->assertDatabaseHas('conventions', $convention->toArray());
     }
 
     /**

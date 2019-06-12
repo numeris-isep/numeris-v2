@@ -12,7 +12,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      *
-     * @dataProvider hiringProjectWithAvailableMissionProvider
+     * @dataProvider hiringProjectAndAvailableMissionProvider
      */
     public function testDeveloperUpdatingApplication($project, $mission)
     {
@@ -55,7 +55,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      *
-     * @dataProvider validatedProjectWithAvailableMissionProvider
+     * @dataProvider validatedProjectAndAvailableMissionProvider
      */
     public function testDeveloperUpdatingApplicationWhoseProjectIsNotHiring($project, $mission)
     {

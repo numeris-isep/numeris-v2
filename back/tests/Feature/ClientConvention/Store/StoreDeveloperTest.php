@@ -11,11 +11,11 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider clientProvider
      */
-    public function testDeveloperCreatingConvention()
+    public function testDeveloperCreatingConvention($client)
     {
-        $client_id = 1;
-
         $convention = ['name'  => 'Convention de test'];
         $rate1 = [
             'name'          => 'Heures de test',
@@ -39,7 +39,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('rates', $rate1);
         $this->assertDatabaseMissing('rates', $rate2);
 
-        $this->json('POST', route('clients.conventions.store', ['client_id' => $client_id]), $data)
+        $this->json('POST', route('clients.conventions.store', ['client_id' => $client->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',
@@ -102,23 +102,23 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider clientProvider
      */
-    public function testDeveloperCreatingConventionWithoutData()
+    public function testDeveloperCreatingConventionWithoutData($client)
     {
-        $client_id = 1;
-
-        $this->json('POST', route('clients.conventions.store', ['client_id' => $client_id]))
+        $this->json('POST', route('clients.conventions.store', ['client_id' => $client->id]))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors(['name', 'rates']);
     }
 
     /**
      * @group developer
+     *
+     * @dataProvider clientProvider
      */
-    public function testDeveloperCreatingConventionWithMissingFields()
+    public function testDeveloperCreatingConventionWithMissingFields($client)
     {
-        $client_id = 1; // Unknown client
-
         $convention = ['name'  => 'Convention de test'];
         $rate1 = [];
         $rate2 = [];
@@ -127,7 +127,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
         $this->assertDatabaseMissing('conventions', $convention);
 
-        $this->json('POST', route('clients.conventions.store', ['client_id' => $client_id]), $data)
+        $this->json('POST', route('clients.conventions.store', ['client_id' => $client->id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors([
                 'rates.0.name', 'rates.0.for_student', 'rates.0.for_staff', 'rates.0.for_client', 'rates.0.is_flat',
@@ -139,11 +139,11 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider clientProvider
      */
-    public function testDeveloperCreatingConventionWithWrongValues()
+    public function testDeveloperCreatingConventionWithWrongValues($client)
     {
-        $client_id = 1;
-
         $convention = ['name'  => 'Convention de test'];
         $rate1 = [
             'name'          => 'Heures de test',
@@ -167,7 +167,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('rates', $rate1);
         $this->assertDatabaseMissing('rates', $rate2);
 
-        $this->json('POST', route('clients.conventions.store', ['client_id' => $client_id]), $data)
+        $this->json('POST', route('clients.conventions.store', ['client_id' => $client->id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors([
                 'rates.0.for_student', 'rates.0.for_staff', 'rates.0.for_client',
@@ -181,11 +181,11 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider clientProvider
      */
-    public function testDeveloperCreatingConventionWithFlatRatesWithoutHours()
+    public function testDeveloperCreatingConventionWithFlatRatesWithoutHours($client)
     {
-        $client_id = 1;
-
         $convention = ['name'  => 'Convention de test'];
         $rate1 = [
             'name'          => 'Heures de test',
@@ -208,7 +208,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('rates', $rate1);
         $this->assertDatabaseMissing('rates', $rate2);
 
-        $this->json('POST', route('clients.conventions.store', ['client_id' => $client_id]), $data)
+        $this->json('POST', route('clients.conventions.store', ['client_id' => $client->id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors(['rates.1.hours']);
 

@@ -12,15 +12,14 @@ class DestroyStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
+     *
+     * @dataProvider conventionProvider
      */
-    public function testStudentDeletingUser()
+    public function testStudentDeletingUser($convention)
     {
-        $convention_id = 1;
-        $convention = Convention::find($convention_id);
-
         $this->assertDatabaseHas('conventions', $convention->toArray());
 
-        $this->json('DELETE', route('conventions.destroy', ['convention_id' => $convention_id]))
+        $this->json('DELETE', route('conventions.destroy', ['convention_id' => $convention->id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 

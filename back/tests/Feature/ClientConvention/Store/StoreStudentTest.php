@@ -11,11 +11,11 @@ class StoreStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
+     *
+     * @dataProvider clientProvider
      */
-    public function testStudentCreatingConvention()
+    public function testStudentCreatingConvention($client)
     {
-        $client_id = 1;
-
         $convention = ['name'  => 'Convention de test'];
         $rate1 = [
             'name'          => 'Heures de test',
@@ -39,7 +39,7 @@ class StoreStudentTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('rates', $rate1);
         $this->assertDatabaseMissing('rates', $rate2);
 
-        $this->json('POST', route('clients.conventions.store', ['client_id' => $client_id]), $data)
+        $this->json('POST', route('clients.conventions.store', ['client_id' => $client->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 

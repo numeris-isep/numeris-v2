@@ -2,14 +2,14 @@
 
 namespace Tests\Traits;
 
-use App\Models\Contact;
+use App\Models\Client;
 
 trait ClientProviderTrait
 {
-    public function clientContactProvider()
+    public function clientProvider()
     {
         $this->refreshApplication();
 
-        return [[factory(Contact::class)->create()]];
+        return [[factory(Client::class)->create()]];
     }
 }
