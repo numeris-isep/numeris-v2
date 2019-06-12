@@ -16,38 +16,49 @@ class StoreDeveloperTest extends TestCaseWithAuth
     {
         $client_id = 1;
 
-        $data = [
-            'name' => '11-1111',
+        $convention = ['name'  => 'Convention de test'];
+        $rate1 = [
+            'name'          => 'Heures de test',
+            'is_flat'       => false,
+            'for_student'   => 10,
+            'for_staff'     => 12,
+            'for_client'    => 15,
+        ];
+        $rate2 = [
+            'name'          => 'Forfait de test',
+            'is_flat'       => true,
+            'hours'         => 10,
+            'for_student'   => 100,
+            'for_staff'     => 120,
+            'for_client'    => 150,
         ];
 
-        $this->assertDatabaseMissing('conventions', $data);
+        $data = array_merge($convention, ['rates' => [$rate1, $rate2]]);
+
+        $this->assertDatabaseMissing('conventions', $convention);
+        $this->assertDatabaseMissing('rates', $rate1);
+        $this->assertDatabaseMissing('rates', $rate2);
 
         $this->json('POST', route('clients.conventions.store', ['client_id' => $client_id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',
                 'name',
+                'createdAt',
+                'updatedAt',
+                'rates' => [[
+                    'id',
+                    'name',
+                    'isFlat',
+                    'forStudent',
+                    'forStaff',
+                    'forClient',
+                ]],
             ]);
 
-        $this->assertDatabaseHas('conventions', $data);
-    }
-
-    /**
-     * @group developer
-     */
-    public function testDeveloperCreatingConventionWithAlreadyUsedData()
-    {
-        $client_id = 1;
-
-        $data = [
-            'name' => Convention::find(1)->name, // Already used
-        ];
-
-        $this->assertDatabaseHas('conventions', $data);
-
-        $this->json('POST', route('clients.conventions.store', ['client_id' => $client_id]), $data)
-            ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJsonValidationErrors(['name']);
+        $this->assertDatabaseHas('conventions', $convention);
+        $this->assertDatabaseHas('rates', $rate1);
+        $this->assertDatabaseHas('rates', $rate2);
     }
 
     /**
@@ -57,13 +68,36 @@ class StoreDeveloperTest extends TestCaseWithAuth
     {
         $client_id = 0; // Unknown client
 
-        $data = [
-            'name' => '11-1111',
+        $convention = ['name'  => 'Convention de test'];
+        $rate1 = [
+            'name'          => 'Heures de test',
+            'is_flat'       => false,
+            'for_student'   => 10,
+            'for_staff'     => 12,
+            'for_client'    => 15,
         ];
+        $rate2 = [
+            'name'          => 'Forfait de test',
+            'is_flat'       => true,
+            'hours'         => 10,
+            'for_student'   => 100,
+            'for_staff'     => 120,
+            'for_client'    => 150,
+        ];
+
+        $data = array_merge($convention, ['rates' => [$rate1, $rate2]]);
+
+        $this->assertDatabaseMissing('conventions', $convention);
+        $this->assertDatabaseMissing('rates', $rate1);
+        $this->assertDatabaseMissing('rates', $rate2);
 
         $this->json('POST', route('clients.conventions.store', ['client_id' => $client_id]), $data)
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
             ->assertJson(['errors' => [trans('api.404')]]);
+
+        $this->assertDatabaseMissing('conventions', $convention);
+        $this->assertDatabaseMissing('rates', $rate1);
+        $this->assertDatabaseMissing('rates', $rate2);
     }
 
     /**
@@ -75,6 +109,111 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
         $this->json('POST', route('clients.conventions.store', ['client_id' => $client_id]))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJsonValidationErrors(['name']);
+            ->assertJsonValidationErrors(['name', 'rates']);
+    }
+
+    /**
+     * @group developer
+     */
+    public function testDeveloperCreatingConventionWithMissingFields()
+    {
+        $client_id = 1; // Unknown client
+
+        $convention = ['name'  => 'Convention de test'];
+        $rate1 = [];
+        $rate2 = [];
+
+        $data = array_merge($convention, ['rates' => [$rate1, $rate2]]);
+
+        $this->assertDatabaseMissing('conventions', $convention);
+
+        $this->json('POST', route('clients.conventions.store', ['client_id' => $client_id]), $data)
+            ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertJsonValidationErrors([
+                'rates.0.name', 'rates.0.for_student', 'rates.0.for_staff', 'rates.0.for_client', 'rates.0.is_flat',
+                'rates.1.name', 'rates.1.for_student', 'rates.1.for_staff', 'rates.1.for_client', 'rates.1.is_flat',
+            ]);
+
+        $this->assertDatabaseMissing('conventions', $convention);
+    }
+
+    /**
+     * @group developer
+     */
+    public function testDeveloperCreatingConventionWithWrongValues()
+    {
+        $client_id = 1;
+
+        $convention = ['name'  => 'Convention de test'];
+        $rate1 = [
+            'name'          => 'Heures de test',
+            'is_flat'       => false,
+            'for_student'   => -10,
+            'for_staff'     => -12,
+            'for_client'    => -15,
+        ];
+        $rate2 = [
+            'name'          => 'Forfait de test',
+            'is_flat'       => true,
+            'hours'         => -10,
+            'for_student'   => -100,
+            'for_staff'     => -120,
+            'for_client'    => -150,
+        ];
+
+        $data = array_merge($convention, ['rates' => [$rate1, $rate2]]);
+
+        $this->assertDatabaseMissing('conventions', $convention);
+        $this->assertDatabaseMissing('rates', $rate1);
+        $this->assertDatabaseMissing('rates', $rate2);
+
+        $this->json('POST', route('clients.conventions.store', ['client_id' => $client_id]), $data)
+            ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertJsonValidationErrors([
+                'rates.0.for_student', 'rates.0.for_staff', 'rates.0.for_client',
+                'rates.1.hours', 'rates.1.for_student', 'rates.1.for_staff', 'rates.1.for_client',
+            ]);
+
+        $this->assertDatabaseMissing('conventions', $convention);
+        $this->assertDatabaseMissing('rates', $rate1);
+        $this->assertDatabaseMissing('rates', $rate2);
+    }
+
+    /**
+     * @group developer
+     */
+    public function testDeveloperCreatingConventionWithFlatRatesWithoutHours()
+    {
+        $client_id = 1;
+
+        $convention = ['name'  => 'Convention de test'];
+        $rate1 = [
+            'name'          => 'Heures de test',
+            'is_flat'       => false,
+            'for_student'   => 10,
+            'for_staff'     => 12,
+            'for_client'    => 15,
+        ];
+        $rate2 = [
+            'name'          => 'Forfait de test',
+            'is_flat'       => true, // No hours
+            'for_student'   => 100,
+            'for_staff'     => 120,
+            'for_client'    => 150,
+        ];
+
+        $data = array_merge($convention, ['rates' => [$rate1, $rate2]]);
+
+        $this->assertDatabaseMissing('conventions', $convention);
+        $this->assertDatabaseMissing('rates', $rate1);
+        $this->assertDatabaseMissing('rates', $rate2);
+
+        $this->json('POST', route('clients.conventions.store', ['client_id' => $client_id]), $data)
+            ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertJsonValidationErrors(['rates.1.hours']);
+
+        $this->assertDatabaseMissing('conventions', $convention);
+        $this->assertDatabaseMissing('rates', $rate1);
+        $this->assertDatabaseMissing('rates', $rate2);
     }
 }

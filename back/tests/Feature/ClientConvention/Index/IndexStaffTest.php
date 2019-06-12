@@ -14,21 +14,15 @@ class IndexStaffTest extends TestCaseWithAuth
      */
     public function testStaffAccessingClientConventionIndex()
     {
-        $this->json('GET', route('clients.index'))
+        $client_id = 1;
+
+        $this->json('GET', route('clients.conventions.index', ['client_id' => $client_id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([[
                 'id',
-                'addressId',
-                'contactId',
                 'name',
-                'reference',
                 'createdAt',
                 'updatedAt',
-                'conventionsCount',
-                'projectsCount',
-                'missionsCount',
-                'address',
-                'contact',
             ]]);
 
     }

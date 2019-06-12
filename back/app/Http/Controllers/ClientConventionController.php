@@ -51,6 +51,6 @@ class ClientConventionController extends Controller
 
         $client->conventions()->save($convention);
 
-        return response()->json(ConventionResource::make($convention), JsonResponse::HTTP_CREATED);
+        return response()->json(ConventionResource::make($convention->load('rates')), JsonResponse::HTTP_CREATED);
     }
 }

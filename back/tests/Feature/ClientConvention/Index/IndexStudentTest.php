@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Client\Index;
+namespace Tests\Feature\ClientConvention\Index;
 
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
@@ -12,9 +12,11 @@ class IndexStudentTest extends TestCaseWithAuth
     /**
      * @group student
      */
-    public function testStudentAccessingClientIndex()
+    public function testStudentAccessingClientConventionIndex()
     {
-        $this->json('GET', route('clients.index'))
+        $client_id = 1;
+
+        $this->json('GET', route('clients.conventions.index', ['client_id' => $client_id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
     }
