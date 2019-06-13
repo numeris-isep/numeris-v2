@@ -25,11 +25,11 @@ class IndexAvailableDeveloperTest extends TestCaseWithAuth
                 'startAt',
                 'duration',
                 'capacity',
-                'address',
-                'project' => [
-                    'client',
-                ],
-                'applications'
+                'applicationsCount',
+                'waitingApplicationsCount',
+                'acceptedApplicationsCount',
+                'refusedApplicationsCount',
+                'project' => ['client'],
             ]]);
     }
 }

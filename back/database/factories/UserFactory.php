@@ -18,7 +18,7 @@ use Faker\Generator as Faker;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'email'     => $faker->unique()->safeEmail,
+        'email'     => $faker->randomDigit * $faker->randomDigit . $faker->unique()->safeEmail,
         'password'  => bcrypt('azerty'),
     ];
 });
@@ -36,7 +36,7 @@ $factory->state(User::class, 'active', function (Faker $faker) {
         'activated'                 => true,
         'tou_accepted'              => true,
         'subscription_paid_at'      => $faker->dateTime(),
-        'username'                  => $faker->unique()->userName,
+        'username'                  => $faker->unique()->userName . $faker->randomDigit * $faker->randomDigit,
         'first_name'                => $faker->firstName,
         'last_name'                 => $faker->lastName,
         'student_number'            => $faker->numberBetween(1000, 99999),

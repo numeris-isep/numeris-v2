@@ -11,11 +11,11 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider clientProvider
      */
-    public function testDeveloperUpdatingClient()
+    public function testDeveloperUpdatingClient($client)
     {
-        $client_id = 1;
-
         $client_data = [
             'name'      => 'AS Something',
             'reference' => '00-0000',
@@ -30,7 +30,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('clients', $client_data);
         $this->assertDatabaseMissing('addresses', $address_data);
 
-        $this->json('PUT', route('clients.update', ['client_id' => $client_id]), $data)
+        $this->json('PUT', route('clients.update', ['client_id' => $client->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',

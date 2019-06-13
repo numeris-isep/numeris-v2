@@ -11,16 +11,16 @@ class UpdateLockDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider availableMissionProvider
      */
-    public function testDeveloperUpdatingMissionLock()
+    public function testDeveloperUpdatingMissionLock($mission)
     {
-        $mission_id = 1;
-
         $data = [
             'is_locked' => true,
         ];
 
-        $this->json('PATCH', route('missions.update.lock', ['mission_id' => $mission_id]), $data)
+        $this->json('PATCH', route('missions.update.lock', ['mission_id' => $mission->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',
@@ -37,11 +37,26 @@ class UpdateLockDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      */
-    public function testDeveloperUpdatingMissionLockWithoutData()
+    public function testDeveloperUpdatingUnknownMissionLock()
     {
-        $mission_id = 1;
+        $mission_id = 0; // Unknown mission
 
-        $this->json('PATCH', route('missions.update.lock', ['mission_id' => $mission_id]))
+        $data = [
+            'is_locked' => true,
+        ];
+
+        $this->json('PATCH', route('missions.update.lock', ['mission_id' => $mission_id]), $data)
+            ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
+            ->assertJson(['errors' => [trans('api.404')]]);
+    }
+
+    /**
+     * @group developer
+     *
+     * @dataProvider availableMissionProvider
+     */
+    public function testDeveloperUpdatingMissionLockWithoutData($mission)
+    {$this->json('PATCH', route('missions.update.lock', ['mission_id' => $mission->id]))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors(['is_locked']);
     }

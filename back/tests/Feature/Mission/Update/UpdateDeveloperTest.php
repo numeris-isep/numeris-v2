@@ -11,11 +11,11 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider availableMissionProvider
      */
-    public function testDeveloperUpdatingMission()
+    public function testDeveloperUpdatingMission($mission)
     {
-        $mission_id = 1;
-
         $mission_data = [
             'project_id'    => 1,
             'title'         => 'Mission de test',
@@ -29,12 +29,12 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             'zip_code'  => '75015',
             'city'      => 'Paris'
         ];
-        $data = array_merge($mission_data, $address_data);
+        $data = array_merge($mission_data, ['address' => $address_data]);
 
         $this->assertDatabaseMissing('missions', $mission_data);
         $this->assertDatabaseMissing('addresses', $address_data);
 
-        $this->json('PUT', route('missions.update', ['mission_id' => $mission_id]), $data)
+        $this->json('PUT', route('missions.update', ['mission_id' => $mission->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',
@@ -52,23 +52,16 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider availableMissionProvider
      */
-    public function testDeveloperUpdatingUserWithoutData()
+    public function testDeveloperUpdatingUserWithoutData($mission)
     {
-        $mission_id = 1;
-
-        $this->json('PUT', route('missions.update', ['mission_id' => $mission_id]))
+        $this->json('PUT', route('missions.update', ['mission_id' => $mission->id]))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors([
-                'project_id',
-                'title',
-                'description',
-                'start_at',
-                'duration',
-                'capacity',
-                'street',
-                'zip_code',
-                'city',
+                'project_id', 'title', 'description', 'start_at', 'duration', 'capacity',
+                'address.street', 'address.zip_code', 'address.city',
             ]);
     }
 }

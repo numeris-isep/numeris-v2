@@ -11,11 +11,11 @@ class UpdateStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
+     *
+     * @dataProvider clientProvider
      */
-    public function testStudentUpdatingClient()
+    public function testStudentUpdatingClient($client)
     {
-        $client_id = 1;
-
         $client_data = [
             'name'      => 'AS Something',
             'reference' => '00-0000',
@@ -30,7 +30,7 @@ class UpdateStudentTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('clients', $client_data);
         $this->assertDatabaseMissing('addresses', $address_data);
 
-        $this->json('PUT', route('clients.update', ['client_id' => $client_id]), $data)
+        $this->json('PUT', route('clients.update', ['client_id' => $client->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 

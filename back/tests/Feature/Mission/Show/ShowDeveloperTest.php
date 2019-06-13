@@ -11,12 +11,12 @@ class ShowDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider availableMissionProvider
      */
-    public function testDeveloperAccessingMissionShow()
+    public function testDeveloperAccessingMissionShow($mission)
     {
-        $mission_id = 1;
-
-        $this->json('GET', route('missions.show', ['mission_id' => $mission_id]))
+        $this->json('GET', route('missions.show', ['mission_id' => $mission->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'id',
@@ -27,9 +27,13 @@ class ShowDeveloperTest extends TestCaseWithAuth
                 'startAt',
                 'duration',
                 'capacity',
-                'address',
+                'applicationsCount',
+                'waitingApplicationsCount',
+                'acceptedApplicationsCount',
+                'refusedApplicationsCount',
                 'project' => [
                     'client',
+                    'convention',
                 ],
                 'applications',
             ]);

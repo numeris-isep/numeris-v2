@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\ClientConvention\Index;
+namespace Tests\Feature\Client\Index;
 
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;

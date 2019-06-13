@@ -11,11 +11,11 @@ class UdpateAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
+     *
+     * @dataProvider availableMissionProvider
      */
-    public function testAdministratorUpdatingMission()
+    public function testAdministratorUpdatingMission($mission)
     {
-        $mission_id = 1;
-
         $mission_data = [
             'project_id'    => 1,
             'title'         => 'Mission de test',
@@ -29,12 +29,12 @@ class UdpateAdministratorTest extends TestCaseWithAuth
             'zip_code'  => '75015',
             'city'      => 'Paris'
         ];
-        $data = array_merge($mission_data, $address_data);
+        $data = array_merge($mission_data, ['address' => $address_data]);
 
         $this->assertDatabaseMissing('missions', $mission_data);
         $this->assertDatabaseMissing('addresses', $address_data);
 
-        $this->json('PUT', route('missions.update', ['mission_id' => $mission_id]), $data)
+        $this->json('PUT', route('missions.update', ['mission_id' => $mission->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',

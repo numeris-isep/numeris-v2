@@ -11,12 +11,12 @@ class ShowDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider clientWithProjectsWithMissionsProvider
      */
-    public function testDeveloperAccessingClientShow()
+    public function testDeveloperAccessingClientShow($client)
     {
-        $client_id = 1;
-
-        $this->json('GET', route('clients.show', ['client_id' => $client_id]))
+        $this->json('GET', route('clients.show', ['client_id' => $client->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'id',

@@ -20,15 +20,19 @@ $factory->define(Mission::class, function (Faker $faker) {
     ];
 });
 
+$factory->state(Mission::class, 'available', function (Faker $faker) {
+    return ['project_id' => factory(Project::class)->state(Project::HIRING)];
+});
+
+$factory->state(Mission::class, 'private', function (Faker $faker) {
+    return ['project_id' => factory(Project::class)->state('private')];
+});
+
 $factory->state(Mission::class, 'locked', function (Faker $faker) {
-    return [
-        'is_locked' => true,
-    ];
+    return ['is_locked' => true];
 });
 
 $factory->state(Mission::class, 'past', function (Faker $faker) {
-    return [
-        'start_at' => Carbon::now()->subMonth()->toDateTimeString(),
-    ];
+    return ['start_at' => Carbon::now()->subMonth()->toDateTimeString()];
 });
 

@@ -56,6 +56,10 @@ class Project extends Model
         'missions',
     ];
 
+    protected $casts = [
+        'is_private' => 'boolean',
+    ];
+
     public static function steps()
     {
         return static::$steps;

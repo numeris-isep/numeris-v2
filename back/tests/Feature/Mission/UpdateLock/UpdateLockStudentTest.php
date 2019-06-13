@@ -11,16 +11,16 @@ class UpdateLockStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
+     *
+     * @dataProvider availableMissionProvider
      */
-    public function testStudentUpdatingMissionLock()
+    public function testStudentUpdatingMissionLock($mission)
     {
-        $mission_id = 1;
-
         $data = [
             'is_locked' => true,
         ];
 
-        $this->json('PATCH', route('missions.update.lock', ['mission_id' => $mission_id]), $data)
+        $this->json('PATCH', route('missions.update.lock', ['mission_id' => $mission->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
     }

@@ -11,16 +11,16 @@ class UpdateLockStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
+     *
+     * @dataProvider availableMissionProvider
      */
-    public function testStaffUpdatingMissionLock()
+    public function testStaffUpdatingMissionLock($mission)
     {
-        $mission_id = 1;
-
         $data = [
             'is_locked' => true,
         ];
 
-        $this->json('PATCH', route('missions.update.lock', ['mission_id' => $mission_id]), $data)
+        $this->json('PATCH', route('missions.update.lock', ['mission_id' => $mission->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',

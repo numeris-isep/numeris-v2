@@ -3,6 +3,7 @@
 namespace Tests\Feature\MissionApplication\Store;
 use App\Models\Application;
 use App\Models\Mission;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
@@ -12,25 +13,24 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider availableMissionAndUserProvider
      */
-    public function testDeveloperCreatingApplication()
+    public function testDeveloperCreatingApplication($mission, $user)
     {
-        $user_id = 2;
-        $mission_id = factory(Mission::class)->create()->id;
-
         $application = [
-            'user_id'       => $user_id,
-            'mission_id'    => $mission_id,
+            'user_id'       => $user->id,
+            'mission_id'    => $mission->id,
             'type'          => Application::STAFF_PLACEMENT,
             'status'        => Application::ACCEPTED
         ];
         $data = [
-            'user_id' => $user_id,
+            'user_id' => $user->id,
         ];
 
         $this->assertDatabaseMissing('applications', $application);
 
-        $this->json('POST', route('missions.applications.store', ['mission_id' => $mission_id]), $data)
+        $this->json('POST', route('missions.applications.store', ['mission_id' => $mission->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',
@@ -47,15 +47,16 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider availableMissionProvider
      */
-    public function testDeveloperCreatingApplicationWithUnknownMission()
+    public function testDeveloperCreatingApplicationWithUnknownUser($mission)
     {
-        $user_id = 0;
-        $mission_id = 1;
+        $user_id = 0; // Unknown user
 
         $application = [
             'user_id'       => $user_id,
-            'mission_id'    => $mission_id,
+            'mission_id'    => $mission->id,
             'type'          => Application::STAFF_PLACEMENT,
             'status'        => Application::ACCEPTED,
         ];
@@ -65,96 +66,176 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
         $this->assertDatabaseMissing('applications', $application);
 
-        $this->json('POST', route('missions.applications.store', ['mission_id' => $mission_id]), $data)
+        $this->json('POST', route('missions.applications.store', ['mission_id' => $mission->id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors(['user_id']);
 
         $this->assertDatabaseMissing('applications', $application);
-
     }
 
     /**
      * @group developer
+     *
+     * @dataProvider userProvider
      */
-    public function testDeveloperCreatingApplicationWithoutData()
+    public function testDeveloperCreatingApplicationWithUnknownMission($user)
     {
-        $mission_id = 1;
+        $mission_id = 0; // Unknown mission
 
-        $this->json('POST', route('missions.applications.store', ['mission_id' => $mission_id]))
+        $application = [
+            'user_id'       => $user->id,
+            'mission_id'    => $mission_id,
+            'type'          => Application::STAFF_PLACEMENT,
+            'status'        => Application::ACCEPTED,
+        ];
+        $data = [
+            'user_id' => $user->id,
+        ];
+
+        $this->assertDatabaseMissing('applications', $application);
+
+        $this->json('POST', route('missions.applications.store', ['mission_id' => $mission_id]), $data)
+            ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
+            ->assertJson(['errors' => [trans('api.404')]]);
+
+        $this->assertDatabaseMissing('applications', $application);
+    }
+
+    /**
+     * @group developer
+     *
+     * @dataProvider availableMissionProvider
+     */
+    public function testDeveloperCreatingApplicationWithoutData($mission)
+    {
+        $this->json('POST', route('missions.applications.store', ['mission_id' => $mission->id]))
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
             ->assertJson(['errors' => [trans('api.404')]]);
     }
 
     /**
      * @group developer
+     *
+     * @dataProvider availableMissionAndUserWhoAlreadyAppliedProviderProvider
      */
-    public function testDeveloperApplyingUserToAlreadyAppliedMission()
+    public function testDeveloperCreatingApplicationToAlreadyAppliedMission($mission, $user)
     {
-        $user_id = 2;
-        $mission_id = 1;
-
         $data = [
-            'user_id' => $user_id,
+            'user_id' => $user->id,
         ];
 
-        $this->json('POST', route('missions.applications.store', ['mission_id' => $mission_id]), $data)
+        $this->json('POST', route('missions.applications.store', ['mission_id' => $mission->id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors(['user_id']);
     }
 
     /**
      * @group developer
+     *
+     * @dataProvider lockedMissionAndUserProvider
      */
-    public function testDeveloperApplyingUserToLockedMission()
+    public function testDeveloperCreatingApplicationToLockedMission($mission, $user)
     {
-        $user_id = 2;
-        $mission_id = $mission_id = factory(Mission::class)->state('locked')->create()->id;;
-
         $application = [
-            'user_id'       => $user_id,
-            'mission_id'    => $mission_id,
-            'type'          => Application::USER_APPLICATION,
+            'user_id'       => $user->id,
+            'mission_id'    => $mission->id,
+            'type'          => Application::STAFF_PLACEMENT,
             'status'        => Application::WAITING
         ];
         $data = [
-            'mission_id' => $mission_id,
+            'user_id' => $user->id,
         ];
 
         $this->assertDatabaseMissing('applications', $application);
 
-        $this->json('POST', route('users.applications.store', ['user_id' => $user_id]), $data)
+        $this->json('POST', route('missions.applications.store', ['mission_id' => $mission->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson([
-                'error' => trans('api.403'),
-            ]);
+            ->assertJson(['errors' => [trans('api.403')]]);
 
         $this->assertDatabaseMissing('applications', $application);
     }
 
     /**
      * @group developer
+     *
+     * @dataProvider pastMissionAndUserProvider
      */
-    public function testDeveloperApplyingUserToPastMission()
+    public function testDeveloperCreatingApplicationToPastMission($mission, $user)
     {
-        $user_id = 2;
-        $mission_id = $mission_id = factory(Mission::class)->state('past')->create()->id;;
-
         $application = [
-            'user_id'       => $user_id,
-            'mission_id'    => $mission_id,
-            'type'          => Application::USER_APPLICATION,
+            'user_id'       => $user->id,
+            'mission_id'    => $mission->id,
+            'type'          => Application::STAFF_PLACEMENT,
             'status'        => Application::WAITING
         ];
         $data = [
-            'mission_id' => $mission_id,
+            'user_id' => $user->id,
         ];
 
         $this->assertDatabaseMissing('applications', $application);
 
-        $this->json('POST', route('users.applications.store', ['user_id' => $user_id]), $data)
+        $this->json('POST', route('missions.applications.store', ['mission_id' => $mission->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson([
-                'error' => trans('api.403'),
+            ->assertJson(['errors' => [trans('api.403')]]);
+
+        $this->assertDatabaseMissing('applications', $application);
+    }
+
+    /**
+     * @group developer
+     *
+     * @dataProvider availablePrivateMissionAndUserProvider
+     */
+    public function testDeveloperApplyingUserToAvailablePrivateMission($mission, $user)
+    {
+        $application = [
+            'user_id'       => $user->id,
+            'mission_id'    => $mission->id,
+            'type'          => Application::USER_APPLICATION,
+            'status'        => Application::WAITING
+        ];
+        $data = [
+            'user_id' => $user->id,
+        ];
+
+        $this->assertDatabaseMissing('applications', $application);
+
+        $this->json('POST', route('missions.applications.store', ['mission_id' => $mission->id]), $data)
+            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
+            ->assertJson(['errors' => [trans('api.403')]]);
+
+        $this->assertDatabaseMissing('applications', $application);
+    }
+
+    /**
+     * @group developer
+     *
+     * @dataProvider availablePrivateMissionAndUserInPrivateProjectProvider
+     */
+    public function testDeveloperApplyingUserInPrivateProjectToAvailablePrivateMission($mission, $user)
+    {
+        $application = [
+            'user_id'       => $user->id,
+            'mission_id'    => $mission->id,
+            'type'          => Application::USER_APPLICATION,
+            'status'        => Application::WAITING
+        ];
+        $data = [
+            'user_id' => $user->id,
+        ];
+
+        $this->assertDatabaseMissing('applications', $application);
+
+        $this->json('POST', route('missions.applications.store', ['mission_id' => $mission->id]), $data)
+            ->assertStatus(JsonResponse::HTTP_CREATED)
+            ->assertJsonStructure([
+                'id',
+                'userId',
+                'missionId',
+                'type',
+                'status',
+                'createdAt',
+                'updatedAt',
             ]);
 
         $this->assertDatabaseMissing('applications', $application);

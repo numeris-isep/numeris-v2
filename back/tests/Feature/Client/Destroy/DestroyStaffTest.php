@@ -14,11 +14,11 @@ class DestroyStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
+     *
+     * @dataProvider clientWithProjectsWithMissionsProvider
      */
-    public function testStaffDeletingClient()
+    public function testStaffDeletingClient($client)
     {
-        $client_id = 1;
-        $client = Client::find($client_id);
         $address = $client->address;
         $conventions = $client->conventions;
         $mission_project_id = $client->missions->first()->project_id;
@@ -26,19 +26,17 @@ class DestroyStaffTest extends TestCaseWithAuth
         $this->assertDatabaseHas('clients', $client->toArray());
         $this->assertDatabaseHas('addresses', $address->toArray());
         $this->assertDatabaseHas('conventions', $conventions->get(0)->toArray());
-        $this->assertDatabaseHas('conventions', $conventions->get(1)->toArray());
-        $this->assertNotEmpty(Project::where('client_id', $client_id)->get());
+        $this->assertNotEmpty(Project::where('client_id', $client->id)->get());
         $this->assertNotEmpty(Mission::where('project_id', $mission_project_id)->get());
 
-        $this->json('DELETE', route('clients.destroy', ['client_id' => $client_id]))
+        $this->json('DELETE', route('clients.destroy', ['client_id' => $client->id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 
         $this->assertDatabaseHas('clients', $client->toArray());
         $this->assertDatabaseHas('addresses', $address->toArray());
         $this->assertDatabaseHas('conventions', $conventions->get(0)->toArray());
-        $this->assertDatabaseHas('conventions', $conventions->get(1)->toArray());
-        $this->assertNotEmpty(Project::where('client_id', $client_id)->get());
+        $this->assertNotEmpty(Project::where('client_id', $client->id)->get());
         $this->assertNotEmpty(Mission::where('project_id', $mission_project_id)->get());
     }
 }

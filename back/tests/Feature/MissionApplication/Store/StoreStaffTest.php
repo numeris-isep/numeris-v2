@@ -13,25 +13,24 @@ class StoreStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
+     *
+     * @dataProvider availableMissionAndUserProvider
      */
-    public function testStaffCreatingApplication()
+    public function testStaffCreatingApplication($mission, $user)
     {
-        $user_id = 6;
-        $mission_id = factory(Mission::class)->create()->id;
-
         $application = [
-            'user_id'       => $user_id,
-            'mission_id'    => $mission_id,
+            'user_id'       => $user->id,
+            'mission_id'    => $mission->id,
             'type'          => Application::STAFF_PLACEMENT,
             'status'        => Application::ACCEPTED
         ];
         $data = [
-            'user_id' => $user_id,
+            'user_id' => $user->id,
         ];
 
         $this->assertDatabaseMissing('applications', $application);
 
-        $this->json('POST', route('missions.applications.store', ['mission_id' => $mission_id]), $data)
+        $this->json('POST', route('missions.applications.store', ['mission_id' => $mission->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',

@@ -12,17 +12,17 @@ class DestroyStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
+     *
+     * @dataProvider availableMissionProvider
      */
-    public function testStaffDeletingMission()
+    public function testStaffDeletingMission($mission)
     {
-        $mission_id = 1;
-        $mission = Mission::find($mission_id);
         $address = $mission->address;
 
         $this->assertDatabaseHas('missions', $mission->toArray());
         $this->assertDatabaseHas('addresses', $address->toArray());
 
-        $this->json('DELETE', route('missions.destroy', ['mission_id' => $mission_id]))
+        $this->json('DELETE', route('missions.destroy', ['mission_id' => $mission->id]))
             ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
 
         $this->assertDatabaseMissing('missions', $mission->toArray());

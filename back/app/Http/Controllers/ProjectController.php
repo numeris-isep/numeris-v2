@@ -101,6 +101,16 @@ class ProjectController extends Controller
         $project = Project::findOrFail($project_id);
         $this->authorize('update', $project);
 
+        // Add eventual mission users to project users if project was public
+        // and is modified to private
+        if (! $project->is_private && $request->get('is_private')) {
+            foreach($project->missions as $mission) {
+                foreach($mission->applications as $application) {
+                    $project->addUser($application->user);
+                }
+            }
+        }
+
         $project->update($request->all());
 
         return response()->json(ProjectResource::make($project), JsonResponse::HTTP_CREATED);

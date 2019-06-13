@@ -9,7 +9,9 @@ use Tests\Traits\ApplicationProviderTrait;
 use Tests\Traits\ClientContactProviderTrait;
 use Tests\Traits\ClientProviderTrait;
 use Tests\Traits\ConventionProviderTrait;
+use Tests\Traits\MissionProviderTrait;
 use Tests\Traits\ProjectProviderTrait;
+use Tests\Traits\UserProviderTrait;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -20,5 +22,7 @@ abstract class TestCase extends BaseTestCase
         ClientProviderTrait,
         ClientContactProviderTrait,
         ApplicationProviderTrait,
-        ConventionProviderTrait;
+        ConventionProviderTrait,
+        MissionProviderTrait,
+        UserProviderTrait;
 }

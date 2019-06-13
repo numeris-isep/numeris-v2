@@ -34,7 +34,13 @@ class MissionUserController extends Controller
             request()->role,
             request()->promotion
         )
-            ->filter(function($user) {return $user->activated;})
+            ->filter(function($user) use ($mission) {
+                if ($mission->project->is_private) {
+                    return $user->belongsToProject($mission->project) && $user->activated;
+                } else {
+                    return $user->activated;
+                }
+            })
             ->load(['roles']);
 
         $users = $allUsers->diff($missionUsers)

@@ -36,14 +36,16 @@ class MissionApplicationController extends Controller
      * Store a newly created resource in storage.
      * Case where a staff or administrator is adding a user to a given mission
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param ApplicationRequest $request
+     * @param $mission_id
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function store(ApplicationRequest $request, $mission_id)
     {
         $mission = Mission::findOrFail($mission_id);
         $user = User::findOrFail($request->get('user_id'));
-        $this->authorize('store-mission-application', $mission);
+        $this->authorize('store-mission-application', [$user, $mission]);
 
         $application = Application::create([
             'type'      => Application::STAFF_PLACEMENT,

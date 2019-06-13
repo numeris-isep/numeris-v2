@@ -26,7 +26,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
             'zip_code'  => '75015',
             'city'      => 'Paris'
         ];
-        $data = array_merge($mission_data, $address_data);
+        $data = array_merge($mission_data, ['address' => $address_data]);
 
         $this->assertDatabaseMissing('missions', $mission_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -56,15 +56,8 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $this->json('POST', route('missions.store'))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors([
-                'project_id',
-                'title',
-                'description',
-                'start_at',
-                'duration',
-                'capacity',
-                'street',
-                'zip_code',
-                'city',
+                'project_id', 'title', 'description', 'start_at', 'duration', 'capacity',
+                'address.street', 'address.zip_code', 'address.city',
             ]);
     }
 }

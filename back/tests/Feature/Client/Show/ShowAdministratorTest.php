@@ -11,12 +11,12 @@ class ShowAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
+     *
+     * @dataProvider clientWithProjectsWithMissionsProvider
      */
-    public function testAdministratorAccessingClientShow()
+    public function testAdministratorAccessingClientShow($client)
     {
-        $client_id = 1;
-
-        $this->json('GET', route('clients.show', ['client_id' => $client_id]))
+        $this->json('GET', route('clients.show', ['client_id' => $client->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'id',

@@ -67,17 +67,17 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('store-application', function(User $user, Mission $mission) {
+        Gate::define('store-application', function(User $current_user, User $user, Mission $mission) {
             return ! $user->hasAppliedTo($mission)
                 && ! $mission->is_locked
                 && Carbon::parse($mission->start_at)->isAfter(now())
-                && $mission->project->isPrivate ? $user->belongsToProject($mission->project) : true
-                && $mission->project->step == Project::HIRING;
+                && $mission->project->step == Project::HIRING
+                && ($mission->project->is_private ? $user->belongsToProject($mission->project) : true);
         });
 
-        Gate::define('store-mission-application', function(User $user, Mission $mission) {
-            return $user->role()->isSuperiorOrEquivalentTo('staff')
-                && Gate::allows('store-application', $mission);
+        Gate::define('store-mission-application', function(User $current_user, User $user, Mission $mission) {
+            return $current_user->role()->isSuperiorOrEquivalentTo('staff')
+                && Gate::allows('store-application', [$user, $mission]);
         });
     }
 }
