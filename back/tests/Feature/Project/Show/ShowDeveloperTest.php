@@ -11,12 +11,12 @@ class ShowDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider projectAndMissionWithBillsProvider
      */
-    public function testDeveloperAccessingProjectShow()
+    public function testDeveloperAccessingProjectShow($project)
     {
-        $project_id = 1;
-
-        $this->json('GET', route('projects.show', ['project_id' => $project_id]))
+        $this->json('GET', route('projects.show', ['project_id' => $project->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'id',
@@ -27,7 +27,10 @@ class ShowDeveloperTest extends TestCaseWithAuth
                 'moneyReceivedAt',
                 'createdAt',
                 'updatedAt',
+                'missionsCount',
+                'usersCount',
                 'client',
+                'convention',
                 'missions',
             ]);
     }

@@ -32,19 +32,9 @@ class UpdateStepDeveloperTest extends TestCaseWithAuth
                 'moneyReceivedAt',
                 'createdAt',
                 'updatedAt',
+                'missionsCount',
+                'usersCount',
             ]);
-    }
-
-    /**
-     * @group developer
-     */
-    public function testDeveloperUpdatingProjectStepWithoutData()
-    {
-        $project_id = 1;
-
-        $this->json('PATCH', route('projects.update.step', ['project_id' => $project_id]))
-            ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJsonValidationErrors(['step']);
     }
 
     /**

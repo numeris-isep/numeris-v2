@@ -11,12 +11,14 @@ class StoreAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
+     *
+     * @dataProvider conventionProvider
      */
-    public function testAdministratorCreatingProject()
+    public function testAdministratorCreatingProject($convention)
     {
         $data = [
-            'client_id'     => 1,
-            'convention_id' => 1,
+            'client_id'     => $convention->client->id,
+            'convention_id' => $convention->id,
             'name'          => 'Projet de test',
             'start_at'      => now()->toDateString(),
             'is_private'    => false,
@@ -35,6 +37,8 @@ class StoreAdministratorTest extends TestCaseWithAuth
                 'moneyReceivedAt',
                 'createdAt',
                 'updatedAt',
+                'missionsCount',
+                'usersCount',
             ]);
 
         $this->assertDatabaseHas('projects', $data);

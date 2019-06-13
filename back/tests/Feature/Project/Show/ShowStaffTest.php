@@ -11,12 +11,12 @@ class ShowStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
+     *
+     * @dataProvider projectAndMissionWithBillsProvider
      */
-    public function testStaffAccessingProjectShow()
+    public function testStaffAccessingProjectShow($project)
     {
-        $project_id = 1;
-
-        $this->json('GET', route('projects.show', ['project_id' => $project_id]))
+        $this->json('GET', route('projects.show', ['project_id' => $project->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'id',
@@ -27,7 +27,10 @@ class ShowStaffTest extends TestCaseWithAuth
                 'moneyReceivedAt',
                 'createdAt',
                 'updatedAt',
+                'missionsCount',
+                'usersCount',
                 'client',
+                'convention',
                 'missions',
             ]);
     }

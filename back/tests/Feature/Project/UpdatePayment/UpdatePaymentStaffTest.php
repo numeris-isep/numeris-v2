@@ -32,6 +32,8 @@ class UpdatePaymentStaffTest extends TestCaseWithAuth
                 'moneyReceivedAt',
                 'createdAt',
                 'updatedAt',
+                'missionsCount',
+                'usersCount',
             ]);
     }
 }

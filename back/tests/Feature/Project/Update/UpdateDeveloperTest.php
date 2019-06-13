@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Project\Update;
 
+use App\Models\Project;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
@@ -11,14 +12,14 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider conventionAndProjectProvider
      */
-    public function testDeveloperUpdatingProject()
+    public function testDeveloperUpdatingProject($convention, $project)
     {
-        $project_id = 1;
-
         $data = [
-            'client_id'     => 1,
-            'convention_id' => 1,
+            'client_id'     => $convention->client->id,
+            'convention_id' => $convention->id,
             'name'          => 'Projet de test',
             'start_at'      => now()->toDateString(),
             'is_private'    => false,
@@ -26,7 +27,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $this->assertDatabaseMissing('projects', $data);
 
-        $this->json('PUT', route('projects.update', ['project_id' => $project_id]), $data)
+        $this->json('PUT', route('projects.update', ['project_id' => $project->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',
@@ -37,6 +38,8 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'moneyReceivedAt',
                 'createdAt',
                 'updatedAt',
+                'missionsCount',
+                'usersCount',
             ]);
 
         $this->assertDatabaseHas('projects', $data);
@@ -44,24 +47,50 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider projectAndMissionWithBillsProvider
      */
-    public function testDeveloperUpdatingProjectWithAlreadyUsedData()
+    public function testDeveloperUpdatingProjectWithAlreadyUsedData($otherProject)
     {
-        $project_id = 1;
+        $project = factory(Project::class)->create();
 
         $data = [
-            'client_id'     => 1,
-            'convention_id' => 1,
-            'name'          => 'AS Connect Décembre 2018',
+            'client_id'     => $otherProject->client->id,
+            'convention_id' => $otherProject->convention->id,
+            'name'          => $otherProject->name,
             'start_at'      => now()->toDateString(),
             'is_private'    => false,
         ];
 
         $this->assertDatabaseMissing('projects', $data);
 
-        $this->json('PUT', route('projects.update', ['project_id' => $project_id]), $data)
+        $this->json('PUT', route('projects.update', ['project_id' => $project->id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors(['name']);
+
+        $this->assertDatabaseMissing('projects', $data);
+    }
+
+    /**
+     * @group developer
+     *
+     * @dataProvider projectProvider
+     */
+    public function testDeveloperUpdatingProjectWithUnknownProjectData($project)
+    {
+        $data = [
+            'client_id'     => 0,
+            'convention_id' => 0,
+            'name'          => 'Projet de test',
+            'start_at'      => now()->toDateString(),
+            'is_private'    => false,
+        ];
+
+        $this->assertDatabaseMissing('projects', $data);
+
+        $this->json('PUT', route('projects.update', ['project_id' => $project->id]), $data)
+            ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertJsonValidationErrors(['client_id', 'convention_id']);
 
         $this->assertDatabaseMissing('projects', $data);
     }

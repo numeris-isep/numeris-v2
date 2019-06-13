@@ -12,21 +12,35 @@ class DestroyAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
+     *
+     * @dataProvider projectProvider
      */
-    public function testAdministratorDeletingProject()
+    public function testAdministratorDeletingProjectWithoutBills($project)
     {
-        $project_id = 1;
-        $project = Project::find($project_id);
-        $missions = $project->missions;
-
         $this->assertDatabaseHas('projects', $project->toArray());
-        $this->assertDatabaseHas('missions', $missions->first()->toArray());
+        $this->assertTrue($project->missions->isEmpty());
 
-        $this->json('DELETE', route('projects.destroy', ['project_id' => $project_id]))
+        $this->json('DELETE', route('projects.destroy', ['project_id' => $project->id]))
+            ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
+
+        $this->assertDatabaseMissing('projects', $project->toArray());
+    }
+
+    /**
+     * @group administrator
+     *
+     * @dataProvider projectAndMissionWithBillsProvider
+     */
+    public function testAdministratorDeletingProjectWithBills($project, $mission)
+    {
+        $this->assertDatabaseHas('projects', $project->toArray());
+        $this->assertDatabaseHas('missions', $mission->toArray());
+
+        $this->json('DELETE', route('projects.destroy', ['project_id' => $project->id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 
         $this->assertDatabaseHas('projects', $project->toArray());
-        $this->assertDatabaseHas('missions', $missions->first()->toArray());
+        $this->assertDatabaseHas('missions', $mission->toArray());
     }
 }

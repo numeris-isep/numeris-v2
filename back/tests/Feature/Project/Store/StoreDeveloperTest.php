@@ -10,12 +10,14 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider conventionProvider
      */
-    public function testDeveloperCreatingProject()
+    public function testDeveloperCreatingProject($convention)
     {
         $data = [
-            'client_id'     => 1,
-            'convention_id' => 1,
+            'client_id'     => $convention->client->id,
+            'convention_id' => $convention->id,
             'name'          => 'Projet de test',
             'start_at'      => now()->toDateString(),
             'is_private'    => false,
@@ -34,6 +36,8 @@ class StoreDeveloperTest extends TestCaseWithAuth
                 'moneyReceivedAt',
                 'createdAt',
                 'updatedAt',
+                'missionsCount',
+                'usersCount',
             ]);
 
         $this->assertDatabaseHas('projects', $data);
@@ -41,12 +45,15 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider projectAndMissionWithBillsProvider
      */
-    public function testDeveloperCreatingProjectWithAlreadyUsedData()
+    public function testDeveloperCreatingProjectWithAlreadyUsedData($project)
     {
         $data = [
-            'client_id'     => 1,
-            'name'          => 'AS Connect Décembre 2018', // Already used
+            'client_id'     => $project->client->id,
+            'convention_id' => $project->convention->id,
+            'name'          => $project->name,
             'start_at'      => now()->toDateString(),
             'is_private'    => false,
         ];
@@ -56,6 +63,28 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $this->json('POST', route('projects.store'), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors(['name']);
+
+        $this->assertDatabaseMissing('projects', $data);
+    }
+
+    /**
+     * @group developer
+     */
+    public function testDeveloperCreatingProjectWithUnknownProjectData()
+    {
+        $data = [
+            'client_id'     => 0,
+            'convention_id' => 0,
+            'name'          => 'Projet de test',
+            'start_at'      => now()->toDateString(),
+            'is_private'    => false,
+        ];
+
+        $this->assertDatabaseMissing('projects', $data);
+
+        $this->json('POST', route('projects.store'), $data)
+            ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertJsonValidationErrors(['client_id', 'convention_id']);
 
         $this->assertDatabaseMissing('projects', $data);
     }

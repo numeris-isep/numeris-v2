@@ -11,12 +11,14 @@ class StoreStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
+     *
+     * @dataProvider conventionProvider
      */
-    public function testStaffCreatingProject()
+    public function testStaffCreatingProject($convention)
     {
         $data = [
-            'client_id'     => 1,
-            'convention_id' => 1,
+            'client_id'     => $convention->client->id,
+            'convention_id' => $convention->id,
             'name'          => 'Projet de test',
             'start_at'      => now()->toDateString(),
             'is_private'    => false,
@@ -35,6 +37,8 @@ class StoreStaffTest extends TestCaseWithAuth
                 'moneyReceivedAt',
                 'createdAt',
                 'updatedAt',
+                'missionsCount',
+                'usersCount',
             ]);
 
         $this->assertDatabaseHas('projects', $data);

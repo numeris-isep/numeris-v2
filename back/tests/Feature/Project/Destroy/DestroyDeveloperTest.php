@@ -12,21 +12,35 @@ class DestroyDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider projectProvider
      */
-    public function testDeveloperDeletingProject()
+    public function testDeveloperDeletingProjectWithoutBills($project)
     {
-        $project_id = 1;
-        $project = Project::find($project_id);
-        $missions = $project->missions;
-
         $this->assertDatabaseHas('projects', $project->toArray());
-        $this->assertDatabaseHas('missions', $missions->first()->toArray());
+        $this->assertTrue($project->missions->isEmpty());
 
-        $this->json('DELETE', route('projects.destroy', ['project_id' => $project_id]))
+        $this->json('DELETE', route('projects.destroy', ['project_id' => $project->id]))
             ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
 
         $this->assertDatabaseMissing('projects', $project->toArray());
-        $this->assertDatabaseMissing('missions', $missions->first()->toArray());
+    }
+
+    /**
+     * @group developer
+     *
+     * @dataProvider projectAndMissionWithBillsProvider
+     */
+    public function testDeveloperDeletingProjectWithBills($project, $mission)
+    {
+        $this->assertDatabaseHas('projects', $project->toArray());
+        $this->assertDatabaseHas('missions', $mission->toArray());
+
+        $this->json('DELETE', route('projects.destroy', ['project_id' => $project->id]))
+            ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
+
+        $this->assertDatabaseMissing('projects', $project->toArray());
+        $this->assertDatabaseMissing('missions', $mission->toArray());
     }
 
     /**

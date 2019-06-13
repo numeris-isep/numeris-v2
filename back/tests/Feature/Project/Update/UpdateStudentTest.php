@@ -11,13 +11,14 @@ class UpdateStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
+     *
+     * @dataProvider conventionAndProjectProvider
      */
-    public function testStudentUpdatingProject()
+    public function testStudentUpdatingProject($convention, $project)
     {
-        $project_id = 1;
-
         $data = [
-            'client_id'     => 1,
+            'client_id'     => $convention->client->id,
+            'convention_id' => $convention->id,
             'name'          => 'Projet de test',
             'start_at'      => now()->toDateString(),
             'is_private'    => false,
@@ -25,7 +26,7 @@ class UpdateStudentTest extends TestCaseWithAuth
 
         $this->assertDatabaseMissing('projects', $data);
 
-        $this->json('PUT', route('projects.update', ['project_id' => $project_id]), $data)
+        $this->json('PUT', route('projects.update', ['project_id' => $project->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 

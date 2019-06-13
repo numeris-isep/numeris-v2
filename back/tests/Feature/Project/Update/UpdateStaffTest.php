@@ -11,14 +11,14 @@ class UpdateStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
+     *
+     * @dataProvider conventionAndProjectProvider
      */
-    public function testStaffUpdatingProject()
+    public function testStaffUpdatingProject($convention, $project)
     {
-        $project_id = 1;
-
         $data = [
-            'client_id'     => 1,
-            'convention_id' => 1,
+            'client_id'     => $convention->client->id,
+            'convention_id' => $convention->id,
             'name'          => 'Projet de test',
             'start_at'      => now()->toDateString(),
             'is_private'    => false,
@@ -26,7 +26,7 @@ class UpdateStaffTest extends TestCaseWithAuth
 
         $this->assertDatabaseMissing('projects', $data);
 
-        $this->json('PUT', route('projects.update', ['project_id' => $project_id]), $data)
+        $this->json('PUT', route('projects.update', ['project_id' => $project->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',
@@ -37,6 +37,8 @@ class UpdateStaffTest extends TestCaseWithAuth
                 'moneyReceivedAt',
                 'createdAt',
                 'updatedAt',
+                'missionsCount',
+                'usersCount',
             ]);
 
         $this->assertDatabaseHas('projects', $data);

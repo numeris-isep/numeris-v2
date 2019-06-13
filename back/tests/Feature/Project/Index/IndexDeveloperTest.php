@@ -16,6 +16,27 @@ class IndexDeveloperTest extends TestCaseWithAuth
     {
         $this->json('GET', route('projects.index'))
             ->assertStatus(JsonResponse::HTTP_OK)
+            ->assertJsonStructure([[
+                'id',
+                'name',
+                'step',
+                'startAt',
+                'isPrivate',
+                'moneyReceivedAt',
+                'createdAt',
+                'updatedAt',
+                'missionsCount',
+                'usersCount',
+            ]]);
+    }
+
+    /**
+     * @group developer
+     */
+    public function testDeveloperAccessingPaginatedProjectIndex()
+    {
+        $this->json('GET', route('projects.index', ['page' => 1]))
+            ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'data' => [[
                     'id',
