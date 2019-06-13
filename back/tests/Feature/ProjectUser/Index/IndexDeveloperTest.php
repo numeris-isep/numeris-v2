@@ -11,12 +11,48 @@ class IndexDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider privateProjectAndUserInProjectProvider
      */
-    public function testDeveloperAccessingProjectUserIndex()
+    public function testDeveloperAccessingProjectUserIndex($project, $user)
     {
-        $project_id = 12; // Private project
+        $this->json('GET', route('projects.users.index', ['project_id' => $project->id]))
+            ->assertStatus(JsonResponse::HTTP_OK)
+            ->assertJsonStructure([[
+                'id',
+                'preferenceId',
+                'addressId',
+                'activated',
+                'touAccepted',
+                'subscriptionPaidAt',
+                'email',
+                'username',
+                'firstName',
+                'lastName',
+                'studentNumber',
+                'promotion',
+                'schoolYear',
+                'phone',
+                'nationality',
+                'birthDate',
+                'birthCity',
+                'socialInsuranceNumber',
+                'iban',
+                'bic',
+                'createdAt',
+                'updatedAt',
+                'roles',
+            ]]);
+    }
 
-        $this->json('GET', route('projects.users.index', ['project_id' => $project_id]))
+    /**
+     * @group developer
+     *
+     * @dataProvider privateProjectAndUserInProjectProvider
+     */
+    public function testDeveloperAccessingPaginatedProjectUserIndex($project, $user)
+    {
+        $this->json('GET', route('projects.users.index', ['project_id' => $project->id, 'page' => 1]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'data' => [[
@@ -50,12 +86,12 @@ class IndexDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider projectProvider
      */
-    public function testDeveloperAccessingPublicProjectUserIndex()
+    public function testDeveloperAccessingPublicProjectUserIndex($project)
     {
-        $project_id = 1; // Public project
-
-        $this->json('GET', route('projects.users.index', ['project_id' => $project_id]))
+        $this->json('GET', route('projects.users.index', ['project_id' => $project->id]))
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
             ->assertJson(['errors' => [trans('api.404')]]);
     }

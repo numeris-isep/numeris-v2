@@ -11,41 +11,37 @@ class IndexStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
+     *
+     * @dataProvider privateProjectAndUserInProjectProvider
      */
-    public function testStaffAccessingProjectUserIndex()
+    public function testStaffAccessingProjectUserIndex($project, $user)
     {
-        $project_id = 12; // Private project
-
-        $this->json('GET', route('projects.users.index', ['project_id' => $project_id]))
+        $this->json('GET', route('projects.users.index', ['project_id' => $project->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
-            ->assertJsonStructure([
-                'data' => [[
-                    'id',
-                    'preferenceId',
-                    'addressId',
-                    'activated',
-                    'touAccepted',
-                    'subscriptionPaidAt',
-                    'email',
-                    'username',
-                    'firstName',
-                    'lastName',
-                    'studentNumber',
-                    'promotion',
-                    'schoolYear',
-                    'phone',
-                    'nationality',
-                    'birthDate',
-                    'birthCity',
-                    'socialInsuranceNumber',
-                    'iban',
-                    'bic',
-                    'createdAt',
-                    'updatedAt',
-                    'roles',
-                ]],
-                'links',
-                'meta',
-            ]);
+            ->assertJsonStructure([[
+                'id',
+                'preferenceId',
+                'addressId',
+                'activated',
+                'touAccepted',
+                'subscriptionPaidAt',
+                'email',
+                'username',
+                'firstName',
+                'lastName',
+                'studentNumber',
+                'promotion',
+                'schoolYear',
+                'phone',
+                'nationality',
+                'birthDate',
+                'birthCity',
+                'socialInsuranceNumber',
+                'iban',
+                'bic',
+                'createdAt',
+                'updatedAt',
+                'roles',
+            ]]);
     }
 }

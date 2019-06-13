@@ -13,23 +13,22 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider privateProjectAndUserProvider
      */
-    public function testDeveloperAddingUserToProject()
+    public function testDeveloperAddingUserToProject($project, $user)
     {
-        $project_id = 12; // private project
-        $user_id = 2;
-
         $data = [
-            'project_id'    => $project_id,
-            'user_id'       => $user_id,
+            'project_id'    => $project->id,
+            'user_id'       => $user->id,
         ];
 
         $this->assertDatabaseMissing('project_user', $data);
 
         $this->json(
             'POST',
-            route('projects.users.store', ['project_id' => $project_id]),
-            ['user_id' => $user_id])
+            route('projects.users.store', ['project_id' => $project->id]),
+            ['user_id' => $user->id])
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',
@@ -61,23 +60,22 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider publicProjectAndUserProvider
      */
-    public function testDeveloperAddingUserToPublicProject()
+    public function testDeveloperAddingUserToPublicProject($project, $user)
     {
-        $project_id = 1; // public project
-        $user_id = 2;
-
         $data = [
-            'project_id'    => $project_id,
-            'user_id'       => $user_id,
+            'project_id'    => $project->id,
+            'user_id'       => $user->id,
         ];
 
         $this->assertDatabaseMissing('project_user', $data);
 
         $this->json(
             'POST',
-            route('projects.users.store', ['project_id' => $project_id]),
-            ['user_id' => $user_id])
+            route('projects.users.store', ['project_id' => $project->id]),
+            ['user_id' => $user->id])
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
             ->assertJson(['errors' => [trans('api.404')]]);
 
@@ -86,23 +84,22 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider privateProjectAndUserInProjectProvider
      */
-    public function testDeveloperAddingAlreadyAddedUserToProject()
+    public function testDeveloperAddingUserAlreadyInProjectToProject($project, $user)
     {
-        $project_id = 12; // private project
-        $user_id = 1; // already added user
-
         $data = [
-            'project_id'    => $project_id,
-            'user_id'       => $user_id,
+            'project_id'    => $project->id,
+            'user_id'       => $user->id,
         ];
 
         $this->assertDatabaseHas('project_user', $data);
 
         $this->json(
             'POST',
-            route('projects.users.store', ['project_id' => $project_id]),
-            ['user_id' => $user_id])
+            route('projects.users.store', ['project_id' => $project->id]),
+            ['user_id' => $user->id])
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 

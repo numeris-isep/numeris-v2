@@ -13,23 +13,22 @@ class StoreAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
+     *
+     * @dataProvider privateProjectAndUserProvider
      */
-    public function testAdministratorAddingUserToProject()
+    public function testAdministratorAddingUserToProject($project, $user)
     {
-        $project_id = 12; // private project
-        $user_id = 2;
-
         $data = [
-            'project_id'    => $project_id,
-            'user_id'       => $user_id,
+            'project_id'    => $project->id,
+            'user_id'       => $user->id,
         ];
 
         $this->assertDatabaseMissing('project_user', $data);
 
         $this->json(
             'POST',
-            route('projects.users.store', ['project_id' => $project_id]),
-            ['user_id' => $user_id])
+            route('projects.users.store', ['project_id' => $project->id]),
+            ['user_id' => $user->id])
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',

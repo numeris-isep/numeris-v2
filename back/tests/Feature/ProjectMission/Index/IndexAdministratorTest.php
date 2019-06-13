@@ -11,12 +11,12 @@ class IndexAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
+     *
+     * @dataProvider projectAndMissionWithBillsProvider
      */
-    public function testAdministratorAccessingProjectMissionxIndex()
+    public function testAdministratorAccessingProjectMissionxIndex($project, $mission)
     {
-        $project_id = 1;
-
-        $this->json('GET', route('projects.missions.index', ['project_id' => $project_id]))
+        $this->json('GET', route('projects.missions.index', ['project_id' => $project->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'data' => [[
@@ -29,6 +29,9 @@ class IndexAdministratorTest extends TestCaseWithAuth
                     'duration',
                     'capacity',
                     'applicationsCount',
+                    'waitingApplicationsCount',
+                    'acceptedApplicationsCount',
+                    'refusedApplicationsCount',
                     'project',
                 ]],
                 'links',

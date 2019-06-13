@@ -13,15 +13,14 @@ class DestroyAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
+     *
+     * @dataProvider privateProjectAndUserInProjectProvider
      */
-    public function testAdministratorRemovingUserFromProject()
+    public function testAdministratorRemovingUserFromProject($project, $user)
     {
-        $project_id = 12; // private project
-        $user_id = 1;
-
         $data = [
-            'project_id'    => $project_id,
-            'user_id'       => $user_id,
+            'project_id'    => $project->id,
+            'user_id'       => $user->id,
         ];
 
         $this->assertDatabaseHas('project_user', $data);

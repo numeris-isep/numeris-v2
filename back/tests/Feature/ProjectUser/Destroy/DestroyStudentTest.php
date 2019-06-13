@@ -13,20 +13,19 @@ class DestroyStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
+     *
+     * @dataProvider privateProjectAndUserInProjectProvider
      */
-    public function testStudentRemovingUserFromProject()
+    public function testStudentRemovingUserFromProject($project, $user)
     {
-        $project_id = 12; // private project
-        $user_id = 1;
-
         $data = [
-            'project_id'    => $project_id,
-            'user_id'       => $user_id,
+            'project_id'    => $project->id,
+            'user_id'       => $user->id,
         ];
 
         $this->assertDatabaseHas('project_user', $data);
 
-        $this->json('DELETE', route('projects.users.destroy', $data), ['user_id' => $user_id])
+        $this->json('DELETE', route('projects.users.destroy', $data), ['user_id' => $user->id])
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 

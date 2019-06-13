@@ -11,12 +11,12 @@ class IndexStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
+     *
+     * @dataProvider projectAndMissionWithBillsProvider
      */
-    public function testStaffAccessingProjectMissionIndex()
+    public function testStaffAccessingProjectMissionIndex($project, $mission)
     {
-        $project_id = 1;
-
-        $this->json('GET', route('projects.missions.index', ['project_id' => $project_id]))
+        $this->json('GET', route('projects.missions.index', ['project_id' => $project->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'data' => [[
@@ -29,6 +29,9 @@ class IndexStaffTest extends TestCaseWithAuth
                     'duration',
                     'capacity',
                     'applicationsCount',
+                    'waitingApplicationsCount',
+                    'acceptedApplicationsCount',
+                    'refusedApplicationsCount',
                     'project',
                 ]],
                 'links',

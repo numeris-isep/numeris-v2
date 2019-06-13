@@ -13,15 +13,14 @@ class DestroyDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider privateProjectAndUserInProjectProvider
      */
-    public function testDeveloperRemovingUserFromProject()
+    public function testDeveloperRemovingUserFromProject($project, $user)
     {
-        $project_id = 12; // private project
-        $user_id = 1;
-
         $data = [
-            'project_id'    => $project_id,
-            'user_id'       => $user_id,
+            'project_id'    => $project->id,
+            'user_id'       => $user->id,
         ];
 
         $this->assertDatabaseHas('project_user', $data);
@@ -34,15 +33,14 @@ class DestroyDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider publicProjectAndUserProvider
      */
-    public function testDeveloperRemovingUserFromPublicProject()
+    public function testDeveloperRemovingUserFromPublicProject($project, $user)
     {
-        $project_id = 1; // public project
-        $user_id = 1;
-
         $data = [
-            'project_id'    => $project_id,
-            'user_id'       => $user_id,
+            'project_id'    => $project->id,
+            'user_id'       => $user->id,
         ];
 
         $this->assertDatabaseMissing('project_user', $data);
@@ -56,15 +54,14 @@ class DestroyDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider privateProjectAndUserProvider
      */
-    public function testDeveloperRemovingAlreadyRemovedUserFromProject()
+    public function testDeveloperRemovingUserNotInProjectFromProject($project, $user)
     {
-        $project_id = 12; // private project
-        $user_id = 3; // already removed user
-
         $data = [
-            'project_id'    => $project_id,
-            'user_id'       => $user_id,
+            'project_id'    => $project->id,
+            'user_id'       => $user->id,
         ];
 
         $this->assertDatabaseMissing('project_user', $data);

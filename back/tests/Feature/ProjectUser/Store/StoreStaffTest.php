@@ -13,23 +13,22 @@ class StoreStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
+     *
+     * @dataProvider privateProjectAndUserProvider
      */
-    public function testStaffAddingUserToProject()
+    public function testStaffAddingUserToProject($project, $user)
     {
-        $project_id = 12; // private project
-        $user_id = 2;
-
         $data = [
-            'project_id'    => $project_id,
-            'user_id'       => $user_id,
+            'project_id'    => $project->id,
+            'user_id'       => $user->id,
         ];
 
         $this->assertDatabaseMissing('project_user', $data);
 
         $this->json(
             'POST',
-            route('projects.users.store', ['project_id' => $project_id]),
-            ['user_id' => $user_id])
+            route('projects.users.store', ['project_id' => $project->id]),
+            ['user_id' => $user->id])
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',
