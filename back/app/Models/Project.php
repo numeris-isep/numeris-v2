@@ -138,4 +138,19 @@ class Project extends Model
     {
         $this->users()->detach($user);
     }
+
+    public function bills()
+    {
+        $bills = collect();
+
+        foreach ($this->missions as $mission) {
+            $bill = $mission->bills;
+
+            if ($bill->count()) {
+                $bills = $bills->merge($bill);
+            }
+        }
+
+        return $bills;
+    }
 }

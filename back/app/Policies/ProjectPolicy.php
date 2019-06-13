@@ -4,11 +4,14 @@ namespace App\Policies;
 
 use App\Models\Project;
 use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ProjectPolicy
 {
     use HandlesAuthorization;
+
+    private $message = 'Accès interdit.';
 
     public function before(User $current_user, $ability)
     {
@@ -55,7 +58,8 @@ class ProjectPolicy
 
     public function destroy(User $current_user, Project $project)
     {
-        // TODO: only if there is no billing data or user = 'developer'
-        return $current_user->role()->isEquivalentTo('developer');
+        return $project->bills()->count() > 0
+            ? $current_user->role()->isEquivalentTo('developer')
+            : $current_user->role()->isSuperiorOrEquivalentTo('staff');
     }
 }

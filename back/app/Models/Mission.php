@@ -172,4 +172,14 @@ class Mission extends Model
             return $a->user;
         });
     }
+
+    public function bills()
+    {
+        return $this->hasManyThrough(
+            Bill::class,
+            Application::class,
+            'mission_id',
+            'application_id'
+        );
+    }
 }
