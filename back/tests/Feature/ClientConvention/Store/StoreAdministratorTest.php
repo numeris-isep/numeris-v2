@@ -2,12 +2,13 @@
 
 namespace Tests\Feature\ClientConvention\Store;
 
+use App\Models\Role;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
 class StoreAdministratorTest extends TestCaseWithAuth
 {
-    protected $username = 'administrator';
+    protected $username = Role::ADMINISTRATOR;
 
     /**
      * @group administrator

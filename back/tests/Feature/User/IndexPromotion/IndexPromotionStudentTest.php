@@ -2,12 +2,13 @@
 
 namespace Tests\Feature\User\IndexPromotion;
 
+use App\Models\Role;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
 class IndexPromotionStudentTest extends TestCaseWithAuth
 {
-    protected $username = 'student';
+    protected $username = Role::STUDENT;
 
     /**
      * @group student

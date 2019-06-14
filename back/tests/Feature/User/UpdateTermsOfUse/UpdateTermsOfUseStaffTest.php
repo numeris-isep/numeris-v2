@@ -2,14 +2,13 @@
 
 namespace Tests\Feature\User\UpdateTermsOfUse;
 
-use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
 use Tests\TestCaseWithAuth;
 
 class UpdateTermsOfUseStaffTest extends TestCaseWithAuth
 {
-    protected $username = 'staff';
+    protected $username = Role::STAFF;
 
     /**
      * @group staff

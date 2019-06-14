@@ -9,7 +9,7 @@ use Tests\TestCaseWithAuth;
 
 class StoreDeveloperTest extends TestCaseWithAuth
 {
-    protected $username = 'developer';
+    protected $username = Role::DEVELOPER;
 
     /**
      * @group developer

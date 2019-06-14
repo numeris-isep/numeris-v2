@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Role;
 use App\Models\Mission;
 use App\Models\Project;
 use App\Models\User;
@@ -14,7 +15,7 @@ class BillPolicy
     public function before(User $current_user, $ability)
     {
         // Forbid everything to students
-        if ($current_user->role()->isInferiorTo('staff')) {
+        if ($current_user->role()->isInferiorTo(Role::STAFF)) {
             return false;
         }
     }

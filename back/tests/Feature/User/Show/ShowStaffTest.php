@@ -2,12 +2,13 @@
 
 namespace Tests\Feature\User\Show;
 
+use App\Models\Role;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
 class ShowStaffTest extends TestCaseWithAuth
 {
-    protected $username = 'staff';
+    protected $username = Role::STAFF;
 
     /**
      * @group staff

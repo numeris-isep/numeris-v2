@@ -4,10 +4,11 @@ namespace Tests\Feature\ProjectUser\Index;
 
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
+use App\Models\Role;
 
 class IndexStudentTest extends TestCaseWithAuth
 {
-    protected $username = 'student';
+    protected $username = Role::STUDENT;
 
     /**
      * @group staff

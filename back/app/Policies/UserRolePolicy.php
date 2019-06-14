@@ -13,14 +13,14 @@ class UserRolePolicy
     public function before(User $current_user, $ability)
     {
         // Grant everything to developers and administrators
-        if ($current_user->role()->isInferiorTo('administrator') && $ability != 'index') {
+        if ($current_user->role()->isInferiorTo(Role::ADMINISTRATOR) && $ability != 'index') {
             return false;
         }
     }
 
     public function index(User $current_user)
     {
-        return $current_user->role()->isSuperiorTo('student');
+        return $current_user->role()->isSuperiorTo(Role::STUDENT);
     }
 
     public function store(User $current_user, User $user, Role $role)

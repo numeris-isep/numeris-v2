@@ -2,12 +2,13 @@
 
 namespace Tests\Feature\Preference\Update;
 
+use App\Models\Role;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
 class UpdateAdministratorTest extends TestCaseWithAuth
 {
-    protected $username = 'administrator';
+    protected $username = Role::ADMINISTRATOR;
 
     /**
      * @group administrator

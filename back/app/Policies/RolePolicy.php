@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -12,7 +13,7 @@ class RolePolicy
     public function before(User $current_user, $ability)
     {
         // Grant everything to developers and administrators
-        if ($current_user->role()->isSuperiorOrEquivalentTo('administrator')) {
+        if ($current_user->role()->isSuperiorOrEquivalentTo(Role::ADMINISTRATOR)) {
             return true;
         }
     }

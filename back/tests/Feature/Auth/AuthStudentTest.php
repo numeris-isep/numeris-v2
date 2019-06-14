@@ -5,8 +5,7 @@ namespace Tests\Feature\Auth;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\Role;
 
 class AuthStudentTest extends TestCase
 {
@@ -15,7 +14,7 @@ class AuthStudentTest extends TestCase
      */
     public function testStudentLoggingIn()
     {
-        $user = User::where('username', 'student')->first();
+        $user = User::where('username', Role::STUDENT)->first();
 
         $data = [
             'email'     => $user->email,
@@ -32,7 +31,7 @@ class AuthStudentTest extends TestCase
      */
     public function testStudentLoggingInWithWrongPassword()
     {
-        $user = User::where('username', 'student')->first();
+        $user = User::where('username', Role::STUDENT)->first();
 
         $data = [
             'email' => $user->email,

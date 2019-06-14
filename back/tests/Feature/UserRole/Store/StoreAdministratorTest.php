@@ -9,7 +9,7 @@ use Tests\TestCaseWithAuth;
 
 class StoreAdministratorTest extends TestCaseWithAuth
 {
-    protected $username = 'administrator';
+    protected $username = Role::ADMINISTRATOR;
 
     /**
      * @group administrator

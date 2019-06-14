@@ -9,7 +9,7 @@ use Tests\TestCaseWithAuth;
 
 class IndexStudentTest extends TestCaseWithAuth
 {
-    protected $username = 'student';
+    protected $username = Role::STUDENT;
 
     /**
      * @group student

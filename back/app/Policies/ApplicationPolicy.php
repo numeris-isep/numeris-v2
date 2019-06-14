@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Role;
 use App\Models\Application;
 use App\Models\Project;
 use App\Models\User;
@@ -14,7 +15,7 @@ class ApplicationPolicy
     public function before(User $current_user, $ability)
     {
         // Grant everything to developers, administrators and staffs
-        if ($current_user->role()->isInferiorTo('staff') && $ability != 'destroy') {
+        if ($current_user->role()->isInferiorTo(Role::STAFF) && $ability != 'destroy') {
             return false;
         }
     }

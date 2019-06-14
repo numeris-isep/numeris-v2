@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Client\Destroy;
 
-use App\Models\Client;
+use App\Models\Role;
 use App\Models\Mission;
 use App\Models\Project;
 use Illuminate\Http\JsonResponse;
@@ -10,7 +10,7 @@ use Tests\TestCaseWithAuth;
 
 class DestroyAdministratorTest extends TestCaseWithAuth
 {
-    protected $username = 'administrator';
+    protected $username = Role::ADMINISTRATOR;
 
     /**
      * @group administrator

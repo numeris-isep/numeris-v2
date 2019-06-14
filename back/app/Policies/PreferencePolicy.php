@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Role;
 use App\Models\Preference;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -13,7 +14,7 @@ class PreferencePolicy
     public function before(User $current_user, $ability)
     {
         // Grant everything to developers
-        if ($current_user->role()->isEquivalentTo('developer')) {
+        if ($current_user->role()->isEquivalentTo(Role::DEVELOPER)) {
             return true;
         }
     }

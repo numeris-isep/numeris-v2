@@ -13,12 +13,12 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         if (Role::all()->isEmpty()) {
-            // 'name' => 'hierarchy'
+            // 'name', 'name_fr', 'hierarchy'
             $roles = [
-                ['developer', 'Développeur', 1],
-                ['administrator', 'Administrateur', 2],
-                ['staff', 'Staff', 3],
-                ['student', 'Étudiant', 4],
+                [Role::DEVELOPER,       'Développeur',      1],
+                [Role::ADMINISTRATOR,   'Administrateur',   2],
+                [Role::STAFF,           'Staff',            3],
+                [Role::STUDENT,         'Étudiant',         4],
             ];
 
             foreach ($roles as $role) {

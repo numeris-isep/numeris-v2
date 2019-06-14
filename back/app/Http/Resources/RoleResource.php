@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Role;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class RoleResource extends JsonResource
@@ -19,7 +20,7 @@ class RoleResource extends JsonResource
             'name'      => $this->name,
             'nameFr'    => $this->name_fr,
             'hierarchy' => $this->when(
-                auth()->user()->role()->name === 'developer',
+                auth()->user()->role()->name === Role::DEVELOPER,
                 $this->hierarchy
             ),
         ];

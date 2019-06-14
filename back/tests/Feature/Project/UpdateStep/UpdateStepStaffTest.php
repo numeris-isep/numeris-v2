@@ -2,13 +2,14 @@
 
 namespace Tests\Feature\Project\Update;
 
+use App\Models\Role;
 use App\Models\Project;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
 class UpdateStepStaffTest extends TestCaseWithAuth
 {
-    protected $username = 'staff';
+    protected $username = Role::STAFF;
 
     /**
      * @group staff

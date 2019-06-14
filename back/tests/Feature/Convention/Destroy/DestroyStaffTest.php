@@ -2,13 +2,13 @@
 
 namespace Tests\Feature\Convention\Destroy;
 
-use App\Models\Convention;
+use App\Models\Role;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
 class DestroyStaffTest extends TestCaseWithAuth
 {
-    protected $username = 'staff';
+    protected $username = Role::STAFF;
 
     /**
      * @group staff

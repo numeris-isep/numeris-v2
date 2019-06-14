@@ -3,13 +3,13 @@
 namespace Tests\Feature\User\Destroy;
 
 use App\Models\Preference;
-use App\Models\User;
+use App\Models\Role;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
 class DestroyStudentTest extends TestCaseWithAuth
 {
-    protected $username = 'student';
+    protected $username = Role::STUDENT;
 
     /**
      * @group student

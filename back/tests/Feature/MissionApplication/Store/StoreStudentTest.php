@@ -5,10 +5,11 @@ namespace Tests\Feature\MissionApplication\Store;
 use App\Models\Application;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
+use App\Models\Role;
 
 class StoreStudentTest extends TestCaseWithAuth
 {
-    protected $username = 'student';
+    protected $username = Role::STUDENT;
 
     /**
      * @group student

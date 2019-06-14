@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Role;
 use App\Models\Client;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -13,7 +14,7 @@ class ClientPolicy
     public function before(User $current_user, $ability)
     {
         // Grant everything to developers, administrators and staffs
-        if ($current_user->role()->isSuperiorOrEquivalentTo('staff') && $ability != 'destroy') {
+        if ($current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF) && $ability != 'destroy') {
             return true;
         }
     }
@@ -41,7 +42,7 @@ class ClientPolicy
     public function destroy(User $current_user, Client $client)
     {
         return $client->bills()->count() > 0
-            ? $current_user->role()->isEquivalentTo('developer')
-            : $current_user->role()->isSuperiorOrEquivalentTo('staff');
+            ? $current_user->role()->isEquivalentTo(Role::DEVELOPER)
+            : $current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF);
     }
 }

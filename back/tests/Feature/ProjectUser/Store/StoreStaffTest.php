@@ -3,13 +3,12 @@
 namespace Tests\Feature\ProjectUser\Store;
 
 use App\Models\Role;
-use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
 class StoreStaffTest extends TestCaseWithAuth
 {
-    protected $username = 'staff';
+    protected $username = Role::STAFF;
 
     /**
      * @group staff

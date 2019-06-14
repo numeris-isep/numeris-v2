@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Role;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserRoleResource extends JsonResource
@@ -18,7 +19,7 @@ class UserRoleResource extends JsonResource
             'id'        => $this->id,
             'name'      => $this->name,
             'hierarchy' => $this->when(
-                auth()->user()->role()->name === 'developer',
+                auth()->user()->role()->name === Role::DEVELOPER,
                 $this->hierarchy
             ),
             'createdAt' => $this->whenPivotLoaded($this->pivot, $this->pivot->created_at->toDateTimeString()),

@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Client\Destroy;
 
-use App\Models\Client;
+use App\Models\Role;
 use App\Models\Mission;
 use App\Models\Project;
 use Illuminate\Http\JsonResponse;
@@ -10,7 +10,7 @@ use Tests\TestCaseWithAuth;
 
 class DestroyDeveloperTest extends TestCaseWithAuth
 {
-    protected $username = 'developer';
+    protected $username = Role::DEVELOPER;
 
     /**
      * @group developer

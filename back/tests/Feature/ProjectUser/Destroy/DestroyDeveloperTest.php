@@ -3,13 +3,12 @@
 namespace Tests\Feature\ProjectUser\Store;
 
 use App\Models\Role;
-use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
 class DestroyDeveloperTest extends TestCaseWithAuth
 {
-    protected $username = 'developer';
+    protected $username = Role::DEVELOPER;
 
     /**
      * @group developer

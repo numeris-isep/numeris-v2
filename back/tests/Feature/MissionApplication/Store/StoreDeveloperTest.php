@@ -1,15 +1,15 @@
 <?php
 
 namespace Tests\Feature\MissionApplication\Store;
+
+use App\Models\Role;
 use App\Models\Application;
-use App\Models\Mission;
-use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
 class StoreDeveloperTest extends TestCaseWithAuth
 {
-    protected $username = 'developer';
+    protected $username = Role::DEVELOPER;
 
     /**
      * @group developer

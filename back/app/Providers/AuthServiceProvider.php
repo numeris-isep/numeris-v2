@@ -76,7 +76,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('store-mission-application', function(User $current_user, User $user, Mission $mission) {
-            return $current_user->role()->isSuperiorOrEquivalentTo('staff')
+            return $current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF)
                 && Gate::allows('store-application', [$user, $mission]);
         });
     }

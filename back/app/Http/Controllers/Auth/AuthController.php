@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Role;
 use App\Http\Requests\AuthRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -57,7 +58,7 @@ class AuthController extends Controller
     {
         $user = auth()->user()->load(['address', 'preference']);
 
-        if ($user->role()->isSuperiorOrEquivalentTo('staff')) {
+        if ($user->role()->isSuperiorOrEquivalentTo(Role::STAFF)) {
             $user->load([
                 'roles' => function($r) {
                     return $r->orderBy('created_at', 'desc');

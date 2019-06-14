@@ -5,7 +5,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Role::class, function (Faker $faker) {
     return [
-        'name'      => 'student',
+        'name'      => Role::STUDENT,
         'name_fr'   => 'Étudiant',
         'hierarchy' => 4,
     ];

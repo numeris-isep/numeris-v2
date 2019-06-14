@@ -1,13 +1,14 @@
 <?php
 
 namespace Tests\Feature\Convention\Update;
-use App\Models\Convention;
+
+use App\Models\Role;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
 class UpdateDeveloperTest extends TestCaseWithAuth
 {
-    protected $username = 'developer';
+    protected $username = Role::DEVELOPER;
 
     /**
      * @group developer

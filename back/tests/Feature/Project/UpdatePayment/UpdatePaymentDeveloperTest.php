@@ -2,13 +2,13 @@
 
 namespace Tests\Feature\Project\Update;
 
-use App\Models\Project;
+use App\Models\Role;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
 class UpdatePaymentDeveloperTest extends TestCaseWithAuth
 {
-    protected $username = 'developer';
+    protected $username = Role::DEVELOPER;
 
     /**
      * @group developer

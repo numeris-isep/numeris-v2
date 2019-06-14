@@ -2,11 +2,10 @@
 
 namespace Tests\Feature\Auth;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AuthAdministratorTest extends TestCase
 {
@@ -15,7 +14,7 @@ class AuthAdministratorTest extends TestCase
      */
     public function testAdministratorLoggingIn()
     {
-        $user = User::where('username', 'administrator')->first();
+        $user = User::where('username', Role::ADMINISTRATOR)->first();
 
         $data = [
             'email'     => $user->email,
@@ -32,7 +31,7 @@ class AuthAdministratorTest extends TestCase
      */
     public function testAdministratorLogginInWithWrongPassword()
     {
-        $user = User::where('username', 'administrator')->first();
+        $user = User::where('username', Role::ADMINISTRATOR)->first();
 
         $data = [
             'email'     => $user->email,

@@ -2,8 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Models\UserRole;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Role;
 
 class UserRoleRequest extends AbstractFormRequest
 {
@@ -14,7 +13,7 @@ class UserRoleRequest extends AbstractFormRequest
      */
     public function authorize()
     {
-        return $this->user()->role()->isSuperiorOrEquivalentTo('staff');
+        return $this->user()->role()->isSuperiorOrEquivalentTo(Role::STAFF);
     }
 
     /**

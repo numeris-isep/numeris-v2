@@ -27,7 +27,7 @@ trait UserProviderTrait
 
         $user = factory(User::class)->state('active')->create();
         $user->roles()
-            ->attach(Role::findByName('student'));
+            ->attach(Role::findByName(Role::STUDENT));
 
         return [[$user]];
     }
@@ -38,7 +38,7 @@ trait UserProviderTrait
 
         $user = factory(User::class)->state('active')->create();
         $user->roles()
-            ->attach(Role::findByName('staff'));
+            ->attach(Role::findByName(Role::STAFF));
 
         return [[$user]];
     }
@@ -49,7 +49,7 @@ trait UserProviderTrait
 
         $user = factory(User::class)->state('active')->create();
         $user->roles()
-            ->attach(Role::findByName('administrator'));
+            ->attach(Role::findByName(Role::ADMINISTRATOR));
 
         return [[$user]];
     }
@@ -60,7 +60,7 @@ trait UserProviderTrait
 
         $user = factory(User::class)->state('active')->create();
         $user->roles()
-            ->attach(Role::findByName('developer'));
+            ->attach(Role::findByName(Role::DEVELOPER));
 
         return [[$user]];
     }

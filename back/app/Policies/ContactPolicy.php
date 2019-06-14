@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Role;
 use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -13,7 +14,7 @@ class ContactPolicy
     public function before(User $current_user, $ability)
     {
         // Grant everything to developers, administrators and staffs
-        if ($current_user->role()->isSuperiorOrEquivalentTo('staff')) {
+        if ($current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF)) {
             return true;
         }
     }

@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\Mission;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -13,24 +13,24 @@ class UserPolicy
     public function before(User $current_user, $ability)
     {
         // Grant everything to developers
-        if ($current_user->role()->isEquivalentTo('developer') && $ability != 'update-terms-of-use') {
+        if ($current_user->role()->isEquivalentTo(Role::DEVELOPER) && $ability != 'update-terms-of-use') {
             return true;
         }
     }
 
     public function index(User $current_user)
     {
-        return $current_user->role()->isSuperiorTo('student');
+        return $current_user->role()->isSuperiorTo(Role::STUDENT);
     }
 
     public function indexPromotion(User $current_user)
     {
-        return $current_user->role()->isSuperiorTo('student');
+        return $current_user->role()->isSuperiorTo(Role::STUDENT);
     }
 
     public function indexUserApplication(User $current_user, User $user)
     {
-        return $current_user->role()->isSuperiorOrEquivalentTo('staff')
+        return $current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF)
             || $current_user->is($user);
     }
 
@@ -45,7 +45,7 @@ class UserPolicy
         // unless   $user1 == $user2
         // or       $user1->role > 'student'
         return $current_user->is($user)
-            || $current_user->role()->isSuperiorTo('student');
+            || $current_user->role()->isSuperiorTo(Role::STUDENT);
     }
 
     public function update(User $current_user, User $user)
@@ -78,6 +78,6 @@ class UserPolicy
         // $user1 whose $role < 'administrator' can't delete the profile of $user2
         // unless   $user1 == $user2
         return $current_user->is($user)
-            || $current_user->role()->isSuperiorOrEquivalentTo('administrator');
+            || $current_user->role()->isSuperiorOrEquivalentTo(Role::ADMINISTRATOR);
     }
 }

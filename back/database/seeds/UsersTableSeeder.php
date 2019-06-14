@@ -26,7 +26,7 @@ class UsersTableSeeder extends Seeder
 
             // Generate my account ;)
             if (! User::where('email', 'eliottdes@gmail.com')->first()) {
-                $this->createUser(1, 'developer', 'active', [
+                $this->createUser(1, Role::DEVELOPER, 'active', [
                     'email'             => 'eliottdes@gmail.com',
                     'username'          => '2Seg',
                     'first_name'        => 'Eliott',
@@ -43,7 +43,7 @@ class UsersTableSeeder extends Seeder
 
             // Generate 2 developer accounts
             if (! User::where('email', 'developer@numeris-isep.fr')->first()) {
-                $this->createUser(1, 'developer', 'active', [
+                $this->createUser(1, Role::DEVELOPER, 'active', [
                     'email'         => 'developer@numeris-isep.fr',
                     'username'      => 'developer',
                     'first_name'    => 'Developer',
@@ -52,7 +52,7 @@ class UsersTableSeeder extends Seeder
             }
 
             if (! User::where('email', 'developer2@numeris-isep.fr')->first()) {
-                $this->createUser(1, 'developer', 'active', [
+                $this->createUser(1, Role::DEVELOPER, 'active', [
                     'email'         => 'developer2@numeris-isep.fr',
                     'username'      => 'developer2',
                     'first_name'    => 'Developer2',
@@ -62,7 +62,7 @@ class UsersTableSeeder extends Seeder
 
             // Generate 2 administrator accounts
             if (! User::where('email', 'administrator@numeris-isep.fr')->first()) {
-                $this->createUser(1, 'administrator', 'active', [
+                $this->createUser(1, Role::ADMINISTRATOR, 'active', [
                     'email'         => 'administrator@numeris-isep.fr',
                     'username'      => 'administrator',
                     'first_name'    => 'Administrator',
@@ -71,7 +71,7 @@ class UsersTableSeeder extends Seeder
             }
 
             if (! User::where('email', 'administrator2@numeris-isep.fr')->first()) {
-                $this->createUser(1, 'administrator', 'active', [
+                $this->createUser(1, Role::ADMINISTRATOR, 'active', [
                     'email'         => 'administrator2@numeris-isep.fr',
                     'username'      => 'administrator2',
                     'first_name'    => 'Administrator2',
@@ -81,7 +81,7 @@ class UsersTableSeeder extends Seeder
 
             // Generate 2 staff accounts
             if (! User::where('email', 'staff@numeris-isep.fr')->first()) {
-                $this->createUser(1, 'staff', 'active', [
+                $this->createUser(1, Role::STAFF, 'active', [
                     'email'         => 'staff@numeris-isep.fr',
                     'username'      => 'staff',
                     'first_name'    => 'Staff',
@@ -90,7 +90,7 @@ class UsersTableSeeder extends Seeder
             }
 
             if (! User::where('email', 'staff2@numeris-isep.fr')->first()) {
-                $this->createUser(1, 'staff', 'active', [
+                $this->createUser(1, Role::STAFF, 'active', [
                     'email'         => 'staff2@numeris-isep.fr',
                     'username'      => 'staff2',
                     'first_name'    => 'Staff2',
@@ -100,7 +100,7 @@ class UsersTableSeeder extends Seeder
 
             // Generate 2 student accounts
             if (! User::where('email', 'student@numeris-isep.fr')->first()) {
-                $this->createUser(1, 'student', 'active', [
+                $this->createUser(1, Role::STUDENT, 'active', [
                     'email'         => 'student@numeris-isep.fr',
                     'username'      => 'student',
                     'first_name'    => 'Student',
@@ -109,7 +109,7 @@ class UsersTableSeeder extends Seeder
             }
 
             if (! User::where('email', 'student2@numeris-isep.fr')->first()) {
-                $this->createUser(1, 'student', 'active', [
+                $this->createUser(1, Role::STUDENT, 'active', [
                     'email'         => 'student2@numeris-isep.fr',
                     'username'      => 'student2',
                     'first_name'    => 'Student2',
@@ -119,7 +119,7 @@ class UsersTableSeeder extends Seeder
 
             if ($this->empty_table) {
                 // Generate 5 random active users
-                $this->createUser(5, 'student', 'active');
+                $this->createUser(5, Role::STUDENT, 'active');
 
                 // Generate 5 random inactive users
                 $this->createUser(5);
@@ -127,7 +127,7 @@ class UsersTableSeeder extends Seeder
         }
     }
 
-    private function createUser($number = 1, $type = 'student', $state = 'inactive', $attributes = [])
+    private function createUser($number = 1, $type = Role::STUDENT, $state = 'inactive', $attributes = [])
     {
         if ($number <= 1) {
             return factory(User::class)->states($state)

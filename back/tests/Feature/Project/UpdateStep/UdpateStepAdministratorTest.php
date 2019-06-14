@@ -2,13 +2,14 @@
 
 namespace Tests\Feature\Project\Update;
 
+use App\Models\Role;
 use App\Models\Project;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
 class UdpateStepAdministratorTest extends TestCaseWithAuth
 {
-    protected $username = 'administrator';
+    protected $username = Role::ADMINISTRATOR;
 
     /**
      * @group administrator

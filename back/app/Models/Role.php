@@ -8,6 +8,21 @@ class Role extends Model
 {
     public $timestamps = false;
 
+    const STUDENT = 'student';
+
+    const STAFF = 'staff';
+
+    const ADMINISTRATOR = 'administrator';
+
+    const DEVELOPER = 'developer';
+
+    private static $roles = [
+        self::STUDENT,
+        self::STAFF,
+        self::ADMINISTRATOR,
+        self::DEVELOPER,
+    ];
+
     protected $fillable = [
         'name',
         'name_fr',

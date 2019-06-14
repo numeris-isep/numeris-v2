@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Role;
+
 class ProjectUserRequest extends AbstractFormRequest
 {
     /**
@@ -11,7 +13,7 @@ class ProjectUserRequest extends AbstractFormRequest
      */
     public function authorize()
     {
-        return $this->user()->role()->isSuperiorOrEquivalentTo('staff');
+        return $this->user()->role()->isSuperiorOrEquivalentTo(Role::STAFF);
     }
 
     /**
