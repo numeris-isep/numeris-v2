@@ -16,15 +16,14 @@ class UpdateTermsOfUseStaffTest extends TestCaseWithAuth
      */
     public function testStaffUpdatingHisOwnTermsOfUse()
     {
-        $user_id = 6; // Own terms-of-use
-
-        User::find($user_id)->update(['tou_accepted' => false]);
+        $user = auth()->user();
+        $user->update(['tou_accepted' => false]);
 
         $data = [
             'tou_accepted' => true
         ];
 
-        $this->json('PATCH', route('users.update.terms-of-use', ['user_id' => $user_id]), $data)
+        $this->json('PATCH', route('users.update.terms-of-use', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'phone',

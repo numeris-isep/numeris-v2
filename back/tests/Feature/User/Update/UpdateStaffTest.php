@@ -11,10 +11,11 @@ class UpdateStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
+     *
+     * @dataProvider activeStudentProvider
      */
-    public function testStaffUpdatingUser()
-    {$user_id = 1;
-
+    public function testStaffUpdatingUser($user)
+    {
         $user_data = $db_data = [
             'email'                     => 'test@numeris-isep.fr',
             'username'                  => 'test',
@@ -45,7 +46,7 @@ class UpdateStaffTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('users', $db_data);
         $this->assertDatabaseMissing('addresses', $address_data);
 
-        $this->json('PUT', route('users.update', ['user_id' => $user_id]), $data)
+        $this->json('PUT', route('users.update', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 

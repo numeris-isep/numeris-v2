@@ -14,7 +14,7 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
      */
     public function testDeveloperUpdatingHisOwnProfile()
     {
-        $user_id = 2; // Own profile
+        $user = auth()->user(); // Own profile
 
         $user_data = [
             'phone'                     => '01 23 45 67 89',
@@ -36,7 +36,7 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('users', $user_data);
         $this->assertDatabaseMissing('addresses', $address_data);
 
-        $this->json('PATCH', route('users.update.profile', ['user_id' => $user_id]), $data)
+        $this->json('PATCH', route('users.update.profile', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'phone',
@@ -76,11 +76,11 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider activeDeveloperProvider
      */
-    public function testDeveloperUpdatingDeveloperProfile()
+    public function testDeveloperUpdatingDeveloperProfile($developer)
     {
-        $user_id = 3; // developer
-
         $user_data = [
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',
@@ -101,7 +101,7 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('users', $user_data);
         $this->assertDatabaseMissing('addresses', $address_data);
 
-        $this->json('PATCH', route('users.update.profile', ['user' => $user_id]), $data)
+        $this->json('PATCH', route('users.update.profile', ['user' => $developer->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'phone',
@@ -121,11 +121,11 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider activeAdministratorProvider
      */
-    public function testDeveloperUpdatingAdministratorProfile()
+    public function testDeveloperUpdatingAdministratorProfile($administrator)
     {
-        $user_id = 4; // administrator
-
         $user_data = [
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',
@@ -146,7 +146,7 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('users', $user_data);
         $this->assertDatabaseMissing('addresses', $address_data);
 
-        $this->json('PATCH', route('users.update.profile', ['user' => $user_id]), $data)
+        $this->json('PATCH', route('users.update.profile', ['user' => $administrator->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'phone',
@@ -166,11 +166,11 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider activeStaffProvider
      */
-    public function testDeveloperUpdatingStaffProfile()
+    public function testDeveloperUpdatingStaffProfile($staff)
     {
-        $user_id = 6; // staff
-
         $user_data = [
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',
@@ -191,7 +191,7 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('users', $user_data);
         $this->assertDatabaseMissing('addresses', $address_data);
 
-        $this->json('PATCH', route('users.update.profile', ['user' => $user_id]), $data)
+        $this->json('PATCH', route('users.update.profile', ['user' => $staff->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'phone',
@@ -211,11 +211,11 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider activeStudentProvider
      */
-    public function testDeveloperUpdatingStudentProfile()
+    public function testDeveloperUpdatingStudentProfile($student)
     {
-        $user_id = 8; // student
-
         $user_data = [
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',
@@ -236,7 +236,7 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('users', $user_data);
         $this->assertDatabaseMissing('addresses', $address_data);
 
-        $this->json('PATCH', route('users.update.profile', ['user' => $user_id]), $data)
+        $this->json('PATCH', route('users.update.profile', ['user' => $student->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'phone',

@@ -5,14 +5,14 @@ namespace Tests\Feature\User\Update;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
-class UdpateAdministratorTest extends TestCaseWithAuth
+class UpdateAdministratorTest extends TestCaseWithAuth
 {
     protected $username = 'administrator';
 
     /**
      * @group administrator
      *
-     * @dataProvider activeUserProvider
+     * @dataProvider activeStudentProvider
      */
     public function testAdministratorUpdatingUser($user)
     {

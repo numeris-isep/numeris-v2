@@ -75,8 +75,9 @@ class UserPolicy
 
     public function destroy(User $current_user, User $user)
     {
-        // $user1 whose $role < 'developer' can't delete the profile of $user2
+        // $user1 whose $role < 'administrator' can't delete the profile of $user2
         // unless   $user1 == $user2
-        return $current_user->is($user);
+        return $current_user->is($user)
+            || $current_user->role()->isSuperiorOrEquivalentTo('administrator');
     }
 }

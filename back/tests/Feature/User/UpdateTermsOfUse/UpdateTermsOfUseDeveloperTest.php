@@ -16,15 +16,14 @@ class UpdateTermsOfUseDeveloperTest extends TestCaseWithAuth
      */
     public function testDeveloperUpdatingHisOwnTermsOfUse()
     {
-        $user_id = 2; // Own terms-of-use
-
-        User::find($user_id)->update(['tou_accepted' => false]);
+        $user = auth()->user();
+        $user->update(['tou_accepted' => false]);
 
         $data = [
             'tou_accepted' => true
         ];
 
-        $this->json('PATCH', route('users.update.terms-of-use', ['user_id' => $user_id]), $data)
+        $this->json('PATCH', route('users.update.terms-of-use', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'phone',
@@ -44,15 +43,14 @@ class UpdateTermsOfUseDeveloperTest extends TestCaseWithAuth
      */
     public function testDeveloperUpdatingHisOwnTermsOfUseWithFalseValue()
     {
-        $user_id = 2; // Own terms-of-use
-
-        User::find($user_id)->update(['tou_accepted' => false]);
+        $user = auth()->user();
+        $user->update(['tou_accepted' => false]);
 
         $data = [
             'tou_accepted' => false
         ];
 
-        $this->json('PATCH', route('users.update.terms-of-use', ['user_id' => $user_id]), $data)
+        $this->json('PATCH', route('users.update.terms-of-use', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors(['tou_accepted']);
     }
@@ -62,16 +60,15 @@ class UpdateTermsOfUseDeveloperTest extends TestCaseWithAuth
      */
     public function testDeveloperUpdatingHisOwnAlreadyAcceptedTermsOfUse()
     {
-        $user_id = 2; // Own terms-of-use
-
-        User::find($user_id)->update(['tou_accepted' => true]);
+        $user = auth()->user();
+        $user->update(['tou_accepted' => true]);
 
         $data = [
             'tou_accepted' => true
         ];
 
-        $this->json('PATCH', route('users.update.terms-of-use', ['user_id' => $user_id]), $data)
+        $this->json('PATCH', route('users.update.terms-of-use', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['error' => trans('api.403')]);
+            ->assertJson(['errors' => [trans('api.403')]]);
     }
 }

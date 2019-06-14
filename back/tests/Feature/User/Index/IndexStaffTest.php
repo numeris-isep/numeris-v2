@@ -40,6 +40,7 @@ class IndexStaffTest extends TestCaseWithAuth
                     'bic',
                     'createdAt',
                     'updatedAt',
+                    'roles',
                 ]],
                 'links',
                 'meta',

@@ -6,6 +6,7 @@ use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\Address;
 use App\Models\Preference;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -85,6 +86,7 @@ class UserController extends Controller
         $user = User::create($user_request);
         $address = Address::create($address_request);
         $address->user()->save($user);
+        $user->roles()->attach(Role::findByName('student'));
 
         return response()->json(UserResource::make($user), JsonResponse::HTTP_CREATED);
     }

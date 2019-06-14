@@ -12,7 +12,7 @@ class IndexPromotionStaffTest extends TestCaseWithAuth
     /**
      * @group staff
      */
-    public function testStaffAccesingUserIndexPromotion()
+    public function testStaffAccessingUserIndexPromotion()
     {
         $this->json('GET', route('users.index'))
             ->assertStatus(JsonResponse::HTTP_OK);

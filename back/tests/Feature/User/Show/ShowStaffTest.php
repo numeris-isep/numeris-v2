@@ -11,12 +11,12 @@ class ShowStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
+     *
+     * @dataProvider activeUserProvider
      */
-    public function testStaffAccessingUserShow()
+    public function testStaffAccessingUserShow($user)
     {
-        $user_id = 1;
-
-        $this->json('GET', route('users.show', ['user_id' => $user_id]))
+        $this->json('GET', route('users.show', ['user_id' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'id',

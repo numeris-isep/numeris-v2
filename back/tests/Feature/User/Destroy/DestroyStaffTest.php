@@ -13,11 +13,11 @@ class DestroyStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
+     *
+     * @dataProvider activeUserProvider
      */
-    public function testStaffDeletingUser()
+    public function testStaffDeletingUser($user)
     {
-        $user_id = 1;
-        $user = User::find($user_id);
         $address = $user->address;
         $preference = $user->preference;
 
@@ -25,7 +25,7 @@ class DestroyStaffTest extends TestCaseWithAuth
         $this->assertDatabaseHas('addresses', $address->toArray());
         $this->assertNotNull(Preference::find($preference->id));
 
-        $this->json('DELETE', route('users.destroy', ['user_id' => $user_id]))
+        $this->json('DELETE', route('users.destroy', ['user_id' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 
@@ -39,8 +39,7 @@ class DestroyStaffTest extends TestCaseWithAuth
      */
     public function testStaffDeletingHisOwnAccount()
     {
-        $user_id = 6; // Own account
-        $user = User::find($user_id);
+        $user = auth()->user();
         $address = $user->address;
         $preference = $user->preference;
 
@@ -48,7 +47,7 @@ class DestroyStaffTest extends TestCaseWithAuth
         $this->assertDatabaseHas('addresses', $address->toArray());
         $this->assertNotNull(Preference::find($preference->id));
 
-        $this->json('DELETE', route('users.destroy', ['user_id' => $user_id]))
+        $this->json('DELETE', route('users.destroy', ['user_id' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
 
         $this->assertDatabaseMissing('users', $user->toArray());

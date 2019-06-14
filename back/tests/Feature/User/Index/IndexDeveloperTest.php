@@ -40,6 +40,7 @@ class IndexDeveloperTest extends TestCaseWithAuth
                     'bic',
                     'createdAt',
                     'updatedAt',
+                    'roles',
                 ]],
                 'links',
                 'meta',

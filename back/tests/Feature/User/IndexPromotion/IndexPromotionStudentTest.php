@@ -12,7 +12,7 @@ class IndexPromotionStudentTest extends TestCaseWithAuth
     /**
      * @group student
      */
-    public function testStudentAccesingUserIndexPromotion()
+    public function testStudentAccessingUserIndexPromotion()
     {
         $this->json('GET', route('users.index.promotion'))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)

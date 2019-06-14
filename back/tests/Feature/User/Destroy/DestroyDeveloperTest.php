@@ -13,11 +13,11 @@ class DestroyDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider activeUserProvider
      */
-    public function testDeveloperDeletingUser()
+    public function testDeveloperDeletingUser($user)
     {
-        $user_id = 2;
-        $user = User::find($user_id);
         $address = $user->address;
         $preference = $user->preference;
 
@@ -25,7 +25,7 @@ class DestroyDeveloperTest extends TestCaseWithAuth
         $this->assertDatabaseHas('addresses', $address->toArray());
         $this->assertNotNull(Preference::find($preference->id));
 
-        $this->json('DELETE', route('users.destroy', ['user_id' => $user_id]))
+        $this->json('DELETE', route('users.destroy', ['user_id' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
 
         $this->assertDatabaseMissing('users', $user->toArray());
@@ -36,29 +36,7 @@ class DestroyDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      */
-    public function testDeveloperDeletingHisOwnAccount()
-    {
-        $user_id = 2; // Own account
-        $user = User::find($user_id);
-        $address = $user->address;
-        $preference = $user->preference;
-
-        $this->assertDatabaseHas('users', $user->toArray());
-        $this->assertDatabaseHas('addresses', $address->toArray());
-        $this->assertNotNull(Preference::find($preference->id));
-
-        $this->json('DELETE', route('users.destroy', ['user_id' => $user_id]))
-            ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
-
-        $this->assertDatabaseMissing('users', $user->toArray());
-        $this->assertDatabaseMissing('addresses', $address->toArray());
-        $this->assertNull(Preference::find($preference->id));
-    }
-
-    /**
-     * @group developer
-     */
-    public function testDeveloperDeletingUserWithUnknownUser()
+    public function testDeveloperDeletingUnknownUser()
     {
         $user_id = 0; // Unknown user
 

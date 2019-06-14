@@ -11,11 +11,11 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider activeStudentProvider
      */
-    public function testDeveloperUpdatingUserWithAllFields()
+    public function testDeveloperUpdatingUserWithAllFields($user)
     {
-        $user_id = 1;
-
         $user_data = $db_data = [
             'email'                     => 'test@numeris-isep.fr',
             'username'                  => 'test',
@@ -46,7 +46,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('users', $db_data);
         $this->assertDatabaseMissing('addresses', $address_data);
 
-        $this->json('PUT', route('users.update', ['user_id' => $user_id]), $data)
+        $this->json('PUT', route('users.update', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',
@@ -78,11 +78,11 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider activeUserProvider
      */
-    public function testDeveloperUpdatingUserWithAlreadyUsedData()
+    public function testDeveloperUpdatingUserWithAlreadyUsedData($user)
     {
-        $user_id = 1;
-
         $user_data = $db_data = [
             'email'                     => 'developer@numeris-isep.fr', // Already used
             'username'                  => 'developer', // Already used
@@ -113,7 +113,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('users', $db_data);
         $this->assertDatabaseMissing('addresses', $address_data);
 
-        $this->json('PUT', route('users.update', ['user_id' => $user_id]), $data)
+        $this->json('PUT', route('users.update', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors(['email', 'username']);
 
@@ -123,12 +123,12 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
+     *
+     * @dataProvider activeUserProvider
      */
-    public function testDeveloperUpdatingUserWithoutData()
+    public function testDeveloperUpdatingUserWithoutData($user)
     {
-        $user_id = 1;
-
-        $this->json('PUT', route('users.update', ['user' => $user_id]))
+        $this->json('PUT', route('users.update', ['user' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors([
                 'password', 'first_name', 'last_name',

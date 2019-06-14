@@ -11,12 +11,12 @@ class ShowStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
+     *
+     * @dataProvider activeUserProvider
      */
-    public function testStudentAccessingUserShow()
+    public function testStudentAccessingUserShow($user)
     {
-        $user_id = 1; // Not his profile
-
-        $this->json('GET', route('users.show', ['user_id' => $user_id]))
+        $this->json('GET', route('users.show', ['user_id' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
     }
@@ -26,9 +26,9 @@ class ShowStudentTest extends TestCaseWithAuth
      */
     public function testStudentAccessingHisProfile()
     {
-        $user_id = 8; // Own profile
+        $user = auth()->user();
 
-        $this->json('GET', route('users.show', ['user_id' => $user_id]))
+        $this->json('GET', route('users.show', ['user_id' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'id',

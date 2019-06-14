@@ -11,12 +11,12 @@ class ShowAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
+     *
+     * @dataProvider activeUserProvider
      */
-    public function testAdministratorAccessingUserShow()
+    public function testAdministratorAccessingUserShow($user)
     {
-        $user_id = 1;
-
-        $this->json('GET', route('users.show', ['user_id' => $user_id]))
+        $this->json('GET', route('users.show', ['user_id' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'id',

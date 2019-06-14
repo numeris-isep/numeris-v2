@@ -40,6 +40,7 @@ class IndexAdministratorTest extends TestCaseWithAuth
                     'bic',
                     'createdAt',
                     'updatedAt',
+                    'roles',
                 ]],
                 'links',
                 'meta',

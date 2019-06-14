@@ -13,33 +13,12 @@ class DestroyAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
+     *
+     * @dataProvider activeUserProvider
      */
     public function testAdministratorDeletingUser()
     {
         $user_id = 1;
-        $user = User::find($user_id);
-        $address = $user->address;
-        $preference = $user->preference;
-
-        $this->assertDatabaseHas('users', $user->toArray());
-        $this->assertDatabaseHas('addresses', $address->toArray());
-        $this->assertNotNull(Preference::find($preference->id));
-
-        $this->json('DELETE', route('users.destroy', ['user_id' => $user_id]))
-            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
-
-        $this->assertDatabaseHas('users', $user->toArray());
-        $this->assertDatabaseHas('addresses', $address->toArray());
-        $this->assertNotNull(Preference::find($preference->id));
-    }
-
-    /**
-     * @group administrator
-     */
-    public function testAdministratorDeletingHisOwnAccount()
-    {
-        $user_id = 4; // Own account
         $user = User::find($user_id);
         $address = $user->address;
         $preference = $user->preference;

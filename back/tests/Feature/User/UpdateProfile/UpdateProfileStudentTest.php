@@ -14,7 +14,7 @@ class UpdateProfileStudentTest extends TestCaseWithAuth
      */
     public function testStudentUpdatingHisOwnProfile()
     {
-        $user_id = 8; // Own profile
+        $user = auth()->user();
 
         $user_data = [
             'phone'                     => '01 23 45 67 89',
@@ -36,7 +36,7 @@ class UpdateProfileStudentTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('users', $user_data);
         $this->assertDatabaseMissing('addresses', $address_data);
 
-        $this->json('PATCH', route('users.update.profile', ['user_id' => $user_id]), $data)
+        $this->json('PATCH', route('users.update.profile', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'phone',
@@ -56,11 +56,11 @@ class UpdateProfileStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
+     *
+     * @dataProvider activeDeveloperProvider
      */
-    public function testStudentUpdatingDeveloperProfile()
+    public function testStudentUpdatingDeveloperProfile($developer)
     {
-        $user_id = 2; // developer
-
         $user_data = [
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',
@@ -81,7 +81,7 @@ class UpdateProfileStudentTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('users', $user_data);
         $this->assertDatabaseMissing('addresses', $address_data);
 
-        $this->json('PATCH', route('users.update.profile', ['user' => $user_id]), $data)
+        $this->json('PATCH', route('users.update.profile', ['user' => $developer->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 
@@ -91,11 +91,11 @@ class UpdateProfileStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
+     *
+     * @dataProvider activeAdministratorProvider
      */
-    public function testStudentUpdatingAdministratorProfile()
+    public function testStudentUpdatingAdministratorProfile($administrator)
     {
-        $user_id = 4; // administrator
-
         $user_data = [
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',
@@ -116,7 +116,7 @@ class UpdateProfileStudentTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('users', $user_data);
         $this->assertDatabaseMissing('addresses', $address_data);
 
-        $this->json('PATCH', route('users.update.profile', ['user' => $user_id]), $data)
+        $this->json('PATCH', route('users.update.profile', ['user' => $administrator->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 
@@ -126,11 +126,11 @@ class UpdateProfileStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
+     *
+     * @dataProvider activeStaffProvider
      */
-    public function testStudentUpdatingStaffProfile()
+    public function testStudentUpdatingStaffProfile($staff)
     {
-        $user_id = 6; // staff
-
         $user_data = [
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',
@@ -151,7 +151,7 @@ class UpdateProfileStudentTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('users', $user_data);
         $this->assertDatabaseMissing('addresses', $address_data);
 
-        $this->json('PATCH', route('users.update.profile', ['user' => $user_id]), $data)
+        $this->json('PATCH', route('users.update.profile', ['user' => $staff->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 
@@ -161,11 +161,11 @@ class UpdateProfileStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
+     *
+     * @dataProvider activeStudentProvider
      */
-    public function testStudentUpdatingStudentProfile()
+    public function testStudentUpdatingStudentProfile($student)
     {
-        $user_id = 9; // student
-
         $user_data = [
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',
@@ -186,7 +186,7 @@ class UpdateProfileStudentTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('users', $user_data);
         $this->assertDatabaseMissing('addresses', $address_data);
 
-        $this->json('PATCH', route('users.update.profile', ['user' => $user_id]), $data)
+        $this->json('PATCH', route('users.update.profile', ['user' => $student->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 
