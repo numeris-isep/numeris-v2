@@ -12,9 +12,9 @@ class ShowStudentTest extends TestCaseWithAuth
     /**
      * @group student
      *
-     * @dataProvider projectAndMissionWithBillsProvider
+     * @dataProvider clientAndProjectAndMissionAndConventionWithBillsProvider
      */
-    public function testStudentAccessingProjectShow($project)
+    public function testStudentAccessingProjectShow($client, $project, $mission, $convention)
     {
         $this->json('GET', route('projects.show', ['project_id' => $project->id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)

@@ -15,7 +15,26 @@ class DestroyDeveloperTest extends TestCaseWithAuth
      *
      * @dataProvider availableMissionProvider
      */
-    public function testDeveloperDeletingMission($mission)
+    public function testDeveloperDeletingMissionWithoutBills($mission)
+    {
+        $address = $mission->address;
+
+        $this->assertDatabaseHas('missions', $mission->toArray());
+        $this->assertDatabaseHas('addresses', $address->toArray());
+
+        $this->json('DELETE', route('missions.destroy', ['mission_id' => $mission->id]))
+            ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
+
+        $this->assertDatabaseMissing('missions', $mission->toArray());
+        $this->assertDatabaseMissing('addresses', $address->toArray());
+    }
+
+    /**
+     * @group developer
+     *
+     * @dataProvider clientAndProjectAndMissionAndConventionWithBillsProvider
+     */
+    public function testDeveloperDeletingMissionWithBills($client, $project, $mission)
     {
         $address = $mission->address;
 

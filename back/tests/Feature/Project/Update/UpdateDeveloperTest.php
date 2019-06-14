@@ -48,9 +48,9 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      *
-     * @dataProvider projectAndMissionWithBillsProvider
+     * @dataProvider clientAndProjectAndMissionAndConventionWithBillsProvider
      */
-    public function testDeveloperUpdatingProjectWithAlreadyUsedData($otherProject)
+    public function testDeveloperUpdatingProjectWithAlreadyUsedData($client, $otherProject, $mission, $convention)
     {
         $project = factory(Project::class)->create();
 

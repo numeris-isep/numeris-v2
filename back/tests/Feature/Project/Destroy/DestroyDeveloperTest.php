@@ -29,9 +29,9 @@ class DestroyDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      *
-     * @dataProvider projectAndMissionWithBillsProvider
+     * @dataProvider clientAndProjectAndMissionAndConventionWithBillsProvider
      */
-    public function testDeveloperDeletingProjectWithBills($project, $mission)
+    public function testDeveloperDeletingProjectWithBills($client, $project, $mission, $convention)
     {
         $this->assertDatabaseHas('projects', $project->toArray());
         $this->assertDatabaseHas('missions', $mission->toArray());

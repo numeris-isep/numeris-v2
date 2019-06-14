@@ -11,7 +11,7 @@ class MissionPolicy
     public function before(User $current_user, $ability)
     {
         // Grant everything to developers, administrators and staffs
-        if ($current_user->role()->isSuperiorOrEquivalentTo('staff')) {
+        if ($current_user->role()->isSuperiorOrEquivalentTo('staff') && $ability != 'destroy') {
             return true;
         }
     }
@@ -58,6 +58,8 @@ class MissionPolicy
 
     public function destroy(User $current_user, Mission $mission)
     {
-        return false;
+        return $mission->bills->count() > 0
+            ? $current_user->role()->isEquivalentTo('developer')
+            : $current_user->role()->isSuperiorOrEquivalentTo('staff');
     }
 }

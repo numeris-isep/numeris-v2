@@ -156,9 +156,9 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      *
-     * @dataProvider conventionWithRatesWithBillsProvider
+     * @dataProvider clientAndProjectAndMissionAndConventionWithBillsProvider
      */
-    public function testDeveloperUpdatingConventionWithRatesWithBillsAndUpdatingRates($convention)
+    public function testDeveloperUpdatingConventionWithRatesWithBillsAndUpdatingRates($client, $project, $mission, $convention)
     {
         $conventionData = ['name' => 'Convention de test'];
         $rate1 = [
@@ -212,9 +212,9 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      *
-     * @dataProvider conventionWithRatesWithBillsProvider
+     * @dataProvider clientAndProjectAndMissionAndConventionWithBillsProvider
      */
-    public function testDeveloperUpdatingConventionWithRatesWithBillsAndDeletingRate($convention)
+    public function testDeveloperUpdatingConventionWithRatesWithBillsAndDeletingRate($client, $project, $mission, $convention)
     {
         $conventionData = ['name' => 'Convention de test'];
         $rate1 = [

@@ -17,7 +17,7 @@ class DestroyStaffTest extends TestCaseWithAuth
      *
      * @dataProvider clientWithProjectsWithMissionsProvider
      */
-    public function testStaffDeletingClient($client)
+    public function testStaffDeletingClientWithoutBills($client)
     {
         $address = $client->address;
         $conventions = $client->conventions;
@@ -30,13 +30,12 @@ class DestroyStaffTest extends TestCaseWithAuth
         $this->assertNotEmpty(Mission::where('project_id', $mission_project_id)->get());
 
         $this->json('DELETE', route('clients.destroy', ['client_id' => $client->id]))
-            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
 
-        $this->assertDatabaseHas('clients', $client->toArray());
-        $this->assertDatabaseHas('addresses', $address->toArray());
-        $this->assertDatabaseHas('conventions', $conventions->get(0)->toArray());
-        $this->assertNotEmpty(Project::where('client_id', $client->id)->get());
-        $this->assertNotEmpty(Mission::where('project_id', $mission_project_id)->get());
+        $this->assertDatabaseMissing('clients', $client->toArray());
+        $this->assertDatabaseMissing('addresses', $address->toArray());
+        $this->assertDatabaseMissing('conventions', $conventions->get(0)->toArray());
+        $this->assertEmpty(Project::where('client_id', $client->id)->get());
+        $this->assertEmpty(Mission::where('project_id', $mission_project_id)->get());
     }
 }

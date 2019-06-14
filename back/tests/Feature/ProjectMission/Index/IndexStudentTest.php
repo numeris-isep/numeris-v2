@@ -12,9 +12,9 @@ class IndexStudentTest extends TestCaseWithAuth
     /**
      * @group student
      *
-     * @dataProvider projectAndMissionWithBillsProvider
+     * @dataProvider clientAndProjectAndMissionAndConventionWithBillsProvider
      */
-    public function testStudentAccessingProjectMissionIndex($project, $mission)
+    public function testStudentAccessingProjectMissionIndex($client, $project, $mission, $convention)
     {
         $this->json('GET', route('projects.missions.index', ['project_id' => $project->id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)

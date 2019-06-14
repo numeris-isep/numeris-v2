@@ -144,10 +144,10 @@ class Project extends Model
         $bills = collect();
 
         foreach ($this->missions as $mission) {
-            $bill = $mission->bills;
+            $mission_bills = $mission->bills;
 
-            if ($bill->count()) {
-                $bills = $bills->merge($bill);
+            if ($mission_bills->count()) {
+                $bills = $bills->merge($mission_bills);
             }
         }
 

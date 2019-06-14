@@ -46,9 +46,9 @@ class StoreDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      *
-     * @dataProvider projectAndMissionWithBillsProvider
+     * @dataProvider clientAndProjectAndMissionAndConventionWithBillsProvider
      */
-    public function testDeveloperCreatingProjectWithAlreadyUsedData($project)
+    public function testDeveloperCreatingProjectWithAlreadyUsedData($client, $project, $mission, $convention)
     {
         $data = [
             'client_id'     => $project->client->id,

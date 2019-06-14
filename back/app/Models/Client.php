@@ -78,4 +78,19 @@ class Client extends Model
     {
         return $this->belongsTo(Contact::class);
     }
+
+    public function bills()
+    {
+        $bills = collect();
+
+        foreach ($this->projects as $project) {
+            $project_bills = $project->bills();
+
+            if ($project_bills->count()) {
+                $bills = $bills->merge($project_bills);
+            }
+        }
+
+        return $bills;
+    }
 }

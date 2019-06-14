@@ -12,9 +12,9 @@ class IndexDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      *
-     * @dataProvider projectAndMissionWithBillsProvider
+     * @dataProvider clientAndProjectAndMissionAndConventionWithBillsProvider
      */
-    public function testDeveloperAccessingProjectMissionIndex($project, $mission)
+    public function testDeveloperAccessingProjectMissionIndex($client, $project, $mission, $convention)
     {
         $this->json('GET', route('projects.missions.index', ['project_id' => $project->id]))
             ->assertStatus(JsonResponse::HTTP_OK)

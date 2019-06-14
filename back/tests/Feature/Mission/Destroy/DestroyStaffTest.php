@@ -15,7 +15,7 @@ class DestroyStaffTest extends TestCaseWithAuth
      *
      * @dataProvider availableMissionProvider
      */
-    public function testStaffDeletingMission($mission)
+    public function testStaffDeletingMissionWithoutBills($mission)
     {
         $address = $mission->address;
 

@@ -29,9 +29,9 @@ class DestroyAdministratorTest extends TestCaseWithAuth
     /**
      * @group administrator
      *
-     * @dataProvider projectAndMissionWithBillsProvider
+     * @dataProvider clientAndProjectAndMissionAndConventionWithBillsProvider
      */
-    public function testAdministratorDeletingProjectWithBills($project, $mission)
+    public function testAdministratorDeletingProjectWithBills($client, $project, $mission, $convention)
     {
         $this->assertDatabaseHas('projects', $project->toArray());
         $this->assertDatabaseHas('missions', $mission->toArray());
