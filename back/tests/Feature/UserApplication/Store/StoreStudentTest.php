@@ -13,25 +13,19 @@ class StoreStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
+     *
+     * @dataProvider availableMissionProvider
      */
-    public function testStudentCreatingApplication()
+    public function testStudentCreatingApplication($mission)
     {
-        $user_id = 8;
-        $mission_id = factory(Mission::class)->create()->id;
+        $user = auth()->user();
 
-        $application = [
-            'user_id'       => $user_id,
-            'mission_id'    => $mission_id,
-            'type'          => Application::USER_APPLICATION,
-            'status'        => Application::WAITING
-        ];
-        $data = [
-            'mission_id' => $mission_id,
-        ];
+        $data = ['mission_id' => $mission->id];
+        $application = array_merge($data, ['user_id' => $user->id]);
 
         $this->assertDatabaseMissing('applications', $application);
 
-        $this->json('POST', route('users.applications.store', ['user_id' => $user_id]), $data)
+        $this->json('POST', route('users.applications.store', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',

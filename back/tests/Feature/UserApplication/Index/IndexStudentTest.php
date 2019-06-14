@@ -14,9 +14,9 @@ class IndexStudentTest extends TestCaseWithAuth
      */
     public function testStudentAccessingHisOwnApplicationIndex()
     {
-        $user_id = 8;
+        $user = auth()->user();
 
-        $this->json('GET', route('users.applications.index', ['user_id' => $user_id]))
+        $this->json('GET', route('users.applications.index', ['user_id' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([[
                 'id',
@@ -35,12 +35,12 @@ class IndexStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
+     *
+     * @dataProvider activeStudentProvider
      */
-    public function testStudentAccessingAnotherUserApplicationIndex()
+    public function testStudentAccessingAnotherUserApplicationIndex($user)
     {
-        $user_id = 1;
-
-        $this->json('GET', route('users.applications.index', ['user_id' => $user_id]))
+        $this->json('GET', route('users.applications.index', ['user_id' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
     }

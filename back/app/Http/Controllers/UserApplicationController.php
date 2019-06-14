@@ -44,7 +44,7 @@ class UserApplicationController extends Controller
     {
         $user = User::findOrFail($user_id);
         $mission = Mission::findOrFail($request->get('mission_id'));
-        $this->authorize('store-application', $mission);
+        $this->authorize('store-application', [$user, $mission]);
 
         $application = Application::create([
             'type'      => Application::USER_APPLICATION,

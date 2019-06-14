@@ -14,9 +14,9 @@ class IndexStaffTest extends TestCaseWithAuth
      */
     public function testStaffAccessingUserApplicationIndex()
     {
-        $user_id = 1;
+        $user = auth()->user();
 
-        $this->json('GET', route('users.applications.index', ['user_id' => $user_id]))
+        $this->json('GET', route('users.applications.index', ['user_id' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([[
                 'id',
