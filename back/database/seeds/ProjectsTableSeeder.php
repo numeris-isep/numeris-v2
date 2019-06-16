@@ -75,6 +75,7 @@ class ProjectsTableSeeder extends Seeder
                     'name'              => "{$client->name} $month_name 2018",
                     'start_at'          => "2018/$month_number/01 00:00:00",
                     'money_received_at' => null,
+                    'step'              => Project::HIRING,
                     'is_private'        => $month_number == '12',
                 ]);
         }
@@ -87,6 +88,7 @@ class ProjectsTableSeeder extends Seeder
                 'name'              => "{$client->name} " . Carbon::now()->format('F Y'),
                 'start_at'          => Carbon::now()->toDateTimeString(),
                 'money_received_at' => Carbon::now()->toDateTimeString(),
+                'step'              => Project::HIRING,
                 'is_private'        => false,
             ]);
 
@@ -98,8 +100,8 @@ class ProjectsTableSeeder extends Seeder
                 'name'              => "{$client->name} " . Carbon::now()->addMonth()->format('F Y'),
                 'start_at'          => Carbon::now()->addMonth()->toDateTimeString(),
                 'money_received_at' => Carbon::now()->addMonth()->toDateTimeString(),
-                'is_private'        => true,
                 'step'              => Project::HIRING,
+                'is_private'        => true,
             ]);
     }
 }
