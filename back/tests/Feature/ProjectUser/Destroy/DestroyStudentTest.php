@@ -12,11 +12,13 @@ class DestroyStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
-     *
-     * @dataProvider privateProjectAndUserInProjectProvider
      */
-    public function testStudentRemovingUserFromProject($project, $user)
+    public function testStudentRemovingUserFromProject()
     {
+        $test_data = $this->privateProjectAndUserInProjectProvider();
+        $project = $test_data['project'];
+        $user = $test_data['user'];
+
         $data = [
             'project_id'    => $project->id,
             'user_id'       => $user->id,

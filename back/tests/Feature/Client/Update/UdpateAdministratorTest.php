@@ -12,11 +12,11 @@ class UdpateAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider clientProvider
      */
-    public function testAdministratorUpdatingClient($client)
+    public function testAdministratorUpdatingClient()
     {
+        $client = $this->clientProvider();
+
         $client_data = [
             'name'      => 'AS Something',
             'reference' => '00-0000',

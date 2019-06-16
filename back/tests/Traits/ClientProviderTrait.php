@@ -14,24 +14,18 @@ use App\Models\User;
 
 trait ClientProviderTrait
 {
-    public function clientProvider()
+    public function clientProvider(): Client
     {
-        $this->refreshApplication();
-
-        return [[factory(Client::class)->create()]];
+        return factory(Client::class)->create();
     }
 
-    public function clientContactProvider()
+    public function clientContactProvider(): Client
     {
-        $this->refreshApplication();
-
-        return [[factory(Contact::class)->create()]];
+        return factory(Contact::class)->create();
     }
 
-    public function clientWithProjectsWithMissionsProvider()
+    public function clientWithProjectsWithMissionsProvider(): Client
     {
-        $this->refreshApplication();
-
         $client = factory(Client::class)->create();
         $projects = factory(Project::class, 2)->create(['client_id' => $client->id]);
 
@@ -41,13 +35,11 @@ trait ClientProviderTrait
             factory(Mission::class, 2)->create(['project_id' => $project->id]);
         }
 
-        return [[$client]];
+        return $client;
     }
 
-    public function clientAndProjectAndMissionAndConventionWithBillsProvider()
+    public function clientAndProjectAndMissionAndConventionWithBillsProvider(): array
     {
-        $this->refreshApplication();
-
         $client = factory(Client::class)->create();
         $convention = factory(Convention::class)->create(['client_id' => $client->id]);
 
@@ -74,6 +66,12 @@ trait ClientProviderTrait
             'rate_id'           => $flat_rate->id,
         ]);
 
-        return [[$client, $project, $mission, $convention, $rate]];
+        return [
+            'client'        => $client,
+            'project'       => $project,
+            'mission'       => $mission,
+            'convention'    => $convention,
+            'rate'          => $rate,
+        ];
     }
 }

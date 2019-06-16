@@ -16,13 +16,15 @@ class UpdateUpdateStudentTest extends TestCaseWithAuth
      */
     public function testStudentUpdatingApplication()
     {
-        $application_id = 1;
+        $mission = $this->hiringProjectAndAvailableMissionProvider()['mission'];
+
+        $application = factory(Application::class)->create(['mission_id' => $mission->id]);
 
         $data = [
             'status' => Application::ACCEPTED,
         ];
 
-        $this->json('PUT', route('applications.update', ['application_id' => $application_id]), $data)
+        $this->json('PUT', route('applications.update', ['application_id' => $application->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
     }

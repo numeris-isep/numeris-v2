@@ -13,11 +13,13 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider conventionAndProjectProvider
      */
-    public function testDeveloperUpdatingProject($convention, $project)
+    public function testDeveloperUpdatingProject()
     {
+        $test_data = $this->conventionAndProjectProvider();
+        $convention = $test_data['convention'];
+        $project = $test_data['project'];
+
         $data = [
             'client_id'     => $convention->client->id,
             'convention_id' => $convention->id,
@@ -48,12 +50,11 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider clientAndProjectAndMissionAndConventionWithBillsProvider
      */
-    public function testDeveloperUpdatingProjectWithAlreadyUsedData($client, $otherProject, $mission, $convention)
+    public function testDeveloperUpdatingProjectWithAlreadyUsedData()
     {
-        $project = factory(Project::class)->create();
+        $otherProject = $this->clientAndProjectAndMissionAndConventionWithBillsProvider()['project'];
+        $project = $this->projectProvider();
 
         $data = [
             'client_id'     => $otherProject->client->id,
@@ -74,11 +75,11 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider projectProvider
      */
-    public function testDeveloperUpdatingProjectWithUnknownProjectData($project)
+    public function testDeveloperUpdatingProjectWithUnknownProjectData()
     {
+        $project = $this->projectProvider();
+
         $data = [
             'client_id'     => 0,
             'convention_id' => 0,

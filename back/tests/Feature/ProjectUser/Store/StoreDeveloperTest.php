@@ -12,11 +12,13 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider privateProjectAndUserProvider
      */
-    public function testDeveloperAddingUserToProject($project, $user)
+    public function testDeveloperAddingUserToProject()
     {
+        $test_data = $this->privateProjectAndUserProvider();
+        $project = $test_data['project'];
+        $user = $test_data['user'];
+
         $data = [
             'project_id'    => $project->id,
             'user_id'       => $user->id,
@@ -59,11 +61,13 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider publicProjectAndUserProvider
      */
-    public function testDeveloperAddingUserToPublicProject($project, $user)
+    public function testDeveloperAddingUserToPublicProject()
     {
+        $test_data = $this->publicProjectAndUserProvider();
+        $project = $test_data['project'];
+        $user = $test_data['user'];
+
         $data = [
             'project_id'    => $project->id,
             'user_id'       => $user->id,
@@ -83,11 +87,13 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider privateProjectAndUserInProjectProvider
      */
-    public function testDeveloperAddingUserAlreadyInProjectToProject($project, $user)
+    public function testDeveloperAddingUserAlreadyInProjectToProject()
     {
+        $test_data = $this->privateProjectAndUserInProjectProvider();
+        $project = $test_data['project'];
+        $user = $test_data['user'];
+
         $data = [
             'project_id'    => $project->id,
             'user_id'       => $user->id,

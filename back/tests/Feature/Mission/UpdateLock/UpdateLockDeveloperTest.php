@@ -12,11 +12,11 @@ class UpdateLockDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider availableMissionProvider
      */
-    public function testDeveloperUpdatingMissionLock($mission)
+    public function testDeveloperUpdatingMissionLock()
     {
+        $mission = $this->availableMissionProvider();
+
         $data = [
             'is_locked' => true,
         ];
@@ -53,11 +53,12 @@ class UpdateLockDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider availableMissionProvider
      */
-    public function testDeveloperUpdatingMissionLockWithoutData($mission)
-    {$this->json('PATCH', route('missions.update.lock', ['mission_id' => $mission->id]))
+    public function testDeveloperUpdatingMissionLockWithoutData()
+    {
+        $mission = $this->availableMissionProvider();
+
+        $this->json('PATCH', route('missions.update.lock', ['mission_id' => $mission->id]))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors(['is_locked']);
     }

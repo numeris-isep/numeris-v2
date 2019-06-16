@@ -12,11 +12,11 @@ class ShowAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider conventionProvider
      */
-    public function testAdministratorAccessingConventionShow($convention)
+    public function testAdministratorAccessingConventionShow()
     {
+        $convention = $this->conventionProvider();
+
         $this->json('GET', route('conventions.show', ['convention_id' => $convention->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([

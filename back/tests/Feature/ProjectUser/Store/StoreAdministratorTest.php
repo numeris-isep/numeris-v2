@@ -12,11 +12,13 @@ class StoreAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider privateProjectAndUserProvider
      */
-    public function testAdministratorAddingUserToProject($project, $user)
+    public function testAdministratorAddingUserToProject()
     {
+        $test_data = $this->privateProjectAndUserProvider();
+        $project = $test_data['project'];
+        $user = $test_data['user'];
+
         $data = [
             'project_id'    => $project->id,
             'user_id'       => $user->id,

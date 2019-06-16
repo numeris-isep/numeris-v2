@@ -12,11 +12,11 @@ class ShowAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider availableMissionProvider
      */
-    public function testAdministratorAccessingMissionShow($mission)
+    public function testAdministratorAccessingMissionShow()
     {
+        $mission = $this->availableMissionProvider();
+
         $this->json('GET', route('missions.show', ['mission_id' => $mission->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([

@@ -12,11 +12,11 @@ class IndexStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider privateProjectAndUserInProjectProvider
      */
-    public function testStaffAccessingProjectUserIndex($project, $user)
+    public function testStaffAccessingProjectUserIndex()
     {
+        $project = $this->privateProjectAndUserInProjectProvider()['project'];
+
         $this->json('GET', route('projects.users.index', ['project_id' => $project->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([[

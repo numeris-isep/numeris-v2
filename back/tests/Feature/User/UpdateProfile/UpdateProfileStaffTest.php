@@ -57,11 +57,11 @@ class UpdateProfileStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider activeDeveloperProvider
      */
-    public function testStaffUpdatingDeveloperProfile($developer)
+    public function testStaffUpdatingDeveloperProfile()
     {
+        $developer = $this->activeDeveloperProvider();
+
         $user_data = [
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',
@@ -92,11 +92,11 @@ class UpdateProfileStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider activeAdministratorProvider
      */
-    public function testStaffUpdatingAdministratorProfile($administrator)
+    public function testStaffUpdatingAdministratorProfile()
     {
+        $administrator = $this->activeAdministratorProvider();
+
         $user_data = [
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',
@@ -127,11 +127,11 @@ class UpdateProfileStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider activeStaffProvider
      */
-    public function testStaffUpdatingStaffProfile($staff)
+    public function testStaffUpdatingStaffProfile()
     {
+        $staff = $this->activeStaffProvider();
+
         $user_data = [
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',
@@ -162,11 +162,11 @@ class UpdateProfileStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider activeStudentProvider
      */
-    public function testStaffUpdatingStudentProfile($student)
+    public function testStaffUpdatingStudentProfile()
     {
+        $student = $this->activeStudentProvider();
+
         $user_data = [
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',

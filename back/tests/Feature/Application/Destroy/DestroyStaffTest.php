@@ -12,11 +12,11 @@ class DestroyStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider ownApplicationProvider
      */
-    public function testStaffDeletingHisApplication($application)
+    public function testStaffDeletingHisApplication()
     {
+        $application = $this->ownApplicationProvider();
+
         $this->assertDatabaseHas('applications', $application->toArray());
 
         $this->json('DELETE', route('applications.destroy', ['application_id' => $application->id]))
@@ -27,11 +27,11 @@ class DestroyStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider otherUserApplicationProvider
      */
-    public function testStaffDeletingApplicationOfOtherUser($application)
+    public function testStaffDeletingApplicationOfOtherUser()
     {
+        $application = $this->otherUserApplicationProvider();
+
         $this->assertDatabaseHas('applications', $application->toArray());
 
         $this->json('DELETE', route('applications.destroy', ['application_id' => $application->id]))

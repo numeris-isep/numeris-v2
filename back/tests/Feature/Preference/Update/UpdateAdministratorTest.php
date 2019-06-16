@@ -15,7 +15,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorUpdatingPreference()
     {
-        $preference_id = 6; // Own preference
+        $preference = auth()->user()->preference;
 
         $data = [
             'on_new_mission'    => true,
@@ -26,7 +26,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
             'by_push'           => true,
         ];
 
-        $this->json('PUT', route('preferences.update', ['preference_id' => $preference_id]), $data)
+        $this->json('PUT', route('preferences.update', ['preference_id' => $preference->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'onNewMission',
@@ -43,7 +43,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorUpdatingDeveloperPreference()
     {
-        $preference_id = 2; // Developer preference
+        $preference = $this->activeDeveloperProvider()->preference;
 
         $data = [
             'on_new_mission'    => true,
@@ -54,7 +54,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
             'by_push'           => true,
         ];
 
-        $this->json('PUT', route('preferences.update', ['preference_id' => $preference_id]), $data)
+        $this->json('PUT', route('preferences.update', ['preference_id' => $preference->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
     }
@@ -64,7 +64,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorUpdatingAdministratorPreference()
     {
-        $preference_id = 4; // Administrator preference
+        $preference = $this->activeAdministratorProvider()->preference;
 
         $data = [
             'on_new_mission'    => true,
@@ -75,16 +75,9 @@ class UpdateAdministratorTest extends TestCaseWithAuth
             'by_push'           => true,
         ];
 
-        $this->json('PUT', route('preferences.update', ['preference_id' => $preference_id]), $data)
-            ->assertStatus(JsonResponse::HTTP_CREATED)
-            ->assertJsonStructure([
-                'onNewMission',
-                'onAcceptance',
-                'onRefusal',
-                'onDocument',
-                'byEmail',
-                'byPush',
-            ]);
+        $this->json('PUT', route('preferences.update', ['preference_id' => $preference->id]), $data)
+            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
+            ->assertJson(['errors' => [trans('api.403')]]);
     }
 
     /**
@@ -92,7 +85,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorUpdatingStaffPreference()
     {
-        $preference_id = 6; // Staff preference
+        $preference = $this->activeStaffProvider()->preference;
 
         $data = [
             'on_new_mission'    => true,
@@ -103,7 +96,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
             'by_push'           => true,
         ];
 
-        $this->json('PUT', route('preferences.update', ['preference_id' => $preference_id]), $data)
+        $this->json('PUT', route('preferences.update', ['preference_id' => $preference->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'onNewMission',
@@ -120,7 +113,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorUpdatingStudentPreference()
     {
-        $preference_id = 8; // Student preference
+        $preference = $this->activeStudentProvider()->preference;
 
         $data = [
             'on_new_mission'    => true,
@@ -131,7 +124,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
             'by_push'           => true,
         ];
 
-        $this->json('PUT', route('preferences.update', ['preference_id' => $preference_id]), $data)
+        $this->json('PUT', route('preferences.update', ['preference_id' => $preference->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'onNewMission',

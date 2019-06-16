@@ -12,11 +12,11 @@ class UpdateStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider clientProvider
      */
-    public function testStaffUpdatingClient($client)
+    public function testStaffUpdatingClient()
     {
+        $client = $this->clientProvider();
+
         $client_data = [
             'name'      => 'AS Something',
             'reference' => '00-0000',

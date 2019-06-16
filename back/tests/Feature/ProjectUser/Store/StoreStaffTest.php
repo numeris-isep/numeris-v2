@@ -12,11 +12,13 @@ class StoreStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider privateProjectAndUserProvider
      */
-    public function testStaffAddingUserToProject($project, $user)
+    public function testStaffAddingUserToProject()
     {
+        $test_data = $this->privateProjectAndUserProvider();
+        $project = $test_data['project'];
+        $user = $test_data['user'];
+
         $data = [
             'project_id'    => $project->id,
             'user_id'       => $user->id,

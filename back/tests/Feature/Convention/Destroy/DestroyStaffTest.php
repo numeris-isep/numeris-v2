@@ -12,11 +12,11 @@ class DestroyStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider ConventionProvider
      */
-    public function testStaffDeletingConvention($convention)
+    public function testStaffDeletingConvention()
     {
+        $convention = $this->conventionProvider();
+
         $this->assertDatabaseHas('conventions', $convention->toArray());
 
         $this->json('DELETE', route('conventions.destroy', ['convention_id' => $convention->id]))

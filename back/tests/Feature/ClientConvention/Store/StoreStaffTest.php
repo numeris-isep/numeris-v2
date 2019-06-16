@@ -12,11 +12,11 @@ class StoreStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider clientProvider
      */
-    public function testStaffCreatingConvention($client)
+    public function testStaffCreatingConvention()
     {
+        $client = $this->clientProvider();
+
         $convention = ['name'  => 'Convention de test'];
         $rate1 = [
             'name'          => 'Heures de test',

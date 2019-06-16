@@ -13,7 +13,7 @@ class IndexAdministratorTest extends TestCaseWithAuth
     /**
      * @group administrator
      */
-    public function testAdministratorAccesingMissionIndex()
+    public function testAdministratorAccessingMissionIndex()
     {
         $this->json('GET', route('missions.index'))
             ->assertStatus(JsonResponse::HTTP_OK)

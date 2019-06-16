@@ -13,11 +13,13 @@ class StoreAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider availableMissionAndUserProvider
      */
-    public function testAdministratorCreatingApplication($mission, $user)
+    public function testAdministratorCreatingApplication()
     {
+        $test_data = $this->availableMissionAndUserProvider();
+        $mission = $test_data['mission'];
+        $user = $test_data['user'];
+
         $application = [
             'user_id'       => $user->id,
             'mission_id'    => $mission->id,

@@ -12,11 +12,11 @@ class DestroyStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider projectProvider
      */
-    public function testStaffDeletingProjectWithoutBills($project)
+    public function testStaffDeletingProjectWithoutBills()
     {
+        $project = $this->projectProvider();
+
         $this->assertDatabaseHas('projects', $project->toArray());
         $this->assertTrue($project->missions->isEmpty());
 

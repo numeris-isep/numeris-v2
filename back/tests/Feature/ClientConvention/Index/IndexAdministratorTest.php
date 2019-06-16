@@ -15,9 +15,9 @@ class IndexAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorAccessingClientConventionIndex()
     {
-        $client_id = 1;
+        $client = $this->clientAndProjectAndMissionAndConventionWithBillsProvider()['client'];
 
-        $this->json('GET', route('clients.conventions.index', ['client_id' => $client_id]))
+        $this->json('GET', route('clients.conventions.index', ['client_id' => $client->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([[
                 'id',

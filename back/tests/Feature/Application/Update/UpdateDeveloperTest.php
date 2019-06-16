@@ -13,11 +13,11 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider hiringProjectAndAvailableMissionProvider
      */
-    public function testDeveloperUpdatingApplication($project, $mission)
+    public function testDeveloperUpdatingApplication()
     {
+        $mission = $this->hiringProjectAndAvailableMissionProvider()['mission'];
+
         $application = factory(Application::class)->create(['mission_id' => $mission->id]);
 
         $data = [
@@ -56,11 +56,11 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider validatedProjectAndAvailableMissionProvider
      */
-    public function testDeveloperUpdatingApplicationWhoseProjectIsNotHiring($project, $mission)
+    public function testDeveloperUpdatingApplicationWhoseProjectIsNotHiring()
     {
+        $mission = $this->validatedProjectAndAvailableMissionProvider()['mission'];
+
         $application = factory(Application::class)->create(['mission_id' => $mission->id]);
 
         $data = [

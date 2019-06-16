@@ -12,11 +12,13 @@ class UpdateStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
-     *
-     * @dataProvider conventionAndProjectProvider
      */
-    public function testStudentUpdatingProject($convention, $project)
+    public function testStudentUpdatingProject()
     {
+        $test_data = $this->conventionAndProjectProvider();
+        $convention = $test_data['convention'];
+        $project = $test_data['project'];
+
         $data = [
             'client_id'     => $convention->client->id,
             'convention_id' => $convention->id,

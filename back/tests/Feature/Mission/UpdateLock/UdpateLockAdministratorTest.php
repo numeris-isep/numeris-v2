@@ -12,11 +12,11 @@ class UdpateLockAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider availableMissionProvider
      */
-    public function testAdministratorUpdatingMissionLock($mission)
+    public function testAdministratorUpdatingMissionLock()
     {
+        $mission = $this->availableMissionProvider();
+
         $data = [
             'is_locked' => true,
         ];

@@ -12,11 +12,11 @@ class UpdateLockStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
-     *
-     * @dataProvider availableMissionProvider
      */
-    public function testStudentUpdatingMissionLock($mission)
+    public function testStudentUpdatingMissionLock()
     {
+        $mission = $this->availableMissionProvider();
+
         $data = [
             'is_locked' => true,
         ];

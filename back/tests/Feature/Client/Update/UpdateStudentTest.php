@@ -12,11 +12,11 @@ class UpdateStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
-     *
-     * @dataProvider clientProvider
      */
-    public function testStudentUpdatingClient($client)
+    public function testStudentUpdatingClient()
     {
+        $client = $this->clientProvider();
+
         $client_data = [
             'name'      => 'AS Something',
             'reference' => '00-0000',

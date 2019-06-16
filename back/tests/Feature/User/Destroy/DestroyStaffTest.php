@@ -13,11 +13,11 @@ class DestroyStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider activeUserProvider
      */
-    public function testStaffDeletingUser($user)
+    public function testStaffDeletingUser()
     {
+        $user = $this->activeUserProvider();
+
         $address = $user->address;
         $preference = $user->preference;
 

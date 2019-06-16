@@ -3,6 +3,7 @@
 namespace Tests\Feature\User\Update;
 
 use App\Models\Role;
+use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
 class UpdateAdministratorTest extends TestCaseWithAuth
@@ -11,11 +12,11 @@ class UpdateAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider activeStudentProvider
      */
-    public function testAdministratorUpdatingUser($user)
+    public function testAdministratorUpdatingUser()
     {
+        $user = $this->activeStudentProvider();
+
         $user_data = $db_data = [
             'email'                     => 'test@numeris-isep.fr',
             'username'                  => 'test',
@@ -47,7 +48,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('addresses', $address_data);
 
         $this->json('PUT', route('users.update', ['user_id' => $user->id]), $data)
-//            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
+            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 
         $this->assertDatabaseMissing('users', $db_data);

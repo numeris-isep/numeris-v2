@@ -12,11 +12,13 @@ class StoreStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
-     *
-     * @dataProvider privateProjectAndUserProvider
      */
-    public function testStudentAddingUserToProject($project, $user)
+    public function testStudentAddingUserToProject()
     {
+        $test_data = $this->privateProjectAndUserProvider();
+        $project = $test_data['project'];
+        $user = $test_data['user'];
+
         $data = [
             'project_id'    => $project->id,
             'user_id'       => $user->id,

@@ -14,11 +14,10 @@ class DestroyStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider clientWithProjectsWithMissionsProvider
      */
-    public function testStaffDeletingClientWithoutBills($client)
+    public function testStaffDeletingClientWithoutBills()
     {
+        $client = $this->clientWithProjectsWithMissionsProvider();
         $address = $client->address;
         $conventions = $client->conventions;
         $mission_project_id = $client->missions->first()->project_id;

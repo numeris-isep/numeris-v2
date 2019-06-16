@@ -16,13 +16,13 @@ class UpdateStepDeveloperTest extends TestCaseWithAuth
      */
     public function testDeveloperUpdatingProjectStep()
     {
-        $project_id = 1;
+        $project = $this->projectProvider();
 
         $data = [
             'step' => Project::HIRING,
         ];
 
-        $this->json('PATCH', route('projects.update.step', ['project_id' => $project_id]), $data)
+        $this->json('PATCH', route('projects.update.step', ['project_id' => $project->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',
@@ -43,13 +43,13 @@ class UpdateStepDeveloperTest extends TestCaseWithAuth
      */
     public function testDeveloperUpdatingProjectStepWithUnknownStep()
     {
-        $project_id = 1;
+        $project = $this->projectProvider();
 
         $data = [
             'step' => 'unknown-step',
         ];
 
-        $this->json('PATCH', route('projects.update.step', ['project_id' => $project_id]), $data)
+        $this->json('PATCH', route('projects.update.step', ['project_id' => $project->id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors(['step']);
     }

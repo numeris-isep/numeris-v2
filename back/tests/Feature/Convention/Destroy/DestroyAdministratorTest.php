@@ -12,11 +12,11 @@ class DestroyAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider conventionProvider
      */
-    public function testAdministratorDeletingConvention($convention)
+    public function testAdministratorDeletingConvention()
     {
+        $convention = $this->conventionProvider();
+
         $this->assertDatabaseHas('conventions', $convention->toArray());
 
         $this->json('DELETE', route('conventions.destroy', ['convention_id' => $convention->id]))

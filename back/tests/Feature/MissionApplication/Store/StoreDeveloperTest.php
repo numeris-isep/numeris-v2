@@ -13,11 +13,13 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider availableMissionAndUserProvider
      */
-    public function testDeveloperCreatingApplication($mission, $user)
+    public function testDeveloperCreatingApplication()
     {
+        $test_data = $this->availableMissionAndUserProvider();
+        $mission = $test_data['mission'];
+        $user = $test_data['user'];
+
         $application = [
             'user_id'       => $user->id,
             'mission_id'    => $mission->id,
@@ -47,11 +49,11 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider availableMissionProvider
      */
-    public function testDeveloperCreatingApplicationWithUnknownUser($mission)
+    public function testDeveloperCreatingApplicationWithUnknownUser()
     {
+        $mission = $this->availableMissionProvider();
+
         $user_id = 0; // Unknown user
 
         $application = [
@@ -75,11 +77,11 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider userProvider
      */
-    public function testDeveloperCreatingApplicationWithUnknownMission($user)
+    public function testDeveloperCreatingApplicationWithUnknownMission()
     {
+        $user = $this->userProvider();
+
         $mission_id = 0; // Unknown mission
 
         $application = [
@@ -103,11 +105,11 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider availableMissionProvider
      */
-    public function testDeveloperCreatingApplicationWithoutData($mission)
+    public function testDeveloperCreatingApplicationWithoutData()
     {
+        $mission = $this->availableMissionProvider();
+
         $this->json('POST', route('missions.applications.store', ['mission_id' => $mission->id]))
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
             ->assertJson(['errors' => [trans('api.404')]]);
@@ -115,11 +117,13 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider availableMissionAndUserWhoAlreadyAppliedProviderProvider
      */
-    public function testDeveloperCreatingApplicationToAlreadyAppliedMission($mission, $user)
+    public function testDeveloperCreatingApplicationToAlreadyAppliedMission()
     {
+        $test_data = $this->availableMissionAndUserWhoAlreadyAppliedProviderProvider();
+        $mission = $test_data['mission'];
+        $user = $test_data['user'];
+
         $data = [
             'user_id' => $user->id,
         ];
@@ -131,11 +135,13 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider lockedMissionAndUserProvider
      */
-    public function testDeveloperCreatingApplicationToLockedMission($mission, $user)
+    public function testDeveloperCreatingApplicationToLockedMission()
     {
+        $test_data = $this->lockedMissionAndUserProvider();
+        $mission = $test_data['mission'];
+        $user = $test_data['user'];
+
         $application = [
             'user_id'       => $user->id,
             'mission_id'    => $mission->id,
@@ -157,11 +163,13 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider pastMissionAndUserProvider
      */
-    public function testDeveloperCreatingApplicationToPastMission($mission, $user)
+    public function testDeveloperCreatingApplicationToPastMission()
     {
+        $test_data = $this->pastMissionAndUserProvider();
+        $mission = $test_data['mission'];
+        $user = $test_data['user'];
+
         $application = [
             'user_id'       => $user->id,
             'mission_id'    => $mission->id,
@@ -183,11 +191,13 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider availablePrivateMissionAndUserProvider
      */
-    public function testDeveloperApplyingUserToAvailablePrivateMission($mission, $user)
+    public function testDeveloperApplyingUserToAvailablePrivateMission()
     {
+        $test_data = $this->availablePrivateMissionAndUserProvider();
+        $mission = $test_data['mission'];
+        $user = $test_data['user'];
+
         $application = [
             'user_id'       => $user->id,
             'mission_id'    => $mission->id,
@@ -209,11 +219,13 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider availablePrivateMissionAndUserInPrivateProjectProvider
      */
-    public function testDeveloperApplyingUserInPrivateProjectToAvailablePrivateMission($mission, $user)
+    public function testDeveloperApplyingUserInPrivateProjectToAvailablePrivateMission()
     {
+        $test_data = $this->availablePrivateMissionAndUserInPrivateProjectProvider();
+        $mission = $test_data['mission'];
+        $user = $test_data['user'];
+
         $application = [
             'user_id'       => $user->id,
             'mission_id'    => $mission->id,

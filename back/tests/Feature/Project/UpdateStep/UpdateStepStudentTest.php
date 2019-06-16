@@ -16,13 +16,13 @@ class UpdateStepStudentTest extends TestCaseWithAuth
      */
     public function testStudentUpdatingProjectStep()
     {
-        $project_id = 1;
+        $project = $this->projectProvider();
 
         $data = [
             'step' => Project::HIRING,
         ];
 
-        $this->json('PATCH', route('projects.update.step', ['project_id' => $project_id]), $data)
+        $this->json('PATCH', route('projects.update.step', ['project_id' => $project->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
     }

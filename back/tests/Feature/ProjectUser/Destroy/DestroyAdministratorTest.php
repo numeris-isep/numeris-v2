@@ -12,11 +12,13 @@ class DestroyAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider privateProjectAndUserInProjectProvider
      */
-    public function testAdministratorRemovingUserFromProject($project, $user)
+    public function testAdministratorRemovingUserFromProject()
     {
+        $test_data = $this->privateProjectAndUserInProjectProvider();
+        $project = $test_data['project'];
+        $user = $test_data['user'];
+
         $data = [
             'project_id'    => $project->id,
             'user_id'       => $user->id,

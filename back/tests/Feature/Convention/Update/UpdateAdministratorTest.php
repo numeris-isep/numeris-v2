@@ -13,11 +13,11 @@ class UpdateAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider conventionProvider
      */
-    public function testAdministratorUpdatingConvention($convention)
+    public function testAdministratorUpdatingConvention()
     {
+        $convention = $this->conventionProvider();
+
         $conventionData = ['name' => 'Convention de test'];
         $rate1 = [
             'id'            => $convention->rates->get(0)->id,

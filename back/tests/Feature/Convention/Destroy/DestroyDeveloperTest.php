@@ -12,11 +12,11 @@ class DestroyDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider conventionProvider
      */
-    public function testDeveloperDeletingConvention($convention)
+    public function testDeveloperDeletingConvention()
     {
+        $convention = $this->conventionProvider();
+
         $this->assertDatabaseHas('conventions', $convention->toArray());
 
         $this->json('DELETE', route('conventions.destroy', ['convention_id' => $convention->id]))
@@ -27,11 +27,11 @@ class DestroyDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider conventionAndProjectProvider
      */
-    public function testDeveloperDeletingConventionWithAssociatedProject($convention)
+    public function testDeveloperDeletingConventionWithAssociatedProject()
     {
+        $convention = $this->conventionAndProjectProvider()['convention'];
+
         $this->assertDatabaseHas('conventions', $convention->toArray());
 
         $this->json('DELETE', route('conventions.destroy', ['convention_id' => $convention->id]))

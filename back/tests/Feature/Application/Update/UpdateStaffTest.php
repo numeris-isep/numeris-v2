@@ -13,11 +13,11 @@ class UpdateStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider hiringProjectAndAvailableMissionProvider
      */
-    public function testStaffUpdatingApplication($project, $mission)
+    public function testStaffUpdatingApplication()
     {
+        $mission = $this->hiringProjectAndAvailableMissionProvider()['mission'];
+
         $application = factory(Application::class)->create(['mission_id' => $mission->id]);
 
         $data = [

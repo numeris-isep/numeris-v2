@@ -12,11 +12,11 @@ class ShowStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider availableMissionProvider
      */
-    public function testStaffAccessingMissionShow($mission)
+    public function testStaffAccessingMissionShow()
     {
+        $mission = $this->availableMissionProvider();
+
         $this->json('GET', route('missions.show', ['mission_id' => $mission->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([

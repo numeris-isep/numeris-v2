@@ -12,11 +12,11 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider activeStudentProvider
      */
-    public function testDeveloperUpdatingUserWithAllFields($user)
+    public function testDeveloperUpdatingUserWithAllFields()
     {
+        $user = $this->activeStudentProvider();
+
         $user_data = $db_data = [
             'email'                     => 'test@numeris-isep.fr',
             'username'                  => 'test',
@@ -79,11 +79,11 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider activeUserProvider
      */
-    public function testDeveloperUpdatingUserWithAlreadyUsedData($user)
+    public function testDeveloperUpdatingUserWithAlreadyUsedData()
     {
+        $user = $this->activeUserProvider();
+
         $user_data = $db_data = [
             'email'                     => 'developer@numeris-isep.fr', // Already used
             'username'                  => 'developer', // Already used
@@ -124,11 +124,11 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider activeUserProvider
      */
-    public function testDeveloperUpdatingUserWithoutData($user)
+    public function testDeveloperUpdatingUserWithoutData()
     {
+        $user = $this->activeUserProvider();
+
         $this->json('PUT', route('users.update', ['user' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors([

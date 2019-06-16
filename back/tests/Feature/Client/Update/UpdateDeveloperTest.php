@@ -12,11 +12,11 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider clientProvider
      */
-    public function testDeveloperUpdatingClient($client)
+    public function testDeveloperUpdatingClient()
     {
+        $client = $this->clientProvider();
+
         $client_data = [
             'name'      => 'AS Something',
             'reference' => '00-0000',
@@ -55,7 +55,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
      */
     public function testDeveloperUpdatingClientWithAlreadyUsedData()
     {
-        $client_id = 2;
+        $client = $this->clientProvider();
 
         $client_data = [
             'name'      => 'AS Connect', // Already used
@@ -71,7 +71,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         $this->assertDatabaseHas('clients', $client_data);
         $this->assertDatabaseMissing('addresses', $address_data);
 
-        $this->json('PUT', route('clients.update', ['client_id' => $client_id]), $data)
+        $this->json('PUT', route('clients.update', ['client_id' => $client->id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors(['name', 'reference']);
 
@@ -84,9 +84,9 @@ class UpdateDeveloperTest extends TestCaseWithAuth
      */
     public function testDeveloperUpdatingClientWithoutData()
     {
-        $client_id = 1;
+        $client = $this->clientProvider();
 
-        $this->json('PUT', route('clients.update', ['client_id' => $client_id]))
+        $this->json('PUT', route('clients.update', ['client_id' => $client->id]))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors([
                 'name',

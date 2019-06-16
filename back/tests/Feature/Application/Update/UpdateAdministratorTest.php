@@ -13,11 +13,11 @@ class UpdateAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider hiringProjectAndAvailableMissionProvider
      */
-    public function testAdministratorUpdatingApplication($project, $mission)
+    public function testAdministratorUpdatingApplication()
     {
+        $mission = $this->hiringProjectAndAvailableMissionProvider()['mission'];
+
         $application = factory(Application::class)->create(['mission_id' => $mission->id]);
 
         $data = [

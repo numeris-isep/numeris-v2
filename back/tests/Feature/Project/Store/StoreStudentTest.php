@@ -12,11 +12,11 @@ class StoreStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
-     *
-     * @dataProvider conventionProvider
      */
-    public function testStudentCreatingProject($convention)
+    public function testStudentCreatingProject()
     {
+        $convention = $this->conventionProvider();
+
         $data = [
             'client_id'     => $convention->client->id,
             'convention_id' => $convention->id,

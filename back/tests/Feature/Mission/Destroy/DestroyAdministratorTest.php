@@ -12,11 +12,11 @@ class DestroyAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider availableMissionProvider
      */
-    public function testAdministratorDeletingMissionWithoutBills($mission)
+    public function testAdministratorDeletingMissionWithoutBills()
     {
+        $mission = $this->availableMissionProvider();
+
         $address = $mission->address;
 
         $this->assertDatabaseHas('missions', $mission->toArray());
@@ -31,11 +31,11 @@ class DestroyAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider clientAndProjectAndMissionAndConventionWithBillsProvider
      */
-    public function testAdministratorDeletingMissionWithBills($client, $project, $mission)
+    public function testAdministratorDeletingMissionWithBills()
     {
+        $mission = $this->clientAndProjectAndMissionAndConventionWithBillsProvider()['mission'];
+
         $address = $mission->address;
 
         $this->assertDatabaseHas('missions', $mission->toArray());

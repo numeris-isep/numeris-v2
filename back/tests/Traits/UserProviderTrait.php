@@ -4,64 +4,69 @@ namespace Tests\Traits;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\UserRole;
 
 trait UserProviderTrait
 {
-    public function userProvider()
+    public function userProvider(): User
     {
-        $this->refreshApplication();
-
-        return [[factory(User::class)->create()]];
+        return factory(User::class)->create();
     }
 
-    public function activeUserProvider()
+    public function activeUserProvider(): User
     {
-        $this->refreshApplication();
-
-        return [[factory(User::class)->state('active')->create()]];
+        return factory(User::class)->state('active')->create();
     }
 
-    public function activeStudentProvider()
+    public function activeStudentProvider(): User
     {
-        $this->refreshApplication();
-
         $user = factory(User::class)->state('active')->create();
-        $user->roles()
-            ->attach(Role::findByName(Role::STUDENT));
+        factory(UserRole::class)->create([
+            'role_id'       => Role::findByName(Role::STUDENT)->id,
+            'user_id'       => $user->id,
+            'created_at'    => now()->subMonth(),
+            'updated_at'    => now()->subMonth(),
+        ]);
 
-        return [[$user]];
+        return $user;
     }
 
-    public function activeStaffProvider()
+    public function activeStaffProvider(): User
     {
-        $this->refreshApplication();
-
         $user = factory(User::class)->state('active')->create();
-        $user->roles()
-            ->attach(Role::findByName(Role::STAFF));
+        factory(UserRole::class)->create([
+            'role_id'       => Role::findByName(Role::STAFF)->id,
+            'user_id'       => $user->id,
+            'created_at'    => now()->subMonth(),
+            'updated_at'    => now()->subMonth(),
+        ]);
 
-        return [[$user]];
+        return $user;
     }
 
-    public function activeAdministratorProvider()
+    public function activeAdministratorProvider(): User
     {
-        $this->refreshApplication();
-
         $user = factory(User::class)->state('active')->create();
-        $user->roles()
-            ->attach(Role::findByName(Role::ADMINISTRATOR));
+        factory(UserRole::class)->create([
+            'role_id'       => Role::findByName(Role::ADMINISTRATOR)->id,
+            'user_id'       => $user->id,
+            'created_at'    => now()->subMonth(),
+            'updated_at'    => now()->subMonth(),
+        ]);
 
-        return [[$user]];
+        return $user;
     }
 
-    public function activeDeveloperProvider()
+    public function activeDeveloperProvider(): User
     {
-        $this->refreshApplication();
-
         $user = factory(User::class)->state('active')->create();
-        $user->roles()
-            ->attach(Role::findByName(Role::DEVELOPER));
+        factory(UserRole::class)->create([
+            'role_id'       => Role::findByName(Role::DEVELOPER)->id,
+            'user_id'       => $user->id,
+            'created_at'    => now()->subMonth(),
+            'updated_at'    => now()->subMonth(),
+        ]);
 
-        return [[$user]];
+        return $user;
     }
 }

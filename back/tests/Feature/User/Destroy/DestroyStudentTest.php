@@ -13,11 +13,11 @@ class DestroyStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
-     *
-     * @dataProvider activeUserProvider
      */
-    public function testStudentDeletingUser($user)
+    public function testStudentDeletingUser()
     {
+        $user = $this->activeUserProvider();
+
         $address = $user->address;
         $preference = $user->preference;
 

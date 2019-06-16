@@ -12,11 +12,11 @@ class StoreStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider conventionProvider
      */
-    public function testStaffCreatingProject($convention)
+    public function testStaffCreatingProject()
     {
+        $convention = $this->conventionProvider();
+
         $data = [
             'client_id'     => $convention->client->id,
             'convention_id' => $convention->id,

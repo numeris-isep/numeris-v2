@@ -146,7 +146,7 @@ class User extends Authenticatable implements JWTSubject
      *
      * DISCLAIMER: this method is the corner stone of the website, all user's
      * authorizations depend on it. If it has to be modified, please do it with
-     * care. Thanks and happy coding!
+     * care.
      */
     public function role()
     {

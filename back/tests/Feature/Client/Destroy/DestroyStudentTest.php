@@ -14,11 +14,10 @@ class DestroyStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
-     *
-     * @dataProvider clientWithProjectsWithMissionsProvider
      */
-    public function testStudentDeletingClient($client)
+    public function testStudentDeletingClient()
     {
+        $client = $this->clientWithProjectsWithMissionsProvider();
         $address = $client->address;
         $conventions = $client->conventions;
         $mission_project_id = $client->missions->first()->project_id;

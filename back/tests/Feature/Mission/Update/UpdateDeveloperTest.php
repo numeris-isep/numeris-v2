@@ -12,11 +12,11 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider availableMissionProvider
      */
-    public function testDeveloperUpdatingMission($mission)
+    public function testDeveloperUpdatingMission()
     {
+        $mission = $this->availableMissionProvider();
+
         $mission_data = [
             'project_id'    => 1,
             'title'         => 'Mission de test',
@@ -53,11 +53,11 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider availableMissionProvider
      */
-    public function testDeveloperUpdatingUserWithoutData($mission)
+    public function testDeveloperUpdatingUserWithoutData()
     {
+        $mission = $this->availableMissionProvider();
+
         $this->json('PUT', route('missions.update', ['mission_id' => $mission->id]))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors([

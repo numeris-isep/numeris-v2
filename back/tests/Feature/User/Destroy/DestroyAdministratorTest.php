@@ -14,13 +14,11 @@ class DestroyAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider activeUserProvider
      */
     public function testAdministratorDeletingUser()
     {
-        $user_id = 1;
-        $user = User::find($user_id);
+        $user = $this->activeUserProvider();
+
         $address = $user->address;
         $preference = $user->preference;
 
@@ -28,7 +26,7 @@ class DestroyAdministratorTest extends TestCaseWithAuth
         $this->assertDatabaseHas('addresses', $address->toArray());
         $this->assertNotNull(Preference::find($preference->id));
 
-        $this->json('DELETE', route('users.destroy', ['user_id' => $user_id]))
+        $this->json('DELETE', route('users.destroy', ['user_id' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
 
         $this->assertDatabaseMissing('users', $user->toArray());

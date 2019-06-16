@@ -16,8 +16,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorChangingDeveloperToDeveloper()
     {
-        $user_id = 2; // developer user
-        $user = User::find($user_id);
+        $developer = $this->activeDeveloperProvider();
 
         $role_id = 1; // developer
         $role_name = Role::find($role_id)->name;
@@ -26,15 +25,13 @@ class StoreAdministratorTest extends TestCaseWithAuth
             'role_id' => $role_id,
         ];
 
-        $this->assertTrue($user->role()->name == $role_name);
+        $this->assertTrue($developer->role()->name == $role_name);
 
-        $this->json('POST', route('users.roles.store', ['user_id' => $user_id]), $data)
+        $this->json('POST', route('users.roles.store', ['user_id' => $developer->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson([
-                'error' => trans('api.403'),
-            ]);
+            ->assertJson(['errors' => [trans('api.403')]]);
 
-        $this->assertTrue($user->role()->name == $role_name);
+        $this->assertTrue($developer->role()->name == $role_name);
     }
 
     /**
@@ -42,8 +39,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorChangingDeveloperToAdministrator()
     {
-        $user_id = 2; // developer user
-        $user = User::find($user_id);
+        $developer = $this->activeDeveloperProvider();
 
         $role_id = 2; // administrator
         $role_name = Role::find($role_id)->name;
@@ -52,15 +48,13 @@ class StoreAdministratorTest extends TestCaseWithAuth
             'role_id' => $role_id,
         ];
 
-        $this->assertFalse($user->role()->name == $role_name);
+        $this->assertFalse($developer->role()->name == $role_name);
 
-        $this->json('POST', route('users.roles.store', ['user_id' => $user_id]), $data)
+        $this->json('POST', route('users.roles.store', ['user_id' => $developer->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson([
-                'error' => trans('api.403'),
-            ]);
+            ->assertJson(['errors' => [trans('api.403')]]);
 
-        $this->assertFalse($user->role()->name == $role_name);
+        $this->assertFalse($developer->role()->name == $role_name);
     }
 
     /**
@@ -68,8 +62,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorChangingDeveloperToStaff()
     {
-        $user_id = 2; // developer user
-        $user = User::find($user_id);
+        $developer = $this->activeDeveloperProvider();
 
         $role_id = 3; // staff
         $role_name = Role::find($role_id)->name;
@@ -78,15 +71,13 @@ class StoreAdministratorTest extends TestCaseWithAuth
             'role_id' => $role_id,
         ];
 
-        $this->assertFalse($user->role()->name == $role_name);
+        $this->assertFalse($developer->role()->name == $role_name);
 
-        $this->json('POST', route('users.roles.store', ['user_id' => $user_id]), $data)
+        $this->json('POST', route('users.roles.store', ['user_id' => $developer->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson([
-                'error' => trans('api.403'),
-            ]);
+            ->assertJson(['errors' => [trans('api.403')]]);
 
-        $this->assertFalse($user->role()->name == $role_name);
+        $this->assertFalse($developer->role()->name == $role_name);
     }
 
     /**
@@ -94,8 +85,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorChangingDeveloperToStudent()
     {
-        $user_id = 2; // developer user
-        $user = User::find($user_id);
+        $developer = $this->activeDeveloperProvider();
 
         $role_id = 4; // student
         $role_name = Role::find($role_id)->name;
@@ -104,15 +94,13 @@ class StoreAdministratorTest extends TestCaseWithAuth
             'role_id' => $role_id,
         ];
 
-        $this->assertFalse($user->role()->name == $role_name);
+        $this->assertFalse($developer->role()->name == $role_name);
 
-        $this->json('POST', route('users.roles.store', ['user_id' => $user_id]), $data)
+        $this->json('POST', route('users.roles.store', ['user_id' => $developer->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson([
-                'error' => trans('api.403'),
-            ]);
+            ->assertJson(['errors' => [trans('api.403')]]);
 
-        $this->assertFalse($user->role()->name == $role_name);
+        $this->assertFalse($developer->role()->name == $role_name);
     }
 
     /**
@@ -120,8 +108,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorChangingAdministratorToDeveloper()
     {
-        $user_id = 4; // administrator user
-        $user = User::find($user_id);
+        $administrator = $this->activeAdministratorProvider();
 
         $role_id = 1; // developer
         $role_name = Role::find($role_id)->name;
@@ -130,15 +117,13 @@ class StoreAdministratorTest extends TestCaseWithAuth
             'role_id' => $role_id,
         ];
 
-        $this->assertFalse($user->role()->name == $role_name);
+        $this->assertFalse($administrator->role()->name == $role_name);
 
-        $this->json('POST', route('users.roles.store', ['user_id' => $user_id]), $data)
+        $this->json('POST', route('users.roles.store', ['user_id' => $administrator->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson([
-                'error' => trans('api.403'),
-            ]);
+            ->assertJson(['errors' => [trans('api.403')]]);
 
-        $this->assertFalse($user->role()->name == $role_name);
+        $this->assertFalse($administrator->role()->name == $role_name);
     }
 
     /**
@@ -146,8 +131,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorChangingAdministratorToAdministrator()
     {
-        $user_id = 4; // administrator user
-        $user = User::find($user_id);
+        $administrator = $this->activeAdministratorProvider();
 
         $role_id = 2; // administrator
         $role_name = Role::find($role_id)->name;
@@ -156,13 +140,13 @@ class StoreAdministratorTest extends TestCaseWithAuth
             'role_id' => $role_id,
         ];
 
-        $this->assertTrue($user->role()->name == $role_name);
+        $this->assertTrue($administrator->role()->name == $role_name);
 
-        $this->json('POST', route('users.roles.store', ['user_id' => $user_id]), $data)
+        $this->json('POST', route('users.roles.store', ['user_id' => $administrator->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 
-        $this->assertTrue($user->role()->name == $role_name);
+        $this->assertTrue($administrator->role()->name == $role_name);
     }
 
     /**
@@ -170,8 +154,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorChangingAdministratorToStaff()
     {
-        $user_id = 4; // administrator user
-        $user = User::find($user_id);
+        $administrator = $this->activeAdministratorProvider();
 
         $role_id = 3; // staff
         $role_name = Role::find($role_id)->name;
@@ -180,16 +163,16 @@ class StoreAdministratorTest extends TestCaseWithAuth
             'role_id' => $role_id,
         ];
 
-        $this->assertFalse($user->role()->name == $role_name);
+        $this->assertFalse($administrator->role()->name == $role_name);
 
-        $this->json('POST', route('users.roles.store', ['user_id' => $user_id]), $data)
+        $this->json('POST', route('users.roles.store', ['user_id' => $administrator->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJson([
                 'id'    => $role_id,
                 'name'  => $role_name,
             ]);
 
-        $this->assertTrue($user->role()->name == $role_name);
+        $this->assertTrue($administrator->role()->name == $role_name);
     }
 
     /**
@@ -197,8 +180,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorChangingAdministratorToStudent()
     {
-        $user_id = 4; // administrator user
-        $user = User::find($user_id);
+        $administrator = $this->activeAdministratorProvider();
 
         $role_id = 4; // student
         $role_name = Role::find($role_id)->name;
@@ -207,16 +189,16 @@ class StoreAdministratorTest extends TestCaseWithAuth
             'role_id' => $role_id,
         ];
 
-        $this->assertFalse($user->role()->name == $role_name);
+        $this->assertFalse($administrator->role()->name == $role_name);
 
-        $this->json('POST', route('users.roles.store', ['user_id' => $user_id]), $data)
+        $this->json('POST', route('users.roles.store', ['user_id' => $administrator->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJson([
                 'id'    => $role_id,
                 'name'  => $role_name,
             ]);
 
-        $this->assertTrue($user->role()->name == $role_name);
+        $this->assertTrue($administrator->role()->name == $role_name);
     }
 
     /**
@@ -224,8 +206,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorChangingStaffToDeveloper()
     {
-        $user_id = 6; // staff user
-        $user = User::find($user_id);
+        $staff = $this->activeStaffProvider();
 
         $role_id = 1; // developer
         $role_name = Role::find($role_id)->name;
@@ -234,15 +215,13 @@ class StoreAdministratorTest extends TestCaseWithAuth
             'role_id' => $role_id,
         ];
 
-        $this->assertFalse($user->role()->name == $role_name);
+        $this->assertFalse($staff->role()->name == $role_name);
 
-        $this->json('POST', route('users.roles.store', ['user_id' => $user_id]), $data)
+        $this->json('POST', route('users.roles.store', ['user_id' => $staff->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson([
-                'error' => trans('api.403'),
-            ]);
+            ->assertJson(['errors' => [trans('api.403')]]);
 
-        $this->assertFalse($user->role()->name == $role_name);
+        $this->assertFalse($staff->role()->name == $role_name);
     }
 
     /**
@@ -250,8 +229,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorChangingStaffToAdministrator()
     {
-        $user_id = 6; // staff user
-        $user = User::find($user_id);
+        $staff = $this->activeStaffProvider();
 
         $role_id = 2; // administrator
         $role_name = Role::find($role_id)->name;
@@ -260,16 +238,16 @@ class StoreAdministratorTest extends TestCaseWithAuth
             'role_id' => $role_id,
         ];
 
-        $this->assertFalse($user->role()->name == $role_name);
+        $this->assertFalse($staff->role()->name == $role_name);
 
-        $this->json('POST', route('users.roles.store', ['user_id' => $user_id]), $data)
+        $this->json('POST', route('users.roles.store', ['user_id' => $staff->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJson([
                 'id'    => $role_id,
                 'name'  => $role_name,
             ]);
 
-        $this->assertTrue($user->role()->name == $role_name);
+        $this->assertTrue($staff->role()->name == $role_name);
     }
 
     /**
@@ -277,8 +255,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorChangingStaffToStaff()
     {
-        $user_id = 6; // staff user
-        $user = User::find($user_id);
+        $staff = $this->activeStaffProvider();
 
         $role_id = 3; // staff
         $role_name = Role::find($role_id)->name;
@@ -287,13 +264,13 @@ class StoreAdministratorTest extends TestCaseWithAuth
             'role_id' => $role_id,
         ];
 
-        $this->assertTrue($user->role()->name == $role_name);
+        $this->assertTrue($staff->role()->name == $role_name);
 
-        $this->json('POST', route('users.roles.store', ['user_id' => $user_id]), $data)
+        $this->json('POST', route('users.roles.store', ['user_id' => $staff->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 
-        $this->assertTrue($user->role()->name == $role_name);
+        $this->assertTrue($staff->role()->name == $role_name);
     }
 
     /**
@@ -301,8 +278,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorChangingStaffToStudent()
     {
-        $user_id = 6; // staff user
-        $user = User::find($user_id);
+        $staff = $this->activeStaffProvider();
 
         $role_id = 4; // student
         $role_name = Role::find($role_id)->name;
@@ -311,16 +287,16 @@ class StoreAdministratorTest extends TestCaseWithAuth
             'role_id' => $role_id,
         ];
 
-        $this->assertFalse($user->role()->name == $role_name);
+        $this->assertFalse($staff->role()->name == $role_name);
 
-        $this->json('POST', route('users.roles.store', ['user_id' => $user_id]), $data)
+        $this->json('POST', route('users.roles.store', ['user_id' => $staff->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJson([
                 'id'    => $role_id,
                 'name'  => $role_name,
             ]);
 
-        $this->assertTrue($user->role()->name == $role_name);
+        $this->assertTrue($staff->role()->name == $role_name);
     }
 
     /**
@@ -328,8 +304,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorChangingStudentToDeveloper()
     {
-        $user_id = 8; // student user
-        $user = User::find($user_id);
+        $student = $this->activeStudentProvider();
 
         $role_id = 1; // developer
         $role_name = Role::find($role_id)->name;
@@ -338,15 +313,13 @@ class StoreAdministratorTest extends TestCaseWithAuth
             'role_id' => $role_id,
         ];
 
-        $this->assertFalse($user->role()->name == $role_name);
+        $this->assertFalse($student->role()->name == $role_name);
 
-        $this->json('POST', route('users.roles.store', ['user_id' => $user_id]), $data)
+        $this->json('POST', route('users.roles.store', ['user_id' => $student->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson([
-                'error' => trans('api.403'),
-            ]);
+            ->assertJson(['errors' => [trans('api.403')]]);
 
-        $this->assertFalse($user->role()->name == $role_name);
+        $this->assertFalse($student->role()->name == $role_name);
     }
 
     /**
@@ -354,8 +327,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorChangingStudentToAdministrator()
     {
-        $user_id = 8; // student user
-        $user = User::find($user_id);
+        $student = $this->activeStudentProvider();
 
         $role_id = 2; // administrator
         $role_name = Role::find($role_id)->name;
@@ -364,16 +336,16 @@ class StoreAdministratorTest extends TestCaseWithAuth
             'role_id' => $role_id,
         ];
 
-        $this->assertFalse($user->role()->name == $role_name);
+        $this->assertFalse($student->role()->name == $role_name);
 
-        $this->json('POST', route('users.roles.store', ['user_id' => $user_id]), $data)
+        $this->json('POST', route('users.roles.store', ['user_id' => $student->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJson([
                 'id'    => $role_id,
                 'name'  => $role_name,
             ]);
 
-        $this->assertTrue($user->role()->name == $role_name);
+        $this->assertTrue($student->role()->name == $role_name);
     }
 
     /**
@@ -381,8 +353,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorChangingStudentToStaff()
     {
-        $user_id = 8; // student user
-        $user = User::find($user_id);
+        $student = $this->activeStudentProvider();
 
         $role_id = 3; // staff
         $role_name = Role::find($role_id)->name;
@@ -391,16 +362,16 @@ class StoreAdministratorTest extends TestCaseWithAuth
             'role_id' => $role_id,
         ];
 
-        $this->assertFalse($user->role()->name == $role_name);
+        $this->assertFalse($student->role()->name == $role_name);
 
-        $this->json('POST', route('users.roles.store', ['user_id' => $user_id]), $data)
+        $this->json('POST', route('users.roles.store', ['user_id' => $student->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJson([
                 'id'    => $role_id,
                 'name'  => $role_name,
             ]);
 
-        $this->assertTrue($user->role()->name == $role_name);
+        $this->assertTrue($student->role()->name == $role_name);
     }
 
     /**
@@ -408,8 +379,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorChangingStudentToStudent()
     {
-        $user_id = 8; // student user
-        $user = User::find($user_id);
+        $student = $this->activeStudentProvider();
 
         $role_id = 4; // student
         $role_name = Role::find($role_id)->name;
@@ -418,12 +388,12 @@ class StoreAdministratorTest extends TestCaseWithAuth
             'role_id' => $role_id,
         ];
 
-        $this->assertTrue($user->role()->name == $role_name);
+        $this->assertTrue($student->role()->name == $role_name);
 
-        $this->json('POST', route('users.roles.store', ['user_id' => $user_id]), $data)
+        $this->json('POST', route('users.roles.store', ['user_id' => $student->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 
-        $this->assertTrue($user->role()->name == $role_name);
+        $this->assertTrue($student->role()->name == $role_name);
     }
 }

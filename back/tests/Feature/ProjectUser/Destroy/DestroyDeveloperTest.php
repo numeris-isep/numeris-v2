@@ -12,11 +12,13 @@ class DestroyDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider privateProjectAndUserInProjectProvider
      */
-    public function testDeveloperRemovingUserFromProject($project, $user)
+    public function testDeveloperRemovingUserFromProject()
     {
+        $test_data = $this->privateProjectAndUserInProjectProvider();
+        $project = $test_data['project'];
+        $user = $test_data['user'];
+
         $data = [
             'project_id'    => $project->id,
             'user_id'       => $user->id,
@@ -32,11 +34,13 @@ class DestroyDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider publicProjectAndUserProvider
      */
-    public function testDeveloperRemovingUserFromPublicProject($project, $user)
+    public function testDeveloperRemovingUserFromPublicProject()
     {
+        $test_data = $this->publicProjectAndUserProvider();
+        $project = $test_data['project'];
+        $user = $test_data['user'];
+
         $data = [
             'project_id'    => $project->id,
             'user_id'       => $user->id,
@@ -53,11 +57,13 @@ class DestroyDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider privateProjectAndUserProvider
      */
-    public function testDeveloperRemovingUserNotInProjectFromProject($project, $user)
+    public function testDeveloperRemovingUserNotInProjectFromProject()
     {
+        $test_data = $this->privateProjectAndUserProvider();
+        $project = $test_data['project'];
+        $user = $test_data['user'];
+
         $data = [
             'project_id'    => $project->id,
             'user_id'       => $user->id,

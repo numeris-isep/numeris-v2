@@ -13,10 +13,8 @@ use App\Models\User;
 
 trait ConventionProviderTrait
 {
-    public function conventionProvider()
+    public function conventionProvider(): Convention
     {
-        $this->refreshApplication();
-
         $client = factory(Client::class)->create();
         $convention = factory(Convention::class)->create([
             'client_id' => $client->id
@@ -28,13 +26,11 @@ trait ConventionProviderTrait
             'convention_id' => $convention->id
         ]);
 
-        return [[$convention]];
+        return $convention;
     }
 
-    public function conventionAndProjectProvider()
+    public function conventionAndProjectProvider(): array
     {
-        $this->refreshApplication();
-
         $client = factory(Client::class)->create();
         $convention = factory(Convention::class)->create(['client_id' => $client->id]);
 
@@ -46,6 +42,9 @@ trait ConventionProviderTrait
             'convention_id' => $convention->id,
         ]);
 
-        return [[$convention, $project]];
+        return [
+            'convention'    => $convention,
+            'project'       => $project,
+        ];
     }
 }

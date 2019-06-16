@@ -12,11 +12,11 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider conventionProvider
      */
-    public function testDeveloperCreatingProject($convention)
+    public function testDeveloperCreatingProject()
     {
+        $convention = $this->conventionProvider();
+
         $data = [
             'client_id'     => $convention->client->id,
             'convention_id' => $convention->id,
@@ -47,11 +47,12 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider clientAndProjectAndMissionAndConventionWithBillsProvider
      */
-    public function testDeveloperCreatingProjectWithAlreadyUsedData($client, $project, $mission, $convention)
+    public function testDeveloperCreatingProjectWithAlreadyUsedData()
     {
+        $test_data = $this->clientAndProjectAndMissionAndConventionWithBillsProvider();
+        $project = $test_data['project'];
+
         $data = [
             'client_id'     => $project->client->id,
             'convention_id' => $project->convention->id,

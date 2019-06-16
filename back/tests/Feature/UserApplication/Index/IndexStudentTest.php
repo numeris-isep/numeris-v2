@@ -36,11 +36,11 @@ class IndexStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
-     *
-     * @dataProvider activeStudentProvider
      */
-    public function testStudentAccessingAnotherUserApplicationIndex($user)
+    public function testStudentAccessingAnotherUserApplicationIndex()
     {
+        $user = $this->activeStudentProvider();
+
         $this->json('GET', route('users.applications.index', ['user_id' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);

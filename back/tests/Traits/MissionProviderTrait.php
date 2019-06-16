@@ -9,27 +9,21 @@ use App\Models\User;
 
 trait MissionProviderTrait
 {
-    public function availableMissionProvider()
+    public function availableMissionProvider(): Mission
     {
-        $this->refreshApplication();
-
-        return [[factory(Mission::class)->state('available')->create()]];
+        return factory(Mission::class)->state('available')->create();
     }
 
-    public function availableMissionAndUserProvider()
+    public function availableMissionAndUserProvider(): array
     {
-        $this->refreshApplication();
-
-        return [[
-            factory(Mission::class)->state('available')->create(),
-            factory(User::class)->create(),
-        ]];
+        return [
+            'mission'   => factory(Mission::class)->state('available')->create(),
+            'user'      => factory(User::class)->create(),
+        ];
     }
 
-    public function availableMissionAndUserWhoAlreadyAppliedProviderProvider()
+    public function availableMissionAndUserWhoAlreadyAppliedProviderProvider(): array
     {
-        $this->refreshApplication();
-
         $mission = factory(Mission::class)->state('available')->create();
         $user = factory(User::class)->create();
 
@@ -38,52 +32,47 @@ trait MissionProviderTrait
             'user_id'       => $user->id,
         ]);
 
-        return [[$mission, $user]];
+        return [
+            'mission'   => $mission,
+            'user'      => $user,
+        ];
     }
 
-    public function lockedMissionAndUserProvider()
+    public function lockedMissionAndUserProvider(): array
     {
-        $this->refreshApplication();
-
-        return [[
-            factory(Mission::class)->state('locked')->create(),
-            factory(User::class)->state('active')->create(),
-        ]];
+        return [
+            'mission'   => factory(Mission::class)->state('locked')->create(),
+            'user'      => factory(User::class)->state('active')->create(),
+        ];
     }
 
-    public function pastMissionAndUserProvider()
+    public function pastMissionAndUserProvider(): array
     {
-        $this->refreshApplication();
-
-        return [[
-            factory(Mission::class)->state('past')->create(),
-            factory(User::class)->state('active')->create(),
-        ]];
+        return [
+            'mission'   => factory(Mission::class)->state('past')->create(),
+            'user'      => factory(User::class)->state('active')->create(),
+        ];
     }
 
-    public function availablePrivateMissionAndUserProvider()
+    public function availablePrivateMissionAndUserProvider(): array
     {
-        $this->refreshApplication();
-
         $project = factory(Project::class)->states(['private', Project::HIRING])->create();
 
-        return [[
-            factory(Mission::class)->create(['project_id' => $project->id]),
-            factory(User::class)->state('active')->create(),
-        ]];
+        return [
+            'mission'   => factory(Mission::class)->create(['project_id' => $project->id]),
+            'user'      => factory(User::class)->state('active')->create(),
+        ];
     }
 
-    public function availablePrivateMissionAndUserInPrivateProjectProvider()
+    public function availablePrivateMissionAndUserInPrivateProjectProvider(): array
     {
-        $this->refreshApplication();
-
         $project = factory(Project::class)->states(['private', Project::HIRING])->create();
         $user = factory(User::class)->state('active')->create();
         $project->addUser($user);
 
-        return [[
-            factory(Mission::class)->create(['project_id' => $project->id]),
-            $user,
-        ]];
+        return [
+            'mission'   => factory(Mission::class)->create(['project_id' => $project->id]),
+            'user'      => $user,
+        ];
     }
 }

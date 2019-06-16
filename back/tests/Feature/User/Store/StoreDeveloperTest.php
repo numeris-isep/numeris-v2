@@ -11,7 +11,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
     protected $username = Role::DEVELOPER;
 
     /**
-     * @group d
+     * @group developer
      */
     public function testDeveloperCreatingUserWithAllFields()
     {

@@ -13,11 +13,11 @@ class DestroyDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider activeUserProvider
      */
-    public function testDeveloperDeletingUser($user)
+    public function testDeveloperDeletingUser()
     {
+        $user = $this->activeUserProvider();
+
         $address = $user->address;
         $preference = $user->preference;
 

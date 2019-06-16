@@ -12,11 +12,13 @@ class UpdateAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider conventionAndProjectProvider
      */
-    public function testAdministratorUpdatingProject($convention, $project)
+    public function testAdministratorUpdatingProject()
     {
+        $test_data = $this->conventionAndProjectProvider();
+        $convention = $test_data['convention'];
+        $project = $test_data['project'];
+
         $data = [
             'client_id'     => $convention->client->id,
             'convention_id' => $convention->id,

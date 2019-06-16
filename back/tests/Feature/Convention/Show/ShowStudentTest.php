@@ -12,11 +12,11 @@ class ShowStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
-     *
-     * @dataProvider conventionProvider
      */
-    public function testStudentAccessingConventionShow($convention)
+    public function testStudentAccessingConventionShow()
     {
+        $convention = $this->conventionProvider();
+
         $this->json('GET', route('conventions.show', ['convention_id' => $convention->id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);

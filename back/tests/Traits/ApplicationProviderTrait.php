@@ -8,45 +8,31 @@ use App\Models\User;
 
 trait ApplicationProviderTrait
 {
-    public function ownApplicationProvider()
+    public function ownApplicationProvider(): Application
     {
-        $this->refreshApplication();
-
         $user = User::where('username', $this->username)->first();
 
-        return [[
-            factory(Application::class)->create(
-                ['user_id' => $user->id]
-            )
-        ]];
+        return factory(Application::class)->create(['user_id' => $user->id]);
     }
 
-    public function otherUserApplicationProvider()
+    public function otherUserApplicationProvider(): Application
     {
-        $this->refreshApplication();
-
         $user = User::where('username', $this->username)->first();
 
-        return [[
-            factory(Application::class)->create([
-                'user_id' => User::where('id', '!=', $user->id)
-                    ->get()->random(1)->get(0)->id
-            ])
-        ]];
+        return factory(Application::class)->create([
+            'user_id' => User::where('id', '!=', $user->id)
+                ->get()->random(1)->get(0)->id
+        ]);
     }
 
-    public function applicationWithAvailableMissionProvider()
+    public function applicationWithAvailableMissionProvider(): Application
     {
-        $this->refreshApplication();
-
         $user = User::where('username', $this->username)->first();
         $mission = factory(Mission::class)->state('available')->create();
 
-        return [[
-            factory(Application::class)->create([
-                'user_id'       => $user->id,
-                'mission_id'    => $mission->id,
-            ])
-        ]];
+        return factory(Application::class)->create([
+            'user_id'       => $user->id,
+            'mission_id'    => $mission->id,
+        ]);
     }
 }

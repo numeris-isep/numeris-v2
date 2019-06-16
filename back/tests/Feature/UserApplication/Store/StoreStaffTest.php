@@ -12,11 +12,10 @@ class StoreStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider availableMissionProvider
      */
-    public function testStaffCreatingApplication($mission)
+    public function testStaffCreatingApplication()
     {
+        $mission = $this->availableMissionProvider();
         $user = auth()->user();
 
         $data = ['mission_id' => $mission->id];

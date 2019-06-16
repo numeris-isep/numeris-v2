@@ -12,11 +12,11 @@ class DestroyDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider availableMissionProvider
      */
-    public function testDeveloperDeletingMissionWithoutBills($mission)
+    public function testDeveloperDeletingMissionWithoutBills()
     {
+        $mission = $this->availableMissionProvider();
+
         $address = $mission->address;
 
         $this->assertDatabaseHas('missions', $mission->toArray());
@@ -31,11 +31,11 @@ class DestroyDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider clientAndProjectAndMissionAndConventionWithBillsProvider
      */
-    public function testDeveloperDeletingMissionWithBills($client, $project, $mission)
+    public function testDeveloperDeletingMissionWithBills()
     {
+        $mission = $this->clientAndProjectAndMissionAndConventionWithBillsProvider()['mission'];
+
         $address = $mission->address;
 
         $this->assertDatabaseHas('missions', $mission->toArray());

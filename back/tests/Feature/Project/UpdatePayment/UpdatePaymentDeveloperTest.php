@@ -15,13 +15,13 @@ class UpdatePaymentDeveloperTest extends TestCaseWithAuth
      */
     public function testDeveloperUpdatingProjectPayment()
     {
-        $project_id = 1;
+        $project = $this->projectProvider();
 
         $data = [
             'money_received_at' => '2018-01-01 00:00:00'
         ];
 
-        $this->json('PATCH', route('projects.update.payment', ['project_id' => $project_id]), $data)
+        $this->json('PATCH', route('projects.update.payment', ['project_id' => $project->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',
@@ -35,5 +35,21 @@ class UpdatePaymentDeveloperTest extends TestCaseWithAuth
                 'missionsCount',
                 'usersCount',
             ]);
+    }
+
+    /**
+     * @group developer
+     */
+    public function testDeveloperUpdatingUnknownProjectPayment()
+    {
+        $project_id = 0;
+
+        $data = [
+            'money_received_at' => '2018-01-01 00:00:00'
+        ];
+
+        $this->json('PATCH', route('projects.update.payment', ['project_id' => $project_id]), $data)
+            ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
+            ->assertJson(['errors' => [trans('api.404')]]);
     }
 }

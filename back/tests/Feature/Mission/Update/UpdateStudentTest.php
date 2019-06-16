@@ -12,11 +12,11 @@ class UpdateStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
-     *
-     * @dataProvider availableMissionProvider
      */
-    public function testStudentUpdatingMission($mission)
+    public function testStudentUpdatingMission()
     {
+        $mission = $this->availableMissionProvider();
+
         $mission_data = [
             'project_id'    => 1,
             'title'         => 'Mission de test',

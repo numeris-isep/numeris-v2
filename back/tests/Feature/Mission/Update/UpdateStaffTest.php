@@ -12,11 +12,11 @@ class UpdateStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider availableMissionProvider
      */
-    public function testStaffUpdatingMission($mission)
+    public function testStaffUpdatingMission()
     {
+        $mission = $this->availableMissionProvider();
+
         $mission_data = [
             'project_id'    => 1,
             'title'         => 'Mission de test',

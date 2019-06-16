@@ -15,9 +15,9 @@ class IndexDeveloperTest extends TestCaseWithAuth
      */
     public function testDeveloperAccessingRoleIndex()
     {
-        $user_id = 1;
+        $user = $this->activeStudentProvider();
 
-        $this->json('GET', route('users.roles.index', ['user_id' => $user_id]))
+        $this->json('GET', route('users.roles.index', ['user_id' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([[
                 'id',

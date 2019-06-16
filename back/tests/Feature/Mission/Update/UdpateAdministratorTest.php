@@ -12,11 +12,11 @@ class UdpateAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider availableMissionProvider
      */
-    public function testAdministratorUpdatingMission($mission)
+    public function testAdministratorUpdatingMission()
     {
+        $mission = $this->availableMissionProvider();
+
         $mission_data = [
             'project_id'    => 1,
             'title'         => 'Mission de test',

@@ -12,11 +12,11 @@ class ShowStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider clientWithProjectsWithMissionsProvider
      */
-    public function testStaffAccessingClientShow($client)
+    public function testStaffAccessingClientShow()
     {
+        $client = $this->clientWithProjectsWithMissionsProvider();
+
         $this->json('GET', route('clients.show', ['client_id' => $client->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([

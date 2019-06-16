@@ -15,9 +15,9 @@ class IndexStudentTest extends TestCaseWithAuth
      */
     public function testStudentAccessingClientProjectIndex()
     {
-        $client_id = 1;
+        $client = $this->clientWithProjectsWithMissionsProvider();
 
-        $this->json('GET', route('clients.projects.index', ['client_id' => $client_id]))
+        $this->json('GET', route('clients.projects.index', ['client_id' => $client->id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
     }

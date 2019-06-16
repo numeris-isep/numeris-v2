@@ -14,11 +14,10 @@ class DestroyDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider clientWithProjectsWithMissionsProvider
      */
-    public function testDeveloperDeletingClientWithoutBills($client)
+    public function testDeveloperDeletingClientWithoutBills()
     {
+        $client = $this->clientWithProjectsWithMissionsProvider();
         $address = $client->address;
         $conventions = $client->conventions;
         $mission_project_id = $client->missions->first()->project_id;
@@ -41,11 +40,15 @@ class DestroyDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider clientAndProjectAndMissionAndConventionWithBillsProvider
      */
-    public function testDeveloperDeletingClientWithBills($client, $project, $mission, $convention, $rate)
+    public function testDeveloperDeletingClientWithBills()
     {
+        $test_data = $this->clientAndProjectAndMissionAndConventionWithBillsProvider();
+        $client = $test_data['client'];
+        $project = $test_data['project'];
+        $mission = $test_data['mission'];
+        $convention = $test_data['convention'];
+        $rate = $test_data['rate'];
         $address = $client->address;
 
         $this->assertDatabaseHas('clients', $client->toArray());

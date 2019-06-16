@@ -16,13 +16,13 @@ class UpdateStepStaffTest extends TestCaseWithAuth
      */
     public function testStaffUpdatingProjectStep()
     {
-        $project_id = 1;
+        $project = $this->projectProvider();
 
         $data = [
             'step' => Project::HIRING,
         ];
 
-        $this->json('PATCH', route('projects.update.step', ['project_id' => $project_id]), $data)
+        $this->json('PATCH', route('projects.update.step', ['project_id' => $project->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',

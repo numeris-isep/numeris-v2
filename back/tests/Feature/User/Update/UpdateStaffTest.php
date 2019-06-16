@@ -12,11 +12,11 @@ class UpdateStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider activeStudentProvider
      */
-    public function testStaffUpdatingUser($user)
+    public function testStaffUpdatingUser()
     {
+        $user = $this->activeStudentProvider();
+
         $user_data = $db_data = [
             'email'                     => 'test@numeris-isep.fr',
             'username'                  => 'test',

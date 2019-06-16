@@ -57,11 +57,11 @@ class UpdateProfileAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider activeDeveloperProvider
      */
-    public function testAdministratorUpdatingDeveloperProfile($developer)
+    public function testAdministratorUpdatingDeveloperProfile()
     {
+        $developer = $this->activeDeveloperProvider();
+
         $user_data = [
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',
@@ -92,11 +92,11 @@ class UpdateProfileAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider activeAdministratorProvider
      */
-    public function testAdministratorUpdatingAdministratorProfile($administrator)
+    public function testAdministratorUpdatingAdministratorProfile()
     {
+        $administrator = $this->activeAdministratorProvider();
+
         $user_data = [
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',
@@ -127,11 +127,11 @@ class UpdateProfileAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider activeStaffProvider
      */
-    public function testAdministratorUpdatingStaffProfile($staff)
+    public function testAdministratorUpdatingStaffProfile()
     {
+        $staff = $this->activeStaffProvider();
+
         $user_data = [
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',
@@ -172,11 +172,11 @@ class UpdateProfileAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider activeStudentProvider
      */
-    public function testAdministratorUpdatingStudentProfile($student)
+    public function testAdministratorUpdatingStudentProfile()
     {
+        $student = $this->activeStudentProvider();
+
         $user_data = [
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',

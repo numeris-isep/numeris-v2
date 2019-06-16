@@ -12,11 +12,11 @@ class DestroyStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider availableMissionProvider
      */
-    public function testStaffDeletingMissionWithoutBills($mission)
+    public function testStaffDeletingMissionWithoutBills()
     {
+        $mission = $this->availableMissionProvider();
+
         $address = $mission->address;
 
         $this->assertDatabaseHas('missions', $mission->toArray());

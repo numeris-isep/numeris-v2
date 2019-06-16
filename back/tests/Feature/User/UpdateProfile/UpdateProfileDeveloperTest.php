@@ -60,9 +60,9 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
      */
     public function testDeveloperUpdatingUserProfileWithoutData()
     {
-        $user_id = 1;
+        $user = $this->activeUserProvider();
 
-        $this->json('PATCH', route('users.update.profile', ['user' => $user_id]))
+        $this->json('PATCH', route('users.update.profile', ['user' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors([
                 'phone',
@@ -77,11 +77,11 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider activeDeveloperProvider
      */
-    public function testDeveloperUpdatingDeveloperProfile($developer)
+    public function testDeveloperUpdatingDeveloperProfile()
     {
+        $developer = $this->activeDeveloperProvider();
+
         $user_data = [
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',
@@ -122,11 +122,11 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider activeAdministratorProvider
      */
-    public function testDeveloperUpdatingAdministratorProfile($administrator)
+    public function testDeveloperUpdatingAdministratorProfile()
     {
+        $administrator = $this->activeAdministratorProvider();
+
         $user_data = [
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',
@@ -167,11 +167,11 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider activeStaffProvider
      */
-    public function testDeveloperUpdatingStaffProfile($staff)
+    public function testDeveloperUpdatingStaffProfile()
     {
+        $staff = $this->activeStaffProvider();
+
         $user_data = [
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',
@@ -212,11 +212,11 @@ class UpdateProfileDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider activeStudentProvider
      */
-    public function testDeveloperUpdatingStudentProfile($student)
+    public function testDeveloperUpdatingStudentProfile()
     {
+        $student = $this->activeStudentProvider();
+
         $user_data = [
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',

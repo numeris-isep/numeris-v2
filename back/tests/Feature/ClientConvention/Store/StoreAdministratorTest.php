@@ -12,11 +12,11 @@ class StoreAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider clientProvider
      */
-    public function testAdministratorCreatingConvention($client)
+    public function testAdministratorCreatingConvention()
     {
+        $client = $this->clientProvider();
+
         $convention = ['name'  => 'Convention de test'];
         $rate1 = [
             'name'          => 'Heures de test',

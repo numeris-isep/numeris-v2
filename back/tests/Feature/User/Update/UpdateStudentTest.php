@@ -12,11 +12,11 @@ class UpdateStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
-     *
-     * @dataProvider activeStudentProvider
      */
-    public function testStudentUpdatingUser($user)
+    public function testStudentUpdatingUser()
     {
+        $user = $this->activeStudentProvider();
+
         $user_data = $db_data = [
             'email'                     => 'test@numeris-isep.fr',
             'username'                  => 'test',

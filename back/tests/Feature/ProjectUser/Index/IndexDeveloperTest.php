@@ -12,11 +12,11 @@ class IndexDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider privateProjectAndUserInProjectProvider
      */
-    public function testDeveloperAccessingProjectUserIndex($project, $user)
+    public function testDeveloperAccessingProjectUserIndex()
     {
+        $project = $this->privateProjectAndUserInProjectProvider()['project'];
+
         $this->json('GET', route('projects.users.index', ['project_id' => $project->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([[
@@ -48,11 +48,11 @@ class IndexDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider privateProjectAndUserInProjectProvider
      */
-    public function testDeveloperAccessingPaginatedProjectUserIndex($project, $user)
+    public function testDeveloperAccessingPaginatedProjectUserIndex()
     {
+        $project = $this->privateProjectAndUserInProjectProvider()['project'];
+
         $this->json('GET', route('projects.users.index', ['project_id' => $project->id, 'page' => 1]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
@@ -87,11 +87,11 @@ class IndexDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider projectProvider
      */
-    public function testDeveloperAccessingPublicProjectUserIndex($project)
+    public function testDeveloperAccessingPublicProjectUserIndex()
     {
+        $project = $this->projectProvider();
+
         $this->json('GET', route('projects.users.index', ['project_id' => $project->id]))
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
             ->assertJson(['errors' => [trans('api.404')]]);

@@ -12,11 +12,10 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider availableMissionProvider
      */
-    public function testDeveloperCreatingApplication($mission)
+    public function testDeveloperCreatingApplication()
     {
+        $mission = $this->availableMissionProvider();
         $user = auth()->user();
 
         $data = ['mission_id' => $mission->id];
@@ -74,11 +73,10 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider applicationWithAvailableMissionProvider
      */
-    public function testDeveloperApplyingToAlreadyAppliedMission($application)
+    public function testDeveloperApplyingToAlreadyAppliedMission()
     {
+        $application = $this->applicationWithAvailableMissionProvider();
         $user = auth()->user();
 
         $data = ['mission_id' => $application->mission->id];
@@ -93,11 +91,10 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider lockedMissionAndUserProvider
      */
-    public function testDeveloperApplyingToLockedMission($mission)
+    public function testDeveloperApplyingToLockedMission()
     {
+        $mission = $this->lockedMissionAndUserProvider()['mission'];
         $user = auth()->user();
 
         $data = ['mission_id' => $mission->id];
@@ -114,11 +111,10 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider pastMissionAndUserProvider
      */
-    public function testDeveloperApplyingToPastMission($mission)
+    public function testDeveloperApplyingToPastMission()
     {
+        $mission = $this->pastMissionAndUserProvider()['mission'];
         $user = auth()->user();
 
         $data = ['mission_id' => $mission->id];

@@ -12,11 +12,11 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider clientProvider
      */
-    public function testDeveloperCreatingConvention($client)
+    public function testDeveloperCreatingConvention()
     {
+        $client = $this->clientProvider();
+
         $convention = ['name'  => 'Convention de test'];
         $rate1 = [
             'name'          => 'Heures de test',
@@ -103,11 +103,11 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider clientProvider
      */
-    public function testDeveloperCreatingConventionWithoutData($client)
+    public function testDeveloperCreatingConventionWithoutData()
     {
+        $client = $this->clientProvider();
+
         $this->json('POST', route('clients.conventions.store', ['client_id' => $client->id]))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors(['name', 'rates']);
@@ -115,11 +115,11 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider clientProvider
      */
-    public function testDeveloperCreatingConventionWithMissingFields($client)
+    public function testDeveloperCreatingConventionWithMissingFields()
     {
+        $client = $this->clientProvider();
+
         $convention = ['name'  => 'Convention de test'];
         $rate1 = [];
         $rate2 = [];
@@ -140,11 +140,11 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider clientProvider
      */
-    public function testDeveloperCreatingConventionWithWrongValues($client)
+    public function testDeveloperCreatingConventionWithWrongValues()
     {
+        $client = $this->clientProvider();
+
         $convention = ['name'  => 'Convention de test'];
         $rate1 = [
             'name'          => 'Heures de test',
@@ -182,11 +182,11 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider clientProvider
      */
-    public function testDeveloperCreatingConventionWithFlatRatesWithoutHours($client)
+    public function testDeveloperCreatingConventionWithFlatRatesWithoutHours()
     {
+        $client = $this->clientProvider();
+
         $convention = ['name'  => 'Convention de test'];
         $rate1 = [
             'name'          => 'Heures de test',

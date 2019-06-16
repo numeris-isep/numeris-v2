@@ -13,32 +13,22 @@ use App\Models\User;
 
 trait ProjectProviderTrait
 {
-    public function projectProvider()
+    public function projectProvider(): Project
     {
-        $this->refreshApplication();
-
-        return [[
-            factory(Project::class)->state(Project::HIRING)->create([
-                'start_at' => now()->addMonth(),
-            ])
-        ]];
+        return factory(Project::class)->state(Project::HIRING)->create([
+            'start_at' => now()->addMonth(),
+        ]);
     }
 
-    public function privateProjectProvider()
+    public function privateProjectProvider(): Project
     {
-        $this->refreshApplication();
-
-        return [[
-            factory(Project::class)->states(['private', Project::HIRING])->create([
-                'start_at' => now()->addMonth(),
-            ])
-        ]];
+        return factory(Project::class)->states(['private', Project::HIRING])->create([
+            'start_at' => now()->addMonth(),
+        ]);
     }
 
-    public function hiringProjectAndAvailableMissionProvider()
+    public function hiringProjectAndAvailableMissionProvider(): array
     {
-        $this->refreshApplication();
-
         $project = factory(Project::class)->state(Project::HIRING)->create([
             'start_at' => now()->addMonth(),
         ]);
@@ -46,13 +36,14 @@ trait ProjectProviderTrait
             'project_id' => $project->id,
         ]);
 
-        return [[$project, $mission]];
+        return [
+            'project'   => $project,
+            'mission'   => $mission
+        ];
     }
 
-    public function validatedProjectAndAvailableMissionProvider()
+    public function validatedProjectAndAvailableMissionProvider(): array
     {
-        $this->refreshApplication();
-
         $project = factory(Project::class)->state(Project::VALIDATED)->create([
             'start_at' => now()->addMonth(),
         ]);
@@ -60,43 +51,41 @@ trait ProjectProviderTrait
             'project_id' => $project->id,
         ]);
 
-        return [[$project, $mission]];
+        return [
+            'project'   => $project,
+            'mission'   => $mission
+        ];
     }
 
-    public function publicProjectAndUserProvider()
+    public function publicProjectAndUserProvider(): array
     {
-        $this->refreshApplication();
-
-        return [[
-            factory(Project::class)->state(Project::HIRING)->create([
-                'start_at' => now()->addMonth(),
-            ]),
-            factory(User::class)->state('active')->create()
-        ]];
+        return [
+            'project'   => factory(Project::class)->state(Project::HIRING)
+                ->create(['start_at' => now()->addMonth()]),
+            'user'      => factory(User::class)->state('active')->create()
+        ];
     }
 
-    public function privateProjectAndUserProvider()
+    public function privateProjectAndUserProvider(): array
     {
-        $this->refreshApplication();
-
-        return [[
-            factory(Project::class)->states(['private', Project::HIRING])->create([
-                'start_at' => now()->addMonth(),
-            ]),
-            factory(User::class)->state('active')->create()
-        ]];
+        return [
+            'project'   => factory(Project::class)->states(['private', Project::HIRING])
+                ->create(['start_at' => now()->addMonth()]),
+            'user'      => factory(User::class)->state('active')->create()
+        ];
     }
 
-    public function privateProjectAndUserInProjectProvider()
+    public function privateProjectAndUserInProjectProvider(): array
     {
-        $this->refreshApplication();
-
         $project = factory(Project::class)->states(['private', Project::HIRING])->create([
             'start_at' => now()->addMonth(),
         ]);
         $user = factory(User::class)->state('active')->create();
         $project->addUser($user);
 
-        return [[$project, $user]];
+        return [
+            'project'   => $project,
+            'user'      => $user,
+        ];
     }
 }

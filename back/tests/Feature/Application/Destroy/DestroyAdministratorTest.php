@@ -12,11 +12,11 @@ class DestroyAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider ownApplicationProvider
      */
-    public function testAdministratorDeletingHisApplication($application)
+    public function testAdministratorDeletingHisApplication()
     {
+        $application = $this->ownApplicationProvider();
+
         $this->assertDatabaseHas('applications', $application->toArray());
 
         $this->json('DELETE', route('applications.destroy', ['application_id' => $application->id]))
@@ -27,11 +27,11 @@ class DestroyAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider otherUserApplicationProvider
      */
-    public function testAdministratorDeletingApplicationOfOtherUser($application)
+    public function testAdministratorDeletingApplicationOfOtherUser()
     {
+        $application = $this->otherUserApplicationProvider();
+
         $this->assertDatabaseHas('applications', $application->toArray());
 
         $this->json('DELETE', route('applications.destroy', ['application_id' => $application->id]))

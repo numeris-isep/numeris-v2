@@ -12,11 +12,11 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider conventionProvider
      */
-    public function testDeveloperUpdatingConventionAndCreatingRates($convention)
+    public function testDeveloperUpdatingConventionAndCreatingRates()
     {
+        $convention = $this->conventionProvider();
+
         $conventionData = ['name' => 'Convention de test'];
         $newRate = [
             'id'            => null,
@@ -56,11 +56,11 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider conventionProvider
      */
-    public function testDeveloperUpdatingConventionAndUpdatingRates($convention)
+    public function testDeveloperUpdatingConventionAndUpdatingRates()
     {
+        $convention = $this->conventionProvider();
+
         $conventionData = ['name' => 'Convention de test'];
         $rate1 = [
             'id'            => $convention->rates->get(0)->id,
@@ -110,11 +110,11 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider conventionProvider
      */
-    public function testDeveloperUpdatingConventionAndDeletingRate($convention)
+    public function testDeveloperUpdatingConventionAndDeletingRate()
     {
+        $convention = $this->conventionProvider();
+
         $conventionData = ['name' => 'Convention de test'];
         $rate1 = [
             'id'            => $convention->rates->get(0)->id,
@@ -156,11 +156,11 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider clientAndProjectAndMissionAndConventionWithBillsProvider
      */
-    public function testDeveloperUpdatingConventionWithRatesWithBillsAndUpdatingRates($client, $project, $mission, $convention)
+    public function testDeveloperUpdatingConventionWithRatesWithBillsAndUpdatingRates()
     {
+        $convention = $this->clientAndProjectAndMissionAndConventionWithBillsProvider()['convention'];
+
         $conventionData = ['name' => 'Convention de test'];
         $rate1 = [
             'id'            => $convention->rates->get(0)->id,
@@ -212,11 +212,11 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider clientAndProjectAndMissionAndConventionWithBillsProvider
      */
-    public function testDeveloperUpdatingConventionWithRatesWithBillsAndDeletingRate($client, $project, $mission, $convention)
+    public function testDeveloperUpdatingConventionWithRatesWithBillsAndDeletingRate()
     {
+        $convention = $this->clientAndProjectAndMissionAndConventionWithBillsProvider()['convention'];
+
         $conventionData = ['name' => 'Convention de test'];
         $rate1 = [
             'id'            => $convention->rates->get(0)->id,
@@ -299,11 +299,11 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
     /**
      * @group developer
-     *
-     * @dataProvider conventionProvider
      */
-    public function testDeveloperUpdatingConventionWithoutData($convention)
+    public function testDeveloperUpdatingConventionWithoutData()
     {
+        $convention = $this->conventionProvider();
+
         $this->json('PUT', route('conventions.update', ['convention_id' => $convention->id]))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors(['name']);

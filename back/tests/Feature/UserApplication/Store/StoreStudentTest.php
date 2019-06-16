@@ -12,11 +12,10 @@ class StoreStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
-     *
-     * @dataProvider availableMissionProvider
      */
-    public function testStudentCreatingApplication($mission)
+    public function testStudentCreatingApplication()
     {
+        $mission = $this->availableMissionProvider();
         $user = auth()->user();
 
         $data = ['mission_id' => $mission->id];

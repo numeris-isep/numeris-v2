@@ -19,7 +19,7 @@ before_script:
   - php artisan migrate:refresh --seed --database testing
 
 script:
-  - vendor/bin/phpunit tests/Feature/Auth
+  - vendor/bin/phpunit
 
 addons:
   ssh_known_hosts: numeris-isep.fr

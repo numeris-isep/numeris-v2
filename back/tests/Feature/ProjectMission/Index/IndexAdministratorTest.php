@@ -12,11 +12,11 @@ class IndexAdministratorTest extends TestCaseWithAuth
 
     /**
      * @group administrator
-     *
-     * @dataProvider clientAndProjectAndMissionAndConventionWithBillsProvider
      */
-    public function testAdministratorAccessingProjectMissionxIndex($client, $project, $mission, $convention)
+    public function testAdministratorAccessingProjectMissionxIndex()
     {
+        $project = $this->clientAndProjectAndMissionAndConventionWithBillsProvider()['project'];
+
         $this->json('GET', route('projects.missions.index', ['project_id' => $project->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([

@@ -15,9 +15,9 @@ class IndexAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorAccessingClientProjectIndex()
     {
-        $client_id = 1;
+        $client = $this->clientWithProjectsWithMissionsProvider();
 
-        $this->json('GET', route('clients.projects.index', ['client_id' => $client_id]))
+        $this->json('GET', route('clients.projects.index', ['client_id' => $client->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'data' => [[

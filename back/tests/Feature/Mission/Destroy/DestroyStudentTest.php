@@ -12,11 +12,11 @@ class DestroyStudentTest extends TestCaseWithAuth
 
     /**
      * @group student
-     *
-     * @dataProvider availableMissionProvider
      */
-    public function testStudentDeletingMission($mission)
+    public function testStudentDeletingMission()
     {
+        $mission = $this->availableMissionProvider();
+
         $address = $mission->address;
 
         $this->assertDatabaseHas('missions', $mission->toArray());

@@ -12,11 +12,11 @@ class ShowStaffTest extends TestCaseWithAuth
 
     /**
      * @group staff
-     *
-     * @dataProvider conventionProvider
      */
-    public function testStaffAccessingConventionShow($convention)
+    public function testStaffAccessingConventionShow()
     {
+        $convention = $this->conventionProvider();
+
         $this->json('GET', route('conventions.show', ['convention_id' => $convention->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
