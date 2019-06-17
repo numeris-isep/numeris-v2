@@ -75,4 +75,9 @@ class Role extends Model
     {
         return $this->hierarchy >= static::findHierarchyByName($name);
     }
+
+    public static function roles()
+    {
+        return self::$roles;
+    }
 }
