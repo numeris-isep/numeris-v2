@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Address;
+use App\Models\Preference;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Console\Command;
@@ -51,6 +53,10 @@ class MakeUser extends Command
         $user_data = [];
         $password = 'azerty';
 
+        if (! isset($options['username']) || ! isset($options['email']) || ! isset($options['first_name']) || ! isset($options['last_name'])) {
+            throw new LogicException("Some options are missing.");
+        }
+
         if ($options['password']) {
             $password = $this->secret('User\'s password');
             $user_data['password'] = bcrypt($password);
@@ -67,9 +73,39 @@ class MakeUser extends Command
         }
 
         // Create the user
-        $user = factory(User::class)->state('active')->create($user_data);
+        $user = User::create(array_merge($user_data, [
+            'activated'                 => true,
+            'tou_accepted'              => true,
+            'student_number'            => random_int(1000, 99999),
+            'promotion'                 => random_int(2015, 2025),
+            'school_year'               => 'A1',
+            'phone'                     => "0" . (string) random_int(100000000, 999999999),
+            'nationality'               => 'france',
+            'birth_date'                => '2000-01-01',
+            'birth_city'                => 'Paris',
+        ]));
+
+        // Attach role
         $user->setRole(Role::findByName($options['role'] ?: 'student'));
 
+        // Create adresse
+        Address::create([
+            'street'    => '1 rue quelquepart',
+            'city'      => 'Paris',
+            'zip_code'  => 75001,
+        ])->user()->save($user);
+
+        // Create preference
+        Preference::create([
+            'on_new_mission'    => true,
+            'on_acceptance'     => true,
+            'on_refusal'        => true,
+            'on_document'       => true,
+            'by_email'          => true,
+            'by_push'           => true,
+        ])->user()->save($user);
+
+        // Check if it worked
         if (User::find($user->id)) {
             $this->info("User created successfully!\n");
             $this->line('You might want to login with the following credentials: ');
