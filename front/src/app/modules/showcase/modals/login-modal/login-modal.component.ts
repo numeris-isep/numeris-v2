@@ -61,9 +61,9 @@ export class LoginModalComponent implements OnInit {
       .subscribe(
         _ => {
           this.alertService.success(['Vous êtes connecté !'], null, true);
+          this.loginModal.approve(undefined); // make the modal disappear
           this.router.navigate(['/profil'])
             .then(() => { this.router.navigate([this.returnUrl]); } );
-          this.loginModal.approve(undefined); // <-- make the modal disappear
         },
         errors => {
           handleFormErrors(this.loginForm, errors);

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
-import { AlertService } from "../services/alert.service";
-import { Router } from "@angular/router";
-import { LoginModal } from "../../modules/showcase/modals/login-modal/login-modal.component";
-import { SuiModalService } from "ng2-semantic-ui";
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { AlertService } from '../services/alert.service';
+import { Router } from '@angular/router';
+import { LoginModal } from '../../modules/showcase/modals/login-modal/login-modal.component';
+import { SuiModalService } from 'ng2-semantic-ui';
 
 @Injectable({
   providedIn: 'root'
@@ -26,15 +26,15 @@ export class ErrorInterceptor implements HttpInterceptor {
 
       switch (err.status) {
         case 401:
-          this.loginModal = new LoginModal(
-            'Veuillez vous connecter pour accéder à cette page',
-            this.router.url
-          );
-          this.modalService.open(this.loginModal);
+          this.alertService.error(err.error.errors, null, null, 'login-form');
           break;
 
         case 403:
-          this.alertService.error(err.error.errors);
+          this.loginModal = new LoginModal(
+            'Veuillez vous connecter pour accéder à cette ressource',
+            this.router.url
+          );
+          this.modalService.open(this.loginModal);
           break;
 
         case 404:
