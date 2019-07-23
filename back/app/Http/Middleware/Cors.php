@@ -16,9 +16,7 @@ class Cors
      */
     public function handle($request, Closure $next)
     {
-        if (! App::environment('production')) {
-            header('Access-Control-Allow-Origin: *');
-        }
+        header('Access-Control_Allow-Origin: ' . App::environment('production') ? env('APP_URL') : '*');
         header('Access-Control-Allow-Headers: Content-Type, X-Auth-Token, Authorization, Origin');
         header('Access-Control-Allow-Methods: *');
         return $next($request);

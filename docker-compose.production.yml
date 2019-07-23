@@ -13,13 +13,3 @@ services:
     ports:
       - ${BACK_PORT}:80
     container_name: numeris_back
-
-  front:
-    build:
-      context: ./front
-      dockerfile: Dockerfile.production
-    links:
-      - back
-    ports:
-      - ${FRONT_PORT}:80
-    container_name: numeris_front
