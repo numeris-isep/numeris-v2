@@ -8,10 +8,10 @@ build:
 	docker-compose build
 
 start-prod:
-	docker-compose up -f docker-compose.production.yml up -d --no-deps
+	docker-compose -f docker-compose.production.yml up -d --no-deps
 
 build-prod:
-	docker-compose up -f docker-compose.production.yml build
+	docker-compose -f docker-compose.production.yml build
 
 deploy-prod: build-prod start-prod
 
