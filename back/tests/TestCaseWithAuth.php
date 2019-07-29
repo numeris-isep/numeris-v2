@@ -23,7 +23,7 @@ abstract class TestCaseWithAuth extends TestCase
             ]);
         }
 
-        $user = User::where('username', $this->username)->first();
+        $user = User::where('email', $this->username . '@isep.fr')->first();
 
         auth()->claims(['rol' => $user->role()->name])
             ->attempt([

@@ -18,33 +18,31 @@ use Faker\Generator as Faker;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'email'     => $faker->randomDigit * $faker->randomDigit . $faker->unique()->safeEmail,
-        'password'  => bcrypt('azerty'),
+        'preference_id' => factory(Preference::class)->create(),
+        'address_id'    => factory(Address::class)->create(),
+        'email'         => $faker->firstName . $faker->randomDigit * $faker->randomDigit . '@isep.fr',
+        'password'      => bcrypt('azerty'),
+        'first_name'    => $faker->firstName,
+        'last_name'     => $faker->lastName,
+        'promotion'     => $faker->numberBetween(2015, 2025),
+        'birth_date'    => $faker->dateTime,
     ];
 });
 
 $factory->state(User::class, 'inactive', function () {
-    return [];
+    return [
+        'activated'     => false,
+        'tou_accepted'  => false,
+    ];
 });
 
 $factory->state(User::class, 'active', function (Faker $faker) {
-    $school_years = ['P1', 'P2', 'I1', 'I2', 'A1', 'A2', 'A3'];
-
     return [
-        'preference_id'             => factory(Preference::class)->create(),
-        'address_id'                => factory(Address::class)->create(),
         'activated'                 => true,
         'tou_accepted'              => true,
         'subscription_paid_at'      => $faker->dateTime(),
-        'username'                  => $faker->unique()->userName . $faker->randomDigit * $faker->randomDigit,
-        'first_name'                => $faker->firstName,
-        'last_name'                 => $faker->lastName,
-        'student_number'            => $faker->numberBetween(1000, 99999),
-        'promotion'                 => $faker->numberBetween(2015, 2025),
-        'school_year'               => $school_years[$faker->numberBetween(0, count($school_years) - 1)],
         'phone'                     => "0" . (string) $faker->numberBetween(600000000, 699999999),
         'nationality'               => 'france',
-        'birth_date'                => $faker->dateTime,
         'birth_city'                => $faker->city,
         'social_insurance_number'   => $faker->numberBetween(1000000000000, 1999999999999),
         'iban'                      => strtoupper($faker->text(15)),

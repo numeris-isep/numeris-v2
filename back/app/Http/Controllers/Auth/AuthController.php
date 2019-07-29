@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Requests\UserRequest;
+use App\Models\Address;
 use App\Models\Role;
 use App\Http\Requests\AuthRequest;
 use App\Http\Resources\UserResource;
@@ -18,7 +20,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'subscribe']]);
     }
 
     /**
@@ -47,6 +49,33 @@ class AuthController extends Controller
         }
 
         return $this->respondWithToken($token);
+    }
+
+    /**
+     * Subscribe a user.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function subscribe(UserRequest $request)
+    {
+        $request['password'] = bcrypt($request['password']);
+
+        $user_request = $request->only([
+            'email', 'password', 'first_name',
+            'last_name', 'promotion', 'birth_date',
+        ]);
+        $address_request = $request->only([
+            'street', 'zip_code', 'city',
+        ]);
+
+        $user = User::create($user_request);
+        $address = Address::create($address_request);
+        $address->user()->save($user);
+        $user->roles()->attach(Role::findByName(Role::STUDENT));
+
+        return response()->json(UserResource::make($user), JsonResponse::HTTP_CREATED);
     }
 
     /**

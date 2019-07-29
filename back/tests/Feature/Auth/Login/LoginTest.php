@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Feature\Auth;
+namespace Tests\Feature\Auth\Login;
 
 use Illuminate\Http\JsonResponse;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class AuthTest extends TestCase
+class LoginTest extends TestCase
 {
     /**
      * @group any

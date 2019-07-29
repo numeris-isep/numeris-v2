@@ -13,18 +13,18 @@ use Illuminate\Http\Request;
 |
 */
 
-// Jwt auth routes
+// Auth routes
 Route::post('login', 'Auth\AuthController@login')->name('login');
 Route::post('logout', 'Auth\AuthController@logout')->name('logout');
 Route::post('refresh', 'Auth\AuthController@refresh')->name('refresh');
 Route::post('current-user', 'Auth\AuthController@currentUser')->name('current-user');
+Route::post('subscribe', 'Auth\AuthController@subscribe')->name('subscribe');
 
 // Every route in this group require user authentication
 Route::group(['middleware' => 'auth:api'], function () {
 
     // User resource routes
-    Route::apiResource('users', 'UserController', ['parameters' => ['users' => 'user_id']]);
-    Route::patch('users/{user_id}/profile', 'UserController@updateProfile')->name('users.update.profile');
+    Route::apiResource('users', 'UserController', ['parameters' => ['users' => 'user_id']])->except(['store']);
     Route::patch('users/{user_id}/terms-of-use', 'UserController@updateTermsOfUse')->name('users.update.terms-of-use');
     Route::get('users-promotion', 'UserController@indexPromotion')->name('users.index.promotion');
     Route::apiResource('users.applications', 'UserApplicationController', ['parameters' => ['users' => 'user_id']])

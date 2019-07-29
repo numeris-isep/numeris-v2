@@ -18,11 +18,9 @@ class UpdateStudentTest extends TestCaseWithAuth
         $user = $this->activeStudentProvider();
 
         $user_data = $db_data = [
-            'email'                     => 'test@numeris-isep.fr',
-            'username'                  => 'test',
+            'email'                     => 'test@isep.fr',
             'first_name'                => 'Test',
             'last_name'                 => 'Numeris',
-            'student_number'            => 1000,
             'promotion'                 => '1991',
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',

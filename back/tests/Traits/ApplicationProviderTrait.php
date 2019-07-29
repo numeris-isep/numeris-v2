@@ -10,14 +10,14 @@ trait ApplicationProviderTrait
 {
     public function ownApplicationProvider(): Application
     {
-        $user = User::where('username', $this->username)->first();
+        $user = User::where('email', $this->username . '@isep.fr')->first();
 
         return factory(Application::class)->create(['user_id' => $user->id]);
     }
 
     public function otherUserApplicationProvider(): Application
     {
-        $user = User::where('username', $this->username)->first();
+        $user = User::where('email', $this->username . '@isep.fr')->first();
 
         return factory(Application::class)->create([
             'user_id' => User::where('id', '!=', $user->id)
@@ -27,7 +27,7 @@ trait ApplicationProviderTrait
 
     public function applicationWithAvailableMissionProvider(): Application
     {
-        $user = User::where('username', $this->username)->first();
+        $user = User::where('email', $this->username . '@isep.fr')->first();
         $mission = factory(Mission::class)->state('available')->create();
 
         return factory(Application::class)->create([

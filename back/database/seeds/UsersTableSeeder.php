@@ -25,15 +25,12 @@ class UsersTableSeeder extends Seeder
             }
 
             // Generate my account ;)
-            if (! User::where('email', 'eliottdes@gmail.com')->first()) {
+            if (! User::where('email', 'eliott.deseguier@isep.fr')->first()) {
                 $this->createUser(1, Role::DEVELOPER, 'active', [
-                    'email'             => 'eliottdes@gmail.com',
-                    'username'          => '2Seg',
+                    'email'             => 'eliott.deseguier@isep.fr',
                     'first_name'        => 'Eliott',
                     'last_name'         => 'de Séguier',
-                    'student_number'    => 8740,
                     'promotion'         => '2019',
-                    'school_year'       => 'A3',
                     'phone'             => '0663670680',
                     'nationality'       => 'france',
                     'birth_date'        => '1995-06-29 00:00:00',
@@ -42,76 +39,68 @@ class UsersTableSeeder extends Seeder
             }
 
             // Generate 2 developer accounts
-            if (! User::where('email', 'developer@numeris-isep.fr')->first()) {
+            if (! User::where('email', 'developer@isep.fr')->first()) {
                 $this->createUser(1, Role::DEVELOPER, 'active', [
-                    'email'         => 'developer@numeris-isep.fr',
-                    'username'      => 'developer',
+                    'email'         => 'developer@isep.fr',
                     'first_name'    => 'Developer',
                     'last_name'     => 'Numeris',
                 ]);
             }
 
-            if (! User::where('email', 'developer2@numeris-isep.fr')->first()) {
+            if (! User::where('email', 'developer2@isep.fr')->first()) {
                 $this->createUser(1, Role::DEVELOPER, 'active', [
-                    'email'         => 'developer2@numeris-isep.fr',
-                    'username'      => 'developer2',
+                    'email'         => 'developer2@isep.fr',
                     'first_name'    => 'Developer2',
                     'last_name'     => 'Numeris',
                 ]);
             }
 
             // Generate 2 administrator accounts
-            if (! User::where('email', 'administrator@numeris-isep.fr')->first()) {
+            if (! User::where('email', 'administrator@isep.fr')->first()) {
                 $this->createUser(1, Role::ADMINISTRATOR, 'active', [
-                    'email'         => 'administrator@numeris-isep.fr',
-                    'username'      => 'administrator',
+                    'email'         => 'administrator@isep.fr',
                     'first_name'    => 'Administrator',
                     'last_name'     => 'Numeris',
                 ]);
             }
 
-            if (! User::where('email', 'administrator2@numeris-isep.fr')->first()) {
+            if (! User::where('email', 'administrator2@isep.fr')->first()) {
                 $this->createUser(1, Role::ADMINISTRATOR, 'active', [
-                    'email'         => 'administrator2@numeris-isep.fr',
-                    'username'      => 'administrator2',
+                    'email'         => 'administrator2@isep.fr',
                     'first_name'    => 'Administrator2',
                     'last_name'     => 'Numeris',
                 ]);
             }
 
             // Generate 2 staff accounts
-            if (! User::where('email', 'staff@numeris-isep.fr')->first()) {
+            if (! User::where('email', 'staff@isep.fr')->first()) {
                 $this->createUser(1, Role::STAFF, 'active', [
-                    'email'         => 'staff@numeris-isep.fr',
-                    'username'      => 'staff',
+                    'email'         => 'staff@isep.fr',
                     'first_name'    => 'Staff',
                     'last_name'     => 'Numeris',
                 ]);
             }
 
-            if (! User::where('email', 'staff2@numeris-isep.fr')->first()) {
+            if (! User::where('email', 'staff2@isep.fr')->first()) {
                 $this->createUser(1, Role::STAFF, 'active', [
-                    'email'         => 'staff2@numeris-isep.fr',
-                    'username'      => 'staff2',
+                    'email'         => 'staff2@isep.fr',
                     'first_name'    => 'Staff2',
                     'last_name'     => 'Numeris',
                 ]);
             }
 
             // Generate 2 student accounts
-            if (! User::where('email', 'student@numeris-isep.fr')->first()) {
+            if (! User::where('email', 'student@isep.fr')->first()) {
                 $this->createUser(1, Role::STUDENT, 'active', [
-                    'email'         => 'student@numeris-isep.fr',
-                    'username'      => 'student',
+                    'email'         => 'student@isep.fr',
                     'first_name'    => 'Student',
                     'last_name'     => 'Numeris',
                 ]);
             }
 
-            if (! User::where('email', 'student2@numeris-isep.fr')->first()) {
+            if (! User::where('email', 'student2@isep.fr')->first()) {
                 $this->createUser(1, Role::STUDENT, 'active', [
-                    'email'         => 'student2@numeris-isep.fr',
-                    'username'      => 'student2',
+                    'email'         => 'student2@isep.fr',
                     'first_name'    => 'Student2',
                     'last_name'     => 'Numeris',
                 ]);

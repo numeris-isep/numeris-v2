@@ -1,20 +1,20 @@
 <?php
 
-namespace Tests\Feature\Auth;
+namespace Tests\Feature\Auth\Login;
 
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCase;
 
-class AuthAdministratorTest extends TestCase
+class LoginDeveloperTest extends TestCase
 {
     /**
-     * @group administrator
+     * @group developer
      */
-    public function testAdministratorLoggingIn()
+    public function testDeveloperLoggingIn()
     {
-        $user = User::where('username', Role::ADMINISTRATOR)->first();
+        $user = User::where('email', Role::DEVELOPER . '@isep.fr')->first();
 
         $data = [
             'email'     => $user->email,
@@ -27,11 +27,11 @@ class AuthAdministratorTest extends TestCase
     }
 
     /**
-     * @group administrator
+     * @group developer
      */
-    public function testAdministratorLogginInWithWrongPassword()
+    public function testDeveloperLoggingInWithWrongPassword()
     {
-        $user = User::where('username', Role::ADMINISTRATOR)->first();
+        $user = User::where('email', Role::DEVELOPER . '@isep.fr')->first();
 
         $data = [
             'email'     => $user->email,

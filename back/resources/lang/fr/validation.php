@@ -143,7 +143,6 @@ return [
 
     'attributes' => [
         'name'                      => 'nom',
-        'username'                  => 'nom d\'utilisateur',
         'email'                     => 'email',
         'first_name'                => 'prénom',
         'last_name'                 => 'nom',

@@ -13,12 +13,15 @@ class UserRequest extends AbstractFormRequest
      */
     public function authorize()
     {
+        if ($this->route()->getName() === 'subscribe') {
+            return true;
+        }
+
         $current_user = auth()->user();
         $user = User::find($this->route('user_id'));
 
         // Use UserPolicy here to authorize before checking the fields
-        return $current_user->can('store', User::class)
-            || $current_user->can('update', $user)
+        return $current_user->can('update', $user)
             || $current_user->can('update-profile', $user);
     }
 
@@ -35,18 +38,8 @@ class UserRequest extends AbstractFormRequest
             'password'                  => 'required|confirmed',
             'first_name'                => 'required|string',
             'last_name'                 => 'required|string',
-            'student_number'            => 'nullable|numeric',
             'promotion'                 => 'nullable|numeric',
-        ];
-
-        $patch_rules = [
-            'phone'                     => 'required|string|min:10',
-            'nationality'               => 'required|string',
             'birth_date'                => 'required|date',
-            'birth_city'                => 'required|string',
-            'social_insurance_number'   => 'required|string',
-            'iban'                      => 'required|string|min:13',
-            'bic'                       => 'required|string',
 
             // Address
             'street'                    => 'required|string',
@@ -54,24 +47,24 @@ class UserRequest extends AbstractFormRequest
             'city'                      => 'required|string',
         ];
 
+        $put_rules = [
+            'phone'                     => 'required|string|min:10',
+            'nationality'               => 'required|string',
+            'birth_city'                => 'required|string',
+            'social_insurance_number'   => 'required|string',
+            'iban'                      => 'required|string|min:13',
+            'bic'                       => 'required|string',
+        ];
+
         switch($this->method())
         {
             case 'POST':
-                $rules['email'] = 'required|email|unique:users,email';
-                $rules['username'] = 'required|string|alpha|unique:users,username';
-                break;
+                $rules['email'] = 'required|email|regex:^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(isep)\.fr$^|unique:users,email';
+                return $rules;
             case 'PUT':
-                $rules['email'] = 'required|email|unique:users,email,' . $user_id;
-                $rules['username'] = 'required|string|alpha|unique:users,username,' . $user_id;
-                break;
-            case 'PATCH':
-                return $patch_rules;
-                break;
+                $rules['email'] = 'required|email|regex:^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(isep)\.fr$^|unique:users,email,' . $user_id;
+                return array_merge($rules, $put_rules);
             default:break;
         }
-
-        $rules = array_merge($rules, $patch_rules);
-
-        return $rules;
     }
 }

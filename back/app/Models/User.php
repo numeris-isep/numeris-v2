@@ -25,7 +25,6 @@ class User extends Authenticatable implements JWTSubject
         'subscription_paid_at',
         'email',
         'password',
-        'username',
         'first_name',
         'last_name',
         'student_number',
@@ -60,11 +59,6 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
-    }
-
-    public static function findByUsername($username)
-    {
-        return static::where('username', $username)->first();
     }
 
     public static function findByEmail($email)

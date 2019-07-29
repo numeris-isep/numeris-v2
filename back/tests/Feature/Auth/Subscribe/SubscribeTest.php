@@ -1,34 +1,23 @@
 <?php
 
-namespace Tests\Feature\User\Store;
+namespace Tests\Feature\Auth\Subscribe;
 
-use App\Models\Role;
 use Illuminate\Http\JsonResponse;
-use Tests\TestCaseWithAuth;
+use Tests\TestCase;
 
-class StoreDeveloperTest extends TestCaseWithAuth
+class SubscribeTest extends TestCase
 {
-    protected $username = Role::DEVELOPER;
-
     /**
-     * @group developer
+     * @group any
      */
-    public function testDeveloperCreatingUserWithAllFields()
+    public function testUserSubscription()
     {
         $user_data = $db_data = [
-            'email'                     => 'test@numeris-isep.fr',
-            'username'                  => 'test',
+            'email'                     => 'test@isep.fr',
             'first_name'                => 'Test',
             'last_name'                 => 'Numeris',
-            'student_number'            => 1000,
             'promotion'                 => '1991',
-            'phone'                     => '01 23 45 67 89',
-            'nationality'               => 'Française',
             'birth_date'                => '2001-06-13 09:50:16',
-            'birth_city'                => 'Paris',
-            'social_insurance_number'   => '1183573438099',
-            'iban'                      => 'QUO IURE EST.',
-            'bic'                       => 'ZVCRVZJGJ7F'
         ];
         $address_data = [
             'street'    => '1 rue Quelquepart',
@@ -45,7 +34,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('users', $db_data);
         $this->assertDatabaseMissing('addresses', $address_data);
 
-        $this->json('POST', route('users.store'), $data)
+        $this->json('POST', route('subscribe'), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
             ->assertJsonStructure([
                 'id',
@@ -55,10 +44,8 @@ class StoreDeveloperTest extends TestCaseWithAuth
                 'touAccepted',
                 'subscriptionPaidAt',
                 'email',
-                'username',
                 'firstName',
                 'lastName',
-                'studentNumber',
                 'promotion',
                 'phone',
                 'nationality',
@@ -76,24 +63,16 @@ class StoreDeveloperTest extends TestCaseWithAuth
     }
 
     /**
-     * @group developer
+     * @group any
      */
-    public function testDeveloperCreatingUserWithAlreadyUsedData()
+    public function testUserSubscriptionWithAleadyUsedData()
     {
         $user_data = $db_data = [
-            'email'                     => 'developer@numeris-isep.fr', // Already used
-            'username'                  => 'developer', // Already used
-            'first_name'                => 'Test',
-            'last_name'                 => 'Numeris',
-            'student_number'            => 1000,
-            'promotion'                 => '1991',
-            'phone'                     => '01 23 45 67 89',
-            'nationality'               => 'Française',
-            'birth_date'                => '2001-06-13 09:50:16',
-            'birth_city'                => 'Paris',
-            'social_insurance_number'   => '1183573438099',
-            'iban'                      => 'QUO IURE EST.',
-            'bic'                       => 'ZVCRVZJGJ7F'
+            'email'         => 'developer@isep.fr',
+            'first_name'    => 'Test',
+            'last_name'     => 'Numeris',
+            'promotion'     => '1991',
+            'birth_date'    => '2001-06-13 09:50:16',
         ];
         $address_data = [
             'street'    => '1 rue Quelquepart',
@@ -110,26 +89,59 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('users', $db_data);
         $this->assertDatabaseMissing('addresses', $address_data);
 
-        $this->json('POST', route('users.store'), $data)
+        $this->json('POST', route('subscribe'), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJsonValidationErrors(['email', 'username']);
+            ->assertJsonValidationErrors(['email']);
 
         $this->assertDatabaseMissing('users', $db_data);
         $this->assertDatabaseMissing('addresses', $address_data);
     }
 
     /**
-     * @group developer
+     * @group any
      */
-    public function testDeveloperCreatingUserWithoutData()
+    public function testUserSubscriptionWithOtherDomainEmail()
     {
-        $this->json('POST', route('users.store'))
+        $user_data = $db_data = [
+            'email'         => 'developer@other-domain.fr',
+            'first_name'    => 'Test',
+            'last_name'     => 'Numeris',
+            'promotion'     => '1991',
+            'birth_date'    => '2001-06-13 09:50:16',
+        ];
+        $address_data = [
+            'street'    => '1 rue Quelquepart',
+            'zip_code'  => '75015',
+            'city'      => 'Paris'
+        ];
+
+        // Add 'password' datas after init to avoid the check on unknown column
+        // 'password_confirmation' and on uncrypted 'password'
+        $user_data['password'] = $user_data['password_confirmation'] = 'azerty';
+
+        $data = array_merge($user_data, $address_data);
+
+        $this->assertDatabaseMissing('users', $db_data);
+        $this->assertDatabaseMissing('addresses', $address_data);
+
+        $this->json('POST', route('subscribe'), $data)
+            ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertJsonValidationErrors(['email']);
+
+        $this->assertDatabaseMissing('users', $db_data);
+        $this->assertDatabaseMissing('addresses', $address_data);
+    }
+
+    /**
+     * @group any
+     */
+    public function testUserSubscriptionWithoutData()
+    {
+        $this->json('POST', route('subscribe'))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors([
                 'password', 'first_name', 'last_name',
-                'email', 'username', 'phone',
-                'nationality', 'birth_date', 'birth_city',
-                'social_insurance_number', 'iban', 'bic',
+                'email', 'birth_date',
                 'street', 'zip_code', 'city',
             ]);
     }

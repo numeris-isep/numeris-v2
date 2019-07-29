@@ -1,20 +1,20 @@
 <?php
 
-namespace Tests\Feature\Auth;
+namespace Tests\Feature\Auth\Login;
 
-use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCase;
+use App\Models\Role;
 
-class AuthStaffTest extends TestCase
+class LoginStudentTest extends TestCase
 {
     /**
-     * @group staff
+     * @group student
      */
-    public function testStaffLoggingIn()
+    public function testStudentLoggingIn()
     {
-        $user = User::where('username', Role::STAFF)->first();
+        $user = User::where('email', Role::STUDENT . '@isep.fr')->first();
 
         $data = [
             'email'     => $user->email,
@@ -27,15 +27,15 @@ class AuthStaffTest extends TestCase
     }
 
     /**
-     * @group staff
+     * @group student
      */
-    public function testStaffLoggingInWithWrongPassword()
+    public function testStudentLoggingInWithWrongPassword()
     {
-        $user = User::where('username', Role::STAFF)->first();
+        $user = User::where('email', Role::STUDENT . '@isep.fr')->first();
 
         $data = [
-            'email'     => $user->email,
-            'password'  => 'wrong-password'
+            'email' => $user->email,
+            'password' => 'wrong-password'
         ];
 
         $this->json('POST', route('login'), $data)
