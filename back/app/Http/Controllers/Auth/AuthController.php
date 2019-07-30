@@ -66,9 +66,7 @@ class AuthController extends Controller
             'email', 'password', 'first_name',
             'last_name', 'promotion', 'birth_date',
         ]);
-        $address_request = $request->only([
-            'street', 'zip_code', 'city',
-        ]);
+        $address_request = $request->only(['address'])['address'];
 
         $user = User::create($user_request);
         $address = Address::create($address_request);

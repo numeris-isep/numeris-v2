@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { SuiModal, ComponentModalConfig, ModalSize } from "ng2-semantic-ui"
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AuthService } from "../../../../core/http/auth/auth.service";
-import { first } from "rxjs/operators";
-import { AlertService } from "../../../../core/services/alert.service";
-import { handleFormErrors } from "../../../../core/functions/form-error-handler";
+import { SuiModal, ComponentModalConfig, ModalSize } from 'ng2-semantic-ui';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../../../core/http/auth/auth.service';
+import { first } from 'rxjs/operators';
+import { AlertService } from '../../../../core/services/alert.service';
+import { handleFormErrors } from '../../../../core/functions/form-error-handler';
 
 export interface ILoginModalContext {
   question: string;

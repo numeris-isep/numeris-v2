@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\User;
+use Carbon\Carbon;
 
 class UserRequest extends AbstractFormRequest
 {
@@ -35,16 +36,16 @@ class UserRequest extends AbstractFormRequest
         $user_id = $this->ids;
 
         $rules = [
-            'password'                  => 'required|confirmed',
-            'first_name'                => 'required|string',
-            'last_name'                 => 'required|string',
-            'promotion'                 => 'nullable|numeric',
-            'birth_date'                => 'required|date',
+            'password'          => 'required|confirmed',
+            'first_name'        => 'required|string',
+            'last_name'         => 'required|string',
+            'promotion'         => 'required|integer|min:' . now()->year,
+            'birth_date'        => 'required|date',
 
             // Address
-            'street'                    => 'required|string',
-            'zip_code'                  => 'required|integer',
-            'city'                      => 'required|string',
+            'address.street'    => 'required|string',
+            'address.zip_code'  => 'required|integer',
+            'address.city'      => 'required|string',
         ];
 
         $put_rules = [

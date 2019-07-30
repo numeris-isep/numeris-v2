@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 import { TokenService } from "../../services/token.service";
 import { environment } from "../../../../environments/environment";
 import { Observable } from "rxjs/internal/Observable";
@@ -31,6 +31,10 @@ export class AuthService {
           this.loggedIn.next(true);
         }
       }));
+  }
+
+  subscribe(user: User) {
+    return this.http.post(`${environment.apiUrl}/api/subscribe`, user);
   }
 
   getCurrentUser(): Observable<User> {

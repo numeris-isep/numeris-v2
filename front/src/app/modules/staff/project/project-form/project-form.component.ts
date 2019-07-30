@@ -1,17 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Project } from "../../../../core/classes/models/project";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ProjectService } from "../../../../core/http/project.service";
-import { Router } from "@angular/router";
-import { Client } from "../../../../core/classes/models/client";
-import { ClientService } from "../../../../core/http/client.service";
-import { ConventionService } from "../../../../core/http/convention.service";
-import { Convention } from "../../../../core/classes/models/convention";
-import { Observable } from "rxjs";
-import { dateToString } from "../../../../shared/utils";
-import { first } from "rxjs/operators";
-import { handleFormErrors } from "../../../../core/functions/form-error-handler";
-import { AlertService } from "../../../../core/services/alert.service";
+import { Project } from '../../../../core/classes/models/project';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProjectService } from '../../../../core/http/project.service';
+import { Router } from '@angular/router';
+import { Client } from '../../../../core/classes/models/client';
+import { ClientService } from '../../../../core/http/client.service';
+import { ConventionService } from '../../../../core/http/convention.service';
+import { Convention } from '../../../../core/classes/models/convention';
+import { Observable } from 'rxjs';
+import { dateToString } from '../../../../shared/utils';
+import { first } from 'rxjs/operators';
+import { handleFormErrors } from '../../../../core/functions/form-error-handler';
+import { AlertService } from '../../../../core/services/alert.service';
 
 @Component({
   selector: 'app-project-form',
@@ -62,12 +62,12 @@ export class ProjectFormComponent implements OnInit {
     });
   }
 
-  get f() { return this.projectForm.controls }
+  get f() { return this.projectForm.controls; }
 
   onSubmit() {
     this.submitted = true;
 
-    if (this.projectForm.invalid) return;
+    if (this.projectForm.invalid) { return; }
 
     this.loading = true;
     this.f.start_at.setValue(dateToString(this.f.start_at.value)); // Handle date
@@ -86,13 +86,13 @@ export class ProjectFormComponent implements OnInit {
         project => {
           this.loading = false;
           this.router.navigate([`/projets/${project.id}`]);
-          if (this.project) this.alertService.success([`Le projet ${project.name} a bien été modifié.`]);
+          if (this.project) { this.alertService.success([`Le projet ${project.name} a bien été modifié.`]); }
         },
         errors => {
           handleFormErrors(this.projectForm, errors);
           this.loading = false;
         }
-      )
+      );
   }
 
   getClients() {

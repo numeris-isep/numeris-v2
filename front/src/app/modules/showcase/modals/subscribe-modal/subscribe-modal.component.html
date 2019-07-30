@@ -1,0 +1,156 @@
+<div class="header">
+  Inscription
+</div>
+
+<div class="content">
+  <form class="ui large form" autocomplete="off"
+        [formGroup]="subscribeForm" (ngSubmit)="onSubmit()"
+        [ngClass]="{'error': submitted && subscribeForm.invalid, 'loading': loading}">
+
+    <h4 class="ui dividing header">Informations</h4>
+    <div class="two fields">
+      <div class="required field" [ngClass]="{ 'error': submitted && f.first_name.errors }">
+        <label>Prénom</label>
+        <div class="ui left icon corner labeled input">
+          <i class="address book outline icon"></i>
+          <input type="text" formControlName="first_name" placeholder="Prénom">
+          <div class="ui corner label">
+            <i class="asterisk icon"></i>
+          </div>
+        </div>
+        <app-form-error *ngIf="submitted && f.first_name.errors" [errors]="f.first_name.errors"></app-form-error>
+      </div>
+      <div class="required field" [ngClass]="{ 'error': submitted && f.last_name.errors }">
+        <label>Nom</label>
+        <div class="ui left icon corner labeled input">
+          <i class="clipboard outline icon"></i>
+          <input type="text" formControlName="last_name" placeholder="Nom">
+          <div class="ui corner label">
+            <i class="asterisk icon"></i>
+          </div>
+        </div>
+        <app-form-error *ngIf="submitted && f.last_name.errors" [errors]="f.last_name.errors"></app-form-error>
+      </div>
+    </div>
+
+    <div class="three fields">
+      <div class="required field" [ngClass]="{ 'error': submitted && f.email.errors }">
+        <label>Adresse email ISEP</label>
+        <div class="ui left icon corner labeled input">
+          <i class="envelope icon"></i>
+          <input type="text" formControlName="email" placeholder="Email"
+                 suiPopup popupPlacement="top left" popupHeader="Adresse email ISEP"
+                 popupText="prenom.nom@isep.fr" popupTrigger="focus">
+          <div class="ui corner label">
+            <i class="asterisk icon"></i>
+          </div>
+        </div>
+        <app-form-error *ngIf="submitted && f.email.errors" [errors]="f.email.errors"></app-form-error>
+      </div>
+      <div class="required field" [ngClass]="{ 'error': submitted && f.promotion.errors }">
+        <label>Promotion</label>
+        <div class="ui left icon corner labeled input">
+          <i class="users icon"></i>
+          <input suiDatepicker pickerMode="year" placeholder="Promotion"
+                 formControlName="promotion" [pickerMinDate]="minPromotion"
+                 suiPopup popupPlacement="top left" popupHeader="Promotion"
+                 popupText="Année d'obtention du futur diplôme" popupTrigger="focus">
+          <div class="ui corner label">
+            <i class="asterisk icon"></i>
+          </div>
+        </div>
+        <app-form-error *ngIf="submitted && f.promotion.errors" [errors]="f.promotion.errors"></app-form-error>
+      </div>
+      <div class="required field" [ngClass]="{ 'error': submitted && f.birth_date.errors }">
+        <label>Date de naissance</label>
+        <div class="ui left icon corner labeled input">
+          <i class="calendar alternate icon"></i>
+          <input suiDatepicker pickerMode="date" placeholder="Date de naissance"
+                 formControlName="birth_date">
+          <div class="ui corner label">
+            <i class="asterisk icon"></i>
+          </div>
+        </div>
+        <app-form-error *ngIf="submitted && f.birth_date.errors" [errors]="f.birth_date.errors"></app-form-error>
+      </div>
+    </div>
+
+    <h4 class="ui dividing header">Mot de passe</h4>
+    <div class="two fields">
+      <div class="required field" [ngClass]="{ 'error': submitted && f.password.errors }">
+        <label>Mot de passe</label>
+        <div class="ui left icon corner labeled input">
+          <i class="lock icon"></i>
+          <input type="password" formControlName="password" placeholder="Mot de passe" autocomplete="new-password">
+          <div class="ui corner label">
+            <i class="asterisk icon"></i>
+          </div>
+        </div>
+        <app-form-error *ngIf="submitted && f.password.errors" [errors]="f.password.errors"></app-form-error>
+      </div>
+      <div class="required field" [ngClass]="{ 'error': submitted && f.password.errors }">
+        <label>Confirmation</label>
+        <div class="ui left icon corner labeled input">
+          <i class="unlock icon"></i>
+          <input type="password" formControlName="password_confirmation" placeholder="Confirmation">
+          <div class="ui corner label">
+            <i class="asterisk icon"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h4 class="ui dividing header">Adresse</h4>
+    <div class="three required fields" formGroupName="address">
+      <div class="eight wide field" [ngClass]="{ 'error': submitted && fa('street').errors }">
+        <label>Rue</label>
+        <div class="ui corner labeled input">
+          <input type="text" formControlName="street" placeholder="Rue">
+          <div class="ui corner label">
+            <i class="asterisk icon"></i>
+          </div>
+        </div>
+        <app-form-error *ngIf="submitted && fa('street').errors" [errors]="fa('street').errors"></app-form-error>
+      </div>
+      <div class="four wide field" [ngClass]="{ 'error': submitted && fa('zip_code').errors }">
+        <label>Code postal</label>
+        <div class="ui corner labeled input">
+          <input type="text" formControlName="zip_code" placeholder="Code postal">
+          <div class="ui corner label">
+            <i class="asterisk icon"></i>
+          </div>
+        </div>
+        <app-form-error *ngIf="submitted && fa('zip_code').errors" [errors]="fa('zip_code').errors"></app-form-error>
+      </div>
+      <div class="four wide field" [ngClass]="{ 'error': submitted && fa('city').errors }">
+        <label>Ville</label>
+        <div class="ui corner labeled input">
+          <input type="text" formControlName="city" placeholder="Ville">
+          <div class="ui corner label">
+            <i class="asterisk icon"></i>
+          </div>
+        </div>
+        <app-form-error *ngIf="submitted && fa('city').errors" [errors]="fa('city').errors"></app-form-error>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="ui large buttons">
+        <a class="ui animated fade button" (click)="subscribeModal.deny(null)">
+          <div class="visible content">Annuler</div>
+          <div class="hidden content">
+            <i class="cancel icon"></i>
+          </div>
+        </a>
+        <div class="or" data-text="ou"></div>
+        <button class="ui animated fade blue button"
+                [ngClass]="{'loading': loading, 'disabled': subscribeForm.invalid}">
+          <div class="visible content">Inscription</div>
+          <div class="hidden content">
+            <i class="plus icon"></i>
+          </div>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

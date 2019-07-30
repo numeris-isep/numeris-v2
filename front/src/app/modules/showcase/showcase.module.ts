@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { ContactUsModalComponent } from './modals/contact-us-modal/contact-us-modal.component';
 import { LoginModalComponent } from './modals/login-modal/login-modal.component';
 import { SharedModule } from '../../shared/shared.module';
+import { SubscribeModalComponent } from './modals/subscribe-modal/subscribe-modal.component';
 
 @NgModule({
   imports: [
@@ -20,9 +21,11 @@ import { SharedModule } from '../../shared/shared.module';
     HomeComponent,
     LoginModalComponent,
     ContactUsModalComponent,
+    SubscribeModalComponent,
   ],
   entryComponents: [
     LoginModalComponent,
+    SubscribeModalComponent,
     ContactUsModalComponent,
   ]
 })

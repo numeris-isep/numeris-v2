@@ -68,13 +68,13 @@ export class ClientFormComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    if (this.clientForm.invalid) return;
+    if (this.clientForm.invalid) { return; }
 
     this.loading = true;
     let clientRequest: Observable<Client>;
 
     if (!this.client) {
-      clientRequest = this.clientService.addClient(this.clientForm.value as Client)
+      clientRequest = this.clientService.addClient(this.clientForm.value as Client);
     } else {
       clientRequest = this.clientService.updateClient(this.clientForm.value as Client, this.client);
     }
