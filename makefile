@@ -7,6 +7,9 @@ start:
 build:
 	docker-compose build
 
+status:
+	docker-compose ps
+
 start-prod:
 	docker-compose -f docker-compose.production.yml up -d --no-deps
 
@@ -71,3 +74,10 @@ migrate-rollback:
 
 db-seed:
 	docker exec -it numeris_back sh -c 'php artisan db:seed'
+
+
+## Utils commands
+###################
+
+log-back:
+	docker exec -it numeris_back sh -c 'cat storage/logs/laravel.log'

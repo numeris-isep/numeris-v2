@@ -120,7 +120,8 @@ class UserController extends Controller
      * @return JsonResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function updateTermsOfUse(Request $request, $user_id) {
+    public function updateTermsOfUse(Request $request, $user_id)
+    {
         $user = User::findOrFail($user_id);
         $this->authorize('update-terms-of-use', $user);
 
