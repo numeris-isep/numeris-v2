@@ -104,9 +104,7 @@ class UserController extends Controller
             'nationality', 'birth_date', 'birth_city',
             'social_insurance_number', 'iban', 'bic',
         ]);
-        $address_request = $request->only([
-            'street', 'zip_code', 'city',
-        ]);
+        $address_request = $request->only(['address'])['address'];
 
         $user->update($user_request);
         $user->address()->update($address_request);

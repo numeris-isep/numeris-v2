@@ -34,4 +34,16 @@ class Preference extends Model
     {
         return $this->hasOne(User::class);
     }
+
+    public static function init()
+    {
+        return static::create([
+            'on_new_mission'    => true,
+            'on_acceptance'     => true,
+            'on_refusal'        => false,
+            'on_document'       => true,
+            'by_email'          => true,
+            'by_push'           => false,
+        ]);
+    }
 }

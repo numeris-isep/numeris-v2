@@ -21,7 +21,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             'email'                     => 'test@isep.fr',
             'first_name'                => 'Test',
             'last_name'                 => 'Numeris',
-            'promotion'                 => '1991',
+            'promotion'                 => now()->addYear()->year,
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',
             'birth_date'                => '2001-06-13 09:50:16',
@@ -40,7 +40,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         // 'password_confirmation' and on uncrypted 'password'
         $user_data['password'] = $user_data['password_confirmation'] = 'azerty';
 
-        $data = array_merge($user_data, $address_data);
+        $data = array_merge($user_data, ['address' => $address_data]);
 
         $this->assertDatabaseMissing('users', $db_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -103,7 +103,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         // 'password_confirmation' and on uncrypted 'password'
         $user_data['password'] = $user_data['password_confirmation'] = 'azerty';
 
-        $data = array_merge($user_data, $address_data);
+        $data = array_merge($user_data, ['address' => $address_data]);
 
         $this->assertDatabaseMissing('users', $db_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -127,7 +127,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             'email'                     => 'developer@other-domain.fr', // Not @isep.fr
             'first_name'                => 'Test',
             'last_name'                 => 'Numeris',
-            'promotion'                 => '1991',
+            'promotion'                 => '1990', // < current year
             'phone'                     => '01 23 45 67 89',
             'nationality'               => 'Française',
             'birth_date'                => '2001-06-13 09:50:16',
@@ -146,14 +146,14 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         // 'password_confirmation' and on uncrypted 'password'
         $user_data['password'] = $user_data['password_confirmation'] = 'azerty';
 
-        $data = array_merge($user_data, $address_data);
+        $data = array_merge($user_data, ['address' => $address_data]);
 
         $this->assertDatabaseMissing('users', $db_data);
         $this->assertDatabaseMissing('addresses', $address_data);
 
         $this->json('PUT', route('users.update', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJsonValidationErrors(['email']);
+            ->assertJsonValidationErrors(['email', 'promotion']);
 
         $this->assertDatabaseMissing('users', $db_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -169,10 +169,10 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         $this->json('PUT', route('users.update', ['user' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors([
-                'password', 'first_name', 'last_name',
-                'email', 'phone', 'nationality', 'birth_date',
-                'birth_city', 'social_insurance_number', 'iban',
-                'bic', 'street', 'zip_code', 'city',
+                'password', 'first_name', 'last_name', 'email',
+                'phone', 'nationality', 'birth_date', 'birth_city',
+                'social_insurance_number', 'iban', 'bic',
+                'address.street', 'address.zip_code', 'address.city',
             ]);
     }
 }

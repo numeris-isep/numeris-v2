@@ -109,7 +109,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function setPreference(Preference $preference)
     {
-        return $this->preference()->attach($preference);
+        return $this->preference()->associate($preference);
     }
 
     /**

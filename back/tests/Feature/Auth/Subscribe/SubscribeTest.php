@@ -16,7 +16,7 @@ class SubscribeTest extends TestCase
             'email'                     => 'test@isep.fr',
             'first_name'                => 'Test',
             'last_name'                 => 'Numeris',
-            'promotion'                 => '1991',
+            'promotion'                 => now()->addYear()->year,
             'birth_date'                => '2001-06-13 09:50:16',
         ];
         $address_data = [
@@ -29,7 +29,7 @@ class SubscribeTest extends TestCase
         // 'password_confirmation' and on uncrypted 'password'
         $user_data['password'] = $user_data['password_confirmation'] = 'azerty';
 
-        $data = array_merge($user_data, $address_data);
+        $data = array_merge($user_data, ['address' => $address_data]);
 
         $this->assertDatabaseMissing('users', $db_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -71,7 +71,7 @@ class SubscribeTest extends TestCase
             'email'         => 'developer@isep.fr',
             'first_name'    => 'Test',
             'last_name'     => 'Numeris',
-            'promotion'     => '1991',
+            'promotion'     => '1990',
             'birth_date'    => '2001-06-13 09:50:16',
         ];
         $address_data = [
@@ -84,7 +84,7 @@ class SubscribeTest extends TestCase
         // 'password_confirmation' and on uncrypted 'password'
         $user_data['password'] = $user_data['password_confirmation'] = 'azerty';
 
-        $data = array_merge($user_data, $address_data);
+        $data = array_merge($user_data, ['address' => $address_data]);
 
         $this->assertDatabaseMissing('users', $db_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -119,7 +119,7 @@ class SubscribeTest extends TestCase
         // 'password_confirmation' and on uncrypted 'password'
         $user_data['password'] = $user_data['password_confirmation'] = 'azerty';
 
-        $data = array_merge($user_data, $address_data);
+        $data = array_merge($user_data, ['address' => $address_data]);
 
         $this->assertDatabaseMissing('users', $db_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -141,8 +141,8 @@ class SubscribeTest extends TestCase
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors([
                 'password', 'first_name', 'last_name',
-                'email', 'birth_date',
-                'street', 'zip_code', 'city',
+                'email', 'birth_date', 'address.street',
+                'address.zip_code', 'address.city',
             ]);
     }
 }

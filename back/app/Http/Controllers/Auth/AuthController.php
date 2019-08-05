@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Requests\UserRequest;
 use App\Models\Address;
+use App\Models\Preference;
 use App\Models\Role;
 use App\Http\Requests\AuthRequest;
 use App\Http\Resources\UserResource;
@@ -71,6 +72,7 @@ class AuthController extends Controller
         $user = User::create($user_request);
         $address = Address::create($address_request);
         $address->user()->save($user);
+        Preference::init()->user()->save($user);
         $user->roles()->attach(Role::findByName(Role::STUDENT));
 
         return response()->json(UserResource::make($user), JsonResponse::HTTP_CREATED);
