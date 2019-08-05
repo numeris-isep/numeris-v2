@@ -2,7 +2,7 @@
   Inscription
 </div>
 
-<div class="content">
+<div class="modal content">
   <form class="ui large form" autocomplete="off"
         [formGroup]="subscribeForm" (ngSubmit)="onSubmit()"
         [ngClass]="{'error': submitted && subscribeForm.invalid, 'loading': loading}">
@@ -36,11 +36,11 @@
     <div class="three fields">
       <div class="required field" [ngClass]="{ 'error': submitted && f.email.errors }">
         <label>Adresse email ISEP</label>
-        <div class="ui left icon corner labeled input">
+        <div class="ui left icon corner right labeled input">
           <i class="envelope icon"></i>
           <input type="text" formControlName="email" placeholder="Email"
                  suiPopup popupPlacement="top left" popupHeader="Adresse email ISEP"
-                 popupText="prenom.nom@isep.fr" popupTrigger="focus">
+                 popupText="prenom.nom@isep.fr" popupTrigger="focus" (keyup.@)="suffix()">
           <div class="ui corner label">
             <i class="asterisk icon"></i>
           </div>
@@ -49,16 +49,13 @@
       </div>
       <div class="required field" [ngClass]="{ 'error': submitted && f.promotion.errors }">
         <label>Promotion</label>
-        <div class="ui left icon corner labeled input">
-          <i class="users icon"></i>
-          <input suiDatepicker pickerMode="year" placeholder="Promotion"
-                 formControlName="promotion" [pickerMinDate]="minPromotion"
-                 suiPopup popupPlacement="top left" popupHeader="Promotion"
-                 popupText="Année d'obtention du futur diplôme" popupTrigger="focus">
-          <div class="ui corner label">
-            <i class="asterisk icon"></i>
-          </div>
-        </div>
+        <sui-select class="fluid selection" label="promotion"
+                    placeholder="Sélectionner une option"
+                    [options]="promotions" formControlName="promotion"
+                    #selectPromotion>
+          <sui-select-option *ngFor="let option of selectPromotion.filteredOptions"
+                             [value]="option"></sui-select-option>
+        </sui-select>
         <app-form-error *ngIf="submitted && f.promotion.errors" [errors]="f.promotion.errors"></app-form-error>
       </div>
       <div class="required field" [ngClass]="{ 'error': submitted && f.birth_date.errors }">
@@ -66,7 +63,7 @@
         <div class="ui left icon corner labeled input">
           <i class="calendar alternate icon"></i>
           <input suiDatepicker pickerMode="date" placeholder="Date de naissance"
-                 formControlName="birth_date">
+                 formControlName="birth_date" [pickerUseNativeOnMobile]="true">
           <div class="ui corner label">
             <i class="asterisk icon"></i>
           </div>

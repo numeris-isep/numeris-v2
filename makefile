@@ -2,6 +2,9 @@
 ####################
 
 start:
+	docker-compose up
+
+start-d:
 	docker-compose up -d
 
 build:

@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { ComponentModalConfig, ModalSize, SuiModal } from 'ng2-semantic-ui';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../../core/http/auth/auth.service';
 import { first } from 'rxjs/operators';
 import { AlertService } from '../../../../core/services/alert.service';
 import { User } from '../../../../core/classes/models/user';
 import { handleFormErrors } from '../../../../core/functions/form-error-handler';
-import { dateToString, dateToYear } from '../../../../shared/utils';
+import { dateToString } from '../../../../shared/utils';
 import * as moment from 'moment';
 
 @Component({
   selector: 'app-subscribe-modal',
   templateUrl: './subscribe-modal.component.html',
-  styleUrls: ['./subscribe-modal.component.html'],
+  styleUrls: ['../contact-us-modal/contact-us-modal.component.css']
 })
 export class SubscribeModalComponent implements OnInit {
 
   subscribeForm: FormGroup;
   loading: boolean = false;
   submitted: boolean = false;
-  minPromotion = moment().subtract(1, 'year').toDate();
+  promotions: number[] = [];
 
   constructor(
     public subscribeModal: SuiModal<void, void, void>,
@@ -29,6 +29,24 @@ export class SubscribeModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.initPromotions();
+    this.initForm();
+  }
+
+  get f() { return this.subscribeForm.controls; }
+
+  fa(field: string) { return this.subscribeForm.get(`address.${field}`); }
+
+  initPromotions() {
+    let currentYear = moment().get('year');
+
+    for (let i = 0; i < 7; i++) {
+      this.promotions.push(currentYear);
+      currentYear++;
+    }
+  }
+
+  initForm() {
     this.subscribeForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
@@ -45,10 +63,6 @@ export class SubscribeModalComponent implements OnInit {
     });
   }
 
-  get f() { return this.subscribeForm.controls; }
-
-  fa(field: string) { return this.subscribeForm.get(`address.${field}`); }
-
   onSubmit() {
     this.submitted = true;
 
@@ -56,7 +70,6 @@ export class SubscribeModalComponent implements OnInit {
 
     this.loading = true;
     this.f.birth_date.setValue(dateToString(this.f.birth_date.value));
-    this.f.promotion.setValue(dateToYear(this.f.promotion.value));
 
     this.authService.subscribe(this.subscribeForm.value)
       .pipe(first())
@@ -72,6 +85,14 @@ export class SubscribeModalComponent implements OnInit {
           this.loading = false;
         }
       );
+  }
+
+  suffix() {
+    const email: AbstractControl = this.f.email;
+
+    if (! email.value.includes('@isep.fr')) {
+      email.setValue(email.value + 'isep.fr');
+    }
   }
 
 }

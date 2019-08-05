@@ -39,7 +39,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   selectedPromotion: string;
   roles: Role[];
   promotions: string[];
-  loading = false;
+  loading: boolean = false;
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
