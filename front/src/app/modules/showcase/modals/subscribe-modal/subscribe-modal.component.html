@@ -51,7 +51,9 @@
         <label>Promotion</label>
         <sui-select class="fluid selection" label="promotion"
                     placeholder="Sélectionner une option"
-                    [options]="promotions" formControlName="promotion"
+                    [options]="promotions" formControlName="promotion" suiPopup
+                    popupHeader="Promotion" popupPlacement="top left" popupTrigger="focus"
+                    popupText="Année d'obtention du diplôme ISEP"
                     #selectPromotion>
           <sui-select-option *ngFor="let option of selectPromotion.filteredOptions"
                              [value]="option"></sui-select-option>
