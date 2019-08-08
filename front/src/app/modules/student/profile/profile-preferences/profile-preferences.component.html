@@ -1,9 +1,9 @@
 <form class="ui form fluid card" [formGroup]="preferenceForm" (ngSubmit)="updatePreference()">
   <div class="content">
-    <h4>
+    <div class="ui ribbon label">
       <i class="bell icon"></i>
       Notifications
-    </h4>
+    </div>
 
     <div class="ui horizontal divider">A chaque ...</div>
     <div class="field">
@@ -41,7 +41,7 @@
   </div>
 
   <app-button hiddenIcon="save" attachment="bottom attached"
-              behaviour="fluid" color="positive" size="tiny"
+              behaviour="fluid" color="positive" size="small"
               [isDisabled]="preferenceForm.pristine" [isLoading]="loading"
               (submit)="updatePreference()">
     Sauvegarder

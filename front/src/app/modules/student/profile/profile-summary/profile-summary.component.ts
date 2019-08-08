@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { User } from "../../../../core/classes/models/user";
-import { AuthService } from "../../../../core/http/auth/auth.service";
+import { User } from '../../../../core/classes/models/user';
+import { AuthService } from '../../../../core/http/auth/auth.service';
 
 @Component({
   selector: 'app-profile-summary',
-  templateUrl: './profile-summary.component.html'
+  templateUrl: './profile-summary.component.html',
+  styleUrls: ['./profile-summary.component.css']
 })
 export class ProfileSummaryComponent implements OnInit {
 

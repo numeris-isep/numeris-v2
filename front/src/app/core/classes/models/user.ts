@@ -16,9 +16,7 @@ export class User {
   username: string;
   firstName: string;
   lastName: string;
-  studentNumber: number;
   promotion: string;
-  schoolYear: string;
   phone: string;
   nationality: string;
   birthDate: string;

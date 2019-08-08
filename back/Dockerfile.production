@@ -19,7 +19,6 @@ RUN a2dissite 000-default.conf && a2ensite numeris.conf && a2enmod rewrite && se
 
 COPY . /home/numeris
 
-
 ### Back config ###
 WORKDIR /home/numeris
 RUN composer install --optimize-autoloader --no-dev --no-interaction

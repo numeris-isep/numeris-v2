@@ -1,7 +1,10 @@
 <div *ngFor="let alert of alerts">
   <div *ngIf="target === alert.target || alert.target === 'all'" class="padded" #div>
     <sui-message class="{{ cssClass(alert) }} icon" (dismiss)="div.remove()">
-      <i *ngIf="alert.title" class="frown outline loading icon"></i>
+      <ng-container *ngIf="alert.title">
+        <i *ngIf="cssClass(alert) === 'success'" class="smile outline loading icon"></i>
+        <i *ngIf="cssClass(alert) === 'warning' || cssClass(alert) === 'error'" class="frown outline loading icon"></i>
+      </ng-container>
       <div class="content">
         <div *ngIf="alert.title" class="header">
           {{ alert.title }}
@@ -10,7 +13,7 @@
           <span *ngIf="alert.content.length == 1; else contents">{{ alert.content }}</span>
           <ng-template #contents>
             <ul>
-              <li *ngFor="let message of content">{{ message }}</li>
+              <li *ngFor="let message of alert.content">{{ message }}</li>
             </ul>
           </ng-template>
         </div>
