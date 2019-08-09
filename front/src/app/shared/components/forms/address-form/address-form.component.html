@@ -1,0 +1,32 @@
+<div class="three required fields" [formGroup]="addressForm">
+  <div class="eight wide field" [ngClass]="{ 'error': submitted && f.street.errors }">
+    <label>Rue</label>
+    <div class="ui corner labeled input">
+      <input type="text" formControlName="street" placeholder="Rue">
+      <div class="ui corner label">
+        <i class="asterisk icon"></i>
+      </div>
+    </div>
+    <app-form-error *ngIf="submitted && f.street.errors" [errors]="f.street.errors"></app-form-error>
+  </div>
+  <div class="four wide field" [ngClass]="{ 'error': submitted && f.zip_code.errors }">
+    <label>Code postal</label>
+    <div class="ui corner labeled input">
+      <input type="text" formControlName="zip_code" placeholder="Code postal">
+      <div class="ui corner label">
+        <i class="asterisk icon"></i>
+      </div>
+    </div>
+    <app-form-error *ngIf="submitted && f.zip_code.errors" [errors]="f.zip_code.errors"></app-form-error>
+  </div>
+  <div class="four wide field" [ngClass]="{ 'error': submitted && f.city.errors }">
+    <label>Ville</label>
+    <div class="ui corner labeled input">
+      <input type="text" formControlName="city" placeholder="Ville">
+      <div class="ui corner label">
+        <i class="asterisk icon"></i>
+      </div>
+    </div>
+    <app-form-error *ngIf="submitted && f.city.errors" [errors]="f.city.errors"></app-form-error>
+  </div>
+</div>

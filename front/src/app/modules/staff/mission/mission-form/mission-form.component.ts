@@ -61,31 +61,19 @@ export class MissionFormComponent implements OnInit {
         this.mission ? this.mission.capacity : '',
         Validators.required,
       ],
-      address: this.fb.group({
-        street: [
-          this.mission ? this.mission.address.street : '',
-          Validators.required,
-        ],
-        zip_code: [
-          this.mission ? this.mission.address.zipCode : '',
-          Validators.required,
-        ],
-        city: [
-          this.mission ? this.mission.address.city : '',
-          Validators.required,
-        ],
-      })
     });
   }
 
-  get f() { return this.missionForm.controls }
+  get f() { return this.missionForm.controls; }
 
-  fa(field: string) { return this.missionForm.get(`address.${field}`); }
+  addAddressForm(addressForm: FormGroup) {
+    this.missionForm.addControl('address', addressForm);
+  }
 
   onSubmit() {
     this.submitted = true;
 
-    if (this.missionForm.invalid) return;
+    if (this.missionForm.invalid) { return; }
 
     this.loading = true;
     this.f.start_at.setValue(dateToString(this.f.start_at.value)); // Handle date

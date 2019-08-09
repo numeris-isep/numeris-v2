@@ -17,6 +17,7 @@ import * as moment from 'moment';
 export class SubscribeModalComponent implements OnInit {
 
   subscribeForm: FormGroup;
+  addressForm: FormGroup;
   loading: boolean = false;
   submitted: boolean = false;
   promotions: number[] = [];
@@ -55,16 +56,17 @@ export class SubscribeModalComponent implements OnInit {
       last_name: ['', Validators.required],
       promotion: ['', Validators.required],
       birth_date: ['', Validators.required],
-      address: this.formBuilder.group({
-        street: ['', Validators.required],
-        zip_code: ['', Validators.required],
-        city: ['', Validators.required],
-      })
     });
+  }
+
+  addAddressForm(addressForm: FormGroup) {
+    this.subscribeForm.addControl('address', addressForm);
   }
 
   onSubmit() {
     this.submitted = true;
+
+    console.log(this.subscribeForm.value);
 
     if (this.subscribeForm.invalid) { return; }
 

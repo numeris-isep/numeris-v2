@@ -21,6 +21,7 @@ import { StatusPipe } from './pipes/status.pipe';
 import { FormErrorComponent } from './components/form-error/form-error.component';
 import { PaginationCaptionComponent } from './components/pagination-caption/pagination-caption.component';
 import { ConventionDetailsComponent } from '../modules/staff/client/convention-details/convention-details.component';
+import { AddressFormComponent } from './components/forms/address-form/address-form.component';
 
 @NgModule({
   imports: [
@@ -50,6 +51,7 @@ import { ConventionDetailsComponent } from '../modules/staff/client/convention-d
     FormErrorComponent,
     PaginationCaptionComponent,
     ConventionDetailsComponent,
+    AddressFormComponent,
   ],
   exports: [
     // Components
@@ -74,6 +76,7 @@ import { ConventionDetailsComponent } from '../modules/staff/client/convention-d
     PhonePipe,
     RolePipe,
     StatusPipe,
+    AddressFormComponent,
   ],
   providers: [
     AlertService

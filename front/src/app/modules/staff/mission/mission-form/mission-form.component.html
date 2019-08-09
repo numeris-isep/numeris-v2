@@ -91,38 +91,8 @@
       </div>
 
       <h4 class="ui dividing header">Adresse</h4>
-      <div class="three required fields" formGroupName="address">
-        <div class="eight wide field" [ngClass]="{ 'error': submitted && fa('street').errors }">
-          <label>Rue</label>
-          <div class="ui corner labeled input">
-            <input type="text" formControlName="street" placeholder="Rue">
-            <div class="ui corner label">
-              <i class="asterisk icon"></i>
-            </div>
-          </div>
-          <app-form-error *ngIf="submitted && fa('street').errors" [errors]="fa('street').errors"></app-form-error>
-        </div>
-        <div class="four wide field" [ngClass]="{ 'error': submitted && fa('zip_code').errors }">
-          <label>Code postal</label>
-          <div class="ui corner labeled input">
-            <input type="text" formControlName="zip_code" placeholder="Code postal">
-            <div class="ui corner label">
-              <i class="asterisk icon"></i>
-            </div>
-          </div>
-          <app-form-error *ngIf="submitted && fa('zip_code').errors" [errors]="fa('zip_code').errors"></app-form-error>
-        </div>
-        <div class="four wide field" [ngClass]="{ 'error': submitted && fa('city').errors }">
-          <label>Ville</label>
-          <div class="ui corner labeled input">
-            <input type="text" formControlName="city" placeholder="Ville">
-            <div class="ui corner label">
-              <i class="asterisk icon"></i>
-            </div>
-          </div>
-          <app-form-error *ngIf="submitted && fa('city').errors" [errors]="fa('city').errors"></app-form-error>
-        </div>
-      </div>
+      <app-address-form [submitted]="submitted" [address]="this.mission ? this.mission.address : null"
+                        (formReady)="addAddressForm($event)" ></app-address-form>
 
       <div class="field">
         <div *ngIf="!mission; else edit" class="ui buttons">

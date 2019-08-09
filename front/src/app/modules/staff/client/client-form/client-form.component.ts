@@ -44,26 +44,14 @@ export class ClientFormComponent implements OnInit {
         Validators.required,
       ],
       contact_id: [this.client ? (this.client.contact ? this.client.contact.id : '') : ''],
-      address: this.fb.group({
-        street: [
-          this.client ? this.client.address.street : '',
-          Validators.required,
-        ],
-        zip_code: [
-          this.client ? this.client.address.zipCode : '',
-          Validators.required,
-        ],
-        city: [
-          this.client ? this.client.address.city : '',
-          Validators.required,
-        ],
-      })
     });
   }
 
   get f() { return this.clientForm.controls; }
 
-  fa(field: string) { return this.clientForm.get(`address.${field}`); }
+  addAddressForm(addressForm: FormGroup) {
+    this.clientForm.addControl('address', addressForm);
+  }
 
   onSubmit() {
     this.submitted = true;
