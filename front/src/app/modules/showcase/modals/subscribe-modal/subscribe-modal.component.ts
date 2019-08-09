@@ -54,8 +54,11 @@ export class SubscribeModalComponent implements OnInit {
     this.subscribeForm.addControl('email', userForm.controls.email);
     this.subscribeForm.addControl('promotion', userForm.controls.promotion);
     this.subscribeForm.addControl('birth_date', userForm.controls.birth_date);
-    this.subscribeForm.addControl('password', userForm.controls.password);
-    this.subscribeForm.addControl('password_confirmation', userForm.controls.password_confirmation);
+  }
+
+  addPasswordForm(passwordForm: FormGroup) {
+    this.subscribeForm.addControl('password', passwordForm.controls.password);
+    this.subscribeForm.addControl('password_confirmation', passwordForm.controls.password_confirmation);
   }
 
   addAddressForm(addressForm: FormGroup) {

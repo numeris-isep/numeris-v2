@@ -23,6 +23,7 @@ import { PaginationCaptionComponent } from './components/pagination-caption/pagi
 import { ConventionDetailsComponent } from '../modules/staff/client/convention-details/convention-details.component';
 import { AddressFormComponent } from './components/forms/address-form/address-form.component';
 import { UserFormComponent } from './components/forms/user-form/user-form.component';
+import { PasswordFormComponent } from './components/forms/password-form/password-form.component';
 
 @NgModule({
   imports: [
@@ -54,6 +55,7 @@ import { UserFormComponent } from './components/forms/user-form/user-form.compon
     ConventionDetailsComponent,
     AddressFormComponent,
     UserFormComponent,
+    PasswordFormComponent,
   ],
   exports: [
     // Components
@@ -80,6 +82,7 @@ import { UserFormComponent } from './components/forms/user-form/user-form.compon
     StatusPipe,
     AddressFormComponent,
     UserFormComponent,
+    PasswordFormComponent,
   ],
   providers: [
     AlertService
