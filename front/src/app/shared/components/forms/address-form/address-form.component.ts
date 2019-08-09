@@ -19,6 +19,7 @@ export class AddressFormComponent implements OnInit {
 
   ngOnInit() {
     this.initAddressForm();
+    this.formReady.emit(this.addressForm);
   }
 
   initAddressForm() {
@@ -27,8 +28,6 @@ export class AddressFormComponent implements OnInit {
       zip_code: [this.address ? this.address.zipCode : '', Validators.required],
       city: [this.address ? this.address.city : '', Validators.required],
     });
-
-    this.formReady.emit(this.addressForm);
   }
 
   get f() {

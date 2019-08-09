@@ -22,6 +22,7 @@ import { FormErrorComponent } from './components/form-error/form-error.component
 import { PaginationCaptionComponent } from './components/pagination-caption/pagination-caption.component';
 import { ConventionDetailsComponent } from '../modules/staff/client/convention-details/convention-details.component';
 import { AddressFormComponent } from './components/forms/address-form/address-form.component';
+import { UserFormComponent } from './components/forms/user-form/user-form.component';
 
 @NgModule({
   imports: [
@@ -52,6 +53,7 @@ import { AddressFormComponent } from './components/forms/address-form/address-fo
     PaginationCaptionComponent,
     ConventionDetailsComponent,
     AddressFormComponent,
+    UserFormComponent,
   ],
   exports: [
     // Components
@@ -77,6 +79,7 @@ import { AddressFormComponent } from './components/forms/address-form/address-fo
     RolePipe,
     StatusPipe,
     AddressFormComponent,
+    UserFormComponent,
   ],
   providers: [
     AlertService

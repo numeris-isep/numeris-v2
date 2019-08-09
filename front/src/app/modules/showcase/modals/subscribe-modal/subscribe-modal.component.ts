@@ -17,7 +17,6 @@ import * as moment from 'moment';
 export class SubscribeModalComponent implements OnInit {
 
   subscribeForm: FormGroup;
-  addressForm: FormGroup;
   loading: boolean = false;
   submitted: boolean = false;
   promotions: number[] = [];
@@ -36,8 +35,6 @@ export class SubscribeModalComponent implements OnInit {
 
   get f() { return this.subscribeForm.controls; }
 
-  fa(field: string) { return this.subscribeForm.get(`address.${field}`); }
-
   initPromotions() {
     let currentYear = moment().get('year');
 
@@ -48,15 +45,17 @@ export class SubscribeModalComponent implements OnInit {
   }
 
   initForm() {
-    this.subscribeForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-      password_confirmation: ['', Validators.required],
-      first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
-      promotion: ['', Validators.required],
-      birth_date: ['', Validators.required],
-    });
+    this.subscribeForm = this.formBuilder.group({});
+  }
+
+  addUserForm(userForm: FormGroup) {
+    this.subscribeForm.addControl('first_name', userForm.controls.first_name);
+    this.subscribeForm.addControl('last_name', userForm.controls.last_name);
+    this.subscribeForm.addControl('email', userForm.controls.email);
+    this.subscribeForm.addControl('promotion', userForm.controls.promotion);
+    this.subscribeForm.addControl('birth_date', userForm.controls.birth_date);
+    this.subscribeForm.addControl('password', userForm.controls.password);
+    this.subscribeForm.addControl('password_confirmation', userForm.controls.password_confirmation);
   }
 
   addAddressForm(addressForm: FormGroup) {
@@ -65,8 +64,6 @@ export class SubscribeModalComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
-    console.log(this.subscribeForm.value);
 
     if (this.subscribeForm.invalid) { return; }
 
@@ -87,14 +84,6 @@ export class SubscribeModalComponent implements OnInit {
           this.loading = false;
         }
       );
-  }
-
-  suffix() {
-    const email: AbstractControl = this.f.email;
-
-    if (! email.value.includes('@isep.fr')) {
-      email.setValue(email.value + 'isep.fr');
-    }
   }
 
 }
