@@ -34,7 +34,11 @@ export class BreadcrumbsService {
         breadcrumbs.push({title: title, url: url.path});
         this.addBreadcrumb(breadcrumbs);
       } else {
-        breadcrumbs = [BreadcrumbsService.getAncestorBreadcrumbs(route)[0]];
+        const ancestor = BreadcrumbsService.getAncestorBreadcrumbs(route)[0];
+
+        if (ancestor) {
+          breadcrumbs.push(ancestor);
+        }
 
         if (breadcrumb) {
           if (Array.isArray(breadcrumb)) {

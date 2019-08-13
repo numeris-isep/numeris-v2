@@ -5,19 +5,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class PhonePipe implements PipeTransform {
 
-  transform(phone: string, args?: any): string | null {
-    if (phone != null) {
-      const separator: string = "\xa0";
-      let result: string = "";
-
-      for (let i = 0; i < phone.length; i += 2) {
-        result += phone.substr(i, 2) + (i != 8 ? separator : "");
-      }
-
-      return result;
-    }
-
-    return null;
+  transform(phone: string, args?: any): string {
+    return phone.replace(/[^\d]/g, '')
+      .replace(/(.{2})/g, '$1 ')
+      .trim();
   }
 
 }

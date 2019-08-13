@@ -25,9 +25,9 @@
   </div>
 
   <div class="three fields">
-    <div class="required field" [ngClass]="{ 'error': submitted && f.email.errors }">
+    <div class="required six wide field" [ngClass]="{ 'error': submitted && f.email.errors }">
       <label>Adresse email ISEP</label>
-      <div class="ui left icon corner right labeled input">
+      <div class="ui left icon corner labeled input">
         <i class="envelope icon"></i>
         <input type="text" formControlName="email" placeholder="Email"
                suiPopup popupPlacement="top left" popupHeader="Adresse email ISEP"
@@ -40,14 +40,14 @@
     </div>
     <div class="required field" [ngClass]="{ 'error': submitted && f.promotion.errors }">
       <label>Promotion</label>
-      <sui-select class="fluid selection" label="promotion"
+      <sui-select class="fluid selection" labelField="promotion" valueField="id"
                   placeholder="Sélectionner une option"
                   [options]="promotions" formControlName="promotion" suiPopup
                   popupHeader="Promotion" popupPlacement="top left" popupTrigger="focus"
                   popupText="Année d'obtention du diplôme ISEP"
                   #selectPromotion>
         <sui-select-option *ngFor="let option of selectPromotion.filteredOptions"
-                           [value]="option"></sui-select-option>
+                           [value]="option"><i class="building icon"></i></sui-select-option>
       </sui-select>
       <app-form-error *ngIf="submitted && f.promotion.errors" [errors]="f.promotion.errors"></app-form-error>
     </div>

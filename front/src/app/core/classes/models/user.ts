@@ -1,6 +1,6 @@
-import { Address } from "./address";
-import { Preference } from "./preference";
-import { Role } from "./role";
+import { Address } from './address';
+import { Preference } from './preference';
+import { Role } from './role';
 
 export class User {
 
@@ -22,6 +22,7 @@ export class User {
   birthDate: string;
   birthCity: string;
   socialInsuranceNumber: string;
+  social_insurance_number: string;
   iban: string;
   bic: string;
   createdAt: string;

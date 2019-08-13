@@ -72,7 +72,7 @@ export class ClientFormComponent implements OnInit {
         client => {
           this.loading = false;
           this.router.navigate([`/clients/${client.id}`]);
-          if (this.client) this.alertService.success([`Le client ${client.name} a bien été modifié.`]);
+          if (this.client) { this.alertService.success([`Le client ${client.name} a bien été modifié.`]); }
         },
         errors => {
           handleFormErrors(this.clientForm, errors);

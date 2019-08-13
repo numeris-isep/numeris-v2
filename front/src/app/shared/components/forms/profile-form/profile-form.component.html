@@ -1,0 +1,92 @@
+<div [formGroup]="profileForm">
+  <h4 class="ui dividing header">Informations</h4>
+  <app-user-form [submitted]="submitted" [user]="user" (formReady)="addUserForm($event)"></app-user-form>
+
+  <div class="two fields">
+    <div class="required field" [ngClass]="{ 'error': submitted && f.phone.errors }">
+      <label>Téléphone</label>
+      <div class="ui left icon corner labeled input">
+        <i class="phone icon"></i>
+        <input type="text" formControlName="phone" [value]="f.phone.value | phone" placeholder="Téléphone">
+        <div class="ui corner label">
+          <i class="asterisk icon"></i>
+        </div>
+      </div>
+      <app-form-error *ngIf="submitted && f.phone.errors" [errors]="f.phone.errors"></app-form-error>
+    </div>
+    <div class="required field" [ngClass]="{ 'error': submitted && f.birth_city.errors }">
+      <label>Ville de naissance</label>
+      <div class="ui left icon corner labeled input">
+        <i class="building icon"></i>
+        <input type="text" formControlName="birth_city" placeholder="Ville de naissance">
+        <div class="ui corner label">
+          <i class="asterisk icon"></i>
+        </div>
+      </div>
+      <app-form-error *ngIf="submitted && f.birth_city.errors" [errors]="f.birth_city.errors"></app-form-error>
+    </div>
+  </div>
+
+  <div class="two fields">
+    <div class="required seven wide field" [ngClass]="{ 'error': submitted && f.nationality.errors }">
+      <label>Nationalité</label>
+      <ng-template let-country #countryTemplate>
+        <i class="{{ country.code }} flag"></i> {{ country.translation }}
+      </ng-template>
+      <sui-select class="fluid selection" labelField="translation" valueField="translation"
+                  placeholder="Sélectionner une option" formControlName="nationality"
+                  [options]="nationalities" [optionTemplate]="countryTemplate" isSearchable="true"
+                  #selectNationality>
+        <sui-select-option *ngFor="let option of selectNationality.filteredOptions"
+                           [value]="option"></sui-select-option>
+      </sui-select>
+      <app-form-error *ngIf="submitted && f.nationality.errors" [errors]="f.nationality.errors"></app-form-error>
+    </div>
+    <div class="required eleven wide field" [ngClass]="{ 'error': submitted && f.social_insurance_number.errors }">
+      <label>Numéro de sécurité sociale</label>
+      <div class="ui left icon corner labeled input">
+        <i class="heartbeat icon"></i>
+        <input type="text" formControlName="social_insurance_number"
+               placeholder="Numéro de sécurité sociale" [value]="f.social_insurance_number.value | socialInsuranceNumber"
+               suiPopup popupTrigger="focus" popupHeader="Numéro de sécurité sociale"
+               popupText="Numéro à 15 chiffres au recto de votre carte vitale">
+        <div class="ui corner label">
+          <i class="asterisk icon"></i>
+        </div>
+      </div>
+      <app-form-error *ngIf="submitted && f.social_insurance_number.errors" [errors]="f.social_insurance_number.errors"></app-form-error>
+    </div>
+  </div>
+
+  <h4 class="ui dividing header">Coordonnées bancaires</h4>
+  <div class="two fields">
+    <div class="required ten wide field" [ngClass]="{ 'error': submitted && f.iban.errors }">
+      <label>IBAN</label>
+      <div class="ui left icon corner labeled input">
+        <i class="euro sign icon"></i>
+        <input type="text" formControlName="iban" placeholder="IBAN">
+        <div class="ui corner label">
+          <i class="asterisk icon"></i>
+        </div>
+      </div>
+      <app-form-error *ngIf="submitted && f.iban.errors" [errors]="f.iban.errors"></app-form-error>
+    </div>
+    <div class="required six wide field" [ngClass]="{ 'error': submitted && f.bic.errors }">
+      <label>BIC</label>
+      <div class="ui left icon corner labeled input">
+        <i class="money bill icon"></i>
+        <input type="text" formControlName="bic" placeholder="BIC">
+        <div class="ui corner label">
+          <i class="asterisk icon"></i>
+        </div>
+      </div>
+      <app-form-error *ngIf="submitted && f.bic.errors" [errors]="f.bic.errors"></app-form-error>
+    </div>
+  </div>
+
+  <h4 class="ui dividing header">Adresse</h4>
+  <app-address-form [submitted]="submitted" [address]="user.address" (formReady)="addAddressForm($event)"></app-address-form>
+
+  <h4 class="ui dividing header">Mot de passe</h4>
+  <app-password-form [submitted]="submitted" [required]="false" (formReady)="addPasswordForm($event)"></app-password-form>
+</div>

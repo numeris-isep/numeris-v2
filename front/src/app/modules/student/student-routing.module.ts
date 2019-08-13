@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from "@angular/router";
-import { DashboardComponent } from "./dashboard/dashboard.component";
-import { ProfileComponent } from "./profile/profile.component";
-import { TermsOfUseComponent } from "./terms-of-use/terms-of-use.component";
-import { AuthGuard } from "../../core/guards/auth.guard";
-import { MissionComponent } from "./mission/mission.component";
-import { ApplicationComponent } from "./application/application.component";
-import { TutorialComponent } from "./tutorial/tutorial.component";
-import { ContactUsComponent } from "./contact-us/contact-us.component";
-import { ActivatedGuard } from "../../core/guards/activated.guard";
+import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProfileComponent } from './profile/profile.component';
+import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
+import { AuthGuard } from '../../core/guards/auth.guard';
+import { MissionComponent } from './mission/mission.component';
+import { ApplicationComponent } from './application/application.component';
+import { TutorialComponent } from './tutorial/tutorial.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { ActivatedGuard } from '../../core/guards/activated.guard';
+import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 
 const studentRoutes: Routes = [
   {
@@ -18,6 +19,11 @@ const studentRoutes: Routes = [
     data: {
       title: 'Tableau de bord',
     }
+  },
+  {
+    path: 'profil/modifier',
+    component: ProfileEditComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'profil',

@@ -32,6 +32,7 @@
         Nationalité
       </td>
       <td>
+        <i class="{{ user.nationality | countryCode }} flag"></i>
         {{ (user.nationality | titlecase) || '-' }}
       </td>
     </tr>
@@ -40,14 +41,14 @@
         <i class="heartbeat icon"></i>
         Numéro de sécurité sociale
       </td>
-      <td>{{ user.socialInsuranceNumber || '-' }}</td>
+      <td>{{ (user.socialInsuranceNumber | socialInsuranceNumber) || '-' }}</td>
     </tr>
     <tr>
       <td class="collapsing">
         <i class="euro sign icon"></i>
         IBAN
       </td>
-      <td>{{ user.iban || '-' }}</td>
+      <td>{{ (user.iban | iban) || '-' }}</td>
     </tr>
     <tr>
       <td class="collapsing">
@@ -61,7 +62,7 @@
 </div>
 
 <div class="ui small bottom attached buttons">
-  <div class="ui animated fade orange button">
+  <div class="ui animated fade orange button" routerLink="/profil/modifier">
     <div class="visible content">Modifier</div>
     <div class="hidden content">
       <i class="edit icon"></i>

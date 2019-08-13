@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Client } from "../../../../core/classes/models/client";
-import { ActivatedRoute } from "@angular/router";
-import { ClientService } from "../../../../core/http/client.service";
-import { TitleService } from "../../../../core/services/title.service";
-import { BreadcrumbsService } from "../../../../core/services/breadcrumbs.service";
+import { Client } from '../../../../core/classes/models/client';
+import { ActivatedRoute } from '@angular/router';
+import { ClientService } from '../../../../core/http/client.service';
+import { TitleService } from '../../../../core/services/title.service';
+import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.service';
 
 @Component({
   selector: 'app-client-edit',
@@ -23,7 +23,7 @@ export class ClientEditComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(param => {
       this.getClient(parseInt(param.clientId));
-    })
+    });
   }
 
   getClient(clientId: number) {

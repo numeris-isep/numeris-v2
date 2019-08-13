@@ -4,20 +4,15 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AlertService } from '../services/alert.service';
 import { Router } from '@angular/router';
-import { LoginModal } from '../../modules/showcase/modals/login-modal/login-modal.component';
-import { SuiModalService } from 'ng2-semantic-ui';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorInterceptor implements HttpInterceptor {
 
-  private loginModal: LoginModal;
-
   constructor(
     private alertService: AlertService,
     private router: Router,
-    private modalService: SuiModalService,
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -30,11 +25,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           break;
 
         case 403:
-          this.loginModal = new LoginModal(
-            'Veuillez vous connecter pour accéder à cette ressource',
-            this.router.url
-          );
-          this.modalService.open(this.loginModal);
+          this.alertService.error(['Vous n\'avez pas le droit d\'effectuer cette action.'], null, null);
           break;
 
         case 404:

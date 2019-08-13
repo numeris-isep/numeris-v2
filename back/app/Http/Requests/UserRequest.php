@@ -33,12 +33,13 @@ class UserRequest extends AbstractFormRequest
      */
     public function rules()
     {
-        $user_id = $this->ids;
+        $user_id = $this->route('user_id');
 
         $rules = [
-            'password'          => 'required|confirmed',
+            'password'          => 'confirmed',
             'first_name'        => 'required|string',
             'last_name'         => 'required|string',
+            'email'             => 'required|email|regex:^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(isep)\.fr$^',
             'promotion'         => 'required|integer|min:' . now()->year,
             'birth_date'        => 'required|date',
 
@@ -49,21 +50,22 @@ class UserRequest extends AbstractFormRequest
         ];
 
         $put_rules = [
-            'phone'                     => 'required|string|min:10',
+            'phone'                     => 'required|numeric|min:10',
             'nationality'               => 'required|string',
             'birth_city'                => 'required|string',
-            'social_insurance_number'   => 'required|string',
-            'iban'                      => 'required|string|min:13',
-            'bic'                       => 'required|string',
+            'social_insurance_number'   => 'required|string|size:15',
+            'iban'                      => 'required|string|min:15',
+            'bic'                       => 'required|string|size:8',
         ];
 
         switch($this->method())
         {
             case 'POST':
-                $rules['email'] = 'required|email|regex:^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(isep)\.fr$^|unique:users,email';
+                $rules['email'] = $rules['email'] . '|unique:users,email';
+                $rules['password'] = $rules['password'] . '|required';
                 return $rules;
             case 'PUT':
-                $rules['email'] = 'required|email|regex:^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(isep)\.fr$^|unique:users,email,' . $user_id;
+                $rules['email'] = $rules['email'] . '|unique:users,email,' . $user_id;
                 return array_merge($rules, $put_rules);
             default:break;
         }

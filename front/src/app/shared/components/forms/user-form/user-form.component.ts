@@ -10,7 +10,7 @@ import * as moment from 'moment';
 export class UserFormComponent implements OnInit {
 
   userForm: FormGroup;
-  promotions: number[] = [];
+  promotions: { promotion: number, id: number }[] = [];
 
   @Input() user: User;
   @Input() submitted: boolean;
@@ -30,7 +30,7 @@ export class UserFormComponent implements OnInit {
     let currentYear = moment().get('year');
 
     for (let i = 0; i < 7; i++) {
-      this.promotions.push(currentYear);
+      this.promotions.push({ promotion: currentYear, id: currentYear});
       currentYear++;
     }
   }
@@ -40,7 +40,7 @@ export class UserFormComponent implements OnInit {
       email: [this.user ? this.user.email : '', Validators.required],
       first_name: [this.user ? this.user.firstName : '', Validators.required],
       last_name: [this.user ? this.user.lastName : '', Validators.required],
-      promotion: [this.user ? this.user.promotion : '', Validators.required],
+      promotion: [this.user ? parseInt(this.user.promotion) : '', Validators.required],
       birth_date: [this.user ? this.user.birthDate : '', Validators.required],
     });
   }

@@ -6,7 +6,6 @@
   <form class="ui large form" autocomplete="off"
         [formGroup]="subscribeForm" (ngSubmit)="onSubmit()"
         [ngClass]="{'error': submitted && subscribeForm.invalid, 'loading': loading}">
-    <input autocomplete="off" name="hidden" type="text" style="display:none;">
 
     <h4 class="ui dividing header">Informations</h4>
     <app-user-form [submitted]="submitted" (formReady)="addUserForm($event)"></app-user-form>

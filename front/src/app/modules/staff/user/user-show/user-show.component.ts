@@ -40,7 +40,7 @@ export class UserShowComponent implements OnInit {
         this.breadcrumbService.setBreadcrumb(
           this.route.snapshot,
           { title: name, url: '' }
-        )
+        );
     });
   }
 

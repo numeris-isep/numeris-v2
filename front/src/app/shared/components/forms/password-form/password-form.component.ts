@@ -22,6 +22,7 @@ export class PasswordFormComponent implements OnInit {
   ];
 
   @Input() submitted: boolean;
+  @Input() required: boolean = true;
   @Output() formReady: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
   constructor(private formBuilder: FormBuilder) { }
@@ -35,8 +36,8 @@ export class PasswordFormComponent implements OnInit {
 
   initPasswordForm() {
     this.passwordForm = this.formBuilder.group({
-      password: ['', Validators.required],
-      password_confirmation: ['', Validators.required],
+      password: ['', this.required ? Validators.required : null],
+      password_confirmation: ['', this.required ? Validators.required : null],
     });
   }
 

@@ -1,0 +1,37 @@
+<app-content [condition]="! (user && userForm)">
+  <div class="ui padded centered grid doubling">
+    <div class="twelve wide column">
+      <div class="ui segments">
+        <div class="ui segment">
+          <div class="ui blue ribbon label">
+            <i class="user icon"></i>
+            Profil - Modifier
+          </div>
+        </div>
+
+        <form class="ui form segment" autocomplete="off"
+              [formGroup]="userForm" (ngSubmit)="onSubmit()"
+              [ngClass]="{'error': submitted && userForm.invalid, 'loading': loading}">
+          <app-profile-form *ngIf="user" [submitted]="submitted" [user]="user" (formReady)="addProfileForm($event)"></app-profile-form>
+
+          <div class="ui buttons">
+            <a class="ui animated fade button" routerLink="/profil">
+              <div class="visible content">Annuler</div>
+              <div class="hidden content">
+                <i class="cancel icon"></i>
+              </div>
+            </a>
+            <div class="or" data-text="ou"></div>
+            <button class="ui animated fade orange button"
+                    [ngClass]="{'loading': loading, 'disabled': userForm.invalid}">
+              <div class="visible content">Modifier</div>
+              <div class="hidden content">
+                <i class="plus icon"></i>
+              </div>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</app-content>

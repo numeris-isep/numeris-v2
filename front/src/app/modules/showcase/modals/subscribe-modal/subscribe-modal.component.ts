@@ -19,7 +19,6 @@ export class SubscribeModalComponent implements OnInit {
   subscribeForm: FormGroup;
   loading: boolean = false;
   submitted: boolean = false;
-  promotions: number[] = [];
 
   constructor(
     public subscribeModal: SuiModal<void, void, void>,
@@ -29,20 +28,10 @@ export class SubscribeModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.initPromotions();
     this.initForm();
   }
 
   get f() { return this.subscribeForm.controls; }
-
-  initPromotions() {
-    let currentYear = moment().get('year');
-
-    for (let i = 0; i < 7; i++) {
-      this.promotions.push(currentYear);
-      currentYear++;
-    }
-  }
 
   initForm() {
     this.subscribeForm = this.formBuilder.group({});

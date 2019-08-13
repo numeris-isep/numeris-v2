@@ -24,6 +24,10 @@ import { ConventionDetailsComponent } from '../modules/staff/client/convention-d
 import { AddressFormComponent } from './components/forms/address-form/address-form.component';
 import { UserFormComponent } from './components/forms/user-form/user-form.component';
 import { PasswordFormComponent } from './components/forms/password-form/password-form.component';
+import { ProfileFormComponent } from './components/forms/profile-form/profile-form.component';
+import { CountryCodePipe } from './pipes/country-code.pipe';
+import { IbanPipe } from './pipes/iban.pipe';
+import { SocialInsuranceNumberPipe } from './pipes/social-insurance-number.pipe';
 
 @NgModule({
   imports: [
@@ -56,6 +60,10 @@ import { PasswordFormComponent } from './components/forms/password-form/password
     AddressFormComponent,
     UserFormComponent,
     PasswordFormComponent,
+    ProfileFormComponent,
+    CountryCodePipe,
+    IbanPipe,
+    SocialInsuranceNumberPipe,
   ],
   exports: [
     // Components
@@ -83,6 +91,10 @@ import { PasswordFormComponent } from './components/forms/password-form/password
     AddressFormComponent,
     UserFormComponent,
     PasswordFormComponent,
+    ProfileFormComponent,
+    IbanPipe,
+    SocialInsuranceNumberPipe,
+    CountryCodePipe,
   ],
   providers: [
     AlertService

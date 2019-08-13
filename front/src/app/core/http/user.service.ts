@@ -103,12 +103,10 @@ export class UserService {
     return this.http.get<string[]>(url, HTTP_OPTIONS);
   }
 
-  addUser() {
-    // TODO
-  }
-
-  updateUser() {
-    // TODO
+  updateUser(data: User, user: User | number): Observable<User> {
+    const userId: number = typeof user === 'number' ? user : user.id;
+    const url = `${environment.apiUrl}/api/users/${userId}`;
+    return this.http.put<User>(url, data, HTTP_OPTIONS);
   }
 
   updateUserTermsOfUse(user: User) {

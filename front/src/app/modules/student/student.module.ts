@@ -18,6 +18,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { MissionDetailsComponent } from "./mission/mission-details/mission-details.component";
 import { ApplicationConfirmModalComponent } from "./application/application-confirm-modal/application-confirm-modal.component";
+import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 
 @NgModule({
   imports: [
@@ -43,6 +44,7 @@ import { ApplicationConfirmModalComponent } from "./application/application-conf
     TutorialComponent,
     ContactUsComponent,
     MissionDetailsComponent,
+    ProfileEditComponent,
   ],
   exports: [
     ProfileDetailsComponent,
