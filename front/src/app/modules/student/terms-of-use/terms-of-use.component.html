@@ -83,7 +83,7 @@
         </div>
         <div class="center aligned extra content">
           <sui-checkbox class="toggle" name="checkbox1" (click)="check()"
-                        [isDisabled]="checkboxes[0].isDisabled"
+                        [isDisabled]="checkboxes[0].isDisabled || accepted"
                         [(ngModel)]="checkboxes[0].isChecked">
             <span>Marquer comme lu</span>
           </sui-checkbox>
@@ -101,12 +101,12 @@
             L'édition du site <a href="http://numeris-isep.fr" target="_blank">numeris-isep</a>
             est assurée par l’association <strong>Numéris ISEP</strong> dont le
             siège social est situé au <em>28 rue Notre Dame des Champs, 75006 PARIS</em>.
-            Le Directeur de la publication est <strong>Monsieur Gaël Chereau</strong>.
+            Le Directeur de la publication est <strong>Madame Candice Rumeau</strong>.
           </div>
         </div>
         <div class="center aligned extra content">
           <sui-checkbox class="toggle" name="checkbox2" (click)="check()"
-                        [isDisabled]="checkboxes[1].isDisabled"
+                        [isDisabled]="checkboxes[1].isDisabled || accepted"
                         [(ngModel)]="checkboxes[1].isChecked">
             <span>Marquer comme lu</span>
           </sui-checkbox>
@@ -150,7 +150,7 @@
         </div>
         <div class="center aligned extra content">
           <sui-checkbox class="toggle" name="checkbox3" (click)="check()"
-                        [isDisabled]="checkboxes[2].isDisabled"
+                        [isDisabled]="checkboxes[2].isDisabled || accepted"
                         [(ngModel)]="checkboxes[2].isChecked">
             <span>Marquer comme lu</span>
           </sui-checkbox>
@@ -208,13 +208,13 @@
               aucune indemnisation suite à l'interruption, à la suspension ou à la
               modification du présent contrat. L'Utilisateur a la possibilité de
               contacter le site par messagerie électronique à l’adresse
-              <a href="mailto:numerisisep@gmail.com" target="_top">numerisisep@gmail.com</a>.
+              <a href="mailto:contact@numeris-isep.fr" target="_top">contact@numeris-isep.fr</a>.
             </p>
           </div>
         </div>
         <div class="center aligned extra content">
           <sui-checkbox class="toggle" name="checkbox4" (click)="check()"
-                        [isDisabled]="checkboxes[3].isDisabled"
+                        [isDisabled]="checkboxes[3].isDisabled || accepted"
                         [(ngModel)]="checkboxes[3].isChecked">
             <span>Marquer comme lu</span>
           </sui-checkbox>
@@ -254,7 +254,7 @@
         </div>
         <div class="center aligned extra content">
           <sui-checkbox class="toggle" name="checkbox5" (click)="check()"
-                        [isDisabled]="checkboxes[4].isDisabled"
+                        [isDisabled]="checkboxes[4].isDisabled || accepted"
                         [(ngModel)]="checkboxes[4].isChecked">
             <span>Marquer comme lu</span>
           </sui-checkbox>
@@ -306,7 +306,7 @@
         </div>
         <div class="center aligned extra content">
           <sui-checkbox class="toggle" name="checkbox6" (click)="check()"
-                        [isDisabled]="checkboxes[5].isDisabled"
+                        [isDisabled]="checkboxes[5].isDisabled || accepted"
                         [(ngModel)]="checkboxes[5].isChecked">
             <span>Marquer comme lu</span>
           </sui-checkbox>
@@ -348,7 +348,7 @@
         </div>
         <div class="center aligned extra content">
           <sui-checkbox class="toggle" name="checkbox7" (click)="check()"
-                        [isDisabled]="checkboxes[6].isDisabled"
+                        [isDisabled]="checkboxes[6].isDisabled || accepted"
                         [(ngModel)]="checkboxes[6].isChecked">
             <span>Marquer comme lu</span>
           </sui-checkbox>
@@ -369,7 +369,7 @@
         </div>
         <div class="center aligned extra content">
           <sui-checkbox class="toggle" name="checkbox8" (click)="check()"
-                        [isDisabled]="checkboxes[7].isDisabled"
+                        [isDisabled]="checkboxes[7].isDisabled || accepted"
                         [(ngModel)]="checkboxes[7].isChecked">
             <span>Marquer comme lu</span>
           </sui-checkbox>
@@ -390,7 +390,7 @@
         </div>
         <div class="center aligned extra content">
           <sui-checkbox class="toggle" name="checkbox9" (click)="check()"
-                        [isDisabled]="checkboxes[8].isDisabled"
+                        [isDisabled]="checkboxes[8].isDisabled || accepted"
                         [(ngModel)]="checkboxes[8].isChecked">
             <span>Marquer comme lu</span>
           </sui-checkbox>
@@ -412,7 +412,7 @@
         </div>
         <div class="center aligned extra content">
           <sui-checkbox class="toggle" name="checkbox10" (click)="check()"
-                        [isDisabled]="checkboxes[9].isDisabled"
+                        [isDisabled]="checkboxes[9].isDisabled || accepted"
                         [(ngModel)]="checkboxes[9].isChecked">
             <span>Marquer comme lu</span>
           </sui-checkbox>

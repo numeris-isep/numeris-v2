@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from "../../../core/http/user.service";
-import { User } from "../../../core/classes/models/user";
-import { AuthService } from "../../../core/http/auth/auth.service";
-import { AlertService } from "../../../core/services/alert.service";
-import { Router } from "@angular/router";
+import { UserService } from '../../../core/http/user.service';
+import { User } from '../../../core/classes/models/user';
+import { AuthService } from '../../../core/http/auth/auth.service';
 
 @Component({
   selector: 'app-terms-of-use',
@@ -34,8 +32,6 @@ export class TermsOfUseComponent implements OnInit {
   constructor(
     private userService: UserService,
     private authService: AuthService,
-    private alertService: AlertService,
-    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -74,8 +70,8 @@ export class TermsOfUseComponent implements OnInit {
 
     this.userService.updateUserTermsOfUse(this.user).subscribe(
       _ => {
-        this.router.navigate(['/'])
-          .then(() => { this.router.navigate(['/conditions-dutilisation']); } );
+        this.accepted = true;
+        this.allDisabled = true;
       },
       error => {
         this.loading = false;
