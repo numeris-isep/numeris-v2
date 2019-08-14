@@ -6,22 +6,18 @@ language: php
 php:
   - '7.2'
 
-sudo: required
-
 notifications:
   email:
     on_success: never
 
+
 before_script:
-  - cd back
-  - composer self-update
-  - composer install --no-interaction
-  - mysql -e 'create database numeris_testing;'
-  - cp .env.travis .env
-  - php artisan migrate:refresh --seed --database testing
+  - cp back/.env.travis back/.env
+  - make start-testing
+  - make db-reset
 
 script:
-  - vendor/bin/phpunit
+  - make test
 
 addons:
   ssh_known_hosts: numeris-isep.fr

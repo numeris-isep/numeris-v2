@@ -21,6 +21,9 @@ build-prod:
 
 deploy-prod: build-prod start-prod
 
+start-testing:
+	docker-compose -f docker-compose.testing.yml up -d --build
+
 stop:
 	docker-compose stop
 
@@ -31,7 +34,7 @@ reload: stop start-d
 
 
 ## Package manager commands
-######################
+#############################
 
 back-install:
 	docker exec -it numeris_back composer install
@@ -79,6 +82,13 @@ migrate-rollback:
 
 db-seed:
 	docker exec -it numeris_back sh -c 'php artisan db:seed'
+
+
+## Test commands
+###################
+
+test:
+	docker exec -it numeris_back sh -c 'vendor/bin/phpunit'
 
 
 ## Utils commands
