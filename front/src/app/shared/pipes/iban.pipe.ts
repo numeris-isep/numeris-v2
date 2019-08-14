@@ -6,9 +6,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class IbanPipe implements PipeTransform {
 
   transform(iban: string, args?: any): any {
-    return iban.replace(/[^\dA-Z]/g, '')
-      .replace(/(.{4})/g, '$1 ')
-      .trim();
+    if (iban) {
+      return iban.toUpperCase().replace(/[^\dA-Z]/g, '')
+        .replace(/(.{4})/g, '$1 ')
+        .trim();
+    }
+
+    return null;
   }
 
 }

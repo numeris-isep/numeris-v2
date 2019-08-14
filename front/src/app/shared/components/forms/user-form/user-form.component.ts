@@ -41,7 +41,7 @@ export class UserFormComponent implements OnInit {
       first_name: [this.user ? this.user.firstName : '', Validators.required],
       last_name: [this.user ? this.user.lastName : '', Validators.required],
       promotion: [this.user ? parseInt(this.user.promotion) : '', Validators.required],
-      birth_date: [this.user ? this.user.birthDate : '', Validators.required],
+      birth_date: [this.user ? new Date(this.user.birthDate) : '', Validators.required],
     });
   }
 

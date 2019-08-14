@@ -9,6 +9,7 @@ import { UserService } from '../../../../core/http/user.service';
 import { first } from 'rxjs/operators';
 import { handleFormErrors } from '../../../../core/functions/form-error-handler';
 import { AlertService } from '../../../../core/services/alert.service';
+import { dateToString } from '../../../../shared/utils';
 
 @Component({
   selector: 'app-profile-edit',
@@ -61,16 +62,19 @@ export class ProfileEditComponent implements OnInit {
   get f() { return this.userForm.controls; }
 
   onSubmit() {
-    this.loading = true;
+    this.submitted = true;
 
     if (this.userForm.invalid) { return; }
 
-    this.submitted = true;
+    this.loading = true;
 
     this.data = this.userForm.value;
-    this.data.phone = this.data.phone.replace(/\s/g, '');
-    this.data.iban = this.data.iban.replace(/\s/g, '');
-    this.data.social_insurance_number = this.data.social_insurance_number.replace(/\s/g, '');
+    this.data.birth_date = this.data.birth_date ? dateToString(this.data.birth_date) : '';
+    this.data.phone = this.data.phone ? this.data.phone.replace(/\s/g, '') : '';
+    this.data.iban = this.data.iban ? this.data.iban.replace(/\s/g, '') : '';
+    this.data.social_insurance_number = this.data.social_insurance_number ? this.data.social_insurance_number.replace(/\s/g, '') : '';
+
+    console.log(this.data);
 
     this.userService.updateUser(this.data, this.user)
       .pipe(first())

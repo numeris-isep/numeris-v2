@@ -1,15 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Mission } from "../../../../core/classes/models/mission";
-import { Project } from "../../../../core/classes/models/project";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MissionService } from "../../../../core/http/mission.service";
-import { AlertService } from "../../../../core/services/alert.service";
+import { Mission } from '../../../../core/classes/models/mission';
+import { Project } from '../../../../core/classes/models/project';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MissionService } from '../../../../core/http/mission.service';
+import { AlertService } from '../../../../core/services/alert.service';
 import { Router } from '@angular/router';
-import { ProjectService } from "../../../../core/http/project.service";
-import { dateToString } from "../../../../shared/utils";
-import { Observable } from "rxjs";
-import { first } from "rxjs/operators";
-import { handleFormErrors } from "../../../../core/functions/form-error-handler";
+import { ProjectService } from '../../../../core/http/project.service';
+import { dateToString } from '../../../../shared/utils';
+import { Observable } from 'rxjs';
+import { first } from 'rxjs/operators';
+import { handleFormErrors } from '../../../../core/functions/form-error-handler';
 
 @Component({
   selector: 'app-mission-form',
@@ -91,7 +91,7 @@ export class MissionFormComponent implements OnInit {
         mission => {
           this.loading = false;
           this.router.navigate([`/missions/${mission.id}`]);
-          if (this.mission) this.alertService.success([`La mission ${mission.title} a bien été modifiée.`]);
+          if (this.mission) { this.alertService.success([`La mission ${mission.title} a bien été modifiée.`]); }
         },
         errors => {
           handleFormErrors(this.missionForm, errors);

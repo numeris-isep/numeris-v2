@@ -217,7 +217,11 @@ export class CountryCodePipe implements PipeTransform {
   ];
 
   transform(value: any, args?: any): any {
-    return CountryCodePipe.countries.find(country => country.translation === value).code;
+    if (value) {
+      return CountryCodePipe.countries.find(country => country.translation.toLowerCase() === value).code;
+    }
+
+    return null;
   }
 
 }

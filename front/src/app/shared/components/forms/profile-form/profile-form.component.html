@@ -64,7 +64,7 @@
       <label>IBAN</label>
       <div class="ui left icon corner labeled input">
         <i class="euro sign icon"></i>
-        <input type="text" formControlName="iban" placeholder="IBAN">
+        <input type="text" formControlName="iban" [value]="f.iban.value | iban" placeholder="IBAN">
         <div class="ui corner label">
           <i class="asterisk icon"></i>
         </div>
@@ -75,7 +75,7 @@
       <label>BIC</label>
       <div class="ui left icon corner labeled input">
         <i class="money bill icon"></i>
-        <input type="text" formControlName="bic" placeholder="BIC">
+        <input type="text" formControlName="bic" [value]="f.bic.value | uppercase" placeholder="BIC">
         <div class="ui corner label">
           <i class="asterisk icon"></i>
         </div>

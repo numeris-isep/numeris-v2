@@ -20,6 +20,7 @@ export class User {
   phone: string;
   nationality: string;
   birthDate: string;
+  birth_date: string;
   birthCity: string;
   socialInsuranceNumber: string;
   social_insurance_number: string;

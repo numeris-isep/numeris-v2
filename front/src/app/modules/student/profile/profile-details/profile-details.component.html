@@ -32,7 +32,7 @@
         Nationalité
       </td>
       <td>
-        <i class="{{ user.nationality | countryCode }} flag"></i>
+        <i *ngIf="user.nationality" class="{{ user.nationality | countryCode }} flag"></i>
         {{ (user.nationality | titlecase) || '-' }}
       </td>
     </tr>

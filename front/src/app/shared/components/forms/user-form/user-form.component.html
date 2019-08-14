@@ -1,5 +1,5 @@
 <div [formGroup]="userForm">
-  <div class="two fields">
+  <div class="three fields">
     <div class="required field" [ngClass]="{ 'error': submitted && f.first_name.errors }">
       <label>Prénom</label>
       <div class="ui left icon corner labeled input">
@@ -22,22 +22,6 @@
       </div>
       <app-form-error *ngIf="submitted && f.last_name.errors" [errors]="f.last_name.errors"></app-form-error>
     </div>
-  </div>
-
-  <div class="three fields">
-    <div class="required six wide field" [ngClass]="{ 'error': submitted && f.email.errors }">
-      <label>Adresse email ISEP</label>
-      <div class="ui left icon corner labeled input">
-        <i class="envelope icon"></i>
-        <input type="text" formControlName="email" placeholder="Email"
-               suiPopup popupPlacement="top left" popupHeader="Adresse email ISEP"
-               popupText="prenom.nom@isep.fr" popupTrigger="focus" (keyup.@)="suffix()">
-        <div class="ui corner label">
-          <i class="asterisk icon"></i>
-        </div>
-      </div>
-      <app-form-error *ngIf="submitted && f.email.errors" [errors]="f.email.errors"></app-form-error>
-    </div>
     <div class="required field" [ngClass]="{ 'error': submitted && f.promotion.errors }">
       <label>Promotion</label>
       <sui-select class="fluid selection" labelField="promotion" valueField="id"
@@ -51,7 +35,23 @@
       </sui-select>
       <app-form-error *ngIf="submitted && f.promotion.errors" [errors]="f.promotion.errors"></app-form-error>
     </div>
-    <div class="required field" [ngClass]="{ 'error': submitted && f.birth_date.errors }">
+  </div>
+
+  <div class="two fields">
+    <div class="required nine wide field" [ngClass]="{ 'error': submitted && f.email.errors }">
+      <label>Adresse email ISEP</label>
+      <div class="ui left icon corner labeled input">
+        <i class="envelope icon"></i>
+        <input type="text" formControlName="email" placeholder="Email"
+               suiPopup popupPlacement="top left" popupHeader="Adresse email ISEP"
+               popupText="prenom.nom@isep.fr" popupTrigger="focus" (keyup.@)="suffix()">
+        <div class="ui corner label">
+          <i class="asterisk icon"></i>
+        </div>
+      </div>
+      <app-form-error *ngIf="submitted && f.email.errors" [errors]="f.email.errors"></app-form-error>
+    </div>
+    <div class="required seven wide field" [ngClass]="{ 'error': submitted && f.birth_date.errors }">
       <label>Date de naissance</label>
       <div class="ui left icon corner labeled input">
         <i class="calendar alternate icon"></i>
