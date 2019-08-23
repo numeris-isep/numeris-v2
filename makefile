@@ -22,7 +22,7 @@ build-prod:
 deploy-prod: build-prod start-prod
 
 start-testing:
-	docker-compose -f docker-compose.testing.yml up -d --build
+	docker-compose -f docker-compose.testing.yml up -d
 
 stop:
 	docker-compose stop

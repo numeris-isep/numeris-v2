@@ -10,10 +10,10 @@ notifications:
   email:
     on_success: never
 
-
 before_script:
-  - cp back/.env.travis back/.env
+  - cp back/.env.testing back/.env
   - make start-testing
+  - make back-update
   - make db-reset
 
 script:
