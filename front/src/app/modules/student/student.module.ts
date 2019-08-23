@@ -52,6 +52,7 @@ import { ProfileEditComponent } from './profile/profile-edit/profile-edit.compon
     ProfilePreferencesComponent,
     ProfileDocumentsComponent,
     MissionDetailsComponent,
+    ProfileEditComponent,
   ],
   entryComponents: [
     ApplicationConfirmModalComponent,

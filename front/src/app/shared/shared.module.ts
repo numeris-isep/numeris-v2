@@ -28,6 +28,7 @@ import { ProfileFormComponent } from './components/forms/profile-form/profile-fo
 import { CountryCodePipe } from './pipes/country-code.pipe';
 import { IbanPipe } from './pipes/iban.pipe';
 import { SocialInsuranceNumberPipe } from './pipes/social-insurance-number.pipe';
+import { UserEditFormComponent } from './components/forms/user-edit-form/user-edit-form.component';
 
 @NgModule({
   imports: [
@@ -64,6 +65,7 @@ import { SocialInsuranceNumberPipe } from './pipes/social-insurance-number.pipe'
     CountryCodePipe,
     IbanPipe,
     SocialInsuranceNumberPipe,
+    UserEditFormComponent,
   ],
   exports: [
     // Components
@@ -95,6 +97,7 @@ import { SocialInsuranceNumberPipe } from './pipes/social-insurance-number.pipe'
     IbanPipe,
     SocialInsuranceNumberPipe,
     CountryCodePipe,
+    UserEditFormComponent,
   ],
   providers: [
     AlertService

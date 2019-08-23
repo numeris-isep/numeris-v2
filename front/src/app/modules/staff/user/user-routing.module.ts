@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from "@angular/router";
-import { UserComponent } from "./user.component";
-import { AuthGuard } from "../../../core/guards/auth.guard";
-import { UserIndexComponent } from "./user-index/user-index.component";
-import { UserShowComponent } from "./user-show/user-show.component";
+import { RouterModule, Routes } from '@angular/router';
+import { UserComponent } from './user.component';
+import { AuthGuard } from '../../../core/guards/auth.guard';
+import { UserIndexComponent } from './user-index/user-index.component';
+import { UserShowComponent } from './user-show/user-show.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 const userRoutes: Routes = [
   {
@@ -18,6 +19,10 @@ const userRoutes: Routes = [
       {
         path: '',
         component: UserIndexComponent,
+      },
+      {
+        path: ':userId/modifier',
+        component: UserEditComponent,
       },
       {
         path: ':userId',

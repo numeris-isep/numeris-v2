@@ -61,7 +61,7 @@
   </table>
 </div>
 
-<div class="ui small bottom attached buttons">
+<div class="ui small bottom attached buttons" *ngIf="user.id === currentUserId; else userShow">
   <div class="ui animated fade orange button" routerLink="/profil/modifier">
     <div class="visible content">Modifier</div>
     <div class="hidden content">
@@ -76,3 +76,21 @@
     </div>
   </div>
 </div>
+
+<ng-template #userShow>
+  <div class="ui small bottom attached buttons">
+    <div class="ui animated fade orange button" routerLink="/utilisateurs/{{ user.id }}/modifier">
+      <div class="visible content">Modifier</div>
+      <div class="hidden content">
+        <i class="edit icon"></i>
+      </div>
+    </div>
+    <div class="or" data-text="ou"></div>
+    <div class="ui animated fade negative button">
+      <div class="visible content">Supprimer</div>
+      <div class="hidden content">
+        <i class="trash alternate icon"></i>
+      </div>
+    </div>
+  </div>
+</ng-template>

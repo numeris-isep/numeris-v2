@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
-import { UserService } from "../../../../core/http/user.service";
-import { TitleService } from "../../../../core/services/title.service";
-import { BreadcrumbsService } from "../../../../core/services/breadcrumbs.service";
-import { User } from "../../../../core/classes/models/user";
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../../../../core/http/user.service';
+import { TitleService } from '../../../../core/services/title.service';
+import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.service';
+import { User } from '../../../../core/classes/models/user';
+import { AuthService } from '../../../../core/http/auth/auth.service';
 
 @Component({
   selector: 'app-user-show',
@@ -13,10 +14,12 @@ import { User } from "../../../../core/classes/models/user";
 export class UserShowComponent implements OnInit {
 
   user: User;
+  currentUserId: number;
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
+    private authService: AuthService,
     private titleService: TitleService,
     private breadcrumbService: BreadcrumbsService
   ) { }
@@ -25,6 +28,8 @@ export class UserShowComponent implements OnInit {
     this.route.params.subscribe(param => {
       this.getUser(parseInt(param.userId));
     });
+
+    this.getCurrentUser();
   }
 
   getUser(userId: number) {
@@ -42,6 +47,10 @@ export class UserShowComponent implements OnInit {
           { title: name, url: '' }
         );
     });
+  }
+
+  getCurrentUser() {
+    this.currentUserId = this.authService.getCurrentUserId();
   }
 
 }

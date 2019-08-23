@@ -1,4 +1,4 @@
-<app-content [condition]="!user">
+<app-content [condition]="! user">
   <div class="ui padded grid doubling">
     <!-- Messages -->
     <div class="sixteen wide column"
@@ -37,7 +37,7 @@
 
       <!-- Profile details -->
       <div class="sixteen wide mobile eight wide computer column">
-        <app-profile-details *ngIf="user" [user]="user"></app-profile-details>
+        <app-profile-details *ngIf="user" [user]="user" [currentUserId]="currentUserId"></app-profile-details>
       </div>
     </div>
 

@@ -8,6 +8,7 @@ import { User } from '../../../../core/classes/models/user';
 export class ProfileDetailsComponent implements OnInit {
 
   @Input() user: User;
+  @Input() currentUserId: number;
 
   constructor() { }
 

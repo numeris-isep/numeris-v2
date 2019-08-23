@@ -10,6 +10,7 @@ import { UserIndexComponent } from './user-index/user-index.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserShowComponent } from "./user-show/user-show.component";
 import { StudentModule } from "../../student/student.module";
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { StudentModule } from "../../student/student.module";
     UserIndexComponent,
     UserListComponent,
     UserShowComponent,
+    UserEditComponent,
   ],
   exports: [
     UserListComponent
