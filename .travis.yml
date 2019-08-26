@@ -11,7 +11,7 @@ notifications:
     on_success: never
 
 before_script:
-  - cp back/.env.testing back/.env
+  - cp back/.env.travis back/.env
   - make start-testing
   - make back-update
   - make db-reset

@@ -14,7 +14,7 @@ services:
   mysql:
     image: mysql:5.7
     environment:
-      MYSQL_DATABASE: 'numeris-v2-testing'
+      MYSQL_DATABASE: 'numeris_testing'
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     container_name: numeris_mysql
 
@@ -22,17 +22,13 @@ services:
     build:
       context: ./back
       dockerfile: Dockerfile
-    env_file:
-      - back/.env.testing
     environment:
       DB_CONNECTION: testing
-      DB_HOST: mysql
-      DB_PORT: 3306
-      DB_DATABASE: numeris-v2-testing
-      DB_USERNAME: root
-      DB_PASSWORD:
-    volumes:
-      - ./back:/home/numeris
+      DB_HOST_TESTING: mysql
+      DB_PORT_TESTING: 3306
+      DB_DATABASE_TESTING: numeris_testing
+      DB_USERNAME_TESTING: root
+      DB_PASSWORD_TESTING:
     ports:
       - 8080:80
     links:

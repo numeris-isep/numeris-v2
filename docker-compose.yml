@@ -14,7 +14,7 @@ services:
   mysql:
     image: mysql:5.7
     environment:
-      MYSQL_DATABASE: 'numeris-v2'
+      MYSQL_DATABASE: 'numeris'
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
     container_name: numeris_mysql
 
