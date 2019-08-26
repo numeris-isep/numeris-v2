@@ -2,10 +2,10 @@
 ####################
 
 start:
-	docker-compose up
-
-start-d:
 	docker-compose up -d
+
+start-output:
+	docker-compose up
 
 build:
 	docker-compose build

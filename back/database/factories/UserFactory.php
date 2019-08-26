@@ -41,11 +41,11 @@ $factory->state(User::class, 'active', function (Faker $faker) {
         'activated'                 => true,
         'tou_accepted'              => true,
         'subscription_paid_at'      => $faker->dateTime(),
-        'phone'                     => "0" . (string) $faker->numberBetween(600000000, 699999999),
+        'phone'                     => '0' . (string) $faker->numberBetween(600000000, 699999999),
         'nationality'               => 'france',
         'birth_city'                => $faker->city,
-        'social_insurance_number'   => $faker->numberBetween(1000000000000, 1999999999999),
-        'iban'                      => strtoupper($faker->text(15)),
+        'social_insurance_number'   => $faker->numberBetween(100000000000000, 199999999999999),
+        'iban'                      => strtoupper($faker->asciify('***************')),
         'bic'                       => $faker->swiftBicNumber,
     ];
 });
