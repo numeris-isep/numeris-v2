@@ -12,6 +12,7 @@ class SocialContribution extends Model
         'name',
         'student_rate',
         'employer_rate',
+        'base',
     ];
 
     public static function findByName($name)
