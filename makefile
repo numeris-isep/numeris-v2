@@ -30,7 +30,7 @@ stop:
 down:
 	docker-compose down --rmi all -v --remove-orphans
 
-reload: stop start-d
+reload: stop start
 
 
 ## Package manager commands
