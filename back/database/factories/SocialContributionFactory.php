@@ -8,6 +8,6 @@ $factory->define(SocialContribution::class, function (Faker $faker) {
         'name'          => $faker->colorName,
         'student_rate'  => $faker->randomFloat(2, 0, 15),
         'employer_rate' => $faker->randomFloat(2, 0, 15),
-        'base'          => $faker->randomFloat(2, 0, 1),
+        'base_rate'     => $faker->randomFloat(4, 0, 1),
     ];
 });
