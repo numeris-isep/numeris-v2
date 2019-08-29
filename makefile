@@ -75,7 +75,7 @@ migrate:
 	docker exec -it numeris_back sh -c 'php artisan migrate'
 
 migrate-prod:
-	docker exec -it numeris_back sh -c 'php artisan migrate --force'
+	docker exec -t numeris_back sh -c 'php artisan migrate --force'
 
 db-refresh:
 	docker exec -it numeris_back sh -c 'php artisan migrate:refresh'
