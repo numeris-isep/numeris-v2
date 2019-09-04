@@ -18,10 +18,14 @@ class Bill extends Model
     ];
 
     public function application() {
-        return $this->belongsToMany(Application::class);
+        return $this->belongsTo(Application::class);
     }
 
     public function rate() {
-        return $this->belongsToMany(Rate::class);
+        return $this->belongsTo(Rate::class);
+    }
+
+    public function user() {
+        return $this->application->user;
     }
 }

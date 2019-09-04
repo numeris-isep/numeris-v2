@@ -78,4 +78,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('applications', 'ApplicationController', ['parameters' => ['applications' => 'application_id']])
         ->only(['update', 'destroy']);
 
+    // Payslip resource routes
+    Route::put('payslips', 'PayslipController@update')->name('payslips.update');
+
 });

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Traits\DateQueryTrait;
 use App\Models\Traits\OnEventsTrait;
 use App\ProjectUser;
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -59,6 +60,15 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function getFullName()
+    {
+        return sprintf(
+            '%s %s',
+            $this->first_name,
+            strtoupper($this->last_name)
+        );
     }
 
     public static function findByEmail($email)
@@ -136,7 +146,7 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
-     * Return the current role of the user (= the latest)
+     * Returns the current role of the user (= the latest)
      *
      * DISCLAIMER: this method is the corner stone of the website, all user's
      * authorizations depend on it. If it has to be modified, please do it with
@@ -145,6 +155,19 @@ class User extends Authenticatable implements JWTSubject
     public function role()
     {
         return $this->roles()->latest()->first();
+    }
+
+    /**
+     * Returns the role of the user at a given date
+     */
+    public function roleAt(string $date)
+    {
+        return $this->roles
+            ->filter(function (Role $role) use ($date) {
+                return $role->pivot
+                    ->created_at
+                    ->isBefore(Carbon::parse($date));
+            })->first();
     }
 
     public function isDeveloper()
@@ -211,5 +234,10 @@ class User extends Authenticatable implements JWTSubject
     public function belongsToProject(Project $project)
     {
         return $project->hasUser($this);
+    }
+
+    public function payslips()
+    {
+        return $this->hasMany(Payslip::class);
     }
 }

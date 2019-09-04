@@ -40,7 +40,7 @@ $factory->state(User::class, 'active', function (Faker $faker) {
     return [
         'activated'                 => true,
         'tou_accepted'              => true,
-        'subscription_paid_at'      => $faker->dateTime(),
+        'subscription_paid_at'      => null,
         'phone'                     => '0' . (string) $faker->numberBetween(600000000, 699999999),
         'nationality'               => 'france',
         'birth_city'                => $faker->city,

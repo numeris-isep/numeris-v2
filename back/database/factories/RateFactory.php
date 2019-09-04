@@ -12,9 +12,9 @@ $factory->define(Rate::class, function (Faker $faker) {
         'name'          => 'Heures ' . $faker->colorName,
         'is_flat'       => 0,
         'hours'         => null,
-        'for_student'       => $rate,
-        'for_staff'         => $rate + $rate * 0.2,
-        'for_client'        => $rate + $rate * 0.4,
+        'for_student'   => $rate,
+        'for_staff'     => $rate + $rate * 0.2,
+        'for_client'    => $rate + $rate * 0.4,
     ];
 });
 
@@ -27,8 +27,8 @@ $factory->state(Rate::class, 'flat-rate', function (Faker $faker) {
         'name'          => "Forfait {$hours}h",
         'is_flat'       => 1,
         'hours'         => $hours,
-        'for_student'       => $rate,
-        'for_staff'         => $rate + $rate * 0.2,
-        'for_client'        => $rate + $rate * 0.4,
+        'for_student'   => $rate,
+        'for_staff'     => $rate + $rate * 0.2,
+        'for_client'    => $rate + $rate * 0.4,
     ];
 });

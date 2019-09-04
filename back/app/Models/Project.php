@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\DateQueryTrait;
 use App\ProjectUser;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -84,6 +85,16 @@ class Project extends Model
         throw new ModelNotFoundException();
     }
 
+    public static function findByMonth(string $month)
+    {
+        $from = Carbon::parse($month);
+        $to = $from->copy()->addMonth();
+
+        return static::where('start_at', '>=', $from->toDateString())
+            ->where('start_at', '<', $to->toDateString())
+            ->get();
+    }
+
     public static function public()
     {
         return static::where('is_private', false);
@@ -152,5 +163,10 @@ class Project extends Model
         }
 
         return $bills;
+    }
+
+    public function payslips()
+    {
+        return $this->hasMany(Payslip::class);
     }
 }

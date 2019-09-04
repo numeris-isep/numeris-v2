@@ -38,20 +38,35 @@ trait ClientProviderTrait
         return $client;
     }
 
-    public function clientAndProjectAndMissionAndConventionWithBillsProvider(): array
+    public function clientAndProjectAndMissionAndConventionWithBillsProvider($user = null, $month = null): array
     {
         $client = factory(Client::class)->create();
         $convention = factory(Convention::class)->create(['client_id' => $client->id]);
 
-        $rate = factory(Rate::class)->create(['convention_id' => $convention->id]);
-        $flat_rate = factory(Rate::class)->state('flat-rate')->create(['convention_id' => $convention->id]);
+        $rate = factory(Rate::class)->create([
+            'convention_id' => $convention->id,
+            'for_student'   => 8,
+            'for_staff'     => 10,
+            'for_client'    => 12,
+        ]);
+        $flat_rate = factory(Rate::class)->state('flat-rate')->create([
+            'convention_id' => $convention->id,
+            'for_student'   => 80,
+            'for_staff'     => 100,
+            'for_client'    => 120,
+        ]);
 
         $project = factory(Project::class)->create([
             'client_id'     => $client->id,
             'convention_id' => $convention->id,
+            'start_at'      => $month ?? '2000-01-01 00:00:00',
         ]);
-        $mission = factory(Mission::class)->create(['project_id' => $project->id]);
-        $user = factory(User::class)->create();
+        $mission = factory(Mission::class)->create([
+            'project_id' => $project->id,
+            'start_at'   => $month ?? '2000-01-01 08:00:00',
+        ]);
+
+        $user = $user ?? factory(User::class)->state('active')->create();
         $application = factory(Application::class)->create([
             'mission_id'    => $mission->id,
             'user_id'       => $user->id,
@@ -60,15 +75,18 @@ trait ClientProviderTrait
         factory(Bill::class)->create([
             'application_id'    => $application->id,
             'rate_id'           => $rate->id,
+            'amount'            => 10,
         ]);
         factory(Bill::class)->create([
             'application_id'    => $application->id,
             'rate_id'           => $flat_rate->id,
+            'amount'            => 1,
         ]);
 
         return [
             'client'        => $client,
             'project'       => $project,
+            'user'          => $user,
             'mission'       => $mission,
             'convention'    => $convention,
             'rate'          => $rate,
