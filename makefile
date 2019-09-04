@@ -64,6 +64,9 @@ shell-front:
 shell-sql:
 	docker exec -it numeris_mysql bash
 
+tinker:
+	docker exec -it numeris_back sh -c 'php artisan tinker'
+
 
 ## Database commands
 ######################
