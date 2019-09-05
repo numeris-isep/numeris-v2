@@ -13,7 +13,6 @@ export class User {
   subscriptionPaidAt: boolean;
   email: string;
   password: string;
-  username: string;
   firstName: string;
   lastName: string;
   promotion: string;

@@ -60,11 +60,9 @@
         <thead>
         <tr>
           <th class="collapsing"><i class="address book outline icon"></i> Nom</th>
-          <th class="collapsing"><i class="id badge icon"></i> Numéro étudiant</th>
-          <th *ngIf="page != 'project-user-modal'" class="collapsing"><i class="mail alternate icon"></i> E-mail</th>
+          <th class="collapsing"><i class="mail alternate icon"></i> E-mail</th>
           <th class="collapsing"><i class="phone icon"></i> Téléphone</th>
           <th class="collapsing"><i class="users icon"></i> Promotion</th>
-          <th class="collapsing"><i class="graduation icon"></i> Classe</th>
           <th class="collapsing"><i class="unlock alternate icon"></i> Rôle</th>
           <th class="collapsing"><i class="hand pointer outline icon"></i> Action{{ project ? 's' : '' }}</th>
         </tr>
@@ -74,9 +72,12 @@
         <tr *ngFor="let user of paginatedUser.data" [ngClass]="{'negative': ! user.activated}"
             suiPopup popupText="À valider" popupPlacement="left" popupTrigger="manual" #popup="suiPopup"
             (mouseenter)="togglePopup(popup, !user.activated)" (mouseleave)="togglePopup(popup, !user.activated)">
-          <td>{{ user.firstName || '-' }} {{ user.lastName | uppercase }}</td>
-          <td>{{ user.studentNumber || '-' }}</td>
-          <td *ngIf="page != 'project-user-modal'">
+          <td>
+            <a routerLink="/utilisateurs/{{ user.id }}">
+              {{ user.firstName || '-' }} {{ user.lastName | uppercase }}
+            </a>
+          </td>
+          <td>
             <a *ngIf="user.email; else noEmail" href="mailto:{{ user.email }}">
               {{ user.email }}
             </a>
@@ -89,7 +90,6 @@
             <ng-template #noPhone>-</ng-template>
           </td>
           <td>{{ user.promotion || '-' }}</td>
-          <td>{{ user.schoolYear || '-' }}</td>
           <td>{{ user.roles[0] | role }}</td>
           <td class="center aligned collapsing">
             <app-link-button routerLink="/utilisateurs/{{user.id}}"

@@ -15,7 +15,7 @@
           <app-profile-form *ngIf="user" [submitted]="submitted" [user]="user" (formReady)="addProfileForm($event)"></app-profile-form>
 
           <div class="ui buttons">
-            <a class="ui animated fade button" routerLink="/profil">
+            <a class="ui animated fade button" [routerLink]="returnUrl">
               <div class="visible content">Annuler</div>
               <div class="hidden content">
                 <i class="cancel icon"></i>

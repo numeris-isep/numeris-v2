@@ -15,6 +15,8 @@ import { handleFormErrors } from '../../../../core/functions/form-error-handler'
 export class UserEditFormComponent implements OnInit {
 
   @Input() user: User;
+  @Input() ownProfile: boolean = true;
+  returnUrl: string = '/profil';
   data: User;
   userForm: FormGroup;
   loading: boolean = false;
@@ -30,6 +32,7 @@ export class UserEditFormComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
+    this.returnUrl = this.ownProfile ? this.returnUrl : `/utilisateurs/${this.user.id}`;
   }
 
   initForm() {
@@ -60,8 +63,8 @@ export class UserEditFormComponent implements OnInit {
       .subscribe(
         user => {
           this.loading = false;
-          this.router.navigate(['/profil']);
-          this.alertService.success([`Votre profil a bien été modifié.`]);
+          this.router.navigate([this.returnUrl]);
+          this.alertService.success([this.ownProfile ? 'Votre profil a bien été modifié.' : `L'utilisateur a bien été modifié.`]);
         },
         errors => {
           handleFormErrors(this.userForm, errors);
