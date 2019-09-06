@@ -16,6 +16,7 @@ class DestroyStaffTest extends TestCaseWithAuth
     public function testStaffDeletingMissionWithoutBills()
     {
         $mission = $this->availableMissionProvider();
+        unset($mission['reference']);
 
         $address = $mission->address;
 

@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Client } from "../../../../core/classes/models/client";
-import { ClientService } from "../../../../core/http/client.service";
-import { first } from "rxjs/operators";
-import { Router } from "@angular/router";
-import { handleFormErrors } from "../../../../core/functions/form-error-handler";
-import { Observable } from "rxjs";
-import { AlertService } from "../../../../core/services/alert.service";
-import { Contact } from "../../../../core/classes/models/contact";
-import { ContactService } from "../../../../core/http/contact.service";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Client } from '../../../../core/classes/models/client';
+import { ClientService } from '../../../../core/http/client.service';
+import { first } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { handleFormErrors } from '../../../../core/functions/form-error-handler';
+import { Observable } from 'rxjs';
+import { AlertService } from '../../../../core/services/alert.service';
+import { Contact } from '../../../../core/classes/models/contact';
+import { ContactService } from '../../../../core/http/contact.service';
 
 @Component({
   selector: 'app-client-form',
@@ -37,10 +37,6 @@ export class ClientFormComponent implements OnInit {
     this.clientForm = this.fb.group({
       name: [
         this.client ? this.client.name : '',
-        Validators.required,
-      ],
-      reference: [
-        this.client ? this.client.reference : '',
         Validators.required,
       ],
       contact_id: [this.client ? (this.client.contact ? this.client.contact.id : '') : ''],

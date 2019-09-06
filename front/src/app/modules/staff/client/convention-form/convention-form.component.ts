@@ -20,6 +20,7 @@ export class ConventionFormComponent implements OnInit {
   @Input() client: Client;
   @Input() convention: Convention;
 
+  conventionName: string = '';
   conventionForm: FormGroup;
   ratesFormArray: FormArray = this.fb.array([]);
   loading: boolean = false;
@@ -33,11 +34,9 @@ export class ConventionFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getConventionName();
+
     this.conventionForm = this.fb.group({
-      name: [
-        this.convention ? this.convention.name : '',
-        Validators.required,
-      ],
       rates : this.ratesFormArray,
     });
 
@@ -48,6 +47,20 @@ export class ConventionFormComponent implements OnInit {
     } else {
       this.addRate();
     }
+  }
+
+  getConventionName() {
+    const conventionCount = this.client.conventionsCount + 1;
+    const conventionName =
+      ('0' + this.client.id)
+        .slice(this.client.id.toString().length < 2 ? -2 : -this.client.id.toString().length)
+      + '-' +
+      ('00' + conventionCount)
+        .slice((conventionCount).toString().length < 3 ? -3 : -(conventionCount).toString().length);
+
+    this.conventionName = this.convention
+      ? this.convention.name
+      : conventionName;
   }
 
   get f() { return this.conventionForm.controls; }

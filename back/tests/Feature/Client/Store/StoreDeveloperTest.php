@@ -17,7 +17,6 @@ class StoreDeveloperTest extends TestCaseWithAuth
     {
         $client_data = [
             'name'      => 'AS Something',
-            'reference' => '00-0000',
         ];
         $address_data = [
             'street'    => '1 rue Quelquepart',
@@ -36,7 +35,6 @@ class StoreDeveloperTest extends TestCaseWithAuth
                 'addressId',
                 'contactId',
                 'name',
-                'reference',
                 'createdAt',
                 'updatedAt',
                 'conventionsCount',
@@ -55,7 +53,6 @@ class StoreDeveloperTest extends TestCaseWithAuth
     {
         $client_data = [
             'name'      => 'AS Connect', // Already used
-            'reference' => '01-0001' // Already used
         ];
         $address_data = [
             'street'    => '1 rue Quelquepart',
@@ -69,7 +66,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
         $this->json('POST', route('clients.store'), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJsonValidationErrors(['name', 'reference']);
+            ->assertJsonValidationErrors(['name']);
 
         $this->assertDatabaseHas('clients', $client_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -84,7 +81,6 @@ class StoreDeveloperTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors([
                 'name',
-                'reference',
                 'address.street',
                 'address.zip_code',
                 'address.city',

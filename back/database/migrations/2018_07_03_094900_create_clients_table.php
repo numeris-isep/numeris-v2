@@ -22,7 +22,6 @@ class CreateClientsTable extends Migration
             $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('set null');
 
             $table->string('name')->unique();
-            $table->string('reference')->unique();
 
             $table->timestamps();
         });

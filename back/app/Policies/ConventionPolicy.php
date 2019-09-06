@@ -14,7 +14,11 @@ class ConventionPolicy
     public function before(User $current_user, $ability)
     {
         // Grant everything to developers, administrators and staffs (expect destroy)
-        if ($current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF) && $ability != 'destroy') {
+        if (
+            $current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF)
+            && $ability != 'destroy'
+            && $ability != 'update'
+        ) {
             return true;
         }
     }
@@ -36,7 +40,8 @@ class ConventionPolicy
 
     public function update(User $current_user, Convention $convention)
     {
-        return false;
+        return $current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF)
+            && $convention->projects()->count() == 0;
     }
 
     public function destroy(User $current_user, Convention $convention)

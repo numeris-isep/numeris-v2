@@ -38,11 +38,10 @@ class ClientConventionController extends Controller
     {
         $client = Client::findOrFail($client_id);
         $this->authorize('store', Convention::class);
-
-        $convention_request = $request->only(['name']);
         $rates_request = $request->only(['rates'])['rates'];
 
-        $convention = Convention::create($convention_request);
+        $convention_name = sprintf('%02d', $client->id) . '-' . sprintf('%03d', count($client->conventions) + 1);
+        $convention = Convention::create(['name' => $convention_name]);
 
         foreach ($rates_request as $rate_request) {
             $rate = Rate::create($rate_request);

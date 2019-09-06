@@ -17,7 +17,6 @@ class StoreStudentTest extends TestCaseWithAuth
     {
         $client = $this->clientProvider();
 
-        $convention = ['name'  => 'Convention de test'];
         $rate1 = [
             'name'          => 'Heures de test',
             'is_flat'       => false,
@@ -34,9 +33,8 @@ class StoreStudentTest extends TestCaseWithAuth
             'for_client'    => 150,
         ];
 
-        $data = array_merge($convention, ['rates' => [$rate1, $rate2]]);
+        $data = ['rates' => [$rate1, $rate2]];
 
-        $this->assertDatabaseMissing('conventions', $convention);
         $this->assertDatabaseMissing('rates', $rate1);
         $this->assertDatabaseMissing('rates', $rate2);
 
@@ -44,7 +42,6 @@ class StoreStudentTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 
-        $this->assertDatabaseMissing('conventions', $convention);
         $this->assertDatabaseMissing('rates', $rate1);
         $this->assertDatabaseMissing('rates', $rate2);
     }

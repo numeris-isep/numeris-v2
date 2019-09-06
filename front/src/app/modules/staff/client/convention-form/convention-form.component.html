@@ -13,16 +13,12 @@
         [formGroup]="conventionForm"
         [ngClass]="{'error': submitted && conventionForm.invalid, 'loading': loading}">
     <h4 class="ui dividing header">Informations</h4>
-    <div class="required field" [ngClass]="{ 'error': submitted && f.name.errors }">
+    <div class="field">
       <label>Nom</label>
       <div class="ui left icon corner labeled input">
         <i class="tag icon"></i>
-        <input type="text" formControlName="name" placeholder="Nom">
-        <div class="ui corner label">
-          <i class="asterisk icon"></i>
-        </div>
+        <input *ngIf="conventionName" type="text" placeholder="Nom" [value]="conventionName" disabled readonly>
       </div>
-      <app-form-error *ngIf="submitted && f.name.errors" [errors]="f.name.errors"></app-form-error>
     </div>
 
     <app-button size="mini" color="green" behaviour="right floated"
@@ -140,7 +136,7 @@
 
     <div class="field">
       <div *ngIf="!convention; else edit" class="ui buttons">
-        <a class="ui animated fade button" routerLink="/clients/{{ client.id }}">
+        <a class="ui animated fade button" routerLink="/clients/{{ client.id }}/conventions">
           <div class="visible content">Annuler</div>
           <div class="hidden content">
             <i class="cancel icon"></i>
@@ -158,7 +154,7 @@
 
       <ng-template #edit>
         <div class="ui buttons">
-          <a class="ui animated fade button" routerLink="/clients/{{ client.id }}">
+          <a class="ui animated fade button" routerLink="/clients/{{ client.id }}/conventions">
             <div class="visible content">Annuler</div>
             <div class="hidden content">
               <i class="cancel icon"></i>

@@ -19,7 +19,6 @@ class UpdateStudentTest extends TestCaseWithAuth
 
         $client_data = [
             'name'      => 'AS Something',
-            'reference' => '00-0000',
         ];
         $address_data = [
             'street'    => '1 rue Quelquepart',

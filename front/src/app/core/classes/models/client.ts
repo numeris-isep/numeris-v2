@@ -1,8 +1,8 @@
-import { Address } from "./address";
-import { Convention } from "./convention";
-import { Project } from "./project";
-import { Mission } from "./mission";
-import { Contact } from "./contact";
+import { Address } from './address';
+import { Convention } from './convention';
+import { Project } from './project';
+import { Mission } from './mission';
+import { Contact } from './contact';
 
 export class Client {
 
@@ -11,7 +11,6 @@ export class Client {
   contactId: number;
 
   name: string;
-  reference: string;
   createdAt: string;
   updatedAt: string;
 

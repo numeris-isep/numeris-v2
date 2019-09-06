@@ -6,7 +6,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Convention::class, function (Faker $faker) {
     return [
-        'name' => 'Convention ' . $faker->colorName,
+        'name' => $faker->numberBetween(10, 99) . '-' . (string) $faker->numberBetween(1000, 9999),
     ];
 });
 

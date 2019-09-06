@@ -19,7 +19,6 @@ class UpdateStaffTest extends TestCaseWithAuth
 
         $client_data = [
             'name'      => 'AS Something',
-            'reference' => '00-0000',
         ];
         $address_data = [
             'street'    => '1 rue Quelquepart',
@@ -38,7 +37,6 @@ class UpdateStaffTest extends TestCaseWithAuth
                 'addressId',
                 'contactId',
                 'name',
-                'reference',
                 'createdAt',
                 'updatedAt',
                 'conventionsCount',

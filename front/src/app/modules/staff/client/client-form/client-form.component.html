@@ -14,7 +14,7 @@
           [formGroup]="clientForm" (ngSubmit)="onSubmit()"
           [ngClass]="{'error': submitted && clientForm.invalid, 'loading': loading}">
       <h4 class="ui dividing header">Informations</h4>
-      <div class="three fields">
+      <div class="two fields">
         <div class="required field" [ngClass]="{ 'error': submitted && f.name.errors }">
           <label>Nom</label>
           <div class="ui left icon corner labeled input">
@@ -25,17 +25,6 @@
             </div>
           </div>
           <app-form-error *ngIf="submitted && f.name.errors" [errors]="f.name.errors"></app-form-error>
-        </div>
-        <div class="required field" [ngClass]="{ 'error': submitted && f.reference.errors }">
-          <label>Référence</label>
-          <div class="ui left icon corner labeled input">
-            <i class="clipboard outline icon"></i>
-            <input type="text" formControlName="reference" placeholder="Référence">
-            <div class="ui corner label">
-              <i class="asterisk icon"></i>
-            </div>
-          </div>
-          <app-form-error *ngIf="submitted && f.reference.errors" [errors]="f.reference.errors"></app-form-error>
         </div>
         <div class="field" [ngClass]="{ 'error': submitted && f.contact_id.errors }">
           <label>Contact</label>

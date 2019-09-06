@@ -17,7 +17,6 @@ class StoreStaffTest extends TestCaseWithAuth
     {
         $client = $this->clientProvider();
 
-        $convention = ['name'  => 'Convention de test'];
         $rate1 = [
             'name'          => 'Heures de test',
             'is_flat'       => false,
@@ -34,9 +33,8 @@ class StoreStaffTest extends TestCaseWithAuth
             'for_client'    => 150,
         ];
 
-        $data = array_merge($convention, ['rates' => [$rate1, $rate2]]);
+        $data = ['rates' => [$rate1, $rate2]];
 
-        $this->assertDatabaseMissing('conventions', $convention);
         $this->assertDatabaseMissing('rates', $rate1);
         $this->assertDatabaseMissing('rates', $rate2);
 
@@ -57,7 +55,6 @@ class StoreStaffTest extends TestCaseWithAuth
                 ]],
             ]);
 
-        $this->assertDatabaseHas('conventions', $convention);
         $this->assertDatabaseHas('rates', $rate1);
         $this->assertDatabaseHas('rates', $rate2);
     }

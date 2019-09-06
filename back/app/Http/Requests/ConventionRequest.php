@@ -29,7 +29,6 @@ class ConventionRequest extends AbstractFormRequest
     public function rules()
     {
         return [
-            'name'                  => 'required|string',
             'rates'                 => 'required|array|min:1',
             'rates.*.name'          => 'required|distinct|string',
             'rates.*.for_student'   => 'required|numeric|min:0',

@@ -22,7 +22,6 @@ class IndexAdministratorTest extends TestCaseWithAuth
                 'addressId',
                 'contactId',
                 'name',
-                'reference',
                 'createdAt',
                 'updatedAt',
                 'conventionsCount',

@@ -16,6 +16,7 @@ class DestroyDeveloperTest extends TestCaseWithAuth
     public function testDeveloperDeletingMissionWithoutBills()
     {
         $mission = $this->availableMissionProvider();
+        unset($mission['reference']);
 
         $address = $mission->address;
 
@@ -35,6 +36,7 @@ class DestroyDeveloperTest extends TestCaseWithAuth
     public function testDeveloperDeletingMissionWithBills()
     {
         $mission = $this->clientAndProjectAndMissionAndConventionWithBillsProvider()['mission'];
+        unset($mission['reference']);
 
         $address = $mission->address;
 

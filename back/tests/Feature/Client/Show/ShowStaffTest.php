@@ -24,7 +24,6 @@ class ShowStaffTest extends TestCaseWithAuth
                 'addressId',
                 'contactId',
                 'name',
-                'reference',
                 'createdAt',
                 'updatedAt',
                 'conventionsCount',

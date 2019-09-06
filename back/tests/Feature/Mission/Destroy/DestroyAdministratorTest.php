@@ -16,6 +16,7 @@ class DestroyAdministratorTest extends TestCaseWithAuth
     public function testAdministratorDeletingMissionWithoutBills()
     {
         $mission = $this->availableMissionProvider();
+        unset($mission['reference']);
 
         $address = $mission->address;
 
@@ -35,6 +36,7 @@ class DestroyAdministratorTest extends TestCaseWithAuth
     public function testAdministratorDeletingMissionWithBills()
     {
         $mission = $this->clientAndProjectAndMissionAndConventionWithBillsProvider()['mission'];
+        unset($mission['reference']);
 
         $address = $mission->address;
 

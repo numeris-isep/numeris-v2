@@ -16,7 +16,6 @@ class Client extends Model
 
         // attributes
         'name',
-        'reference',
     ];
 
     protected $hidden = [

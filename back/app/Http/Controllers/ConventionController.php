@@ -35,11 +35,7 @@ class ConventionController extends Controller
         $convention = Convention::findOrFail($convention_id);
         $this->authorize('update', $convention);
 
-        $convention_request = $request->only('name');
         $rates_request = $request->only('rates')['rates'];
-
-        $convention->update($convention_request);
-
         $old_rates = $convention->rates->keyBy('id');
 
         foreach ($rates_request as $rate_request) {

@@ -16,6 +16,7 @@ class DestroyStudentTest extends TestCaseWithAuth
     public function testStudentDeletingMission()
     {
         $mission = $this->availableMissionProvider();
+        unset($mission['reference']);
 
         $address = $mission->address;
 

@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Traits\OnEventsTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Convention extends Model
 {
+    use OnEventsTrait;
+
     protected $fillable = [
         'client_id',
         'name',

@@ -50,6 +50,8 @@ class DestroyAdministratorTest extends TestCaseWithAuth
         $convention = $test_data['convention'];
         $rate = $test_data['rate'];
 
+        unset($mission['reference']);
+
         $address = $client->address;
 
         $this->assertDatabaseHas('clients', $client->toArray());

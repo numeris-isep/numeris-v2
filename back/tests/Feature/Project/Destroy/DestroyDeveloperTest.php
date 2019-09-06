@@ -35,6 +35,8 @@ class DestroyDeveloperTest extends TestCaseWithAuth
         $project = $test_data['project'];
         $mission = $test_data['mission'];
 
+        unset($mission['reference']);
+
         $this->assertDatabaseHas('projects', $project->toArray());
         $this->assertDatabaseHas('missions', $mission->toArray());
 

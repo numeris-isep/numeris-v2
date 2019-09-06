@@ -17,7 +17,6 @@ class UpdateStaffTest extends TestCaseWithAuth
     {
         $convention = $this->conventionProvider();
 
-        $conventionData = ['name' => 'Convention de test'];
         $rate1 = [
             'id'            => $convention->rates->get(0)->id,
             'name'          => 'Heures de test',
@@ -36,11 +35,10 @@ class UpdateStaffTest extends TestCaseWithAuth
             'for_client'    => 151,
         ];
 
-        $this->assertDatabaseMissing('conventions', $conventionData);
         $this->assertDatabaseMissing('rates', $rate1);
         $this->assertDatabaseMissing('rates', $rate2);
 
-        $data = array_merge($conventionData, ['rates' => [$rate1, $rate2]]);
+        $data = ['rates' => [$rate1, $rate2]];
 
         $this->json('PUT', route('conventions.update', ['convention_id' => $convention->id]), $data)
             ->assertStatus(JsonResponse::HTTP_CREATED)
@@ -59,7 +57,6 @@ class UpdateStaffTest extends TestCaseWithAuth
                 ]],
             ]);
 
-        $this->assertDatabaseHas('conventions', $conventionData);
         $this->assertDatabaseHas('rates', $rate1);
         $this->assertDatabaseHas('rates', $rate2);
     }

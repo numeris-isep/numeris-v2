@@ -19,7 +19,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $client_data = [
             'name'      => 'AS Something',
-            'reference' => '00-0000',
         ];
         $address_data = [
             'street'    => '1 rue Quelquepart',
@@ -38,7 +37,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'addressId',
                 'contactId',
                 'name',
-                'reference',
                 'createdAt',
                 'updatedAt',
                 'conventionsCount',
@@ -59,7 +57,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $client_data = [
             'name'      => 'AS Connect', // Already used
-            'reference' => '01-0001' // Already used
         ];
         $address_data = [
             'street'    => '1 rue Quelquepart',
@@ -73,7 +70,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $this->json('PUT', route('clients.update', ['client_id' => $client->id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJsonValidationErrors(['name', 'reference']);
+            ->assertJsonValidationErrors(['name']);
 
         $this->assertDatabaseHas('clients', $client_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -90,7 +87,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors([
                 'name',
-                'reference',
                 'address.street',
                 'address.zip_code',
                 'address.city',

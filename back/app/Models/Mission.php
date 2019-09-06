@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Models\Traits\OnEventsTrait;
 use App\Models\Traits\DateQueryTrait;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Mission extends Model
 {
@@ -110,6 +109,12 @@ class Mission extends Model
         return Client::findByName($client_name)->missions;
     }
 
+    public function generateReference()
+    {
+        $this->reference = $this->project->convention->name
+            . '-' . strtoupper(substr(sha1($this->id), 0, 4));
+    }
+
     /**
      * To be realised just after an mission is deleted
      */
@@ -117,6 +122,11 @@ class Mission extends Model
     {
         // Delete all related models
         $mission->address()->delete();
+    }
+
+    public static function onSaved(self $mission)
+    {
+        $mission->generateReference();
     }
 
     public function applications()

@@ -51,6 +51,8 @@ class DestroyDeveloperTest extends TestCaseWithAuth
         $rate = $test_data['rate'];
         $address = $client->address;
 
+        unset($mission['reference']);
+
         $this->assertDatabaseHas('clients', $client->toArray());
         $this->assertDatabaseHas('addresses', $address->toArray());
         $this->assertDatabaseHas('projects', $project->toArray());
