@@ -40,7 +40,9 @@ export class ConventionDeleteModalComponent implements OnInit {
 
     this.deleteConvention().subscribe(
       () => {
-        this.router.navigate([`/clients/${this.client.id}/conventions`]);
+        this.router.navigate([]);
+        this.router.navigate(['/profil'])
+          .then(() => { this.router.navigate([`/clients/${this.client.id}/conventions`]); } );
         this.alertService.success([`Le convention ${this.convention.name} a bien été supprimée.`]);
         this.modal.approve(undefined);
       },

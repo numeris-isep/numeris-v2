@@ -40,13 +40,6 @@
               <div class="middle aligned row">
                 <div class="padded column">
                   <div class="field">
-                    <label>Documents étudiants</label>
-                    <app-button size="small" hiddenIcon="id card" behaviour="fluid"
-                                [isDisabled]="false" [isLoading]="false">
-                        Générer
-                    </app-button>
-                  </div>
-                  <div class="field">
                     <label>Facture client</label>
                     <app-button size="small" hiddenIcon="money bill" behaviour="fluid" color="grey"
                                 [isDisabled]="false" [isLoading]="false">
@@ -96,11 +89,7 @@
             <i class="tags icon"></i> Missions
             <span class="ui tiny blue label">{{ project.missionsCount }}</span>
           </a>
-          <a class="item" suiTabHeader="2">
-            <i class="folder open icon"></i> Documents
-            <span class="ui tiny blue label">0</span>
-          </a>
-          <a *ngIf="project.isPrivate" class="item" suiTabHeader="3">
+          <a *ngIf="project.isPrivate" class="item" suiTabHeader="2">
             <i class="users icon"></i> Étudiants
             <span class="ui tiny blue label">{{ projectUsers.length }}</span>
           </a>
@@ -110,12 +99,7 @@
           <app-mission-list [project]="project"></app-mission-list>
         </div>
 
-        <div class="ui" suiTabContent="2">
-          <h1>Documents</h1>
-          <!--TODO-->
-        </div>
-
-        <div *ngIf="project.isPrivate" class="ui" suiTabContent="3">
+        <div *ngIf="project.isPrivate" class="ui" suiTabContent="2">
           <app-user-list [project]="project" page="project-show"></app-user-list>
         </div>
       </sui-tabset>
