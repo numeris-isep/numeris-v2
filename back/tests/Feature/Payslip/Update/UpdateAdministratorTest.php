@@ -12,8 +12,6 @@ use Tests\Traits\UserProviderTrait;
 
 class UpdateAdministratorTest extends TestCaseWithAuth
 {
-    use ClientProviderTrait;
-
     protected $username = Role::ADMINISTRATOR;
 
     /**
@@ -27,17 +25,24 @@ class UpdateAdministratorTest extends TestCaseWithAuth
         $this->json('PUT', route('payslips.update'), ['month' => $month])
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([[
-                'user_id',
+                'user',
                 'month',
-                'gross_amount',
-                'net_amount',
-                'final_amount',
-                'subscription_fee',
-                'deduction_amount',
-                'employer_deduction_amount',
-                'deductions',
-                'operations',
-                'clients',
+                'grossAmount',
+                'netAmount',
+                'finalAmount',
+                'subscriptionFee',
+                'deductionAmount',
+                'employerDeductionAmount',
+                'deductions' => [[
+                    'socialContribution',
+                    'base',
+                    'employeeAmount',
+                    'employerAmount'
+                ]],
+                'operations' => [['reference', 'startAt']],
+                'clients' => [],
+                'createdAt',
+                'updatedAt',
             ]]);
     }
 }

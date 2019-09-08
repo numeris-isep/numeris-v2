@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Calculator\PayslipCalculator;
 use App\Http\Requests\PayslipRequest;
+use App\Http\Resources\PayslipResource;
 use App\Models\Payslip;
 
 class PayslipController extends Controller
@@ -20,12 +21,15 @@ class PayslipController extends Controller
     {
         $this->authorize('update', Payslip::class);
 
-        $payslips = $calculator->calculate($request->get('month'));
+        $results = $calculator->calculate($request->get('month'));
+        $payslips = collect();
 
-        foreach ($payslips as $payslip) {
-            Payslip::updateOrCreate(['user_id' => $payslip['user_id'], 'month' => $payslip['month']], $payslip);
+        foreach ($results as $payslip) {
+            $payslips->add(
+                Payslip::updateOrCreate(['user_id' => $payslip['user_id'], 'month' => $payslip['month']], $payslip)->load('user')
+            );
         }
 
-        return response()->json($payslips);
+        return response()->json(PayslipResource::collection($payslips));
     }
 }

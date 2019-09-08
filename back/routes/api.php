@@ -63,6 +63,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         ->only(['index', 'store', 'destroy']);
     Route::patch('projects/{project_id}/step', 'ProjectController@updateStep')->name('projects.update.step');
     Route::patch('projects/{project_id}/payment', 'ProjectController@updatePayment')->name('projects.update.payment');
+    Route::put('projects/{project_id}/invoices', 'ProjectInvoiceController@update')->name('projects.invoices.update');
 
     // Mission resource routes
     Route::apiResource('missions', 'MissionController', ['parameters' => ['missions' => 'mission_id']]);

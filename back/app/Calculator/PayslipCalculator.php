@@ -13,10 +13,10 @@ class PayslipCalculator implements CalculatorInterface
     /**
      * Calculate payslips for projects of the given month
      *
-     * @param null $params
+     * @param string $params
      * @return array
      */
-    public function calculate($params = null): array
+    public function calculate($params): array
     {
         $payslips = [];
 
@@ -68,7 +68,7 @@ class PayslipCalculator implements CalculatorInterface
                         : $index['gross_amount'] = $this->calculateGrossAmount($bill);
 
                     // Create 'operations' index and add missions references and start_at dates to it
-                    $operation_info = ['reference' => $mission->reference, 'start_at' => $mission->start_at];
+                    $operation_info = ['reference' => $mission->reference, 'startAt' => $mission->start_at];
                     in_array($operation_info, $index['operations'] ?? [])
                         ?: $index['operations'][] = $operation_info;
 
@@ -119,10 +119,10 @@ class PayslipCalculator implements CalculatorInterface
 
         foreach (SocialContribution::all() as $social_contribution) {
             $deductions['details'][] = [
-                'social_contribution'   => $social_contribution->name,
+                'socialContribution'   => $social_contribution->name,
                 'base'                  => $base_amount = $gross_amount * $social_contribution->base_rate,
-                'employee_amount'       => $employee_deduction = $base_amount * ($social_contribution->student_rate / 100),
-                'employer_amount'       => $employer_deduction = $base_amount * ($social_contribution->employer_rate / 100),
+                'employeeAmount'       => $employee_deduction = $base_amount * ($social_contribution->student_rate / 100),
+                'employerAmount'       => $employer_deduction = $base_amount * ($social_contribution->employer_rate / 100),
             ];
 
             $total_employee += $employee_deduction;

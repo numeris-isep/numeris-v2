@@ -16,7 +16,11 @@ class ProjectPolicy
     public function before(User $current_user, $ability)
     {
         // Grant everything to developers, administrators and staffs
-        if ($current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF) && $ability != 'destroy') {
+        if (
+            $current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF)
+            && $ability !== 'update-invoice'
+            && $ability !== 'destroy'
+        ) {
             return true;
         }
     }
@@ -54,6 +58,12 @@ class ProjectPolicy
     public function updatePayment(User $current_user, Project $project)
     {
         return false;
+    }
+
+    public function updateInvoice(User $current_user, Project $project)
+    {
+        return $current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF)
+            && ! $project->bills()->isEmpty();
     }
 
     public function destroy(User $current_user, Project $project)

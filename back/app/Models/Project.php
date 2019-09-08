@@ -165,8 +165,8 @@ class Project extends Model
         return $bills;
     }
 
-    public function payslips()
+    public function invoice()
     {
-        return $this->hasMany(Payslip::class);
+        return $this->hasOne(Invoice::class);
     }
 }

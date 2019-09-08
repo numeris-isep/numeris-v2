@@ -60,13 +60,24 @@ class Client extends Model
 
     public function conventions()
     {
-        return $this->hasMany(Convention::class);
+        return $this->hasMany(Convention::class)
+            ->orderBy('created_at', 'DESC');
     }
 
     public function missions()
     {
         return $this->hasManyThrough(
             Mission::class,
+            Project::class,
+            'client_id',
+            'project_id'
+        );
+    }
+
+    public function invoices()
+    {
+        return $this->hasManyThrough(
+            Invoice::class,
             Project::class,
             'client_id',
             'project_id'

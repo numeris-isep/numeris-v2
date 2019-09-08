@@ -12,9 +12,6 @@ use Tests\Traits\UserProviderTrait;
 
 class UpdateDeveloperTest extends TestCaseWithAuth
 {
-    use ClientProviderTrait,
-        UserProviderTrait;
-
     protected $username = Role::DEVELOPER;
 
     /**
@@ -28,17 +25,24 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         $this->json('PUT', route('payslips.update'), ['month' => $month])
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([[
-                'user_id',
+                'user',
                 'month',
-                'gross_amount',
-                'net_amount',
-                'final_amount',
-                'subscription_fee',
-                'deduction_amount',
-                'employer_deduction_amount',
-                'deductions',
-                'operations',
-                'clients',
+                'grossAmount',
+                'netAmount',
+                'finalAmount',
+                'subscriptionFee',
+                'deductionAmount',
+                'employerDeductionAmount',
+                'deductions' => [[
+                    'socialContribution',
+                    'base',
+                    'employeeAmount',
+                    'employerAmount'
+                ]],
+                'operations' => [['reference', 'startAt']],
+                'clients' => [],
+                'createdAt',
+                'updatedAt',
             ]]);
     }
 
@@ -109,7 +113,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         $res = $this->json('PUT', route('payslips.update'), ['month' => $month])
             ->assertStatus(JsonResponse::HTTP_OK);
 
-        $subscription_fee = json_decode($res->getContent(), true)[0]['subscription_fee'];
+        $subscription_fee = json_decode($res->getContent(), true)[0]['subscriptionFee'];
 
         $user = User::findByEmail($user->email);
         $this->assertEquals($subscription_fee, 18);
@@ -131,7 +135,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         $res = $this->json('PUT', route('payslips.update'), ['month' => $month])
             ->assertStatus(JsonResponse::HTTP_OK);
 
-        $subscription_fee = json_decode($res->getContent(), true)[0]['subscription_fee'];
+        $subscription_fee = json_decode($res->getContent(), true)[0]['subscriptionFee'];
 
         $user = User::findByEmail($user->email);
         $this->assertEquals($subscription_fee, 18);
@@ -156,7 +160,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         $res = $this->json('PUT', route('payslips.update'), ['month' => $month])
             ->assertStatus(JsonResponse::HTTP_OK);
 
-        $subscription_fee = json_decode($res->getContent(), true)[0]['subscription_fee'];
+        $subscription_fee = json_decode($res->getContent(), true)[0]['subscriptionFee'];
 
         $user = User::findByEmail($user->email);
         $this->assertEquals($subscription_fee, 0);
@@ -177,12 +181,12 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_OK);
         $content = json_decode($response->getContent(), true)[0];
 
-        $this->assertEquals(160, $content['gross_amount']);
-        $this->assertEquals($content['gross_amount'] - $content['deduction_amount'], $content['net_amount']);
-        $this->assertEquals($content['net_amount'] - $content['subscription_fee'], $content['final_amount']);
-        $this->assertEquals(18, $content['subscription_fee']);
-        $this->assertEquals(33.3444, $content['deduction_amount']);
-        $this->assertEquals(52.5216, $content['employer_deduction_amount']);
+        $this->assertEquals(160, $content['grossAmount']);
+        $this->assertEquals($content['grossAmount'] - $content['deductionAmount'], $content['netAmount']);
+        $this->assertEquals($content['netAmount'] - $content['subscriptionFee'], $content['finalAmount']);
+        $this->assertEquals(18, $content['subscriptionFee']);
+        $this->assertEquals(33.3444, $content['deductionAmount']);
+        $this->assertEquals(52.5216, $content['employerDeductionAmount']);
     }
 
     /**
@@ -198,12 +202,12 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_OK);
         $content = json_decode($response->getContent(), true)[0];
 
-        $this->assertEquals(200, $content['gross_amount']);
-        $this->assertEquals($content['gross_amount'] - $content['deduction_amount'], $content['net_amount']);
-        $this->assertEquals($content['net_amount'] - $content['subscription_fee'], $content['final_amount']);
-        $this->assertEquals(18, $content['subscription_fee']);
-        $this->assertEquals(41.680499999999995, $content['deduction_amount']);
-        $this->assertEquals(65.652, $content['employer_deduction_amount']);
+        $this->assertEquals(200, $content['grossAmount']);
+        $this->assertEquals($content['grossAmount'] - $content['deductionAmount'], $content['netAmount']);
+        $this->assertEquals($content['netAmount'] - $content['subscriptionFee'], $content['finalAmount']);
+        $this->assertEquals(18, $content['subscriptionFee']);
+        $this->assertEquals(41.680499999999995, $content['deductionAmount']);
+        $this->assertEquals(65.652, $content['employerDeductionAmount']);
     }
 
     /**
@@ -219,15 +223,12 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_OK);
         $content = json_decode($response->getContent(), true)[0];
 
-        $deductions = json_decode($content['deductions'], true);
-        $operations = json_decode($content['operations'], true);
+        $this->assertArrayHasKey('socialContribution', $content['deductions'][0]);
+        $this->assertArrayHasKey('base', $content['deductions'][0]);
+        $this->assertArrayHasKey('employeeAmount', $content['deductions'][0]);
+        $this->assertArrayHasKey('employerAmount', $content['deductions'][0]);
 
-        $this->assertArrayHasKey('social_contribution', $deductions[0]);
-        $this->assertArrayHasKey('base', $deductions[0]);
-        $this->assertArrayHasKey('employee_amount', $deductions[0]);
-        $this->assertArrayHasKey('employer_amount', $deductions[0]);
-
-        $this->assertArrayHasKey('reference', $operations[0]);
-        $this->assertArrayHasKey('start_at', $operations[0]);
+        $this->assertArrayHasKey('reference', $content['operations'][0]);
+        $this->assertArrayHasKey('startAt', $content['operations'][0]);
     }
 }

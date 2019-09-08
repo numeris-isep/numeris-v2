@@ -1,13 +1,15 @@
 <?php
 
-namespace Tests\Feature\Payslip\Update;
+namespace Tests\Feature\ProjectInvoice\Update;
 
+use App\Models\Invoice;
 use App\Models\Payslip;
 use App\Models\Role;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Tests\TestCaseWithAuth;
 use Tests\Traits\ClientProviderTrait;
+use Tests\Traits\ProjectProviderTrait;
 use Tests\Traits\UserProviderTrait;
 
 class UpdateStudentTest extends TestCaseWithAuth
@@ -15,14 +17,13 @@ class UpdateStudentTest extends TestCaseWithAuth
     protected $username = Role::STUDENT;
 
     /**
-     * @group student
+     * @group staff
      */
-    public function testStudentUpdatingPayslips()
+    public function testStudentUpdatingProjectInvoice()
     {
-        $this->clientAndProjectAndMissionAndConventionWithBillsProvider();
-        $month = '2000-01-01 00:00:00';
+        $project = $this->clientAndProjectAndMissionAndConventionWithBillsProvider()['project'];
 
-        $this->json('PUT', route('payslips.update'), ['month' => $month])
+        $this->json('PUT', route('projects.invoices.update', ['project' => $project->id]), [])
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
     }

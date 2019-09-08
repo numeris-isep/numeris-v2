@@ -8,6 +8,7 @@ use App\Models\Bill;
 use App\Models\Client;
 use App\Models\Contact;
 use App\Models\Convention;
+use App\Models\Invoice;
 use App\Models\Mission;
 use App\Models\Payslip;
 use App\Models\Preference;
