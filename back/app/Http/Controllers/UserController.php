@@ -69,7 +69,7 @@ class UserController extends Controller
         $user = User::findOrFail($user_id);
         $this->authorize('show', $user);
 
-        $user->load(['address', 'preference']);
+        $user->load(['address', 'preference', 'payslips']);
 
         if (auth()->user()->role()->isSuperiorOrEquivalentTo(Role::STAFF)) {
             $user->load([

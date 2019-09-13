@@ -38,10 +38,11 @@ class UserResource extends JsonResource
             'createdAt'             => $this->created_at->toDateTimeString(),
             'updatedAt'             => $this->updated_at->toDateTimeString(),
 
-            // Relation
+            // Relations
             'address'               => AddressResource::make($this->whenLoaded('address')),
             'preference'            => PreferenceResource::make($this->whenLoaded('preference')),
             'roles'                 => UserRoleResource::collection($this->whenLoaded('roles')),
+            'payslips'              => PayslipResource::collection($this->whenLoaded('payslips')),
         ];
     }
 }

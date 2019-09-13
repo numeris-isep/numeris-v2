@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,7 +11,10 @@ use Illuminate\Http\Request;
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 // Auth routes
+
 Route::post('login', 'Auth\AuthController@login')->name('login');
 Route::post('logout', 'Auth\AuthController@logout')->name('logout');
 Route::post('refresh', 'Auth\AuthController@refresh')->name('refresh');

@@ -68,13 +68,14 @@ class PayslipCalculator implements CalculatorInterface
                         : $index['gross_amount'] = $this->calculateGrossAmount($bill);
 
                     // Create 'operations' index and add missions references and start_at dates to it
-                    $operation_info = ['reference' => $mission->reference, 'startAt' => $mission->start_at];
-                    in_array($operation_info, $index['operations'] ?? [])
-                        ?: $index['operations'][] = $operation_info;
+                    $mission_info = ['id' => $mission->id, 'reference' => $mission->reference, 'startAt' => $mission->start_at];
+                    in_array($mission_info, $index['operations'] ?? [])
+                        ?: $index['operations'][] = $mission_info;
 
                     // Create 'clients' index and add clients name to it
-                    in_array($project->client->name, $index['clients'] ?? [])
-                        ?: $index['clients'][] = $project->client->name;
+                    $client_info = ['id' => $project->client->id, 'name' => $project->client->name];
+                    in_array($client_info, $index['clients'] ?? [])
+                        ?: $index['clients'][] = $client_info;
                 }
             }
         }
