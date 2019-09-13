@@ -4,6 +4,7 @@ import { ContactUsModal } from '../modals/contact-us-modal/contact-us-modal.comp
 import { SuiModalService } from 'ng2-semantic-ui';
 import { AuthService } from '../../../core/http/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FileService } from '../../../core/services/file.service';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
+  @ViewChild('template') template: ElementRef;
 
   @ViewChild('top') private top: ElementRef;
   @ViewChild('aboutUs') private aboutUs: ElementRef;
@@ -33,7 +36,8 @@ export class HomeComponent implements OnInit {
     private modalService: SuiModalService,
     private router: Router,
     private route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private fileService: FileService,
   ) { }
 
   ngOnInit() {
