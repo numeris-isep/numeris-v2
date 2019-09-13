@@ -109,9 +109,6 @@
   bottom: 50px;
   height: 200px;
 }
-.visible.content.position {
-  padding-top: 72px;
-}
 
 
 @media only screen and (max-width: 767px) {
