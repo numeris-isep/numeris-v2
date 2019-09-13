@@ -55,7 +55,7 @@
         <i class="money bill icon"></i>
         BIC
       </td>
-      <td>{{ user.bic || '-' }}</td>
+      <td>{{ (user.bic | uppercase) || '-' }}</td>
     </tr>
     </tbody>
   </table>
