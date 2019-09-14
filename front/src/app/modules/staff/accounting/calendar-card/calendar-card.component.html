@@ -5,20 +5,40 @@
   </div>
 
   <div class="ui mini bottom attached buttons">
-    <button class="ui animated fade button" (click)="calculate()" [ngClass]="{'loading': loading}">
+    <button class="ui animated fade button" (click)="calculate()"
+            [ngClass]="{'loading': loading}"
+            suiPopup popupPlacement="bottom" popupHeader="Action"
+            popupText="{{ payslipByMonth.payslips.length > 0 ? 'Recalcul' : 'Calcul' }} des données de paiement">
       <div class="visible content">
-        <span *ngIf="! payslipByMonth.payslips.length > 0; else exists">Calculer</span>
-        <ng-template #exists>Recalculer</ng-template>
+        <span *ngIf="! payslipByMonth.payslips.length > 0; else exists">
+          <i class="calculator icon"></i>
+        </span>
+        <ng-template #exists>
+          <i class="icons">
+            <i class="calculator icon"></i>
+            <i class="top right corner redo icon"></i>
+          </i>
+        </ng-template>
       </div>
       <div class="hidden content">
-        <i class="calculator icon"></i>
+        <i class="save icon"></i>
       </div>
     </button>
     <div class="or" data-text="ou"></div>
-    <button class="ui animated fade positive button" [disabled]="! payslipByMonth.payslips.length > 0"
-            suiPopup popupPlacement="bottom" popupHeader="Actions"
-            popupText="Téléchargement d'une archive et ajout des documents sur le profil des étudiants">
-      <div class="visible content">Documents</div>
+    <button class="ui animated fade teal button" [disabled]="! payslipByMonth.payslips.length > 0"
+            suiPopup popupPlacement="bottom" popupHeader="Action"
+            popupText="Ajout des documents sur le profil des étudiants">
+      <div class="visible content"><i class="users icon"></i></div>
+      <div class="hidden content">
+        <i class="clipboard icon"></i>
+      </div>
+    </button>
+    <div class="or" data-text="ou"></div>
+    <button class="ui animated fade positive button" (click)="downloadArchive()"
+            [disabled]="! payslipByMonth.payslips.length > 0"
+            suiPopup popupPlacement="bottom" popupHeader="Action"
+            popupText="Télécharger les documents étudiants du mois">
+      <div class="visible content"><i class="archive icon"></i></div>
       <div class="hidden content">
         <i class="download icon"></i>
       </div>

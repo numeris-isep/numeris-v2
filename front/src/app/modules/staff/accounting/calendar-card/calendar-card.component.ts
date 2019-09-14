@@ -47,4 +47,8 @@ export class CalendarCardComponent implements OnInit {
       });
   }
 
+  downloadArchive() {
+
+  }
+
 }
