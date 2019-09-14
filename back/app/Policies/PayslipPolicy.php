@@ -18,6 +18,11 @@ class PayslipPolicy
         }
     }
 
+    public function index(User $current_user)
+    {
+        return true;
+    }
+
     public function update(User $current_user)
     {
         return true;

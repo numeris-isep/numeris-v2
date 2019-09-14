@@ -10,6 +10,16 @@ use App\Models\Payslip;
 class PayslipController extends Controller
 {
     /**
+     * Display a listing of the resource.
+     */
+    public function index(PayslipRequest $request)
+    {
+        $this->authorize('index', Payslip::class);
+
+        return response()->json(PayslipResource::collection(Payslip::findByYear($request['year'])));
+    }
+
+    /**
      * Update the specified resources in storage.
      *
      * @param PayslipRequest $request

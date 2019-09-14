@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from "@angular/router";
-import { StatisticComponent } from "./statistic/statistic.component";
-import { AuthGuard } from "../../core/guards/auth.guard";
+import { RouterModule, Routes } from '@angular/router';
+import { StatisticComponent } from './statistic/statistic.component';
+import { AuthGuard } from '../../core/guards/auth.guard';
 
 const staffRoutes: Routes = [
   {

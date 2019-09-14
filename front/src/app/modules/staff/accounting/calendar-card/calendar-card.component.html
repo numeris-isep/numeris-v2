@@ -1,0 +1,27 @@
+<div class="ui fluid card">
+  <div class="content">
+    <div class="header">{{ month.locale('fr').format('MMMM') | titlecase }}</div>
+    <div class="meta">{{ month.format('MM') }}</div>
+  </div>
+
+  <div class="ui mini bottom attached buttons">
+    <button class="ui animated fade button" (click)="calculate()" [ngClass]="{'loading': loading}">
+      <div class="visible content">
+        <span *ngIf="! payslipByMonth.payslips.length > 0; else exists">Calculer</span>
+        <ng-template #exists>Recalculer</ng-template>
+      </div>
+      <div class="hidden content">
+        <i class="calculator icon"></i>
+      </div>
+    </button>
+    <div class="or" data-text="ou"></div>
+    <button class="ui animated fade positive button" [disabled]="! payslipByMonth.payslips.length > 0"
+            suiPopup popupPlacement="bottom" popupHeader="Actions"
+            popupText="Téléchargement d'une archive et ajout des documents sur le profil des étudiants">
+      <div class="visible content">Documents</div>
+      <div class="hidden content">
+        <i class="download icon"></i>
+      </div>
+    </button>
+  </div>
+</div>

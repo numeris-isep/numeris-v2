@@ -23,8 +23,17 @@ class PayslipRequest extends AbstractFormRequest
      */
     public function rules()
     {
-        return [
-            'month' => 'required|string|date',
-        ];
+        switch ($this->method())
+        {
+            case 'POST':
+                return [
+                    'year' => 'required|string|date_format:Y',
+                ];
+            case 'PUT':
+                return [
+                    'month' => 'required|string|date',
+                ];
+            default: break;
+        }
     }
 }

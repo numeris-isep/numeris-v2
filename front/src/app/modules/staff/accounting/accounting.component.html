@@ -1,0 +1,18 @@
+<div class="ui padded grid">
+  <div class="column">
+    <div class="ui top pointing secondary menu">
+      <a *ngFor="let year of years" class="item" suiTabHeader=""
+         [isActive]="year === selectedYear" (click)="selectYear(year)">
+        {{ year }}
+      </a>
+    </div>
+  </div>
+</div>
+
+<app-content [condition]="loading">
+  <div class="ui padded three column centered grid stackable">
+    <div class="column" *ngFor="let payslipByMonth of payslipsByMonth">
+      <app-calendar-card [payslipByMonth]="payslipByMonth"></app-calendar-card>
+    </div>
+  </div>
+</app-content>

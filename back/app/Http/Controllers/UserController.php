@@ -95,16 +95,19 @@ class UserController extends Controller
         $user = User::findOrFail($user_id);
         $this->authorize('update', $user);
 
-        // Encrypt password
-        $request['password'] = bcrypt($request['password']);
-
         $user_request = $request->only([
-            'email', 'password', 'first_name',
+            'email', 'first_name',
             'last_name', 'promotion', 'phone',
             'nationality', 'birth_date', 'birth_city',
             'social_insurance_number', 'iban', 'bic',
         ]);
         $address_request = $request->only(['address'])['address'];
+
+        // Encrypt password
+        if ($request['password']) {
+            $request['password'] = bcrypt($request['password']);
+            $user_request = array_merge($user_request, $request->only('password'));
+        }
 
         $user->update($user_request);
         $user->address()->update($address_request);

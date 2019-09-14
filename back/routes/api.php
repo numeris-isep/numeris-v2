@@ -81,6 +81,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         ->only(['update', 'destroy']);
 
     // Payslip resource routes
+    Route::post('payslips', 'PayslipController@index')->name('payslips.index');
     Route::put('payslips', 'PayslipController@update')->name('payslips.update');
 
 });

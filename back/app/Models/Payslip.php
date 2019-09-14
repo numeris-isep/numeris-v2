@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\DateQueryTrait;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Payslip extends Model
 {
+    use DateQueryTrait;
+
     protected $fillable = [
         // One-to-One relations
         'user_id',
@@ -33,5 +37,12 @@ class Payslip extends Model
         return static::where('user_id', $user_id)
             ->where('month', $month)
             ->first();
+    }
+
+    public static function findByYear(string $year) {
+        $from = Carbon::parse("$year-01-01 00:00:00");
+        $to = $from->copy()->addYear();
+
+        return static::whereDate('month', [$from, $to])->get();
     }
 }

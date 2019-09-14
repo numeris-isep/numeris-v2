@@ -10,6 +10,7 @@ import { ClientModule } from './client/client.module';
 import { ProjectModule } from './project/project.module';
 import { MissionModule } from './mission/mission.module';
 import { UserModule } from './user/user.module';
+import { AccountingModule } from './accounting/accounting.module';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { UserModule } from './user/user.module';
     ProjectModule,
     MissionModule,
     UserModule,
+    AccountingModule,
   ],
   declarations: [
     StatisticComponent,
