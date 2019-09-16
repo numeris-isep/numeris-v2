@@ -69,15 +69,13 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         $this->clientAndProjectAndMissionAndConventionWithBillsProvider();
         $month = '2000-01-01 00:00:00';
 
-        $this->json('PUT', route('payslips.update'), ['month' => $month])
+        $response1 = $this->json('PUT', route('payslips.update'), ['month' => $month])
             ->assertStatus(JsonResponse::HTTP_OK);
 
-        $this->assertEquals(1, Payslip::all()->count());
-
-        $this->json('PUT', route('payslips.update'), ['month' => $month])
+        $response2 = $this->json('PUT', route('payslips.update'), ['month' => $month])
             ->assertStatus(JsonResponse::HTTP_OK);
 
-        $this->assertEquals(1, Payslip::all()->count());
+        $this->assertSame(json_decode($response1->getContent(), true), json_decode($response2->getContent(), true));
     }
 
     /**

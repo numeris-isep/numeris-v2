@@ -6,17 +6,39 @@ use App\Calculator\PayslipCalculator;
 use App\Http\Requests\PayslipRequest;
 use App\Http\Resources\PayslipResource;
 use App\Models\Payslip;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class PayslipController extends Controller
 {
     /**
      * Display a listing of the resource.
+     *
+     * @param PayslipRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function index(PayslipRequest $request)
     {
         $this->authorize('index', Payslip::class);
 
         return response()->json(PayslipResource::collection(Payslip::findByYear($request['year'])));
+    }
+
+    /**
+     * Download a given payslip PDF.
+     *
+     * @param $payslip_id
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function downloadPayslip($payslip_id)
+    {
+        /** @var Payslip $payslip */
+        $payslip = Payslip::findOrFail($payslip_id);
+        $this->authorize('show', $payslip);
+
+        return PDF::loadView('files.payslip', ['payslip' => $payslip])
+            ->download($payslip->generatePayslipName());
     }
 
     /**

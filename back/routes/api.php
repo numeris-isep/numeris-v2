@@ -14,7 +14,6 @@
 use Illuminate\Support\Facades\Route;
 
 // Auth routes
-
 Route::post('login', 'Auth\AuthController@login')->name('login');
 Route::post('logout', 'Auth\AuthController@logout')->name('logout');
 Route::post('refresh', 'Auth\AuthController@refresh')->name('refresh');
@@ -81,7 +80,9 @@ Route::group(['middleware' => 'auth:api'], function () {
         ->only(['update', 'destroy']);
 
     // Payslip resource routes
-    Route::post('payslips', 'PayslipController@index')->name('payslips.index');
     Route::put('payslips', 'PayslipController@update')->name('payslips.update');
+    Route::post('payslips', 'PayslipController@index')->name('payslips.index');
+    Route::get('payslips/{payslip_id}/download-payslip', 'PayslipController@downloadPayslip')
+        ->name('payslips.download.payslip');
 
 });

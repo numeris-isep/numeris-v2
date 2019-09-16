@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Traits\DateQueryTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Payslip extends Model
 {
@@ -27,6 +28,30 @@ class Payslip extends Model
         'operations',
         'clients',
     ];
+
+    protected $casts = [
+        'month' => 'date',
+    ];
+
+    private function generateFilename(string $type)
+    {
+        return sprintf(
+            '%s_%s_%s.pdf',
+            $this->month->format('Y-m'),
+            $type,
+            Str::slug($this->user->getFullName())
+        );
+    }
+
+    public function generatePayslipName()
+    {
+        return $this->generateFilename('BV');
+    }
+
+    public function generateContractName()
+    {
+        return $this->generateFilename('contrat');
+    }
 
     public function user()
     {
