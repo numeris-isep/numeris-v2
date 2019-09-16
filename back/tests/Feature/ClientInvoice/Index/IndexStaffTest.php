@@ -25,7 +25,7 @@ class IndexStaffTest extends TestCaseWithAuth
                 'grossAmount',
                 'vatAmount',
                 'finalAmount',
-                'details' => [
+                'details' => [[
                     'bills' => [[
                         'rate',
                         'hours',
@@ -35,7 +35,7 @@ class IndexStaffTest extends TestCaseWithAuth
                     'title',
                     'startAt',
                     'reference',
-                ],
+                ]],
             ]]);
 
     }

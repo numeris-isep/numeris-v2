@@ -22,4 +22,9 @@ class InvoicePolicy
     {
         return false;
     }
+
+    public function download(User $current_user)
+    {
+        return false;
+    }
 }

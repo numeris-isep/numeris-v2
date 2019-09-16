@@ -88,4 +88,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('payslips/{payslip_id}/download-contract', 'PayslipController@downloadContract')
         ->name('payslips.download.contract');
 
+    // Invoice resource routes
+    Route::get('invoices/{invoice_id}/download', 'InvoiceController@download')
+        ->name('invoices.download');
+
 });

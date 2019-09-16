@@ -13,7 +13,7 @@ $factory->define(Invoice::class, function (Faker $faker) {
         'gross_amount'  => 5000.00,
         'vat_amount'    => 1000.00,
         'final_amount'  => 6000.00,
-        'details'       => json_encode([
+        'details'       => json_encode([[
             'bills'     => [[
                 'rate'      => 'Heures de test',
                 'hours'     => 100,
@@ -25,6 +25,6 @@ $factory->define(Invoice::class, function (Faker $faker) {
             'reference' => $faker->numberBetween(10, 99)
                 . '-' . $faker->numberBetween(1000, 9999)
                 . '-' . strtoupper(substr(sha1($faker->numberBetween(10, 99)), 0, 4)),
-        ]),
+        ]]),
     ];
 });

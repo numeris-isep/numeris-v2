@@ -6,7 +6,7 @@ use App\Models\Role;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
-class ShowDeveloperTest extends TestCaseWithAuth
+class DownloadPayslipDeveloperTest extends TestCaseWithAuth
 {
     protected $username = Role::DEVELOPER;
 

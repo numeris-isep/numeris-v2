@@ -24,7 +24,12 @@ class PayslipPolicy
         return false;
     }
 
-    public function show(User $current_user, Payslip $payslip)
+    public function downloadPayslip(User $current_user, Payslip $payslip)
+    {
+        return $current_user->is($payslip->user);
+    }
+
+    public function downloadContract(User $current_user, Payslip $payslip)
     {
         return $current_user->is($payslip->user);
     }

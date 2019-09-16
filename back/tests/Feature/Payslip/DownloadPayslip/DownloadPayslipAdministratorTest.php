@@ -1,23 +1,23 @@
 <?php
 
-namespace Tests\Feature\Payslip\DownloadContract;
+namespace Tests\Feature\Payslip\DownloadPayslip;
 
 use App\Models\Role;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
-class ShowAdministratorTest extends TestCaseWithAuth
+class DownloadPayslipAdministratorTest extends TestCaseWithAuth
 {
     protected $username = Role::ADMINISTRATOR;
 
     /**
      * @group administrator
      */
-    public function testAdministratorDownloadingContract()
+    public function testAdministratorDownloadingPayslip()
     {
         $payslip = $this->clientAndProjectAndMissionAndConventionWithBillsProvider()['payslip'];
 
-        $this->json('GET', route('payslips.download.contract', ['payslip_id' => $payslip->id]))
+        $this->json('GET', route('payslips.download.payslip', ['payslip_id' => $payslip->id]))
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertHeader('Content-Type', 'application/pdf');
     }

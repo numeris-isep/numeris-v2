@@ -35,7 +35,7 @@ class PayslipController extends Controller
     {
         /** @var Payslip $payslip */
         $payslip = Payslip::findOrFail($payslip_id);
-        $this->authorize('show', $payslip);
+        $this->authorize('download-payslip', $payslip);
 
         return PDF::loadView('files.payslip', ['payslip' => $payslip])
             ->download($payslip->generatePayslipName());
@@ -52,7 +52,7 @@ class PayslipController extends Controller
     {
         /** @var Payslip $payslip */
         $payslip = Payslip::findOrFail($payslip_id);
-        $this->authorize('show', $payslip);
+        $this->authorize('download-contract', $payslip);
 
         return PDF::loadView('files.contract', ['payslip' => $payslip])
             ->download($payslip->generateContractName());

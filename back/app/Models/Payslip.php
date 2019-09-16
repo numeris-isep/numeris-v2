@@ -29,15 +29,11 @@ class Payslip extends Model
         'clients',
     ];
 
-    protected $casts = [
-        'month' => 'date',
-    ];
-
     private function generateFilename(string $type)
     {
         return sprintf(
             '%s_%s_%s.pdf',
-            $this->month->format('Y-m'),
+            Carbon::parse($this->month)->format('Y-m'),
             $type,
             Str::slug($this->user->getFullName())
         );

@@ -6,14 +6,14 @@ use App\Models\Role;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
-class ShowStudentTest extends TestCaseWithAuth
+class DownloadContractStudentTest extends TestCaseWithAuth
 {
     protected $username = Role::STUDENT;
 
     /**
      * @group student
      */
-    public function testStudentAccessingHisOwnContract()
+    public function testStudentDownloadingHisOwnContract()
     {
         $payslip = $this->clientAndProjectAndMissionAndConventionWithBillsProvider(auth()->user())['payslip'];
 
@@ -25,7 +25,7 @@ class ShowStudentTest extends TestCaseWithAuth
     /**
      * @group student
      */
-    public function testStudentAccessingAnotherUserContract()
+    public function testStudentDownloadingAnotherUserContract()
     {
         $payslip = $this->clientAndProjectAndMissionAndConventionWithBillsProvider()['payslip'];
 
