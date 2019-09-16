@@ -54,7 +54,7 @@ module.exports = {
     config = config || extend(false, {}, defaults);
 
     /*--------------
-       File Paths
+       Document Paths
     ---------------*/
 
     var

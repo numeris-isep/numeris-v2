@@ -126,7 +126,7 @@ module.exports = {
       ]
     },
 
-    /* File Renames */
+    /* Document Renames */
     rename: {
       minJS     : { extname : '.min.js' },
       minCSS    : { extname : '.min.css' },
