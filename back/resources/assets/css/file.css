@@ -1,0 +1,65 @@
+* {
+    font-size: 13px;
+}
+
+.header {
+    margin-bottom: 0;
+}
+
+.sub.header {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.information {
+    font-size: 11px !important;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.text {
+    font-size: 12px !important;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.block {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.half {
+    width: 49.75%;
+}
+.third {
+    width: 33%;
+}
+.quarter {
+    width: 25%;
+}
+
+.left-aligned {
+    text-align: left;
+}
+.center-aligned {
+    text-align: center;
+}
+.middle-aligned {
+    vertical-align: center;
+}
+.right-aligned {
+    text-align: right;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+img.mini-tall {
+    width: 50px;
+    height: auto;
+}
+
+td.hightlight {
+    background: rgb(249, 250, 251);
+    font-weight: 700;
+}
