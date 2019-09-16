@@ -17,6 +17,7 @@ class PayslipResource extends JsonResource
         return [
             'id'                            => $this->id,
             'month'                         => $this->month,
+            'hourAmount'                    => $this->hour_amount,
             'grossAmount'                   => $this->gross_amount,
             'netAmount'                     => $this->net_amount,
             'finalAmount'                   => $this->final_amount,

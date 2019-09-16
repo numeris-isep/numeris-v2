@@ -20,6 +20,7 @@ class CreatePayslipTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
 
             $table->timestamp('month')->nullable();
+            $table->decimal('hour_amount', 10, 2);
             $table->decimal('gross_amount', 10, 2);
             $table->decimal('net_amount', 10, 2);
             $table->decimal('final_amount', 10, 2);

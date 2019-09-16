@@ -21,6 +21,7 @@ class PayslipCalculator implements CalculatorInterface
         $payslips = [];
 
         foreach ($this->sortBillsByUser(Project::findByMonth($params)) as $value) {
+            $hour_amount        = $value['hour_amount'];
             $gross_amount       = $value['gross_amount'];
             $deductions         = $this->calculateDeductions($gross_amount);
             $net_amount         = $this->calculateNetAmount($gross_amount, $deductions['total_employee']);
@@ -31,6 +32,7 @@ class PayslipCalculator implements CalculatorInterface
                 $payslips[] = [
                     'user_id'                       => $value['user']->id,
                     'month'                         => $params,
+                    'hour_amount'                   => $hour_amount,
                     'gross_amount'                  => $gross_amount,
                     'net_amount'                    => $this->calculateNetAmount($gross_amount, $deductions['total_employee']),
                     'final_amount'                  => $final_amount,
@@ -66,6 +68,11 @@ class PayslipCalculator implements CalculatorInterface
                     isset($index['gross_amount'])
                         ? $index['gross_amount'] += $this->calculateGrossAmount($bill)
                         : $index['gross_amount'] = $this->calculateGrossAmount($bill);
+
+                    // Create 'hour_amount' index and increment it
+                    isset($index['hour_amount'])
+                        ? $index['hour_amount'] += $bill->amount
+                        : $index['hour_amount'] = $bill->amount;
 
                     // Create 'operations' index and add missions references and start_at dates to it
                     $mission_info = ['id' => $mission->id, 'reference' => $mission->reference, 'startAt' => $mission->start_at];
@@ -119,11 +126,16 @@ class PayslipCalculator implements CalculatorInterface
         $total_employer = 0;
 
         foreach (SocialContribution::all() as $social_contribution) {
+            $employee_deduction = 0;
+            $employer_deduction = 0;
+
             $deductions['details'][] = [
-                'socialContribution'   => $social_contribution->name,
+                'socialContribution'    => $social_contribution->name,
                 'base'                  => $base_amount = $gross_amount * $social_contribution->base_rate,
-                'employeeAmount'       => $employee_deduction = $base_amount * ($social_contribution->student_rate / 100),
-                'employerAmount'       => $employer_deduction = $base_amount * ($social_contribution->employer_rate / 100),
+                'employeeRate'          => $social_contribution->student_rate,
+                'employerRate'          => $social_contribution->employer_rate,
+                'employeeAmount'        => $employee_deduction = $base_amount * ($social_contribution->student_rate / 100),
+                'employerAmount'        => $employer_deduction = $base_amount * ($social_contribution->employer_rate / 100),
             ];
 
             $total_employee += $employee_deduction;

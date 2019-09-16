@@ -18,6 +18,16 @@ class Address extends Model
         'user',
     ];
 
+    public function getFullAddress()
+    {
+        return sprintf(
+            '%s %s %s',
+            $this->street,
+            $this->zip_code,
+            $this->city
+        );
+    }
+
     public function user()
     {
         return $this->hasOne(User::class);

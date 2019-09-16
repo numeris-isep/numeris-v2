@@ -225,6 +225,8 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $this->assertArrayHasKey('socialContribution', $content['deductions'][0]);
         $this->assertArrayHasKey('base', $content['deductions'][0]);
+        $this->assertArrayHasKey('employeeRate', $content['deductions'][0]);
+        $this->assertArrayHasKey('employerRate', $content['deductions'][0]);
         $this->assertArrayHasKey('employeeAmount', $content['deductions'][0]);
         $this->assertArrayHasKey('employerAmount', $content['deductions'][0]);
 

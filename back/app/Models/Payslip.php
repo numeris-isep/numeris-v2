@@ -16,6 +16,7 @@ class Payslip extends Model
 
         // attributes
         'month',
+        'hour_amount',
         'gross_amount',
         'net_amount',
         'final_amount',
