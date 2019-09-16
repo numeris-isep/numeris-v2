@@ -27,6 +27,7 @@ class UpdateStaffTest extends TestCaseWithAuth
             ->assertJsonStructure([[
                 'user',
                 'month',
+                'hourAmount',
                 'grossAmount',
                 'netAmount',
                 'finalAmount',
@@ -36,11 +37,13 @@ class UpdateStaffTest extends TestCaseWithAuth
                 'deductions' => [[
                     'socialContribution',
                     'base',
+                    'employeeRate',
+                    'employerRate',
                     'employeeAmount',
                     'employerAmount'
                 ]],
-                'operations' => [['reference', 'startAt']],
-                'clients' => [],
+                'operations' => [['id', 'reference', 'startAt']],
+                'clients' => [['id', 'name']],
                 'createdAt',
                 'updatedAt',
             ]]);
