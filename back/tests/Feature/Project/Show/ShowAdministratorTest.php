@@ -34,6 +34,7 @@ class ShowAdministratorTest extends TestCaseWithAuth
                 'client',
                 'convention',
                 'missions',
+                'invoice',
             ]);
     }
 }

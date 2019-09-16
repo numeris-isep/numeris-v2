@@ -34,6 +34,7 @@ class ShowDeveloperTest extends TestCaseWithAuth
                 'client',
                 'convention',
                 'missions',
+                'invoice',
             ]);
     }
 

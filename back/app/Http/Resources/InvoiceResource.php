@@ -24,7 +24,7 @@ class InvoiceResource extends JsonResource
             'updatedAt'     => $this->updated_at,
 
             // Relation
-            'project' => UserResource::make($this->whenLoaded('project')),
+            'project'       => ProjectResource::make($this->whenLoaded('project')),
         ];
     }
 }

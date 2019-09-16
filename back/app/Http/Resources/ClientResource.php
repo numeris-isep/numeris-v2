@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Invoice;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ClientResource extends JsonResource
@@ -34,6 +35,7 @@ class ClientResource extends JsonResource
             'conventions'       => ConventionResource::collection($this->whenLoaded('conventions')),
             'projects'          => ProjectResource::collection($this->whenLoaded('projects')),
             'missions'          => MissionResource::collection($this->whenLoaded('missions')),
+            'invoices'          => InvoiceResource::collection($this->whenLoaded('invoices')),
         ];
     }
 }

@@ -34,6 +34,7 @@ class ShowStaffTest extends TestCaseWithAuth
                 'client',
                 'convention',
                 'missions',
+                'invoice',
             ]);
     }
 }

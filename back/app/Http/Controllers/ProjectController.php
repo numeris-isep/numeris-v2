@@ -83,7 +83,7 @@ class ProjectController extends Controller
             ->findOrFail($project_id);
         $this->authorize('show', $project);
 
-        $project->load(['client', 'convention', 'missions']);
+        $project->load(['client', 'convention', 'missions', 'invoice']);
 
         return response()->json(ProjectResource::make($project));
     }

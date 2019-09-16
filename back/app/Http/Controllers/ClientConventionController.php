@@ -20,10 +20,10 @@ class ClientConventionController extends Controller
      */
     public function index($client_id)
     {
-        $project = Client::findOrFail($client_id);
+        $client= Client::findOrFail($client_id);
         $this->authorize('index', Convention::class);
 
-        return response()->json(ConventionResource::collection($project->conventions));
+        return response()->json(ConventionResource::collection($client->conventions));
     }
 
     /**

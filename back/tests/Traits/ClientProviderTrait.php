@@ -7,6 +7,7 @@ use App\Models\Bill;
 use App\Models\Client;
 use App\Models\Contact;
 use App\Models\Convention;
+use App\Models\Invoice;
 use App\Models\Mission;
 use App\Models\Payslip;
 use App\Models\Project;
@@ -86,8 +87,10 @@ trait ClientProviderTrait
 
         $payslip = factory(Payslip::class)->create([
             'user_id'   => $user->id,
-            'month'     => $month ?? '2000-01-01 08:00:00',
+            'month'     => $month ?? '2000-01-01 00:00:00',
         ]);
+
+        $invoice = factory(Invoice::class)->create(['project_id' => $project->id]);
 
         return [
             'client'        => $client,
@@ -97,6 +100,7 @@ trait ClientProviderTrait
             'convention'    => $convention,
             'rate'          => $rate,
             'payslip'       => $payslip,
+            'invoice'       => $invoice,
         ];
     }
 }

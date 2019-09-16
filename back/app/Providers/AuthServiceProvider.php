@@ -23,6 +23,7 @@ use App\Policies\BillPolicy;
 use App\Policies\ClientPolicy;
 use App\Policies\ContactPolicy;
 use App\Policies\ConventionPolicy;
+use App\Policies\InvoicePolicy;
 use App\Policies\MissionPolicy;
 use App\Policies\PayslipPolicy;
 use App\Policies\PreferencePolicy;
@@ -60,6 +61,7 @@ class AuthServiceProvider extends ServiceProvider
         Contact::class      => ContactPolicy::class,
         Bill::class         => BillPolicy::class,
         Payslip::class      => PayslipPolicy::class,
+        Invoice::class      => InvoicePolicy::class,
     ];
 
     /**
