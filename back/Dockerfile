@@ -7,10 +7,11 @@ RUN apt-get update && apt-get install -y \
     git \
     zip \
     unzip \
-    nano
+    nano \
+    libpng-dev
 
 # Install the PHP mcrypt pdo_mysql extension
-RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install pdo_mysql gd
 
 # Install composer
 COPY --from=composer /usr/bin/composer /usr/bin/composer
