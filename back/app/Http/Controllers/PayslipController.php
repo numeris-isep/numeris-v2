@@ -42,6 +42,23 @@ class PayslipController extends Controller
     }
 
     /**
+     * Download a given contract PDF.
+     *
+     * @param $payslip_id
+     * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function downloadContract($payslip_id)
+    {
+        /** @var Payslip $payslip */
+        $payslip = Payslip::findOrFail($payslip_id);
+        $this->authorize('show', $payslip);
+
+        return PDF::loadView('files.contract', ['payslip' => $payslip])
+            ->download($payslip->generateContractName());
+    }
+
+    /**
      * Update the specified resources in storage.
      *
      * @param PayslipRequest $request

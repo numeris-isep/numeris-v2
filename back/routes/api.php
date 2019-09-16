@@ -84,5 +84,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('payslips', 'PayslipController@index')->name('payslips.index');
     Route::get('payslips/{payslip_id}/download-payslip', 'PayslipController@downloadPayslip')
         ->name('payslips.download.payslip');
+    Route::get('payslips/{payslip_id}/download-contract', 'PayslipController@downloadContract')
+        ->name('payslips.download.contract');
 
 });
