@@ -3,6 +3,7 @@ import { Convention } from './convention';
 import { Project } from './project';
 import { Mission } from './mission';
 import { Contact } from './contact';
+import { Invoice } from './Invoice';
 
 export class Client {
 
@@ -23,5 +24,6 @@ export class Client {
   conventions: Convention[];
   projects: Project[];
   missions: Mission[];
+  invoices: Invoice[];
 
 }

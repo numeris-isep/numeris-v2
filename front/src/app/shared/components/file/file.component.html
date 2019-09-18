@@ -1,4 +1,4 @@
-<div class="ui card">
+<div class="ui fluid card">
   <ng-container *ngIf="type === 'contract' || type === 'payslip'" [ngTemplateOutlet]="payslip"></ng-container>
   <ng-container *ngIf="type === 'invoice'" [ngTemplateOutlet]="invoice"></ng-container>
 
@@ -48,11 +48,31 @@
     </ng-container>
     =
     <b suiPopup popupPlacement="top" popupText="Salaire net à verser" popupInverted>
-      {{ data.netAmount | currency: '€' }}
+      {{ data.finalAmount | currency: '€' }}
     </b>
   </div>
 </ng-template>
 
 <ng-template #invoice>
-
+  <div class="content">
+    <i class="right floated big red file pdf icon"></i>
+    <a class="header" routerLink="/projets/{{ data.project.id }}">{{ data.project.name }}</a>
+    <div class="meta">{{ (data.project.startAt | date:'MMMM yyyy') | titlecase }}</div>
+    <div class="description" *ngIf="data.project.missionsCount">
+      {{ data.project.missionsCount }} {{ data.project.missionsCount > 1 ? 'missions effectuées' : 'mission effectuée' }}
+    </div>
+  </div>
+  <div class="extra content center aligned">
+    <span suiPopup popupPlacement="top" popupText="Coût de la prestation (HT)" popupInverted>
+      {{ data.grossAmount | currency:'€' }}
+    </span>
+    +
+    <span suiPopup popupPlacement="top" popupText="TVA" popupInverted>
+      {{ data.vatAmount | currency:'€' }}
+    </span>
+    =
+    <b suiPopup popupPlacement="top" popupText="Montant à payer TTC" popupInverted>
+      {{ data.finalAmount | currency: '€' }}
+    </b>
+  </div>
 </ng-template>

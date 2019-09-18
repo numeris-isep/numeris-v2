@@ -1,5 +1,6 @@
 import { Client } from "./client";
 import { Convention } from "./convention";
+import { Invoice } from './Invoice';
 
 export class Project {
 
@@ -20,6 +21,7 @@ export class Project {
 
   client: Client;
   convention: Convention;
+  invoice: Invoice;
 
 }
 

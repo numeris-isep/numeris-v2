@@ -62,7 +62,7 @@ class ClientController extends Controller
             ->findOrFail($client_id);
         $this->authorize('show', $client);
 
-        $client->load(['address', 'contact', 'conventions', 'conventions.rates']);
+        $client->load(['address', 'contact', 'conventions', 'conventions.rates', 'invoices', 'invoices.project']);
 
         return response()->json(ClientResource::make($client));
     }

@@ -32,6 +32,9 @@ class ShowDeveloperTest extends TestCaseWithAuth
                 'address',
                 'contact',
                 'conventions' => [['rates']],
+                'projects',
+                'missions',
+                'incoices',
             ]);
     }
 

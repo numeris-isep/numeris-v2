@@ -32,6 +32,9 @@ class ShowAdministratorTest extends TestCaseWithAuth
                 'address',
                 'contact',
                 'conventions' => [['rates']],
+                'projects',
+                'missions',
+                'incoices',
             ]);
     }
 }

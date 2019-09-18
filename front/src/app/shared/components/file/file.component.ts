@@ -3,6 +3,7 @@ import { Payslip } from '../../../core/classes/models/payslip';
 import { Invoice } from '../../../core/classes/models/Invoice';
 import { FileService } from '../../../core/http/file.service';
 import { AlertService } from '../../../core/services/alert.service';
+import { Project } from '../../../core/classes/models/project';
 
 @Component({
   selector: 'app-file',
@@ -13,6 +14,7 @@ export class FileComponent implements OnInit {
 
   @Input() type: string;
   @Input() data: Payslip | Invoice;
+  @Input() otherData: Project;
   document: any;
   url: string;
   loading: boolean = false;
@@ -23,6 +25,13 @@ export class FileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.initInvoice();
+  }
+
+  initInvoice() {
+    if (this.otherData) {
+      Object.assign(this.data, { project: this.otherData });
+    }
   }
 
   getDocument(documentId: number) {

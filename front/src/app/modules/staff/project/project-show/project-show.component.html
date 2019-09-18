@@ -39,15 +39,6 @@
               <div class="ui vertical divider">Ou</div>
               <div class="middle aligned row">
                 <div class="padded column">
-                  <div class="field">
-                    <label>Facture client</label>
-                    <app-button size="small" hiddenIcon="money bill" behaviour="fluid" color="grey"
-                                [isDisabled]="false" [isLoading]="false">
-                      Générer
-                    </app-button>
-                  </div>
-                </div>
-                <div class="padded column">
                   <div class="field" *ngIf="steps">
                     <label>Status</label>
                     <sui-select class="selection" labelField="translation" valueField="step"
@@ -57,6 +48,16 @@
                                 #select>
                       <sui-select-option *ngFor="let option of select.filteredOptions" [value]="option"></sui-select-option>
                     </sui-select>
+                  </div>
+                </div>
+                <div class="padded column">
+                  <div class="field">
+                    <label>Facture client</label>
+                    <app-button size="small" hiddenIcon="money bill" behaviour="fluid" color="grey"
+                                [isDisabled]="false" [isLoading]="false">
+                      <span *ngIf="project.invoice; else noInvoice">Regénérer</span>
+                      <ng-template #noInvoice>Générer</ng-template>
+                    </app-button>
                   </div>
                   <div class="field">
                     <label *ngIf="!project.moneyReceivedAt; else paid">Marquer comme payé</label>
@@ -93,6 +94,9 @@
             <i class="users icon"></i> Étudiants
             <span class="ui tiny blue label">{{ projectUsers.length }}</span>
           </a>
+          <a class="item" suiTabHeader="3" [isDisabled]="! project.invoice">
+            <i class="money bill icon"></i> Facture
+          </a>
         </div>
 
         <div class="ui" suiTabContent="1">
@@ -101,6 +105,16 @@
 
         <div *ngIf="project.isPrivate" class="ui" suiTabContent="2">
           <app-user-list [project]="project" page="project-show"></app-user-list>
+        </div>
+
+        <div class="ui" suiTabContent="3">
+          <div *ngIf="project.invoice; else emptyInvoice" class="ui three columns grid stackable">
+            <app-file class="column" type="invoice" [data]="project.invoice" [otherData]="project"></app-file>
+          </div>
+
+          <ng-template #emptyInvoice>
+            <app-empty>Aucune facture client n'a été générée.</app-empty>
+          </ng-template>
         </div>
       </sui-tabset>
     </div>

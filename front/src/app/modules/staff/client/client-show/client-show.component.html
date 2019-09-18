@@ -56,6 +56,10 @@
             <i class="tags icon"></i> Conventions
             <span class="ui tiny blue label">{{ client.conventionsCount }}</span>
           </a>
+          <a class="item" suiTabHeader="3" [isDisabled]="! client.invoices.length > 0">
+            <i class="money bill icon"></i> Factures
+            <span class="ui tiny blue label">{{ client.invoices.length }}</span>
+          </a>
         </div>
 
         <div class="ui" suiTabContent="1">
@@ -64,6 +68,12 @@
 
         <div class="ui" suiTabContent="2">
           <app-client-convention [client]="client"></app-client-convention>
+        </div>
+
+        <div class="ui" suiTabContent="3">
+          <div class="ui three column grid stackable">
+            <app-file *ngFor="let invoice of client.invoices" class="column" type="invoice" [data]="invoice"></app-file>
+          </div>
         </div>
       </sui-tabset>
     </div>
