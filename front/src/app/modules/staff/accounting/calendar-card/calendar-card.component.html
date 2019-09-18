@@ -10,7 +10,7 @@
             suiPopup popupPlacement="bottom" popupHeader="Action"
             popupText="{{ (payslipByMonth.payslips.length > 0) ? 'Recalcul' : 'Calcul' }} des données de paiement">
       <div class="visible content">
-        <span *ngIf="! payslipByMonth.payslips.length > 0; else exists">
+        <span *ngIf="! (payslipByMonth.payslips.length > 0); else exists">
           <i class="calculator icon"></i>
         </span>
         <ng-template #exists>
