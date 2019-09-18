@@ -7,6 +7,7 @@ import { HTTP_OPTIONS } from "../constants/http_options";
 import { Client } from "../classes/models/client";
 import { Project, ProjectStep } from "../classes/models/project";
 import { User } from "../classes/models/user";
+import { Invoice } from '../classes/models/Invoice';
 
 @Injectable({
   providedIn: 'root'
@@ -104,5 +105,11 @@ export class ProjectService {
     const userId: number = typeof user === 'number' ? user : user.id;
     const url = `${environment.apiUrl}/api/projects/${projectId}/users/${userId}`;
     return this.http.delete<User>(url, HTTP_OPTIONS);
+  }
+
+  updateProjectInvoice(project: Project | number): Observable<Invoice> {
+    const projectId: number = typeof project === 'number' ? project : project.id;
+    const url = `${environment.apiUrl}/api/projects/${projectId}/invoices`;
+    return this.http.put<Invoice>(url, {}, HTTP_OPTIONS);
   }
 }

@@ -25,6 +25,6 @@ class ProjectInvoiceController extends Controller
         $result = $calculator->calculate($project);
         $invoice = Invoice::updateOrCreate(['project_id' => $result['project_id']], $result);
 
-        return response()->json(InvoiceResource::make($invoice));
+        return response()->json(InvoiceResource::make($invoice->load('project')));
     }
 }

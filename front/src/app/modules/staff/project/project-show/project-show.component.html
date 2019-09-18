@@ -54,7 +54,8 @@
                   <div class="field">
                     <label>Facture client</label>
                     <app-button size="small" hiddenIcon="money bill" behaviour="fluid" color="grey"
-                                [isDisabled]="false" [isLoading]="false">
+                                [isDisabled]="project.step === 'hiring'" [isLoading]="invoiceLoading"
+                                (click)="calculate()">
                       <span *ngIf="project.invoice; else noInvoice">Regénérer</span>
                       <ng-template #noInvoice>Générer</ng-template>
                     </app-button>

@@ -25,6 +25,7 @@ export class ProjectShowComponent implements OnInit, OnDestroy {
   selectedStep: string;
   currentDate: string;
   loading: boolean = false;
+  invoiceLoading: boolean = false;
 
   projectUserModal: ProjectUserModal;
 
@@ -98,6 +99,19 @@ export class ProjectShowComponent implements OnInit, OnDestroy {
 
   openModal() {
     this.modalService.open(this.projectUserModal);
+  }
+
+  calculate() {
+    this.invoiceLoading = true;
+
+    this.projectService.updateProjectInvoice(this.project.id)
+      .subscribe(invoice => {
+        this.invoiceLoading = false;
+        Object.assign(this.project, { invoice: invoice });
+        this.alertService.success([`La facture de ce projet a bien été générée.`]);
+      },
+        error => this.invoiceLoading = false
+      );
   }
 
 }
