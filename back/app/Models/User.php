@@ -238,6 +238,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function payslips()
     {
-        return $this->hasMany(Payslip::class);
+        return $this->hasMany(Payslip::class)
+            ->orderBy('month', 'asc');
     }
 }

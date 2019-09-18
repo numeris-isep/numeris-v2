@@ -85,7 +85,7 @@ class AuthController extends Controller
      */
     public function currentUser()
     {
-        $user = auth()->user()->load(['address', 'preference']);
+        $user = auth()->user()->load(['address', 'preference', 'payslips']);
 
         if ($user->role()->isSuperiorOrEquivalentTo(Role::STAFF)) {
             $user->load([

@@ -5,6 +5,7 @@ export class Payslip {
 
   id: number;
   month: string;
+  hourAmount: number;
   grossAmount: number;
   netAmount: number;
   finalAmount: number;
@@ -19,5 +20,7 @@ export class Payslip {
   }[];
   operations: Mission[];
   clients: Client[];
+  createdAt: string;
+  updatedAt: string;
 
 }

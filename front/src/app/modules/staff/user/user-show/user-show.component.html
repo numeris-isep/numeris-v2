@@ -44,7 +44,7 @@
     <div class="row">
       <!-- Documents -->
       <div class="column">
-        <app-profile-documents></app-profile-documents>
+        <app-profile-documents *ngIf="user" [payslips]="user.payslips"></app-profile-documents>
       </div>
     </div>
   </div>

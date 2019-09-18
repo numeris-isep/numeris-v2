@@ -1,0 +1,58 @@
+<div class="ui card">
+  <ng-container *ngIf="type === 'contract' || type === 'payslip'" [ngTemplateOutlet]="payslip"></ng-container>
+  <ng-container *ngIf="type === 'invoice'" [ngTemplateOutlet]="invoice"></ng-container>
+
+  <div class="ui tiny bottom attached buttons">
+    <div class="ui animated fade button"
+         [ngClass]="{ 'loading': loading }"
+         (click)="getDocument(data.id)">
+      <div class="visible content"><i class="file pdf alternate icon"></i></div>
+      <div class="hidden content">
+        <i class="sync icon"></i>
+      </div>
+    </div>
+    <div class="or" data-text="ou"></div>
+    <a class="ui animated fade grey button" target="_blank"
+       [ngClass]="{ 'disabled': ! url }" [href]="url | safeURL" suiPopup popupHeader="Remarque"
+       popupText="Veuillez désactiver votre bloqueur de publicité pour afficher le document" popupPlacement="top">
+      <div class="visible content"><i class="eye icon"></i></div>
+      <div class="hidden content">
+        <i class="external icon"></i>
+      </div>
+    </a>
+  </div>
+</div>
+
+<ng-template #payslip>
+  <div class="content">
+    <i class="right floated big red file pdf icon"></i>
+    <div class="header">{{ (data.month | date:'MMMM yyyy') | titlecase }}</div>
+    <div class="meta">{{ data.hourAmount | hours }}</div>
+    <div class="description">
+      {{ data.operations.length }} {{ data.operations.length > 1 ? 'missions effectuées' : 'mission effectuée' }}
+    </div>
+  </div>
+  <div class="extra content center aligned">
+    <span suiPopup popupPlacement="top" popupText="Salaire brut" popupInverted>
+      {{ data.grossAmount | currency:'€' }}
+    </span>
+    -
+    <span suiPopup popupPlacement="top" popupText="Cotisations sociales" popupInverted>
+      {{ data.deductionAmount | currency:'€' }}
+    </span>
+    <ng-container *ngIf="data.subscriptionFee > 0">
+      -
+      <span suiPopup popupPlacement="top" popupText="Cotisation Numéris" popupInverted>
+        {{ data.subscriptionFee | currency:'€' }}
+      </span>
+    </ng-container>
+    =
+    <b suiPopup popupPlacement="top" popupText="Salaire net à verser" popupInverted>
+      {{ data.netAmount | currency: '€' }}
+    </b>
+  </div>
+</ng-template>
+
+<ng-template #invoice>
+
+</ng-template>

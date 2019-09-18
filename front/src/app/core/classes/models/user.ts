@@ -1,6 +1,7 @@
 import { Address } from './address';
 import { Preference } from './preference';
 import { Role } from './role';
+import { Payslip } from './payslip';
 
 export class User {
 
@@ -31,4 +32,5 @@ export class User {
   address: Address;
   preference: Preference;
   roles: Role[];
+  payslips: Payslip[];
 }

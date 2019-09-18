@@ -6,7 +6,7 @@
         <i class="top right corner pencil icon"></i>
       </i>
       Contrats
-      <span class="ui mini red label">2</span>
+      <span *ngIf="payslips" class="ui mini blue label">{{ payslips.length }}</span>
     </a>
     <a class="item" suiTabHeader="2">
       <i class="icons">
@@ -14,130 +14,29 @@
         <i class="bottom right corner euro icon"></i>
       </i>
       Bulletins
+      <span *ngIf="payslips" class="ui mini blue label">{{ payslips.length }}</span>
     </a>
   </div>
 
-  <div class="ui segment" suiTabContent="1">
-    <!-- Message -->
-    <div class="ui icon error message">
-      <i class="pencil icon"></i>
-      <div class="content">
-        <div class="header">
-          2 contrats de travail à signer
-        </div>
-        <p>Les contrats de travail doivent être signés pour être payé.</p>
-      </div>
+  <!-- Contracts -->
+  <div class="ui" suiTabContent="1">
+    <div *ngIf="payslips; else emptyContract" class="ui four column grid stackable">
+      <app-file class="column" *ngFor="let payslip of payslips" type="contract" [data]="payslip"></app-file>
     </div>
 
-    <!-- Contracts -->
-    <div class="ui grid doubling">
-      <div class="eight wide mobile four wide tablet four wide computer column">
-        <div class="ui red fluid link card">
-          <div class="content">
-            <div class="description">
-              <i class="folder open icon"></i> AS Janvier 2018
-            </div>
-          </div>
-          <div class="extra content">
-            <span class="right floated">
-              281,05 €
-            </span>
-            <span>
-              <i class="clock outline icon"></i>16h
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="eight wide mobile four wide tablet four wide computer column">
-        <div class="ui green fluid link card">
-          <div class="content">
-            <div class="description">
-              <i class="folder open icon"></i> AS Juin 2018
-            </div>
-          </div>
-          <div class="extra content">
-            <span class="right floated">
-              64,31 €
-            </span>
-            <span>
-              <i class="clock outline icon"></i>8h
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="eight wide mobile four wide tablet four wide computer column">
-        <div class="ui green fluid link card">
-          <div class="content">
-            <div class="description">
-              <i class="folder open icon"></i> AS Octobre 2018
-            </div>
-          </div>
-          <div class="extra content">
-            <span class="right floated">
-              38,00 €
-            </span>
-            <span>
-              <i class="clock outline icon"></i>4h
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="eight wide mobile four wide tablet four wide computer column">
-        <div class="ui red fluid link card">
-          <div class="content">
-            <div class="description">
-              <i class="folder open icon"></i> AS Novembre et Décembre 2018
-            </div>
-          </div>
-          <div class="extra content">
-            <span class="right floated">
-              577,87 €
-            </span>
-            <span>
-              <i class="clock outline icon"></i>102h
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="eight wide mobile four wide tablet four wide computer column">
-        <div class="ui green fluid link card">
-          <div class="content">
-            <div class="description">
-              <i class="folder open icon"></i> AS Janvier 2019
-            </div>
-          </div>
-          <div class="extra content">
-            <span class="right floated">
-              17 €
-            </span>
-            <span>
-              <i class="clock outline icon"></i>2h
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ng-template #emptyContract>
+      <app-empty>Aucun contrat de travail.</app-empty>
+    </ng-template>
   </div>
-  <div class="ui segment" suiTabContent="2">
-    <!-- Payment slips -->
-    <div class="ui grid doubling">
-      <div class="eight wide mobile four wide tablet four wide computer column">
-        <div class="ui fluid link card">
-          <div class="content">
-            <div class="description">
-              <i class="folder open icon"></i> AS Janvier 2018
-            </div>
-          </div>
-          <div class="extra content">
-            <span class="right floated">
-              281,05 €
-            </span>
-            <span>
-              <i class="clock outline icon"></i>16h
-            </span>
-          </div>
-        </div>
-      </div>
+
+  <!-- Payment slips -->
+  <div class="ui" suiTabContent="2">
+    <div *ngIf="payslips; else emptyPayslip" class="ui four column grid stackable">
+      <app-file class="column" *ngFor="let payslip of payslips" type="payslip" [data]="payslip"></app-file>
     </div>
+
+    <ng-template #emptyPayslip>
+      <app-empty>Aucun bulletin de versement.</app-empty>
+    </ng-template>
   </div>
 </sui-tabset>

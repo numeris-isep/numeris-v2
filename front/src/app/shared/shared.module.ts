@@ -29,6 +29,9 @@ import { CountryCodePipe } from './pipes/country-code.pipe';
 import { IbanPipe } from './pipes/iban.pipe';
 import { SocialInsuranceNumberPipe } from './pipes/social-insurance-number.pipe';
 import { UserEditFormComponent } from './components/forms/user-edit-form/user-edit-form.component';
+import { SafeURLPipe } from './pipes/safe-url.pipe';
+import { FileComponent } from './components/file/file.component';
+import { HoursPipe } from './pipes/hours.pipe';
 
 @NgModule({
   imports: [
@@ -66,6 +69,9 @@ import { UserEditFormComponent } from './components/forms/user-edit-form/user-ed
     IbanPipe,
     SocialInsuranceNumberPipe,
     UserEditFormComponent,
+    SafeURLPipe,
+    FileComponent,
+    HoursPipe,
   ],
   exports: [
     // Components
@@ -84,20 +90,23 @@ import { UserEditFormComponent } from './components/forms/user-edit-form/user-ed
     FormErrorComponent,
     PaginationCaptionComponent,
     ConventionDetailsComponent,
+    AddressFormComponent,
+    UserFormComponent,
+    PasswordFormComponent,
+    ProfileFormComponent,
+    UserEditFormComponent,
+    FileComponent,
 
     // Pipes
     AddressPipe,
     PhonePipe,
     RolePipe,
     StatusPipe,
-    AddressFormComponent,
-    UserFormComponent,
-    PasswordFormComponent,
-    ProfileFormComponent,
     IbanPipe,
     SocialInsuranceNumberPipe,
     CountryCodePipe,
-    UserEditFormComponent,
+    SafeURLPipe,
+    HoursPipe,
   ],
   providers: [
     AlertService
