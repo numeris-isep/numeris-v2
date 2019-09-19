@@ -1,15 +1,40 @@
 version: '3'
 services:
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - 3000:80
+    links:
+      - mysql:db
+    depends_on:
+      - mysql
+    container_name: numeris_phpmyadmin
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+    - /Volumes:/var/lib/mysql
+    container_name: numeris_mysql
+
   back:
     build:
       context: ./back
       dockerfile: Dockerfile.production
     env_file:
-      - .env
+      - back/.env
     environment:
       APP_ENV: production
       APP_DEBUG: "false"
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
     ports:
       - ${BACK_PORT}:80
     container_name: numeris_back
