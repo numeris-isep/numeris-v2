@@ -51,7 +51,8 @@
         <label>Téléphone</label>
         <div class="ui left icon input">
           <i class="phone icon"></i>
-          <input type="text" formControlName="phone" placeholder="Téléphone">
+          <input type="text" formControlName="phone" placeholder="Téléphone"
+                 [value]="f.phone.value | phone">
         </div>
         <app-form-error *ngIf="submitted && f.phone.errors" [errors]="f.phone.errors"></app-form-error>
       </div>

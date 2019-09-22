@@ -20,23 +20,29 @@
 
   <!-- Contracts -->
   <div class="ui" suiTabContent="1">
-    <div *ngIf="payslips; else emptyContract" class="ui four column grid stackable">
+    <div *ngIf="payslips.length > 0; else emptyContract" class="ui four column grid stackable">
       <app-file class="column" *ngFor="let payslip of payslips" type="contract" [data]="payslip"></app-file>
     </div>
 
     <ng-template #emptyContract>
-      <app-empty>Aucun contrat de travail.</app-empty>
+      <app-empty suiPopup popupPlacement="top" popupHeader="Information"
+                 popupText="Dans cette section seront affichés vos contrats de travail lorsque vous aurez effectué des missions. N'hésitez-pas à postuler !">
+        Aucun contrat de travail pour le moment.
+      </app-empty>
     </ng-template>
   </div>
 
   <!-- Payment slips -->
   <div class="ui" suiTabContent="2">
-    <div *ngIf="payslips; else emptyPayslip" class="ui four column grid stackable">
+    <div *ngIf="payslips.length > 0; else emptyPayslip" class="ui four column grid stackable">
       <app-file class="column" *ngFor="let payslip of payslips" type="payslip" [data]="payslip"></app-file>
     </div>
 
     <ng-template #emptyPayslip>
-      <app-empty>Aucun bulletin de versement.</app-empty>
+      <app-empty suiPopup popupPlacement="top" popupHeader="Information"
+                 popupText="Dans cette section seront affichés vos bulletins de versement lorsque vous aurez effectué des missions. N'hésitez-pas à postuler !">
+        Aucun bulletin de versement pour le moment.
+      </app-empty>
     </ng-template>
   </div>
 </sui-tabset>
