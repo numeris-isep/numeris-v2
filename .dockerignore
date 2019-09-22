@@ -11,6 +11,9 @@ back/vendor
 back/public/storage
 back/public/build
 
+# MySQL
+var
+
 # Front
 front/.DS_Store
 front/node_modules/
