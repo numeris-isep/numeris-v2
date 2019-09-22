@@ -34,7 +34,7 @@ services:
       DB_USERNAME: ${DB_USERNAME}
       DB_PASSWORD: ${DB_PASSWORD}
     ports:
-      - 8080:80
+      - ${BACK_PORT}:80
     links:
     - mysql
     depends_on:
