@@ -17,6 +17,11 @@ class Preference extends Model
         'by_push',
     ];
 
+    protected static $statusToAttribute = [
+        'accepted'  => 'on_acceptance',
+        'refused'   => 'on_refusal',
+    ];
+
     protected $casts = [
         'on_new_mission'    => 'boolean',
         'on_acceptance'     => 'boolean',
@@ -29,6 +34,11 @@ class Preference extends Model
     protected $hidden = [
         'user',
     ];
+
+    public static function statusToAttribute()
+    {
+        return self::$statusToAttribute;
+    }
 
     public function user()
     {

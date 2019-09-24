@@ -10,3 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use Illuminate\Support\Facades\Route;
+
+Route::get('mailable', function () {
+
+    $a = \App\Models\Application::find(1);
+
+    return new \App\Mail\ApplicationMail($a);
+});

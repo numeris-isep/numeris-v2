@@ -9,6 +9,7 @@
         "ext-json": "*",
         "barryvdh/laravel-dompdf": "^0.8.5",
         "doctrine/dbal": "^2.7",
+        "fedeisas/laravel-mail-css-inliner": "^2.2",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",

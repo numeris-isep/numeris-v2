@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ApplicationRequest;
 use App\Http\Resources\ApplicationResource;
+use App\Mail\MailService;
 use App\Models\Application;
 use Illuminate\Http\JsonResponse;
 
@@ -30,12 +31,14 @@ class ApplicationController extends Controller
      * @return JsonResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(ApplicationRequest $request, $application_id)
+    public function update(ApplicationRequest $request, $application_id, MailService $mailService)
     {
         $application = Application::findOrFail($application_id);
         $this->authorize('update', $application);
 
         $application->update($request->all());
+
+        $mailService->missionApplication($application);
 
         return response()->json(ApplicationResource::make($application), JsonResponse::HTTP_CREATED);
     }

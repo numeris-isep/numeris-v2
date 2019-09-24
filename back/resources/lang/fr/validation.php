@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Application;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -203,6 +205,9 @@ return [
         'rates.*.for_staff'         => 'tarif staff',
         'rates.*.for_client'        => 'tarif client',
         'rates.*.is_flat'           => 'forfait',
-        'rates.*.hours'             => 'heures'
+        'rates.*.hours'             => 'heures',
+
+        Application::ACCEPTED       => 'acceptée',
+        Application::REFUSED        => 'refusée',
     ],
 ];

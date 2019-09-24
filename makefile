@@ -101,4 +101,9 @@ test:
 ###################
 
 log-back:
-	docker exec -it numeris_back sh -c 'cat storage/logs/laravel.log'
+	docker exec -it numeris_back sh -c 'less +G storage/logs/laravel.log'
+
+config-clear:
+	docker exec -it numeris_back sh -c 'php artisan config:clear'
+	docker exec -it numeris_back sh -c 'php artisan cache:clear'
+	docker exec -it numeris_back sh -c 'php artisan route:clear'
