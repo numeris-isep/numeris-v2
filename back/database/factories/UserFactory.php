@@ -18,8 +18,8 @@ use Faker\Generator as Faker;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'preference_id' => factory(Preference::class)->create(),
-        'address_id'    => factory(Address::class)->create(),
+        'preference_id' => factory(Preference::class)->state('all-notifications'),
+        'address_id'    => factory(Address::class),
         'email'         => $faker->firstName . $faker->randomDigit * $faker->randomDigit . '@isep.fr',
         'password'      => bcrypt('azerty'),
         'first_name'    => $faker->firstName,
@@ -47,5 +47,11 @@ $factory->state(User::class, 'active', function (Faker $faker) {
         'social_insurance_number'   => $faker->numberBetween(100000000000000, 199999999999999),
         'iban'                      => strtoupper($faker->lexify('???????????????')),
         'bic'                       => $faker->bothify('#??##?#?'),
+    ];
+});
+
+$factory->state(User::class, 'no-notification', function () {
+    return [
+        'preference_id' => factory(Preference::class)->state('no-notification'),
     ];
 });

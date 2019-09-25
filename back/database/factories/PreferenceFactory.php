@@ -14,7 +14,7 @@ $factory->define(Preference::class, function (Faker $faker) {
     ];
 });
 
-$factory->state(Preference::class, 'all_notifications', function () {
+$factory->state(Preference::class, 'all-notifications', function () {
     return [
         'on_new_mission'    => 1,
         'on_acceptance'     => 1,
@@ -25,7 +25,7 @@ $factory->state(Preference::class, 'all_notifications', function () {
     ];
 });
 
-$factory->state(Preference::class, 'no_notifications', function () {
+$factory->state(Preference::class, 'no-notification', function () {
     return [
         'on_new_mission'    => 0,
         'on_acceptance'     => 0,

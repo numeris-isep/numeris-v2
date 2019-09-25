@@ -18,7 +18,7 @@ trait MissionProviderTrait
     {
         return [
             'mission'   => factory(Mission::class)->state('available')->create(),
-            'user'      => factory(User::class)->create(),
+            'user'      => factory(User::class)->state('no-notification')->create(),
         ];
     }
 

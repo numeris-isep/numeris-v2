@@ -2,9 +2,11 @@
 
 namespace Tests\Feature\MissionApplication\Store;
 
+use App\Mail\ApplicationMail;
 use App\Models\Role;
 use App\Models\Application;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCaseWithAuth;
 
 class StoreAdministratorTest extends TestCaseWithAuth
@@ -45,5 +47,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
             ]);
 
         $this->assertDatabaseHas('applications', $application);
+
+        Mail::assertNotQueued(ApplicationMail::class);
     }
 }

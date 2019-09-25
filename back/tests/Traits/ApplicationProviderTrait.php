@@ -35,4 +35,24 @@ trait ApplicationProviderTrait
             'mission_id'    => $mission->id,
         ]);
     }
+
+    public function applicationWithAllNotifications(Mission $mission = null): Application
+    {
+        return factory(Application::class)->create([
+            'user_id'       => factory(User::class)->create()->id,
+            'mission_id'    => $mission
+                ? $mission->id
+                : factory(Mission::class)->state('available')->create()->id,
+        ]);
+    }
+
+    public function applicationWithNoNotification(Mission $mission = null): Application
+    {
+        return factory(Application::class)->create([
+            'user_id'       => factory(User::class)->state('no-notification')->create()->id,
+            'mission_id'    => $mission
+                ? $mission->id
+                : factory(Mission::class)->state('available')->create()->id,
+        ]);
+    }
 }

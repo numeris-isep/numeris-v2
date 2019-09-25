@@ -11,16 +11,20 @@ class MailService
 {
     public function missionApplication(Application $application): void
     {
+        if (! in_array($application->status, [Application::ACCEPTED, Application::REFUSED])) {
+            return;
+        }
+
         $user = $application->user;
         $attribute = Preference::statusToAttribute()[$application->status];
 
         if ($user->preference->$attribute) {
-            $this->sendMail('eliottdes@gmail.com', new ApplicationMail($application));
+            $this->queueMail($user->email, new ApplicationMail($application));
         }
     }
 
-    private function sendMail($emails, Mailable $mailable)
+    private function queueMail($emails, Mailable $mailable)
     {
-        Mail::to($emails)->send($mailable);
+        Mail::to($emails)->queue($mailable);
     }
 }

@@ -2,9 +2,11 @@
 
 namespace Tests\Feature\MissionApplication\Store;
 
+use App\Mail\ApplicationMail;
 use App\Models\Role;
 use App\Models\Application;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCaseWithAuth;
 
 class StoreDeveloperTest extends TestCaseWithAuth
@@ -45,6 +47,47 @@ class StoreDeveloperTest extends TestCaseWithAuth
             ]);
 
         $this->assertDatabaseHas('applications', $application);
+
+        Mail::assertNotQueued(ApplicationMail::class);
+    }
+
+    /**
+     * @group developer
+     */
+    public function testDeveloperCreatingApplicationWithAllNotifications()
+    {
+        $mission = $this->availableMissionProvider();
+        $user = $this->userProvider();
+
+        $application = [
+            'user_id'       => $user->id,
+            'mission_id'    => $mission->id,
+            'type'          => Application::STAFF_PLACEMENT,
+            'status'        => Application::ACCEPTED
+        ];
+        $data = [
+            'user_id' => $user->id,
+        ];
+
+        $this->assertDatabaseMissing('applications', $application);
+
+        $this->json('POST', route('missions.applications.store', ['mission_id' => $mission->id]), $data)
+            ->assertStatus(JsonResponse::HTTP_CREATED)
+            ->assertJsonStructure([
+                'id',
+                'userId',
+                'missionId',
+                'type',
+                'status',
+                'createdAt',
+                'updatedAt',
+            ]);
+
+        $this->assertDatabaseHas('applications', $application);
+
+        Mail::assertQueued(ApplicationMail::class, function (ApplicationMail $mail) use ($user) {
+            return $mail->hasTo($user->email);
+        });
     }
 
     /**
@@ -73,6 +116,8 @@ class StoreDeveloperTest extends TestCaseWithAuth
             ->assertJsonValidationErrors(['user_id']);
 
         $this->assertDatabaseMissing('applications', $application);
+
+        Mail::assertNotQueued(ApplicationMail::class);
     }
 
     /**
@@ -101,6 +146,8 @@ class StoreDeveloperTest extends TestCaseWithAuth
             ->assertJson(['errors' => [trans('api.404')]]);
 
         $this->assertDatabaseMissing('applications', $application);
+
+        Mail::assertNotQueued(ApplicationMail::class);
     }
 
     /**
@@ -113,6 +160,8 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $this->json('POST', route('missions.applications.store', ['mission_id' => $mission->id]))
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
             ->assertJson(['errors' => [trans('api.404')]]);
+
+        Mail::assertNotQueued(ApplicationMail::class);
     }
 
     /**
@@ -131,6 +180,8 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $this->json('POST', route('missions.applications.store', ['mission_id' => $mission->id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors(['user_id']);
+
+        Mail::assertNotQueued(ApplicationMail::class);
     }
 
     /**
@@ -159,6 +210,8 @@ class StoreDeveloperTest extends TestCaseWithAuth
             ->assertJson(['errors' => [trans('api.403')]]);
 
         $this->assertDatabaseMissing('applications', $application);
+
+        Mail::assertNotQueued(ApplicationMail::class);
     }
 
     /**
@@ -187,6 +240,8 @@ class StoreDeveloperTest extends TestCaseWithAuth
             ->assertJson(['errors' => [trans('api.403')]]);
 
         $this->assertDatabaseMissing('applications', $application);
+
+        Mail::assertNotQueued(ApplicationMail::class);
     }
 
     /**
@@ -215,6 +270,8 @@ class StoreDeveloperTest extends TestCaseWithAuth
             ->assertJson(['errors' => [trans('api.403')]]);
 
         $this->assertDatabaseMissing('applications', $application);
+
+        Mail::assertNotQueued(ApplicationMail::class);
     }
 
     /**
@@ -251,5 +308,9 @@ class StoreDeveloperTest extends TestCaseWithAuth
             ]);
 
         $this->assertDatabaseMissing('applications', $application);
+
+        Mail::assertQueued(ApplicationMail::class, function (ApplicationMail $mail) use ($user) {
+            return $mail->hasTo($user->email);
+        });
     }
 }

@@ -2,9 +2,11 @@
 
 namespace Tests\Feature\Application\Update;
 
+use App\Mail\ApplicationMail;
 use App\Models\Role;
 use App\Models\Application;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCaseWithAuth;
 
 class UpdateStaffTest extends TestCaseWithAuth
@@ -17,8 +19,7 @@ class UpdateStaffTest extends TestCaseWithAuth
     public function testStaffUpdatingApplication()
     {
         $mission = $this->hiringProjectAndAvailableMissionProvider()['mission'];
-
-        $application = factory(Application::class)->create(['mission_id' => $mission->id]);
+        $application = $this->applicationWithNoNotification($mission);
 
         $data = [
             'status' => Application::ACCEPTED,
@@ -36,5 +37,7 @@ class UpdateStaffTest extends TestCaseWithAuth
                 'updatedAt',
                 'mission' => ['project'],
             ]);
+
+        Mail::assertNotQueued(ApplicationMail::class);
     }
 }

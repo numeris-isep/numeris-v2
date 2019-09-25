@@ -2,8 +2,10 @@
 
 namespace Tests\Feature\MissionApplication\Store;
 
+use App\Mail\ApplicationMail;
 use App\Models\Application;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCaseWithAuth;
 use App\Models\Role;
 
@@ -37,5 +39,7 @@ class StoreStudentTest extends TestCaseWithAuth
             ->assertJson(['errors' => [trans('api.403')]]);
 
         $this->assertDatabaseMissing('applications', $application);
+
+        Mail::assertNotQueued(ApplicationMail::class);
     }
 }
