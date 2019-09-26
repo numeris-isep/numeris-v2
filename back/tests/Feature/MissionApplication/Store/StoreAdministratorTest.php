@@ -5,8 +5,10 @@ namespace Tests\Feature\MissionApplication\Store;
 use App\Mail\ApplicationMail;
 use App\Models\Role;
 use App\Models\Application;
+use App\Notifications\ApplicationNotification;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCaseWithAuth;
 
 class StoreAdministratorTest extends TestCaseWithAuth
@@ -48,6 +50,6 @@ class StoreAdministratorTest extends TestCaseWithAuth
 
         $this->assertDatabaseHas('applications', $application);
 
-        Mail::assertNotQueued(ApplicationMail::class);
+        Notification::assertNotSentTo($user, ApplicationNotification::class);
     }
 }

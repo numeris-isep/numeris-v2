@@ -25,9 +25,9 @@ class UsersTableSeeder extends Seeder
             }
 
             // Generate my account ;)
-            if (! User::where('email', 'eliott.deseguier@isep.fr')->first()) {
+            if (! User::where('email', 'eliott.de-seguier@isep.fr')->first()) {
                 $this->createUser(1, Role::DEVELOPER, 'active', [
-                    'email'             => 'eliott.deseguier@isep.fr',
+                    'email'             => 'eliott.de-seguier@isep.fr',
                     'first_name'        => 'Eliott',
                     'last_name'         => 'de Séguier',
                     'promotion'         => '2019',

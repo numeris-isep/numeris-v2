@@ -19,6 +19,8 @@ Route::post('logout', 'Auth\AuthController@logout')->name('logout');
 Route::post('refresh', 'Auth\AuthController@refresh')->name('refresh');
 Route::post('current-user', 'Auth\AuthController@currentUser')->name('current-user');
 Route::post('subscribe', 'Auth\AuthController@subscribe')->name('subscribe');
+Route::post('forgot', 'Auth\ForgotPasswordController@forgot')->name('password.forgot');
+Route::post('reset', 'Auth\ResetPasswordController@reset')->name('password.reset');
 
 // Every route in this group require user authentication
 Route::group(['middleware' => 'auth:api'], function () {
@@ -47,7 +49,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::get('clients/{client_id}/projects', 'ClientProjectController@index')->name('clients.projects.index');
     Route::get('clients/{client_id}/conventions', 'ClientConventionController@index')->name('clients.conventions.index');
     Route::post('clients/{client_id}/conventions', 'ClientConventionController@store')->name('clients.conventions.store');
-    Route::get('clients/{client_id}/invoices', 'ClientInvoiceController@index')->name('clients.invoices.index');
 
     // Convention resource routes
     Route::apiResource('conventions', 'ConventionController', ['parameters' => ['conventions' => 'convention_id']])

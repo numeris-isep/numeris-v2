@@ -5,8 +5,10 @@ namespace Tests\Feature\Application\Update;
 use App\Mail\ApplicationMail;
 use App\Models\Role;
 use App\Models\Application;
+use App\Notifications\ApplicationNotification;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCaseWithAuth;
 
 class UpdateAdministratorTest extends TestCaseWithAuth
@@ -38,6 +40,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
                 'mission' => ['project'],
             ]);
 
-        Mail::assertNotQueued(ApplicationMail::class);
+
+        Notification::assertNotSentTo($application->user, ApplicationNotification::class);
     }
 }

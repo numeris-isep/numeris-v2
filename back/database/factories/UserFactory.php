@@ -21,7 +21,7 @@ $factory->define(User::class, function (Faker $faker) {
         'preference_id' => factory(Preference::class)->state('all-notifications'),
         'address_id'    => factory(Address::class),
         'email'         => $faker->firstName . $faker->randomDigit * $faker->randomDigit . '@isep.fr',
-        'password'      => bcrypt('azerty'),
+        'password'      => bcrypt('azertyuiop'),
         'first_name'    => $faker->firstName,
         'last_name'     => $faker->lastName,
         'promotion'     => $faker->numberBetween(2015, 2025),

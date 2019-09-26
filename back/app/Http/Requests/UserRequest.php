@@ -36,7 +36,7 @@ class UserRequest extends AbstractFormRequest
         $user_id = $this->route('user_id');
 
         $rules = [
-            'password'          => 'confirmed',
+            'password'          => 'confirmed|min:8',
             'first_name'        => 'required|string',
             'last_name'         => 'required|string',
             'email'             => 'required|email|regex:^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(isep)\.fr$^',

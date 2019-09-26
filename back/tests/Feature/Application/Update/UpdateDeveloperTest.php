@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\Application\Update;
 
-use App\Mail\ApplicationMail;
 use App\Models\Role;
 use App\Models\Application;
+use App\Notifications\ApplicationNotification;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCaseWithAuth;
 
 class UpdateDeveloperTest extends TestCaseWithAuth
@@ -38,7 +38,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'mission' => ['project'],
             ]);
 
-        Mail::assertNotQueued(ApplicationMail::class);
+        Notification::assertNotSentTo($application->user, ApplicationNotification::class);
     }
 
     /**
@@ -66,9 +66,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'mission' => ['project'],
             ]);
 
-        Mail::assertQueued(ApplicationMail::class, function ($mail) use ($application) {
-            return $mail->hasTo($application->user->email);
-        });
+        Notification::assertSentTo($application->user, ApplicationNotification::class);
     }
 
     /**
@@ -96,9 +94,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'mission' => ['project'],
             ]);
 
-        Mail::assertQueued(ApplicationMail::class, function (ApplicationMail $mail) use ($application) {
-            return $mail->hasTo($application->user->email);
-        });
+        Notification::assertSentTo($application->user, ApplicationNotification::class);
     }
 
     /**
@@ -126,7 +122,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'mission' => ['project'],
             ]);
 
-        Mail::assertNotQueued(ApplicationMail::class);
+        Notification::assertNotSentTo($application->user, ApplicationNotification::class);
     }
 
     /**
@@ -144,7 +140,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
             ->assertJson(['errors' => [trans('api.404')]]);
 
-        Mail::assertNotQueued(ApplicationMail::class);
+        Notification::assertNothingSent();
     }
 
     /**
@@ -164,6 +160,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 
-        Mail::assertNotQueued(ApplicationMail::class);
+        Notification::assertNotSentTo($application->user, ApplicationNotification::class);
     }
 }

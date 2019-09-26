@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\Application\Update;
 
-use App\Mail\ApplicationMail;
 use App\Models\Application;
 use App\Models\Role;
+use App\Notifications\ApplicationNotification;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCaseWithAuth;
 
 class UpdateUpdateStudentTest extends TestCaseWithAuth
@@ -29,6 +29,6 @@ class UpdateUpdateStudentTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 
-        Mail::assertNotQueued(ApplicationMail::class);
+        Notification::assertNotSentTo($application->user, ApplicationNotification::class);
     }
 }

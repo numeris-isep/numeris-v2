@@ -38,7 +38,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
 
         // Add 'password' datas after init to avoid the check on unknown column
         // 'password_confirmation' and on uncrypted 'password'
-        $user_data['password'] = $user_data['password_confirmation'] = 'azerty';
+        $user_data['password'] = $user_data['password_confirmation'] = 'azertyuiop';
 
         $data = array_merge($user_data, ['address' => $address_data]);
 
@@ -101,7 +101,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
 
         // Add 'password' datas after init to avoid the check on unknown column
         // 'password_confirmation' and on uncrypted 'password'
-        $user_data['password'] = $user_data['password_confirmation'] = 'azerty';
+        $user_data['password'] = $user_data['password_confirmation'] = 'azertyuiop';
 
         $data = array_merge($user_data, ['address' => $address_data]);
 
@@ -164,7 +164,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
 
         // Add 'password' datas after init to avoid the check on unknown column
         // 'password_confirmation' and on uncrypted 'password'
-        $user_data['password'] = $user_data['password_confirmation'] = 'azerty';
+        $user_data['password'] = $user_data['password_confirmation'] = 'azertyuiop';
 
         $data = array_merge($user_data, ['address' => $address_data]);
 
@@ -207,7 +207,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
 
         // Add 'password' datas after init to avoid the check on unknown column
         // 'password_confirmation' and on uncrypted 'password'
-        $user_data['password'] = $user_data['password_confirmation'] = 'azerty';
+        $user_data['password'] = $user_data['password_confirmation'] = 'azertyuiop';
 
         $data = array_merge($user_data, ['address' => $address_data]);
 

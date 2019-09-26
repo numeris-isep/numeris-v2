@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ApplicationRequest;
 use App\Http\Resources\ApplicationResource;
-use App\Mail\MailService;
 use App\Models\Application;
 use App\Models\Mission;
 use App\Models\User;
+use App\Notifications\ApplicationNotification;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Notification;
 
 class MissionApplicationController extends Controller
 {
@@ -42,7 +43,7 @@ class MissionApplicationController extends Controller
      * @return JsonResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function store(ApplicationRequest $request, $mission_id, MailService $mailService)
+    public function store(ApplicationRequest $request, $mission_id)
     {
         $mission = Mission::findOrFail($mission_id);
         $user = User::findOrFail($request->get('user_id'));
@@ -57,7 +58,7 @@ class MissionApplicationController extends Controller
 
         $application->load(['user', 'mission']);
 
-        $mailService->missionApplication($application);
+        $user->sendApplicationNotification($application);
 
         return response()->json(new ApplicationResource($application), JsonResponse::HTTP_CREATED);
     }

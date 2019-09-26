@@ -5,6 +5,7 @@ namespace Tests;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Support\Facades\Notification;
 use Tests\Traits\ApplicationProviderTrait;
 use Tests\Traits\ClientProviderTrait;
 use Tests\Traits\ConventionProviderTrait;
@@ -23,4 +24,12 @@ abstract class TestCase extends BaseTestCase
         ConventionProviderTrait,
         MissionProviderTrait,
         UserProviderTrait;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Disable sending real notifications during testing
+        Notification::fake();
+    }
 }

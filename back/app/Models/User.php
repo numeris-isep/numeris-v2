@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Models\Traits\DateQueryTrait;
 use App\Models\Traits\OnEventsTrait;
+use App\Notifications\ApplicationNotification;
+use App\Notifications\ResetPasswordNotification;
 use App\ProjectUser;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
@@ -240,5 +242,21 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Payslip::class)
             ->orderBy('month', 'asc');
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
+    }
+
+    public function sendApplicationNotification(Application $application)
+    {
+        if (in_array($application->status, [Application::ACCEPTED, Application::REFUSED])) {
+            $attribute = Preference::statusToAttribute()[$application->status];
+
+            if ($this->preference->$attribute) {
+                $this->notify(new ApplicationNotification($application));
+            }
+        }
     }
 }

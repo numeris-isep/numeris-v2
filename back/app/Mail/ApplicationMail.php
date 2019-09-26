@@ -3,16 +3,11 @@
 namespace App\Mail;
 
 use App\Models\Application;
-use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class ApplicationMail extends Mailable
 {
-    use Queueable, SerializesModels;
-
-    private $application;
+    protected $application;
 
     /**
      * Create a new message instance.

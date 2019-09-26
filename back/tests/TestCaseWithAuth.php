@@ -3,7 +3,6 @@
 namespace Tests;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Schema;
 use Tests\Traits\ApplicationProviderTrait;
 
@@ -31,8 +30,5 @@ abstract class TestCaseWithAuth extends TestCase
                 'email' => $user->email,
                 'password' => 'azerty'
             ]);
-
-        // Disable sending mails during testing
-        Mail::fake();
     }
 }
