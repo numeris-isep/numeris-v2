@@ -22,7 +22,7 @@ class ResetPasswordRequest extends AbstractFormRequest
     public function rules()
     {
         return [
-            'email'     => 'required|email|exists:',
+            'email'     => 'required|email|exists:users,email',
             'password'  => 'required|confirmed|min:8',
             'token'     => 'required',
         ];

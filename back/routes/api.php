@@ -19,8 +19,8 @@ Route::post('logout', 'Auth\AuthController@logout')->name('logout');
 Route::post('refresh', 'Auth\AuthController@refresh')->name('refresh');
 Route::post('current-user', 'Auth\AuthController@currentUser')->name('current-user');
 Route::post('subscribe', 'Auth\AuthController@subscribe')->name('subscribe');
-Route::post('forgot', 'Auth\ForgotPasswordController@forgot')->name('password.forgot');
-Route::post('reset', 'Auth\ResetPasswordController@reset')->name('password.reset');
+Route::post('password/forgot', 'Auth\ForgotPasswordController@forgot')->name('password.forgot');
+Route::post('password/reset', 'Auth\ResetPasswordController@doReset')->name('password.reset');
 
 // Every route in this group require user authentication
 Route::group(['middleware' => 'auth:api'], function () {
