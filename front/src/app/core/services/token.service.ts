@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from "../../../environments/environment";
+import { environment } from '../../../environments/environment';
 import * as moment from 'moment';
 
 @Injectable({
@@ -68,10 +68,10 @@ export class TokenService {
   getCurrentUserId(): number {
     const token = this.get();
 
-    if (token){
+    if (token) {
       const payload = this.payload(token);
 
-      if (payload){
+      if (payload) {
         return payload.sub;
       }
     }
@@ -80,10 +80,10 @@ export class TokenService {
   getCurrentUserRole(): string {
     const token = this.get();
 
-    if (token){
+    if (token) {
       const payload = this.payload(token);
 
-      if (payload){
+      if (payload) {
         return payload.rol;
       }
     }

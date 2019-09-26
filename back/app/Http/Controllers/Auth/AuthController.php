@@ -106,7 +106,7 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Déconnecté avec succès']);
+        return response()->json(['message' => [trans('api.logout')]]);
     }
 
     /**

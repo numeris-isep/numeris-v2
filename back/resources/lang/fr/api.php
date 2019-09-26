@@ -11,7 +11,8 @@ return [
     |
     */
 
-    'auth'  => 'Veuillez vous connecter pour accéder à cette page.',
+    'auth'      => 'Veuillez vous connecter pour accéder à cette page.',
+    'logout'    => 'Déconnecté avec succès.',
 
     '401'   => 'Non autorisé.',
     '403'   => 'Accès interdit.',
