@@ -29,7 +29,7 @@ export class AccountingComponent implements OnInit {
   initYears() {
     let currentYear = moment().get('year');
 
-    for (let i = 2018; i <= moment().get('year'); i++) {
+    for (let i = 2019; i <= moment().get('year'); i++) {
       this.years.push(i.toString());
       currentYear++;
     }

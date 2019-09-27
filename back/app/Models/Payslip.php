@@ -54,6 +54,11 @@ class Payslip extends Model
         return $this->belongsTo(User::class);
     }
 
+    public static function findByMonth(string $month)
+    {
+        return static::where('month', $month)->get();
+    }
+
     public static function findByUserAndMonth(int $user_id, string $month)
     {
         return static::where('user_id', $user_id)

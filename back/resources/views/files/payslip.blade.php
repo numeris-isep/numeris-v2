@@ -23,12 +23,18 @@
   ), ', ');
 @endphp
 
+@section('style')
+  {{-- Semantic UI CDN for table styling --}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/table.min.css"
+        integrity="sha256-oVdx55VoqJ/ONE3ehd7/NUko5KBRzuAfdxPBwp9qE4w=" crossorigin="anonymous" />
+@endsection
+
 @section('title')
   Bulletin de versement - {{ $employee->getFullName() }} - {{ $month->format('m/Y') }}
 @endsection
 
 @section('type')
-  Bulletin de versement {{ asset('') }}
+  Bulletin de versement
 @endsection
 
 @section('summary')
@@ -43,7 +49,7 @@
   <div class="ui segments">
     <div class="ui segment">
       <div class="block half">
-        <h4 class="header">Employeur</h4>
+        <h2 class="header">Employeur</h2>
         <ul class="information">
           <li>Association Numéris ISEP</li>
           <li>Mme Candice RUMEAU</li>
@@ -56,7 +62,7 @@
       </div>
 
       <div class="block half">
-        <h4 class="header">Salarié</h4>
+        <h2 class="header">Salarié</h2>
         <ul class="information">
           <li>{{ $employee->getFullName() }}</li>
           <li>N° de sécurité sociale : {{ $employee->social_insurance_number }}</li>

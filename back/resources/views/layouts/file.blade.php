@@ -6,19 +6,19 @@
   <meta charset="UTF-8">
   <title>@yield('title')</title>
   <link type="text/css" rel="stylesheet" href="{{ base_path('resources/assets/css/file.css') }}" />
-  <link type="text/css" rel="stylesheet" href="{{ base_path('resources/assets/css/semantic.min.css') }}" />
+  @yield('style')
 </head>
 <body>
 
   <div class="ui container">
+    <div class="column">
+      <img class="logo" src="{{ public_path('logos/numeris-blue.png') }}">
+    </div>
     <div class="ui two columns grid">
       <div class="column">
-        <h2 class="header">Numéris ISEP</h2>
+        <h1>Numéris ISEP</h1>
         <div class="sub header">@yield('type')</div>
         <div>@yield('summary')</div>
-      </div>
-      <div class="column">
-        <img class="ui small right floated image" src="{{ public_path('logos/numeris-blue.png') }}">
       </div>
     </div>
 

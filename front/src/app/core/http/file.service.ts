@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { HTTP_OPTIONS } from '../constants/http_options';
 
 @Injectable({
   providedIn: 'root'
@@ -30,11 +31,12 @@ export class FileService {
     return window.URL.createObjectURL(blob);
   }
 
-  openFile(file: any, type: string = 'application/pdf') {
-    const pwa = window.open(this.getFileURL(file, type));
+  getArchive(month: string) {
+    const url = `${environment.apiUrl}/api/payslips/download-zip`;
+    return this.http.put(url, { month: month }, { responseType: 'blob' });
+  }
 
-    if (! pwa || pwa.closed || typeof pwa.closed === undefined) {
-      alert('Pour ouvrir ce document, veuillez désactiver votre bloquer de publicité et réessayer.');
-    }
+  downloadFile(file: any, type) {
+    window.open(this.getFileURL(file, type));
   }
 }

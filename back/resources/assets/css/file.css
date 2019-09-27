@@ -1,9 +1,43 @@
 * {
+    font-family: -apple-system, Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
     font-size: 13px;
 }
 
-.header {
+.logo {
+    width: 100px;
+    float: right;
+    position: fixed;
+}
+
+.segment {
+    margin-top: 1em;
+    padding: 1em;
+    border: 1px solid rgba(34, 36, 38, 0.15);
+    border-radius: 4px;
+}
+.segments > .segment:first-child {
     margin-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.segments > .segment:last-child {
+    margin-top: 0;
+    margin-bottom: 1em;
+    border-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+h1 {
+    font-size: 18px;
+}
+
+h2 {
+    margin: 0;
+}
+
+.header {
+    margin-bottom: 2px !important;
 }
 
 .sub.header {

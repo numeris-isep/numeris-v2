@@ -6,6 +6,7 @@ use App\Models\Payslip;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Database\Eloquent\Collection;
 
 class PayslipPolicy
 {
@@ -14,7 +15,7 @@ class PayslipPolicy
     public function before(User $current_user, $ability)
     {
         // Grant everything to staff, administrator and developer
-        if ($current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF)) {
+        if ($current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF) && $ability != 'download-zip') {
             return true;
         }
     }
@@ -32,6 +33,12 @@ class PayslipPolicy
     public function downloadContract(User $current_user, Payslip $payslip)
     {
         return $current_user->is($payslip->user);
+    }
+
+    public function downloadZip(User $current_user, Collection $payslips)
+    {
+        return $current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF)
+            && $payslips->isNotEmpty();
     }
 
     public function update(User $current_user)

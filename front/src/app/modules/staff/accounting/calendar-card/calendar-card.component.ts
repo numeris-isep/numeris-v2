@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { Moment } from 'moment';
 import { PayslipService } from '../../../../core/http/payslip.service';
 import { AlertService } from '../../../../core/services/alert.service';
+import { FileService } from '../../../../core/http/file.service';
 
 @Component({
   selector: 'app-calendar-card',
@@ -17,9 +18,11 @@ export class CalendarCardComponent implements OnInit {
   };
   month: Moment;
   loading: boolean = false;
+  zipLoading: boolean = false;
 
   constructor(
     private payslipService: PayslipService,
+    private fileService: FileService,
     private alertService: AlertService,
   ) { }
 
@@ -47,8 +50,18 @@ export class CalendarCardComponent implements OnInit {
       });
   }
 
-  downloadArchive() {
+  downloadArchive(month: string) {
+    this.zipLoading = true;
 
+    this.fileService.getArchive(month).subscribe(
+      zip => {
+        this.fileService.downloadFile(zip, 'application/zip');
+        this.zipLoading = false;
+      },
+      error => {
+        this.zipLoading = false;
+      },
+    );
   }
 
 }

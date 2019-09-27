@@ -25,19 +25,11 @@
       </div>
     </button>
     <div class="or" data-text="ou"></div>
-    <button class="ui animated fade teal button" [disabled]="! (payslipByMonth.payslips.length > 0)"
-            suiPopup popupPlacement="bottom" popupHeader="Action"
-            popupText="Ajout des documents sur le profil des étudiants">
-      <div class="visible content"><i class="users icon"></i></div>
-      <div class="hidden content">
-        <i class="clipboard icon"></i>
-      </div>
-    </button>
-    <div class="or" data-text="ou"></div>
-    <button class="ui animated fade positive button" (click)="downloadArchive()"
+    <button class="ui animated fade positive button" [ngClass]="{'loading': zipLoading}"
+            (click)="downloadArchive(month.locale('fr').format('Y-MM-DD HH:mm:ss'))"
             [disabled]="! (payslipByMonth.payslips.length > 0)"
             suiPopup popupPlacement="bottom" popupHeader="Action"
-            popupText="Télécharger les documents étudiants du mois">
+            popupText="Télécharger les documents étudiants du mois (désactivez votre bloqueur de publicité)">
       <div class="visible content"><i class="archive icon"></i></div>
       <div class="hidden content">
         <i class="download icon"></i>

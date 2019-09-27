@@ -7,6 +7,8 @@ use App\Http\Requests\PayslipRequest;
 use App\Http\Resources\PayslipResource;
 use App\Models\Payslip;
 use Barryvdh\DomPDF\Facade as PDF;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class PayslipController extends Controller
 {
@@ -56,6 +58,52 @@ class PayslipController extends Controller
 
         return PDF::loadView('files.contract', ['payslip' => $payslip])
             ->download($payslip->generateContractName());
+    }
+
+    /**
+     * Download a ZIP archive containing contracts an payslips of a given month
+     *
+     * Note: this takes a bit of time
+     *          ¯\_(ツ)_/¯
+     *
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function downloadZip(Request $request)
+    {
+        set_time_limit(0); // Necessary because this task can take a while
+
+        $payslips = Payslip::findByMonth($request['month']);
+        $this->authorize('download-zip', [Payslip::class, $payslips]);
+
+        $zip = new \ZipArchive();
+        $zip_name = sprintf('%s_documents.zip', Carbon::parse($request['month'])->format('Y-m'));
+        $zip->open($zip_name, \ZipArchive::CREATE);
+
+        $contract_folder_name = 'Contrats de travail';
+        $payslip_folder_name = 'Bulletins de versement';
+        $zip->addEmptyDir($contract_folder_name);
+        $zip->addEmptyDir($payslip_folder_name);
+
+        foreach ($payslips as $payslip) {
+            $contractPDF = PDF::loadView('files.contract', ['payslip' => $payslip]);
+            $payslipPDF = PDF::loadView('files.payslip', ['payslip' => $payslip]);
+
+            $zip->addFromString(
+                sprintf('%s/%s', $contract_folder_name, $payslip->generateContractName()),
+                $contractPDF->output()
+            );
+            $zip->addFromString(
+                sprintf('%s/%s', $payslip_folder_name, $payslip->generatePayslipName()),
+                $payslipPDF->output()
+            );
+        }
+
+        $zip->close();
+
+        return response()->download(public_path($zip_name), $zip_name, ['Content-Type' => 'application/zip'])
+            ->deleteFileAfterSend();
     }
 
     /**
