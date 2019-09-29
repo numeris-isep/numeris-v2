@@ -8,6 +8,8 @@ import { ContactUsModalComponent } from './modals/contact-us-modal/contact-us-mo
 import { LoginModalComponent } from './modals/login-modal/login-modal.component';
 import { SharedModule } from '../../shared/shared.module';
 import { SubscribeModalComponent } from './modals/subscribe-modal/subscribe-modal.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ShowcaseRoutingModule } from './showcase-routing.module';
 
 @NgModule({
   imports: [
@@ -15,6 +17,7 @@ import { SubscribeModalComponent } from './modals/subscribe-modal/subscribe-moda
     CommonModule,
     SuiModule,
     ReactiveFormsModule,
+    ShowcaseRoutingModule,
     SharedModule,
   ],
   declarations: [
@@ -22,6 +25,7 @@ import { SubscribeModalComponent } from './modals/subscribe-modal/subscribe-moda
     LoginModalComponent,
     ContactUsModalComponent,
     SubscribeModalComponent,
+    ResetPasswordComponent,
   ],
   entryComponents: [
     LoginModalComponent,

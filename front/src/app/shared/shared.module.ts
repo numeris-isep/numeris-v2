@@ -32,6 +32,7 @@ import { UserEditFormComponent } from './components/forms/user-edit-form/user-ed
 import { SafeURLPipe } from './pipes/safe-url.pipe';
 import { FileComponent } from './components/file/file.component';
 import { HoursPipe } from './pipes/hours.pipe';
+import { ResetPasswordFormComponent } from './components/forms/reset-password-form/reset-password-form.component';
 
 @NgModule({
   imports: [
@@ -72,6 +73,7 @@ import { HoursPipe } from './pipes/hours.pipe';
     SafeURLPipe,
     FileComponent,
     HoursPipe,
+    ResetPasswordFormComponent,
   ],
   exports: [
     // Components
@@ -107,6 +109,7 @@ import { HoursPipe } from './pipes/hours.pipe';
     CountryCodePipe,
     SafeURLPipe,
     HoursPipe,
+    ResetPasswordFormComponent,
   ],
   providers: [
     AlertService

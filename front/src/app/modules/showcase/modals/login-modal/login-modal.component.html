@@ -31,6 +31,7 @@
         </div>
       </div>
       <app-form-error *ngIf="submitted && f.password.errors" [errors]="f.password.errors"></app-form-error>
+      <a routerLink="/mot-de-passe/reinitialiser" (click)="loginModal.deny(undefined)"><i class="question circle icon"></i> Mot de passe oublié ?</a>
     </div>
 
     <app-button hiddenIcon="sign in"

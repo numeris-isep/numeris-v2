@@ -61,4 +61,21 @@ export class AuthService {
       this.alertService.clear();
     }
   }
+
+  forgotPassword(email: string): Observable<{message: string[]}> {
+    const url = `${environment.apiUrl}/api/password/forgot`;
+    return this.http.post<{message: string[]}>(url, {email: email}, HTTP_OPTIONS);
+  }
+
+  resetPassword(
+    data: {
+      email: string,
+      password: string,
+      password_confirmation: string,
+      token: string,
+    }
+  ): Observable<{message: string[]}> {
+    const url = `${environment.apiUrl}/api/password/reset`;
+    return this.http.post<{message: string[]}>(url, data, HTTP_OPTIONS);
+  }
 }
