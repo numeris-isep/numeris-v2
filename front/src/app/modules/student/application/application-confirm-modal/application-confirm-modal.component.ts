@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { SuiModal, ComponentModalConfig, ModalSize } from "ng2-semantic-ui"
-import { Mission } from "../../../../core/classes/models/mission";
-import { Application } from "../../../../core/classes/models/application";
-import { ApplicationService } from "../../../../core/http/application.service";
-import { AlertService } from "../../../../core/services/alert.service";
-import { Router } from "@angular/router";
-import { Observable } from "rxjs";
-import { AuthService } from "../../../../core/http/auth/auth.service";
+import { SuiModal, ComponentModalConfig, ModalSize } from 'ng2-semantic-ui';
+import { Mission } from '../../../../core/classes/models/mission';
+import { Application } from '../../../../core/classes/models/application';
+import { ApplicationService } from '../../../../core/http/application.service';
+import { AlertService } from '../../../../core/services/alert.service';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthService } from '../../../../core/http/auth/auth.service';
 
 export interface IConfirmModalContext {
   title: string;
@@ -45,7 +45,7 @@ export class ApplicationConfirmModalComponent implements OnInit {
       this.storeUserApplication(this.mission).subscribe(
         _ => {
           this.router.navigate(['/profil'])
-            .then(() => { this.router.navigate([this.returnUrl]) } );
+            .then(() => { this.router.navigate([this.returnUrl]); } );
           this.alertService.success([`Vous avez bien postulé à la mission ${this.mission.title}.`], null, true);
           this.modal.approve(undefined);
         },
@@ -59,7 +59,7 @@ export class ApplicationConfirmModalComponent implements OnInit {
       this.deleteUserApplication(this.application).subscribe(
         _ => {
           this.router.navigate(['/profil'])
-            .then(() => { this.router.navigate([this.returnUrl]) } );
+            .then(() => { this.router.navigate([this.returnUrl]); } );
           this.alertService.success([`Candidature à la mission ${this.mission.title} retirée.`], null, true);
           this.modal.approve(undefined);
         },

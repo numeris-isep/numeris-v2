@@ -61,7 +61,7 @@ export class MissionDetailsComponent implements OnInit {
           : `Êtes-vous sûr de vouloir retirer votre candidature de la mission ${this.mission.title} ?`,
         this.mission,
         this.userApplication
-      )
+      );
     }
   }
 

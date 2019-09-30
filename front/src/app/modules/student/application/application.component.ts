@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Mission } from "../../../core/classes/models/mission";
+import { Mission } from '../../../core/classes/models/mission';
 import * as moment from 'moment';
-import { AuthService } from "../../../core/http/auth/auth.service";
-import { MissionService } from "../../../core/http/mission.service";
+import { AuthService } from '../../../core/http/auth/auth.service';
+import { MissionService } from '../../../core/http/mission.service';
 
 @Component({
   selector: 'app-application',
@@ -14,9 +14,9 @@ export class ApplicationComponent implements OnInit {
   counter: number = 0;
 
   sortedMissionGroups = [
-    { name: "Candidatures acceptées", color: "green", missions: <Mission[]>[] },
-    { name: "Candidatures en cours", color: "blue", missions: <Mission[]>[] },
-    { name: "Historique", color: "grey", missions: <Mission[]>[] }
+    { name: 'Candidatures acceptées', color: 'green', missions: <Mission[]>[] },
+    { name: 'Candidatures en cours', color: 'blue', missions: <Mission[]>[] },
+    { name: 'Historique', color: 'grey', missions: <Mission[]>[] }
   ];
 
   constructor(
@@ -28,9 +28,6 @@ export class ApplicationComponent implements OnInit {
     this.getMissions();
   }
 
-  /**
-   * Get and sort missions to make an user friendly display
-   */
   getMissions() {
     this.missionService.getAvailableMissions().subscribe(
       missions => {
@@ -40,7 +37,7 @@ export class ApplicationComponent implements OnInit {
             const currentUserId: number = this.authService.getCurrentUserId();
             mission.applications
               .filter((application) => {
-                if (application.userId == currentUserId) {
+                if (application.userId === currentUserId) {
                   if (moment(mission.startAt).isBefore(moment())) {
                     this.sortedMissionGroups[2].missions.push(mission);
                   } else {
@@ -54,7 +51,7 @@ export class ApplicationComponent implements OnInit {
                       default: break;
                     }
                   }
-                  if (application.status != 'refused') this.counter++;
+                  if (application.status !== 'refused') { this.counter++; }
                 }
               });
           });
@@ -63,7 +60,7 @@ export class ApplicationComponent implements OnInit {
           (group) => group.missions.length > 0 ? group : null
         );
       }
-    )
+    );
   }
 
 }

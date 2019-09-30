@@ -27,12 +27,9 @@ class IndexAdministratorTest extends TestCaseWithAuth
                 'touAccepted',
                 'subscriptionPaidAt',
                 'email',
-                'username',
                 'firstName',
                 'lastName',
-                'studentNumber',
                 'promotion',
-                'schoolYear',
                 'phone',
                 'nationality',
                 'birthDate',
@@ -42,7 +39,6 @@ class IndexAdministratorTest extends TestCaseWithAuth
                 'bic',
                 'createdAt',
                 'updatedAt',
-                'roles',
             ]]);
     }
 }
