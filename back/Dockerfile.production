@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     libpng-dev
 
 # Install the PHP mcrypt pdo_mysql extension
-RUN docker-php-ext-install pdo_mysql gd
+RUN docker-php-ext-install pdo_mysql gd zip
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 # Enable apache conf
