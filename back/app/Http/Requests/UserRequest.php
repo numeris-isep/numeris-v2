@@ -66,6 +66,7 @@ class UserRequest extends AbstractFormRequest
                 return $rules;
             case 'PUT':
                 $rules['email'] = $rules['email'] . '|unique:users,email,' . $user_id;
+                $rules['password'] = $rules['password'] . '|nullable';
                 return array_merge($rules, $put_rules);
             default:break;
         }

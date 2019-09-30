@@ -78,14 +78,15 @@ class User extends Authenticatable implements JWTSubject
         return static::where('email', $email)->first();
     }
 
-    public static function filtered($search, $role, $promotion, $project_id = null, $in_project = null) {
-        return static::where('activated', true)
+    public static function filtered($search, $role, $promotion, $project_id = null, $in_project = null, $only_active = true) {
+        return static::when($only_active, function ($query) use ($only_active) {
+            return $query->where('activated', true);
+        })
             ->when($search != null, function($query) use ($search) {
                 return $query->where(function ($query) use ($search) {
                     return $query->where('first_name', 'LIKE', "%{$search}%")
                         ->orWhere('last_name', 'LIKE', "%{$search}%")
-                        ->orWhere('email', 'LIKE', "%{$search}%")
-                        ->orWhere('student_number', 'LIKE', "%{$search}%");
+                        ->orWhere('email', 'LIKE', "%{$search}%");
                 });
             })
             ->when($promotion != null, function ($query) use ($promotion) {

@@ -33,7 +33,10 @@ class UserController extends Controller
         $users = User::filtered(
             request()->search,
             request()->role,
-            request()->promotion
+            request()->promotion,
+            null,
+            null,
+            false
         )->load(['roles'])
             ->sortByDesc('created_at')
             ->paginate(10, request()->page)
