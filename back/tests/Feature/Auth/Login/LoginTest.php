@@ -26,7 +26,7 @@ class LoginTest extends TestCase
     {
         $data = [
             'email'     => 'unknown@mail.com',
-            'password'  => 'azerty'
+            'password'  => 'azertyuiop'
         ];
 
         $this->json('POST', route('login'), $data)

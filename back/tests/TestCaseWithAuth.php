@@ -28,7 +28,7 @@ abstract class TestCaseWithAuth extends TestCase
         auth()->claims(['rol' => $user->role()->name])
             ->attempt([
                 'email' => $user->email,
-                'password' => 'azerty'
+                'password' => 'azertyuiop'
             ]);
     }
 }
