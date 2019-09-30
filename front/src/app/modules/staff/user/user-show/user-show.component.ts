@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../core/http/user.service';
 import { TitleService } from '../../../../core/services/title.service';
 import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.service';
@@ -25,30 +25,36 @@ export class UserShowComponent implements OnInit {
     private titleService: TitleService,
     private breadcrumbService: BreadcrumbsService,
     private alertService: AlertService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
+    this.getCurrentUser();
+
     this.route.params.subscribe(param => {
       this.getUser(parseInt(param.userId));
     });
-
-    this.getCurrentUser();
   }
 
   getUser(userId: number) {
     return this.userService.getUser(userId).subscribe(user => {
-        this.user = user;
-        let name = 'Utilisateur sans nom';
+      if (this.currentUserId === user.id) {
+        this.router.navigate(['/profil']);
+      }
 
-        if (user.firstName && user.lastName) {
-          name = `${user.firstName} ${user.lastName.toUpperCase()}`;
-        }
+      this.user = user;
 
-        this.titleService.setTitles(name);
-        this.breadcrumbService.setBreadcrumb(
-          this.route.snapshot,
-          { title: name, url: '' }
-        );
+      let name = 'Utilisateur sans nom';
+
+      if (user.firstName && user.lastName) {
+        name = `${user.firstName} ${user.lastName.toUpperCase()}`;
+      }
+
+      this.titleService.setTitles(name);
+      this.breadcrumbService.setBreadcrumb(
+        this.route.snapshot,
+        { title: name, url: '' }
+      );
     });
   }
 
