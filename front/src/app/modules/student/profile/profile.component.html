@@ -34,6 +34,11 @@
             <i class="question circle icon"></i> Besoin d'aide ?
           </a>
         </div>
+        <app-button *ngIf="user.roles[0].name !== 'student'" size="small" hiddenIcon="check" color="basic teal"
+                    [isLoading]="loading" suiPopup popupPlacement="top" popupHeader="Information"
+                    popupText="Vous allez devoir vous reconnecter" (click)="activateUser()">
+          Activer
+        </app-button>
       </div>
 
       <!-- Terms of use accepted -->

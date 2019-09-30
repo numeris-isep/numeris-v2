@@ -1,12 +1,11 @@
 <app-content [condition]="! user">
   <div class="ui padded grid doubling">
     <!-- Messages -->
-    <div class="sixteen wide column"
-         *ngIf="user && (!user.activated || !user.touAccepted)">
+    <div class="sixteen wide column">
       <!-- Activate account -->
-      <div class="ui icon info message" *ngIf="!user.activated">
-        <i class="ban icon"></i>
-        <div class="content">
+      <div class="ui icon info message" *ngIf="user">
+        <i class="{{ user.activated ? 'check' : 'ban' }} icon"></i>
+        <div class="content" *ngIf="! user.activated; else activated">
           <div class="header">
             Ce compte n'est pas activé
           </div>
@@ -21,6 +20,19 @@
             </ul>
           </div>
         </div>
+
+        <ng-template #activated>
+          <div class="content">
+            <div class="header">
+              Ce compte est activé
+            </div>
+          </div>
+        </ng-template>
+
+        <app-button *ngIf="user.roles[0].name !== 'student'" size="small" [hiddenIcon]="user.activated ? 'ban' : 'check'" color="basic teal"
+                    [isLoading]="loading" (click)="updateActivated()">
+          {{ user.activated ? 'Désactiver' : 'Activer' }}
+        </app-button>
       </div>
     </div>
 

@@ -109,9 +109,16 @@ export class UserService {
     return this.http.put<User>(url, data, HTTP_OPTIONS);
   }
 
-  updateUserTermsOfUse(user: User) {
-    const url = `${environment.apiUrl}/api/users/${user.id}/terms-of-use`;
-    return this.http.patch(url, { tou_accepted: true }, HTTP_OPTIONS);
+  updateUserTermsOfUse(user: User): Observable<User> {
+    const userId: number = typeof user === 'number' ? user : user.id;
+    const url = `${environment.apiUrl}/api/users/${userId}/terms-of-use`;
+    return this.http.patch<User>(url, { tou_accepted: true }, HTTP_OPTIONS);
+  }
+
+  updateUserActivated(activated: boolean, user: User): Observable<User> {
+    const userId: number = typeof user === 'number' ? user : user.id;
+    const url = `${environment.apiUrl}/api/users/${userId}/activated`;
+    return this.http.patch<User>(url, { activated: activated }, HTTP_OPTIONS);
   }
 
   deleteUser(user: User) {

@@ -1,9 +1,9 @@
 <div class="ui fluid card">
   <div class="center aligned content">
     <div class="header">{{ user.firstName | titlecase }} {{ user.lastName | uppercase }}</div>
-    <div class="meta" *ngIf="currentUserRole != 'student'">
-      <a (click)="openModal()"><i class="settings small icon"></i></a> {{ user.roles[0] | role }}
-    </div>
+    <a class="meta" *ngIf="currentUserRole != 'student'" (click)="openModal()">
+      <i class="settings small icon"></i> {{ user.roles[0] | role }}
+    </a>
   </div>
   <div class="image">
     <img src="assets/logos/numeris-blue.png" alt="Logo de Numéris">

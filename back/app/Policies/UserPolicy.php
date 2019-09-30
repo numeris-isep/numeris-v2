@@ -68,6 +68,15 @@ class UserPolicy
             && ! $user->tou_accepted;
     }
 
+    public function updateActivated(User $current_user, User $user)
+    {
+        // $user1 whose $role < 'developer' can't update the activation of $user2
+        // unless   $user1->role >= 'staff'
+        // AND      $user1->role > $user2->role
+        return $current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF)
+            && $current_user->role()->isSuperiorTo($user->role()->name);
+    }
+
     public function destroy(User $current_user, User $user)
     {
         // $user1 whose $role < 'administrator' can't delete the profile of $user2

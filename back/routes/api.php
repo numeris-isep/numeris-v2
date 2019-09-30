@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     // User resource routes
     Route::apiResource('users', 'UserController', ['parameters' => ['users' => 'user_id']])->except(['store']);
     Route::patch('users/{user_id}/terms-of-use', 'UserController@updateTermsOfUse')->name('users.update.terms-of-use');
+    Route::patch('users/{user_id}/activated', 'UserController@updateActivated')->name('users.update.activated');
     Route::get('users-promotion', 'UserController@indexPromotion')->name('users.index.promotion');
     Route::apiResource('users.applications', 'UserApplicationController', ['parameters' => ['users' => 'user_id']])
         ->only(['index', 'store']);

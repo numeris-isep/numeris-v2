@@ -139,6 +139,26 @@ class UserController extends Controller
     }
 
     /**
+     * Activate or disactivate a user.
+     *
+     * @param Request $request
+     * @param $user_id
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function updateActivated(Request $request, $user_id)
+    {
+        $user = User::findOrFail($user_id);
+        $this->authorize('update-activated', $user);
+
+        $request->validate(['activated' => 'required|boolean']);
+
+        $user->update($request->only('activated'));
+
+        return response()->json(UserResource::make($user), JsonResponse::HTTP_CREATED);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param $user_id
