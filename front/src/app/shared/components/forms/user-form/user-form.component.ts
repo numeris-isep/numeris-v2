@@ -27,11 +27,10 @@ export class UserFormComponent implements OnInit {
   get f() { return this.userForm.controls; }
 
   initPromotions() {
-    let currentYear = moment().get('year');
+    const currentYear = moment().get('year');
 
     for (let i = 0; i < 7; i++) {
-      this.promotions.push({ promotion: currentYear, id: currentYear});
-      currentYear++;
+      this.promotions.push({ promotion: currentYear + i, id: currentYear + i});
     }
   }
 
