@@ -1,0 +1,11 @@
+.actions {
+  text-align: left !important;
+}
+
+.padded {
+  padding-bottom: 0;
+}
+
+.ui.form .fields {
+  margin: 0 -0.5em;
+}

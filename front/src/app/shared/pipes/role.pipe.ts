@@ -10,7 +10,7 @@ export class RolePipe implements PipeTransform {
     if (role != null) {
       const translationFR = {
         developer: 'Développeur',
-        administrator: 'Administrator',
+        administrator: 'Administrateur',
         staff: 'Staff',
         student: 'Étudiant'
       };

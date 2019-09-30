@@ -12,8 +12,8 @@ class RolePolicy
 
     public function before(User $current_user, $ability)
     {
-        // Grant everything to developers and administrators
-        if ($current_user->role()->isSuperiorOrEquivalentTo(Role::ADMINISTRATOR)) {
+        // Grant everything to developers, staffs and administrators
+        if ($current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF)) {
             return true;
         }
     }

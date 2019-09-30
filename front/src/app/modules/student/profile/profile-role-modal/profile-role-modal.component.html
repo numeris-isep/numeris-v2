@@ -1,0 +1,67 @@
+<div class="header">
+  Rôles de {{ user.firstName }} {{ user.lastName | uppercase }}
+</div>
+
+<app-alert target="modal"></app-alert>
+
+<div class="content">
+  <h4 class="ui header">Historique</h4>
+  <div class="ui feed">
+    <div *ngFor="let role of user.roles; let i = index" class="event">
+      <div class="label">
+        <i class="{{ i === user.roles.length - 1 ? 'handshake' : 'exchange' }} blue icon"></i>
+      </div>
+      <div class="content">
+        <div class="date">
+          {{ role.createdAt | date: "\'Le\' dd/MM/yy" }}
+        </div>
+
+        <div class="summary">
+          <ng-container *ngIf="i === user.roles.length - 1; else others">
+            Inscription en tant que
+          </ng-container>
+          <ng-template #others>
+            {{ user.roles[i + 1] | role }} <i class="chevron right green icon"></i>
+          </ng-template>
+          <a>{{ role | role }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="actions">
+  <form *ngIf="roles" class="ui form" [formGroup]="roleForm"
+        [ngClass]="{'error': submitted && roleForm.invalid}" (ngSubmit)="onSubmit()">
+
+    <div class="two fields">
+      <div class="field" [ngClass]="{ 'error': submitted && f.role.errors }">
+        <label>Nouveau rôle</label>
+        <sui-select class="tiny selection" labelField="name" valueField="id"
+                    placeholder="Sélectionner une option"
+                    [options]="roles" [optionFormatter]="translateRole"
+                    formControlName="role" #selectRole>
+          <sui-select-option *ngFor="let option of selectRole.filteredOptions" [value]="option"></sui-select-option>
+        </sui-select>
+        <app-form-error *ngIf="submitted && f.role.errors" [errors]="f.role.errors"></app-form-error>
+      </div>
+
+      <div class="field">
+        <label>&nbsp;</label>
+        <app-button *ngIf="isOwnProfile; else otherUser" size="medium"
+                    hiddenIcon="exchange" color="orange" [isLoading]="loading"
+                    [isDisabled]="roleForm.invalid" suiPopup popupPlacement="top"
+                    popupHeader="Information" popupText="Vous allez devoir vous reconnecter">
+          Vous promouvoir "{{ roles[f.role.value - 1] | role }}"
+        </app-button>
+
+        <ng-template #otherUser>
+          <app-button size="medium" hiddenIcon="exchange" color="orange" [isLoading]="loading" [isDisabled]="roleForm.invalid">
+            Promouvoir l'utilisateur "{{ roles[f.role.value - 1] | role }}"
+          </app-button>
+        </ng-template>
+      </div>
+    </div>
+  </form>
+</div>
+

@@ -11,7 +11,7 @@
 
         <form class="ui form segment" autocomplete="off"
               [formGroup]="userForm" (ngSubmit)="onSubmit()"
-              [ngClass]="{'error': submitted && userForm.invalid, 'loading': loading}">
+              [ngClass]="{'error': submitted && userForm.invalid}">
           <app-profile-form *ngIf="user" [submitted]="submitted" [user]="user" (formReady)="addProfileForm($event)"></app-profile-form>
 
           <div class="ui buttons">

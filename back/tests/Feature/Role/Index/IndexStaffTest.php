@@ -16,7 +16,11 @@ class IndexStaffTest extends TestCaseWithAuth
     public function testStaffAccessingRoleIndex()
     {
         $this->json('GET', route('roles.index'))
-            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertStatus(JsonResponse::HTTP_OK)
+            ->assertJsonStructure([[
+                'id',
+                'name',
+                'nameFr',
+            ]]);
     }
 }

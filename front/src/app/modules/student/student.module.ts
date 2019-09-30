@@ -19,6 +19,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { MissionDetailsComponent } from './mission/mission-details/mission-details.component';
 import { ApplicationConfirmModalComponent } from './application/application-confirm-modal/application-confirm-modal.component';
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
+import { ProfileRoleModalComponent } from './profile/profile-role-modal/profile-role-modal.component';
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import { ProfileEditComponent } from './profile/profile-edit/profile-edit.compon
     ContactUsComponent,
     MissionDetailsComponent,
     ProfileEditComponent,
+    ProfileRoleModalComponent,
   ],
   exports: [
     ProfileDetailsComponent,
@@ -56,6 +58,7 @@ import { ProfileEditComponent } from './profile/profile-edit/profile-edit.compon
   ],
   entryComponents: [
     ApplicationConfirmModalComponent,
+    ProfileRoleModalComponent,
   ]
 })
 export class StudentModule { }
