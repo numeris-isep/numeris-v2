@@ -31,8 +31,9 @@ $factory->define(User::class, function (Faker $faker) {
 
 $factory->state(User::class, 'inactive', function () {
     return [
-        'activated'     => false,
-        'tou_accepted'  => false,
+        'activated'         => false,
+        'tou_accepted'      => false,
+        'email_verified_at' => null,
     ];
 });
 
@@ -40,6 +41,7 @@ $factory->state(User::class, 'active', function (Faker $faker) {
     return [
         'activated'                 => true,
         'tou_accepted'              => true,
+        'email_verified_at'         => $faker->dateTime,
         'subscription_paid_at'      => null,
         'phone'                     => '0' . (string) $faker->numberBetween(600000000, 699999999),
         'nationality'               => 'france',

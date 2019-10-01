@@ -161,4 +161,86 @@ class UpdateActivatedDeveloperTest extends TestCaseWithAuth
                 'updatedAt',
             ]);
     }
+
+    /**
+     * @group developer
+     */
+    public function testDeveloperActivatingStudentWhoHasNotAcceptedTou()
+    {
+        $user = $this->activeStudentProvider();
+        $user->update([
+            'tou_accepted'  => false,
+            'activated'     => false,
+        ]);
+
+        $data = [
+            'activated' => true
+        ];
+
+        $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
+            ->assertStatus(JsonResponse::HTTP_CREATED)
+            ->assertJsonStructure([
+                'id',
+                'preferenceId',
+                'addressId',
+                'activated',
+                'touAccepted',
+                'emailVerifiedAt',
+                'subscriptionPaidAt',
+                'email',
+                'firstName',
+                'lastName',
+                'promotion',
+                'phone',
+                'nationality',
+                'birthDate',
+                'birthCity',
+                'socialInsuranceNumber',
+                'iban',
+                'bic',
+                'createdAt',
+                'updatedAt',
+            ]);
+    }
+
+    /**
+     * @group developer
+     */
+    public function testDeveloperActivatingStudentWhoseEmailIsNotVerified()
+    {
+        $user = $this->activeStudentProvider();
+        $user->update([
+            'email_verified_at'     => null,
+            'activated'             => false,
+        ]);
+
+        $data = [
+            'activated' => true
+        ];
+
+        $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
+            ->assertStatus(JsonResponse::HTTP_CREATED)
+            ->assertJsonStructure([
+                'id',
+                'preferenceId',
+                'addressId',
+                'activated',
+                'touAccepted',
+                'emailVerifiedAt',
+                'subscriptionPaidAt',
+                'email',
+                'firstName',
+                'lastName',
+                'promotion',
+                'phone',
+                'nationality',
+                'birthDate',
+                'birthCity',
+                'socialInsuranceNumber',
+                'iban',
+                'bic',
+                'createdAt',
+                'updatedAt',
+            ]);
+    }
 }

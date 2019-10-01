@@ -119,4 +119,44 @@ class UpdateActivatedAdministratorTest extends TestCaseWithAuth
                 'updatedAt',
             ]);
     }
+
+    /**
+     * @group administrator
+     */
+    public function testAdministratorActivatingStudentWhoHasNotAcceptedTou()
+    {
+        $user = $this->activeStudentProvider();
+        $user->update([
+            'tou_accepted'  => false,
+            'activated'     => false,
+        ]);
+
+        $data = [
+            'activated' => true
+        ];
+
+        $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
+            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
+            ->assertJson(['errors' => [trans('api.403')]]);
+    }
+
+    /**
+     * @group administrator
+     */
+    public function testAdministratorActivatingStudentWhoseEmailIsNotVerified()
+    {
+        $user = $this->activeStudentProvider();
+        $user->update([
+            'email_verified_at'     => null,
+            'activated'             => false,
+        ]);
+
+        $data = [
+            'activated' => true
+        ];
+
+        $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
+            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
+            ->assertJson(['errors' => [trans('api.403')]]);
+    }
 }

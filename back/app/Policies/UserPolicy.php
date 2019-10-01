@@ -74,7 +74,9 @@ class UserPolicy
         // unless   $user1->role >= 'staff'
         // AND      $user1->role > $user2->role
         return $current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF)
-            && $current_user->role()->isSuperiorTo($user->role()->name);
+            && $current_user->role()->isSuperiorTo($user->role()->name)
+            && $user->tou_accepted
+            && ! is_null($user->email_verified_at);
     }
 
     public function destroy(User $current_user, User $user)
