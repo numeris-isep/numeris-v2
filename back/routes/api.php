@@ -15,15 +15,26 @@ use Illuminate\Support\Facades\Route;
 
 // Auth routes
 Route::post('login', 'Auth\AuthController@login')->name('login');
-Route::post('logout', 'Auth\AuthController@logout')->name('logout');
-Route::post('refresh', 'Auth\AuthController@refresh')->name('refresh');
-Route::post('current-user', 'Auth\AuthController@currentUser')->name('current-user');
 Route::post('subscribe', 'Auth\AuthController@subscribe')->name('subscribe');
 Route::post('password/forgot', 'Auth\ForgotPasswordController@forgot')->name('password.forgot');
 Route::post('password/reset', 'Auth\ResetPasswordController@doReset')->name('password.reset');
 
 // Every route in this group require user authentication
 Route::group(['middleware' => 'auth:api'], function () {
+
+    // Every route in this group is throttled
+//    Route::group(['middleware' => 'throttle:6,1'], function() {
+
+        // Verify Email routes
+        Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+        Route::get('email/verify', 'Auth\VerificationController@verify')->middleware('signed')->name('verification.verify');
+
+//    });
+
+    // Auth routes
+    Route::post('logout', 'Auth\AuthController@logout')->name('logout');
+    Route::post('refresh', 'Auth\AuthController@refresh')->name('refresh');
+    Route::post('current-user', 'Auth\AuthController@currentUser')->name('current-user');
 
     // User resource routes
     Route::apiResource('users', 'UserController', ['parameters' => ['users' => 'user_id']])->except(['store']);

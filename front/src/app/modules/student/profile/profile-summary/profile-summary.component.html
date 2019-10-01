@@ -16,7 +16,7 @@
       </p>
       <p>
         <i class="mail envelope icon"></i>
-        <a href="mailto:{{ user.email }}" target="_blank"> {{ user.email }}</a>
+        <a href="mailto:{{ user.email }}" target="_blank"> {{ user.email }}</a>&nbsp;<app-verified-email [emailVerifiedAt]="user.emailVerifiedAt"></app-verified-email>
       </p>
       <p>
         <i class="history icon"></i> Membre depuis le {{ user.createdAt | date:"dd/MM/yyyy" }}

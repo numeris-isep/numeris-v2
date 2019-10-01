@@ -20,6 +20,7 @@ class UserResource extends JsonResource
             'addressId'             => $this->address_id,
             'activated'             => $this->activated,
             'touAccepted'           => $this->tou_accepted,
+            'emailVerifiedAt'       => $this->email_verified_at,
             'subscriptionPaidAt'    => $this->subscription_paid_at,
             'email'                 => $this->email,
             'firstName'             => $this->first_name,

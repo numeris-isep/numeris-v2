@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Traits\DateQueryTrait;
 use App\Models\Traits\OnEventsTrait;
 use App\Notifications\ApplicationNotification;
 use App\Notifications\ResetPasswordNotification;
+use App\Notifications\VerifyEmailNotification;
 use App\ProjectUser;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
@@ -25,6 +25,7 @@ class User extends Authenticatable implements JWTSubject
         // attributes
         'activated',
         'tou_accepted',
+        'email_verified_at',
         'subscription_paid_at',
         'email',
         'password',
@@ -248,6 +249,11 @@ class User extends Authenticatable implements JWTSubject
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
+    }
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new VerifyEmailNotification());
     }
 
     public function sendApplicationNotification(Application $application)

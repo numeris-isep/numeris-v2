@@ -22,6 +22,7 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
 import { StaffModule } from '../modules/staff/staff.module';
 import { ShowcaseModule } from '../modules/showcase/showcase.module';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
+import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 
 // Setting to locale to 'fr'
 registerLocaleData(localeFr, 'fr');
@@ -51,6 +52,7 @@ registerLocaleData(localeFr, 'fr');
     TitleComponent,
     HeaderComponent,
     BreadcrumbsComponent,
+    VerifyEmailComponent,
   ],
   providers: [
     Title,

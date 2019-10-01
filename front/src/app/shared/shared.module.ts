@@ -33,6 +33,7 @@ import { SafeURLPipe } from './pipes/safe-url.pipe';
 import { FileComponent } from './components/file/file.component';
 import { HoursPipe } from './pipes/hours.pipe';
 import { ResetPasswordFormComponent } from './components/forms/reset-password-form/reset-password-form.component';
+import { VerifiedEmailComponent } from './components/verified-email/verified-email.component';
 
 @NgModule({
   imports: [
@@ -74,6 +75,7 @@ import { ResetPasswordFormComponent } from './components/forms/reset-password-fo
     FileComponent,
     HoursPipe,
     ResetPasswordFormComponent,
+    VerifiedEmailComponent,
   ],
   exports: [
     // Components
@@ -98,6 +100,7 @@ import { ResetPasswordFormComponent } from './components/forms/reset-password-fo
     ProfileFormComponent,
     UserEditFormComponent,
     FileComponent,
+    VerifiedEmailComponent,
 
     // Pipes
     AddressPipe,

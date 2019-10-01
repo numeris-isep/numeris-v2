@@ -6,11 +6,18 @@ import { HomeComponent } from '../modules/showcase/home/home.component';
 import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { TitleService } from './services/title.service';
 import { BreadcrumbsService } from './services/breadcrumbs.service';
+import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const appRoutes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'email/verification',
+    component: VerifyEmailComponent,
+    canActivate: [AuthGuard],
   },
 
   // otherwise 404

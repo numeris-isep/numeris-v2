@@ -11,7 +11,8 @@ export class User {
 
   activated: boolean;
   touAccepted: boolean;
-  subscriptionPaidAt: boolean;
+  emailVerifiedAt: string;
+  subscriptionPaidAt: string;
   email: string;
   password: string;
   firstName: string;

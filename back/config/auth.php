@@ -99,4 +99,19 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Verifying Email
+    |--------------------------------------------------------------------------
+    |
+    | The expire time is the number of minutes that the reset token should be
+    | considered valid. This security feature keeps tokens short-lived so
+    | they have less time to be guessed. You may change this as needed.
+    |
+    */
+
+    'verification' => [
+        'expire' => 60,
+    ]
+
 ];

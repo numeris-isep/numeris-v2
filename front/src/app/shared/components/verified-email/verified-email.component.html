@@ -1,0 +1,5 @@
+<i *ngIf="emailVerifiedAt; else notVerified" class="check green icon" suiPopup popupInverted popupPlacement="top" popupText="L'adresse email est vérifée"></i>
+
+<ng-template #notVerified>
+  <i class="x red icon" suiPopup popupInverted popupPlacement="top" popupText="L'adresse email n'est pas vérifée"></i>
+</ng-template>

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { first, map } from 'rxjs/operators';
-import { TokenService } from "../../services/token.service";
-import { environment } from "../../../../environments/environment";
-import { Observable } from "rxjs/internal/Observable";
-import { BehaviorSubject } from "rxjs";
-import { User } from "../../classes/models/user";
-import { HTTP_OPTIONS } from "../../constants/http_options";
-import { AlertService } from "../../services/alert.service";
+import { TokenService } from '../../services/token.service';
+import { environment } from '../../../../environments/environment';
+import { Observable } from 'rxjs/internal/Observable';
+import { BehaviorSubject } from 'rxjs';
+import { User } from '../../classes/models/user';
+import { HTTP_OPTIONS } from '../../constants/http_options';
+import { AlertService } from '../../services/alert.service';
 
 @Injectable({
   providedIn: 'root'
@@ -77,5 +77,16 @@ export class AuthService {
   ): Observable<{message: string[]}> {
     const url = `${environment.apiUrl}/api/password/reset`;
     return this.http.post<{message: string[]}>(url, data, HTTP_OPTIONS);
+  }
+
+  validateEmail(
+    data: {
+      expires: string;
+      id: string;
+      signature: string;
+    }
+  ): Observable<{message: string[]}> {
+    const url = `${environment.apiUrl}/api/email/verify?expires=${data.expires}&id=${data.id}&signature=${data.signature}`;
+    return this.http.get<{message: string[]}>(url, HTTP_OPTIONS);
   }
 }

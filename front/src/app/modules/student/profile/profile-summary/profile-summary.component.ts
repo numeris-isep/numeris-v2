@@ -2,8 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../../../../core/classes/models/user';
 import { AuthService } from '../../../../core/http/auth/auth.service';
 import { SuiModalService } from 'ng2-semantic-ui';
-import { SuiModal } from 'ng2-semantic-ui';
-import { IProfileRoleModalContext, ProfileRoleModal } from '../profile-role-modal/profile-role-modal.component';
+import { ProfileRoleModal } from '../profile-role-modal/profile-role-modal.component';
 
 @Component({
   selector: 'app-profile-summary',
