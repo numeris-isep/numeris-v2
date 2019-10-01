@@ -1,0 +1,16 @@
+<div class="ui grid">
+  <!-- Activate account -->
+  <div class="sixteen wide column">
+    <app-activate-account-message *ngIf="!user.activated" [user]="user"></app-activate-account-message>
+  </div>
+
+  <!-- Terms of use message -->
+  <div class="sixteen wide column unpadded-top">
+    <app-terms-of-use-message *ngIf="!user.touAccepted"></app-terms-of-use-message>
+  </div>
+
+  <!-- Verify email message -->
+  <div class="sixteen wide column unpadded-top">
+    <app-verify-email-message *ngIf="!user.emailVerifiedAt"></app-verify-email-message>
+  </div>
+</div>

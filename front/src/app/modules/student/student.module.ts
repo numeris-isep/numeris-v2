@@ -20,6 +20,7 @@ import { MissionDetailsComponent } from './mission/mission-details/mission-detai
 import { ApplicationConfirmModalComponent } from './application/application-confirm-modal/application-confirm-modal.component';
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 import { ProfileRoleModalComponent } from './profile/profile-role-modal/profile-role-modal.component';
+import { ProfileMessagesComponent } from './profile/profile-messages/profile-messages.component';
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import { ProfileRoleModalComponent } from './profile/profile-role-modal/profile-
     MissionDetailsComponent,
     ProfileEditComponent,
     ProfileRoleModalComponent,
+    ProfileMessagesComponent,
   ],
   exports: [
     ProfileDetailsComponent,

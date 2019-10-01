@@ -62,13 +62,31 @@ export class LoginModalComponent implements OnInit {
         _ => {
           this.alertService.success(['Vous êtes connecté !'], null, true);
           this.loginModal.approve(undefined); // make the modal disappear
-          this.router.navigate(['/profil'])
-            .then(() => { this.router.navigate([this.returnUrl]); } );
+          this.router.navigate(
+            [this.returnUrl.split('?')[0] !== '/' ? this.returnUrl.split('?')[0] : '/tableau-de-bord'],
+            { queryParams: this.getQueryParameters() }
+            );
         },
         errors => {
           handleFormErrors(this.loginForm, errors);
           this.loading = false;
         });
+  }
+
+  private getQueryParameters(): string[] {
+    const paramsStr: string = this.returnUrl.split('?')[1];
+    const params = [];
+
+    if (! paramsStr) {
+      return [];
+    }
+
+    paramsStr.split('&').forEach(paramGrp => {
+      const keyValue = paramGrp.split('=');
+      params[keyValue[0]] = keyValue[1];
+    });
+
+    return params;
   }
 }
 
@@ -76,7 +94,7 @@ export class LoginModal extends ComponentModalConfig<ILoginModalContext, void, v
 
   constructor(
     question = null,
-    returnUrl = '/',
+    returnUrl = '/tableau-de-bord',
     size = ModalSize.Small,
     isClosable: boolean = true,
     transitionDuration: number = 200

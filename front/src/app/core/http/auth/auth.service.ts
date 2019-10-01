@@ -79,6 +79,11 @@ export class AuthService {
     return this.http.post<{message: string[]}>(url, data, HTTP_OPTIONS);
   }
 
+  verifyEmail(): Observable<{message: string[]}> {
+    const url = `${environment.apiUrl}/api/email/resend`;
+    return this.http.get<{message: string[]}>(url, HTTP_OPTIONS);
+  }
+
   validateEmail(
     data: {
       expires: string;

@@ -1,79 +1,29 @@
 <app-content [condition]="!user">
-  <div class="ui padded grid doubling">
+  <div *ngIf="user" class="ui padded grid doubling">
     <!-- Messages -->
-    <div class="sixteen wide column"
-         *ngIf="user && (!user.activated || !user.touAccepted)">
-      <!-- Activate account -->
-      <div class="ui icon info message" *ngIf="!user.activated">
-        <i class="ban icon"></i>
-        <div class="content">
-          <div class="header">
-            Votre compte n'est pas activé
-          </div>
-          <p>
-            Veuillez
-            <span *ngIf="!user.touAccepted">
-              accepter les <a routerLink="/conditions-dutilisation">conditions d'utilisation</a>
-            </span>
-            <span *ngIf="!(user.phone || user.birthCity || user.nationality || user.socialInsuranceNumber || user.bic)">
-              <span *ngIf="!user.touAccepted">, </span>
-              compléter votre profil
-            </span>
-            <span *ngIf="!user.touAccepted || !(user.phone || user.birthCity || user.nationality || user.socialInsuranceNumber || user.bic)">
-              et
-            </span>
-            envoyer un email avec votre <b>adresse mail ISEP</b> à
-            <a href="mailto:inscription@numeris-isep.fr?subject=Inscription {{ user.firstName }} {{ user.lastName }}"
-               target="_blank">
-              inscription@numeris-isep.fr
-            </a>
-            contenant une photocopie de votre <b>carte d'identité</b>, de votre
-            <b>RIB</b> et de votre <b>certificat de scolarité</b>.
-          </p>
-          <a routerLink="/nous-contacter">
-            <i class="question circle icon"></i> Besoin d'aide ?
-          </a>
-        </div>
-        <app-button *ngIf="user.roles[0].name !== 'student'" size="small" hiddenIcon="check" color="basic teal"
-                    [isLoading]="loading" suiPopup popupPlacement="top" popupHeader="Information"
-                    popupText="Vous allez devoir vous reconnecter" (click)="activateUser()">
-          Activer
-        </app-button>
-      </div>
-
-      <!-- Terms of use accepted -->
-      <div class="ui icon warning message" *ngIf="!user.touAccepted">
-        <i class="book icon"></i>
-        <div class="content">
-          <div class="header">
-            Veuillez accepter les <a routerLink="/conditions-dutilisation">conditions d'utilisation</a>
-          </div>
-          <p>Veuillez accepter les conditions d'utilisation afin de pouvoir utiliser le service.</p>
-        </div>
-      </div>
-    </div>
+    <app-profile-messages [user]="user"></app-profile-messages>
 
     <div class="stretched row">
       <!-- Profile summary -->
       <div class="sixteen wide mobile eight wide tablet four wide computer column">
-        <app-profile-summary *ngIf="user" [user]="user"></app-profile-summary>
+        <app-profile-summary [user]="user"></app-profile-summary>
       </div>
 
       <!-- Preferences -->
       <div class="sixteen wide mobile eight wide tablet four wide computer column">
-        <app-profile-preferences *ngIf="user" [preference]="user.preference"></app-profile-preferences>
+        <app-profile-preferences [preference]="user.preference"></app-profile-preferences>
       </div>
 
       <!-- Profile details -->
       <div class="sixteen wide mobile eight wide computer column">
-        <app-profile-details *ngIf="user" [user]="user" [currentUserId]="user.id"></app-profile-details>
+        <app-profile-details [user]="user" [currentUserId]="user.id"></app-profile-details>
       </div>
     </div>
 
     <div class="row">
       <!-- Documents -->
       <div class="column">
-        <app-profile-documents *ngIf="user" [payslips]="user.payslips"></app-profile-documents>
+        <app-profile-documents [payslips]="user.payslips"></app-profile-documents>
       </div>
     </div>
   </div>

@@ -37,6 +37,7 @@ class StoreStaffTest extends TestCaseWithAuth
                 'addressId',
                 'activated',
                 'touAccepted',
+                'emailVerifiedAt',
                 'subscriptionPaidAt',
                 'email',
                 'firstName',

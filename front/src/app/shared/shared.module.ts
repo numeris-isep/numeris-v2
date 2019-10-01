@@ -34,6 +34,9 @@ import { FileComponent } from './components/file/file.component';
 import { HoursPipe } from './pipes/hours.pipe';
 import { ResetPasswordFormComponent } from './components/forms/reset-password-form/reset-password-form.component';
 import { VerifiedEmailComponent } from './components/verified-email/verified-email.component';
+import { TermsOfUseMessageComponent } from './components/messages/terms-of-use-message/terms-of-use-message.component';
+import { VerifyEmailMessageComponent } from './components/messages/verify-email-message/verify-email-message.component';
+import { ActivateAccountMessageComponent } from './components/messages/activate-account-message/activate-account-message.component';
 
 @NgModule({
   imports: [
@@ -76,6 +79,9 @@ import { VerifiedEmailComponent } from './components/verified-email/verified-ema
     HoursPipe,
     ResetPasswordFormComponent,
     VerifiedEmailComponent,
+    TermsOfUseMessageComponent,
+    VerifyEmailMessageComponent,
+    ActivateAccountMessageComponent,
   ],
   exports: [
     // Components
@@ -101,6 +107,9 @@ import { VerifiedEmailComponent } from './components/verified-email/verified-ema
     UserEditFormComponent,
     FileComponent,
     VerifiedEmailComponent,
+    TermsOfUseMessageComponent,
+    VerifiedEmailComponent,
+    ActivateAccountMessageComponent,
 
     // Pipes
     AddressPipe,
@@ -113,6 +122,7 @@ import { VerifiedEmailComponent } from './components/verified-email/verified-ema
     SafeURLPipe,
     HoursPipe,
     ResetPasswordFormComponent,
+    VerifyEmailMessageComponent,
   ],
   providers: [
     AlertService

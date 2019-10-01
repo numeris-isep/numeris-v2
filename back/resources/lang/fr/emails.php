@@ -14,5 +14,6 @@ return [
 
     'sent'      => 'Le lien de vérification de l\'adresse email vous a été envoyé par email.',
     'verified'  => 'Votre adresse email a été vérifiée.',
+    'already'   => 'Votre adresse email a déjà été vérifiée',
 
 ];

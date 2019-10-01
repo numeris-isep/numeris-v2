@@ -23,13 +23,13 @@ Route::post('password/reset', 'Auth\ResetPasswordController@doReset')->name('pas
 Route::group(['middleware' => 'auth:api'], function () {
 
     // Every route in this group is throttled
-//    Route::group(['middleware' => 'throttle:6,1'], function() {
+    Route::group(['middleware' => 'throttle:6,1'], function() {
 
         // Verify Email routes
         Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
         Route::get('email/verify', 'Auth\VerificationController@verify')->middleware('signed')->name('verification.verify');
 
-//    });
+    });
 
     // Auth routes
     Route::post('logout', 'Auth\AuthController@logout')->name('logout');

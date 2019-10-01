@@ -1,0 +1,40 @@
+<div class="ui icon info message">
+  <i class="ban icon"></i>
+  <div class="content">
+    <div class="header">
+      Votre compte n'est pas activé
+    </div>
+    <p>
+      Veuillez
+      <span *ngIf="!user.touAccepted">
+              <b>accepter les <a routerLink="/conditions-dutilisation">conditions d'utilisation</a></b>
+            </span>
+      <span *ngIf="!user.emailVerifiedAt">
+              <span *ngIf="!user.touAccepted">, </span>
+              <b><a routerLink="/profil">vérifier votre adresse email</a></b>
+            </span>
+      <span *ngIf="!isCompleted">
+              <span *ngIf="!user.emailVerifiedAt || !user.touAccepted ">, </span>
+              <b><a routerLink="/profil/modifier">compléter votre profil</a></b>
+            </span>
+      <span *ngIf="!user.touAccepted || !user.emailVerifiedAt || !isCompleted">
+              et
+            </span>
+      <b>envoyer un email</b> avec votre <b>adresse mail ISEP</b>
+      contenant une photocopie de votre <b>carte d'identité</b>, de votre
+      <b>RIB</b> et de votre <b>certificat de scolarité</b> à
+      <a href="mailto:inscription@numeris-isep.fr?subject=Inscription {{ user.firstName }} {{ user.lastName }}"
+         target="_blank">
+        inscription@numeris-isep.fr
+      </a>.
+    </p>
+    <a routerLink="/nous-contacter">
+      <i class="question circle icon"></i> Besoin d'aide ?
+    </a>
+  </div>
+  <app-button *ngIf="user.roles[0].name !== 'student'" size="small" hiddenIcon="check" color="basic teal"
+              [isLoading]="loading" suiPopup popupPlacement="top" popupHeader="Information"
+              popupText="Vous allez devoir vous reconnecter" (click)="activateUser()">
+    Activer
+  </app-button>
+</div>

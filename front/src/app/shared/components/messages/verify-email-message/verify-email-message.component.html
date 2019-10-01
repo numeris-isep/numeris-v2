@@ -1,0 +1,14 @@
+<div class="ui icon warning message">
+  <i class="envelope icon"></i>
+  <div class="content">
+    <div class="header">
+      Veuillez vérifier votre adresse email
+    </div>
+    <p>Veuillez vérifier l'adresse email de votre compte afin de pouvoir utiliser le service.</p>
+  </div>
+  <app-button size="small" hiddenIcon="envelope" color="basic brown"
+              [isLoading]="loading" suiPopup popupPlacement="top" popupHeader="Information"
+              popupText="Vous allez recevoir un email avec la procédure à suivre" (click)="sendEmail()">
+    Vérifier
+  </app-button>
+</div>

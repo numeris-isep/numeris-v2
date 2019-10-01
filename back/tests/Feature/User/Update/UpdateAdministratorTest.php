@@ -53,6 +53,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
                 'addressId',
                 'activated',
                 'touAccepted',
+                'emailVerifiedAt',
                 'subscriptionPaidAt',
                 'email',
                 'firstName',
