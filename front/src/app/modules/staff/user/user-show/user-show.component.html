@@ -15,6 +15,7 @@
               <li *ngIf="!user.touAccepted">
                 les <a routerLink="/conditions-dutilisation">conditions d'utilisation</a> sont acceptées
               </li>
+              <li *ngIf="!user.emailVerifiedAt">l'adresse email est vérifiée</li>
               <li>le profil est complété</li>
               <li>les informations fournies sont exactes</li>
             </ul>
@@ -29,7 +30,7 @@
           </div>
         </ng-template>
 
-        <app-button *ngIf="user.roles[0].name !== 'student'" size="small" [hiddenIcon]="user.activated ? 'ban' : 'check'" color="basic teal"
+        <app-button size="small" [hiddenIcon]="user.activated ? 'ban' : 'check'" color="basic teal"
                     [isLoading]="loading" (click)="updateActivated()">
           {{ user.activated ? 'Désactiver' : 'Activer' }}
         </app-button>

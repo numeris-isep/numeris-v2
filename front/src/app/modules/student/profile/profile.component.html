@@ -1,7 +1,7 @@
 <app-content [condition]="!user">
   <div *ngIf="user" class="ui padded grid doubling">
     <!-- Messages -->
-    <div class="stretched row">
+    <div class="stretched row" *ngIf="!user.activated || !user.touAccepted || !user.emailVerifiedAt">
       <div class="sixteen wide mobile column">
         <app-profile-messages [user]="user"></app-profile-messages>
       </div>

@@ -9,3 +9,7 @@
   right: 0;
   min-width: 291px;
 }
+
+.flying .content {
+  margin-right: 1.5em !important;
+}
