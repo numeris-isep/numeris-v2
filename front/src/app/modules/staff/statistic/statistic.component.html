@@ -1,13 +1,9 @@
 <app-content [condition]="!true">
   <div class="ui padded grid">
-    <div class="column">
-      <p *ngIf="false; else empty">
-        mission works!
-      </p>
-
-      <ng-template #empty>
-        <app-empty>Aucune statistique à afficher.</app-empty>
-      </ng-template>
+    <div class="stretched row">
+      <div class="sixteen wide mobile column">
+        <app-wip></app-wip>
+      </div>
     </div>
   </div>
 </app-content>
