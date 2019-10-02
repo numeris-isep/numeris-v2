@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Transition, TransitionController, TransitionDirection } from "ng2-semantic-ui";
+import { Transition, TransitionController, TransitionDirection } from 'ng2-semantic-ui';
 
 @Component({
   selector: 'app-content',
@@ -17,7 +17,7 @@ export class ContentComponent implements OnInit {
     this.animate();
   }
 
-  public animate(transitionName:string = "fade") {
+  public animate(transitionName: string = 'fade') {
     this.transitionController.animate(
       new Transition(transitionName, 500, TransitionDirection.In)
     );

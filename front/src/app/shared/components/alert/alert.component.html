@@ -1,6 +1,8 @@
-<div *ngFor="let alert of alerts">
-  <div *ngIf="target === alert.target || alert.target === 'all'" class="padded" #div>
-    <sui-message class="{{ cssClass(alert) }} icon" (dismiss)="div.remove()">
+<div *ngFor="let alert of alerts; let i = index">
+  <div *ngIf="target === alert.target || alert.target === 'all'"
+       class="padded" [ngClass]="{ 'flying': alert.target === 'main' }"
+       [suiTransition]="alert.transitionController" #container>
+    <sui-message class="{{ cssClass(alert) }} icon" (dismiss)="removeAlert(i)">
       <ng-container *ngIf="alert.title">
         <i *ngIf="cssClass(alert) === 'success'" class="smile outline loading icon"></i>
         <i *ngIf="cssClass(alert) === 'warning' || cssClass(alert) === 'error'" class="frown outline loading icon"></i>
