@@ -32,10 +32,6 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.router.navigate(['/page-inconnue']);
           break;
 
-        case 429:
-          this.alertService.error(['Veuillez attendre 1 minute puis réessayez.'], 'Trop de requêtes', null);
-          break;
-
         case 500:
           this.alertService.error(
             ['Le serveur a rencontré une erreur, veuillez nous contacter si le problème persiste.'],

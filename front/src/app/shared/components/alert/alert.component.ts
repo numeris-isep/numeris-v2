@@ -32,9 +32,7 @@ export class AlertComponent implements OnInit {
       // add alert to array
       this.alerts.push(alert);
 
-      timer(5000).subscribe(() => {
-        this.animate(alert, this.alerts.findIndex(a => a === alert));
-      });
+      this.autoFade(alert);
     });
   }
 
@@ -63,10 +61,16 @@ export class AlertComponent implements OnInit {
     }
   }
 
+  autoFade(alert: Alert) {
+    timer(8000).subscribe(() => {
+      this.animate(alert, this.alerts.findIndex(a => a === alert));
+    });
+  }
+
   animate(alert, index: number) {
     alert.transitionController.animate(
       new Transition(
-        'fade',
+        'fade down',
         500,
         TransitionDirection.Out,
         () => this.removeAlert(index))

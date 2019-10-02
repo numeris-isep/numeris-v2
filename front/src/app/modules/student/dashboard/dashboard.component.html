@@ -1,8 +1,16 @@
 <app-content [condition]="!user">
   <div *ngIf="user" class="ui padded grid doubling">
     <!-- Messages -->
-    <app-profile-messages [user]="user"></app-profile-messages>
+    <div class="stretched row">
+      <div class="sixteen wide mobile column">
+        <app-profile-messages [user]="user"></app-profile-messages>
+      </div>
+    </div>
 
-    <h1>This is the tableau de bord</h1>
+    <div class="stretched row">
+      <div class="sixteen wide mobile column">
+        <app-wip></app-wip>
+      </div>
+    </div>
   </div>
 </app-content>

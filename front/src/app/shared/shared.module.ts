@@ -37,6 +37,7 @@ import { VerifiedEmailComponent } from './components/verified-email/verified-ema
 import { TermsOfUseMessageComponent } from './components/messages/terms-of-use-message/terms-of-use-message.component';
 import { VerifyEmailMessageComponent } from './components/messages/verify-email-message/verify-email-message.component';
 import { ActivateAccountMessageComponent } from './components/messages/activate-account-message/activate-account-message.component';
+import { WipComponent } from './components/wip/wip.component';
 
 @NgModule({
   imports: [
@@ -82,6 +83,7 @@ import { ActivateAccountMessageComponent } from './components/messages/activate-
     TermsOfUseMessageComponent,
     VerifyEmailMessageComponent,
     ActivateAccountMessageComponent,
+    WipComponent,
   ],
   exports: [
     // Components
@@ -110,6 +112,7 @@ import { ActivateAccountMessageComponent } from './components/messages/activate-
     TermsOfUseMessageComponent,
     VerifiedEmailComponent,
     ActivateAccountMessageComponent,
+    WipComponent,
 
     // Pipes
     AddressPipe,
