@@ -67,8 +67,8 @@ export class AppRoutingModule {
         if (child.data['title']) {
           const title: string = child.data['title'];
 
-          this.titleService.setTitles(title);
-          this.breadcrumbsService.setBreadcrumb(child);
+          if (title) { this.titleService.setTitles(title); }
+          if (child) { this.breadcrumbsService.setBreadcrumb(child); }
         }
     });
   }

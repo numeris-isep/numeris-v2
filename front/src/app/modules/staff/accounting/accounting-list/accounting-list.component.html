@@ -1,0 +1,5 @@
+<div class="ui padded three column centered grid stackable">
+  <div class="column" *ngFor="let statisticByMonth of statisticsByMonth">
+    <app-accounting-details [statisticByMonth]="statisticByMonth" [isLink]="true"></app-accounting-details>
+  </div>
+</div>

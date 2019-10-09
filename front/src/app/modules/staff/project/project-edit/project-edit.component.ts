@@ -23,7 +23,7 @@ export class ProjectEditComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(param => {
       this.getProject(parseInt(param.projectId));
-    })
+    });
   }
 
   getProject(projectId: number) {

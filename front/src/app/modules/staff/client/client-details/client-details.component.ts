@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Client } from "../../../../core/classes/models/client";
-import { ClientDeleteModal } from "../client-delete-modal/client-delete-modal.component";
-import { SuiModalService } from "ng2-semantic-ui";
+import { Client } from '../../../../core/classes/models/client';
+import { ClientDeleteModal } from '../client-delete-modal/client-delete-modal.component';
+import { SuiModalService } from 'ng2-semantic-ui';
 
 @Component({
   selector: 'app-client-details',

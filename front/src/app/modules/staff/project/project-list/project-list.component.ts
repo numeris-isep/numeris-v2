@@ -1,9 +1,9 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { PaginatedProject } from "../../../../core/classes/pagination/paginated-project";
-import { ProjectService } from "../../../../core/http/project.service";
-import { IPopup } from "ng2-semantic-ui";
-import { Client } from "../../../../core/classes/models/client";
-import { dateToISO } from "../../../../shared/utils";
+import { PaginatedProject } from '../../../../core/classes/pagination/paginated-project';
+import { ProjectService } from '../../../../core/http/project.service';
+import { IPopup } from 'ng2-semantic-ui';
+import { Client } from '../../../../core/classes/models/client';
+import { dateToISO } from '../../../../shared/utils';
 
 @Component({
   selector: 'app-project-list',
@@ -14,11 +14,7 @@ import { dateToISO } from "../../../../shared/utils";
   ]
 })
 export class ProjectListComponent implements OnInit {
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.windowWidth = event.target.innerWidth;
-  }
+  constructor(private projectService: ProjectService) { }
 
   windowWidth: number = window.innerWidth;
 
@@ -29,23 +25,27 @@ export class ProjectListComponent implements OnInit {
   to: string;
   loading: boolean = false;
   options: string[] = [
-    "Ouvert", "Validé",
-    "Facturé", "Payé", "Cloturé"
+    'Ouvert', 'Validé',
+    'Facturé', 'Payé', 'Cloturé'
   ];
   stepTranslations: string[] = [
     'hiring', 'validated',
     'billed', 'paid',
     'closed'
   ];
-  constructor(private projectService: ProjectService) { }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.windowWidth = event.target.innerWidth;
+  }
 
   ngOnInit() {
     this.getPaginatedProjects(1);
   }
 
   reset(field: string) {
-    if (this[field] !== undefined) this[field] = null;
-    if (field == 'selectedStep') this.setFilter();
+    if (this[field] !== undefined) { this[field] = null; }
+    if (field === 'selectedStep') { this.setFilter(); }
   }
 
   getPaginatedProjects(pageId?: number) {

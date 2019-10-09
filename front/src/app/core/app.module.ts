@@ -21,8 +21,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { StaffModule } from '../modules/staff/staff.module';
 import { ShowcaseModule } from '../modules/showcase/showcase.module';
-import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { ActivatedRouteSnapshot, Router } from '@angular/router';
 
 // Setting to locale to 'fr'
 registerLocaleData(localeFr, 'fr');

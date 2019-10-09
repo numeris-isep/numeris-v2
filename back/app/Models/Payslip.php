@@ -66,6 +66,16 @@ class Payslip extends Model
             ->first();
     }
 
+    /**
+     * Find payslips by school year
+     *
+     * Example:
+     *      If $year = 2019
+     *      Will return payslips->month >= 2019-01 and < 2020-01
+     *
+     * @param string $year
+     * @return mixed
+     */
     public static function findByYear(string $year) {
         $from = Carbon::parse("$year-01-01 00:00:00");
         $to = $from->copy()->addYear();

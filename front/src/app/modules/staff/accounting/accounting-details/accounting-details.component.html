@@ -1,0 +1,109 @@
+<a *ngIf="isLink; else isNotLink" class="ui fluid link card" routerLink="/comptabilite/{{ month.get('year') }}/{{ month.format('MM') }}">
+  <ng-container [ngTemplateOutlet]="content"></ng-container>
+</a>
+
+<ng-template #isNotLink>
+  <div class="ui fluid card">
+    <ng-container [ngTemplateOutlet]="content"></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #content>
+  <div class="content">
+    <div class="ui blue ribbon label">
+      <i class="calendar alternate icon"></i> {{ month.locale('fr').format('MMMM Y') | titlecase }}
+    </div>
+    <img class="right floated mini ui image" src="assets/logos/numeris-blue.png" alt="Logo de Numéris">
+  </div>
+
+  <div *ngIf="statisticByMonth.payslips.length > 0 || statisticByMonth.invoices.length > 0; else empty" class="content">
+    <div class="center aligned description">
+      <div class="ui mini green statistic"
+           suiPopup popupText="Heures" popupPlacement="bottom" popupInverted>
+        <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="hourAmount" [duration]="1" (countoChange)="hourCount = $event">
+          {{ hourCount | number:'1.0-0': 'fr-FR' }}
+        </div>
+        <div class="label">
+          <i class="clock blue icon"></i>
+        </div>
+      </div>
+      <div class="ui mini grey statistic"
+           suiPopup popupText="Net à verser" popupPlacement="bottom" popupInverted>
+        <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="grossAmount" [duration]="1" (countoChange)="grossCount = $event">
+          {{ grossCount | number:'1.0-0': 'fr-FR' }}€
+        </div>
+        <div class="label">
+          <i class="users blue icon"></i>
+        </div>
+      </div>
+      <div class="ui mini brown statistic"
+           suiPopup popupText="Cotisation Numéris" popupPlacement="bottom" popupInverted>
+        <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="subscriptionFee" [duration]="1" (countoChange)="subscriptionFeeCount = $event">
+          {{ subscriptionFeeCount | number:'1.0-0': 'fr-FR' }}€
+        </div>
+        <div class="label">
+          <i class="icons">
+            <i class="blue handshake icon"></i>
+            <i class="money bill green corner icon"></i>
+          </i>
+        </div>
+      </div>
+
+      <div class="ui mini yellow statistic"
+           suiPopup popupText="Paiements client" popupPlacement="bottom" popupInverted>
+        <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="clientFinalAmount" [duration]="1" (countoChange)="clientFinalCount = $event">
+          {{ clientFinalCount | number:'1.0-0': 'fr-FR' }}€
+        </div>
+        <div class="label">
+          <i class="building blue icon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #empty>
+    <div class="extra content">
+      Aucune donnée pour ce mois-ci.
+    </div>
+  </ng-template>
+</ng-template>
+
+<!--<div class="ui fluid card">-->
+<!--  <div class="content">-->
+<!--    <div class="header">{{ month.locale('fr').format('MMMM') | titlecase }}</div>-->
+<!--    <div class="meta">{{ month.format('MM') }}</div>-->
+<!--  </div>-->
+
+<!--  <div class="ui mini bottom attached buttons">-->
+<!--    <button class="ui animated fade button" (click)="calculate()"-->
+<!--            [ngClass]="{'loading': loading}"-->
+<!--            suiPopup popupPlacement="bottom" popupHeader="Action"-->
+<!--            popupText="{{ (payslipByMonth.payslips.length > 0) ? 'Recalcul' : 'Calcul' }} des données de paiement">-->
+<!--      <div class="visible content">-->
+<!--        <span *ngIf="! (payslipByMonth.payslips.length > 0); else exists">-->
+<!--          <i class="calculator icon"></i>-->
+<!--        </span>-->
+<!--        <ng-template #exists>-->
+<!--          <i class="icons">-->
+<!--            <i class="calculator icon"></i>-->
+<!--            <i class="top right corner redo icon"></i>-->
+<!--          </i>-->
+<!--        </ng-template>-->
+<!--      </div>-->
+<!--      <div class="hidden content">-->
+<!--        <i class="save icon"></i>-->
+<!--      </div>-->
+<!--    </button>-->
+<!--    <div class="or" data-text="ou"></div>-->
+<!--    <button class="ui animated fade positive button" [ngClass]="{'loading': zipLoading}"-->
+<!--            (click)="downloadArchive(month.locale('fr').format('Y-MM-DD HH:mm:ss'))"-->
+<!--            [disabled]="! (payslipByMonth.payslips.length > 0)"-->
+<!--            suiPopup popupPlacement="bottom" popupHeader="Action"-->
+<!--            popupText="Télécharger les documents étudiants du mois (désactivez votre bloqueur de publicité)">-->
+<!--      <div class="visible content"><i class="archive icon"></i></div>-->
+<!--      <div class="hidden content">-->
+<!--        <i class="download icon"></i>-->
+<!--      </div>-->
+<!--    </button>-->
+<!--  </div>-->
+<!--</div>-->

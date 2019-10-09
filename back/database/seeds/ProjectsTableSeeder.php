@@ -52,6 +52,7 @@ class ProjectsTableSeeder extends Seeder
 
     private function createProjects($client)
     {
+        $current_year = now()->get('year');
         $months = [
             '01' => 'Janvier',
             '02' => 'Février',
@@ -72,11 +73,11 @@ class ProjectsTableSeeder extends Seeder
                 ->create([
                     'client_id'         => $client->id,
                     'convention_id'     => $client->conventions()->first()->id,
-                    'name'              => "{$client->name} $month_name 2018",
-                    'start_at'          => "2018/$month_number/01 00:00:00",
+                    'name'              => "{$client->name} $month_name $current_year",
+                    'start_at'          => "$current_year/$month_number/01 00:00:00",
                     'money_received_at' => null,
                     'step'              => Project::HIRING,
-                    'is_private'        => $month_number == '12',
+                    'is_private'        => $month_number === '12',
                 ]);
         }
 

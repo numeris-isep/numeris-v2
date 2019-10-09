@@ -32,4 +32,23 @@ class Invoice extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    /**
+     * Find invoices by school year
+     *
+     * Example:
+     *      If $year = 2019
+     *      Will return invoices->project->startAt >= 2019-01 and < 2020-01
+     *
+     * @param string $year
+     * @return mixed
+     */
+    public static function findByYear(string $year) {
+        $from = Carbon::parse("$year-01-01 00:00:00");
+        $to = $from->copy()->addYear();
+
+        return static::whereHas('project', function ($query) use ($from, $to) {
+            return $query->whereBetween('start_at', [$from, $to]);
+        })->get();
+    }
 }

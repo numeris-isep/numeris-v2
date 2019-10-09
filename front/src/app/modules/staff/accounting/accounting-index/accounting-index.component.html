@@ -1,0 +1,20 @@
+<app-content [condition]="! (payslips && invoices)">
+  <div class="ui padded grid">
+    <div class="column">
+      <app-accounting-statistic *ngIf="payslips && invoices" [payslips]="payslips" [invoices]="invoices"></app-accounting-statistic>
+    </div>
+  </div>
+
+  <div class="ui padded grid">
+    <div class="column">
+      <div class="ui top pointing secondary menu">
+        <a *ngFor="let year of years; let i = index" class="item" [suiTabHeader]="i.toString()"
+           [isActive]="year === selectedYear" routerLink="/comptabilite/{{ year }}">
+          {{ year }}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <app-accounting-list [statisticsByMonth]="statisticsByMonth"></app-accounting-list>
+</app-content>

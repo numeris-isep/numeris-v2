@@ -6,7 +6,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AccountingRoutingModule } from './accounting-routing.module';
-import { CalendarCardComponent } from './calendar-card/calendar-card.component';
+import { AccountingDetailsComponent } from './accounting-details/accounting-details.component';
+import { AccountingIndexComponent } from './accounting-index/accounting-index.component';
+import { AccountingListComponent } from './accounting-list/accounting-list.component';
 
 @NgModule({
   imports: [
@@ -20,7 +22,9 @@ import { CalendarCardComponent } from './calendar-card/calendar-card.component';
   ],
   declarations: [
     AccountingComponent,
-    CalendarCardComponent,
+    AccountingDetailsComponent,
+    AccountingIndexComponent,
+    AccountingListComponent,
   ],
 })
 export class AccountingModule { }

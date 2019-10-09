@@ -1,17 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { AccountingComponent } from './accounting.component';
 import { AuthGuard } from '../../../core/guards/auth.guard';
+import { AccountingIndexComponent } from './accounting-index/accounting-index.component';
+import * as moment from 'moment';
+
+const year = moment().format('Y');
 
 const accountingRoutes: Routes = [
   {
     path: 'comptabilite',
-    component: AccountingComponent,
+    redirectTo: 'comptabilite/' + year,
+    pathMatch: 'full',
     canActivate: [AuthGuard],
-    data: {
-      title: 'Comptabilité',
-    }
+  },
+  {
+    path: 'comptabilite',
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: ':year',
+        component: AccountingIndexComponent,
+      },
+    ]
   }
 ];
 

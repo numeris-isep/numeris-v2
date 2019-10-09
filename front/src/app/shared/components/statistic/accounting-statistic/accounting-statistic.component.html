@@ -1,0 +1,50 @@
+<div class="ui four column padded centered grid doubling">
+  <div class="center aligned column">
+    <div class="ui green small statistic">
+      <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="hourAmount" [duration]="1" (countoChange)="hourCount = $event">
+        {{ hourCount | number:'1.0-0': 'fr-FR' }}
+      </div>
+      <div class="label">
+        <i class="clock blue icon"></i> Heures
+      </div>
+    </div>
+  </div>
+
+  <div class="center aligned column">
+    <div class="ui grey small statistic">
+      <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="grossAmount" [duration]="1" (countoChange)="grossCount = $event">
+        {{ grossCount | number:'1.0-0': 'fr-FR' }}€
+      </div>
+      <div class="label">
+        <i class="users blue icon"></i> À verser
+      </div>
+    </div>
+  </div>
+
+  <div class="center aligned column">
+    <div class="ui brown small statistic">
+      <div class="label">
+        <i class="icons">
+          <i class="blue handshake icon"></i>
+          <i class="money bill green corner icon"></i>
+        </i>
+        Cotisation Numéris
+      </div>
+      <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="subscriptionFee" [duration]="1" (countoChange)="subscriptionFeeCount = $event">
+        {{ subscriptionFeeCount | number:'1.0-0': 'fr-FR' }}€
+      </div>
+    </div>
+  </div>
+
+  <div class="center aligned column">
+    <div class="ui yellow small statistic">
+      <div class="label">
+        <i class="building blue icon"></i>
+        Paiements client
+      </div>
+      <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="clientFinalAmount" [duration]="1" (countoChange)="clientFinalCount = $event">
+        {{ clientFinalCount | number:'1.0-0': 'fr-FR' }}€
+      </div>
+    </div>
+  </div>
+</div>

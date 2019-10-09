@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Payslip;
+use App\Models\Invoice;
 
-class PayslipRequest extends AbstractFormRequest
+class InvoiceRequest extends AbstractFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,14 +15,7 @@ class PayslipRequest extends AbstractFormRequest
     {
         $current_user = auth()->user();
 
-        switch ($this->route()->getName()) {
-            case 'payslips.index':
-                return $current_user->can('index', Payslip::class);
-            case 'payslips.update':
-                return $current_user->can('update', Payslip::class);
-            default:
-                return false;
-        }
+        return $current_user->can('index', Invoice::class);
     }
 
     /**
@@ -37,10 +30,6 @@ class PayslipRequest extends AbstractFormRequest
             case 'POST':
                 return [
                     'year' => 'required|string|date_format:Y',
-                ];
-            case 'PUT':
-                return [
-                    'month' => 'required|string|date',
                 ];
             default: break;
         }

@@ -94,8 +94,8 @@ Route::group(['middleware' => 'auth:api'], function () {
         ->only(['update', 'destroy']);
 
     // Payslip resource routes
-    Route::put('payslips', 'PayslipController@update')->name('payslips.update');
     Route::post('payslips', 'PayslipController@index')->name('payslips.index');
+    Route::put('payslips', 'PayslipController@update')->name('payslips.update');
     Route::get('payslips/{payslip_id}/download-payslip', 'PayslipController@downloadPayslip')
         ->name('payslips.download.payslip');
     Route::get('payslips/{payslip_id}/download-contract', 'PayslipController@downloadContract')
@@ -104,6 +104,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         ->name('payslips.download.zip');
 
     // Invoice resource routes
+    Route::post('invoices', 'InvoiceController@index')->name('invoices.index');
     Route::get('invoices/{invoice_id}/download', 'InvoiceController@download')
         ->name('invoices.download');
 
