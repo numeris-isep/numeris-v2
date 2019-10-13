@@ -4,21 +4,24 @@ import { Invoice } from '../../../../core/classes/models/Invoice';
 import { InvoiceAmount, PayslipAmount, StatisticService } from '../../../../core/services/statistic.service';
 
 @Component({
-  selector: 'app-accounting-details',
-  templateUrl: './accounting-details.component.html',
+  selector: 'app-accounting-statistic',
+  templateUrl: './accounting-statistic.component.html'
 })
-export class AccountingDetailsComponent implements OnInit {
+export class AccountingStatisticComponent implements OnInit {
 
-  @Input() statisticByMonth: {
-    month: string,
-    payslips: Payslip[],
-    invoices: Invoice[],
-  };
+  @Input() payslips: Payslip[] = [];
+  @Input() invoices: Invoice[] = [];
 
   payslipAmounts: PayslipAmount;
   invoiceAmounts: InvoiceAmount;
 
-  constructor(private statisticService: StatisticService) { }
+  hourCount: any;
+  grossCount: any;
+  subscriptionFeeCount: any;
+  clientFinalCount: any;
+
+  constructor(private statisticService: StatisticService) {
+  }
 
   ngOnInit() {
     this.calculate();
@@ -26,9 +29,10 @@ export class AccountingDetailsComponent implements OnInit {
 
   calculate() {
     this.payslipAmounts = this.statisticService
-      .calculatePayslipAmounts(this.statisticByMonth.payslips);
+      .calculatePayslipAmounts(this.payslips);
     this.invoiceAmounts = this.statisticService
-      .calculateInvoiceAmounts(this.statisticByMonth.invoices);
+      .calculateInvoiceAmounts(this.invoices);
   }
 
 }
+

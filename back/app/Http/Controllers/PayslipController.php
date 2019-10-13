@@ -22,8 +22,9 @@ class PayslipController extends Controller
     public function index(PayslipRequest $request)
     {
         $this->authorize('index', Payslip::class);
+        $payslips = Payslip::findByYear($request['year'])->load(['user']);
 
-        return response()->json(PayslipResource::collection(Payslip::findByYear($request['year'])));
+        return response()->json(PayslipResource::collection($payslips));
     }
 
     /**

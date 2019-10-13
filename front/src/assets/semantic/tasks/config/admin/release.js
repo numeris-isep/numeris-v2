@@ -101,7 +101,7 @@ module.exports = {
     'shape',
     'sidebar',
     'site',
-    'statistic',
+    'statistics',
     'step',
     'sticky',
     'tab',

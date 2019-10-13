@@ -1,0 +1,33 @@
+<app-content [condition]="! (payslips && invoices)">
+  <div *ngIf="payslips && invoices" class="ui padded grid doubling">
+    <div class="stretched row">
+      <div class="sixteen wide mobile five wide computer column">
+        <app-accounting-summary *ngIf="payslips && invoices"
+                                [statisticByMonth]="statisticByMonth"></app-accounting-summary>
+      </div>
+
+      <div class="sixteen wide mobile eleven wide computer column">
+        <app-accounting-actions *ngIf="payslips && invoices"
+                                [statisticByMonth]="statisticByMonth"></app-accounting-actions>
+      </div>
+    </div>
+
+    <div *ngIf="payslips.length > 0 || invoices.length > 0; else empty" class="stretched row">
+      <div class="sixteen wide mobile five wide computer column">
+        <app-accounting-details *ngIf="payslips && invoices"
+                                [statisticByMonth]="statisticByMonth"></app-accounting-details>
+      </div>
+
+      <div class="sixteen wide mobile eleven wide computer column">
+        <app-accounting-tabset *ngIf="payslips && invoices"
+                               [documents]="statisticByMonth"></app-accounting-tabset>
+      </div>
+    </div>
+
+    <ng-template #empty>
+      <div class="sixteen wide column">
+        <app-empty>Aucune donnée pour ce mois-ci.</app-empty>
+      </div>
+    </ng-template>
+  </div>
+</app-content>

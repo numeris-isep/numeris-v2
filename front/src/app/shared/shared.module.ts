@@ -38,7 +38,7 @@ import { TermsOfUseMessageComponent } from './components/messages/terms-of-use-m
 import { VerifyEmailMessageComponent } from './components/messages/verify-email-message/verify-email-message.component';
 import { ActivateAccountMessageComponent } from './components/messages/activate-account-message/activate-account-message.component';
 import { WipComponent } from './components/wip/wip.component';
-import { AccountingStatisticComponent } from './components/statistic/accounting-statistic/accounting-statistic.component';
+import { AccountingStatisticComponent } from './components/statistics/accounting-statistic/accounting-statistic.component';
 import { CountToDirective } from './directives/count-to.directive';
 
 @NgModule({

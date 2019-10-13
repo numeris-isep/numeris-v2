@@ -1,7 +1,7 @@
 <div class="ui four column padded centered grid doubling">
   <div class="center aligned column">
     <div class="ui green small statistic">
-      <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="hourAmount" [duration]="1" (countoChange)="hourCount = $event">
+      <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="payslipAmounts.hourAmounts" [duration]="1" (countoChange)="hourCount = $event">
         {{ hourCount | number:'1.0-0': 'fr-FR' }}
       </div>
       <div class="label">
@@ -12,7 +12,7 @@
 
   <div class="center aligned column">
     <div class="ui grey small statistic">
-      <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="grossAmount" [duration]="1" (countoChange)="grossCount = $event">
+      <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="payslipAmounts.grossAmounts" [duration]="1" (countoChange)="grossCount = $event">
         {{ grossCount | number:'1.0-0': 'fr-FR' }}€
       </div>
       <div class="label">
@@ -30,7 +30,7 @@
         </i>
         Cotisation Numéris
       </div>
-      <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="subscriptionFee" [duration]="1" (countoChange)="subscriptionFeeCount = $event">
+      <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="payslipAmounts.subscriptionFees" [duration]="1" (countoChange)="subscriptionFeeCount = $event">
         {{ subscriptionFeeCount | number:'1.0-0': 'fr-FR' }}€
       </div>
     </div>
@@ -39,10 +39,13 @@
   <div class="center aligned column">
     <div class="ui yellow small statistic">
       <div class="label">
-        <i class="building blue icon"></i>
+        <i class="icons">
+          <i class="building blue icon"></i>
+          <i class="plus corner green icon"></i>
+        </i>
         Paiements client
       </div>
-      <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="clientFinalAmount" [duration]="1" (countoChange)="clientFinalCount = $event">
+      <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="payslipAmounts.finalAmounts" [duration]="1" (countoChange)="clientFinalCount = $event">
         {{ clientFinalCount | number:'1.0-0': 'fr-FR' }}€
       </div>
     </div>

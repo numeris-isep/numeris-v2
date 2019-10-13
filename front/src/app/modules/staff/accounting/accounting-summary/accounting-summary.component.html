@@ -1,0 +1,81 @@
+<a *ngIf="isLink; else isNotLink" class="ui fluid link card" routerLink="/comptabilite/{{ month.get('year') }}/{{ month.format('MM') }}">
+  <ng-container [ngTemplateOutlet]="content"></ng-container>
+</a>
+
+<ng-template #isNotLink>
+  <div class="ui fluid card">
+    <ng-container [ngTemplateOutlet]="content"></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #content>
+  <div class="content">
+    <div class="ui blue ribbon label">
+      <i class="calendar alternate icon"></i> {{ month.locale('fr').format('MMMM Y') | titlecase }}
+    </div>
+    <img class="right floated mini ui image" src="assets/logos/numeris-blue.png" alt="Logo de Numéris">
+  </div>
+
+  <ng-container *ngIf="statisticByMonth.payslips.length > 0 || statisticByMonth.invoices.length > 0; else empty">
+    <div class="content">
+      <div class="center aligned description">
+        <div class="ui mini green statistic"
+             suiPopup popupText="Heures" popupPlacement="bottom" popupInverted>
+          <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="payslipAmounts.hourAmounts" [duration]="1" (countoChange)="hourCount = $event">
+            {{ hourCount | number:'1.0-0': 'fr-FR' }}
+          </div>
+          <div class="label">
+            <i class="clock blue icon"></i>
+          </div>
+        </div>
+
+        <div class="ui mini grey statistic"
+             suiPopup popupText="Net à verser" popupPlacement="bottom" popupInverted>
+          <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="payslipAmounts.grossAmounts" [duration]="1" (countoChange)="grossCount = $event">
+            {{ grossCount | number:'1.0-0': 'fr-FR' }}€
+          </div>
+          <div class="label">
+            <i class="users blue icon"></i>
+          </div>
+        </div>
+
+        <div class="ui mini brown statistic"
+             suiPopup popupText="Cotisation Numéris" popupPlacement="bottom" popupInverted>
+          <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="payslipAmounts.subscriptionFees" [duration]="1" (countoChange)="subscriptionFeeCount = $event">
+            {{ subscriptionFeeCount | number:'1.0-0': 'fr-FR' }}€
+          </div>
+          <div class="label">
+            <i class="icons">
+              <i class="blue handshake icon"></i>
+              <i class="money bill green corner icon"></i>
+            </i>
+          </div>
+        </div>
+
+        <div class="ui mini yellow statistic"
+             suiPopup popupText="Paiements client" popupPlacement="bottom" popupInverted>
+          <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="invoiceAmounts.finalAmounts" [duration]="1" (countoChange)="clientFinalCount = $event">
+            {{ clientFinalCount | number:'1.0-0': 'fr-FR' }}€
+          </div>
+          <div class="label">
+            <i class="icons">
+              <i class="building blue icon"></i>
+              <i class="plus corner green icon"></i>
+            </i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="extra content">
+      Du {{ month.format('DD/MM/Y') }} au {{ month.clone().endOf('month').format('DD/MM/Y') }} inclus
+    </div>
+  </ng-container>
+
+  <ng-template #empty>
+    <div class="extra content">
+      Aucune donnée pour ce mois-ci.
+    </div>
+  </ng-template>
+</ng-template>
+

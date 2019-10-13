@@ -1,9 +1,11 @@
 import { Mission } from './mission';
 import { Client } from './client';
+import { User } from './user';
 
 export class Payslip {
 
   id: number;
+  user: User;
   month: string;
   hourAmount: number;
   grossAmount: number;

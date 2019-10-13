@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../../../core/guards/auth.guard';
 import { AccountingIndexComponent } from './accounting-index/accounting-index.component';
 import * as moment from 'moment';
+import { AccountingShowComponent } from './accounting-show/accounting-show.component';
 
 const year = moment().format('Y');
 
@@ -20,7 +21,16 @@ const accountingRoutes: Routes = [
     children: [
       {
         path: ':year',
-        component: AccountingIndexComponent,
+        children: [
+          {
+            path: ':month',
+            component: AccountingShowComponent,
+          },
+          {
+            path: '',
+            component: AccountingIndexComponent,
+          },
+        ],
       },
     ]
   }

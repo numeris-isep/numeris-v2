@@ -79,7 +79,7 @@ module.exports = {
     'comment',
     'feed',
     'item',
-    'statistic',
+    'statistics',
 
     // modules
     'accordion',

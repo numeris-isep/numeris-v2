@@ -382,7 +382,7 @@ module.exports = {
           { name: "comment", checked: true },
           { name: "feed", checked: true },
           { name: "item", checked: true },
-          { name: "statistic", checked: true },
+          { name: "statistics", checked: true },
           { name: "accordion", checked: true },
           { name: "checkbox", checked: true },
           { name: "dimmer", checked: true },

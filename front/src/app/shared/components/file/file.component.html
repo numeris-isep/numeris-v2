@@ -26,10 +26,20 @@
 <ng-template #payslip>
   <div class="content">
     <i class="right floated big red file pdf icon"></i>
-    <div class="header">{{ (data.month | date:'MMMM yyyy') | titlecase }}</div>
+    <div class="header">
+      {{ type === 'contract' ? 'Contrat' : 'BV' }}
+      {{ (data.month | date:'MMMM yyyy') | titlecase }}
+    </div>
     <div class="meta">{{ data.hourAmount | hours }}</div>
     <div class="description">
-      {{ data.operations.length }} {{ data.operations.length > 1 ? 'missions effectuées' : 'mission effectuée' }}
+      <p>
+        <i class="copy icon"></i>
+        {{ data.operations.length }} {{ data.operations.length > 1 ? 'missions effectuées' : 'mission effectuée' }}
+      </p>
+      <p *ngIf="data.user">
+        <i class="user icon"></i>
+        <a routerLink="/utilisateurs/{{ data.user.id }}">{{ data.user.firstName }} {{ data.user.lastName.toUpperCase() }}</a>
+      </p>
     </div>
   </div>
   <div class="extra content center aligned">
@@ -56,7 +66,7 @@
 <ng-template #invoice>
   <div class="content">
     <i class="right floated big red file pdf icon"></i>
-    <a class="header" routerLink="/projets/{{ data.project.id }}">{{ data.project.name }}</a>
+    <a class="header" routerLink="/projets/{{ data.project.id }}">Facture {{ data.project.name }}</a>
     <div class="meta">{{ (data.project.startAt | date:'MMMM yyyy') | titlecase }}</div>
     <div class="description" *ngIf="data.project.missionsCount">
       {{ data.project.missionsCount }} {{ data.project.missionsCount > 1 ? 'missions effectuées' : 'mission effectuée' }}

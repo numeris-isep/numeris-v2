@@ -47,7 +47,7 @@ export class AccountingIndexComponent implements OnInit {
           this.selectedYear = parseInt(moment().get('year').toString());
         }
 
-        this.selectYear(this.selectedYear);
+        this.selectYear();
       });
   }
 
@@ -57,9 +57,7 @@ export class AccountingIndexComponent implements OnInit {
     }
   }
 
-  selectYear(year: number) {
-    this.selectedYear = year;
-
+  selectYear() {
     forkJoin([this.getPayslips(), this.getInvoices()]).subscribe(data => {
       [this.payslips, this.invoices] = data;
 

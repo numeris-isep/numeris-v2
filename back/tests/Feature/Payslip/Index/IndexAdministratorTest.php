@@ -21,6 +21,7 @@ class IndexAdministratorTest extends TestCaseWithAuth
         $this->json('POST', route('payslips.index'), $year)
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([[
+                'user',
                 'month',
                 'hourAmount',
                 'grossAmount',

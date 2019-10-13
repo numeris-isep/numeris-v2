@@ -1,0 +1,67 @@
+<sui-tabset>
+  <div class="ui top pointing secondary menu">
+    <a class="item" suiTabHeader="1">
+      <i class="icons">
+        <i class="clipboard icon"></i>
+        <i class="top right corner pencil icon"></i>
+      </i>
+      Contrats
+      <span class="ui mini blue label">{{ documents.payslips.length }}</span>
+    </a>
+    <a class="item" suiTabHeader="2">
+      <i class="icons">
+        <i class="clipboard icon"></i>
+        <i class="bottom right corner euro icon"></i>
+      </i>
+      Bulletins
+      <span class="ui mini blue label">{{ documents.payslips.length }}</span>
+    </a>
+    <a class="item" suiTabHeader="3">
+      <i class="icons">
+        <i class="clipboard icon"></i>
+        <i class="bottom right corner euro icon"></i>
+      </i>
+      Factures
+      <span class="ui mini blue label">{{ documents.invoices.length }}</span>
+    </a>
+  </div>
+
+  <!-- Contracts -->
+  <div class="ui" suiTabContent="1">
+    <div *ngIf="documents.payslips.length > 0; else emptyContract" class="ui three column grid stackable">
+      <app-file class="column" *ngFor="let payslip of documents.payslips" type="contract" [data]="payslip"></app-file>
+    </div>
+
+    <ng-template #emptyContract>
+      <app-empty>
+        Aucun contrat de travail.
+      </app-empty>
+    </ng-template>
+  </div>
+
+  <!-- Payment slips -->
+  <div class="ui" suiTabContent="2">
+    <div *ngIf="documents.payslips.length > 0; else emptyPayslip" class="ui three column grid stackable">
+      <app-file class="column" *ngFor="let payslip of documents.payslips" type="payslip" [data]="payslip"></app-file>
+    </div>
+
+    <ng-template #emptyPayslip>
+      <app-empty>
+        Aucun bulletin de versement.
+      </app-empty>
+    </ng-template>
+  </div>
+
+  <!-- Invoices -->
+  <div class="ui" suiTabContent="3">
+    <div *ngIf="documents.invoices.length > 0; else emptyInvoice" class="ui three column grid stackable">
+      <app-file class="column" *ngFor="let invoice of documents.invoices" type="invoice" [data]="invoice"></app-file>
+    </div>
+
+    <ng-template #emptyInvoice>
+      <app-empty>
+        Aucune facture client.
+      </app-empty>
+    </ng-template>
+  </div>
+</sui-tabset>

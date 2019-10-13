@@ -1,0 +1,48 @@
+<div class="ui blue segment">
+  <div class="ui blue ribbon label">Actions</div>
+  <div class="ui two column center aligned grid">
+    <div class="ui vertical divider">Ou</div>
+    <div class="middle aligned row">
+      <div class="column">
+        <div class="ui small icon header">
+          <i class="calculator icon"></i>
+          {{ (statisticByMonth.payslips.length > 0) ? 'Recalcul' : 'Calcul' }} des données de paiement
+        </div><br>
+        <button class="ui animated fade button" (click)="calculateStatistics()"
+                [ngClass]="{'loading': loading}">
+          <div class="visible content">
+            <span *ngIf="! (statisticByMonth.payslips.length > 0); else exists">
+              <i class="calculator icon"></i> Calculer
+            </span>
+
+            <ng-template #exists>
+              <i class="icons">
+                <i class="calculator icon"></i>
+                <i class="top right corner redo icon"></i>
+              </i> Recalculer
+            </ng-template>
+          </div>
+          <div class="hidden content">
+            <i class="save icon"></i>
+          </div>
+        </button>
+      </div>
+      <div class="column">
+        <div class="ui small icon header">
+          <i class="archive icon"></i>
+          Télécharger l'archive
+        </div><br>
+        <button class="ui animated fade positive button" [ngClass]="{'loading': zipLoading}"
+                (click)="downloadArchive(month.locale('fr').format('Y-MM-DD HH:mm:ss'))"
+                [disabled]="! (statisticByMonth.payslips.length > 0)"
+                suiPopup popupPlacement="bottom" popupHeader="Action"
+                popupText="Télécharger les documents étudiants du mois (désactivez votre bloqueur de publicité)">
+          <div class="visible content"><i class="archive icon"></i> Télécharger</div>
+          <div class="hidden content">
+            <i class="download icon"></i>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

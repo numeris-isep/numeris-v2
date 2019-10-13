@@ -48,7 +48,7 @@ export class ProfilePreferencesComponent implements OnInit {
       ...this.preferenceForm.value
     }).subscribe(_ => {
         this.router.navigate(['/'])
-          .then(() => { this.router.navigate(['/profil']) } );
+          .then(() => { this.router.navigate(['/profil']); } );
         this.alertService.success(['Préférences de notifications mises à jour.'], null, true);
       },
       error => {
