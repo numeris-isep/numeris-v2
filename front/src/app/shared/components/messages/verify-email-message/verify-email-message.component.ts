@@ -9,6 +9,7 @@ import { AlertService } from '../../../../core/services/alert.service';
 export class VerifyEmailMessageComponent implements OnInit {
 
   loading: boolean = false;
+  disabled: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -26,7 +27,9 @@ export class VerifyEmailMessageComponent implements OnInit {
         this.alertService.success(message.message);
 
         this.loading = false;
-      }
+        this.disabled = true;
+      },
+      () => this.loading = false
     );
   }
 

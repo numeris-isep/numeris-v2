@@ -17,7 +17,7 @@ export class ButtonComponent
   }
 
   ngOnInit() {
-    this.animation = this.hiddenIcon != undefined ? 'fade animated' : '';
+    this.animation = this.hiddenIcon !== undefined ? 'fade animated' : '';
 
     this.classes = [
       this.color, this.size, this.animation, this.attachment, this.behaviour,

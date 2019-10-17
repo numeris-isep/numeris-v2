@@ -41,7 +41,9 @@ export class ErrorInterceptor implements HttpInterceptor {
           );
           break;
 
-        default: break;
+        default:
+          this.alertService.error(err.error.errors, 'Erreur', null);
+          break;
       }
 
       return throwError(err.error.errors);

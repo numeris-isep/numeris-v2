@@ -6,7 +6,7 @@
     </div>
     <p>Veuillez vérifier l'adresse email de votre compte afin de pouvoir utiliser le service.</p>
   </div>
-  <app-button size="small" hiddenIcon="envelope" color="basic brown"
+  <app-button size="small" hiddenIcon="envelope" color="basic brown" [isDisabled]="disabled"
               [isLoading]="loading" suiPopup popupPlacement="top" popupHeader="Information"
               popupText="Vous allez recevoir un email avec la procédure à suivre" (click)="sendEmail()">
     Vérifier
