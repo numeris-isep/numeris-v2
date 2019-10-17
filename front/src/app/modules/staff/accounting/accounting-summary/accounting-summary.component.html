@@ -21,7 +21,7 @@
       <div class="center aligned description">
         <div class="ui mini green statistic"
              suiPopup popupText="Heures" popupPlacement="bottom" popupInverted>
-          <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="payslipAmounts.hourAmounts" [duration]="1" (countoChange)="hourCount = $event">
+          <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="payslipAmounts.hourAmounts" (countoChange)="hourCount = $event">
             {{ hourCount | number:'1.0-0': 'fr-FR' }}
           </div>
           <div class="label">
@@ -31,7 +31,7 @@
 
         <div class="ui mini grey statistic"
              suiPopup popupText="Net à verser" popupPlacement="bottom" popupInverted>
-          <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="payslipAmounts.grossAmounts" [duration]="1" (countoChange)="grossCount = $event">
+          <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="payslipAmounts.grossAmounts" (countoChange)="grossCount = $event">
             {{ grossCount | number:'1.0-0': 'fr-FR' }}€
           </div>
           <div class="label">
@@ -41,7 +41,7 @@
 
         <div class="ui mini brown statistic"
              suiPopup popupText="Cotisation Numéris" popupPlacement="bottom" popupInverted>
-          <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="payslipAmounts.subscriptionFees" [duration]="1" (countoChange)="subscriptionFeeCount = $event">
+          <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="payslipAmounts.subscriptionFees" (countoChange)="subscriptionFeeCount = $event">
             {{ subscriptionFeeCount | number:'1.0-0': 'fr-FR' }}€
           </div>
           <div class="label">
@@ -54,7 +54,7 @@
 
         <div class="ui mini yellow statistic"
              suiPopup popupText="Paiements client" popupPlacement="bottom" popupInverted>
-          <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="invoiceAmounts.finalAmounts" [duration]="1" (countoChange)="clientFinalCount = $event">
+          <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="invoiceAmounts.finalAmounts" (countoChange)="clientFinalCount = $event">
             {{ clientFinalCount | number:'1.0-0': 'fr-FR' }}€
           </div>
           <div class="label">

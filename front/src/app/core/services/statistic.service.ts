@@ -35,12 +35,12 @@ export class StatisticService {
     this.initPayslipAmounts();
 
     payslips.forEach(payslip => {
-      this.payslipAmounts.hourAmounts += parseInt(payslip.hourAmount.toString());
-      this.payslipAmounts.grossAmounts += parseInt(payslip.grossAmount.toString());
-      this.payslipAmounts.finalAmounts += parseInt(payslip.finalAmount.toString());
-      this.payslipAmounts.subscriptionFees += parseInt(payslip.subscriptionFee.toString());
-      this.payslipAmounts.deductionAmounts += parseInt(payslip.deductionAmount.toString());
-      this.payslipAmounts.employerDeductionAmounts += parseInt(payslip.employerDeductionAmount.toString());
+      this.payslipAmounts.hourAmounts += parseFloat(payslip.hourAmount.toString());
+      this.payslipAmounts.grossAmounts += parseFloat(payslip.grossAmount.toString());
+      this.payslipAmounts.finalAmounts += parseFloat(payslip.finalAmount.toString());
+      this.payslipAmounts.subscriptionFees += parseFloat(payslip.subscriptionFee.toString());
+      this.payslipAmounts.deductionAmounts += parseFloat(payslip.deductionAmount.toString());
+      this.payslipAmounts.employerDeductionAmounts += parseFloat(payslip.employerDeductionAmount.toString());
     });
 
     return this.payslipAmounts;
@@ -50,9 +50,9 @@ export class StatisticService {
     this.initInvoiceAmount();
 
     invoices.forEach(invoice => {
-      this.invoiceAmount.grossAmounts += invoice.grossAmount;
-      this.invoiceAmount.vatAmounts += invoice.vatAmount;
-      this.invoiceAmount.finalAmounts += invoice.finalAmount;
+      this.invoiceAmount.grossAmounts += parseFloat(invoice.grossAmount.toString());
+      this.invoiceAmount.vatAmounts += parseFloat(invoice.vatAmount.toString());
+      this.invoiceAmount.finalAmounts += parseFloat(invoice.finalAmount.toString());
     });
 
     return this.invoiceAmount;

@@ -16,5 +16,7 @@
     </div>
   </div>
 
-  <app-accounting-list [statisticsByMonth]="statisticsByMonth"></app-accounting-list>
+  <app-content [condition]="loading">
+    <app-accounting-list [statisticsByMonth]="statisticsByMonth"></app-accounting-list>
+  </app-content>
 </app-content>

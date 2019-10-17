@@ -8,7 +8,7 @@ export class CountToDirective {
   @Output() countoChange = new EventEmitter();
   @Output() countoEnd = new EventEmitter();
   private _timer: any;
-  private _duration: number;
+  private _duration: number = 0.8;
   private _countTo: number;
   private _countFrom: number;
   private _step: number;

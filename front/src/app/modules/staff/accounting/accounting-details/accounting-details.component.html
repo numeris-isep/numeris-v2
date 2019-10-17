@@ -20,7 +20,7 @@
         </i>
         Salaires brut
       </td>
-      <td><b>{{ payslipAmounts.grossAmounts | number:'1.0-2': 'fr-FR' }}€</b></td>
+      <td><b>{{ payslipAmounts.grossAmounts | number:'1.2-2': 'fr-FR' }}€</b></td>
     </tr>
     <tr>
       <td class="collapsing">
@@ -30,7 +30,7 @@
         </i>
         Salaires net à verser
       </td>
-      <td>{{ payslipAmounts.finalAmounts | number:'1.0-2': 'fr-FR' }}€</td>
+      <td>{{ payslipAmounts.finalAmounts | number:'1.2-2': 'fr-FR' }}€</td>
     </tr>
     <tr>
       <td class="collapsing">
@@ -50,7 +50,7 @@
         </i>
         Cotisations sociales
       </td>
-      <td>{{ payslipAmounts.deductionAmounts | number:'1.0-2': 'fr-FR' }}€</td>
+      <td>{{ payslipAmounts.deductionAmounts | number:'1.2-2': 'fr-FR' }}€</td>
     </tr>
     <tr>
       <td class="collapsing">
@@ -60,7 +60,7 @@
         </i>
         Cotisations employeur
       </td>
-      <td>{{ payslipAmounts.employerDeductionAmounts | number:'1.0-2': 'fr-FR' }}€</td>
+      <td>{{ payslipAmounts.employerDeductionAmounts | number:'1.2-2': 'fr-FR' }}€</td>
     </tr>
     <tr>
       <td class="collapsing">
@@ -70,7 +70,7 @@
         </i>
         Montants à payer TTC
       </td>
-      <td>{{ invoiceAmounts.grossAmounts | number:'1.0-2': 'fr-FR' }}€</td>
+      <td>{{ invoiceAmounts.grossAmounts | number:'1.2-2': 'fr-FR' }}€</td>
     </tr>
     <tr>
       <td class="collapsing">
@@ -80,7 +80,7 @@
         </i>
         Total TVA
       </td>
-      <td>{{ invoiceAmounts.vatAmounts | number:'1.0-2': 'fr-FR' }}€</td>
+      <td>{{ invoiceAmounts.vatAmounts | number:'1.2-2': 'fr-FR' }}€</td>
     </tr>
     <tr>
       <td class="collapsing">
@@ -90,7 +90,7 @@
         </i>
         Coût prestation HT
       </td>
-      <td><b>{{ invoiceAmounts.finalAmounts | number:'1.0-2': 'fr-FR' }}€</b></td>
+      <td><b>{{ invoiceAmounts.finalAmounts | number:'1.2-2': 'fr-FR' }}€</b></td>
     </tr>
     </tbody>
   </table>

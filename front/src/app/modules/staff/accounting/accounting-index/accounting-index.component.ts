@@ -40,15 +40,16 @@ export class AccountingIndexComponent implements OnInit {
     this.initYears();
 
     this.route.params.subscribe(param => {
-        this.selectedYear = parseInt(param.year);
+      this.selectedYear = parseInt(param.year);
 
-        if (! (this.years.filter(y => y === param.year).length > 0)) {
-          this.router.navigate(['/comptabilite']);
-          this.selectedYear = parseInt(moment().get('year').toString());
-        }
+      if (! (this.years.filter(y => y === parseInt(param.year)).length > 0)) {
+        const currentYear: number = moment().get('year');
+        this.router.navigate([`/comptabilite/${currentYear}`]);
+        this.selectedYear = currentYear;
+      }
 
-        this.selectYear();
-      });
+      this.selectYear();
+    });
   }
 
   initYears() {
@@ -58,11 +59,14 @@ export class AccountingIndexComponent implements OnInit {
   }
 
   selectYear() {
+    this.loading = true;
+
     forkJoin([this.getPayslips(), this.getInvoices()]).subscribe(data => {
       [this.payslips, this.invoices] = data;
 
       this.initStatisticsByMonth();
       this.setTitlesAndBreadcrumbs();
+      this.loading = false;
     });
   }
 

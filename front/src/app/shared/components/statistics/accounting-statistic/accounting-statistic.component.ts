@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Payslip } from '../../../../core/classes/models/payslip';
 import { Invoice } from '../../../../core/classes/models/Invoice';
 import { InvoiceAmount, PayslipAmount, StatisticService } from '../../../../core/services/statistic.service';
@@ -7,7 +7,7 @@ import { InvoiceAmount, PayslipAmount, StatisticService } from '../../../../core
   selector: 'app-accounting-statistic',
   templateUrl: './accounting-statistic.component.html'
 })
-export class AccountingStatisticComponent implements OnInit {
+export class AccountingStatisticComponent implements OnInit, OnChanges {
 
   @Input() payslips: Payslip[] = [];
   @Input() invoices: Invoice[] = [];
@@ -20,18 +20,21 @@ export class AccountingStatisticComponent implements OnInit {
   subscriptionFeeCount: any;
   clientFinalCount: any;
 
-  constructor(private statisticService: StatisticService) {
-  }
+  constructor(private statisticService: StatisticService) { }
 
   ngOnInit() {
-    this.calculate();
+    this.calculate(this.payslips, this.invoices);
   }
 
-  calculate() {
+  ngOnChanges(changes: SimpleChanges) {
+    this.calculate(changes.payslips.currentValue, changes.invoices.currentValue);
+  }
+
+  calculate(payslips: Payslip[], invoices: Invoice[]) {
     this.payslipAmounts = this.statisticService
-      .calculatePayslipAmounts(this.payslips);
+      .calculatePayslipAmounts(payslips);
     this.invoiceAmounts = this.statisticService
-      .calculateInvoiceAmounts(this.invoices);
+      .calculateInvoiceAmounts(invoices);
   }
 
 }

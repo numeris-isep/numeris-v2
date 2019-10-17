@@ -9,31 +9,46 @@ import { AccountingShowComponent } from './accounting-show/accounting-show.compo
 const year = moment().format('Y');
 
 const accountingRoutes: Routes = [
+  // {
+  //   path: 'comptabilite',
+  //   canActivate: [AuthGuard],
+  //   children: [
+  //     {
+  //       path: ':year',
+  //       children: [
+  //         {
+  //           path: ':month',
+  //           component: AccountingShowComponent,
+  //         },
+  //         {
+  //           path: '',
+  //           component: AccountingIndexComponent,
+  //         },
+  //       ],
+  //     },
+  //   ]
+  // },
   {
-    path: 'comptabilite',
-    redirectTo: 'comptabilite/' + year,
-    pathMatch: 'full',
+    path: 'comptabilite/:year/:month',
     canActivate: [AuthGuard],
+    component: AccountingShowComponent,
+  },
+  {
+    path: 'comptabilite/:year',
+    canActivate: [AuthGuard],
+    component: AccountingIndexComponent,
   },
   {
     path: 'comptabilite',
     canActivate: [AuthGuard],
-    children: [
-      {
-        path: ':year',
-        children: [
-          {
-            path: ':month',
-            component: AccountingShowComponent,
-          },
-          {
-            path: '',
-            component: AccountingIndexComponent,
-          },
-        ],
-      },
-    ]
-  }
+    component: AccountingIndexComponent,
+  },
+  // {
+  //   path: 'comptabilite',
+  //   redirectTo: 'comptabilite/' + year,
+  //   pathMatch: 'full',
+  //   canActivate: [AuthGuard],
+  // },
 ];
 
 @NgModule({
