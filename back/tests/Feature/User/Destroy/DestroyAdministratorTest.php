@@ -19,18 +19,11 @@ class DestroyAdministratorTest extends TestCaseWithAuth
     {
         $user = $this->activeUserProvider();
 
-        $address = $user->address;
-        $preference = $user->preference;
-
-        $this->assertDatabaseHas('users', $user->toArray());
-        $this->assertDatabaseHas('addresses', $address->toArray());
-        $this->assertNotNull(Preference::find($preference->id));
+        $this->assertNull($user->deleted_at);
 
         $this->json('DELETE', route('users.destroy', ['user_id' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
 
-        $this->assertDatabaseMissing('users', $user->toArray());
-        $this->assertDatabaseMissing('addresses', $address->toArray());
-        $this->assertNull(Preference::find($preference->id));
+        $this->assertNotNull(User::onlyTrashed()->find($user->id)->deleted_at);
     }
 }

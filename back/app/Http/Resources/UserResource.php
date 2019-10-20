@@ -35,6 +35,7 @@ class UserResource extends JsonResource
             'bic'                   => $this->bic,
             'createdAt'             => $this->created_at->toDateTimeString(),
             'updatedAt'             => $this->updated_at->toDateTimeString(),
+            'deletedAt'             => $this->deleted_at,
 
             // Relations
             'address'               => AddressResource::make($this->whenLoaded('address')),

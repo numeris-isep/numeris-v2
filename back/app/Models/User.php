@@ -8,6 +8,7 @@ use App\Notifications\ResetPasswordNotification;
 use App\Notifications\VerifyEmailNotification;
 use App\ProjectUser;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -15,7 +16,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable,
-        OnEventsTrait;
+        OnEventsTrait,
+        SoftDeletes;
 
     protected $fillable = [
         // One-to-One relations
@@ -41,6 +43,7 @@ class User extends Authenticatable implements JWTSubject
         'social_insurance_number',
         'iban',
         'bic',
+        'deleted_at',
     ];
 
     protected $hidden = [
@@ -124,16 +127,6 @@ class User extends Authenticatable implements JWTSubject
     public function setPreference(Preference $preference)
     {
         return $this->preference()->associate($preference);
-    }
-
-    /**
-     * To be realised just after an user is deleted
-     */
-    public static function onDeleted(self $user)
-    {
-        // Delete all related models
-        $user->address()->delete();
-        $user->preference()->delete();
     }
 
     public function roles()

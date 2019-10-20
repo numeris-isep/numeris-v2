@@ -4,6 +4,7 @@ namespace Tests\Feature\User\Destroy;
 
 use App\Models\Preference;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCaseWithAuth;
 
@@ -18,20 +19,13 @@ class DestroyStudentTest extends TestCaseWithAuth
     {
         $user = $this->activeUserProvider();
 
-        $address = $user->address;
-        $preference = $user->preference;
-
-        $this->assertDatabaseHas('users', $user->toArray());
-        $this->assertDatabaseHas('addresses', $address->toArray());
-        $this->assertNotNull(Preference::find($preference->id));
+        $this->assertNull($user->deleted_at);
 
         $this->json('DELETE', route('users.destroy', ['user_id' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
 
-        $this->assertDatabaseHas('users', $user->toArray());
-        $this->assertDatabaseHas('addresses', $address->toArray());
-        $this->assertNotNull(Preference::find($preference->id));
+        $this->assertNull($user->deleted_at);
     }
 
     /**
@@ -40,18 +34,12 @@ class DestroyStudentTest extends TestCaseWithAuth
     public function testStudentDeletingHisOwnAccount()
     {
         $user = auth()->user();
-        $address = $user->address;
-        $preference = $user->preference;
 
-        $this->assertDatabaseHas('users', $user->toArray());
-        $this->assertDatabaseHas('addresses', $address->toArray());
-        $this->assertNotNull(Preference::find($preference->id));
+        $this->assertNull($user->deleted_at);
 
         $this->json('DELETE', route('users.destroy', ['user_id' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
 
-        $this->assertDatabaseMissing('users', $user->toArray());
-        $this->assertDatabaseMissing('addresses', $address->toArray());
-        $this->assertNull(Preference::find($preference->id));
+        $this->assertNotNull(User::onlyTrashed()->find($user->id)->deleted_at);
     }
 }
