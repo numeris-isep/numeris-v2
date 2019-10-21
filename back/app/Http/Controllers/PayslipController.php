@@ -28,6 +28,19 @@ class PayslipController extends Controller
     }
 
     /**
+     * Count hour amounts for podium.
+     *
+     * @param PayslipRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function indexPodium(PayslipRequest $request)
+    {
+        $payslips = Payslip::findTopThree($request['month']);
+
+        return response()->json(PayslipResource::collection($payslips));
+    }
+
+    /**
      * Download a given payslip PDF.
      *
      * @param $payslip_id
@@ -75,7 +88,7 @@ class PayslipController extends Controller
     {
         set_time_limit(0); // Necessary because this task can take a while
 
-        $payslips = Payslip::findByMonth($request['month']);
+        $payslips = Payslip::findByMonth($request['month'])->get();
         $this->authorize('download-zip', [Payslip::class, $payslips]);
 
         $zip = new \ZipArchive();

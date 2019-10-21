@@ -1,48 +1,61 @@
-<div class="ui container">
-  <div class="ui basic vertical stripe center aligned segment">
-    <h1>Podium ({{ currentMonth }} {{ currentYear }})</h1>
-  </div>
+<div #template>
+  <ng-container *ngIf="payslips && payslips.length > 0; else empty">
+    <div class="ui basic center aligned segment">
+      <h1>Podium {{ date.locale('fr').format('MMMM Y') }}</h1>
+    </div>
 
-  <div class="ui raised segments">
-    <!-- First -->
-    <div class="ui blue center aligned segment">
-      <div class="ui header">Eliott de Séguier</div>
-      <div class="ui huge statistic">
-        <div class="value">
-          <i class="blue rocket icon"></i> 135
+    <div class="ui container">
+      <div class="ui raised segments">
+        <!-- First -->
+        <div class="ui blue center aligned segment">
+          <div class="ui header">{{ payslips[0].user.firstName }} {{ payslips[0].user.lastName.toUpperCase() }}</div>
+          <div class="ui huge statistic">
+            <div class="value" appCountTo [step]="1" [countFrom]="0" [countTo]="payslips[0].hourAmount" (countoChange)="hour0Count = $event" (countoEnd)="shootConfetti()">
+              <i class="blue rocket icon"></i> {{ hour0Count | number:'1.0-0': 'fr-FR' }}
+            </div>
+            <div class="label">
+              heures travaillées
+            </div>
+          </div>
+          <canvas id="canvas" #canvas></canvas>
         </div>
-        <div class="label">
-          heures
+
+        <!-- Second / Third -->
+        <div class="ui horizontal segments">
+          <!-- Second -->
+          <div class="ui center aligned segment">
+            <div class="ui header">{{ payslips[1].user.firstName }} {{ payslips[1].user.lastName.toUpperCase() }}</div>
+            <div class="ui big statistic">
+              <div class="value" appCountTo [step]="1" [countFrom]="0" [countTo]="payslips[1].hourAmount" (countoChange)="hour1Count = $event">
+                <i class="blue fighter jet icon"></i> {{ hour1Count | number:'1.0-0': 'fr-FR' }}
+              </div>
+              <div class="label">
+                heures
+              </div>
+            </div>
+          </div>
+
+          <!-- Third -->
+          <div class="ui center aligned segment">
+            <div class="ui header">{{ payslips[2].user.firstName }} {{ payslips[2].user.lastName.toUpperCase() }}</div>
+            <div class="ui big statistic">
+              <div class="value" appCountTo [step]="1" [countFrom]="0" [countTo]="payslips[2].hourAmount" (countoChange)="hour2Count = $event">
+                <i class="blue plane icon"></i> {{ hour2Count | number:'1.0-0': 'fr-FR' }}
+              </div>
+              <div class="label">
+                heures
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="ui horizontal segments">
-      <!-- Second -->
-      <div class="ui center aligned segment">
-        <div class="ui header">John Doe</div>
-        <div class="ui big statistic">
-          <div class="value">
-            <i class="blue fighter jet icon"></i> 81
-          </div>
-          <div class="label">
-            heures
-          </div>
-        </div>
-      </div>
+  </ng-container>
 
-      <!-- Third -->
-      <div class="ui center aligned segment">
-        <div class="ui header">Kelly Slater</div>
-        <div class="ui big statistic">
-          <div class="value">
-            <i class="blue plane icon"></i> 42
-          </div>
-          <div class="label">
-            heures
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <ng-template #empty>
+    <app-empty *ngIf="page !== 'home'">
+      Le classement n'est pas encore disponible pour ce mois.
+    </app-empty>
+  </ng-template>
 </div>

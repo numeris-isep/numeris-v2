@@ -69,7 +69,7 @@
         <tbody *ngIf="paginatedMission.data.length > 0; else noMission">
         <tr *ngFor="let mission of paginatedMission.data" [ngClass]="{'hatched': mission.isLocked || isMissionExpired(mission)}"
             suiPopup popupText="{{ isMissionExpired(mission) ? 'Expirée' : 'Fermée' }}" popupPlacement="left" popupTrigger="manual" #popup="suiPopup"
-            (mouseenter)="togglePopup(popup, mission)" (mouseleave)="togglePopup(popup, mission)">
+            (mouseenter)="togglePopup(popup, mission)" (mouseleave)="togglePopup(popup, mission)" popupInverted>
           <td>{{ mission.startAt | date:'dd/MM/y H\'h\'mm' }}</td>
           <td>{{ mission.reference || '-' }}</td>
           <td>{{ mission.title }}</td>

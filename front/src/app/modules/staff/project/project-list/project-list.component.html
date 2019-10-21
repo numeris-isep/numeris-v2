@@ -67,7 +67,7 @@
 
         <tbody *ngIf="paginatedProject.data.length > 0; else noProject">
         <tr *ngFor="let project of paginatedProject.data" [ngClass]="{'hatched': project.step == 'closed'}"
-            suiPopup popupText="Cloturé" popupPlacement="left" popupTrigger="manual" #popup="suiPopup"
+            suiPopup popupText="Cloturé" popupPlacement="left" popupTrigger="manual" #popup="suiPopup" popupInverted
             (mouseenter)="togglePopup(popup, project.step == 'closed')" (mouseleave)="togglePopup(popup, project.step == 'closed')">
           <td>{{ project.startAt | date:'dd/MM/y' }}</td>
           <td class="collapsing">{{ project.name }}</td>

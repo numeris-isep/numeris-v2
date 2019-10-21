@@ -40,6 +40,7 @@ import { ActivateAccountMessageComponent } from './components/messages/activate-
 import { WipComponent } from './components/wip/wip.component';
 import { AccountingStatisticComponent } from './components/statistics/accounting-statistic/accounting-statistic.component';
 import { CountToDirective } from './directives/count-to.directive';
+import { ScrollDirective } from './directives/scroll.directive';
 
 @NgModule({
   imports: [
@@ -88,6 +89,7 @@ import { CountToDirective } from './directives/count-to.directive';
     WipComponent,
     AccountingStatisticComponent,
     CountToDirective,
+    ScrollDirective,
   ],
   exports: [
     // Components
@@ -131,7 +133,10 @@ import { CountToDirective } from './directives/count-to.directive';
     ResetPasswordFormComponent,
     VerifyEmailMessageComponent,
     AccountingStatisticComponent,
+
+    // Directives
     CountToDirective,
+    ScrollDirective,
   ],
   providers: [
     AlertService

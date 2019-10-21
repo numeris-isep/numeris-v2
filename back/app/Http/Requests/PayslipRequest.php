@@ -18,6 +18,8 @@ class PayslipRequest extends AbstractFormRequest
         switch ($this->route()->getName()) {
             case 'payslips.index':
                 return $current_user->can('index', Payslip::class);
+            case 'payslips.podium.index':
+                return true;
             case 'payslips.update':
                 return $current_user->can('update', Payslip::class);
             default:

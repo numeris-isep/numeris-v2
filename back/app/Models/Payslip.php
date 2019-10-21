@@ -56,7 +56,7 @@ class Payslip extends Model
 
     public static function findByMonth(string $month)
     {
-        return static::where('month', $month)->get();
+        return static::where('month', $month);
     }
 
     public static function findByUserAndMonth(int $user_id, string $month)
@@ -81,5 +81,13 @@ class Payslip extends Model
         $to = $from->copy()->addYear();
 
         return static::whereDate('month', [$from, $to])->get();
+    }
+
+    public static function findTopThree(string $date) {
+        return static::findByMonth($date)
+            ->get()
+            ->load('user')
+            ->sortByDesc('hour_amount')
+            ->slice(0, 3);
     }
 }

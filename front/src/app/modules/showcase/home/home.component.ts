@@ -4,6 +4,9 @@ import { ContactUsModal } from '../modals/contact-us-modal/contact-us-modal.comp
 import { SuiModalService } from 'ng2-semantic-ui';
 import { AuthService } from '../../../core/http/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfettiService, ConfettiType } from '../../../core/services/confetti.service';
+import { Moment } from 'moment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +23,10 @@ export class HomeComponent implements OnInit {
   @ViewChild('podium') private podium: ElementRef;
   @ViewChild('contactUs') private contactUs: ElementRef;
 
+  @ViewChild('snowCanvas') private snowCanvas: ElementRef;
+
+  currentDate: Moment = moment();
+
   private elements: {
     top: ElementRef,
     aboutUs: ElementRef,
@@ -32,6 +39,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private scrollService: ScrollService,
+    private confettiService: ConfettiService,
     private modalService: SuiModalService,
     private router: Router,
     private route: ActivatedRoute,
@@ -56,6 +64,7 @@ export class HomeComponent implements OnInit {
     };
 
     this.scrollService.setPageElements(this.elements);
+    this.rainSnow();
   }
 
   scrollToElement(anchor: string) {
@@ -64,5 +73,11 @@ export class HomeComponent implements OnInit {
 
   openModal() {
     this.modalService.open(this.modal);
+  }
+
+  rainSnow() {
+    if (this.currentDate.isBetween(moment({d: 22, M: 11}), moment({d: 20, M: 2}).add(1, 'year'))) {
+      this.confettiService.shoot(ConfettiType.Snow, this.snowCanvas.nativeElement);
+    }
   }
 }

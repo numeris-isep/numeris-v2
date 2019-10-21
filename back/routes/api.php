@@ -109,3 +109,6 @@ Route::group(['middleware' => 'auth:api'], function () {
         ->name('invoices.download');
 
 });
+
+// Payslip resource routes
+Route::put('payslips-podium', 'PayslipController@indexPodium')->name('payslips.podium.index');

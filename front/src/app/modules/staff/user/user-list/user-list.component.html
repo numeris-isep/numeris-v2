@@ -70,7 +70,7 @@
 
         <tbody *ngIf="paginatedUser.data.length > 0; else noUser">
         <tr *ngFor="let user of paginatedUser.data" [ngClass]="{'negative': ! user.activated}"
-            suiPopup popupText="À valider" popupPlacement="left" popupTrigger="manual" #popup="suiPopup"
+            suiPopup popupText="À valider" popupPlacement="left" popupTrigger="manual" popupInverted #popup="suiPopup"
             (mouseenter)="togglePopup(popup, !user.activated)" (mouseleave)="togglePopup(popup, !user.activated)">
           <td>
             <a routerLink="/utilisateurs/{{ user.id }}">

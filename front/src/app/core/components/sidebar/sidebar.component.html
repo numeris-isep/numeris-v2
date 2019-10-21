@@ -1,5 +1,5 @@
 <app-menu [sidebar]="sidebar"></app-menu>
-<sui-sidebar-container class="ui attached" track-scroll>
+<sui-sidebar-container class="ui attached" appScroll (scrollPosition)="scrollPosition($event)">
   <sui-sidebar transition="overlay" class="vertical" #sidebar>
     <div *ngIf="(isLoggedIn$ | async); else guest">
       <div class="header item">

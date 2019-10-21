@@ -21,6 +21,7 @@
 }
 .scroll-down {
   position: relative;
+  z-index: 100;
   animation-name: vertical-shake;
   animation-duration: 1.5s;
   animation-iteration-count: infinite;
@@ -38,6 +39,7 @@
 
 .ui.vertical.stripe {
   padding: 3.5em 0;
+  border-bottom: none;
 }
 .ui.vertical.stripe h3 {
   font-size: 2em;
@@ -96,7 +98,7 @@
 }
 
 .keyboard-background {
-  min-height: 500px;
+  min-height: 350px;
   position: relative;
   top: -100px;
   z-index: -1;
@@ -110,6 +112,10 @@
   height: 200px;
 }
 
+.ui.segments > .horizontal.segments {
+  background-color: white;
+  border-radius: 0 0 .28571428rem .28571428rem;
+}
 
 @media only screen and (max-width: 767px) {
   .masthead.segment {
