@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../../../../core/classes/models/user';
-import { Task } from 'src/app/core/classes/dashboard/Task';
+import { Task } from 'src/app/core/classes/task';
 import { TasksService } from '../../../../core/services/tasks.service';
 
 @Component({

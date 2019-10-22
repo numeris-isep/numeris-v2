@@ -4,10 +4,12 @@ import * as moment from 'moment';
 import { AuthService } from '../../http/auth/auth.service';
 import { User } from '../../classes/models/user';
 import { UserService } from '../../http/user.service';
+import { Count } from '../../classes/count';
 
 @Component({
   selector: 'app-accordion',
-  templateUrl: './accordion.component.html'
+  templateUrl: './accordion.component.html',
+  styleUrls: ['./accordion.component.css'],
 })
 export class AccordionComponent implements OnInit {
 
@@ -17,6 +19,7 @@ export class AccordionComponent implements OnInit {
   currentUser: User;
 
   @Input() sidebar: SidebarComponent;
+  @Input() counts: Count;
 
   constructor(
     private authService: AuthService,

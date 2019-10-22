@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Mission } from "../../../core/classes/models/mission";
-import { MissionService } from "../../../core/http/mission.service";
+import { Mission } from '../../../core/classes/models/mission';
+import { MissionService } from '../../../core/http/mission.service';
 import * as moment from 'moment';
-import { Moment } from "moment";
-import { ActivatedRoute } from "@angular/router";
+import { Moment } from 'moment';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-mission',
@@ -28,10 +28,10 @@ export class MissionComponent implements OnInit {
   ];
 
   sortedMissionGroups = [
-    { name: "Cette semaine", range: this.thisWeek, missions: <Mission[]>[] },
-    { name: "La semaine prochaine", range: this.nextWeek, missions: <Mission[]>[] },
-    { name: "Dans 2 semaines", range: this.inTwoWeeks, missions: <Mission[]>[] },
-    { name: "Prochainement", range: [], missions: <Mission[]>[] },
+    { name: 'Cette semaine', range: this.thisWeek, missions: <Mission[]>[] },
+    { name: 'La semaine prochaine', range: this.nextWeek, missions: <Mission[]>[] },
+    { name: 'Dans 2 semaines', range: this.inTwoWeeks, missions: <Mission[]>[] },
+    { name: 'Prochainement', range: [], missions: <Mission[]>[] },
   ];
 
   constructor(private missionService: MissionService) { }
@@ -50,7 +50,7 @@ export class MissionComponent implements OnInit {
         missions
           .map(mission => {
             this.counter++;
-            let missionDate = moment(mission.startAt);
+            const missionDate = moment(mission.startAt);
 
             switch (true) {
               case missionDate.isBetween(this.sortedMissionGroups[0].range[0], this.sortedMissionGroups[0].range[1]):

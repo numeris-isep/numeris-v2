@@ -1,11 +1,11 @@
 <app-menu [sidebar]="sidebar"></app-menu>
 <sui-sidebar-container class="ui attached" appScroll (scrollPosition)="scrollPosition($event)">
-  <sui-sidebar transition="overlay" class="vertical" #sidebar>
+  <sui-sidebar transition="overlay" class="vertical" (isVisibleChange)="getCounts($event)" #sidebar>
     <div *ngIf="(isLoggedIn$ | async); else guest">
       <div class="header item">
         <img class="ui tiny centered image" src="assets/logos/numeris-blue.png" alt="Logo de Numéris">
       </div>
-      <app-accordion [sidebar]="sidebar"></app-accordion>
+      <app-accordion [sidebar]="sidebar" [counts]="counts"></app-accordion>
     </div>
 
     <ng-template #guest>

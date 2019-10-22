@@ -14,9 +14,17 @@
       <ng-container *ngIf="currentUser.activated">
         <a class="item" routerLink="/missions-disponibles" routerLinkActive="active">
           <i class="tasks icon"></i> Missions disponibles
+          <span class="floating ui mini blue label">
+            <ng-container *ngIf="counts; else loading">{{ counts.missions }}</ng-container>
+            <ng-template #loading><i class="notched circle loading icon"></i></ng-template>
+          </span>
         </a>
         <a class="item" routerLink="/candidatures" routerLinkActive="active">
           <i class="handshake icon"></i> Candidatures
+          <span class="floating ui mini green label">
+            <ng-container *ngIf="counts; else loading">{{ counts.applications }}</ng-container>
+            <ng-template #loading><i class="notched circle loading icon"></i></ng-template>
+          </span>
         </a>
       </ng-container>
       <a class="item" routerLink="/tutoriels" routerLinkActive="active">
@@ -79,7 +87,7 @@
   </sui-accordion-panel>
 
   <div class="item">
-    <a target="_blank" href="https://www.facebook.com/isepnumeris/">
+    <a target="_blank" href="https://www.facebook.com/numerisisep/">
       <i class="facebook icon"></i>
     </a>
     <a target="_blank" href="https://www.linkedin.com/company/numerisisep/">
@@ -87,9 +95,6 @@
     </a>
     <a href="https://www.instagram.com/numerisisep" target="_blank">
       <i class="icon instagram"></i>
-    </a>
-    <a target="_blank" href="TODO">
-      <i class="youtube icon"></i>
     </a>
     <span suiPopup popupText="Développé et maintenu avec &#10084; par Eliott de Séguier">
       <i class="copyright outline icon"></i> 2016-{{ currentYear }}
