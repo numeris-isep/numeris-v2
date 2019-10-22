@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
 
   @ViewChild('snowCanvas') private snowCanvas: ElementRef;
 
-  currentDate: Moment = moment();
+  isWinter: boolean = moment().isBetween(moment({d: 22, M: 11}), moment({d: 20, M: 2}).add(1, 'year'));
 
   private elements: {
     top: ElementRef,
@@ -76,7 +76,7 @@ export class HomeComponent implements OnInit {
   }
 
   rainSnow() {
-    if (this.currentDate.isBetween(moment({d: 22, M: 11}), moment({d: 20, M: 2}).add(1, 'year'))) {
+    if (this.isWinter) {
       this.confettiService.shoot(ConfettiType.Snow, this.snowCanvas.nativeElement);
     }
   }

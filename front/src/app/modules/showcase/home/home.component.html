@@ -1,7 +1,8 @@
 <!-- Top -->
 <div class="ui vertical primary masthead center aligned segment" #top>
   <div class="ui text container">
-    <img class="ui centered massive fluid image" src="assets/logos/numeris-white.png" alt="Logo de Numéris">
+    <img class="ui centered massive fluid image" alt="Logo de Numéris"
+         src="assets/logos/numeris-white{{ isWinter ? '-winter' : '' }}.png">
     <h2 class="ui white inverted header">Le job service de l'ISEP</h2>
     <button class="circular ui primary large icon button scroll-down" (click)="scrollToElement('aboutUs')">
       <i class="icon arrow down"></i>
