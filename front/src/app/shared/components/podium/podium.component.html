@@ -23,7 +23,7 @@
         <!-- Second / Third -->
         <div class="ui horizontal segments" *ngIf="payslips[1] && payslips[2]">
           <!-- Second -->
-          <div class="ui center aligned segment">
+          <div class="ui center aligned segment" *ngIf="payslips[1]">
             <div class="ui header">{{ payslips[1].user.firstName }} {{ payslips[1].user.lastName.toUpperCase() }}</div>
             <div class="ui big statistic">
               <div class="value" appCountTo [step]="1" [countFrom]="0" [countTo]="payslips[1].hourAmount" (countoChange)="hour1Count = $event">
@@ -36,7 +36,7 @@
           </div>
 
           <!-- Third -->
-          <div class="ui center aligned segment">
+          <div class="ui center aligned segment" *ngIf="payslips[2]">
             <div class="ui header">{{ payslips[2].user.firstName }} {{ payslips[2].user.lastName.toUpperCase() }}</div>
             <div class="ui big statistic">
               <div class="value" appCountTo [step]="1" [countFrom]="0" [countTo]="payslips[2].hourAmount" (countoChange)="hour2Count = $event">
