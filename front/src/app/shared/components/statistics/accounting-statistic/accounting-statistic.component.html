@@ -43,7 +43,7 @@
           <i class="building blue icon"></i>
           <i class="plus corner green icon"></i>
         </i>
-        Paiements client
+        Coût de la prestation
       </div>
       <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="invoiceAmounts.finalAmounts" (countoChange)="clientFinalCount = $event">
         {{ clientFinalCount | number:'1.0-0': 'fr-FR' }}€

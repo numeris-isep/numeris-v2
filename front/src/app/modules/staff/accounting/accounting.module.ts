@@ -13,6 +13,7 @@ import { AccountingShowComponent } from './accounting-show/accounting-show.compo
 import { AccountingActionsComponent } from './accounting-actions/accounting-actions.component';
 import { AccountingDetailsComponent } from './accounting-details/accounting-details.component';
 import { AccountingTabsetComponent } from './accounting-tabset/accounting-tabset.component';
+import { AccountingChartComponent } from './accounting-chart/accounting-chart.component';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { AccountingTabsetComponent } from './accounting-tabset/accounting-tabset
     AccountingActionsComponent,
     AccountingDetailsComponent,
     AccountingTabsetComponent,
+    AccountingChartComponent,
   ],
 })
 export class AccountingModule { }

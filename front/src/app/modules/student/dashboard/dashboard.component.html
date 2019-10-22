@@ -1,5 +1,5 @@
 <app-content [condition]="!user">
-  <div *ngIf="user" class="ui padded center aligned grid doubling">
+  <div *ngIf="user" class="ui padded centered grid doubling">
     <!-- Messages -->
     <div class="stretched row" *ngIf="!user.activated || !user.touAccepted || !user.emailVerifiedAt">
       <div *ngIf="!user.activated" class="sixteen wide left aligned column">
@@ -20,7 +20,7 @@
     </div>
 
     <div class="stretched row">
-      <div class="sixteen wide mobile ten wide computer left aligned column">
+      <div class="sixteen wide mobile ten wide computer column">
         <app-podium></app-podium>
       </div>
     </div>

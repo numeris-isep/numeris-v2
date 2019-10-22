@@ -6,7 +6,6 @@ export class Alert {
   title: string | null = null;
   target: string;
   transitionController: TransitionController;
-  dismissable: boolean = false;
 }
 
 export enum AlertType {

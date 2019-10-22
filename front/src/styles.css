@@ -37,7 +37,7 @@ label > span {
   z-index: 100;
 }
 
-canvas {
+canvas.behind {
   width: 100%;
   height: 100%;
   z-index: 10;

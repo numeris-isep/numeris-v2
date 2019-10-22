@@ -30,7 +30,7 @@
         </div>
 
         <div class="ui mini grey statistic"
-             suiPopup popupText="Net à verser" popupPlacement="bottom" popupInverted>
+             suiPopup popupText="Salaires bruts" popupPlacement="bottom" popupInverted>
           <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="payslipAmounts.grossAmounts" (countoChange)="grossCount = $event">
             {{ grossCount | number:'1.0-0': 'fr-FR' }}€
           </div>
@@ -53,7 +53,7 @@
         </div>
 
         <div class="ui mini yellow statistic"
-             suiPopup popupText="Paiements client" popupPlacement="bottom" popupInverted>
+             suiPopup popupText="Coût de la prestation" popupPlacement="bottom" popupInverted>
           <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="invoiceAmounts.finalAmounts" (countoChange)="clientFinalCount = $event">
             {{ clientFinalCount | number:'1.0-0': 'fr-FR' }}€
           </div>

@@ -5,7 +5,6 @@ import { SuiModalService } from 'ng2-semantic-ui';
 import { AuthService } from '../../../core/http/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfettiService, ConfettiType } from '../../../core/services/confetti.service';
-import { Moment } from 'moment';
 import * as moment from 'moment';
 
 @Component({

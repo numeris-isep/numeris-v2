@@ -17,6 +17,12 @@
   </div>
 
   <app-content [condition]="loading">
-    <app-accounting-list [statisticsByMonth]="statisticsByMonth"></app-accounting-list>
+    <app-accounting-list *ngIf="statisticsByMonth" [statisticsByMonth]="statisticsByMonth"></app-accounting-list>
+
+    <div class="ui padded grid">
+      <div class="column">
+        <app-accounting-chart *ngIf="statisticsByMonth && selectedYear" [statisticsByMonth]="statisticsByMonth" [year]="selectedYear"></app-accounting-chart>
+      </div>
+    </div>
   </app-content>
 </app-content>
