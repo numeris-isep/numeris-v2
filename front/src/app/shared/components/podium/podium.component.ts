@@ -22,6 +22,7 @@ export class PodiumComponent implements OnInit {
   initializedPayslips: Payslip[];
   payslips: Payslip[];
   fetched: boolean = false;
+  loading: boolean = false;
 
   hour0Count;
   hour1Count;
@@ -38,7 +39,7 @@ export class PodiumComponent implements OnInit {
 
     if (this.page === 'home') {
       this.scrollService.scrollPosition.subscribe(y => {
-        if (! this.fetched && y >= this.template.nativeElement.getBoundingClientRect().y + 400) {
+        if (! this.fetched && y >= this.template.nativeElement.getBoundingClientRect().y + 1000) {
           this.setPayslips();
           this.fetched = true;
         }
@@ -47,10 +48,13 @@ export class PodiumComponent implements OnInit {
   }
 
   getPayslips() {
+    this.loading = true;
+
     this.payslipService.getPodium(this.date.format('Y-MM-DD HH:mm:ss')).subscribe(payslips => {
       this.initializedPayslips = payslips;
 
       if (this.page !== 'home') { this.setPayslips(); }
+      this.loading = false;
     });
   }
 

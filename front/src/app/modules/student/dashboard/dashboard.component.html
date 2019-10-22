@@ -1,20 +1,26 @@
 <app-content [condition]="!user">
-  <div *ngIf="user" class="ui padded grid doubling">
+  <div *ngIf="user" class="ui padded center aligned grid doubling">
     <!-- Messages -->
     <div class="stretched row" *ngIf="!user.activated || !user.touAccepted || !user.emailVerifiedAt">
-      <div class="sixteen wide mobile column">
-        <app-profile-messages [user]="user"></app-profile-messages>
+      <div *ngIf="!user.activated" class="sixteen wide left aligned column">
+        <app-activate-account-message [user]="user"></app-activate-account-message>
       </div>
     </div>
 
     <div class="stretched row">
-      <div class="sixteen wide mobile column">
-        <app-wip></app-wip>
+      <!-- Profile summary -->
+      <div class="sixteen wide mobile eight wide tablet four wide computer left aligned column">
+        <app-profile-summary [user]="user"></app-profile-summary>
+      </div>
+
+      <!-- To do -->
+      <div class="sixteen wide mobile eight wide tablet twelve wide computer left aligned column">
+        <app-todo [user]="user"></app-todo>
       </div>
     </div>
 
     <div class="stretched row">
-      <div class="ten wide mobile column">
+      <div class="sixteen wide mobile ten wide computer left aligned column">
         <app-podium></app-podium>
       </div>
     </div>

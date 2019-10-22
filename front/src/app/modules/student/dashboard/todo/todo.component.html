@@ -1,0 +1,35 @@
+<div class="ui segments">
+  <div class="ui segment">
+    <div class="ui blue ribbon label">
+      <i class="tasks icon"></i>
+      À faire
+    </div>
+  </div>
+
+  <div class="ui segment" [ngClass]="{ 'loading': loading }">
+    <div *ngIf="tasks.length > 0; else empty">
+      <div class="ui animated selection list">
+        <a *ngFor="let task of tasks" [routerLink]="task.link" class="item">
+          <i class="{{ task.icon ? task.icon : 'dot' }} icon"></i>
+          <div class="content">
+            <div class="header">{{ task.title }}</div>
+            <div class="description">{{ task.description }}</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <ng-template #empty>
+      <div class="ui success icon message">
+        <i class="check icon"></i>
+        <div class="header">
+          Aucune tâche à faire pour le moment
+        </div>
+        <p *ngIf="user.activated">
+          N'hésitez pas à postuler aux missions !
+          Voir les <a routerLink="/missions-disponibles">missions disponibles</a>.
+        </p>
+      </div>
+    </ng-template>
+  </div>
+</div>

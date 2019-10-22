@@ -21,6 +21,7 @@ import { ApplicationConfirmModalComponent } from './application/application-conf
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 import { ProfileRoleModalComponent } from './profile/profile-role-modal/profile-role-modal.component';
 import { ProfileMessagesComponent } from './profile/profile-messages/profile-messages.component';
+import { TodoComponent } from './dashboard/todo/todo.component';
 
 @NgModule({
   imports: [
@@ -49,6 +50,7 @@ import { ProfileMessagesComponent } from './profile/profile-messages/profile-mes
     ProfileEditComponent,
     ProfileRoleModalComponent,
     ProfileMessagesComponent,
+    TodoComponent,
   ],
   exports: [
     ProfileDetailsComponent,
