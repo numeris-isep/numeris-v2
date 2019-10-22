@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ComponentModalConfig, ModalSize, SuiModal } from 'ng2-semantic-ui';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '../../../../core/http/auth/auth.service';
 import { first } from 'rxjs/operators';
 import { AlertService } from '../../../../core/services/alert.service';
 import { User } from '../../../../core/classes/models/user';
 import { handleFormErrors } from '../../../../core/functions/form-error-handler';
 import { dateToString } from '../../../../shared/utils';
-import * as moment from 'moment';
+import { ConfettiService, ConfettiType } from '../../../../core/services/confetti.service';
 
 @Component({
   selector: 'app-subscribe-modal',
@@ -25,6 +25,7 @@ export class SubscribeModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private alertService: AlertService,
+    private confettiService: ConfettiService,
   ) { }
 
   ngOnInit() {
@@ -68,7 +69,10 @@ export class SubscribeModalComponent implements OnInit {
         (user: User) => {
           this.subscribeModal.approve(undefined);
           this.authService.login(user.email, this.f.password.value).subscribe(
-            _ => this.alertService.success([`Bienvenue chez Numéris, ${user.firstName} !`], 'Inscription réussie')
+            () => {
+              this.alertService.success([`Bienvenue chez Numéris, ${user.firstName} !`], 'Inscription réussie');
+              this.confettiService.shoot(ConfettiType.Fireworks);
+            }
           );
         },
         errors => {

@@ -1,6 +1,7 @@
 import { ElementRef, Injectable } from '@angular/core';
 import * as confetti from 'canvas-confetti';
-import { timer } from 'rxjs';
+import { interval, timer } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -66,17 +67,19 @@ export class ConfettiService {
   private fireworks() {
     const launcher = this.launcher;
 
-    timer(0, 1000).subscribe(() => {
-      launcher({
-        startVelocity: 30,
-        spread: 360,
-        ticks: 100,
-        shapes: ['square'],
-        origin: {
-          x: Math.random(),
-          y: Math.random() - 0.2
-        }
-      });
+    interval(800)
+      .pipe(takeUntil(timer(10000)))
+      .subscribe(() => {
+        launcher({
+          startVelocity: 30,
+          spread: 360,
+          ticks: 200,
+          shapes: ['square'],
+          origin: {
+            x: Math.random(),
+            y: Math.random() - 0.2
+          }
+        });
     });
   }
 
