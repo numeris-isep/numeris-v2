@@ -15,15 +15,8 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(project?: number | Project): Observable<PaginatedUser> {
-    let projectPath = '';
-
-    if (project) {
-      const projectId = typeof project === 'number' ? project : project.id;
-      projectPath = `/projects/${projectId}`;
-    }
-
-    const url = `${environment.apiUrl}/api${projectPath}/users`;
+  getUsers(): Observable<PaginatedUser> {
+    const url = `${environment.apiUrl}/api/users`;
     return this.http.get<PaginatedUser>(url, HTTP_OPTIONS);
   }
 

@@ -1,8 +1,11 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Injectable, Pipe, PipeTransform } from '@angular/core';
 import { Role } from '../../core/classes/models/role';
 
 @Pipe({
   name: 'role'
+})
+@Injectable({
+  providedIn: 'root'
 })
 export class RolePipe implements PipeTransform {
 
