@@ -20,6 +20,11 @@ class ApplicationPolicy
         }
     }
 
+    public function index(User $current_user)
+    {
+        return true;
+    }
+
     public function indexStatus(User $current_user)
     {
         return true;

@@ -14,6 +14,11 @@ export class ApplicationService {
 
   constructor(private http: HttpClient) { }
 
+  getApplications(year: string): Observable<Application[]> {
+    const url = `${environment.apiUrl}/api/applications`;
+    return this.http.post<Application[]>(url, {year: year}, HTTP_OPTIONS);
+  }
+
   getApplicationStatuses(): Observable<ApplicationStatus[]> {
     const url = `${environment.apiUrl}/api/applications-statuses`;
     return this.http.get<ApplicationStatus[]>(url, HTTP_OPTIONS);

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IPagination } from "../../../core/classes/pagination/pagination-interface";
+import { IPagination } from '../../../core/classes/pagination/pagination-interface';
 
 @Component({
   selector: 'app-pagination-caption',

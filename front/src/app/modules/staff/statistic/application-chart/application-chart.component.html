@@ -1,0 +1,22 @@
+<app-content [condition]="!configuration">
+  <div *ngIf="configuration" class="ui segments">
+    <div class="ui segment" [ngClass]="{ 'loading': !(data.length > 0) }">
+      <div class="ui blue ribbon label">
+        <i class="chart line icon"></i> Candidatures par mois en {{ selectedYear.get('year') }}
+      </div>
+      <app-chart [configuration]="configuration"></app-chart>
+    </div>
+    <div class="ui center aligned segment">
+      <div class="ui center aligned icon basic buttons">
+        <button class="ui button" (click)="changeYear('subtract')">
+          <i class="angle left icon"></i>
+          {{ selectedYear.clone().subtract(1, 'year').get('year') }}
+        </button>
+        <button class="ui button" (click)="changeYear('add')">
+          {{ selectedYear.clone().add(1, 'year').get('year') }}
+          <i class="angle right icon"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</app-content>

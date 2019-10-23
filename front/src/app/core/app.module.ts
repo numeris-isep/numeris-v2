@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import localeFr from '@angular/common/locales/fr';
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, TitleCasePipe } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from '../shared/shared.module';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
@@ -56,6 +56,7 @@ registerLocaleData(localeFr, 'fr');
   ],
   providers: [
     Title,
+    TitleCasePipe,
     {provide: LOCALE_ID, useValue: 'fr'},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

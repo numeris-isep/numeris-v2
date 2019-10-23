@@ -31,6 +31,7 @@ class ApplicationsTableSeeder extends Seeder
                     factory(Application::class)->create([
                         'user_id'       => $user->id,
                         'mission_id'    => $mission->id,
+                        'created_at'    => $mission->start_at,
                     ]);
                 }
             }

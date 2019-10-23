@@ -84,6 +84,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::put('missions/{mission_id}/bills', 'MissionBillController@update')->name('missions.bills.update');
 
     // Application resource routes
+    Route::post('applications', 'ApplicationController@index')->name('applications.index');
     Route::get('applications-statuses', 'ApplicationController@indexStatus')->name('applications.statuses.index');
     Route::apiResource('applications', 'ApplicationController', ['parameters' => ['applications' => 'application_id']])
         ->only(['update', 'destroy']);

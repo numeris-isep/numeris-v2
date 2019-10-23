@@ -33,6 +33,10 @@ class ApplicationRequest extends AbstractFormRequest
      */
     public function rules()
     {
+        if ($this->route()->getName() === 'applications.index') {
+            return ['year' => 'required|string|date_format:Y'];
+        }
+
         $rules = [
             'mission_id'    => 'integer|exists:missions,id|unique:applications,mission_id,NULL,id,user_id,' . $this->user_id,
             'user_id'       => 'integer|exists:users,id|unique:applications,user_id,NULL,id,mission_id,' . $this->mission_id,

@@ -15,6 +15,7 @@ import { OverallStatisticComponent } from './statistic/overall-statistic/overall
 import { DaresStatisticComponent } from './statistic/dares-statistic/dares-statistic.component';
 import { CountStatisticComponent } from './statistic/count-statistic/count-statistic.component';
 import { RoleCountChartComponent } from './statistic/role-count-chart/role-count-chart.component';
+import { ApplicationChartComponent } from './statistic/application-chart/application-chart.component';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { RoleCountChartComponent } from './statistic/role-count-chart/role-count
     DaresStatisticComponent,
     CountStatisticComponent,
     RoleCountChartComponent,
+    ApplicationChartComponent,
   ]
 })
 export class StaffModule { }

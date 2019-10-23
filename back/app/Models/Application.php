@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\DateQueryTrait;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Application extends Model
 {
+    use DateQueryTrait;
+
     const USER_APPLICATION = 'user-application';
 
     const STAFF_PLACEMENT = 'staff-placement';
@@ -98,5 +102,13 @@ class Application extends Model
     public function bills()
     {
         return $this->hasMany(Bill::class);
+    }
+
+    public static function findByYear(string $year)
+    {
+        $from = Carbon::parse("$year-01-01 00:00:00");
+        $to = $from->copy()->addYear();
+
+        return static::whereDate('created_at', [$from, $to])->get();
     }
 }

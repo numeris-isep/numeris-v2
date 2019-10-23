@@ -12,6 +12,19 @@ use Illuminate\Support\Facades\Notification;
 class ApplicationController extends Controller
 {
     /**
+     * Display a listing of the resource.
+     *
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function index(ApplicationRequest $request)
+    {
+        $this->authorize('index', Application::class);
+
+        return response()->json(ApplicationResource::collection(Application::findByYear($request['year'])));
+    }
+
+    /**
      * Display a listing of the status with their translation.
      *
      * @return JsonResponse

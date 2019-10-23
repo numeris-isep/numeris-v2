@@ -1,6 +1,8 @@
-<div *ngIf="configuration" class="ui segment">
-  <div class="ui blue ribbon label">
-    <i class="chart pie icon"></i> Rôles des utilisateurs
+<app-content [condition]="!configuration">
+  <div *ngIf="configuration" class="ui segment">
+    <div class="ui blue ribbon label">
+      <i class="chart pie icon"></i> Rôles des utilisateurs
+    </div>
+    <app-chart [configuration]="configuration"></app-chart>
   </div>
-  <app-chart [configuration]="configuration"></app-chart>
-</div>
+</app-content>
