@@ -3,7 +3,9 @@ import { Payslip } from '../../../../core/classes/models/payslip';
 import * as moment from 'moment';
 import { Moment } from 'moment';
 import { Invoice } from '../../../../core/classes/models/Invoice';
-import { InvoiceAmount, PayslipAmount, StatisticService } from '../../../../core/services/statistic.service';
+import { StatisticService } from '../../../../core/services/statistic.service';
+import { PayslipAmount } from '../../../../core/classes/payslip-amount';
+import { InvoiceAmount } from '../../../../core/classes/invoice-amount';
 
 @Component({
   selector: 'app-accounting-summary',
@@ -23,11 +25,6 @@ export class AccountingSummaryComponent implements OnInit {
 
   payslipAmounts: PayslipAmount;
   invoiceAmounts: InvoiceAmount;
-
-  hourCount: any;
-  grossCount: any;
-  subscriptionFeeCount: any;
-  clientFinalCount: any;
 
   constructor(private statisticService: StatisticService) { }
 
