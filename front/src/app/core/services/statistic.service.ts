@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Payslip } from '../classes/models/payslip';
 import { Invoice } from '../classes/models/Invoice';
+import { PayslipAmount } from '../classes/payslip-amount';
+import { InvoiceAmount } from '../classes/invoice-amount';
 
 @Injectable({
   providedIn: 'root'
@@ -57,23 +59,4 @@ export class StatisticService {
 
     return this.invoiceAmount;
   }
-}
-
-export class PayslipAmount {
-
-  hourAmounts: number;
-  grossAmounts: number;
-  finalAmounts: number;
-  subscriptionFees: number;
-  deductionAmounts: number;
-  employerDeductionAmounts: number;
-
-}
-
-export class InvoiceAmount {
-
-  grossAmounts: number;
-  vatAmounts: number;
-  finalAmounts: number;
-
 }

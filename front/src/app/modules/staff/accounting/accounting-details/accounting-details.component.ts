@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Payslip } from '../../../../core/classes/models/payslip';
 import { Invoice } from '../../../../core/classes/models/Invoice';
-import { InvoiceAmount, PayslipAmount, StatisticService } from '../../../../core/services/statistic.service';
+import { StatisticService } from '../../../../core/services/statistic.service';
+import { PayslipAmount } from '../../../../core/classes/payslip-amount';
+import { InvoiceAmount } from '../../../../core/classes/invoice-amount';
 
 @Component({
   selector: 'app-accounting-details',

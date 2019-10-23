@@ -1,0 +1,49 @@
+<div class="ui four column padded centered grid doubling">
+  <div class="center aligned column">
+    <div class="ui orange small statistic">
+      <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="counts.users" (countoChange)="userCount = $event">
+        <i class="users blue icon"></i>
+        {{ userCount | number:'1.0-0': 'fr-FR' }}
+      </div>
+      <div class="label">
+        Utilisateurs
+      </div>
+    </div>
+  </div>
+
+  <div class="center aligned column">
+    <div class="ui yellow small statistic">
+      <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="counts.missions" (countoChange)="missionCount = $event">
+        <i class="copy blue icon"></i>
+        {{ missionCount | number:'1.0-0': 'fr-FR' }}
+      </div>
+      <div class="label">
+        Missions
+      </div>
+    </div>
+  </div>
+
+  <div class="center aligned column">
+    <div class="ui grey small statistic">
+      <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="counts.projects" (countoChange)="projectCount = $event">
+        <i class="folder open blue icon"></i>
+        {{ projectCount | number:'1.0-0': 'fr-FR' }}
+      </div>
+      <div class="label">
+        Projets
+      </div>
+    </div>
+  </div>
+
+  <div class="center aligned column">
+    <div class="ui teal small statistic">
+      <div class="value" appCountTo [step]="20" [countFrom]="0" [countTo]="counts.clients" (countoChange)="clientCount = $event">
+        <i class="building blue icon"></i>
+        {{ clientCount | number:'1.0-0': 'fr-FR' }}
+      </div>
+      <div class="label">
+        Clients
+      </div>
+    </div>
+  </div>
+</div>

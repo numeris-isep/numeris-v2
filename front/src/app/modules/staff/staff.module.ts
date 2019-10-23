@@ -11,6 +11,10 @@ import { ProjectModule } from './project/project.module';
 import { MissionModule } from './mission/mission.module';
 import { UserModule } from './user/user.module';
 import { AccountingModule } from './accounting/accounting.module';
+import { OverallStatisticComponent } from './statistic/overall-statistic/overall-statistic.component';
+import { DaresStatisticComponent } from './statistic/dares-statistic/dares-statistic.component';
+import { CountStatisticComponent } from './statistic/count-statistic/count-statistic.component';
+import { RoleCountChartComponent } from './statistic/role-count-chart/role-count-chart.component';
 
 @NgModule({
   imports: [
@@ -31,6 +35,10 @@ import { AccountingModule } from './accounting/accounting.module';
   ],
   declarations: [
     StatisticComponent,
+    OverallStatisticComponent,
+    DaresStatisticComponent,
+    CountStatisticComponent,
+    RoleCountChartComponent,
   ]
 })
 export class StaffModule { }

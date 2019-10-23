@@ -1,6 +1,9 @@
 export class Count {
 
-  missions: number;
-  applications: number;
+  users?: number;
+  missions?: number;
+  applications?: number;
+  projects?: number;
+  clients?: number;
 
 }

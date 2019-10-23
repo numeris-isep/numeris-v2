@@ -5,7 +5,6 @@ import { ScrollService } from '../../services/scroll.service';
 import { ScrollDirective } from '../../../shared/directives/scroll.directive';
 import { MissionService } from '../../http/mission.service';
 import { Count } from '../../classes/count';
-import { logger } from 'codelyzer/util/logger';
 import { Mission } from '../../classes/models/mission';
 
 @Component({

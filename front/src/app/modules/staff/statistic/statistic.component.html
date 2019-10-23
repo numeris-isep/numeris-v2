@@ -1,9 +1,24 @@
 <app-content [condition]="!true">
   <div class="ui padded grid">
-    <div class="stretched row">
-      <div class="sixteen wide mobile column">
-        <app-wip></app-wip>
-      </div>
+    <div class="column">
+      <sui-tabset>
+        <div class="ui top pointing secondary menu">
+          <a class="item" suiTabHeader="1">
+            <i class="globe icon"></i> Général
+          </a>
+          <a class="item" suiTabHeader="2">
+            <i class="gavel icon"></i> DARES
+          </a>
+        </div>
+
+        <div class="ui" suiTabContent="1">
+          <app-overall-statistic></app-overall-statistic>
+        </div>
+
+        <div class="ui" suiTabContent="2">
+          <app-dares-statistic></app-dares-statistic>
+        </div>
+      </sui-tabset>
     </div>
   </div>
 </app-content>
