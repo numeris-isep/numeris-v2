@@ -1,18 +1,14 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Payslip } from '../../../../core/classes/models/payslip';
 import { Invoice } from '../../../../core/classes/models/Invoice';
-import Chart from 'chart.js';
 import * as moment from 'moment';
 import { StatisticService } from '../../../../core/services/statistic.service';
 
 @Component({
   selector: 'app-accounting-chart',
-  templateUrl: './accounting-chart.component.html',
-  styleUrls: ['./accounting-chart.component.css']
+  templateUrl: './accounting-chart.component.html'
 })
 export class AccountingChartComponent implements OnInit {
-
-  @ViewChild('chartRef') chartRef: ElementRef;
 
   @Input() year;
   @Input() statisticsByMonth: {
@@ -21,16 +17,16 @@ export class AccountingChartComponent implements OnInit {
     invoices: Invoice[],
   }[];
 
-  chart: Chart = [];
+  configuration: any;
 
   constructor(private statisticService: StatisticService) { }
 
   ngOnInit() {
-    this.generateChart();
+    this.configure();
   }
 
-  get options() {
-    return {
+  configure() {
+    this.configuration = {
       type: 'line',
       data: {
         labels: this.monthNames,
@@ -88,10 +84,6 @@ export class AccountingChartComponent implements OnInit {
 
   get title() {
     return `Salaires bruts et coût des prestations en ${moment(this.year)}`;
-  }
-
-  generateChart() {
-    this.chart = new Chart(this.chartRef.nativeElement.getContext('2d'), this.options);
   }
 
 }

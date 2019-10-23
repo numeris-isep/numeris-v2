@@ -41,6 +41,7 @@ import { WipComponent } from './components/wip/wip.component';
 import { AccountingStatisticComponent } from './components/statistics/accounting-statistic/accounting-statistic.component';
 import { CountToDirective } from './directives/count-to.directive';
 import { ScrollDirective } from './directives/scroll.directive';
+import { ChartComponent } from './components/chart/chart.component';
 
 @NgModule({
   imports: [
@@ -90,6 +91,7 @@ import { ScrollDirective } from './directives/scroll.directive';
     AccountingStatisticComponent,
     CountToDirective,
     ScrollDirective,
+    ChartComponent,
   ],
   exports: [
     // Components
@@ -137,6 +139,7 @@ import { ScrollDirective } from './directives/scroll.directive';
     // Directives
     CountToDirective,
     ScrollDirective,
+    ChartComponent,
   ],
   providers: [
     AlertService
