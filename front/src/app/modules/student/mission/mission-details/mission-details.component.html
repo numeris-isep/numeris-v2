@@ -36,7 +36,8 @@
     </div>
 
     <div class="extra content">
-      <i class="map marker alternate icon"></i> {{ mission.address | address }}
+      <p><i class="clipboard outline icon"></i> {{ mission.reference }}</p>
+      <p><i class="map marker alternate icon"></i> {{ mission.address | address }}</p>
     </div>
 
     <ng-container *ngIf="page == 'show'">

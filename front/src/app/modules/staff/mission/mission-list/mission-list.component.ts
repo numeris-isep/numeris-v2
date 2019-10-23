@@ -1,11 +1,11 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { PaginatedMission } from "../../../../core/classes/pagination/paginated-mission";
-import { MissionService } from "../../../../core/http/mission.service";
-import * as moment from "moment";
-import { IPopup } from "ng2-semantic-ui";
-import { Project } from "../../../../core/classes/models/project";
-import { Mission } from "../../../../core/classes/models/mission";
-import { now } from "moment";
+import { PaginatedMission } from '../../../../core/classes/pagination/paginated-mission';
+import { MissionService } from '../../../../core/http/mission.service';
+import * as moment from 'moment';
+import { IPopup } from 'ng2-semantic-ui';
+import { Project } from '../../../../core/classes/models/project';
+import { Mission } from '../../../../core/classes/models/mission';
+import { now } from 'moment';
 
 @Component({
   selector: 'app-mission-list',
@@ -17,10 +17,7 @@ import { now } from "moment";
 })
 export class MissionListComponent implements OnInit {
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.windowWidth = event.target.innerWidth;
-  }
+  constructor(private missionService: MissionService) { }
 
   windowWidth: number = window.innerWidth;
 
@@ -30,18 +27,21 @@ export class MissionListComponent implements OnInit {
   from: string;
   to: string;
   loading: boolean = false;
-  options = ["Missions ouvertes", "Missions fermées"];
+  options = ['Missions ouvertes', 'Missions fermées'];
   popupText: string = 'Fermée';
 
-  constructor(private missionService: MissionService) { }
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.windowWidth = event.target.innerWidth;
+  }
 
   ngOnInit() {
     this.getPaginatedMissions(1);
   }
 
   reset(field: string) {
-    if (this[field] !== undefined) this[field] = null;
-    if (field == 'selectedOption') this.setFilter();
+    if (this[field] !== undefined) { this[field] = null; }
+    if (field === 'selectedOption') { this.setFilter(); }
   }
 
   getPaginatedMissions(pageId?: number) {
@@ -71,7 +71,7 @@ export class MissionListComponent implements OnInit {
 
   selectedOptionToIsLocked() {
     if (this.selectedOption !== undefined && this.selectedOption !== null) {
-      return this.selectedOption != "Missions ouvertes"
+      return this.selectedOption !== 'Missions ouvertes';
     }
     return this.selectedOption;
   }

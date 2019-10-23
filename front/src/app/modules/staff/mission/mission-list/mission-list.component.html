@@ -55,10 +55,9 @@
       <table class="ui celled striped selectable table">
         <thead>
         <tr>
-          <th class="collapsing"><i class="calendar outline icon"></i> Date</th>
-          <th class="collapsing"><i class="clipboard outline icon"></i> Référence</th>
-          <th class="collapsing"><i class="file alternate outline icon"></i> Titre</th>
-          <th class="collapsing"><i class="folder open icon"></i> Projet</th>
+          <th><i class="calendar outline icon"></i> Date</th>
+          <th><i class="file alternate outline icon"></i> Titre</th>
+          <th><i class="folder open icon"></i> Projet</th>
           <th class="collapsing"><i class="clock outline icon"></i> Durée</th>
           <th class="collapsing"><i class="users icon"></i> Capacité</th>
           <th class="collapsing"><i class="user secret icon"></i> Visibilité</th>
@@ -70,10 +69,9 @@
         <tr *ngFor="let mission of paginatedMission.data" [ngClass]="{'hatched': mission.isLocked || isMissionExpired(mission)}"
             suiPopup popupText="{{ isMissionExpired(mission) ? 'Expirée' : 'Fermée' }}" popupPlacement="left" popupTrigger="manual" #popup="suiPopup"
             (mouseenter)="togglePopup(popup, mission)" (mouseleave)="togglePopup(popup, mission)" popupInverted>
-          <td>{{ mission.startAt | date:'dd/MM/y H\'h\'mm' }}</td>
-          <td>{{ mission.reference || '-' }}</td>
-          <td>{{ mission.title }}</td>
-          <td><a routerLink="/projets/{{ mission.project.id }}">{{ mission.project.name }}</a></td>
+          <td class="collapsing">{{ mission.startAt | date:'dd/MM/y HH\'h\'mm' }}</td>
+          <td class="collapsing">{{ mission.title }}</td>
+          <td class="collapsing"><a routerLink="/projets/{{ mission.project.id }}">{{ mission.project.name }}</a></td>
           <td class="center aligned">{{ mission.duration }}h</td>
           <td>
             <sui-progress class="tiny active indicating"

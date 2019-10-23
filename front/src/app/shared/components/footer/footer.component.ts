@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import { ScrollService } from "../../../core/services/scroll.service";
+import { ScrollService } from '../../../core/services/scroll.service';
 
 @Component({
   selector: 'app-footer',
