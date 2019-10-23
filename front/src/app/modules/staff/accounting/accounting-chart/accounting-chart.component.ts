@@ -34,12 +34,14 @@ export class AccountingChartComponent implements OnInit {
           {
             label: 'Salaires bruts',
             borderColor: '#767676',
+            backgroundColor: '#767676',
             fill: false,
             data: this.payslipGrossAmounts,
           },
           {
             label: 'Coût des prestations',
             borderColor: '#FBBD08',
+            backgroundColor: '#FBBD08',
             fill: false,
             data: this.invoiceFinalAmounts,
           },
