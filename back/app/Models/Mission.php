@@ -124,7 +124,7 @@ class Mission extends Model
         $mission->address()->delete();
     }
 
-    public static function onSaved(self $mission)
+    public static function onSaving(self $mission)
     {
         $mission->generateReference();
     }
