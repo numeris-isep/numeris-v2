@@ -1,3 +1,12 @@
-<div class="ui segment">
-  <app-chart [configuration]="configuration"></app-chart>
+<div class="ui segments">
+  <div class="ui segment">
+    <div class="ui blue ribbon label">
+      <i class="chart line icon"></i>
+      Récapitulatif par mois de {{ year }}
+    </div>
+  </div>
+
+  <div class="ui segment">
+    <app-chart [configuration]="configuration"></app-chart>
+  </div>
 </div>

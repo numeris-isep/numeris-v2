@@ -27,7 +27,7 @@ export class AccountingChartComponent implements OnInit {
 
   configure() {
     this.configuration = {
-      type: 'line',
+      type: 'bar',
       data: {
         labels: this.monthNames,
         datasets: [
@@ -36,6 +36,7 @@ export class AccountingChartComponent implements OnInit {
             borderColor: '#767676',
             backgroundColor: '#767676',
             fill: false,
+            yAxisID: 'A',
             data: this.payslipGrossAmounts,
           },
           {
@@ -43,21 +44,39 @@ export class AccountingChartComponent implements OnInit {
             borderColor: '#FBBD08',
             backgroundColor: '#FBBD08',
             fill: false,
+            yAxisID: 'A',
             data: this.invoiceFinalAmounts,
+          },
+          {
+            label: 'Nombre d\'étudiants',
+            borderColor: '#7CC7FF',
+            backgroundColor: '#7CC7FF',
+            fill: false,
+            yAxisID: 'B',
+            data: this.studentCount,
           },
         ]
       },
       options: {
-        title: {
-          display: true,
-          text: this.title,
-        },
         scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
+          yAxes: [
+            {
+              id: 'A',
+              type: 'linear',
+              position: 'left',
+              ticks: {
+                beginAtZero: true
+              },
+            },
+            {
+              id: 'B',
+              type: 'linear',
+              position: 'right',
+              ticks: {
+                beginAtZero: true
+              },
+            },
+          ]
         },
       }
     };
@@ -82,6 +101,10 @@ export class AccountingChartComponent implements OnInit {
     );
   }
 
+  get studentCount() {
+    return this.statisticsByMonth.map(stat => stat.payslips.length);
+  }
+
   get invoiceFinalAmounts() {
     return this.statisticsByMonth.map(stat => (
       this.statisticService
@@ -89,10 +112,6 @@ export class AccountingChartComponent implements OnInit {
         .finalAmounts.toFixed(2)
       )
     );
-  }
-
-  get title() {
-    return `Salaires bruts et coût des prestations en ${moment(this.year)}`;
   }
 
 }

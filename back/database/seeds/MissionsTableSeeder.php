@@ -15,6 +15,8 @@ class MissionsTableSeeder extends Seeder
      */
     public function run()
     {
+        Mission::flushEventListeners();
+
         if (Mission::all()->isEmpty()) {
             if (Project::all()->isEmpty()) {
                 $this->call(ProjectsTableSeeder::class);
