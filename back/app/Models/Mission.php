@@ -112,7 +112,7 @@ class Mission extends Model
     public function generateReference()
     {
         $this->reference = $this->project->convention->name
-            . '-' . strtoupper(substr(sha1($this->id), 0, 4));
+            . '-' . strtoupper(substr(sha1(bin2hex(random_bytes(16))), 0, 4));
     }
 
     /**
