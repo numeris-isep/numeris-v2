@@ -56,7 +56,14 @@
       <div class="ui left icon corner labeled input">
         <i class="calendar alternate icon"></i>
         <input suiDatepicker pickerMode="date" placeholder="Date de naissance"
-               formControlName="birth_date" [pickerUseNativeOnMobile]="true">
+               [pickerMaxDate]="maxDate.toDate()" formControlName="birth_date" [pickerUseNativeOnMobile]="true"
+               suiPopup popupPlacement="top left" popupHeader="Date de naissance"
+               popupTrigger="focus" [popupTemplate]="birthDateTemplate">
+        <ng-template #birthDateTemplate>
+          Sélectionner une date en utilisant la popup ci-dessous ou en entrant une date au format suivant :<br>
+          <b>[jour] [intitulé du mois] [année]</b><br>
+          <i>(ex : 1 Janvier 1990)</i>
+        </ng-template>
         <div class="ui corner label">
           <i class="asterisk icon"></i>
         </div>

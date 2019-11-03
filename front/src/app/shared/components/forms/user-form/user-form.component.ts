@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../../core/classes/models/user';
 import * as moment from 'moment';
+import { Moment } from 'moment';
 
 @Component({
   selector: 'app-user-form',
@@ -11,6 +12,8 @@ export class UserFormComponent implements OnInit {
 
   userForm: FormGroup;
   promotions: { promotion: number, id: number }[] = [];
+
+  maxDate: Moment = moment().startOf('month').subtract(18, 'year');
 
   @Input() user: User;
   @Input() submitted: boolean;
