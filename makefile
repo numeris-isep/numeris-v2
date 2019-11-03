@@ -107,3 +107,7 @@ config-clear:
 	docker exec -it numeris_back sh -c 'php artisan config:clear'
 	docker exec -it numeris_back sh -c 'php artisan cache:clear'
 	docker exec -it numeris_back sh -c 'php artisan route:clear'
+
+config-cache:
+    docker exec -it numeris_back sh -c 'php artisan route:cache'
+    docker exec -it numeris_back sh -c 'php artisan config:cache'
