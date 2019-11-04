@@ -6,5 +6,6 @@ export class PayslipAmount {
   subscriptionFees: number;
   deductionAmounts: number;
   employerDeductionAmounts: number;
+  count: number;
 
 }

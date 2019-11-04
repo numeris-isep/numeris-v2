@@ -1,1 +1,53 @@
-<app-wip></app-wip>
+<div class="ui center aligned basic  segment">
+  <div class="ui center aligned icon basic buttons">
+    <button class="ui button" (click)="changeYear('subtract')">
+      <i class="angle left icon"></i>
+      {{ selectedYear.clone().subtract(1, 'year').get('year') }}
+    </button>
+    <button class="ui button">
+      <b>{{ selectedYear.get('year') }}</b>
+    </button>
+    <button class="ui button" (click)="changeYear('add')">
+      {{ selectedYear.clone().add(1, 'year').get('year') }}
+      <i class="angle right icon"></i>
+    </button>
+  </div>
+</div>
+
+<app-content [condition]="loading">
+  <div class="ui padded centered grid">
+    <div class="twelve wide column">
+      <div class="ui segments">
+        <div class="ui segment">
+          <div class="ui blue ribbon label"><i class="clipboard icon"></i> Récapitulatif {{ selectedYear.get('year') }}</div>
+        </div>
+        <div class="ui segment">
+          <table class="ui celled structured striped selectable definition table">
+            <thead class="full-width">
+            <tr>
+              <th></th>
+              <th><i class="user icon"></i> Nombre d'étudiants</th>
+              <th><i class="clock icon"></i> Heures travaillées</th>
+              <th>
+                <i class="icons">
+                  <i class="users icon"></i>
+                  <i class="plus green corner icon"></i>
+                </i>
+                Salaires bruts
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let trimesterData of payslipByTrimester; let i = index">
+              <td>Trimestre {{ i + 1 }}</td>
+              <td>{{ trimesterData.payslipAmount.count }}</td>
+              <td>{{ trimesterData.payslipAmount.hourAmounts | number:'1.0-1' }}</td>
+              <td>{{ trimesterData.payslipAmount.grossAmounts | number:'1.2-2' }}€</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-content>

@@ -21,7 +21,8 @@ export class StatisticService {
       finalAmounts: 0,
       subscriptionFees: 0,
       deductionAmounts: 0,
-      employerDeductionAmounts: 0
+      employerDeductionAmounts: 0,
+      count: 0,
     };
   }
 
@@ -43,6 +44,7 @@ export class StatisticService {
       this.payslipAmounts.subscriptionFees += parseFloat(payslip.subscriptionFee.toString());
       this.payslipAmounts.deductionAmounts += parseFloat(payslip.deductionAmount.toString());
       this.payslipAmounts.employerDeductionAmounts += parseFloat(payslip.employerDeductionAmount.toString());
+      this.payslipAmounts.count++;
     });
 
     return this.payslipAmounts;

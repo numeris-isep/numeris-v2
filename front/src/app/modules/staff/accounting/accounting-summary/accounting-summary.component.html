@@ -22,7 +22,7 @@
         <div class="ui mini green statistic"
              suiPopup popupText="Heures" popupPlacement="bottom" popupInverted>
           <div class="value">
-            {{ payslipAmounts.hourAmounts | number:'1.0-0': 'fr-FR' }}
+            {{ payslipAmounts.hourAmounts | number:'1.0-1': 'fr-FR' }}
           </div>
           <div class="label">
             <i class="clock blue icon"></i>
@@ -32,10 +32,13 @@
         <div class="ui mini grey statistic"
              suiPopup popupText="Salaires bruts" popupPlacement="bottom" popupInverted>
           <div class="value">
-            {{ payslipAmounts.grossAmounts | number:'1.0-0': 'fr-FR' }}€
+            {{ payslipAmounts.grossAmounts | number:'1.0-2': 'fr-FR' }}€
           </div>
           <div class="label">
-            <i class="users blue icon"></i>
+            <i class="icons">
+              <i class="users blue icon"></i>
+              <i class="plus green corner icon"></i>
+            </i>
           </div>
         </div>
 
@@ -55,7 +58,7 @@
         <div class="ui mini yellow statistic"
              suiPopup popupText="Coût de la prestation" popupPlacement="bottom" popupInverted>
           <div class="value">
-            {{ invoiceAmounts.finalAmounts | number:'1.0-0': 'fr-FR' }}€
+            {{ invoiceAmounts.finalAmounts | number:'1.0-2': 'fr-FR' }}€
           </div>
           <div class="label">
             <i class="icons">
