@@ -50,7 +50,7 @@ class UserRequest extends AbstractFormRequest
         ];
 
         $put_rules = [
-            'phone'                     => 'required|numeric|min:10',
+            'phone'                     => 'required|string|min:10',
             'nationality'               => 'required|string',
             'birth_city'                => 'required|string',
             'social_insurance_number'   => 'required|string|size:15',
