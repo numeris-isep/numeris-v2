@@ -58,7 +58,7 @@ export class AuthService {
     if (this.tokenService.get()) {
       this.tokenService.remove();
       this.loggedIn.next(false);
-      this.alertService.clear();
+      this.alertService.success(['Déconnecté avec succès !'], null, true);
     }
   }
 
