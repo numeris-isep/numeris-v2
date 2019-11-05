@@ -17,6 +17,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
     {
         $mission_data = [
             'project_id'    => 1,
+            'user_id'       => 1,
             'title'         => 'Mission de test',
             'description'   => 'Description de la mission de test',
             'start_at'      => '2018-01-01 08:00:00',

@@ -36,6 +36,8 @@ class ShowAdministratorTest extends TestCaseWithAuth
                     'client',
                     'convention',
                 ],
+                'user',
+                'contact',
                 'applications',
             ]);
     }

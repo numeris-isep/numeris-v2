@@ -33,6 +33,8 @@ class MissionResource extends JsonResource
             // Relations
             'address'                   => AddressResource::make($this->whenLoaded('address')),
             'project'                   => ProjectResource::make($this->whenLoaded('project')),
+            'user'                      => UserResource::make($this->whenLoaded('user')),
+            'contact'                   => ContactResource::make($this->whenLoaded('contact')),
             'applications'              => ApplicationResource::collection($this->whenLoaded('applications')),
         ];
     }

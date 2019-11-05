@@ -40,6 +40,8 @@ class MissionRequest extends AbstractFormRequest
 
         return [
             'project_id'    => 'required|exists:projects,id|integer',
+            'user_id'       => 'required|exists:users,id|integer',
+            'contact_id'    => 'exists:contacts,id|integer',
             'title'         => 'required|string',
             'description'   => 'required|string',
             'start_at'      => 'required|date',

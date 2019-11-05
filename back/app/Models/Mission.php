@@ -15,6 +15,7 @@ class Mission extends Model
         // One-to-One relations
         'address_id',
         'project_id',
+        'user_id',
 
         // Attributes
         'is_locked',
@@ -191,5 +192,15 @@ class Mission extends Model
             'mission_id',
             'application_id'
         );
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function contact()
+    {
+        return $this->belongsTo(Contact::class);
     }
 }

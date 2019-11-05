@@ -1,8 +1,10 @@
 <?php
 
 use App\Models\Address;
+use App\Models\Contact;
 use App\Models\Mission;
 use App\Models\Project;
+use App\Models\User;
 use Carbon\Carbon;
 use Faker\Generator as Faker;
 
@@ -10,6 +12,7 @@ $factory->define(Mission::class, function (Faker $faker) {
     return [
         'project_id'    => factory(Project::class),
         'address_id'    => factory(Address::class),
+        'user_id'       => factory(User::class),
         'is_locked'     => false,
         'reference'     => $faker->numberBetween(10, 99)
             . '-' . $faker->numberBetween(1000, 9999)

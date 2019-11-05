@@ -36,6 +36,8 @@ class ShowStaffTest extends TestCaseWithAuth
                     'client',
                     'convention',
                 ],
+                'user',
+                'contact',
                 'applications',
             ]);
     }

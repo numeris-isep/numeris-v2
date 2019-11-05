@@ -93,6 +93,8 @@ class MissionController extends Controller
         $mission->load([
             'address',
             'project',
+            'user',
+            'contact',
             'project.convention',
             'project.convention.rates',
             'applications',
