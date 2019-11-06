@@ -88,7 +88,7 @@ export class SubscribeModal extends ComponentModalConfig<void, void, void> {
 
   constructor(
     size = ModalSize.Normal,
-    isClosable: boolean = true,
+    isClosable: boolean = false,
     transitionDuration: number = 200
   ) {
     super(SubscribeModalComponent);
