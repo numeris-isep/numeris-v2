@@ -1,12 +1,12 @@
-import { Project } from "./project";
-import { Address } from "./address";
-import { Application } from "./application";
+import { Project } from './project';
+import { Address } from './address';
+import { Application } from './application';
+import { User } from './user';
+import { Contact } from './contact';
 
 export class Mission {
 
   id: number;
-  projectId: number;
-  addressId: number;
 
   isLocked: boolean;
   reference: string;
@@ -24,6 +24,8 @@ export class Mission {
   refusedApplications: boolean;
 
   project: Project;
+  user: User;
+  contact: Contact;
   address: Address;
   applications: Application[];
 

@@ -7,9 +7,13 @@ import { AlertService } from '../../../../core/services/alert.service';
 import { Router } from '@angular/router';
 import { ProjectService } from '../../../../core/http/project.service';
 import { dateToString } from '../../../../shared/utils';
-import { Observable } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { handleFormErrors } from '../../../../core/functions/form-error-handler';
+import { UserService } from '../../../../core/http/user.service';
+import { User } from '../../../../core/classes/models/user';
+import { Contact } from '../../../../core/classes/models/contact';
+import { ContactService } from '../../../../core/http/contact.service';
 
 @Component({
   selector: 'app-mission-form',
@@ -20,6 +24,8 @@ export class MissionFormComponent implements OnInit {
   @Input() mission: Mission;
   @Input() project: Project;
   projects: Project[];
+  users: User[];
+  contacts: Contact[];
 
   missionForm: FormGroup;
   loading: boolean = false;
@@ -28,13 +34,15 @@ export class MissionFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private missionService: MissionService,
+    private userService: UserService,
+    private contactService: ContactService,
     private projectService: ProjectService,
     private alertService: AlertService,
     private router: Router,
   ) { }
 
   ngOnInit() {
-    this.getProjects();
+    this.getData();
 
     this.missionForm = this.fb.group({
       title: [
@@ -48,6 +56,13 @@ export class MissionFormComponent implements OnInit {
       project_id: [
         this.mission ? this.mission.project.id : (this.project ? this.project.id : ''),
         Validators.required,
+      ],
+      user_id: [
+        this.mission ? this.mission.user.id : '',
+        Validators.required,
+      ],
+      contact_id: [
+        this.mission ? (this.mission.contact ? this.mission.contact.id : '') : '',
       ],
       start_at: [
         this.mission ? new Date(this.mission.startAt) : '',
@@ -100,8 +115,28 @@ export class MissionFormComponent implements OnInit {
       );
   }
 
+  getData() {
+    forkJoin([this.getProjects(), this.getUsers(), this.getContacts()]).subscribe(data => {
+      this.projects = data[0];
+      this.users = data[1].data;
+      this.contacts = data[2];
+    });
+  }
+
   getProjects() {
-    this.projectService.getProjects().subscribe(projects => this.projects = projects);
+    return this.projectService.getProjects();
+  }
+
+  getUsers() {
+    return this.userService.getPaginatedUsers(null, null, null, null, null, null, true);
+  }
+
+  getContacts() {
+    return this.contactService.getContacts();
+  }
+
+  fullName(option: Contact | User, query?: string): string {
+    return `${option.firstName} ${option.lastName.toUpperCase()}`;
   }
 
 }

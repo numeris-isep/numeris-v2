@@ -20,6 +20,8 @@ export class MissionShowComponent implements OnInit, OnDestroy {
   applications: Application[];
   hoursTabActive: boolean;
 
+  lockLoading: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private missionService: MissionService,
@@ -63,9 +65,12 @@ export class MissionShowComponent implements OnInit, OnDestroy {
   }
 
   updateLock() {
+    this.lockLoading = true;
+
     this.missionService.updateMissionLock(!this.mission.isLocked, this.mission).subscribe(
       () => this.mission.isLocked = !this.mission.isLocked,
-      errors => this.alertService.error(errors.isLocked || errors)
+      errors => this.alertService.error(errors.isLocked || errors),
+      () => this.lockLoading = false,
     );
   }
 

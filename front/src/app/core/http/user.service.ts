@@ -26,7 +26,8 @@ export class UserService {
     search?: string,
     role?: string,
     promotion?: string,
-    inProject: boolean = null
+    inProject: boolean = null,
+    raw: boolean = false,
   ): Observable<PaginatedUser> {
     let projectPath = '';
 
@@ -42,6 +43,7 @@ export class UserService {
     if (role != null) { url += `&role=${role}`; }
     if (promotion != null) { url += `&promotion=${promotion}`; }
     if (inProject) { url += `&inProject=false`; }
+    if (raw) { url += `&raw=true`; }
 
     return this.http.get<PaginatedUser>(url, HTTP_OPTIONS);
   }

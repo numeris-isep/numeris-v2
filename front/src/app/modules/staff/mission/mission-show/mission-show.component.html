@@ -27,7 +27,7 @@
                     <i class="unlock icon"></i>
                     Ouverte aux candidatures
                   </div><br>
-                  <app-button hiddenIcon="lock" size="tiny" (click)="updateLock()">
+                  <app-button hiddenIcon="lock" size="tiny" (click)="updateLock()" [isLoading]="lockLoading">
                     Fermer les candidatures
                   </app-button>
                 </div>
@@ -38,7 +38,7 @@
                       <i class="lock icon"></i>
                       Fermée aux candidatures
                     </div><br>
-                    <app-button *ngIf="mission && !isMissionExpired(mission); else expired" hiddenIcon="unlock" size="tiny" (click)="updateLock()">
+                    <app-button *ngIf="mission && !isMissionExpired(mission); else expired" hiddenIcon="unlock" size="tiny" (click)="updateLock()" [isLoading]="lockLoading">
                       Ouvrir les candidatures
                     </app-button>
                     <ng-template #expired>

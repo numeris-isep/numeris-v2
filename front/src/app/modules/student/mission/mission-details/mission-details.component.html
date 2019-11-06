@@ -37,6 +37,16 @@
 
     <div class="extra content">
       <p><i class="clipboard outline icon"></i> {{ mission.reference }}</p>
+      <p>
+        <i class="user icon"></i>
+        <a routerLink="/utilisateurs/{{ mission.user.id }}">
+          {{ mission.user.firstName }} {{ mission.user.lastName | uppercase }}
+        </a>
+      </p>
+      <p *ngIf="mission.contact">
+        <i class="user md icon"></i>
+        {{ mission.contact.firstName }} {{ mission.contact.lastName | uppercase }}
+      </p>
       <p><i class="map marker alternate icon"></i> {{ mission.address | address }}</p>
     </div>
 

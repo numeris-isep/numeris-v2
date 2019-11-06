@@ -38,9 +38,13 @@ class UserController extends Controller
             null,
             false
         )->load(['roles'])
-            ->sortByDesc('created_at')
-            ->paginate(10, request()->page)
-            ->withPath(route('users.index'));
+            ->sortByDesc('created_at');
+
+        if (! request('raw')) {
+            $users = $users
+                ->paginate(10, request()->page)
+                ->withPath(route('users.index'));
+        }
 
         return UserResource::collection($users);
     }

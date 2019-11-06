@@ -45,3 +45,7 @@ canvas.behind {
   left: 0;
   top: 0;
 }
+
+input.search {
+  width: 100% !important;
+}

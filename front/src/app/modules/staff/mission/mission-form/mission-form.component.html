@@ -1,4 +1,4 @@
-<app-content [condition]="!projects">
+<app-content [condition]="! (projects && users && contacts)">
   <div class="ui segments">
     <div class="ui segment">
       <div class="ui blue ribbon label">
@@ -35,21 +35,8 @@
         </div>
         <app-form-error *ngIf="submitted && f.description.errors" [errors]="f.description.errors"></app-form-error>
       </div>
-      <div class="two required fields">
-        <div class="field" [ngClass]="{ 'error': submitted && f.project_id.errors }">
-          <label>Projet</label>
-          <div class="ui input">
-            <sui-select class="selection fluid" labelField="name" valueField="id"
-                        placeholder="Sélectionner une option" formControlName="project_id"
-                        [options]="projects" [isDisabled]="!!project || !!mission"
-                        [isSearchable]="true"
-                        #projectSelect>
-              <sui-select-option *ngFor="let option of projectSelect.filteredOptions" [value]="option"></sui-select-option>
-            </sui-select>
-          </div>
-          <app-form-error *ngIf="submitted && f.project_id.errors" [errors]="f.project_id.errors"></app-form-error>
-        </div>
-        <div class="field" [ngClass]="{ 'error': submitted && f.start_at.errors }">
+      <div class="three required fields">
+        <div class="eight wide field" [ngClass]="{ 'error': submitted && f.start_at.errors }">
           <label>Date de début</label>
           <div class="ui left icon corner labeled input">
             <i class="calendar outline icon"></i>
@@ -62,10 +49,8 @@
           </div>
           <app-form-error *ngIf="submitted && f.start_at.errors" [errors]="f.start_at.errors"></app-form-error>
         </div>
-      </div>
-      <div class="two required fields">
-        <div class="field" [ngClass]="{ 'error': submitted && f.duration.errors }">
-          <label>Durée (en heures)</label>
+        <div class="four wide field" [ngClass]="{ 'error': submitted && f.duration.errors }">
+          <label>Durée (heures)</label>
           <div class="ui left icon corner labeled input">
             <i class="clock outline icon"></i>
             <input type="number" name="test" min="0" step="0.5"
@@ -76,7 +61,7 @@
           </div>
           <app-form-error *ngIf="submitted && f.duration.errors" [errors]="f.duration.errors"></app-form-error>
         </div>
-        <div class="field" [ngClass]="{ 'error': submitted && f.capacity.errors }">
+        <div class="four wide field" [ngClass]="{ 'error': submitted && f.capacity.errors }">
           <label>Capacité</label>
           <div class="ui left icon corner labeled input">
             <i class="users icon"></i>
@@ -87,6 +72,45 @@
             </div>
           </div>
           <app-form-error *ngIf="submitted && f.capacity.errors" [errors]="f.capacity.errors"></app-form-error>
+        </div>
+      </div>
+      <div class="three fields">
+        <div class="required field" [ngClass]="{ 'error': submitted && f.project_id.errors }" *ngIf="projects">
+          <label>Projet</label>
+          <div class="ui input">
+            <sui-select class="selection fluid" labelField="name" valueField="id"
+                        placeholder="Sélectionner une option" formControlName="project_id"
+                        [options]="projects" [isDisabled]="!!project || !!mission"
+                        [isSearchable]="true"
+                        #projectSelect>
+              <sui-select-option *ngFor="let option of projectSelect.filteredOptions" [value]="option"></sui-select-option>
+            </sui-select>
+          </div>
+          <app-form-error *ngIf="submitted && f.project_id.errors" [errors]="f.project_id.errors"></app-form-error>
+        </div>
+        <div class="required field" [ngClass]="{ 'error': submitted && f.user_id.errors }" *ngIf="users">
+          <label>Responsable</label>
+          <div class="ui input">
+            <sui-select *ngIf="contacts" class="selection fluid" labelField="firstName" valueField="id"
+                        placeholder="Sélectionner une option" formControlName="user_id"
+                        [options]="users" [optionFormatter]="fullName" [isDisabled]="!contacts.length > 0"
+                        isSearchable="true" #userSelect>
+              <sui-select-option *ngFor="let option of userSelect.filteredOptions" [value]="option"></sui-select-option>
+            </sui-select>
+          </div>
+          <app-form-error *ngIf="submitted && f.user_id.errors" [errors]="f.user_id.errors"></app-form-error>
+        </div>
+        <div class="field" [ngClass]="{ 'error': submitted && f.contact_id.errors }" *ngIf="contacts">
+          <label>Contact</label>
+          <div class="ui input">
+            <sui-select *ngIf="contacts" class="selection fluid" labelField="firstName" valueField="id"
+                        placeholder="Sélectionner une option" formControlName="contact_id"
+                        [options]="contacts" [optionFormatter]="fullName" [isDisabled]="!contacts.length > 0"
+                        isSearchable="true" #contactSelect>
+              <sui-select-option *ngFor="let option of contactSelect.filteredOptions" [value]="option"></sui-select-option>
+            </sui-select>
+          </div>
+          <app-form-error *ngIf="submitted && f.contact_id.errors" [errors]="f.contact_id.errors"></app-form-error>
         </div>
       </div>
 

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Mission } from "../../../../core/classes/models/mission";
-import { ActivatedRoute } from "@angular/router";
-import { MissionService } from "../../../../core/http/mission.service";
-import { TitleService } from "../../../../core/services/title.service";
-import { BreadcrumbsService } from "../../../../core/services/breadcrumbs.service";
+import { Mission } from '../../../../core/classes/models/mission';
+import { ActivatedRoute } from '@angular/router';
+import { MissionService } from '../../../../core/http/mission.service';
+import { TitleService } from '../../../../core/services/title.service';
+import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.service';
 
 @Component({
   selector: 'app-mission-edit',
@@ -23,7 +23,7 @@ export class MissionEditComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(param => {
       this.getMission(parseInt(param.missionId));
-    })
+    });
   }
 
   getMission(missionId: number) {

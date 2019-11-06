@@ -16,6 +16,7 @@ class Mission extends Model
         'address_id',
         'project_id',
         'user_id',
+        'contact_id',
 
         // Attributes
         'is_locked',
@@ -30,6 +31,8 @@ class Mission extends Model
     protected $hidden = [
         'address',
         'client',
+        'user',
+        'contact',
         'project',
         'applications',
     ];
