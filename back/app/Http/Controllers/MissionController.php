@@ -51,7 +51,7 @@ class MissionController extends Controller
         $missions = $missions = Mission::available()->sortBy('start_at');
 
         return response()->json(MissionResource::collection(
-            $missions->load('address', 'project', 'applications')
+            $missions->load('address', 'project', 'applications', 'user')
         ));
     }
 
