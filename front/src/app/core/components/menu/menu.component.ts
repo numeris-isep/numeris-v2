@@ -7,6 +7,7 @@ import { AuthService } from '../../http/auth/auth.service';
 import { Router } from '@angular/router';
 import { ScrollService } from '../../services/scroll.service';
 import { SubscribeModal } from '../../../modules/showcase/modals/subscribe-modal/subscribe-modal.component';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-menu',
@@ -26,7 +27,8 @@ export class MenuComponent implements OnInit {
     private modalService: SuiModalService,
     private authService: AuthService,
     private router: Router,
-    private scrollService: ScrollService
+    private scrollService: ScrollService,
+    private alertService: AlertService,
   ) {}
 
   ngOnInit() {
@@ -41,6 +43,7 @@ export class MenuComponent implements OnInit {
     this.sidebar.close();
     this.authService.logout();
     this.router.navigate(['/']);
+    this.alertService.success(['Déconnecté avec succès !'], null, false);
   }
 
   scrollToElement(anchor: string) {
