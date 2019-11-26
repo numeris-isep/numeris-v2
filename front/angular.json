@@ -23,12 +23,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "node_modules/trix/dist/trix.css"
+              "src/styles.css"
             ],
-            "scripts": [
-              "node_modules/trix/dist/trix.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
