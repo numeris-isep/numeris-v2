@@ -7,6 +7,7 @@ import { HTTP_OPTIONS } from '../constants/http_options';
 import { PaginatedMission } from '../classes/pagination/paginated-mission';
 import { Project } from '../classes/models/project';
 import { Application } from '../classes/models/application';
+import { Email } from '../classes/email';
 
 @Injectable({
   providedIn: 'root'
@@ -95,5 +96,11 @@ export class MissionService {
     const missionId: number = typeof mission === 'number' ? mission : mission.id;
     const url = `${environment.apiUrl}/api/missions/${missionId}`;
     return this.http.delete<Mission>(url, HTTP_OPTIONS);
+  }
+
+  sendEmail(mission: Mission | number, email: Email): Observable<Mission> {
+    const missionId: number = typeof mission === 'number' ? mission : mission.id;
+    const url = `${environment.apiUrl}/api/missions/${missionId}/email`;
+    return this.http.post<Mission>(url, email, HTTP_OPTIONS);
   }
 }

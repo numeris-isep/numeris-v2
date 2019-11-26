@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ComponentModalConfig, ModalSize, SuiModal } from "ng2-semantic-ui";
-import { Project } from "../../../../core/classes/models/project";
+import { ComponentModalConfig, ModalSize, SuiModal } from 'ng2-semantic-ui';
+import { Project } from '../../../../core/classes/models/project';
 
 export interface IProjectUserModalConfig {
   project: Project;

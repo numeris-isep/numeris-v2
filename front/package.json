@@ -20,6 +20,8 @@
     "@angular/platform-browser": "^7.2.15",
     "@angular/platform-browser-dynamic": "^7.2.15",
     "@angular/router": "^7.2.15",
+    "@ckeditor/ckeditor5-angular": "^1.1.2",
+    "@ckeditor/ckeditor5-build-classic": "^15.0.0",
     "canvas-confetti": "^0.4.2",
     "chart.js": "^2.8.0",
     "core-js": "^2.6.5",

@@ -66,15 +66,22 @@
                     Générer
                   </app-button>
                 </div>
-                <div class="padded column">
+                <div class="column">
                   <div class="ui small icon header">
                     <i class="mail icon"></i>
                     E-mail pré-mission
                   </div><br>
-                  <app-button size="tiny" hiddenIcon="mail"
+                  <app-button *ngIf="mission && !isMissionExpired(mission); else isLockedEmail" size="tiny" hiddenIcon="mail" (click)="openModal()"
                               [isDisabled]="false" [isLoading]="false">
                     Éditer puis envoyer
                   </app-button>
+
+                  <ng-template #isLockedEmail>
+                    <app-button size="tiny" hiddenIcon="mail" (click)="openModal()" [isDisabled]="true"
+                                suiPopup popupPlacement="bottom" popupText="Impossible d'envoyer l'email pour une mission expirée">
+                      Éditer puis envoyer
+                    </app-button>
+                  </ng-template>
                 </div>
               </div>
             </div>

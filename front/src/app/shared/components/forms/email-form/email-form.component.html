@@ -1,0 +1,25 @@
+<div [formGroup]="emailForm">
+  <div class="required field" [ngClass]="{ 'error': submitted && f.subject.errors }">
+    <label>Objet</label>
+    <div class="ui left icon corner labeled input">
+      <i class="address book outline icon"></i>
+      <input type="text" formControlName="subject" placeholder="Objet du mail">
+      <div class="ui corner label">
+        <i class="asterisk icon"></i>
+      </div>
+    </div>
+    <app-form-error *ngIf="submitted && f.subject.errors" [errors]="f.subject.errors"></app-form-error>
+  </div>
+
+  <div class="required field" [ngClass]="{ 'error': submitted && f.content.errors }">
+    <label>Contenu</label>
+    <ckeditor [editor]="editor" formControlName="content"></ckeditor>
+    <app-form-error *ngIf="submitted && f.content.errors" [errors]="f.content.errors"></app-form-error>
+  </div>
+
+<!--  <div class="field" [ngClass]="{ 'error': submitted && f.promotion.errors }">-->
+<!--    <label>Pièce(s) jointe(s)</label>-->
+<!--    <input type="file" formControlName="attachments" multiple="true"/>-->
+<!--    <app-form-error *ngIf="submitted && f.promotion.errors" [errors]="f.promotion.errors"></app-form-error>-->
+<!--  </div>-->
+</div>

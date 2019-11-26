@@ -19,7 +19,7 @@ import { MissionEditComponent } from './mission-edit/mission-edit.component';
 import { MissionDeleteModalComponent } from './mission-delete-modal/mission-delete-modal.component';
 import { MissionBillsComponent } from './mission-bills/mission-bills.component';
 import { BillsFormComponent } from './mission-bills/bills-form/bills-form.component';
-
+import { MissionEmailModalComponent } from './mission-email-modal/mission-email-modal.component';
 
 @NgModule({
   imports: [
@@ -46,6 +46,7 @@ import { BillsFormComponent } from './mission-bills/bills-form/bills-form.compon
     MissionDeleteModalComponent,
     MissionBillsComponent,
     BillsFormComponent,
+    MissionEmailModalComponent,
   ],
   exports: [
     MissionListComponent,
@@ -53,6 +54,7 @@ import { BillsFormComponent } from './mission-bills/bills-form/bills-form.compon
   ],
   entryComponents: [
     MissionDeleteModalComponent,
+    MissionEmailModalComponent,
   ],
 })
 export class MissionModule { }

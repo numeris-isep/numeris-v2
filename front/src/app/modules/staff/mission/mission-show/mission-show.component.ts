@@ -9,6 +9,8 @@ import { now } from 'moment';
 import { AlertService } from '../../../../core/services/alert.service';
 import { ApplicationHandlerService } from '../../../../core/services/handlers/application-handler.service';
 import { Application } from 'src/app/core/classes/models/application';
+import { MissionEmailModal } from '../mission-email-modal/mission-email-modal.component';
+import { SuiModalService } from 'ng2-semantic-ui';
 
 @Component({
   selector: 'app-mission-show',
@@ -20,6 +22,8 @@ export class MissionShowComponent implements OnInit, OnDestroy {
   applications: Application[];
   hoursTabActive: boolean;
 
+  emailModal: MissionEmailModal;
+
   lockLoading: boolean = false;
 
   constructor(
@@ -29,6 +33,7 @@ export class MissionShowComponent implements OnInit, OnDestroy {
     private titleService: TitleService,
     private breadcrumbsService: BreadcrumbsService,
     private alertService: AlertService,
+    private modalService: SuiModalService,
   ) { }
 
   ngOnInit() {
@@ -47,6 +52,7 @@ export class MissionShowComponent implements OnInit, OnDestroy {
   getMission(missionId: number) {
     this.missionService.getMission(missionId).subscribe(mission => {
       this.mission = mission;
+      this.emailModal = new MissionEmailModal(mission);
 
       this.titleService.setTitles(mission.title);
       this.breadcrumbsService.setBreadcrumb(
@@ -72,6 +78,10 @@ export class MissionShowComponent implements OnInit, OnDestroy {
       errors => this.alertService.error(errors.isLocked || errors),
       () => this.lockLoading = false,
     );
+  }
+
+  openModal() {
+    this.modalService.open(this.emailModal);
   }
 
 }

@@ -1,0 +1,29 @@
+<div class="header">
+  Email pré-mission
+</div>
+
+<div class="modal content">
+  <form class="ui large form" *ngIf="email" (ngSubmit)="onSubmit()">
+    <div class="field">
+      <app-email-form *ngIf="mission" [email]="email" [submitted]="submitted" (formReady)="addEmailForm($event)"></app-email-form>
+    </div>
+
+    <div class="field">
+      <div class="ui small buttons">
+        <a class="ui animated fade button" (click)="modal.deny(null)">
+          <div class="visible content">Annuler</div>
+          <div class="hidden content">
+            <i class="cancel icon"></i>
+          </div>
+        </a>
+        <div class="or" data-text="ou"></div>
+        <button class="ui animated fade blue button" [ngClass]="{'loading': loading}">
+          <div class="visible content">Envoyer</div>
+          <div class="hidden content">
+            <i class="share icon"></i>
+          </div>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

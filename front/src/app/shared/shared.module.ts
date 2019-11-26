@@ -42,6 +42,8 @@ import { AccountingStatisticComponent } from './components/statistics/accounting
 import { CountToDirective } from './directives/count-to.directive';
 import { ScrollDirective } from './directives/scroll.directive';
 import { ChartComponent } from './components/chart/chart.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { EmailFormComponent } from './components/forms/email-form/email-form.component';
 
 @NgModule({
   imports: [
@@ -50,6 +52,7 @@ import { ChartComponent } from './components/chart/chart.component';
     SuiModule,
     FormsModule,
     ReactiveFormsModule,
+    CKEditorModule,
   ],
   declarations: [
     AlertComponent,
@@ -92,8 +95,12 @@ import { ChartComponent } from './components/chart/chart.component';
     CountToDirective,
     ScrollDirective,
     ChartComponent,
+    EmailFormComponent,
   ],
   exports: [
+    // Modules
+    CKEditorModule,
+
     // Components
     AlertComponent,
     FooterComponent,
@@ -140,9 +147,11 @@ import { ChartComponent } from './components/chart/chart.component';
     CountToDirective,
     ScrollDirective,
     ChartComponent,
+    EmailFormComponent,
   ],
   providers: [
-    AlertService
+    AlertService,
+    PhonePipe,
   ]
 })
 export class SharedModule { }
