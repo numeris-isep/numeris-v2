@@ -4,12 +4,15 @@ namespace App\Models;
 
 use App\Models\Traits\OnEventsTrait;
 use App\Models\Traits\DateQueryTrait;
+use App\Notifications\PreMissionNotification;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Mission extends Model
 {
     use OnEventsTrait,
-        DateQueryTrait;
+        DateQueryTrait,
+        Notifiable;
 
     protected $fillable = [
         // One-to-One relations
@@ -205,5 +208,10 @@ class Mission extends Model
     public function contact()
     {
         return $this->belongsTo(Contact::class);
+    }
+
+    public function sendPreMissionNotification(string $subject, string $content)
+    {
+        $this->notify(new PreMissionNotification($this, $subject, $content));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EmailRequest;
 use App\Http\Requests\MissionRequest;
 use App\Http\Resources\MissionResource;
 use App\Models\Address;
@@ -159,6 +160,20 @@ class MissionController extends Controller
         $this->authorize('destroy', $mission);
 
         $mission->delete();
+
+        return response()->json(null, JsonResponse::HTTP_NO_CONTENT);
+    }
+
+    public function sendEmail(EmailRequest $request, $mission_id)
+    {
+        /** @var Mission $mission */
+        $mission = Mission::findOrFail($mission_id);
+        $this->authorize('sendEmail', $mission);
+
+        $mission->sendPreMissionNotification(
+            $request['subject'],
+            $request['content']
+        );
 
         return response()->json(null, JsonResponse::HTTP_NO_CONTENT);
     }

@@ -25,7 +25,7 @@ trait ApplicationProviderTrait
         ]);
     }
 
-    public function applicationWithAvailableMissionProvider(): Application
+    public function applicationWithAvailableMissionProvider(string $status = Application::ACCEPTED): Application
     {
         $user = User::where('email', $this->username . '@isep.fr')->first();
         $mission = factory(Mission::class)->state('available')->create();
@@ -33,6 +33,7 @@ trait ApplicationProviderTrait
         return factory(Application::class)->create([
             'user_id'       => $user->id,
             'mission_id'    => $mission->id,
+            'status'        => $status,
         ]);
     }
 

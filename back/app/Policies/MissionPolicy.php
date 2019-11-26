@@ -62,4 +62,9 @@ class MissionPolicy
             ? $current_user->role()->isEquivalentTo(Role::DEVELOPER)
             : $current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF);
     }
+
+    public function sendEmail(User $current_user, Mission $mission)
+    {
+        return false;
+    }
 }
