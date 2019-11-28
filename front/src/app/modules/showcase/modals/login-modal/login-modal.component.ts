@@ -39,6 +39,9 @@ export class LoginModalComponent implements OnInit {
       password: ['', Validators.required]
     });
 
+    // reset auth status
+    this.authService.logout();
+
     // get return url from route parameters or default to home
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }

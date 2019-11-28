@@ -24,14 +24,14 @@ export class AuthGuard implements CanActivate {
       .pipe(
         take(1),
         map((isLoggedIn: boolean) => {
-          if (! isLoggedIn) {
-            // not logged in so redirect to home page with the return url
-            this.router.navigate(['/'], { queryParams: { returnUrl: state.url }});
-            this.modalService.open(this.modal);
-            return false;
-          }
+          // if (! isLoggedIn) {
+          //   // not logged in so redirect to home page with the return url
+          //   this.router.navigate(['/'], { queryParams: { returnUrl: state.url }});
+          //   this.modalService.open(this.modal);
+          //   return false;
+          // }
           return true;
         })
-      )
+      );
   }
 }
