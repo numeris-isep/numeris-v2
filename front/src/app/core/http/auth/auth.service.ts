@@ -49,6 +49,7 @@ export class AuthService {
   }
 
   get isLoggedIn(): Observable<boolean> {
+    console.log(this.tokenService.isValid());
     return this.loggedIn.asObservable();
   }
 
