@@ -13,7 +13,7 @@ import { HTTP_OPTIONS } from '../../constants/http_options';
 })
 export class AuthService {
 
-  private loggedIn = new BehaviorSubject<boolean>(this.tokenService.isValid());
+  private loggedIn = new BehaviorSubject<boolean>(true);
 
   constructor(
     private http: HttpClient,
