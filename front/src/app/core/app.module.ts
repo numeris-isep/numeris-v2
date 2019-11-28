@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule, OnInit } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +22,7 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
 import { StaffModule } from '../modules/staff/staff.module';
 import { ShowcaseModule } from '../modules/showcase/showcase.module';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { AuthService } from './http/auth/auth.service';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
 
 // Setting to locale to 'fr'
@@ -63,11 +64,17 @@ registerLocaleData(localeFr, 'fr');
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  // Uncomment these following lines to display the router configuration
-  // (useful to see if the routes are in the proper order)
+export class AppModule implements OnInit {
 
-  // constructor(router: Router) {
-  //   console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
-  // }
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+  ) {
+    // Uncomment the following line to display the router configuration (useful to see if the routes are in the proper order)
+    // console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
+  }
+
+  ngOnInit() {
+    this.authService.checkAuth();
+  }
 }

@@ -13,12 +13,16 @@ import { HTTP_OPTIONS } from '../../constants/http_options';
 })
 export class AuthService {
 
-  private loggedIn = new BehaviorSubject<boolean>(true);
+  private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.tokenService.isValid());
 
   constructor(
     private http: HttpClient,
     private tokenService: TokenService,
   ) { }
+
+  checkAuth() {
+    this.loggedIn.next(this.tokenService.isValid());
+  }
 
   login(email: string, password: string) {
     return this.http.post<any>(`${environment.apiUrl}/api/login`, { email: email, password: password })
@@ -49,7 +53,6 @@ export class AuthService {
   }
 
   get isLoggedIn(): Observable<boolean> {
-    console.log(this.tokenService.isValid());
     return this.loggedIn.asObservable();
   }
 
