@@ -10,7 +10,7 @@
         [ngClass]="{'error': submitted && missionForm.invalid}">
     <h4 class="ui dividing header">Sélection</h4>
 
-    <div class="ui error message field">Veuillez sélectionner au moins une mission.</div>
+    <div class="ui error message field" *ngIf="f.missions.errors">Veuillez sélectionner au moins une mission.</div>
 
     <div formArrayName="missions" class="field">
       <div *ngFor="let mission of fm.controls; let i = index" [formGroupName]="i" class="field"

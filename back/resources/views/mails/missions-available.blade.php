@@ -8,7 +8,7 @@
 De nouvelles missions sont disponibles sur le site :
 
 @foreach($missions as $mission)
-- Le *{{ \Carbon\Carbon::parse($mission->start_at)->format('d/m/Y à H\hi') }}*, **{{ $mission->title }}** à *{{ $mission->fullAddress }}*
+- *{{ \Carbon\Carbon::parse($mission->start_at)->format('d/m/Y à H\hi') }}* - **{{ $mission->title }}** - *{{ $mission->fullAddress }}*
 @endforeach
 
 @component('mail::button', ['url' => $availableMissionsUrl])

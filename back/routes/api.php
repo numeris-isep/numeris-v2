@@ -78,7 +78,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('missions', 'MissionController', ['parameters' => ['missions' => 'mission_id']]);
     Route::get('missions-available', 'MissionController@indexAvailable')->name('missions.index.available');
     Route::post('missions/{mission_id}/email', 'MissionController@sendPreMissionEmail')->name('missions.email');
-    Route::post('missions/notify', 'MissionController@notifyAvailability')->middleware(['throttle:10,1'])->name('missions.notify');
+    Route::post('missions/notify', 'MissionController@notifyAvailability')->name('missions.notify');
     Route::patch('missions/{mission_id}/lock', 'MissionController@updateLock')->name('missions.update.lock');
     Route::apiResource('missions.applications', 'MissionApplicationController', ['parameters' => ['missions' => 'mission_id']])
         ->only(['index', 'store']);
