@@ -67,4 +67,9 @@ class MissionPolicy
     {
         return false;
     }
+
+    public function notifyAvailability(User $current_user)
+    {
+        return false;
+    }
 }

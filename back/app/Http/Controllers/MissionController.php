@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EmailRequest;
 use App\Http\Requests\MissionRequest;
+use App\Http\Requests\NewMissionsAvailableRequest;
 use App\Http\Resources\MissionResource;
+use App\Mail\NewMissionsAvailableMail;
 use App\Models\Address;
 use App\Models\Mission;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Mail;
 
 class MissionController extends Controller
 {
@@ -49,7 +53,7 @@ class MissionController extends Controller
     {
         $this->authorize('index-available', Mission::class);
 
-        $missions = $missions = Mission::available()->sortBy('start_at');
+        $missions = Mission::available()->sortBy('start_at');
 
         return response()->json(MissionResource::collection(
             $missions->load('address', 'project', 'applications', 'user')
@@ -164,7 +168,15 @@ class MissionController extends Controller
         return response()->json(null, JsonResponse::HTTP_NO_CONTENT);
     }
 
-    public function sendEmail(EmailRequest $request, $mission_id)
+    /**
+     * Send pre-mission email
+     *
+     * @param EmailRequest $request
+     * @param $mission_id
+     * @return JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function sendPreMissionEmail(EmailRequest $request, $mission_id)
     {
         /** @var Mission $mission */
         $mission = Mission::findOrFail($mission_id);
@@ -174,6 +186,36 @@ class MissionController extends Controller
             $request['subject'],
             $request['content']
         );
+
+        return response()->json(null, JsonResponse::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * Send email for new missions available
+     * This include only public missions.
+     *
+     * @param NewMissionsAvailableRequest $request
+     * @return mixed|\Symfony\Component\HttpFoundation\ParameterBag
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function notifyAvailability(NewMissionsAvailableRequest $request)
+    {
+        $this->authorize('notify-availability', Mission::class);
+
+        $missions = collect();
+        $users = User::active()->filter(function (User $user) {
+            return $user->hasVerifiedEmail() && $user->preference->on_new_mission;
+        });
+
+        foreach (request()->missions as $mission_id) {
+            $mission = Mission::findOrFail($mission_id);
+
+            if (! $mission->isPrivate) {
+                $missions->push(Mission::findOrFail($mission_id));
+            }
+        }
+
+        Mail::to($users)->send(new NewMissionsAvailableMail($missions));
 
         return response()->json(null, JsonResponse::HTTP_NO_CONTENT);
     }

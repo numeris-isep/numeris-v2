@@ -5,6 +5,7 @@ namespace Tests;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Tests\Traits\ApplicationProviderTrait;
 use Tests\Traits\ClientProviderTrait;
@@ -29,7 +30,8 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        // Disable sending real notifications during testing
+        // Disable sending real mail/notifications during testing
+        Mail::fake();
         Notification::fake();
     }
 }

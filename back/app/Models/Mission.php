@@ -61,6 +61,11 @@ class Mission extends Model
             ->where('is_locked', true);
     }
 
+    public function getIsPrivateAttribute()
+    {
+        return $this->project->is_private;
+    }
+
     public static function available(User $user = null)
     {
         $user = $user ?: auth()->user();
@@ -139,6 +144,16 @@ class Mission extends Model
     public function applications()
     {
         return $this->hasMany(Application::class);
+    }
+
+    public function getFullAddressAttribute()
+    {
+        return sprintf(
+            '%s %s, %s',
+            $this->address->street,
+            $this->address->zip_code,
+            $this->address->city
+        );
     }
 
     public function applicationsWhoseStatusIs($status =  null)

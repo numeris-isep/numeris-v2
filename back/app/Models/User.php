@@ -239,6 +239,11 @@ class User extends Authenticatable implements JWTSubject
             ->orderBy('month', 'asc');
     }
 
+    public static function active()
+    {
+        return static::where('activated', true)->get();
+    }
+
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
