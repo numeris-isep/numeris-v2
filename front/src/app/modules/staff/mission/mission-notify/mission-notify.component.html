@@ -1,0 +1,7 @@
+<app-content [condition]="! missions">
+  <div class="ui padded centered grid">
+    <div class="sixteen wide tablet twelve wide computer column">
+      <app-mission-notify-form *ngIf="missions" [missions]="missions"></app-mission-notify-form>
+    </div>
+  </div>
+</app-content>

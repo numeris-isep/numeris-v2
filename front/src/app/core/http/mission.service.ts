@@ -103,4 +103,9 @@ export class MissionService {
     const url = `${environment.apiUrl}/api/missions/${missionId}/email`;
     return this.http.post<Mission>(url, email, HTTP_OPTIONS);
   }
+
+  notifyAvailability(data: number[]): Observable<any> {
+    const url = `${environment.apiUrl}/api/missions/notify`;
+    return this.http.post<any>(url, {missions: data}, HTTP_OPTIONS);
+  }
 }

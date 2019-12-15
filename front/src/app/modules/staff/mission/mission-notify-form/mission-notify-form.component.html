@@ -1,0 +1,41 @@
+<div class="ui segments" *ngIf="missions.length > 0; else empty">
+  <div class="ui segment">
+    <div class="ui blue ribbon label">
+      <i class="bullhorn icon"></i>
+      Prévenir des missions disponibles
+    </div>
+  </div>
+
+  <form class="ui form segment" [formGroup]="missionForm"
+        [ngClass]="{'error': submitted && missionForm.invalid}">
+    <h4 class="ui dividing header">Sélection</h4>
+
+    <div class="ui error message field">Veuillez sélectionner au moins une mission.</div>
+
+    <div formArrayName="missions" class="field">
+      <div *ngFor="let mission of fm.controls; let i = index" [formGroupName]="i" class="field"
+           [ngClass]="{'error': this.submitted && f.missions.errors}">
+        <sui-checkbox formControlName="checked" class="slider">
+          {{ fmg(i).controls['startAt'].value }} -
+          <b>{{ fmg(i).controls['title'].value }}</b>
+          &nbsp;
+          <i *ngIf="fmg(i).controls['checked'].value" class="green check icon"></i>
+        </sui-checkbox>
+      </div>
+    </div>
+
+    <div class="field">
+      <button class="ui animated fade button" (click)="onSubmit()"
+              [ngClass]="{'loading': loading, 'disabled': missionForm.invalid || missionForm.pristine }">
+        <div class="visible content">Envoyer</div>
+        <div class="hidden content">
+          <i class="send icon"></i>
+        </div>
+      </button>
+    </div>
+  </form>
+</div>
+
+<ng-template #empty>
+  <app-empty>Aucune mission disponible</app-empty>
+</ng-template>
