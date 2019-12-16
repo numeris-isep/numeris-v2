@@ -1,5 +1,6 @@
 @php
   $availableMissionsUrl = env('FRONT_APP_URL') . '/missions-disponibles';
+  $contactUrl = env('FRONT_APP_URL') . '/nous-contacter';
 @endphp
 
 @component('mail::message')
@@ -15,7 +16,7 @@ De nouvelles missions sont disponibles sur le site :
   Voir toutes les missions disponibles
 @endcomponent
 
-*N'hésitez pas à postuler ou à contacter un membre de l'équipe pour plus d'informations.*
+*N'hésitez pas à postuler ou à <a href="{{ $contactUrl }}" target="_blank">contacter</a> un membre de l'équipe pour plus d'informations.*
 
 Cordialement,<br>
 L'équipe Numéris.

@@ -3,7 +3,9 @@
 namespace Tests\Feature\User\UpdateActivated;
 
 use App\Models\Role;
+use App\Notifications\ActivateUserNotification;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCaseWithAuth;
 
 class UpdateActivatedDeveloperTest extends TestCaseWithAuth
@@ -46,6 +48,8 @@ class UpdateActivatedDeveloperTest extends TestCaseWithAuth
                 'createdAt',
                 'updatedAt',
             ]);
+
+        Notification::assertSentTo([$user], ActivateUserNotification::class);
     }
 
     /**
@@ -84,6 +88,8 @@ class UpdateActivatedDeveloperTest extends TestCaseWithAuth
                 'createdAt',
                 'updatedAt',
             ]);
+
+        Notification::assertSentTo([$user], ActivateUserNotification::class);
     }
 
     /**
@@ -122,6 +128,8 @@ class UpdateActivatedDeveloperTest extends TestCaseWithAuth
                 'createdAt',
                 'updatedAt',
             ]);
+
+        Notification::assertSentTo([$user], ActivateUserNotification::class);
     }
 
     /**
@@ -160,6 +168,8 @@ class UpdateActivatedDeveloperTest extends TestCaseWithAuth
                 'createdAt',
                 'updatedAt',
             ]);
+
+        Notification::assertSentTo([$user], ActivateUserNotification::class);
     }
 
     /**
@@ -201,6 +211,8 @@ class UpdateActivatedDeveloperTest extends TestCaseWithAuth
                 'createdAt',
                 'updatedAt',
             ]);
+
+        Notification::assertSentTo([$user], ActivateUserNotification::class);
     }
 
     /**
@@ -242,5 +254,7 @@ class UpdateActivatedDeveloperTest extends TestCaseWithAuth
                 'createdAt',
                 'updatedAt',
             ]);
+
+        Notification::assertSentTo([$user], ActivateUserNotification::class);
     }
 }

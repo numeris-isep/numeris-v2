@@ -3,7 +3,9 @@
 namespace Tests\Feature\User\UpdateActivated;
 
 use App\Models\Role;
+use App\Notifications\ActivateUserNotification;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCaseWithAuth;
 
 class UpdateActivatedAdministratorTest extends TestCaseWithAuth
@@ -25,6 +27,8 @@ class UpdateActivatedAdministratorTest extends TestCaseWithAuth
         $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
+
+        Notification::assertNothingSent();
     }
 
     /**
@@ -42,6 +46,8 @@ class UpdateActivatedAdministratorTest extends TestCaseWithAuth
         $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
+
+        Notification::assertNothingSent();
     }
 
     /**
@@ -80,6 +86,8 @@ class UpdateActivatedAdministratorTest extends TestCaseWithAuth
                 'createdAt',
                 'updatedAt',
             ]);
+
+        Notification::assertSentTo([$user], ActivateUserNotification::class);
     }
 
     /**
@@ -118,6 +126,8 @@ class UpdateActivatedAdministratorTest extends TestCaseWithAuth
                 'createdAt',
                 'updatedAt',
             ]);
+
+        Notification::assertSentTo([$user], ActivateUserNotification::class);
     }
 
     /**
@@ -138,6 +148,8 @@ class UpdateActivatedAdministratorTest extends TestCaseWithAuth
         $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
+
+        Notification::assertNothingSent();
     }
 
     /**
@@ -158,5 +170,7 @@ class UpdateActivatedAdministratorTest extends TestCaseWithAuth
         $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
+
+        Notification::assertNothingSent();
     }
 }

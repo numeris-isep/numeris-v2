@@ -15,7 +15,7 @@
   @if($application->status == \App\Models\Application::ACCEPTED)
 
   Tu recevras un email prochainement avec toutes les informations de la mission.
-  N'hésite pas à <a href="{{ $contactUrl }}" target="_blank">contacter</a> un membre de l'équipe si tu as des questions.
+  *N'hésite pas à <a href="{{ $contactUrl }}" target="_blank">contacter</a> un membre de l'équipe si tu as des questions.*
 
   @endif
 

@@ -159,6 +159,8 @@ class UserController extends Controller
 
         $user->update($request->only('activated'));
 
+        $user->sendActivateUserNotification();
+
         return response()->json(UserResource::make($user), JsonResponse::HTTP_CREATED);
     }
 

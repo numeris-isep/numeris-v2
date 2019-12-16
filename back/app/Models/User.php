@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\OnEventsTrait;
+use App\Notifications\ActivateUserNotification;
 use App\Notifications\ApplicationNotification;
 use App\Notifications\ResetPasswordNotification;
 use App\Notifications\VerifyEmailNotification;
@@ -247,6 +248,11 @@ class User extends Authenticatable implements JWTSubject
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
+    }
+
+    public function sendActivateUserNotification()
+    {
+        $this->notify(new ActivateUserNotification());
     }
 
     public function sendEmailVerificationNotification()

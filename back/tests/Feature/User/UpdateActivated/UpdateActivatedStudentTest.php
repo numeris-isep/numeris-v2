@@ -4,6 +4,7 @@ namespace Tests\Feature\User\UpdateActivated;
 
 use App\Models\Role;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCaseWithAuth;
 
 class UpdateActivatedStudentTest extends TestCaseWithAuth
@@ -25,6 +26,8 @@ class UpdateActivatedStudentTest extends TestCaseWithAuth
         $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
+
+        Notification::assertNothingSent();
     }
 
     /**
@@ -42,6 +45,8 @@ class UpdateActivatedStudentTest extends TestCaseWithAuth
         $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
+
+        Notification::assertNothingSent();
     }
 
     /**
@@ -59,6 +64,8 @@ class UpdateActivatedStudentTest extends TestCaseWithAuth
         $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
+
+        Notification::assertNothingSent();
     }
 
     /**
@@ -76,5 +83,7 @@ class UpdateActivatedStudentTest extends TestCaseWithAuth
         $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
+
+        Notification::assertNothingSent();
     }
 }
