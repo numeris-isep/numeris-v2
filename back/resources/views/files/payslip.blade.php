@@ -24,9 +24,7 @@
 @endphp
 
 @section('style')
-  {{-- Semantic UI CDN for table styling --}}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/components/table.min.css"
-        integrity="sha256-oVdx55VoqJ/ONE3ehd7/NUko5KBRzuAfdxPBwp9qE4w=" crossorigin="anonymous" />
+  <link type="text/css" rel="stylesheet" href="{{ base_path('resources/assets/css/semantic/table.min.css') }}" />
 @endsection
 
 @section('title')
@@ -38,7 +36,7 @@
 @endsection
 
 @section('summary')
-  <ul>
+  <ul class="no-bullet">
     <li>Période d'emploi : du <b>{{ $month->format('d/m/Y') }}</b> au <b>{{ $to->format('d/m/Y') }}</b></li>
     <li>Nombres d'heures travaillées : <b>{{ $hours }}</b></li>
     <li>Rémunération brute : <b>{{ $grossAmount }}€</b></li>
@@ -50,7 +48,7 @@
     <div class="ui segment">
       <div class="block half">
         <h2 class="header">Employeur</h2>
-        <ul class="information">
+        <ul class="information no-bullet">
           <li>Association Numéris ISEP</li>
           <li>Mme Candice RUMEAU</li>
           <li>28 rue Notre Dame des Champs, 75006 Paris</li>
@@ -63,7 +61,7 @@
 
       <div class="block half">
         <h2 class="header">Salarié</h2>
-        <ul class="information">
+        <ul class="information no-bullet">
           <li>{{ $employee->getFullName() }}</li>
           <li>N° de sécurité sociale : {{ $employee->social_insurance_number }}</li>
           <li>Date de naissance : {{ \Carbon\Carbon::parse($employee->birth_date)->format('d/m/Y') }}</li>
@@ -165,7 +163,7 @@
 
 @section('footer')
   <p class="right-aligned text">
-    Fait à Paris, le {{ \Carbon\Carbon::parse($payslip->updated_at)->format('d/m/Y') }}.
+    Fait à Paris, le {{ now()->format('d/m/Y') }}.
   </p>
 
   <p class="center-aligned information">

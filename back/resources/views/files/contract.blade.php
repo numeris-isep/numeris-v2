@@ -26,7 +26,7 @@
 @endsection
 
 @section('summary')
-  <ul>
+  <ul class="no-bullet">
     <li>Période d'emploi : du <b>{{ $month->format('d/m/Y') }}</b> au <b>{{ $to->format('d/m/Y') }}</b></li>
     <li>Nombres d'heures travaillées : <b>{{ $hours }}</b></li>
     <li>Rémunération brute : <b>{{ $grossAmount }}€</b></li>
@@ -42,7 +42,7 @@
 @endsection
 
 @section('content')
-  <h4 class="header">Entre les soussignés</h4>
+  <h4 class="marged header">Entre les soussignés</h4>
   <div class="text">
     L'association <b>Numéris</b>, association régie à la loi de 1901 est au 28 rue Notre Dame des Champs, 75006 Paris
     représentée par sa présidente Candice RUMEAU ci-après dénommé "<b>Numéris</b>" d'une part et {{ $employee->getFullName() }},
@@ -52,14 +52,14 @@
     L'étudiant et Numéris sont ci-arpès désignés individuellement une "<b>Partie</b>" et ensemble les "<b>Parties</b>".
   </div>
 
-  <h4 class="header">Il a préalablement exposé ce qui suit</h4>
+  <h4 class="marged header">Il a préalablement exposé ce qui suit</h4>
   <div class="text">
     Le présent récapitulatif de mission a pour objet de préciser les termes de la collaboration entre les parties signataires à la
     réalisation de la (des) mission(s) {{ $missions }} confiée(s) par le (les) client(s) {{ $clients }} (ci-après dénomé le
     "<b>Client</b>") à Numéris.
   </div>
 
-  <h4 class="header">À la suite de quoi il a été décidé ce qui suit</h4>
+  <h4 class="marged header">À la suite de quoi il a été décidé ce qui suit</h4>
   <div class="sub header">Article 1 - Objet de la mission</div>
   <div class="text">
     Cette mission consiste en la déconnexion, la reconnexion, la configuration et la mise en réseau de postes informatiques.
@@ -91,7 +91,7 @@
 
 @section('footer')
   <p class="right-aligned text">
-    Fait à Paris, le {{ \Carbon\Carbon::parse($payslip->updated_at)->format('d/m/Y') }} en double exemplaire.
+    Fait à Paris, le {{ now()->format('d/m/Y') }} en double exemplaire.
   </p>
 
   <div class="ui segment">
@@ -99,7 +99,7 @@
       <div>Pour <b>Numéris</b></div>
       <div>Candice RUMEAU</div>
       <div class="middle-aligned information">
-        lu et approuvé
+        <i>lu et approuvé</i>
         <img class="ui mini-tall image" src="{{ public_path('images/signature-candice-rumeau.png') }}">
       </div>
     </div>
