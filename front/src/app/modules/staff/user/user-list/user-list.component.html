@@ -73,6 +73,7 @@
             suiPopup popupText="À valider" popupPlacement="left" popupTrigger="manual" popupInverted #popup="suiPopup"
             (mouseenter)="togglePopup(popup, !user.activated)" (mouseleave)="togglePopup(popup, !user.activated)">
           <td>
+            <i *ngIf="user.nationality" class="{{ user.nationality | countryCode }} flag"></i>
             <a routerLink="/utilisateurs/{{ user.id }}">
               {{ user.firstName || '-' }} {{ user.lastName | uppercase }}
             </a>

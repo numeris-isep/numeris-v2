@@ -9,6 +9,7 @@
       Candidatures {{ status.translationPlural }}
       <div class="detail">{{ applications.length }}</div>
     </div>
+
     <table class="ui celled striped selectable table">
       <thead>
       <tr>
@@ -22,7 +23,10 @@
 
       <tbody *ngIf="applications.length > 0; else noApplication">
       <tr *ngFor="let application of applications" draggable="true">
-        <td>{{ application.user.firstName }} {{ application.user.lastName | uppercase }}</td>
+        <td>
+          <i *ngIf="application.user.nationality" class="{{ application.user.nationality | countryCode }} flag"></i>
+          {{ application.user.firstName }} {{ application.user.lastName | uppercase }}
+        </td>
         <ng-container *ngIf="status.status == 'accepted'">
           <td>{{ application.updatedAt | date:'dd/MM/yyyy' }}</td>
         </ng-container>
