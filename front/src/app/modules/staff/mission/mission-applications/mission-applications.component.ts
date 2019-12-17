@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Mission } from "../../../../core/classes/models/mission";
-import { ApplicationStatus } from "../../../../core/classes/models/application";
-import { ApplicationHandlerService } from "../../../../core/services/handlers/application-handler.service";
-import { ApplicationService } from "../../../../core/http/application.service";
+import { Mission } from '../../../../core/classes/models/mission';
+import { ApplicationStatus } from '../../../../core/classes/models/application';
+import { ApplicationHandlerService } from '../../../../core/services/handlers/application-handler.service';
+import { ApplicationService } from '../../../../core/http/application.service';
 
 @Component({
   selector: 'app-mission-applications',

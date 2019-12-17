@@ -8,18 +8,15 @@
     n'a plus le status <b>Ouvert</b>.
   </div>
 
-  <div *ngIf="applicationStatuses" class="ui centered grid doubling">
-    <div class="row">
-      <div class="ten wide column">
+  <div *ngIf="applicationStatuses" class="ui centered three column grid stackable" cdkDropListGroup>
+    <div class="stretched row">
+      <div class="column">
         <app-application-list [statuses]="applicationStatuses" [status]="acceptedStatus" [mission]="mission"></app-application-list>
       </div>
-    </div>
-
-    <div class="stretched row">
-      <div class="sixteen wide mobile eight wide computer column">
+      <div class="column">
         <app-application-list [statuses]="applicationStatuses" [status]="waitingStatus" [mission]="mission"></app-application-list>
       </div>
-      <div class="sixteen wide mobile eight wide computer column">
+      <div class="column">
         <app-application-list [statuses]="applicationStatuses" [status]="refusedStatus" [mission]="mission"></app-application-list>
       </div>
     </div>

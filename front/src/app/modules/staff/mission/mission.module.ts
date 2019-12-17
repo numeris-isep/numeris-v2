@@ -22,6 +22,7 @@ import { BillsFormComponent } from './mission-bills/bills-form/bills-form.compon
 import { MissionEmailModalComponent } from './mission-email-modal/mission-email-modal.component';
 import { MissionNotifyComponent } from './mission-notify/mission-notify.component';
 import { MissionNotifyFormComponent } from './mission-notify-form/mission-notify-form.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { MissionNotifyFormComponent } from './mission-notify-form/mission-notify
     SuiModule,
     FormsModule,
     ReactiveFormsModule,
+    DragDropModule,
     SharedModule,
     HttpClientModule,
     MissionRoutingModule,

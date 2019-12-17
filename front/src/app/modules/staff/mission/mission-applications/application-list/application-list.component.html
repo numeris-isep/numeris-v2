@@ -1,73 +1,43 @@
 <app-content [condition]="!(applications && mission)">
-  <div class="ui segment">
-    <sui-progress *ngIf="status.status == 'accepted'" class="top attached indicating" [showProgress]="false"
-                  [value]="applications.length" [maximum]="mission.capacity">
-    </sui-progress>
+  <div class="ui segments">
+    <div class="ui segment">
+      <sui-progress *ngIf="status.status == 'accepted'" class="top attached indicating" [showProgress]="false"
+                    [value]="applications.length" [maximum]="mission.capacity">
+      </sui-progress>
 
-    <div class="ui ribbon label" [ngClass]="{'green': status.status == 'accepted', 'blue': status.status == 'waiting', 'red': status.status == 'refused' }">
-      <i class="icon" [ngClass]="{'handshake': status.status == 'accepted', 'hand paper': status.status == 'waiting', 'thumbs down': status.status == 'refused' }"></i>
-      Candidatures {{ status.translationPlural }}
-      <div class="detail">{{ applications.length }}</div>
+      <div class="ui ribbon label" [ngClass]="{'green': status.status == 'accepted', 'blue': status.status == 'waiting', 'red': status.status == 'refused' }">
+        <i class="icon" [ngClass]="{'handshake': status.status == 'accepted', 'hand paper': status.status == 'waiting', 'thumbs down': status.status == 'refused' }"></i>
+        Candidatures {{ status.translationPlural }}
+        <div class="detail">{{ applications.length }}</div>
+      </div>
     </div>
 
-    <table class="ui celled striped selectable table">
-      <thead>
-      <tr>
-        <th><i class="user icon"></i> Nom</th>
-        <ng-container *ngIf="status.status == 'accepted'">
-          <th><i class="calendar icon"></i> Dernière modification</th>
-        </ng-container>
-        <th class="collapsing"><i class="hand pointer outline icon"></i> Actions</th>
-      </tr>
-      </thead>
+      <div class="ui drop-zone segment">
+        <div cdkDropList [id]="status.status" [cdkDropListData]="applications" (cdkDropListDropped)="drop($event)" class="ui selection list">
+          <div *ngFor="let application of applications" class="item"
+             cdkDrag [cdkDragData]="application">
+            <div class="placeholder" *cdkDragPlaceholder></div>
+            <i class="middle aligned icon" cdkDragHandle>
+              <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+                <path d="M0 0h24v24H0z" fill="none"></path>
+              </svg>
+            </i>
+            <div class="content">
+              <a class="header" routerLink="/utilisateurs/{{ application.user.id }}">
+                {{ application.user.firstName }} {{ application.user.lastName | uppercase }}
+              </a>
+              <div class="description">
+                <i *ngIf="application.user.nationality" class="{{ application.user.nationality | countryCode }} flag"></i>
+              </div>
+            </div>
+          </div>
 
-      <tbody *ngIf="applications.length > 0; else noApplication">
-      <tr *ngFor="let application of applications" draggable="true">
-        <td>
-          <i *ngIf="application.user.nationality" class="{{ application.user.nationality | countryCode }} flag"></i>
-          {{ application.user.firstName }} {{ application.user.lastName | uppercase }}
-        </td>
-        <ng-container *ngIf="status.status == 'accepted'">
-          <td>{{ application.updatedAt | date:'dd/MM/yyyy' }}</td>
-        </ng-container>
-        <td class="center aligned collapsing">
-          <app-link-button routerLink="/utilisateurs/{{ application.user.id }}"
-                           behaviour="compact"
-                           size="tiny" color="basic"
-                           hiddenIcon="zoom-in">
-            Voir
-          </app-link-button>
-          <ng-container *ngIf="mission.project.step == 'hiring'">
-            <app-button *ngIf="application.status != 'accepted'" behaviour="compact"
-                        size="tiny" color="basic positive" (click)="updateApplication('accepted', application)"
-                        hiddenIcon="handshake">
-              Inscrire
-            </app-button>
-            <app-button *ngIf="application.status == 'accepted'" behaviour="compact"
-                        size="tiny" color="basic negative" (click)="updateApplication('waiting', application)"
-                        hiddenIcon="trash alternate">
-              Retirer
-            </app-button>
-            <app-button *ngIf="application.status == 'waiting'" behaviour="compact"
-                        size="tiny" color="basic negative" (click)="updateApplication('refused', application)"
-                        hiddenIcon="trash alternate">
-              Refuser
-            </app-button>
-          </ng-container>
-        </td>
-      </tr>
-      </tbody>
-      <ng-template #noApplication>
-        <tfoot class="full-width">
-        <tr>
-          <th colspan="20">
-            <app-empty [icon]="false">
-              Aucune candidature {{ status.translationPlural }}
-            </app-empty>
-          </th>
-        </tr>
-        </tfoot>
-      </ng-template>
-    </table>
-  </div>
+          <app-empty *ngIf="! (applications.length > 0)" [icon]="false">
+            Aucune candidature {{ status.translation }}
+          </app-empty>
+        </div>
+      </div>
+    </div>
+
 </app-content>
