@@ -12,7 +12,7 @@ export class User {
   activated: boolean;
   touAccepted: boolean;
   emailVerifiedAt: string;
-  subscriptionPaidAt: string;
+  subscriptionDates: string[];
   email: string;
   password: string;
   firstName: string;
