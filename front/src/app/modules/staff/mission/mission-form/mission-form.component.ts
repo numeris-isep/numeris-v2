@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { Mission } from '../../../../core/classes/models/mission';
 import { Project } from '../../../../core/classes/models/project';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -19,15 +19,17 @@ import { ContactService } from '../../../../core/http/contact.service';
   selector: 'app-mission-form',
   templateUrl: './mission-form.component.html'
 })
-export class MissionFormComponent implements OnInit {
+export class MissionFormComponent implements OnInit, AfterViewInit {
 
   @Input() mission: Mission;
   @Input() project: Project;
+
   projects: Project[];
   users: User[];
   contacts: Contact[];
 
   missionForm: FormGroup;
+  initialValue: object;
   loading: boolean = false;
   submitted: boolean = false;
 
@@ -43,7 +45,14 @@ export class MissionFormComponent implements OnInit {
 
   ngOnInit() {
     this.getData();
+    this.initForm();
+  }
 
+  ngAfterViewInit() {
+    this.initialValue = this.missionForm.value;
+  }
+
+  initForm() {
     this.missionForm = this.fb.group({
       title: [
         this.mission ? this.mission.title : '',

@@ -8,6 +8,7 @@ import { MissionShowComponent } from './mission-show/mission-show.component';
 import { MissionCreateComponent } from './mission-create/mission-create.component';
 import { MissionEditComponent } from './mission-edit/mission-edit.component';
 import { MissionNotifyComponent } from './mission-notify/mission-notify.component';
+import { DeactivateGuard } from '../../../core/guards/deactivate.guard';
 
 const missionRoute: Routes = [
   {
@@ -25,6 +26,7 @@ const missionRoute: Routes = [
       {
         path: 'nouvelle',
         component: MissionCreateComponent,
+        canDeactivate: [DeactivateGuard],
         data: {
           title: 'Nouvelle mission',
         },
@@ -39,10 +41,12 @@ const missionRoute: Routes = [
       {
         path: ':missionId/modifier',
         component: MissionEditComponent,
+        canDeactivate: [DeactivateGuard],
       },
       {
         path: ':missionId/heures',
         component: MissionShowComponent,
+        canDeactivate: [DeactivateGuard],
         data: {
           tab: 'heures'
         }
@@ -50,6 +54,7 @@ const missionRoute: Routes = [
       {
         path: ':missionId',
         component: MissionShowComponent,
+        canDeactivate: [DeactivateGuard],
       },
     ]
   },

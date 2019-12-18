@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { TitleService } from '../../../../core/services/title.service';
 import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.service';
 import { ActivatedRoute } from '@angular/router';
@@ -11,12 +11,16 @@ import { ApplicationHandlerService } from '../../../../core/services/handlers/ap
 import { Application } from 'src/app/core/classes/models/application';
 import { MissionEmailModal } from '../mission-email-modal/mission-email-modal.component';
 import { SuiModalService } from 'ng2-semantic-ui';
+import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
+import { MissionBillsComponent } from '../mission-bills/mission-bills.component';
 
 @Component({
   selector: 'app-mission-show',
   templateUrl: './mission-show.component.html'
 })
-export class MissionShowComponent implements OnInit, OnDestroy {
+export class MissionShowComponent implements OnInit, OnDestroy, CanComponentDeactivate {
+
+  @ViewChild(MissionBillsComponent) missionBillsComponent: MissionBillsComponent;
 
   mission: Mission;
   applications: Application[];
@@ -47,6 +51,10 @@ export class MissionShowComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.applicationHandler.resetAll();
+  }
+
+  canDeactivate() {
+    return this.missionBillsComponent.canDeactivate();
   }
 
   getMission(missionId: number) {

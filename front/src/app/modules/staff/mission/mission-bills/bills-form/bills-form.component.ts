@@ -20,6 +20,7 @@ export class BillsFormComponent implements OnInit {
   applications: Application[];
 
   billsForm: FormGroup;
+  initialValue: object;
   applicationsFormArray: FormArray;
   loading  = false;
   submitted = false;
@@ -44,6 +45,8 @@ export class BillsFormComponent implements OnInit {
       this.billsForm = this.fb.group({
         applications: this.applicationsFormArray
       });
+
+      this.initialValue = this.billsForm.value;
     });
   }
 
