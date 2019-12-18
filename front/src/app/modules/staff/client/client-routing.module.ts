@@ -11,6 +11,7 @@ import { ContactCreateComponent } from './contact-create/contact-create.componen
 import { ContactEditComponent } from './contact-edit/contact-edit.component';
 import { ConventionCreateComponent } from './convention-create/convention-create.component';
 import { ConventionEditComponent } from './convention-edit/convention-edit.component';
+import { DeactivateGuard } from '../../../core/guards/deactivate.guard';
 
 const clientRoutes: Routes = [
   {
@@ -59,6 +60,7 @@ const clientRoutes: Routes = [
       {
         path: ':clientId/modifier',
         component: ClientEditComponent,
+        canDeactivate: [DeactivateGuard]
       },
       {
         path: ':clientId/projets/nouveau',

@@ -8,7 +8,7 @@ import { MissionComponent } from './mission/mission.component';
 import { ApplicationComponent } from './application/application.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
-import { ActivatedGuard } from '../../core/guards/activated.guard';
+import { ActivateGuard } from '../../core/guards/activate.guard';
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 
 const studentRoutes: Routes = [
@@ -36,7 +36,7 @@ const studentRoutes: Routes = [
   {
     path: 'missions-disponibles',
     component: MissionComponent,
-    canActivate: [AuthGuard, ActivatedGuard],
+    canActivate: [AuthGuard, ActivateGuard],
     data: {
       title: 'Missions disponibles',
     }
@@ -44,7 +44,7 @@ const studentRoutes: Routes = [
   {
     path: 'candidatures',
     component: ApplicationComponent,
-    canActivate: [AuthGuard, ActivatedGuard],
+    canActivate: [AuthGuard, ActivateGuard],
     data: {
       title: 'Candidatures',
     }

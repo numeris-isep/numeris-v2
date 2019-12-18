@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Client } from '../../../../core/classes/models/client';
 import { ClientService } from '../../../../core/http/client.service';
@@ -14,11 +14,12 @@ import { ContactService } from '../../../../core/http/contact.service';
   selector: 'app-client-form',
   templateUrl: './client-form.component.html'
 })
-export class ClientFormComponent implements OnInit {
+export class ClientFormComponent implements OnInit, AfterViewInit {
 
   @Input() client: Client;
 
   clientForm: FormGroup;
+  initialValue: object;
   loading: boolean = false;
   submitted: boolean = false;
   contacts: Contact[];
@@ -33,7 +34,14 @@ export class ClientFormComponent implements OnInit {
 
   ngOnInit() {
     this.getContacts();
+    this.initForm();
+  }
 
+  ngAfterViewInit() {
+    this.initialValue = this.clientForm.value;
+  }
+
+  initForm() {
     this.clientForm = this.fb.group({
       name: [
         this.client ? this.client.name : '',
