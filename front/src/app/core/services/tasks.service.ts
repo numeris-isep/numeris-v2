@@ -27,7 +27,7 @@ export class TasksService {
       this.addTask({
         icon: 'envelope',
         title: 'Adresse email',
-        description: 'Veuillez vérfier votre adresse email',
+        description: 'Veuillez vérifier votre adresse email',
         link: '/profil',
       });
     }
