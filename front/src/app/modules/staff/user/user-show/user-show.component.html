@@ -55,6 +55,13 @@
     </div>
 
     <div class="row">
+      <!-- Statistics -->
+      <div class="column">
+        <app-profile-statistics *ngIf="user" [payslips]="user.payslips"></app-profile-statistics>
+      </div>
+    </div>
+
+    <div class="row">
       <!-- Documents -->
       <div class="column">
         <app-profile-documents *ngIf="user" [payslips]="user.payslips"></app-profile-documents>

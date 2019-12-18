@@ -22,6 +22,8 @@ import { ProfileEditComponent } from './profile/profile-edit/profile-edit.compon
 import { ProfileRoleModalComponent } from './profile/profile-role-modal/profile-role-modal.component';
 import { ProfileMessagesComponent } from './profile/profile-messages/profile-messages.component';
 import { TodoComponent } from './dashboard/todo/todo.component';
+import { ProfileStatisticsComponent } from './profile/profile-statistics/profile-statistics.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   imports: [
@@ -32,6 +34,7 @@ import { TodoComponent } from './dashboard/todo/todo.component';
     StudentRoutingModule,
     SharedModule,
     HttpClientModule,
+    DragDropModule,
   ],
   declarations: [
     DashboardComponent,
@@ -51,6 +54,7 @@ import { TodoComponent } from './dashboard/todo/todo.component';
     ProfileRoleModalComponent,
     ProfileMessagesComponent,
     TodoComponent,
+    ProfileStatisticsComponent,
   ],
   exports: [
     ProfileDetailsComponent,
@@ -59,6 +63,7 @@ import { TodoComponent } from './dashboard/todo/todo.component';
     ProfileDocumentsComponent,
     MissionDetailsComponent,
     ProfileEditComponent,
+    ProfileStatisticsComponent,
   ],
   entryComponents: [
     ApplicationConfirmModalComponent,

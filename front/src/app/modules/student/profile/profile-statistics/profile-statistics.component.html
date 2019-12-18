@@ -1,0 +1,37 @@
+<div class="ui three column padded centered grid doubling">
+  <div class="center aligned column">
+    <div class="ui brown small statistic">
+      <div class="label">
+        <i class="money bill blue icon"></i>
+        Salaire net
+      </div>
+      <div class="value" appCountTo [step]="10" [duration]="1" [countFrom]="0" [countTo]="payslipAmounts.finalAmounts" (countoChange)="finalCount = $event">
+        {{ finalCount | number:'1.0-0': 'fr-FR' }}€
+      </div>
+    </div>
+  </div>
+
+  <div class="center aligned column">
+    <div class="ui yellow small statistic">
+      <div class="value"  appCountTo [step]="5" [countFrom]="0" [duration]="1" [countTo]="payslipAmounts.hourAmounts" (countoChange)="hourCount = $event">
+        {{ hourCount | number:'1.0-0': 'fr-FR' }}
+      </div>
+      <div class="label">
+        <i class="clock blue icon"></i> Heures travaillées
+      </div>
+    </div>
+  </div>
+
+  <div class="center aligned column">
+    <div class="ui teal small statistic">
+      <div class="value" appCountTo [step]="5" [countFrom]="0" [duration]="1" [countTo]="missionAmounts" (countoChange)="missionCount = $event">
+        <i class="copy blue icon"></i>
+        {{ missionCount | number:'1.0-0': 'fr-FR' }}
+      </div>
+      <div class="label">
+        Missions
+      </div>
+    </div>
+  </div>
+</div>
+
