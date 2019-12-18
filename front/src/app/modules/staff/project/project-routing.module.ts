@@ -8,6 +8,7 @@ import { ProjectShowComponent } from './project-show/project-show.component';
 import { ProjectCreateComponent } from './project-create/project-create.component';
 import { ProjectEditComponent } from './project-edit/project-edit.component';
 import { ProjectMissionCreateComponent } from './project-mission-create/project-mission-create.component';
+import { DeactivateGuard } from '../../../core/guards/deactivate.guard';
 
 const projectRoutes: Routes = [
   {
@@ -25,6 +26,7 @@ const projectRoutes: Routes = [
       {
         path: 'nouveau',
         component: ProjectCreateComponent,
+        canDeactivate: [DeactivateGuard],
         data: {
           title: 'Nouveau projet'
         }
@@ -32,10 +34,12 @@ const projectRoutes: Routes = [
       {
         path: ':projectId/modifier',
         component: ProjectEditComponent,
+        canDeactivate: [DeactivateGuard],
       },
       {
         path: ':projectId/missions/nouvelle',
         component: ProjectMissionCreateComponent,
+        canDeactivate: [DeactivateGuard],
       },
       {
         path: ':projectId',

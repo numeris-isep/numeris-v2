@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { TitleService } from "../../../../core/services/title.service";
-import { BreadcrumbsService } from "../../../../core/services/breadcrumbs.service";
-import { ActivatedRoute } from "@angular/router";
-import { ProjectService } from "../../../../core/http/project.service";
-import { Project } from "../../../../core/classes/models/project";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { TitleService } from '../../../../core/services/title.service';
+import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.service';
+import { ActivatedRoute } from '@angular/router';
+import { ProjectService } from '../../../../core/http/project.service';
+import { Project } from '../../../../core/classes/models/project';
+import { ProjectFormComponent } from '../project-form/project-form.component';
+import { equals } from '../../../../shared/utils';
 
 @Component({
   selector: 'app-project-edit',
   templateUrl: './project-edit.component.html'
 })
 export class ProjectEditComponent implements OnInit {
+
+  @ViewChild(ProjectFormComponent) projectFormComponent: ProjectFormComponent;
 
   project: Project;
 
@@ -24,6 +28,13 @@ export class ProjectEditComponent implements OnInit {
     this.route.params.subscribe(param => {
       this.getProject(parseInt(param.projectId));
     });
+  }
+
+  canDeactivate() {
+    return equals(
+      this.projectFormComponent.initialValue,
+      this.projectFormComponent.projectForm.value
+    );
   }
 
   getProject(projectId: number) {
