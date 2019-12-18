@@ -15,7 +15,7 @@
       <div class="ui drop-zone segment">
         <div cdkDropList [id]="status.status" [cdkDropListData]="applications" (cdkDropListDropped)="drop($event)" class="ui selection list">
           <div *ngFor="let application of applications" class="item"
-             cdkDrag [cdkDragData]="application">
+             cdkDrag [cdkDragData]="application" [cdkDragDisabled]="mission.project.step !== 'hiring'">
             <div class="placeholder" *cdkDragPlaceholder></div>
             <i class="middle aligned icon" cdkDragHandle>
               <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
