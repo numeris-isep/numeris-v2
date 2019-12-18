@@ -10,6 +10,7 @@ import { TutorialComponent } from './tutorial/tutorial.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { ActivateGuard } from '../../core/guards/activate.guard';
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
+import { DeactivateGuard } from '../../core/guards/deactivate.guard';
 
 const studentRoutes: Routes = [
   {
@@ -24,11 +25,13 @@ const studentRoutes: Routes = [
     path: 'profil/modifier',
     component: ProfileEditComponent,
     canActivate: [AuthGuard],
+    canDeactivate: [DeactivateGuard],
   },
   {
     path: 'profil',
     component: ProfileComponent,
     canActivate: [AuthGuard],
+    canDeactivate: [DeactivateGuard],
     data: {
       title: 'Profil',
     }
@@ -69,6 +72,7 @@ const studentRoutes: Routes = [
     path: 'conditions-dutilisation',
     component: TermsOfUseComponent,
     canActivate: [AuthGuard],
+    canDeactivate: [DeactivateGuard],
     data: {
       title: 'Conditions d\'utilisation'
     }

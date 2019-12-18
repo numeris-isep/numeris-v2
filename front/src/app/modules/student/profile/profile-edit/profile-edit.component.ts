@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.service';
 import { User } from '../../../../core/classes/models/user';
 import { AuthService } from '../../../../core/http/auth/auth.service';
@@ -9,13 +9,17 @@ import { UserService } from '../../../../core/http/user.service';
 import { first } from 'rxjs/operators';
 import { handleFormErrors } from '../../../../core/functions/form-error-handler';
 import { AlertService } from '../../../../core/services/alert.service';
-import { dateToString } from '../../../../shared/utils';
+import { dateToString, equals } from '../../../../shared/utils';
+import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
+import { UserEditFormComponent } from '../../../../shared/components/forms/user-edit-form/user-edit-form.component';
 
 @Component({
   selector: 'app-profile-edit',
   templateUrl: './profile-edit.component.html'
 })
-export class ProfileEditComponent implements OnInit {
+export class ProfileEditComponent implements OnInit, CanComponentDeactivate {
+
+  @ViewChild(UserEditFormComponent) userEditFormComponent: UserEditFormComponent;
 
   user: User;
 
@@ -28,6 +32,13 @@ export class ProfileEditComponent implements OnInit {
 
   ngOnInit() {
     this.getCurrentUser();
+  }
+
+  canDeactivate() {
+    return equals(
+      this.userEditFormComponent.initialValue,
+      this.userEditFormComponent.userForm.value
+    );
   }
 
   getCurrentUser() {

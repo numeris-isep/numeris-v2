@@ -2,19 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../core/http/user.service';
 import { User } from '../../../core/classes/models/user';
 import { AuthService } from '../../../core/http/auth/auth.service';
+import { CanComponentDeactivate } from '../../../core/guards/deactivate.guard';
+import { equals } from '../../../shared/utils';
 
 @Component({
   selector: 'app-terms-of-use',
   templateUrl: './terms-of-use.component.html',
   styleUrls: ['./terms-of-use.component.css']
 })
-export class TermsOfUseComponent implements OnInit {
+export class TermsOfUseComponent implements OnInit, CanComponentDeactivate {
 
   user: User;
   loading: boolean =  false;
   accepted: boolean = false;
   allDisabled: boolean = false;
   allChecked: boolean = false;
+
+  initialValue: object;
 
   checkboxes = [
     { isChecked: false, isDisabled: false }, // checkbox 1
@@ -37,6 +41,17 @@ export class TermsOfUseComponent implements OnInit {
   ngOnInit() {
     this.getCurrentUser();
     this.check();
+  }
+
+  initForm() {
+    this.initialValue = this.checkboxes;
+  }
+
+  canDeactivate() {
+    return equals(
+      this.initialValue,
+      this.checkboxes
+    );
   }
 
   getCurrentUser() {
@@ -69,7 +84,8 @@ export class TermsOfUseComponent implements OnInit {
     this.loading = true;
 
     this.userService.updateUserTermsOfUse(this.user).subscribe(
-      _ => {
+      () => {
+        this.initForm();
         this.accepted = true;
         this.allDisabled = true;
       },

@@ -1,13 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../../../core/classes/models/user';
 import { AuthService } from '../../../core/http/auth/auth.service';
+import { ProfilePreferencesComponent } from './profile-preferences/profile-preferences.component';
+import { CanComponentDeactivate } from '../../../core/guards/deactivate.guard';
+import { equals } from '../../../shared/utils';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, CanComponentDeactivate {
+
+  @ViewChild(ProfilePreferencesComponent) profilePreferenceComponent: ProfilePreferencesComponent;
 
   user: User;
 
@@ -15,6 +20,13 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.getCurrentUser();
+  }
+
+  canDeactivate() {
+    return equals(
+      this.profilePreferenceComponent.initialValue,
+      this.profilePreferenceComponent.preferenceForm.value
+    );
   }
 
   getCurrentUser() {
