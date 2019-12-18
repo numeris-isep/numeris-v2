@@ -7,31 +7,33 @@ use App\Models\Project;
 use App\Models\Role;
 use App\Models\SocialContribution;
 use App\Models\User;
+use Carbon\Carbon;
+use function PHPSTORM_META\elementType;
 
 class PayslipCalculator implements CalculatorInterface
 {
     /**
      * Calculate payslips for projects of the given month
      *
-     * @param string $params
+     * @param string $month
      * @return array
      */
-    public function calculate($params): array
+    public function calculate($month): array
     {
         $payslips = [];
 
-        foreach ($this->sortBillsByUser(Project::findByMonth($params)) as $value) {
+        foreach ($this->sortBillsByUser(Project::findByMonth($month)) as $value) {
             $hour_amount        = $value['hour_amount'];
             $gross_amount       = $value['gross_amount'];
             $deductions         = $this->calculateDeductions($gross_amount);
             $net_amount         = $this->calculateNetAmount($gross_amount, $deductions['total_employee']);
-            $subscription_fee   = $this->calculateSubscriptionFee($value['user'], $net_amount, $params);
+            $subscription_fee   = $this->calculateSubscriptionFee($value['user'], $net_amount, $month);
             $final_amount       = $this->calculateFinalAmount($net_amount, $subscription_fee);
 
             if ($gross_amount > 0) {
                 $payslips[] = [
                     'user_id'                       => $value['user']->id,
-                    'month'                         => $params,
+                    'month'                         => $month,
                     'hour_amount'                   => $hour_amount,
                     'gross_amount'                  => $gross_amount,
                     'net_amount'                    => $this->calculateNetAmount($gross_amount, $deductions['total_employee']),
@@ -146,29 +148,70 @@ class PayslipCalculator implements CalculatorInterface
     }
 
     /**
-     * Determine user's subscription fee
+     * Determine user's subscription fee for the given month
      *
-     * The subscription fee will be applied if:
-     *      - the user did not paid his subscription yet
-     *          or
-     *      - the user paid the subscription fee at the given date of calculation.
+     * The fee is digressive, which means that the amount will change according
+     * to the number of paid months :
+     *      - first month   --> 10€
+     *      - second month  --> 5€
+     *      - third month   --> 5€
+     *      - after         --> 0€ (subscription fully paid)
      *
      * @param User $user
      * @param float $net_amount
-     * @param string $paid_at
+     * @param string $month
      * @return float
      */
-    private function calculateSubscriptionFee(User $user, float $net_amount, string $paid_at): float
+    private function calculateSubscriptionFee(User $user, float $net_amount, string $month): float
     {
-        if ($net_amount > 18) {
-            if ($user->subscription_paid_at) {
-                if ($user->subscription_paid_at === $paid_at) {
-                    return 18;
+        $dates_count = count($user->subscription_dates ?? []);
+
+        switch (true) {
+            case $dates_count == 0:
+                // Case where it is the first time we calculate payslips for the
+                // given user. This means he does not have any subscription_dates.
+                // We would update $user->subscription_date and return a fee amount
+                // only if the $net_amount > User::SUBSCRIPTION_0, this to prevent
+                // a negative $final_amount
+                if ($net_amount >= User::SUBSCRIPTION_0) {
+                    $user->update(['subscription_dates' => [$month]]);
+                    return User::SUBSCRIPTION_0;
                 }
-            } else {
-                $user->update(['subscription_paid_at' => $paid_at]);
-                return 18;
-            }
+                break;
+
+            case $dates_count <= 3:
+                if (is_int($index = array_search($month, $user->subscription_dates))) {
+                    // Case where we are recalculating payslips so we need to find the
+                    // index of $month in $user->subscription_dates to determine the
+                    // correct subscription amount
+
+                    if ($net_amount > $amount = User::subscriptionMatrix()[$index]) {
+                        // No need to update $user->subscription_dates because this is
+                        // a recalculation. We only return the same fee $amount than
+                        // the previous calculation(s)
+                        return $amount;
+                    }
+                } else {
+                    $calculation_month  = Carbon::parse($month);
+                    $last_month         = Carbon::parse($user->subscription_dates[$dates_count - 1]);
+
+                    // We consider that another subscription fee will be applied only
+                    // if $month is after the last $user->subscription_date
+                    if ($calculation_month->isAfter($last_month) && $dates_count < 3) {
+                        // Here we are also preventing a negative $final_amount (see above)
+                        if ($net_amount > $amount = User::subscriptionMatrix()[$dates_count]) {
+                            $user->update(['subscription_dates' => array_merge(
+                                $user->subscription_dates,
+                                [$month]
+                            )]);
+
+                            return $amount;
+                        }
+                    }
+                }
+                break;
+
+            default: break;
         }
 
         return 0;

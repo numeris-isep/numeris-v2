@@ -103,13 +103,13 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      */
-    public function testDeveloperUpdatingPayslipsCheckUserSubscription()
+    public function testDeveloperUpdatingPayslipsCheckUserSubscriptionFirstMonth()
     {
+        $month = '2000-01-01 00:00:00';
         $test_data = $this->clientAndProjectAndMissionAndConventionWithBillsProvider();
         $user = $test_data['user'];
-        $month = '2000-01-01 00:00:00';
 
-        $this->assertNull(User::findByEmail($user->email)->subscription_paid_at);
+        $this->assertNull(User::findByEmail($user->email)->subscription_dates);
 
         $res = $this->json('PUT', route('payslips.update'), ['month' => $month])
             ->assertStatus(JsonResponse::HTTP_OK);
@@ -117,56 +117,179 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         $subscription_fee = json_decode($res->getContent(), true)[0]['subscriptionFee'];
 
         $user = User::findByEmail($user->email);
-        $this->assertEquals($subscription_fee, 18);
-        $this->assertNotNull($user->subscription_paid_at);
-        $this->assertEquals($user->subscription_paid_at, $month);
+        $this->assertEquals($subscription_fee, User::SUBSCRIPTION_0);
+        $this->assertEquals($user->subscription_dates, [$month]);
     }
 
     /**
      * @group developer
      */
-    public function testDeveloperUpdatingPayslipsCheckUserSubscriptionPaidAtMonth()
+    public function testDeveloperUpdatingPayslipsCheckUserSubscriptionSecondMonth()
     {
-        $test_data = $this->clientAndProjectAndMissionAndConventionWithBillsProvider();
+        $first_month = '2000-01-01 00:00:00';
+        $second_month = '2000-02-01 00:00:00';
+        $test_data = $this->clientAndProjectAndMissionAndConventionWithBillsProvider(null, $second_month);
         $user = $test_data['user'];
-        $month = '2000-01-01 00:00:00';
 
-        User::findByEmail($user->email)->update(['subscription_paid_at' => $month]);
+        $user->update(['subscription_dates' => [$first_month]]);
 
-        $res = $this->json('PUT', route('payslips.update'), ['month' => $month])
+        $this->assertEquals(User::findByEmail($user->email)->subscription_dates, [$first_month]);
+
+        $res = $this->json('PUT', route('payslips.update'), ['month' => $second_month])
             ->assertStatus(JsonResponse::HTTP_OK);
 
         $subscription_fee = json_decode($res->getContent(), true)[0]['subscriptionFee'];
 
         $user = User::findByEmail($user->email);
-        $this->assertEquals($subscription_fee, 18);
-        $this->assertNotNull($user->subscription_paid_at);
-        $this->assertEquals($user->subscription_paid_at, $month);
+        $this->assertEquals($subscription_fee, User::SUBSCRIPTION_1);
+        $this->assertEquals($user->subscription_dates, [$first_month, $second_month]);
     }
 
     /**
      * @group developer
      */
-    public function testDeveloperUpdatingPayslipsCheckUserSubscriptionPaidAtOtherMonth()
+    public function testDeveloperUpdatingPayslipsCheckUserSubscriptionThirdMonth()
     {
-        $test_data = $this->clientAndProjectAndMissionAndConventionWithBillsProvider();
+        $first_month = '2000-01-01 00:00:00';
+        $second_month = '2000-02-01 00:00:00';
+        $third_month = '2000-03-01 00:00:00';
+        $test_data = $this->clientAndProjectAndMissionAndConventionWithBillsProvider(null, $third_month);
         $user = $test_data['user'];
-        $month = '2000-01-01 00:00:00';
-        $subscription_paid_at = '2000-02-01 00:00:00';
+
+        $user->update(['subscription_dates' => [$first_month, $second_month]]);
+
+        $this->assertEquals(User::findByEmail($user->email)->subscription_dates, [$first_month, $second_month]);
+
+        $res = $this->json('PUT', route('payslips.update'), ['month' => $third_month])
+            ->assertStatus(JsonResponse::HTTP_OK);
+
+        $subscription_fee = json_decode($res->getContent(), true)[0]['subscriptionFee'];
 
         $user = User::findByEmail($user->email);
-        $user->update(['subscription_paid_at' => $subscription_paid_at]);
-        $this->assertEquals($user->subscription_paid_at, $subscription_paid_at);
+        $this->assertEquals($subscription_fee, User::SUBSCRIPTION_2);
+        $this->assertEquals($user->subscription_dates, [$first_month, $second_month, $third_month]);
+    }
 
-        $res = $this->json('PUT', route('payslips.update'), ['month' => $month])
+    /**
+     * @group developer
+     */
+    public function testDeveloperUpdatingPayslipsCheckUserSubscriptionFourthMonth()
+    {
+        $first_month = '2000-01-01 00:00:00';
+        $second_month = '2000-02-01 00:00:00';
+        $third_month = '2000-03-01 00:00:00';
+        $fourth_month = '2000-04-01 00:00:00';
+        $test_data = $this->clientAndProjectAndMissionAndConventionWithBillsProvider(null, $fourth_month);
+        $user = $test_data['user'];
+
+        $user->update(['subscription_dates' => [$first_month, $second_month, $third_month]]);
+
+        $this->assertEquals(User::findByEmail($user->email)->subscription_dates, [$first_month, $second_month, $third_month]);
+
+        $res = $this->json('PUT', route('payslips.update'), ['month' => $fourth_month])
             ->assertStatus(JsonResponse::HTTP_OK);
 
         $subscription_fee = json_decode($res->getContent(), true)[0]['subscriptionFee'];
 
         $user = User::findByEmail($user->email);
         $this->assertEquals($subscription_fee, 0);
-        $this->assertNotNull($user->subscription_paid_at);
-        $this->assertEquals($user->subscription_paid_at, $subscription_paid_at);
+        $this->assertEquals($user->subscription_dates, [$first_month, $second_month, $third_month]);
+    }
+
+    /**
+     * @group developer
+     */
+    public function testDeveloperUpdatingPayslipsCheckUserSubscriptionPreviousMonth()
+    {
+        $first_month = '2000-02-01 00:00:00';
+        $second_month = '2000-01-01 00:00:00';
+        $test_data = $this->clientAndProjectAndMissionAndConventionWithBillsProvider(null, $second_month);
+        $user = $test_data['user'];
+
+        $user->update(['subscription_dates' => [$first_month]]);
+
+        $this->assertEquals(User::findByEmail($user->email)->subscription_dates, [$first_month]);
+
+        $res = $this->json('PUT', route('payslips.update'), ['month' => $second_month])
+            ->assertStatus(JsonResponse::HTTP_OK);
+
+        $subscription_fee = json_decode($res->getContent(), true)[0]['subscriptionFee'];
+
+        $user = User::findByEmail($user->email);
+        $this->assertEquals($subscription_fee, 0);
+        $this->assertEquals($user->subscription_dates, [$first_month]);
+    }
+
+    /**
+     * @group developer
+     */
+    public function testDeveloperUpdatingPayslipsCheckUserSubscriptionSameFirstMonth()
+    {
+        $month = '2000-01-01 00:00:00';
+        $test_data = $this->clientAndProjectAndMissionAndConventionWithBillsProvider();
+        $user = $test_data['user'];
+
+        $user->update(['subscription_dates' => [$month]]);
+
+        $this->assertEquals(User::findByEmail($user->email)->subscription_dates, [$month]);
+
+        $res = $this->json('PUT', route('payslips.update'), ['month' => $month])
+            ->assertStatus(JsonResponse::HTTP_OK);
+
+        $subscription_fee = json_decode($res->getContent(), true)[0]['subscriptionFee'];
+
+        $user = User::findByEmail($user->email);
+        $this->assertEquals($subscription_fee, User::SUBSCRIPTION_0);
+        $this->assertEquals($user->subscription_dates, [$month]);
+    }
+
+    /**
+     * @group developer
+     */
+    public function testDeveloperUpdatingPayslipsCheckUserSubscriptionSameSecondMonth()
+    {
+        $first_month = '2000-01-01 00:00:00';
+        $second_month = '2000-02-01 00:00:00';
+        $test_data = $this->clientAndProjectAndMissionAndConventionWithBillsProvider(null, $second_month);
+        $user = $test_data['user'];
+
+        $user->update(['subscription_dates' => [$first_month, $second_month]]);
+
+        $this->assertEquals(User::findByEmail($user->email)->subscription_dates, [$first_month, $second_month]);
+
+        $res = $this->json('PUT', route('payslips.update'), ['month' => $second_month])
+            ->assertStatus(JsonResponse::HTTP_OK);
+
+        $subscription_fee = json_decode($res->getContent(), true)[0]['subscriptionFee'];
+
+        $user = User::findByEmail($user->email);
+        $this->assertEquals($subscription_fee, User::SUBSCRIPTION_1);
+        $this->assertEquals($user->subscription_dates, [$first_month, $second_month]);
+    }
+
+    /**
+     * @group developer
+     */
+    public function testDeveloperUpdatingPayslipsCheckUserSubscriptionSameThirdMonth()
+    {
+        $first_month = '2000-01-01 00:00:00';
+        $second_month = '2000-02-01 00:00:00';
+        $third_month = '2000-03-01 00:00:00';
+        $test_data = $this->clientAndProjectAndMissionAndConventionWithBillsProvider(null, $third_month);
+        $user = $test_data['user'];
+
+        $user->update(['subscription_dates' => [$first_month, $second_month, $third_month]]);
+
+        $this->assertEquals(User::findByEmail($user->email)->subscription_dates, [$first_month, $second_month, $third_month]);
+
+        $res = $this->json('PUT', route('payslips.update'), ['month' => $third_month])
+            ->assertStatus(JsonResponse::HTTP_OK);
+
+        $subscription_fee = json_decode($res->getContent(), true)[0]['subscriptionFee'];
+
+        $user = User::findByEmail($user->email);
+        $this->assertEquals($subscription_fee, User::SUBSCRIPTION_2);
+        $this->assertEquals($user->subscription_dates, [$first_month, $second_month, $third_month]);
     }
 
     /**
@@ -185,7 +308,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         $this->assertEquals(160, $content['grossAmount']);
         $this->assertEquals($content['grossAmount'] - $content['deductionAmount'], $content['netAmount']);
         $this->assertEquals($content['netAmount'] - $content['subscriptionFee'], $content['finalAmount']);
-        $this->assertEquals(18, $content['subscriptionFee']);
+        $this->assertEquals(User::SUBSCRIPTION_0, $content['subscriptionFee']);
         $this->assertEquals(33.3444, $content['deductionAmount']);
         $this->assertEquals(52.5216, $content['employerDeductionAmount']);
     }
@@ -206,7 +329,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         $this->assertEquals(200, $content['grossAmount']);
         $this->assertEquals($content['grossAmount'] - $content['deductionAmount'], $content['netAmount']);
         $this->assertEquals($content['netAmount'] - $content['subscriptionFee'], $content['finalAmount']);
-        $this->assertEquals(18, $content['subscriptionFee']);
+        $this->assertEquals(User::SUBSCRIPTION_0, $content['subscriptionFee']);
         $this->assertEquals(41.680499999999995, $content['deductionAmount']);
         $this->assertEquals(65.652, $content['employerDeductionAmount']);
     }

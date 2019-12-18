@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use phpDocumentor\Reflection\Types\Self_;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -19,6 +20,16 @@ class User extends Authenticatable implements JWTSubject
     use Notifiable,
         OnEventsTrait,
         SoftDeletes;
+
+    const SUBSCRIPTION_0 = 10;
+    const SUBSCRIPTION_1 = 5;
+    const SUBSCRIPTION_2 = 5;
+
+    private static $subscriptionMatrix = [
+        self::SUBSCRIPTION_0,
+        self::SUBSCRIPTION_1,
+        self::SUBSCRIPTION_2,
+    ];
 
     protected $fillable = [
         // One-to-One relations
@@ -29,7 +40,7 @@ class User extends Authenticatable implements JWTSubject
         'activated',
         'tou_accepted',
         'email_verified_at',
-        'subscription_paid_at',
+        'subscription_dates',
         'email',
         'password',
         'first_name',
@@ -55,9 +66,15 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     protected $casts = [
-        'activated'     => 'boolean',
-        'tou_accepted'  => 'boolean',
+        'activated'             => 'boolean',
+        'tou_accepted'          => 'boolean',
+        'subscription_dates'    => 'array',
     ];
+
+    public static function subscriptionMatrix()
+    {
+        return static::$subscriptionMatrix;
+    }
 
     public function getJWTIdentifier()
     {
