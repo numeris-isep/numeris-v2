@@ -42,7 +42,7 @@
 
   <app-button hiddenIcon="save" attachment="bottom attached"
               behaviour="fluid" color="positive" size="small"
-              [isDisabled]="preferenceForm.pristine" [isLoading]="loading"
+              [isDisabled]="isDisabled()" [isLoading]="loading"
               (submit)="updatePreference()">
     Sauvegarder
   </app-button>

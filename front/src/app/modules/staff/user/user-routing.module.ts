@@ -6,6 +6,7 @@ import { AuthGuard } from '../../../core/guards/auth.guard';
 import { UserIndexComponent } from './user-index/user-index.component';
 import { UserShowComponent } from './user-show/user-show.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { DeactivateGuard } from '../../../core/guards/deactivate.guard';
 
 const userRoutes: Routes = [
   {
@@ -23,10 +24,12 @@ const userRoutes: Routes = [
       {
         path: ':userId/modifier',
         component: UserEditComponent,
+        canDeactivate: [DeactivateGuard],
       },
       {
         path: ':userId',
         component: UserShowComponent,
+        canDeactivate: [DeactivateGuard],
       }
     ]
   },

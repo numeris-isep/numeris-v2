@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../../core/http/user.service';
 import { TitleService } from '../../../../core/services/title.service';
@@ -6,13 +6,18 @@ import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.servic
 import { User } from '../../../../core/classes/models/user';
 import { AuthService } from '../../../../core/http/auth/auth.service';
 import { AlertService } from '../../../../core/services/alert.service';
+import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
+import { ProfilePreferencesComponent } from '../../../student/profile/profile-preferences/profile-preferences.component';
+import { equals } from '../../../../shared/utils';
 
 @Component({
   selector: 'app-user-show',
   templateUrl: './user-show.component.html',
   styleUrls: ['./user-show.component.css']
 })
-export class UserShowComponent implements OnInit {
+export class UserShowComponent implements OnInit, CanComponentDeactivate {
+
+  @ViewChild(ProfilePreferencesComponent) profilePreferenceComponent: ProfilePreferencesComponent;
 
   user: User;
   currentUserId: number;
@@ -34,6 +39,13 @@ export class UserShowComponent implements OnInit {
     this.route.params.subscribe(param => {
       this.getUser(parseInt(param.userId));
     });
+  }
+
+  canDeactivate() {
+    return equals(
+      this.profilePreferenceComponent.initialValue,
+      this.profilePreferenceComponent.preferenceForm.value
+    );
   }
 
   getUser(userId: number) {

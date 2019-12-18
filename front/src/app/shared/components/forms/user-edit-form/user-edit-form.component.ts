@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { User } from '../../../../core/classes/models/user';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,13 +12,15 @@ import { handleFormErrors } from '../../../../core/functions/form-error-handler'
   selector: 'app-user-edit-form',
   templateUrl: './user-edit-form.component.html'
 })
-export class UserEditFormComponent implements OnInit {
+export class UserEditFormComponent implements OnInit, AfterViewInit {
 
   @Input() user: User;
   @Input() ownProfile: boolean = true;
+
   returnUrl: string = '/profil';
   data: User;
   userForm: FormGroup;
+  initialValue: object;
   loading: boolean = false;
   submitted: boolean = false;
 
@@ -33,6 +35,10 @@ export class UserEditFormComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     this.returnUrl = this.ownProfile ? this.returnUrl : `/utilisateurs/${this.user.id}`;
+  }
+
+  ngAfterViewInit() {
+    this.initialValue = this.userForm.value;
   }
 
   initForm() {
