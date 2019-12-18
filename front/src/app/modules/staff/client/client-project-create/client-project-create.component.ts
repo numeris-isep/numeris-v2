@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
-import { ClientService } from "../../../../core/http/client.service";
-import { TitleService } from "../../../../core/services/title.service";
-import { BreadcrumbsService } from "../../../../core/services/breadcrumbs.service";
-import { Client } from "../../../../core/classes/models/client";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ClientService } from '../../../../core/http/client.service';
+import { TitleService } from '../../../../core/services/title.service';
+import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.service';
+import { Client } from '../../../../core/classes/models/client';
+import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
+import { equals } from '../../../../shared/utils';
+import { ProjectFormComponent } from '../../project/project-form/project-form.component';
 
 @Component({
   selector: 'app-client-project-create',
   templateUrl: './client-project-create.component.html'
 })
-export class ClientProjectCreateComponent implements OnInit {
+export class ClientProjectCreateComponent implements OnInit, CanComponentDeactivate {
+
+  @ViewChild(ProjectFormComponent) projectFormComponent: ProjectFormComponent;
 
   client: Client;
 
@@ -24,6 +29,13 @@ export class ClientProjectCreateComponent implements OnInit {
     this.route.params.subscribe(param => {
       this.getClient(parseInt(param.clientId));
     });
+  }
+
+  canDeactivate() {
+    return equals(
+      this.projectFormComponent.initialValue,
+      this.projectFormComponent.projectForm.value
+    );
   }
 
   getClient(clientId: number) {

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { Convention } from '../../../../core/classes/models/convention';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from '../../../../core/services/alert.service';
@@ -15,13 +15,14 @@ import { Rate } from '../../../../core/classes/models/rate';
   templateUrl: './convention-form.component.html',
   styleUrls: ['./convention-form.component.css'],
 })
-export class ConventionFormComponent implements OnInit {
+export class ConventionFormComponent implements OnInit, AfterViewInit {
 
   @Input() client: Client;
   @Input() convention: Convention;
 
   conventionName: string = '';
   conventionForm: FormGroup;
+  initialValue: object;
   ratesFormArray: FormArray = this.fb.array([]);
   loading: boolean = false;
   submitted: boolean = false;
@@ -35,7 +36,14 @@ export class ConventionFormComponent implements OnInit {
 
   ngOnInit() {
     this.getConventionName();
+    this.initForm();
+  }
 
+  ngAfterViewInit() {
+    this.initialValue = this.conventionForm.value;
+  }
+
+  initForm() {
     this.conventionForm = this.fb.group({
       rates : this.ratesFormArray,
     });

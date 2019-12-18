@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { Contact } from '../../../../core/classes/models/contact';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContactService } from '../../../../core/http/contact.service';
@@ -12,11 +12,12 @@ import { handleFormErrors } from '../../../../core/functions/form-error-handler'
   selector: 'app-contact-form',
   templateUrl: './contact-form.component.html'
 })
-export class ContactFormComponent implements OnInit {
+export class ContactFormComponent implements OnInit, AfterViewInit {
 
   @Input() contact: Contact;
 
   contactForm: FormGroup;
+  initialValue: object;
   loading: boolean = false;
   submitted: boolean = false;
 
@@ -28,6 +29,14 @@ export class ContactFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.initForm();
+  }
+
+  ngAfterViewInit() {
+    this.initialValue = this.contactForm.value;
+  }
+
+  initForm() {
     this.contactForm = this.fb.group({
       first_name: [
         this.contact ? this.contact.firstName : '',

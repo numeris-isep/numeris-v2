@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { Project } from '../../../../core/classes/models/project';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProjectService } from '../../../../core/http/project.service';
@@ -17,7 +17,7 @@ import { AlertService } from '../../../../core/services/alert.service';
   selector: 'app-project-form',
   templateUrl: './project-form.component.html'
 })
-export class ProjectFormComponent implements OnInit {
+export class ProjectFormComponent implements OnInit, AfterViewInit {
 
   @Input() project: Project;
   @Input() client: Client;
@@ -25,6 +25,7 @@ export class ProjectFormComponent implements OnInit {
   conventions: Convention[];
 
   projectForm: FormGroup;
+  initialValue: object;
   loading: boolean = false;
   submitted: boolean = false;
 
@@ -40,7 +41,14 @@ export class ProjectFormComponent implements OnInit {
   ngOnInit() {
     this.getClients();
     this.getConventions(this.client || (this.project ? this.project.client : null));
+    this.initForm();
+  }
 
+  ngAfterViewInit() {
+    this.initialValue = this.projectForm.value;
+  }
+
+  initForm() {
     this.projectForm = this.fb.group({
       name: [
         this.project ? this.project.name : '',

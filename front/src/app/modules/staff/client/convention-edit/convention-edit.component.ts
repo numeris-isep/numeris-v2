@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Convention } from '../../../../core/classes/models/convention';
 import { Client } from '../../../../core/classes/models/client';
 import { ClientService } from '../../../../core/http/client.service';
@@ -6,12 +6,17 @@ import { ConventionService } from '../../../../core/http/convention.service';
 import { ActivatedRoute } from '@angular/router';
 import { TitleService } from '../../../../core/services/title.service';
 import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.service';
+import { ConventionFormComponent } from '../convention-form/convention-form.component';
+import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
+import { equals } from '../../../../shared/utils';
 
 @Component({
   selector: 'app-convention-edit',
   templateUrl: './convention-edit.component.html'
 })
-export class ConventionEditComponent implements OnInit {
+export class ConventionEditComponent implements OnInit, CanComponentDeactivate {
+
+  @ViewChild(ConventionFormComponent) conventionFormComponent: ConventionFormComponent;
 
   client: Client;
   convention: Convention;
@@ -29,6 +34,13 @@ export class ConventionEditComponent implements OnInit {
       this.getClient(parseInt(param.clientId));
       this.getConvention(parseInt(param.conventionId));
     });
+  }
+
+  canDeactivate() {
+    return equals(
+      this.conventionFormComponent.initialValue,
+      this.conventionFormComponent.conventionForm.value
+    );
   }
 
   getClient(clientId: number) {

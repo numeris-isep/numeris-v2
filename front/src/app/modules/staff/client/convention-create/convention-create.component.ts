@@ -1,17 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ClientService } from '../../../../core/http/client.service';
 import { TitleService } from '../../../../core/services/title.service';
 import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.service';
 import { Client } from '../../../../core/classes/models/client';
+import { ConventionFormComponent } from '../convention-form/convention-form.component';
+import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
+import { equals } from '../../../../shared/utils';
 
 @Component({
   selector: 'app-convention-create',
   templateUrl: './convention-create.component.html'
 })
-export class ConventionCreateComponent implements OnInit {
+export class ConventionCreateComponent implements OnInit, CanComponentDeactivate {
 
   client: Client;
+
+  @ViewChild(ConventionFormComponent) conventionFormComponent: ConventionFormComponent;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,6 +29,13 @@ export class ConventionCreateComponent implements OnInit {
     this.route.params.subscribe(param => {
       this.getClient(parseInt(param.clientId));
     });
+  }
+
+  canDeactivate() {
+    return equals(
+      this.conventionFormComponent.initialValue,
+      this.conventionFormComponent.conventionForm.value
+    );
   }
 
   getClient(clientId: number) {

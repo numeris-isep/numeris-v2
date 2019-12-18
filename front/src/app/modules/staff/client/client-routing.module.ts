@@ -29,6 +29,7 @@ const clientRoutes: Routes = [
       {
         path: 'nouveau',
         component: ClientCreateComponent,
+        canDeactivate: [DeactivateGuard],
         data: {
           title: 'Nouveau client'
         }
@@ -47,6 +48,7 @@ const clientRoutes: Routes = [
           {
             path: 'nouveau',
             component: ContactCreateComponent,
+            canDeactivate: [DeactivateGuard],
             data: {
               title: 'Nouveau contact client'
             },
@@ -54,6 +56,7 @@ const clientRoutes: Routes = [
           {
             path: ':contactId/modifier',
             component: ContactEditComponent,
+            canDeactivate: [DeactivateGuard],
           }
         ]
       },
@@ -65,14 +68,17 @@ const clientRoutes: Routes = [
       {
         path: ':clientId/projets/nouveau',
         component: ClientProjectCreateComponent,
+        canDeactivate: [DeactivateGuard],
       },
       {
         path: ':clientId/conventions/:conventionId/modifier',
         component: ConventionEditComponent,
+        canDeactivate: [DeactivateGuard],
       },
       {
         path: ':clientId/conventions/nouvelle',
         component: ConventionCreateComponent,
+        canDeactivate: [DeactivateGuard],
       },
       {
         path: ':clientId/conventions',

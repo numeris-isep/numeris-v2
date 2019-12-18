@@ -1,17 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Contact } from "../../../../core/classes/models/contact";
 import { ActivatedRoute } from "@angular/router";
 import { TitleService } from "../../../../core/services/title.service";
 import { BreadcrumbsService } from "../../../../core/services/breadcrumbs.service";
 import { ContactService } from "../../../../core/http/contact.service";
+import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
+import { equals } from '../../../../shared/utils';
+import { ContactFormComponent } from '../contact-form/contact-form.component';
 
 @Component({
   selector: 'app-contact-edit',
   templateUrl: './contact-edit.component.html'
 })
-export class ContactEditComponent implements OnInit {
+export class ContactEditComponent implements OnInit, CanComponentDeactivate {
 
   contact: Contact;
+
+  @ViewChild(ContactFormComponent) contactFormComponent: ContactFormComponent;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,6 +29,13 @@ export class ContactEditComponent implements OnInit {
     this.route.params.subscribe(param => {
       this.getContact(parseInt(param.contactId));
     });
+  }
+
+  canDeactivate() {
+    return equals(
+      this.contactFormComponent.initialValue,
+      this.contactFormComponent.contactForm.value
+    );
   }
 
   getContact(contactId: number) {
