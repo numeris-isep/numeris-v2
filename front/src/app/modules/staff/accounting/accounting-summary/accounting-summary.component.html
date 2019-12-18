@@ -10,7 +10,7 @@
 
 <ng-template #content>
   <div class="content">
-    <div class="ui blue ribbon label">
+    <div class="ui {{ statisticByMonth.payslips.length > 0 || statisticByMonth.invoices.length > 0 ? 'blue' : ''  }} ribbon label">
       <i class="calendar alternate icon"></i> {{ month.locale('fr').format('MMMM Y') | titlecase }}
     </div>
     <img class="right floated mini ui image" src="assets/logos/numeris-blue.png" alt="Logo de Numéris">
