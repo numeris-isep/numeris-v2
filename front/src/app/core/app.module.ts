@@ -22,8 +22,9 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
 import { StaffModule } from '../modules/staff/staff.module';
 import { ShowcaseModule } from '../modules/showcase/showcase.module';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
-import { AuthService } from './http/auth/auth.service';
-import { ActivatedRouteSnapshot, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../../environments/environment';
 
 // Setting to locale to 'fr'
 registerLocaleData(localeFr, 'fr');
@@ -43,6 +44,7 @@ registerLocaleData(localeFr, 'fr');
     StaffModule,
     SharedModule,
     AppRoutingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   declarations: [
     AppComponent,
@@ -64,17 +66,10 @@ registerLocaleData(localeFr, 'fr');
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule implements OnInit {
+export class AppModule {
 
-  constructor(
-    private router: Router,
-    private authService: AuthService,
-  ) {
+  constructor(private router: Router) {
     // Uncomment the following line to display the router configuration (useful to see if the routes are in the proper order)
     // console.log('Routes: ', JSON.stringify(router.config, undefined, 2));
-  }
-
-  ngOnInit() {
-    this.authService.checkAuth();
   }
 }

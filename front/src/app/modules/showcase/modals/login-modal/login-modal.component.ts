@@ -52,16 +52,15 @@ export class LoginModalComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    // stop here if form is invalid
     if (this.loginForm.invalid) { return; }
 
     this.loading = true;
     this.authService.login(this.f.email.value, this.f.password.value)
       .pipe(first())
       .subscribe(
-        _ => {
+        () => {
           this.alertService.success(['Vous êtes connecté !'], null, true);
-          this.loginModal.approve(undefined); // make the modal disappear
+          this.loginModal.approve(undefined);
           this.router.navigate(
             [this.returnUrl.split('?')[0] !== '/' ? this.returnUrl.split('?')[0] : '/tableau-de-bord'],
             { queryParams: this.getQueryParameters() }
