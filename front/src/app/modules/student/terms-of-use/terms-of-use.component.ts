@@ -52,7 +52,7 @@ export class TermsOfUseComponent implements OnInit, CanComponentDeactivate {
       return equals(
         this.initialValue,
         this.checkboxes
-      );
+      ) || this.user.touAccepted;
     } catch (e) {
       return true;
     }
