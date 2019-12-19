@@ -40,8 +40,6 @@ export class ProfilePreferencesComponent implements OnInit, AfterViewInit {
       on_acceptance:  [this.preference.onAcceptance || false, Validators.required],
       on_refusal:     [this.preference.onRefusal || false, Validators.required],
       on_document:    [this.preference.onDocument || false, Validators.required],
-      by_email:       [this.preference.byEmail || false, Validators.required],
-      by_push:        [this.preference.byPush || false, Validators.required],
     });
   }
 

@@ -20,8 +20,6 @@ class PreferenceResource extends JsonResource
             'onAcceptance'      => $this->on_acceptance,
             'onRefusal'         => $this->on_refusal,
             'onDocument'        => $this->on_document,
-            'byEmail'           => $this->by_email,
-            'byPush'            => $this->by_push
         ];
     }
 }

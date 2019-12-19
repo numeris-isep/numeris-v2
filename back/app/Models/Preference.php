@@ -13,8 +13,6 @@ class Preference extends Model
         'on_acceptance',
         'on_refusal',
         'on_document',
-        'by_email',
-        'by_push',
     ];
 
     protected static $statusToAttribute = [
@@ -27,8 +25,6 @@ class Preference extends Model
         'on_acceptance'     => 'boolean',
         'on_refusal'        => 'boolean',
         'on_document'       => 'boolean',
-        'by_email'          => 'boolean',
-        'by_push'           => 'boolean',
     ];
 
     protected $hidden = [
@@ -52,8 +48,6 @@ class Preference extends Model
             'on_acceptance'     => true,
             'on_refusal'        => false,
             'on_document'       => true,
-            'by_email'          => true,
-            'by_push'           => false,
         ]);
     }
 }

@@ -101,8 +101,6 @@ class MakeUser extends Command
             'on_acceptance'     => true,
             'on_refusal'        => true,
             'on_document'       => true,
-            'by_email'          => true,
-            'by_push'           => true,
         ])->user()->save($user);
 
         // Check if it worked

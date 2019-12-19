@@ -22,8 +22,6 @@ class UpdateUpdateStudentTest extends TestCaseWithAuth
             'on_acceptance'     => true,
             'on_refusal'        => true,
             'on_document'       => true,
-            'by_email'          => true,
-            'by_push'           => true,
         ];
 
         $this->json('PUT', route('preferences.update', ['preference_id' => $preference->id]), $data)
@@ -33,8 +31,6 @@ class UpdateUpdateStudentTest extends TestCaseWithAuth
                 'onAcceptance',
                 'onRefusal',
                 'onDocument',
-                'byEmail',
-                'byPush',
             ]);
     }
 
@@ -50,8 +46,6 @@ class UpdateUpdateStudentTest extends TestCaseWithAuth
             'on_acceptance'     => true,
             'on_refusal'        => true,
             'on_document'       => true,
-            'by_email'          => true,
-            'by_push'           => true,
         ];
 
         $this->json('PUT', route('preferences.update', ['preference_id' => $preference->id]), $data)
@@ -71,8 +65,6 @@ class UpdateUpdateStudentTest extends TestCaseWithAuth
             'on_acceptance'     => true,
             'on_refusal'        => true,
             'on_document'       => true,
-            'by_email'          => true,
-            'by_push'           => true,
         ];
 
         $this->json('PUT', route('preferences.update', ['preference_id' => $preference->id]), $data)
@@ -92,8 +84,6 @@ class UpdateUpdateStudentTest extends TestCaseWithAuth
             'on_acceptance'     => true,
             'on_refusal'        => true,
             'on_document'       => true,
-            'by_email'          => true,
-            'by_push'           => true,
         ];
 
         $this->json('PUT', route('preferences.update', ['preference_id' => $preference->id]), $data)
@@ -113,8 +103,6 @@ class UpdateUpdateStudentTest extends TestCaseWithAuth
             'on_acceptance'     => true,
             'on_refusal'        => true,
             'on_document'       => true,
-            'by_email'          => true,
-            'by_push'           => true,
         ];
 
         $this->json('PUT', route('preferences.update', ['preference_id' => $preference->id]), $data)

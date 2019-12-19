@@ -22,8 +22,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             'on_acceptance'     => true,
             'on_refusal'        => true,
             'on_document'       => true,
-            'by_email'          => true,
-            'by_push'           => true,
         ];
 
         $this->json('PUT', route('preferences.update', ['preference_id' => $preference->id]), $data)
@@ -33,8 +31,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'onAcceptance',
                 'onRefusal',
                 'onDocument',
-                'byEmail',
-                'byPush',
             ]);
     }
 
@@ -50,8 +46,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             'on_acceptance'     => true,
             'on_refusal'        => true,
             'on_document'       => true,
-            'by_email'          => true,
-            'by_push'           => true,
         ];
 
         $this->json('PUT', route('preferences.update', ['preference_id' => $preference->id]), $data)
@@ -61,8 +55,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'onAcceptance',
                 'onRefusal',
                 'onDocument',
-                'byEmail',
-                'byPush',
             ]);
     }
 
@@ -78,8 +70,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             'on_acceptance'     => true,
             'on_refusal'        => true,
             'on_document'       => true,
-            'by_email'          => true,
-            'by_push'           => true,
         ];
 
         $this->json('PUT', route('preferences.update', ['preference_id' => $preference->id]), $data)
@@ -89,8 +79,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'onAcceptance',
                 'onRefusal',
                 'onDocument',
-                'byEmail',
-                'byPush',
             ]);
     }
 
@@ -106,8 +94,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             'on_acceptance'     => true,
             'on_refusal'        => true,
             'on_document'       => true,
-            'by_email'          => true,
-            'by_push'           => true,
         ];
 
         $this->json('PUT', route('preferences.update', ['preference_id' => $preference->id]), $data)
@@ -117,8 +103,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'onAcceptance',
                 'onRefusal',
                 'onDocument',
-                'byEmail',
-                'byPush',
             ]);
     }
 
@@ -134,8 +118,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             'on_acceptance'     => true,
             'on_refusal'        => true,
             'on_document'       => true,
-            'by_email'          => true,
-            'by_push'           => true,
         ];
 
         $this->json('PUT', route('preferences.update', ['preference_id' => $preference->id]), $data)
@@ -145,8 +127,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'onAcceptance',
                 'onRefusal',
                 'onDocument',
-                'byEmail',
-                'byPush',
             ]);
     }
 
@@ -162,8 +142,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             'on_acceptance'     => true,
             'on_refusal'        => true,
             'on_document'       => true,
-            'by_email'          => true,
-            'by_push'           => true,
         ];
 
         $this->json('PUT', route('preferences.update', ['preference_id' => $preference_id]), $data)
@@ -185,8 +163,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'on_acceptance',
                 'on_refusal',
                 'on_document',
-                'by_email',
-                'by_push',
             ]);
     }
 }

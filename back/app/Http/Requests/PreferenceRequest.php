@@ -32,8 +32,6 @@ class PreferenceRequest extends AbstractFormRequest
             'on_acceptance'     => 'required|boolean',
             'on_refusal'        => 'required|boolean',
             'on_document'       => 'required|boolean',
-            'by_email'          => 'required|boolean',
-            'by_push'           => 'required|boolean',
         ];
     }
 }

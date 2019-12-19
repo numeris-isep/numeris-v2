@@ -5,7 +5,5 @@ export class Preference {
   onAcceptance: boolean;
   onRefusal: boolean;
   onDocument: boolean;
-  byEmail: boolean;
-  byPush: boolean;
 
 }

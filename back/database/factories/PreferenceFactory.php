@@ -9,8 +9,6 @@ $factory->define(Preference::class, function (Faker $faker) {
         'on_acceptance'     => $faker->numberBetween(0, 1),
         'on_refusal'        => $faker->numberBetween(0, 1),
         'on_document'       => $faker->numberBetween(0, 1),
-        'by_email'          => $faker->numberBetween(0, 1),
-        'by_push'           => $faker->numberBetween(0, 1),
     ];
 });
 
@@ -20,8 +18,6 @@ $factory->state(Preference::class, 'all-notifications', function () {
         'on_acceptance'     => 1,
         'on_refusal'        => 1,
         'on_document'       => 1,
-        'by_email'          => 1,
-        'by_push'           => 1,
     ];
 });
 
@@ -31,7 +27,5 @@ $factory->state(Preference::class, 'no-notification', function () {
         'on_acceptance'     => 0,
         'on_refusal'        => 0,
         'on_document'       => 0,
-        'by_push'           => 0,
-        'by_email'          => 0,
     ];
 });
