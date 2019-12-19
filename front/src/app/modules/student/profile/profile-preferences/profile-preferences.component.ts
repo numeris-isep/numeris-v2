@@ -3,7 +3,6 @@ import { Preference } from '../../../../core/classes/models/preference';
 import { PreferenceService } from '../../../../core/http/preference.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from '../../../../core/services/alert.service';
-import { Router } from '@angular/router';
 import { equals } from '../../../../shared/utils';
 
 @Component({
@@ -23,7 +22,6 @@ export class ProfilePreferencesComponent implements OnInit, AfterViewInit {
     private preferenceService: PreferenceService,
     private formBuilder: FormBuilder,
     private alertService: AlertService,
-    private router: Router
   ) { }
 
   ngOnInit() {
@@ -62,14 +60,16 @@ export class ProfilePreferencesComponent implements OnInit, AfterViewInit {
     this.preferenceService.updatePreference({
       id: this.preference.id,
       ...this.preferenceForm.value
-    }).subscribe(_ => {
-        this.router.navigate(['/'])
-          .then(() => { this.router.navigate(['/profil']); } );
-        this.alertService.success(['Préférences de notifications mises à jour.'], null, true);
-      },
-      error => {
-        this.loading = false;
-      });
+    }).subscribe(preference => {
+      Object.assign(this.preference, preference);
+      this.initialValue = this.preferenceForm.value;
+      this.initForm();
+      this.alertService.success(['Préférences de notifications mises à jour.'], null, false);
+      this.loading = false;
+    },
+    error => {
+      this.loading = false;
+    });
   }
 
 }
