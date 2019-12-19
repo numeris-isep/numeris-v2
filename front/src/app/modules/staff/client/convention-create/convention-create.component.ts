@@ -6,7 +6,7 @@ import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.servic
 import { Client } from '../../../../core/classes/models/client';
 import { ConventionFormComponent } from '../convention-form/convention-form.component';
 import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
-import { equals } from '../../../../shared/utils';
+import { handleFormDeactivation } from '../../../../core/functions/form-deactivate-handler';
 
 @Component({
   selector: 'app-convention-create',
@@ -32,14 +32,7 @@ export class ConventionCreateComponent implements OnInit, CanComponentDeactivate
   }
 
   canDeactivate() {
-    try {
-      return equals(
-        this.conventionFormComponent.initialValue,
-        this.conventionFormComponent.conventionForm.value
-      );
-    } catch (e) {
-      return true;
-    }
+    return handleFormDeactivation(this.conventionFormComponent, 'conventionForm');
   }
 
   getClient(clientId: number) {

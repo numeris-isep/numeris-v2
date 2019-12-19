@@ -8,7 +8,7 @@ import { AuthService } from '../../../../core/http/auth/auth.service';
 import { AlertService } from '../../../../core/services/alert.service';
 import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
 import { ProfilePreferencesComponent } from '../../../student/profile/profile-preferences/profile-preferences.component';
-import { equals } from '../../../../shared/utils';
+import { handleFormDeactivation } from '../../../../core/functions/form-deactivate-handler';
 
 @Component({
   selector: 'app-user-show',
@@ -42,14 +42,7 @@ export class UserShowComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    try {
-      return equals(
-        this.profilePreferenceComponent.initialValue,
-        this.profilePreferenceComponent.preferenceForm.value
-      );
-    } catch (e) {
-      return true;
-    }
+    return handleFormDeactivation(this.profilePreferenceComponent, 'preferenceForm');
   }
 
   getUser(userId: number) {

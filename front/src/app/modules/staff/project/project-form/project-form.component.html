@@ -12,7 +12,7 @@
 
     <form class="ui form segment"
           [formGroup]="projectForm" (ngSubmit)="onSubmit()"
-          [ngClass]="{'error': submitted && projectForm.invalid, 'loading': loading}">
+          [ngClass]="{'error': submitted && projectForm.invalid}">
       <h4 class="ui dividing header">Informations</h4>
       <div class="two required fields">
         <div class="ten wide required field" [ngClass]="{ 'error': submitted && f.name.errors }">

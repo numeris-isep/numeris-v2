@@ -6,7 +6,7 @@ import { TitleService } from '../../../../core/services/title.service';
 import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.service';
 import { MissionFormComponent } from '../mission-form/mission-form.component';
 import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
-import { equals } from '../../../../shared/utils';
+import { handleFormDeactivation } from '../../../../core/functions/form-deactivate-handler';
 
 @Component({
   selector: 'app-mission-edit',
@@ -32,14 +32,7 @@ export class MissionEditComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    try {
-      return equals(
-        this.missionFormComponent.initialValue,
-        this.missionFormComponent.missionForm.value
-      );
-    } catch (e) {
-      return true;
-    }
+    return handleFormDeactivation(this.missionFormComponent, 'missionForm');
   }
 
   getMission(missionId: number) {

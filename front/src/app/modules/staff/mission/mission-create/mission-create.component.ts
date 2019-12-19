@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
-import { equals } from '../../../../shared/utils';
 import { MissionFormComponent } from '../mission-form/mission-form.component';
+import { handleFormDeactivation } from '../../../../core/functions/form-deactivate-handler';
 
 @Component({
   selector: 'app-mission-create',
@@ -17,14 +17,7 @@ export class MissionCreateComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    try {
-      return equals(
-        this.missionFormComponent.initialValue,
-        this.missionFormComponent.missionForm.value
-      );
-    } catch (e) {
-      return true;
-    }
+    return handleFormDeactivation(this.missionFormComponent, 'missionForm');
   }
 
 }

@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Contact } from "../../../../core/classes/models/contact";
-import { ActivatedRoute } from "@angular/router";
-import { TitleService } from "../../../../core/services/title.service";
-import { BreadcrumbsService } from "../../../../core/services/breadcrumbs.service";
-import { ContactService } from "../../../../core/http/contact.service";
+import { Contact } from '../../../../core/classes/models/contact';
+import { ActivatedRoute } from '@angular/router';
+import { TitleService } from '../../../../core/services/title.service';
+import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.service';
+import { ContactService } from '../../../../core/http/contact.service';
 import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
-import { equals } from '../../../../shared/utils';
 import { ContactFormComponent } from '../contact-form/contact-form.component';
+import { handleFormDeactivation } from '../../../../core/functions/form-deactivate-handler';
 
 @Component({
   selector: 'app-contact-edit',
@@ -32,14 +32,7 @@ export class ContactEditComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    try {
-      return equals(
-        this.contactFormComponent.initialValue,
-        this.contactFormComponent.contactForm.value
-      );
-    } catch (e) {
-      return true;
-    }
+    return handleFormDeactivation(this.contactFormComponent, 'contactForm');
   }
 
   getContact(contactId: number) {

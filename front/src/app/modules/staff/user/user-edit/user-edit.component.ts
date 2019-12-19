@@ -1,16 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from '../../../../core/classes/models/user';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from '../../../../core/http/user.service';
-import { AlertService } from '../../../../core/services/alert.service';
 import { TitleService } from '../../../../core/services/title.service';
 import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.service';
 import { ActivatedRoute } from '@angular/router';
-import { dateToString, equals } from '../../../../shared/utils';
-import { first } from 'rxjs/operators';
-import { handleFormErrors } from '../../../../core/functions/form-error-handler';
 import { UserEditFormComponent } from '../../../../shared/components/forms/user-edit-form/user-edit-form.component';
 import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
+import { handleFormDeactivation } from '../../../../core/functions/form-deactivate-handler';
 
 @Component({
   selector: 'app-user-edit',
@@ -36,14 +32,7 @@ export class UserEditComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    try {
-      return equals(
-        this.userEditFormComponent.initialValue,
-        this.userEditFormComponent.userForm.value
-      );
-    } catch (e) {
-      return true;
-    }
+    return handleFormDeactivation(this.userEditFormComponent, 'userForm');
   }
 
   getUser(userId: number) {

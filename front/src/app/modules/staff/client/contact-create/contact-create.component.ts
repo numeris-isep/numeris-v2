@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
 import { ContactFormComponent } from '../contact-form/contact-form.component';
-import { equals } from '../../../../shared/utils';
+import { handleFormDeactivation } from '../../../../core/functions/form-deactivate-handler';
 
 @Component({
   selector: 'app-contact-create',
@@ -17,14 +17,7 @@ export class ContactCreateComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    try {
-      return equals(
-        this.contactFormComponent.initialValue,
-        this.contactFormComponent.contactForm.value
-      );
-    } catch (e) {
-      return true;
-    }
+    return handleFormDeactivation(this.contactFormComponent, 'contactForm');
   }
 
 }

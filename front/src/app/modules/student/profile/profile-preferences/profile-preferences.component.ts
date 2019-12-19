@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
-import { Preference } from "../../../../core/classes/models/preference";
-import { PreferenceService } from "../../../../core/http/preference.service";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { AlertService } from "../../../../core/services/alert.service";
-import { Router } from "@angular/router";
+import { Preference } from '../../../../core/classes/models/preference';
+import { PreferenceService } from '../../../../core/http/preference.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertService } from '../../../../core/services/alert.service';
+import { Router } from '@angular/router';
 import { equals } from '../../../../shared/utils';
 
 @Component({

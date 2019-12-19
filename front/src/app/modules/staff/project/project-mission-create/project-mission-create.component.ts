@@ -7,6 +7,7 @@ import { ProjectService } from '../../../../core/http/project.service';
 import { MissionFormComponent } from '../../mission/mission-form/mission-form.component';
 import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
 import { equals } from '../../../../shared/utils';
+import { handleFormDeactivation } from '../../../../core/functions/form-deactivate-handler';
 
 @Component({
   selector: 'app-project-mission-create',
@@ -32,14 +33,7 @@ export class ProjectMissionCreateComponent implements OnInit, CanComponentDeacti
   }
 
   canDeactivate() {
-    try {
-      return equals(
-        this.missionFormComponent.initialValue,
-        this.missionFormComponent.missionForm.value
-      );
-    } catch (e) {
-      return true;
-    }
+    return handleFormDeactivation(this.missionFormComponent, 'missionForm');
   }
 
   getProject(projectId: number) {

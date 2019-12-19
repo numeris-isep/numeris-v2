@@ -7,6 +7,7 @@ import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.servic
 import { ClientFormComponent } from '../client-form/client-form.component';
 import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
 import { equals } from '../../../../shared/utils';
+import { handleFormDeactivation } from '../../../../core/functions/form-deactivate-handler';
 
 @Component({
   selector: 'app-client-edit',
@@ -32,14 +33,7 @@ export class ClientEditComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    try {
-      return equals(
-        this.clientFormComponent.clientForm.value,
-        this.clientFormComponent.initialValue
-      );
-    } catch (e) {
-      return true;
-    }
+    return handleFormDeactivation(this.clientFormComponent, 'clientForm');
   }
 
   getClient(clientId: number) {

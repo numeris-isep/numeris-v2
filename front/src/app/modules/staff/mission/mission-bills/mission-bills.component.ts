@@ -3,7 +3,7 @@ import { Mission } from '../../../../core/classes/models/mission';
 import { Application } from '../../../../core/classes/models/application';
 import { BillsFormComponent } from './bills-form/bills-form.component';
 import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
-import { equals } from '../../../../shared/utils';
+import { handleFormDeactivation } from '../../../../core/functions/form-deactivate-handler';
 
 @Component({
   selector: 'app-mission-bills',
@@ -22,14 +22,7 @@ export class MissionBillsComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    try {
-      return equals(
-        this.billsFormComponent.initialValue,
-        this.billsFormComponent.billsForm.value
-      );
-    } catch (e) {
-      return true;
-    }
+    return handleFormDeactivation(this.billsFormComponent, 'billsForm');
   }
 
 }

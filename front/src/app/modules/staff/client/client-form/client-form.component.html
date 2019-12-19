@@ -12,7 +12,7 @@
 
     <form class="ui form segment"
           [formGroup]="clientForm" (ngSubmit)="onSubmit()"
-          [ngClass]="{'error': submitted && clientForm.invalid, 'loading': loading}">
+          [ngClass]="{'error': submitted && clientForm.invalid}">
       <h4 class="ui dividing header">Informations</h4>
       <div class="two fields">
         <div class="required field" [ngClass]="{ 'error': submitted && f.name.errors }">

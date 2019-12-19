@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ClientFormComponent } from '../client-form/client-form.component';
-import { equals } from '../../../../shared/utils';
 import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
+import { handleFormDeactivation } from '../../../../core/functions/form-deactivate-handler';
 
 @Component({
   selector: 'app-client-create',
@@ -17,14 +17,7 @@ export class ClientCreateComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    try {
-      return equals(
-        this.clientFormComponent.clientForm.value,
-        this.clientFormComponent.initialValue
-      );
-    } catch (e) {
-      return true;
-    }
+    return handleFormDeactivation(this.clientFormComponent, 'clientForm');
   }
 
 }

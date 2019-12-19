@@ -3,7 +3,7 @@ import { User } from '../../../core/classes/models/user';
 import { AuthService } from '../../../core/http/auth/auth.service';
 import { ProfilePreferencesComponent } from './profile-preferences/profile-preferences.component';
 import { CanComponentDeactivate } from '../../../core/guards/deactivate.guard';
-import { equals } from '../../../shared/utils';
+import { handleFormDeactivation } from '../../../core/functions/form-deactivate-handler';
 
 @Component({
   selector: 'app-profile',
@@ -23,14 +23,7 @@ export class ProfileComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    try {
-      return equals(
-        this.profilePreferenceComponent.initialValue,
-        this.profilePreferenceComponent.preferenceForm.value
-      );
-    } catch (e) {
-      return true;
-    }
+    return handleFormDeactivation(this.profilePreferenceComponent, 'preferenceForm');
   }
 
   getCurrentUser() {

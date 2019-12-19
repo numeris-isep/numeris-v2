@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../../../../core/http/project.service';
 import { Project } from '../../../../core/classes/models/project';
 import { ProjectFormComponent } from '../project-form/project-form.component';
-import { equals } from '../../../../shared/utils';
+import { handleFormDeactivation } from '../../../../core/functions/form-deactivate-handler';
 
 @Component({
   selector: 'app-project-edit',
@@ -31,14 +31,7 @@ export class ProjectEditComponent implements OnInit {
   }
 
   canDeactivate() {
-    try {
-      return equals(
-        this.projectFormComponent.initialValue,
-        this.projectFormComponent.projectForm.value
-      );
-    } catch (e) {
-      return true;
-    }
+    return handleFormDeactivation(this.projectFormComponent, 'projectForm');
   }
 
   getProject(projectId: number) {

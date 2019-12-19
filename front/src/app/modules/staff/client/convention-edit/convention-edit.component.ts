@@ -8,7 +8,7 @@ import { TitleService } from '../../../../core/services/title.service';
 import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.service';
 import { ConventionFormComponent } from '../convention-form/convention-form.component';
 import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
-import { equals } from '../../../../shared/utils';
+import { handleFormDeactivation } from '../../../../core/functions/form-deactivate-handler';
 
 @Component({
   selector: 'app-convention-edit',
@@ -37,14 +37,7 @@ export class ConventionEditComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    try {
-      return equals(
-        this.conventionFormComponent.initialValue,
-        this.conventionFormComponent.conventionForm.value
-      );
-    } catch (e) {
-      return true;
-    }
+    return handleFormDeactivation(this.conventionFormComponent, 'conventionForm');
   }
 
   getClient(clientId: number) {

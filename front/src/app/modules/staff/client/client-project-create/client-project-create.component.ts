@@ -5,8 +5,8 @@ import { TitleService } from '../../../../core/services/title.service';
 import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.service';
 import { Client } from '../../../../core/classes/models/client';
 import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
-import { equals } from '../../../../shared/utils';
 import { ProjectFormComponent } from '../../project/project-form/project-form.component';
+import { handleFormDeactivation } from '../../../../core/functions/form-deactivate-handler';
 
 @Component({
   selector: 'app-client-project-create',
@@ -32,14 +32,7 @@ export class ClientProjectCreateComponent implements OnInit, CanComponentDeactiv
   }
 
   canDeactivate() {
-    try {
-      return equals(
-        this.projectFormComponent.initialValue,
-        this.projectFormComponent.projectForm.value
-      );
-    } catch (e) {
-      return true;
-    }
+    return handleFormDeactivation(this.projectFormComponent, 'projectForm');
   }
 
   getClient(clientId: number) {

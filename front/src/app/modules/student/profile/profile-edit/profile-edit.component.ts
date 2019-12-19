@@ -4,14 +4,9 @@ import { User } from '../../../../core/classes/models/user';
 import { AuthService } from '../../../../core/http/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TitleService } from '../../../../core/services/title.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { UserService } from '../../../../core/http/user.service';
-import { first } from 'rxjs/operators';
-import { handleFormErrors } from '../../../../core/functions/form-error-handler';
-import { AlertService } from '../../../../core/services/alert.service';
-import { dateToString, equals } from '../../../../shared/utils';
 import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
 import { UserEditFormComponent } from '../../../../shared/components/forms/user-edit-form/user-edit-form.component';
+import { handleFormDeactivation } from '../../../../core/functions/form-deactivate-handler';
 
 @Component({
   selector: 'app-profile-edit',
@@ -35,14 +30,7 @@ export class ProfileEditComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    try {
-      return equals(
-        this.userEditFormComponent.initialValue,
-        this.userEditFormComponent.userForm.value
-      );
-    } catch (e) {
-      return true;
-    }
+    return handleFormDeactivation(this.userEditFormComponent, 'userForm');
   }
 
   getCurrentUser() {

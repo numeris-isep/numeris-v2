@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BreadcrumbsService } from '../../../../core/services/breadcrumbs.service';
 import { CanComponentDeactivate } from '../../../../core/guards/deactivate.guard';
 import { ProjectFormComponent } from '../project-form/project-form.component';
-import { equals } from '../../../../shared/utils';
+import { handleFormDeactivation } from '../../../../core/functions/form-deactivate-handler';
 
 @Component({
   selector: 'app-project-create',
@@ -26,14 +26,7 @@ export class ProjectCreateComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    try {
-      return equals(
-        this.projectFormComponent.initialValue,
-        this.projectFormComponent.projectForm.value
-      );
-    } catch (e) {
-      return true;
-    }
+    return handleFormDeactivation(this.projectFormComponent, 'projectForm');
   }
 
 }
