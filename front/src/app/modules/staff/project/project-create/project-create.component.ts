@@ -26,10 +26,14 @@ export class ProjectCreateComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    return equals(
-      this.projectFormComponent.initialValue,
-      this.projectFormComponent.projectForm.value
-    );
+    try {
+      return equals(
+        this.projectFormComponent.initialValue,
+        this.projectFormComponent.projectForm.value
+      );
+    } catch (e) {
+      return true;
+    }
   }
 
 }

@@ -32,10 +32,14 @@ export class ClientProjectCreateComponent implements OnInit, CanComponentDeactiv
   }
 
   canDeactivate() {
-    return equals(
-      this.projectFormComponent.initialValue,
-      this.projectFormComponent.projectForm.value
-    );
+    try {
+      return equals(
+        this.projectFormComponent.initialValue,
+        this.projectFormComponent.projectForm.value
+      );
+    } catch (e) {
+      return true;
+    }
   }
 
   getClient(clientId: number) {

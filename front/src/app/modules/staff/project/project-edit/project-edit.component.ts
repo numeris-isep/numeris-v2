@@ -31,10 +31,14 @@ export class ProjectEditComponent implements OnInit {
   }
 
   canDeactivate() {
-    return equals(
-      this.projectFormComponent.initialValue,
-      this.projectFormComponent.projectForm.value
-    );
+    try {
+      return equals(
+        this.projectFormComponent.initialValue,
+        this.projectFormComponent.projectForm.value
+      );
+    } catch (e) {
+      return true;
+    }
   }
 
   getProject(projectId: number) {

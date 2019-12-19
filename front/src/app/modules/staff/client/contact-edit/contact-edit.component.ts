@@ -32,10 +32,14 @@ export class ContactEditComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    return equals(
-      this.contactFormComponent.initialValue,
-      this.contactFormComponent.contactForm.value
-    );
+    try {
+      return equals(
+        this.contactFormComponent.initialValue,
+        this.contactFormComponent.contactForm.value
+      );
+    } catch (e) {
+      return true;
+    }
   }
 
   getContact(contactId: number) {

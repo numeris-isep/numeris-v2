@@ -54,7 +54,11 @@ export class MissionShowComponent implements OnInit, OnDestroy, CanComponentDeac
   }
 
   canDeactivate() {
-    return this.missionBillsComponent.canDeactivate();
+    try {
+      return this.missionBillsComponent.canDeactivate();
+    } catch (e) {
+      return true;
+    }
   }
 
   getMission(missionId: number) {

@@ -22,10 +22,14 @@ export class MissionBillsComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    return equals(
-      this.billsFormComponent.initialValue,
-      this.billsFormComponent.billsForm.value
-    );
+    try {
+      return equals(
+        this.billsFormComponent.initialValue,
+        this.billsFormComponent.billsForm.value
+      );
+    } catch (e) {
+      return true;
+    }
   }
 
 }

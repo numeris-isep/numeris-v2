@@ -32,10 +32,14 @@ export class ProjectMissionCreateComponent implements OnInit, CanComponentDeacti
   }
 
   canDeactivate() {
-    return equals(
-      this.missionFormComponent.initialValue,
-      this.missionFormComponent.missionForm.value
-    );
+    try {
+      return equals(
+        this.missionFormComponent.initialValue,
+        this.missionFormComponent.missionForm.value
+      );
+    } catch (e) {
+      return true;
+    }
   }
 
   getProject(projectId: number) {

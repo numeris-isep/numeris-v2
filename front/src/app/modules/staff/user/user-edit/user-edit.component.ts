@@ -36,10 +36,14 @@ export class UserEditComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    return equals(
-      this.userEditFormComponent.initialValue,
-      this.userEditFormComponent.userForm.value
-    );
+    try {
+      return equals(
+        this.userEditFormComponent.initialValue,
+        this.userEditFormComponent.userForm.value
+      );
+    } catch (e) {
+      return true;
+    }
   }
 
   getUser(userId: number) {

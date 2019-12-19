@@ -48,10 +48,14 @@ export class TermsOfUseComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    return equals(
-      this.initialValue,
-      this.checkboxes
-    );
+    try {
+      return equals(
+        this.initialValue,
+        this.checkboxes
+      );
+    } catch (e) {
+      return true;
+    }
   }
 
   getCurrentUser() {

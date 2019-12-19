@@ -42,10 +42,14 @@ export class UserShowComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    return equals(
-      this.profilePreferenceComponent.initialValue,
-      this.profilePreferenceComponent.preferenceForm.value
-    );
+    try {
+      return equals(
+        this.profilePreferenceComponent.initialValue,
+        this.profilePreferenceComponent.preferenceForm.value
+      );
+    } catch (e) {
+      return true;
+    }
   }
 
   getUser(userId: number) {

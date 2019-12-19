@@ -17,10 +17,14 @@ export class MissionCreateComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    return equals(
-      this.missionFormComponent.initialValue,
-      this.missionFormComponent.missionForm.value
-    );
+    try {
+      return equals(
+        this.missionFormComponent.initialValue,
+        this.missionFormComponent.missionForm.value
+      );
+    } catch (e) {
+      return true;
+    }
   }
 
 }

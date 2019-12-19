@@ -17,10 +17,14 @@ export class ClientCreateComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    return equals(
-      this.clientFormComponent.clientForm.value,
-      this.clientFormComponent.initialValue
-    );
+    try {
+      return equals(
+        this.clientFormComponent.clientForm.value,
+        this.clientFormComponent.initialValue
+      );
+    } catch (e) {
+      return true;
+    }
   }
 
 }

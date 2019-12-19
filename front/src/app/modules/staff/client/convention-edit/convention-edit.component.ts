@@ -37,10 +37,14 @@ export class ConventionEditComponent implements OnInit, CanComponentDeactivate {
   }
 
   canDeactivate() {
-    return equals(
-      this.conventionFormComponent.initialValue,
-      this.conventionFormComponent.conventionForm.value
-    );
+    try {
+      return equals(
+        this.conventionFormComponent.initialValue,
+        this.conventionFormComponent.conventionForm.value
+      );
+    } catch (e) {
+      return true;
+    }
   }
 
   getClient(clientId: number) {
