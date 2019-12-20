@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { map, take } from "rxjs/operators";
-import { AuthService } from "../http/auth/auth.service";
-import { SuiModalService } from "ng2-semantic-ui";
-import { LoginModal } from "../../modules/showcase/modals/login-modal/login-modal.component";
-import { TokenService } from "../services/token.service";
+import { map, take } from 'rxjs/operators';
+import { AuthService } from '../http/auth/auth.service';
+import { SuiModalService } from 'ng2-semantic-ui';
+import { LoginModal } from '../../modules/showcase/modals/login-modal/login-modal.component';
 
 @Injectable({
   providedIn: 'root'
