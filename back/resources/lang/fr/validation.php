@@ -206,6 +206,7 @@ return [
         'rates.*.for_client'        => 'tarif client',
         'rates.*.is_flat'           => 'forfait',
         'rates.*.hours'             => 'heures',
+        'time_limit'                => 'date limite',
 
         Application::ACCEPTED       => 'acceptée',
         Application::REFUSED        => 'refusée',

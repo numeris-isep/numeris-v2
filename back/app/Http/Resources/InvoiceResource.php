@@ -19,6 +19,7 @@ class InvoiceResource extends JsonResource
             'grossAmount'   => $this->gross_amount,
             'vatAmount'     => $this->vat_amount,
             'finalAmount'   => $this->final_amount,
+            'timeLimit'     => $this->time_limit,
             'details'       => json_decode($this->details, true),
             'createdAt'     => $this->created_at,
             'updatedAt'     => $this->updated_at,

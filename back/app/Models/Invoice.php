@@ -17,6 +17,7 @@ class Invoice extends Model
         'vat_amount',
         'final_amount',
         'details',
+        'time_limit',
     ];
 
     public function generateFilename()

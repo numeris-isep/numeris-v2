@@ -22,14 +22,16 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     public function testDeveloperUpdatingProjectInvoice()
     {
         $project = $this->clientAndProjectAndMissionAndConventionWithBillsProvider()['project'];
+        $data = ['time_limit' => 30];
 
-        $this->json('PUT', route('projects.invoices.update', ['project' => $project->id]), [])
+        $this->json('PUT', route('projects.invoices.update', ['project' => $project->id]), $data)
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'id',
                 'grossAmount',
                 'vatAmount',
                 'finalAmount',
+                'timeLimit',
                 'details' => [[
                     'reference',
                     'title',
@@ -52,8 +54,9 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     public function testDeveloperUpdatingProjectWithNoBillsInvoice()
     {
         $project = $this->projectProvider();
+        $data = ['time_limit' => 30];
 
-        $this->json('PUT', route('projects.invoices.update', ['project' => $project->id]), [])
+        $this->json('PUT', route('projects.invoices.update', ['project' => $project->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
     }
@@ -63,9 +66,23 @@ class UpdateDeveloperTest extends TestCaseWithAuth
      */
     public function testDeveloperUpdatingProjectInvoiceWithNoProject()
     {
-        $this->json('PUT', route('projects.invoices.update', ['project' => 0]), [])
+        $data = ['time_limit' => 30];
+
+        $this->json('PUT', route('projects.invoices.update', ['project' => 0]), $data)
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
             ->assertJson(['errors' => [trans('api.404')]]);
+    }
+
+    /**
+     * @group developer
+     */
+    public function testDeveloperUpdatingProjectInvoiceWithNoTimeLimit()
+    {
+        $project = $this->clientAndProjectAndMissionAndConventionWithBillsProvider()['project'];
+
+        $this->json('PUT', route('projects.invoices.update', ['project' => $project->id]), [])
+            ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertJsonValidationErrors(['time_limit']);
     }
 
     /**
@@ -74,13 +91,14 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     public function testDeveloperUpdatingProjectInvoiceTwice()
     {
         $project = $this->clientAndProjectAndMissionAndConventionWithBillsProvider()['project'];
+        $data = ['time_limit' => 30];
 
-        $this->json('PUT', route('projects.invoices.update', ['project' => $project->id]), [])
+        $this->json('PUT', route('projects.invoices.update', ['project' => $project->id]), $data)
             ->assertStatus(JsonResponse::HTTP_OK);
 
         $this->assertEquals(1, Invoice::all()->count());
 
-        $this->json('PUT', route('projects.invoices.update', ['project' => $project->id]), [])
+        $this->json('PUT', route('projects.invoices.update', ['project' => $project->id]), $data)
             ->assertStatus(JsonResponse::HTTP_OK);
 
         $this->assertEquals(1, Invoice::all()->count());
@@ -92,14 +110,16 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     public function testDeveloperUpdatingProjectInvoiceCheckAmounts()
     {
         $project = $this->clientAndProjectAndMissionAndConventionWithBillsProvider()['project'];
+        $data = ['time_limit' => 30];
 
-        $response = $this->json('PUT', route('projects.invoices.update', ['project' => $project->id]), [])
+        $response = $this->json('PUT', route('projects.invoices.update', ['project' => $project->id]), $data)
             ->assertStatus(JsonResponse::HTTP_OK);
         $content = json_decode($response->getContent(), true);
 
         $this->assertEquals(240, $content['grossAmount']);
         $this->assertEquals($content['grossAmount'] * 0.2, $content['vatAmount']);
         $this->assertEquals($content['grossAmount'] + $content['vatAmount'], $content['finalAmount']);
+        $this->assertEquals($content['timeLimit'], $data['time_limit']);
     }
 
     /**
@@ -108,8 +128,9 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     public function testDeveloperUpdatingProjectInvoiceCheckJsonAttributesStructure()
     {
         $project = $this->clientAndProjectAndMissionAndConventionWithBillsProvider()['project'];
+        $data = ['time_limit' => 30];
 
-        $response = $this->json('PUT', route('projects.invoices.update', ['project' => $project->id]), [])
+        $response = $this->json('PUT', route('projects.invoices.update', ['project' => $project->id]), $data)
             ->assertStatus(JsonResponse::HTTP_OK);
         $content = json_decode($response->getContent(), true);
 

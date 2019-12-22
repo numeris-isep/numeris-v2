@@ -22,8 +22,9 @@ class UpdateStudentTest extends TestCaseWithAuth
     public function testStudentUpdatingProjectInvoice()
     {
         $project = $this->clientAndProjectAndMissionAndConventionWithBillsProvider()['project'];
+        $data = ['time_limit' => 30];
 
-        $this->json('PUT', route('projects.invoices.update', ['project' => $project->id]), [])
+        $this->json('PUT', route('projects.invoices.update', ['project' => $project->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
     }

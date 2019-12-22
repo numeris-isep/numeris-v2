@@ -31,6 +31,10 @@ class InvoiceRequest extends AbstractFormRequest
                 return [
                     'year' => 'required|string|date_format:Y',
                 ];
+            case 'PUT':
+                return [
+                    'time_limit' => 'required|numeric|min:0',
+                ];
             default: break;
         }
     }

@@ -7,6 +7,7 @@
   $grossAmount = number_format($invoice->gross_amount, 2, '.', '');
   $vatAmount = number_format($invoice->vat_amount, 2, '.', '');
   $finalAmount = number_format($invoice->final_amount, 2, '.', '');
+  $timeLimit = $invoice->time_limit;
   $details = json_decode($invoice->details, true);
 @endphp
 
@@ -140,7 +141,8 @@
     <div class="ui no-padding segment">
       <ul class="information">
         <li>
-          Date limite : {{ now()->addDays(30)->format('d/m/Y') }} (76 jours)
+          Date limite : {{ $timeLimit > 0 ? now()->addDays($timeLimit)->format('d/m/Y') : 'paiement comptant' }}
+          @if($timeLimit > 0)({{ $timeLimit }} {{ $timeLimit > 1 ? 'jours' : 'jour' }})@endif
         </li>
         <li>
           Taux annuel de pénalité en cas de retard de paiement : 3 fois le taux

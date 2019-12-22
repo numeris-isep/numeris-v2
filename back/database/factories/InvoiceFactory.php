@@ -13,6 +13,7 @@ $factory->define(Invoice::class, function (Faker $faker) {
         'gross_amount'  => 5000.00,
         'vat_amount'    => 1000.00,
         'final_amount'  => 6000.00,
+        'time_limit'    => 30,
         'details'       => json_encode([[
             'bills'     => [[
                 'rate'      => 'Heures de test',

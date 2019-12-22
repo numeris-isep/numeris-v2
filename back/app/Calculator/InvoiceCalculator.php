@@ -10,22 +10,23 @@ class InvoiceCalculator implements CalculatorInterface
     /**
      * Calculate client invoice for the given project
      *
-     * @param Project $params
+     * @param array $params
      * @return array
      */
     public function calculate($params): array
     {
-        $details        = $this->calculateDetails($params);
+        $details        = $this->calculateDetails($params['project']);
         $gross_amount   = $details['gross_amount'];
         $vat_amount     = $this->calculateVAT($gross_amount);
         $final_amount   = $this->calculateFinalAmount($gross_amount, $vat_amount);
 
         return [
-            'project_id'    => $params->id,
+            'project_id'    => $params['project']->id,
             'gross_amount'  => $gross_amount,
             'vat_amount'    => $vat_amount,
             'final_amount'  => $final_amount,
             'details'       => json_encode($details['details']),
+            'time_limit'    => $params['time_limit'],
         ];
     }
 

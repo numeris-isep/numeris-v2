@@ -26,6 +26,7 @@ class IndexDeveloperTest extends TestCaseWithAuth
                 'grossAmount',
                 'vatAmount',
                 'finalAmount',
+                'timeLimit',
                 'details',
                 'createdAt',
                 'updatedAt',

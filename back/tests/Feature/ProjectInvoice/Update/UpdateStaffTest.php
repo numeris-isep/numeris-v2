@@ -22,14 +22,16 @@ class UpdateStaffTest extends TestCaseWithAuth
     public function testStaffUpdatingProjectInvoice()
     {
         $project = $this->clientAndProjectAndMissionAndConventionWithBillsProvider()['project'];
+        $data = ['time_limit' => 30];
 
-        $this->json('PUT', route('projects.invoices.update', ['project' => $project->id]), [])
+        $this->json('PUT', route('projects.invoices.update', ['project' => $project->id]), $data)
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'id',
                 'grossAmount',
                 'vatAmount',
                 'finalAmount',
+                'timeLimit',
                 'details' => [[
                     'reference',
                     'title',
