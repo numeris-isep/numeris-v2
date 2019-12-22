@@ -1,8 +1,8 @@
 {
-  "name": "numeris-frontend",
-  "short_name": "numeris-frontend",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "Numéris ISEP",
+  "short_name": "Numéris",
+  "theme_color": "#0025AA",
+  "background_color": "#FFFFFF",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
@@ -13,8 +13,8 @@
       "type": "image/png"
     },
     {
-      "src": "assets/icons/icon-96x96.png",
-      "sizes": "96x96",
+      "src": "assets/icons/icon-100x100.png",
+      "sizes": "100x100",
       "type": "image/png"
     },
     {
@@ -33,13 +33,13 @@
       "type": "image/png"
     },
     {
-      "src": "assets/icons/icon-192x192.png",
-      "sizes": "192x192",
+      "src": "assets/icons/icon-196x196.png",
+      "sizes": "196x196",
       "type": "image/png"
     },
     {
-      "src": "assets/icons/icon-384x384.png",
-      "sizes": "384x384",
+      "src": "assets/icons/icon-256x256.png",
+      "sizes": "256x256",
       "type": "image/png"
     },
     {
