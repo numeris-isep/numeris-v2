@@ -107,9 +107,9 @@ export class ProjectService {
     return this.http.delete<User>(url, HTTP_OPTIONS);
   }
 
-  updateProjectInvoice(project: Project | number): Observable<Invoice> {
+  updateProjectInvoice(project: Project | number, timeLimit: number): Observable<Invoice> {
     const projectId: number = typeof project === 'number' ? project : project.id;
     const url = `${environment.apiUrl}/api/projects/${projectId}/invoices`;
-    return this.http.put<Invoice>(url, {}, HTTP_OPTIONS);
+    return this.http.put<Invoice>(url, {time_limit: timeLimit}, HTTP_OPTIONS);
   }
 }

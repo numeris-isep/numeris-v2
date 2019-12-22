@@ -1,0 +1,31 @@
+<app-button *ngIf="project.step !== 'hiring'; else isDisabled"
+            size="small" hiddenIcon="money bill" behaviour="fluid" color="grey"
+            suiPopup popupTrigger="outsideClick" popupPlacement="top"
+            popupHeader="Jours limite de paiement" [popupTemplate]="invoicePopup" #popup="suiPopup">
+  <span *ngIf="project.invoice; else noInvoice">Regénérer</span>
+  <ng-template #noInvoice>Générer</ng-template>
+</app-button>
+
+<ng-template #isDisabled>
+  <app-button size="small" hiddenIcon="money bill" behaviour="fluid" color="grey" [isDisabled]="true">
+    <span *ngIf="project.invoice; else noInvoice">Regénérer</span>
+    <ng-template #noInvoice>Générer</ng-template>
+  </app-button>
+</ng-template>
+
+
+<ng-template #invoicePopup>
+  <form class="ui form" [formGroup]="invoiceForm"
+        [ngClass]="{'error': submitted && invoiceForm.invalid}"
+        (ngSubmit)="calculate()">
+    <div class="required field" [ngClass]="{ 'error': submitted && f.time_limit.errors }">
+      <div class="ui left icon action input">
+        <i class="calendar plus outline icon"></i>
+        <input type="number" formControlName="time_limit" placeholder="Jours" min="0" step="1">
+        <button class="ui icon button" [ngClass]="{'loading': loading, 'disabled': invoiceForm.invalid}">
+          <i class="save icon"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+</ng-template>

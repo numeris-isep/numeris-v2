@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Payslip } from '../../../core/classes/models/payslip';
 import { Invoice } from '../../../core/classes/models/Invoice';
 import { FileService } from '../../../core/http/file.service';
@@ -10,11 +10,12 @@ import { Project } from '../../../core/classes/models/project';
   templateUrl: './file.component.html',
   styleUrls: ['./file.component.css']
 })
-export class FileComponent implements OnInit {
+export class FileComponent implements OnInit, OnChanges {
 
   @Input() type: string;
   @Input() data: Payslip | Invoice;
   @Input() otherData: Project;
+
   document: any;
   url: string;
   loading: boolean = false;
@@ -26,6 +27,10 @@ export class FileComponent implements OnInit {
 
   ngOnInit() {
     this.initInvoice();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.url = undefined;
   }
 
   initInvoice() {
