@@ -30,7 +30,7 @@ class PreMissionNotification extends AbstractNotification
     {
         $emails = $this->getEmails();
 
-        return (new BasicMail($notifiable, $this->subject, $this->content))
+        return (new BasicMail($this->subject, $this->content))
             ->to($emails);
     }
 

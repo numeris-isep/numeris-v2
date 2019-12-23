@@ -10,8 +10,6 @@ class BasicMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private $notifiable;
-
     private $mailSubject;
 
     private $content;
@@ -21,9 +19,8 @@ class BasicMail extends Mailable
      *
      * @return void
      */
-    public function __construct($notifiable, string $subject, string $content)
+    public function __construct(string $subject, string $content)
     {
-        $this->notifiable = $notifiable;
         $this->mailSubject = $subject;
         $this->content = $content;
     }
