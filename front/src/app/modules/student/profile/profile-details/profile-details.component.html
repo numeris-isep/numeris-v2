@@ -41,14 +41,14 @@
         <i class="heartbeat icon"></i>
         Numéro de sécurité sociale
       </td>
-      <td>{{ (user.socialInsuranceNumber | socialInsuranceNumber) || '-' }}</td>
+      <td [innerHTML]="(user.socialInsuranceNumber | socialInsuranceNumber: true) || '-'"></td>
     </tr>
     <tr>
       <td class="collapsing">
         <i class="euro sign icon"></i>
         IBAN
       </td>
-      <td>{{ (user.iban | iban) || '-' }}</td>
+      <td [innerHTML]="(user.iban | iban: true) || '-'"></td>
     </tr>
     <tr>
       <td class="collapsing">

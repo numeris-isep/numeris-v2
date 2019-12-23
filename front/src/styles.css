@@ -32,6 +32,13 @@ label > span {
   color: #989898;
 }
 
+/*
+Space between substring for copy/paste without space in string
+ */
+* > span.spaced {
+  margin-right: 0.2em;
+}
+
 .ui.ribbon.label {
   z-index: 100;
 }
