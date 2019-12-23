@@ -30,7 +30,10 @@ export class InvoiceFormComponent implements OnInit {
 
   initForm() {
     this.invoiceForm = this.formBuilder.group({
-      time_limit: ['', Validators.required]
+      time_limit: [
+        this.project.client ? this.project.client.timeLimit : '',
+        Validators.required
+      ]
     });
   }
 

@@ -14,12 +14,23 @@
           [formGroup]="clientForm" (ngSubmit)="onSubmit()"
           [ngClass]="{'error': submitted && clientForm.invalid}">
       <h4 class="ui dividing header">Informations</h4>
+      <div class="required field" [ngClass]="{ 'error': submitted && f.name.errors }">
+        <label>Nom</label>
+        <div class="ui left icon corner labeled input">
+          <i class="address book outline icon"></i>
+          <input type="text" formControlName="name" placeholder="Nom">
+          <div class="ui corner label">
+            <i class="asterisk icon"></i>
+          </div>
+        </div>
+        <app-form-error *ngIf="submitted && f.name.errors" [errors]="f.name.errors"></app-form-error>
+      </div>
       <div class="two fields">
-        <div class="required field" [ngClass]="{ 'error': submitted && f.name.errors }">
-          <label>Nom</label>
+        <div class="required field" [ngClass]="{ 'error': submitted && f.time_limit.errors }">
+          <label>Jours limite de paiement</label>
           <div class="ui left icon corner labeled input">
-            <i class="address book outline icon"></i>
-            <input type="text" formControlName="name" placeholder="Nom">
+            <i class="calendar plus outline icon"></i>
+            <input type="number" formControlName="time_limit" placeholder="Jours" min="0">
             <div class="ui corner label">
               <i class="asterisk icon"></i>
             </div>

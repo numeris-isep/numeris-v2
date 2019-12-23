@@ -47,6 +47,10 @@ export class ClientFormComponent implements OnInit, AfterViewInit {
         this.client ? this.client.name : '',
         Validators.required,
       ],
+      time_limit: [
+        this.client ? this.client.timeLimit : '',
+        Validators.required,
+      ],
       contact_id: [this.client ? (this.client.contact ? this.client.contact.id : '') : ''],
     });
   }

@@ -12,6 +12,7 @@ export class Client {
   contactId: number;
 
   name: string;
+  timeLimit: number;
   createdAt: string;
   updatedAt: string;
 
