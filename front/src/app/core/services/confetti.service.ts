@@ -49,7 +49,8 @@ export class ConfettiService {
   private snow() {
     const launcher = this.launcher;
 
-    timer(0, 50).subscribe(() => {
+    interval(50)
+      .pipe(takeUntil(timer(15000))).subscribe(() => {
       launcher({
         particleCount: 1,
         startVelocity: 0,
