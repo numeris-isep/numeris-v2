@@ -18,7 +18,8 @@ class UpdateStudentTest extends TestCaseWithAuth
         $client = $this->clientProvider();
 
         $client_data = [
-            'name'      => 'AS Something',
+            'name'          => 'AS Something',
+            'time_limit'    => 30,
         ];
         $address_data = [
             'street'    => '1 rue Quelquepart',

@@ -16,7 +16,8 @@ class StoreDeveloperTest extends TestCaseWithAuth
     public function testDeveloperCreatingClient()
     {
         $client_data = [
-            'name'      => 'AS Something',
+            'name'          => 'AS Something',
+            'time_limit'    => 30,
         ];
         $address_data = [
             'street'    => '1 rue Quelquepart',
@@ -35,6 +36,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
                 'addressId',
                 'contactId',
                 'name',
+                'timeLimit',
                 'createdAt',
                 'updatedAt',
                 'conventionsCount',
@@ -49,10 +51,11 @@ class StoreDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      */
-    public function testDeveloperCreatingClientWithAlreadyUsedData()
+    public function testDeveloperCreatingClientWithWrongData()
     {
         $client_data = [
             'name'      => 'AS Connect', // Already used
+            'time_limit'    => -1,
         ];
         $address_data = [
             'street'    => '1 rue Quelquepart',
@@ -61,14 +64,14 @@ class StoreDeveloperTest extends TestCaseWithAuth
         ];
         $data = array_merge($client_data, ['address' => $address_data]);
 
-        $this->assertDatabaseHas('clients', $client_data);
+        $this->assertDatabaseHas('clients', ['name' => $client_data['name']]);
         $this->assertDatabaseMissing('addresses', $address_data);
 
         $this->json('POST', route('clients.store'), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJsonValidationErrors(['name']);
+            ->assertJsonValidationErrors(['name', 'time_limit']);
 
-        $this->assertDatabaseHas('clients', $client_data);
+        $this->assertDatabaseHas('clients', ['name' => $client_data['name']]);
         $this->assertDatabaseMissing('addresses', $address_data);
     }
 
@@ -81,6 +84,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors([
                 'name',
+                'time_limit',
                 'address.street',
                 'address.zip_code',
                 'address.city',

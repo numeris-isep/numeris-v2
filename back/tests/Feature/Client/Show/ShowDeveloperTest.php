@@ -24,6 +24,7 @@ class ShowDeveloperTest extends TestCaseWithAuth
                 'addressId',
                 'contactId',
                 'name',
+                'timeLimit',
                 'createdAt',
                 'updatedAt',
                 'conventionsCount',

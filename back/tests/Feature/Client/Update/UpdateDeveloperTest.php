@@ -18,7 +18,8 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         $client = $this->clientProvider();
 
         $client_data = [
-            'name'      => 'AS Something',
+            'name'          => 'AS Something',
+            'time_limit'    => 30,
         ];
         $address_data = [
             'street'    => '1 rue Quelquepart',
@@ -51,12 +52,13 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      */
-    public function testDeveloperUpdatingClientWithAlreadyUsedData()
+    public function testDeveloperUpdatingClientWithWrongData()
     {
         $client = $this->clientProvider();
 
         $client_data = [
-            'name'      => 'AS Connect', // Already used
+            'name'          => 'AS Connect', // Already used
+            'time_limit'    => -1,
         ];
         $address_data = [
             'street'    => '1 rue Quelquepart',
@@ -65,14 +67,14 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         ];
         $data = array_merge($client_data, ['address' => $address_data]);
 
-        $this->assertDatabaseHas('clients', $client_data);
+        $this->assertDatabaseHas('clients', ['name' => $client_data['name']]);
         $this->assertDatabaseMissing('addresses', $address_data);
 
         $this->json('PUT', route('clients.update', ['client_id' => $client->id]), $data)
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJsonValidationErrors(['name']);
+            ->assertJsonValidationErrors(['name', 'time_limit']);
 
-        $this->assertDatabaseHas('clients', $client_data);
+        $this->assertDatabaseHas('clients', ['name' => $client_data['name']]);
         $this->assertDatabaseMissing('addresses', $address_data);
     }
 
@@ -87,6 +89,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors([
                 'name',
+                'time_limit',
                 'address.street',
                 'address.zip_code',
                 'address.city',

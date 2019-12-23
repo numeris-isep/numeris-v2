@@ -20,7 +20,7 @@ class ClientResource extends JsonResource
             'addressId'         => $this->address_id,
             'contactId'         => $this->contact_id,
             'name'              => $this->name,
-            'reference'         => $this->reference,
+            'timeLimit'         => $this->time_limit,
             'createdAt'         => $this->created_at->toDateTimeString(),
             'updatedAt'         => $this->updated_at->toDateTimeString(),
 

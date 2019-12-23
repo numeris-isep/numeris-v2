@@ -16,6 +16,7 @@ class Client extends Model
 
         // attributes
         'name',
+        'time_limit',
     ];
 
     protected $hidden = [

@@ -16,7 +16,8 @@ class StoreStaffTest extends TestCaseWithAuth
     public function testStaffCreatingClient()
     {
         $client_data = [
-            'name'      => 'AS Something',
+            'name'          => 'AS Something',
+            'time_limit'    => 30,
         ];
         $address_data = [
             'street'    => '1 rue Quelquepart',
@@ -35,6 +36,7 @@ class StoreStaffTest extends TestCaseWithAuth
                 'addressId',
                 'contactId',
                 'name',
+                'timeLimit',
                 'createdAt',
                 'updatedAt',
                 'conventionsCount',
