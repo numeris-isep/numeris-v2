@@ -17,20 +17,12 @@ class ApplicationNotification extends AbstractNotification
 
     public function via($notifiable)
     {
-        if (in_array($this->application->status, [Application::ACCEPTED, Application::REFUSED])) {
-            $attribute = Preference::statusToAttribute()[$this->application->status];
-
-            if ($this->application->user->preference->$attribute) {
-                return ['mail'];
-            }
-        }
-
-        return null;
+        return ['mail'];
     }
 
-    public function toMail()
+    public function toMail($notifiable)
     {
         return (new ApplicationMail($this->application))
-            ->to($this->application->user->email);
+            ->to($notifiable->email);
     }
 }
