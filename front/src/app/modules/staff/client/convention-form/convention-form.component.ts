@@ -94,6 +94,8 @@ export class ConventionFormComponent implements OnInit, AfterViewInit {
   }
 
   removeRate(index: number) {
+    if (this.fr.controls.length <= 1) { return; }
+
     this.ratesFormArray.removeAt(index);
   }
 
