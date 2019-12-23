@@ -59,8 +59,9 @@ export class AuthService {
   logout() {
     if (this.tokenService.get()) {
       this.tokenService.remove();
-      this.loggedIn.next(false);
     }
+
+    this.loggedIn.next(false);
   }
 
   forgotPassword(email: string): Observable<{message: string[]}> {
