@@ -44,6 +44,7 @@ import { ScrollDirective } from './directives/scroll.directive';
 import { ChartComponent } from './components/chart/chart.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { EmailFormComponent } from './components/forms/email-form/email-form.component';
+import { DateToIsoPipe } from './pipes/date-to-iso.pipe';
 
 @NgModule({
   imports: [
@@ -96,6 +97,7 @@ import { EmailFormComponent } from './components/forms/email-form/email-form.com
     ScrollDirective,
     ChartComponent,
     EmailFormComponent,
+    DateToIsoPipe,
   ],
   exports: [
     // Modules
@@ -148,6 +150,7 @@ import { EmailFormComponent } from './components/forms/email-form/email-form.com
     ScrollDirective,
     ChartComponent,
     EmailFormComponent,
+    DateToIsoPipe,
   ],
   providers: [
     AlertService,

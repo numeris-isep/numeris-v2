@@ -25,7 +25,7 @@
         </ng-template>
       </div>
       <div class="description">
-        {{ mission.startAt | date: "\'Le\' dd/MM/yy à H\'h\'mm" }}
+        {{ mission.startAt | dateToISO | date: "\'Le\' dd/MM/yy à H\'h\'mm" }}
       </div>
     </div>
 

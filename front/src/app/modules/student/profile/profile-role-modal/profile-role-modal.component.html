@@ -13,7 +13,7 @@
       </div>
       <div class="content">
         <div class="date">
-          {{ role.createdAt | date: "\'Le\' dd/MM/yy" }}
+          {{ role.createdAt | dateToISO | date: "\'Le\' dd/MM/yy" }}
         </div>
 
         <div class="summary">

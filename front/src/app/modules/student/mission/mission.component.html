@@ -15,10 +15,10 @@
                 </div>
                 <div class="tablet only computer only column">
                   <h3 class="ui right aligned basic segment">
-                    {{ missionGroup.range[0] | date: "dd/MM/yyyy" }}
+                    {{ missionGroup.range[0] | dateToISO | date: "dd/MM/yyyy" }}
                     <i *ngIf="missionGroup.range[0] != undefined"
                        class="right angle icon divider"></i>
-                    {{ missionGroup.range[1] | date: "dd/MM/yyyy" }}
+                    {{ missionGroup.range[1] | dateToISO | date: "dd/MM/yyyy" }}
                   </h3>
                 </div>
               </div>

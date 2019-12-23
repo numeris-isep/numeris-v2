@@ -60,7 +60,7 @@
           </p>
         </ng-container>
         <p>
-          <i class="history icon"></i> Modifié le {{ client.updatedAt | date:"dd/MM/y" }}
+          <i class="history icon"></i> Modifié le {{ client.updatedAt | dateToISO | date:"dd/MM/y" }}
         </p>
       </div>
     </div>

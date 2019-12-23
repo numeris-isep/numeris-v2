@@ -17,7 +17,7 @@
         <i class="calendar alternate icon"></i>
         Date de naissance
       </td>
-      <td>{{ user.birthDate | date:"dd/MM/yyyy" }}</td>
+      <td>{{ user.birthDate | dateToISO | date:"dd/MM/yyyy" }}</td>
     </tr>
     <tr>
       <td class="collapsing">

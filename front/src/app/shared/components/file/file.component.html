@@ -28,7 +28,7 @@
     <i class="right floated big red file pdf icon"></i>
     <div class="header">
       {{ type === 'contract' ? 'Contrat' : 'BV' }}
-      {{ (data.month | date:'MMMM yyyy') | titlecase }}
+      {{ (data.month | dateToISO | date:'MMMM yyyy') | titlecase }}
     </div>
     <div class="meta">{{ data.hourAmount | hours }}</div>
     <div class="description">
@@ -67,7 +67,7 @@
   <div class="content">
     <i class="right floated big red file pdf icon"></i>
     <a class="header" routerLink="/projets/{{ data.project.id }}">Facture {{ data.project.name }}</a>
-    <div class="meta">{{ (data.project.startAt | date:'MMMM yyyy') | titlecase }}</div>
+    <div class="meta">{{ (data.project.startAt | dateToISO | date:'MMMM yyyy') | titlecase }}</div>
     <div class="description" *ngIf="data.project.missionsCount">
       {{ data.project.missionsCount }} {{ data.project.missionsCount > 1 ? 'missions effectuées' : 'mission effectuée' }}
     </div>

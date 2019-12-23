@@ -38,10 +38,10 @@
           <i class="tag icon"></i> {{ project.convention.name }}
         </p>
         <p>
-          <i class="calendar outline icon"></i> {{ project.startAt | date:'yy/MM/y' }}
+          <i class="calendar outline icon"></i> {{ project.startAt | dateToISO | date:'yy/MM/y' }}
         </p>
         <p>
-          <i class="history icon"></i> Modifié le {{ project.updatedAt | date:"dd/MM/y" }}
+          <i class="history icon"></i> Modifié le {{ project.updatedAt | dateToISO | date:"dd/MM/y" }}
         </p>
       </div>
     </div>

@@ -69,7 +69,7 @@
         <tr *ngFor="let mission of paginatedMission.data" [ngClass]="{'hatched': mission.isLocked || isMissionExpired(mission)}"
             suiPopup popupText="{{ isMissionExpired(mission) ? 'Expirée' : 'Fermée' }}" popupPlacement="left" popupTrigger="manual" #popup="suiPopup"
             (mouseenter)="togglePopup(popup, mission)" (mouseleave)="togglePopup(popup, mission)" popupInverted>
-          <td class="collapsing">{{ mission.startAt | date:'dd/MM/y HH\'h\'mm' }}</td>
+          <td class="collapsing">{{ mission.startAt | dateToISO | date:'dd/MM/y HH\'h\'mm' }}</td>
           <td class="collapsing">{{ mission.title }}</td>
           <td class="collapsing"><a routerLink="/projets/{{ mission.project.id }}">{{ mission.project.name }}</a></td>
           <td class="center aligned">{{ mission.duration }}h</td>

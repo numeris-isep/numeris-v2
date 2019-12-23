@@ -58,7 +58,7 @@
                   <div class="field">
                     <label *ngIf="!project.moneyReceivedAt; else paid">Marquer comme payé</label>
                     <ng-template #paid>
-                      <label>Paiement reçu le {{ project.moneyReceivedAt | date:'dd/MM/y' }}</label>
+                      <label>Paiement reçu le {{ project.moneyReceivedAt | dateToISO | date:'dd/MM/y' }}</label>
                     </ng-template>
                     <app-button size="small" hiddenIcon="money bill" behaviour="fluid" (click)="updatePayment()"
                                 [visibleIcon]="!!project.moneyReceivedAt ? 'check' : null"

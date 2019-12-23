@@ -69,7 +69,7 @@
         <tr *ngFor="let project of paginatedProject.data" [ngClass]="{'hatched': project.step == 'closed'}"
             suiPopup popupText="Cloturé" popupPlacement="left" popupTrigger="manual" #popup="suiPopup" popupInverted
             (mouseenter)="togglePopup(popup, project.step == 'closed')" (mouseleave)="togglePopup(popup, project.step == 'closed')">
-          <td>{{ project.startAt | date:'dd/MM/y' }}</td>
+          <td>{{ project.startAt | dateToISO | date:'dd/MM/y' }}</td>
           <td class="collapsing">{{ project.name }}</td>
           <td [ngClass]="(project.step != 'hiring' && project.step != 'closed') ? project.step : ''">
             {{ project.step | status }}
