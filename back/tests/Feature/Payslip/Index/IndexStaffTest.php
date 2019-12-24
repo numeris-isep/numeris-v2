@@ -21,6 +21,8 @@ class IndexStaffTest extends TestCaseWithAuth
         $this->json('POST', route('payslips.index'), $year)
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([[
+                'signed',
+                'paid',
                 'user',
                 'month',
                 'hourAmount',

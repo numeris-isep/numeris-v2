@@ -21,6 +21,8 @@ class UpdateAdministratorTest extends TestCaseWithAuth
         $this->json('PUT', route('payslips.update'), ['month' => $month])
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([[
+                'signed',
+                'paid',
                 'user',
                 'month',
                 'hourAmount',

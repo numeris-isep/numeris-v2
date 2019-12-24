@@ -9,7 +9,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Payslip::class, function (Faker $faker) {
     return [
-        'user_id'                      => factory(User::class),
+        'user_id'                   => factory(User::class),
         'month'                     => Carbon::now()->addMonth()->toDateTimeString(),
         'hour_amount'               => 10.00,
         'gross_amount'              => 100.00,
@@ -37,5 +37,7 @@ $factory->define(Payslip::class, function (Faker $faker) {
             'id'                    => 1,
             'name'                  => 'Client de test',
         ]]),
+        'signed'                    => 0,
+        'paid'                      => 0,
     ];
 });

@@ -16,6 +16,8 @@ class Payslip extends Model
         'user_id',
 
         // attributes
+        'signed',
+        'paid',
         'month',
         'hour_amount',
         'gross_amount',
@@ -27,6 +29,11 @@ class Payslip extends Model
         'deductions',
         'operations',
         'clients',
+    ];
+
+    protected $casts = [
+        'signed'    => 'boolean',
+        'paid'      => 'boolean',
     ];
 
     private function generateFilename(string $type)
