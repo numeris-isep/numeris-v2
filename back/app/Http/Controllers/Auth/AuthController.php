@@ -33,7 +33,7 @@ class AuthController extends Controller
         }
 
         $token = auth()->claims(['rol' => $user->role()->name])
-            ->setTTL(120) // <-- token valid for 2 hours
+            ->setTTL(240) // Token valid for 4 hours
             ->attempt($credentials);
 
         if (! $token) {
