@@ -1,5 +1,5 @@
 @php
-  $mailSav = env('SAV_ADDRESS');
+  $mailSav = env('MAIL_FROM_ADDRESS');
   $profileUrl = env('FRONT_APP_URL') . '/profil';
   $contactUrl = env('FRONT_APP_URL') . '/nous-contacter';
 @endphp
