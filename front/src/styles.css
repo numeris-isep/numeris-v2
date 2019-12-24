@@ -55,3 +55,7 @@ canvas.behind {
 input.search {
   width: 100% !important;
 }
+
+.ui.slider.checkbox input:checked ~ label:before {
+  background-color: #0025AA !important;
+}

@@ -6,6 +6,8 @@ export class Payslip {
 
   id: number;
   user: User;
+  signed: boolean;
+  paid: boolean;
   month: string;
   hourAmount: number;
   grossAmount: number;

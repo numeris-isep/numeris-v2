@@ -4,6 +4,8 @@ import { Invoice } from '../../../core/classes/models/Invoice';
 import { FileService } from '../../../core/http/file.service';
 import { AlertService } from '../../../core/services/alert.service';
 import { Project } from '../../../core/classes/models/project';
+import { PayslipService } from '../../../core/http/payslip.service';
+import { AuthService } from '../../../core/http/auth/auth.service';
 
 @Component({
   selector: 'app-file',
@@ -20,8 +22,12 @@ export class FileComponent implements OnInit, OnChanges {
   url: string;
   loading: boolean = false;
 
+  currentUserRole: string = this.authService.getCurrentUserRole();
+
   constructor(
     private fileService: FileService,
+    private payslipService: PayslipService,
+    private authService: AuthService,
     private alertService: AlertService,
   ) { }
 
@@ -81,6 +87,22 @@ export class FileComponent implements OnInit, OnChanges {
 
   getInvoice(invoiceId: number) {
     this.document = this.fileService.getInvoice(invoiceId);
+  }
+
+  updatePayslipPartially(field: string) {
+    const data: { id: number, signed?: boolean, paid?: boolean }[] = [{
+      id: this.data.id,
+      signed: (this.data as Payslip).signed,
+      paid: (this.data as Payslip).paid,
+    }];
+
+    this.payslipService.updatePayslipsPartially(data).subscribe(
+      payslips => {},
+      errors => {
+        this.data[field] = ! this.data[field];
+        this.alertService.error(['Impossible d\'effectuer cette action.']);
+      }
+    );
   }
 
 }

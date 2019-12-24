@@ -26,4 +26,9 @@ export class PayslipService {
     const url = `${environment.apiUrl}/api/payslips`;
     return this.http.put<Payslip[]>(url, {month: month}, HTTP_OPTIONS);
   }
+
+  updatePayslipsPartially(data: { id: number, signed?: boolean, paid?: boolean }[]): Observable<Payslip[]> {
+    const url = `${environment.apiUrl}/api/payslips`;
+    return this.http.patch<Payslip[]>(url, { payslips: data }, HTTP_OPTIONS);
+  }
 }

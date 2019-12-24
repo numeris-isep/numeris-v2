@@ -42,6 +42,22 @@
       </p>
     </div>
   </div>
+
+  <div class="ui form content" *ngIf="currentUserRole !== 'student' && type === 'contract'">
+    <div class="field">
+      <sui-checkbox class="slider" [(ngModel)]="data.signed" (click)="updatePayslipPartially('signed')">
+        <ng-container *ngIf="data.signed; else notSigned">Signé <i class="green check icon"></i></ng-container>
+        <ng-template #notSigned>Non signé <i class="red x icon"></i></ng-template>
+      </sui-checkbox>
+    </div>
+    <div class="field">
+      <sui-checkbox class="slider" [(ngModel)]="data.paid" (click)="updatePayslipPartially('paid')">
+        <ng-container *ngIf="data.paid; else notPaid">Payé <i class="green check icon"></i></ng-container>
+        <ng-template #notPaid>Non payé <i class="red x icon"></i></ng-template>
+      </sui-checkbox>
+    </div>
+  </div>
+
   <div class="extra content center aligned">
     <span suiPopup popupPlacement="top" popupText="Salaire brut" popupInverted>
       {{ data.grossAmount | currency:'€' }}
