@@ -94,6 +94,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     // Payslip resource routes
     Route::post('payslips', 'PayslipController@index')->name('payslips.index');
     Route::put('payslips', 'PayslipController@update')->name('payslips.update');
+    Route::patch('payslips', 'PayslipController@updatePartial')->name('payslips.update.partial');
     Route::get('payslips/{payslip_id}/download-payslip', 'PayslipController@downloadPayslip')
         ->name('payslips.download.payslip');
     Route::get('payslips/{payslip_id}/download-contract', 'PayslipController@downloadContract')

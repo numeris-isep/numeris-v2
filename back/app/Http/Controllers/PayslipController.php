@@ -151,6 +151,32 @@ class PayslipController extends Controller
     }
 
     /**
+     * Update signed or paid attributes of given payslips
+     *
+     * @param PayslipRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function updatePartial(PayslipRequest $request)
+    {
+        $this->authorize('update', Payslip::class);
+
+        $payslips = collect();
+
+        foreach ($request->toArray()['payslips'] as $data) {
+            $payslip = Payslip::findOrFail($data['id']);
+
+            $payslip->update([
+                'signed'    => $data['signed'] ?? $payslip->signed,
+                'paid'      => $data['paid'] ?? $payslip->paid,
+            ]);
+            $payslips->add($payslip->load('user'));
+        }
+
+        return response()->json(PayslipResource::collection($payslips));
+    }
+
+    /**
      * Send an email only when the document was recently created
      * (we do not want to send an email each time we update payslips)
      *

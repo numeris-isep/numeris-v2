@@ -207,6 +207,9 @@ return [
         'rates.*.is_flat'           => 'forfait',
         'rates.*.hours'             => 'heures',
         'time_limit'                => 'date limite',
+        'payslips.*.id'             => 'identifiant',
+        'payslips.*.signed'         => 'signé',
+        'payslips.*.paid'           => 'payé',
 
         Application::ACCEPTED       => 'acceptée',
         Application::REFUSED        => 'refusée',

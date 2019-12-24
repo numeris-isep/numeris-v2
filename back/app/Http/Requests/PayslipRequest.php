@@ -21,6 +21,7 @@ class PayslipRequest extends AbstractFormRequest
             case 'payslips.podium.index':
                 return true;
             case 'payslips.update':
+            case 'payslips.update.partial':
                 return $current_user->can('update', Payslip::class);
             default:
                 return false;
@@ -43,6 +44,14 @@ class PayslipRequest extends AbstractFormRequest
             case 'PUT':
                 return [
                     'month' => 'required|string|date',
+                ];
+            case 'PATCH':
+                return [
+                    'payslips'          => 'required|array',
+                    'payslips.*'        => 'required|array',
+                    'payslips.*.id'     => 'required|exists:payslips,id',
+                    'payslips.*.signed' => 'required_without:payslips.*.paid|boolean',
+                    'payslips.*.paid'   => 'required_without:payslips.*.signed|boolean',
                 ];
             default: break;
         }
