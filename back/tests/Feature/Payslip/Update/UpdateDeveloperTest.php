@@ -337,6 +337,22 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      */
+    public function testDeveloperUpdatingPayslipsCheckSignedAndPaidAttributes()
+    {
+        $this->clientAndProjectAndMissionAndConventionWithBillsProvider();
+        $month = '2000-01-01 00:00:00';
+
+        $response = $this->json('PUT', route('payslips.update'), ['month' => $month])
+            ->assertStatus(JsonResponse::HTTP_OK);
+        $content = json_decode($response->getContent(), true)[0];
+
+        $this->assertFalse($content['signed']);
+        $this->assertFalse($content['paid']);
+    }
+
+    /**
+     * @group developer
+     */
     public function testDeveloperUpdatingPayslipsCheckJsonAttributesStructure()
     {
         $user = $this->activeStaffProvider();
