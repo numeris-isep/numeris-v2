@@ -28,6 +28,23 @@
 
   <!-- Contracts -->
   <div class="ui" suiTabContent="1">
+    <div *ngIf="documents.payslips.length > 0" class="ui equal width form" [ngClass]="{ 'loading': loading }">
+      <div class="fields">
+        <div class="field">
+          <sui-checkbox class="toggle" [(ngModel)]="massAction.signed" (click)="markAllAs('signed')">
+            <ng-container *ngIf="massAction.signed; else notSigned">Tout marquer comme non signé</ng-container>
+            <ng-template #notSigned>Tout marquer comme signé</ng-template>
+          </sui-checkbox>
+        </div>
+        <div class="field">
+          <sui-checkbox class="toggle" [(ngModel)]="massAction.paid" (click)="markAllAs('paid')">
+            <ng-container *ngIf="massAction.paid; else notPaid">Tout marquer comme non payé</ng-container>
+            <ng-template #notPaid>Tout marquer comme payé</ng-template>
+          </sui-checkbox>
+        </div>
+      </div>
+    </div>
+
     <div *ngIf="documents.payslips.length > 0; else emptyContract" class="ui three column grid stackable">
       <app-file class="column" *ngFor="let payslip of documents.payslips" type="contract" [data]="payslip"></app-file>
     </div>

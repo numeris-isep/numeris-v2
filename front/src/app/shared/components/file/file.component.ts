@@ -97,8 +97,8 @@ export class FileComponent implements OnInit, OnChanges {
     }];
 
     this.payslipService.updatePayslipsPartially(data).subscribe(
-      payslips => {},
-      errors => {
+      () => {},
+      () => {
         this.data[field] = ! this.data[field];
         this.alertService.error(['Impossible d\'effectuer cette action.']);
       }
