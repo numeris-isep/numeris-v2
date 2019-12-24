@@ -7,8 +7,6 @@ use App\Models\Role;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Tests\TestCaseWithAuth;
-use Tests\Traits\ClientProviderTrait;
-use Tests\Traits\UserProviderTrait;
 
 class UpdateDeveloperTest extends TestCaseWithAuth
 {

@@ -11,6 +11,7 @@ use App\Models\Address;
 use App\Models\Mission;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Mail;
 
 class MissionController extends Controller
@@ -203,9 +204,6 @@ class MissionController extends Controller
         $this->authorize('notify-availability', Mission::class);
 
         $missions = collect();
-        $users = User::active()->filter(function (User $user) {
-            return $user->hasVerifiedEmail() && $user->preference->on_new_mission;
-        });
 
         foreach (request()->missions as $mission_id) {
             $mission = Mission::findOrFail($mission_id);
@@ -215,8 +213,22 @@ class MissionController extends Controller
             }
         }
 
-        Mail::to($users)->send(new NewMissionsAvailableMail($missions));
+        $this->sendNewMissionsAvailableMail($missions);
 
         return response()->json(null, JsonResponse::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @param Collection $missions
+     */
+    private function sendNewMissionsAvailableMail(Collection $missions)
+    {
+        try {
+            $users = User::active()->filter(function (User $user) {
+                return $user->hasVerifiedEmail() && $user->preference->on_new_mission;
+            });
+
+            Mail::to($users)->send(new NewMissionsAvailableMail($missions));
+        } catch (\Exception $exception) {}
     }
 }

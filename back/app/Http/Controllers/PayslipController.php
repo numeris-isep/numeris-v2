@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use App\Calculator\PayslipCalculator;
 use App\Http\Requests\PayslipRequest;
 use App\Http\Resources\PayslipResource;
+use App\Mail\NewDocumentMail;
 use App\Models\Payslip;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Mail;
 
 class PayslipController extends Controller
 {
@@ -135,12 +139,36 @@ class PayslipController extends Controller
         $results = $calculator->calculate($request->get('month'));
         $payslips = collect();
 
-        foreach ($results as $payslip) {
+        foreach ($results as $result) {
             $payslips->add(
-                Payslip::updateOrCreate(['user_id' => $payslip['user_id'], 'month' => $payslip['month']], $payslip)->load('user')
+                Payslip::updateOrCreate(['user_id' => $result['user_id'], 'month' => $result['month']], $result)->load('user')
             );
         }
 
+        $this->sendNewDocumentMail($payslips);
+
         return response()->json(PayslipResource::collection($payslips));
+    }
+
+    /**
+     * Send an email only when the document was recently created
+     * (we do not want to send an email each time we update payslips)
+     *
+     * @param Collection $payslips
+     */
+    private function sendNewDocumentMail(Collection $payslips)
+    {
+        try {
+            $users = $payslips
+                ->filter(function (Payslip $payslip) {
+                    return $payslip->wasRecentlyCreated;
+                })
+                ->pluck('user')
+                ->filter(function (User $user) {
+                    return $user->preference->on_document;
+                });
+
+            Mail::to($users)->send(new NewDocumentMail());
+        } catch (\Exception $exception) {}
     }
 }
