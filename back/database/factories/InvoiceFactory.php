@@ -25,7 +25,7 @@ $factory->define(Invoice::class, function (Faker $faker) {
             'startAt'   => Carbon::now()->addMonth()->toDateTimeString(),
             'reference' => $faker->numberBetween(10, 99)
                 . '-' . $faker->numberBetween(1000, 9999)
-                . '-' . strtoupper(substr(sha1($faker->numberBetween(10, 99)), 0, 4)),
+                . '-' . mb_strtoupper(substr(sha1($faker->numberBetween(10, 99)), 0, 4), 'UTF-8'),
         ]]),
     ];
 });

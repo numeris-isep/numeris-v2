@@ -91,7 +91,7 @@ class User extends Authenticatable implements JWTSubject
         return sprintf(
             '%s %s',
             $this->first_name,
-            strtoupper($this->last_name)
+            mb_strtoupper($this->last_name, 'UTF-8')
         );
     }
 

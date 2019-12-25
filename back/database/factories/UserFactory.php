@@ -47,7 +47,7 @@ $factory->state(User::class, 'active', function (Faker $faker) {
         'nationality'               => 'france',
         'birth_city'                => $faker->city,
         'social_insurance_number'   => $faker->numberBetween(100000000000000, 199999999999999),
-        'iban'                      => strtoupper($faker->lexify('???????????????')),
+        'iban'                      => mb_strtoupper($faker->lexify('???????????????'), 'UTF-8'),
         'bic'                       => $faker->bothify('#??##?#?'),
     ];
 });

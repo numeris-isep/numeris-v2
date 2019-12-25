@@ -52,7 +52,7 @@ class ContactUsMail extends Mailable
             '[Formulaire de contact] %s - %s %s',
             $this->data['subject'],
             $this->data['first_name'],
-            strtoupper($this->data['last_name'])
+            mb_strtoupper($this->data['last_name'], 'UTF-8')
         );
     }
 
@@ -61,7 +61,7 @@ class ContactUsMail extends Mailable
         return sprintf(
             '%s %s',
             $this->data['first_name'],
-            $this->data['last_name']
+            mb_strtoupper($this->data['last_name'], 'UTF-8')
         );
     }
 }

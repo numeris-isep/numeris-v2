@@ -16,7 +16,7 @@ $factory->define(Mission::class, function (Faker $faker) {
         'is_locked'     => false,
         'reference'     => $faker->numberBetween(10, 99)
             . '-' . $faker->numberBetween(1000, 9999)
-            . '-' . strtoupper(substr(sha1($faker->numberBetween(10, 99)), 0, 4)),
+            . '-' . mb_strtoupper(substr(sha1($faker->numberBetween(10, 99)), 0, 4), 'UTF-8'),
         'title'         => $faker->text(10),
         'description'   => $faker->text($faker->numberBetween(5, 200)),
         'start_at'      => Carbon::now()->addMonth()->toDateTimeString(),
