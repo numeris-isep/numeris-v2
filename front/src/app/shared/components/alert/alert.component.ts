@@ -3,6 +3,7 @@ import { AlertService } from '../../../core/services/alert.service';
 import { Alert, AlertType } from '../../../core/classes/alert';
 import { timer } from 'rxjs';
 import { Transition, TransitionController, TransitionDirection } from 'ng2-semantic-ui';
+import { ScrollService } from '../../../core/services/scroll.service';
 
 @Component({
   selector: 'app-alert',
@@ -16,12 +17,21 @@ export class AlertComponent implements OnInit {
   @ViewChildren('message') messages: QueryList<ElementRef>;
 
   alerts: Alert[] = [];
+  position: number = 0;
 
-  constructor(protected alertService: AlertService) { }
+  constructor(
+    private alertService: AlertService,
+    private scrollService: ScrollService,
+  ) { }
 
   ngOnInit() {
+    this.initAlerts();
+    this.initPosition();
+  }
+
+  initAlerts() {
     this.alertService.getAlert().subscribe((alert: Alert) => {
-      if (!alert) {
+      if (! alert) {
         // clear alerts when an empty alert is received
         this.alerts = [];
         return;
@@ -34,6 +44,10 @@ export class AlertComponent implements OnInit {
 
       this.autoFade(alert);
     });
+  }
+
+  initPosition() {
+    this.scrollService.scrollPosition.subscribe(position => this.position = position);
   }
 
   removeAlert(index: number) {

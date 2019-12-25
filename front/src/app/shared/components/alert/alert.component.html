@@ -1,6 +1,6 @@
 <div *ngFor="let alert of alerts; let i = index">
   <div *ngIf="target === alert.target || alert.target === 'all'"
-       class="padded" [ngClass]="{ 'flying': alert.target === 'main' }"
+       class="padded" [ngClass]="{ 'flying': alert.target === 'main' }" [style.top.px]="position"
        [suiTransition]="alert.transitionController" #container>
     <sui-message class="{{ cssClass(alert) }} icon" (dismiss)="removeAlert(i)">
       <ng-container *ngIf="alert.title">
