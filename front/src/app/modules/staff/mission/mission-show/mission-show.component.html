@@ -101,11 +101,23 @@
             <span class="ui tiny blue label">{{ applications.length }}</span>
           </a>
           <a class="item" suiTabHeader="2" [isDisabled]="mission.project.step != 'hiring'">
-            <i class="users icon"></i> Étudiants
+            <span *ngIf="mission.project.step != 'hiring'; else noInscriptionPopup"
+                  suiPopup popupText="Le projet doit être 'Ouvert'" popupPlacement="top" popupInverted>
+              <i class="users icon"></i> Étudiants
+            </span>
+            <ng-template #noInscriptionPopup>
+              <i class="users icon"></i> Étudiants
+            </ng-template>
           </a>
           <a class="item" suiTabHeader="3" [isDisabled]="mission.project.step == 'hiring'"
              [isActive]="hoursTabActive">
-            <i class="clock icon"></i> Heures
+            <span *ngIf="mission.project.step == 'hiring'; else noHoursPopup"
+                  suiPopup popupText="Le projet ne doit pas être 'Ouvert'" popupPlacement="top" popupInverted>
+              <i class="clock icon"></i> Heures
+            </span>
+            <ng-template #noHoursPopup>
+              <i class="clock icon"></i> Heures
+            </ng-template>
           </a>
         </div>
 
