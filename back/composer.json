@@ -1,5 +1,5 @@
 {
-    "name": "2Seg/numeris-v2",
+    "name": "2seg/numeris-v2",
     "description": "Home of the new website of Numéris.",
     "keywords": ["Numéris", "association", "website"],
     "license": "MIT",
@@ -19,6 +19,7 @@
         "doctrine/dbal": "^2.7",
         "fedeisas/laravel-mail-css-inliner": "^2.2",
         "fideloper/proxy": "^4.0",
+        "guzzlehttp/guzzle": "^6.5",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "tymon/jwt-auth": "^1.0.0-rc.2"

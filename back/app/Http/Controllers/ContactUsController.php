@@ -17,7 +17,7 @@ class ContactUsController extends Controller
      */
     public function contactUs(ContactUsRequest $request)
     {
-        Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ContactUsMail($request));
+        Mail::to(env('MAIL_FROM_ADDRESS'))->send(new ContactUsMail($request->only(['data'])['data']));
 
         return response()->json([], JsonResponse::HTTP_NO_CONTENT);
     }

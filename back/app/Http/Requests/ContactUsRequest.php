@@ -22,11 +22,13 @@ class ContactUsRequest extends AbstractFormRequest
     public function rules()
     {
         return [
-            'first_name'    => 'required|string',
-            'last_name'     => 'required|string',
-            'email'         => 'required|email',
-            'subject'       => 'required|string',
-            'content'       => 'required|string',
+            'recaptcha_token'   => 'required|recaptcha',
+
+            'data.first_name'   => 'required|string',
+            'data.last_name'    => 'required|string',
+            'data.email'        => 'required|email',
+            'data.subject'      => 'required|string',
+            'data.content'      => 'required|string',
         ];
     }
 }

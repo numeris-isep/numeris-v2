@@ -18,15 +18,9 @@ class ContactUsMail extends Mailable
      *
      * @return void
      */
-    public function __construct(ContactUsRequest $request)
+    public function __construct(array $data)
     {
-        $this->data = $request->only([
-            'first_name',
-            'last_name',
-            'email',
-            'subject',
-            'content',
-        ]);
+        $this->data = $data;
     }
 
     /**

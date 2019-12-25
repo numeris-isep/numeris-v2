@@ -12,11 +12,14 @@ class ContactUsTest extends TestCase
     public function testContactUs()
     {
         $data = [
-            'first_name'    => 'John',
-            'last_name'     => 'Doe',
-            'email'         => $email = 'john.doe@unknown.io',
-            'subject'       => 'Stay in touch',
-            'content'       => 'Hello, I have basically no idea why I want to reach you but I do. Regards, Johnny Doe.'
+            'recaptcha_token'   => 'token',
+            'data' => [
+                'first_name'    => 'John',
+                'last_name'     => 'Doe',
+                'email'         => $email = 'john.doe@unknown.io',
+                'subject'       => 'Stay in touch',
+                'content'       => 'Hello, I have basically no idea why I want to reach you but I do. Regards, Johnny Doe.'
+            ],
         ];
 
         $this->json('POST', route('contact-us'), $data)
@@ -29,7 +32,13 @@ class ContactUsTest extends TestCase
     {
         $this->json('POST', route('contact-us'), [])
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJsonValidationErrors(['first_name', 'last_name', 'email', 'subject', 'content']);
+            ->assertJsonValidationErrors([
+                'data.first_name',
+                'data.last_name',
+                'data.email',
+                'data.subject',
+                'data.content'
+            ]);
 
         Mail::assertNothingSent();
     }
