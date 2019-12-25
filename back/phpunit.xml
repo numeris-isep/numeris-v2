@@ -24,6 +24,7 @@
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>
         <env name="DB_CONNECTION" value="testing"/>
+        <env name="MAIL_FROM_ADDRESS" value="test@test.fr"/>
         <env name="GOOGLE_RECAPTCHA_KEY" value="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"/>
         <env name="GOOGLE_RECAPTCHA_SECRET" value="6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"/>
     </php>
