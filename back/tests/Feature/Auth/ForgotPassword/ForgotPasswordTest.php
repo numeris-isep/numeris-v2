@@ -22,4 +22,16 @@ class ForgotPasswordTest extends TestCase
 
         Notification::assertSentTo($user, ResetPasswordNotification::class);
     }
+
+    /**
+     * @group any
+     */
+    public function testForgotPasswordWithoutData()
+    {
+        $this->json('POST', route('password.forgot'), [])
+            ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
+            ->assertJsonValidationErrors(['email']);
+
+        Notification::assertNothingSent();
+    }
 }

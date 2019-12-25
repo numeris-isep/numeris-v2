@@ -1,0 +1,67 @@
+<?php
+
+namespace App\Mail;
+
+use App\Http\Requests\ContactUsRequest;
+use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+
+class ContactUsMail extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    private $data;
+
+    /**
+     * Create a new message instance.
+     *
+     * @return void
+     */
+    public function __construct(ContactUsRequest $request)
+    {
+        $this->data = $request->only([
+            'first_name',
+            'last_name',
+            'email',
+            'subject',
+            'content',
+        ]);
+    }
+
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+        return $this->subject($this->getSubject())
+            ->replyTo($this->data['email'])
+            ->markdown('mails.contact-us', [
+                'user'      => $this->getFullName(),
+                'email'     => $this->data['email'],
+                'subject'   => $this->data['subject'],
+                'content'   => $this->data['content'],
+            ]);
+    }
+
+    private function getSubject()
+    {
+        return sprintf(
+            '[Formulaire de contact] %s - %s %s',
+            $this->data['subject'],
+            $this->data['first_name'],
+            strtoupper($this->data['last_name'])
+        );
+    }
+
+    private function getFullName()
+    {
+        return sprintf(
+            '%s %s',
+            $this->data['first_name'],
+            $this->data['last_name']
+        );
+    }
+}
