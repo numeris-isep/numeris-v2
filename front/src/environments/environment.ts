@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080',
-  tokenName: 'numeris_token'
+  tokenName: 'numeris_token',
+  savEmail: 'sav.numeris@gmail.com',
 };
 
 /*

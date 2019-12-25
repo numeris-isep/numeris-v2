@@ -8,87 +8,90 @@
         [ngClass]="{ 'error': submitted && contactUsForm.invalid }">
     <div class="two fields">
       <div class="required field"
-           [ngClass]="{ 'error': submitted && f.firstName.errors }">
+           [ngClass]="{ 'error': submitted && f.first_name.errors }">
         <label>Prénom</label>
-        <div class="ui corner labeled input">
-          <input type="text" formControlName="firstName" placeholder="Prénom"/>
+        <div class="ui left icon corner labeled input">
+          <i class="address book outline icon"></i>
+          <input type="text" formControlName="first_name" placeholder="Prénom"/>
           <div class="ui corner label">
             <i class="asterisk icon"></i>
           </div>
         </div>
 
-        <div *ngIf="submitted && f.firstName.errors"
-             class="ui error message">
-          Veuillez saisir un prénom.
-        </div>
+        <app-form-error *ngIf="submitted && f.first_name.errors" [errors]="f.first_name.errors"></app-form-error>
       </div>
 
       <div class="required field"
-           [ngClass]="{ 'error': submitted && f.lastName.errors }">
+           [ngClass]="{ 'error': submitted && f.last_name.errors }">
         <label>Nom</label>
-        <div class="ui corner labeled input">
-          <input type="text" formControlName="lastName" placeholder="Nom"/>
+        <div class="ui left icon corner labeled input">
+          <i class="clipboard outline icon"></i>
+          <input type="text" formControlName="last_name" placeholder="Nom"/>
           <div class="ui corner label">
             <i class="asterisk icon"></i>
           </div>
         </div>
-        <div *ngIf="submitted && f.lastName.errors"
-             class="ui error message">
-          Veuillez saisir un nom.
-        </div>
+        <app-form-error *ngIf="submitted && f.last_name.errors" [errors]="f.last_name.errors"></app-form-error>
       </div>
     </div>
 
     <div class="required field"
          [ngClass]="{ 'error': submitted && f.email.errors }">
       <label>Adresse email</label>
-      <div class="ui corner labeled input">
+      <div class="ui left icon corner labeled input">
+        <i class="envelope icon"></i>
         <input type="email" formControlName="email" placeholder="Adresse email"/>
         <div class="ui corner label">
           <i class="asterisk icon"></i>
         </div>
       </div>
-      <div *ngIf="submitted && f.email.errors"
-           class="ui error message">
-        Veuillez saisir une adresse email.
-      </div>
+      <app-form-error *ngIf="submitted && f.email.errors" [errors]="f.email.errors"></app-form-error>
     </div>
 
     <div class="required field"
          [ngClass]="{ 'error': submitted && f.subject.errors }">
       <label>Objet</label>
-      <div class="ui corner labeled input">
+      <div class="ui left icon corner labeled input">
+        <i class="pencil icon"></i>
         <input type="text" formControlName="subject" placeholder="Objet"/>
         <div class="ui corner label">
           <i class="asterisk icon"></i>
         </div>
       </div>
-      <div *ngIf="submitted && f.subject.errors"
-           class="ui error message">
-        Veuillez saisir l'objet du message.
-      </div>
+      <app-form-error *ngIf="submitted && f.subject.errors" [errors]="f.subject.errors"></app-form-error>
     </div>
 
     <div class="required field"
-         [ngClass]="{ 'error': submitted && f.message.errors }">
+         [ngClass]="{ 'error': submitted && f.content.errors }">
       <label>Message</label>
       <div class="ui corner labeled input">
-        <textarea type="text" formControlName="message" placeholder="Message">
+        <textarea type="text" formControlName="content" placeholder="Message">
         </textarea>
         <div class="ui corner label">
           <i class="asterisk icon"></i>
         </div>
       </div>
-      <div *ngIf="submitted && f.message.errors"
-           class="ui error message">
-        Veuillez saisir un message.
-      </div>
+
+      <app-form-error *ngIf="submitted && f.content.errors" [errors]="f.content.errors"></app-form-error>
     </div>
 
-    <app-button hiddenIcon="envelope"
-                [isLoading]="loading" behaviour="fluid">
-      Envoyer
-    </app-button>
+    <div class="field">
+      <div class="ui large buttons">
+        <a class="ui animated fade button" (click)="modal.deny(null)">
+          <div class="visible content">Annuler</div>
+          <div class="hidden content">
+            <i class="cancel icon"></i>
+          </div>
+        </a>
+        <div class="or" data-text="ou"></div>
+        <button class="ui animated fade blue button"
+                [ngClass]="{'loading': loading, 'disabled': contactUsForm.invalid}">
+          <div class="visible content">Envoyer</div>
+          <div class="hidden content">
+            <i class="envelope icon"></i>
+          </div>
+        </button>
+      </div>
+    </div>
   </form>
 </div>
-

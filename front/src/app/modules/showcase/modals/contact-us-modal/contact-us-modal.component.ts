@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { SuiModal, ComponentModalConfig, ModalSize } from "ng2-semantic-ui"
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { SuiModal, ComponentModalConfig, ModalSize } from 'ng2-semantic-ui';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ContactUsService } from '../../../../core/http/contact-us.service';
+import { AlertService } from '../../../../core/services/alert.service';
+import { handleFormErrors } from '../../../../core/functions/form-error-handler';
 
 @Component({
   selector: 'contact-us-modal',
@@ -15,16 +18,18 @@ export class ContactUsModalComponent implements OnInit {
 
   constructor(
     public modal: SuiModal<void, void, void>,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private contactUsService: ContactUsService,
+    private alertService: AlertService,
   ) { }
 
   ngOnInit() {
     this.contactUsForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
       email: ['', Validators.required],
       subject: ['', Validators.required],
-      message: ['', Validators.required]
+      content: ['', Validators.required]
     });
   }
 
@@ -38,15 +43,26 @@ export class ContactUsModalComponent implements OnInit {
     if (this.contactUsForm.invalid) { return; }
 
     this.loading = true;
-    // TODO
+
+    this.contactUsService.contactUs(this.contactUsForm.value).subscribe(
+      () => {
+        this.alertService.success(['Votre message a bien été envoyé.']);
+        this.modal.approve(null);
+        this.loading = false;
+      },
+      errors => {
+        handleFormErrors(this.contactUsForm, errors);
+        this.loading = false;
+      }
+    );
   }
 }
 
 export class ContactUsModal extends ComponentModalConfig<void, void, void> {
 
   constructor(
-    size = ModalSize.Large,
-    isClosable: boolean = true,
+    size = ModalSize.Normal,
+    isClosable: boolean = false,
     transitionDuration: number = 200
   ) {
     super(ContactUsModalComponent);

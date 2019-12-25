@@ -23,9 +23,9 @@
       <b>envoyer un email</b> avec votre <b>adresse mail ISEP</b>
       contenant une photocopie de votre <b>carte d'identité</b>, de votre
       <b>RIB</b> et de votre <b>certificat de scolarité</b> à
-      <a href="mailto:inscription.numeris@gmail.com?subject=Inscription {{ user.firstName }} {{ user.lastName }}"
+      <a href="mailto:{{ savEmail }}?subject=Inscription {{ user.firstName }} {{ user.lastName }}"
          target="_blank">
-        inscription.numeris@gmail.com
+        {{ savEmail }}
       </a>.
     </p>
     <a routerLink="/nous-contacter">

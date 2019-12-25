@@ -4,6 +4,7 @@ import { UserService } from '../../../../core/http/user.service';
 import { AlertService } from '../../../../core/services/alert.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../core/http/auth/auth.service';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-activate-account-message',
@@ -14,6 +15,8 @@ export class ActivateAccountMessageComponent implements OnInit {
   @Input() user: User;
   isCompleted: boolean;
   loading: boolean = false;
+
+  savEmail: string = environment.savEmail;
 
   constructor(
     private authService: AuthService,

@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { Contact } from "../classes/models/contact";
-import { environment } from "../../../environments/environment";
-import { HTTP_OPTIONS } from "../constants/http_options";
-import { Client } from "../classes/models/client";
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Contact } from '../classes/models/contact';
+import { environment } from '../../../environments/environment';
+import { HTTP_OPTIONS } from '../constants/http_options';
 
 @Injectable({
   providedIn: 'root'
