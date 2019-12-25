@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Button } from "../button";
+import { Button } from '../button';
 
 @Component({
   selector: 'app-link-button',
@@ -16,7 +16,7 @@ export class LinkButtonComponent
   }
 
   ngOnInit() {
-    this.animation = this.hiddenIcon != undefined ? 'fade animated' : '';
+    this.animation = this.hiddenIcon !== undefined ? 'fade animated' : '';
 
     this.classes = [
       this.color, this.size, this.animation, this.attachment, this.behaviour

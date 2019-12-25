@@ -4,6 +4,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContactUsService } from '../../../../core/http/contact-us.service';
 import { AlertService } from '../../../../core/services/alert.service';
 import { handleFormErrors } from '../../../../core/functions/form-error-handler';
+import { User } from '../../../../core/classes/models/user';
+
+export interface IContactUsModal {
+  user: User;
+}
 
 @Component({
   selector: 'contact-us-modal',
@@ -15,9 +20,10 @@ export class ContactUsModalComponent implements OnInit {
   contactUsForm: FormGroup;
   loading: boolean = false;
   submitted: boolean = false;
+  user: User = this.modal.context.user;
 
   constructor(
-    public modal: SuiModal<void, void, void>,
+    public modal: SuiModal<IContactUsModal, void, void>,
     private formBuilder: FormBuilder,
     private contactUsService: ContactUsService,
     private alertService: AlertService,
@@ -25,9 +31,9 @@ export class ContactUsModalComponent implements OnInit {
 
   ngOnInit() {
     this.contactUsForm = this.formBuilder.group({
-      first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
-      email: ['', Validators.required],
+      first_name: [this.user ? this.user.firstName : '', Validators.required],
+      last_name: [this.user ? this.user.lastName : '', Validators.required],
+      email: [this.user ? this.user.email : '', Validators.required],
       subject: ['', Validators.required],
       content: ['', Validators.required]
     });
@@ -58,14 +64,15 @@ export class ContactUsModalComponent implements OnInit {
   }
 }
 
-export class ContactUsModal extends ComponentModalConfig<void, void, void> {
+export class ContactUsModal extends ComponentModalConfig<IContactUsModal, void, void> {
 
   constructor(
+    user: User = null,
     size = ModalSize.Normal,
     isClosable: boolean = false,
-    transitionDuration: number = 200
+    transitionDuration: number = 200,
   ) {
-    super(ContactUsModalComponent);
+    super(ContactUsModalComponent, { user: user });
 
     this.isClosable = isClosable;
     this.transitionDuration = transitionDuration;

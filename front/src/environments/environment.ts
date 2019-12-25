@@ -7,6 +7,7 @@ export const environment = {
   apiUrl: 'http://localhost:8080',
   tokenName: 'numeris_token',
   savEmail: 'sav.numeris@gmail.com',
+  messengerUrl: 'http://m.me/numerisisep',
 };
 
 /*

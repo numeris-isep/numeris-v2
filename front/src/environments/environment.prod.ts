@@ -3,4 +3,5 @@ export const environment = {
   apiUrl: 'https://api.numeris-isep.fr',
   tokenName: 'numeris_token',
   savEmail: 'sav.numeris@gmail.com',
+  messengerUrl: 'http://m.me/numerisisep',
 };

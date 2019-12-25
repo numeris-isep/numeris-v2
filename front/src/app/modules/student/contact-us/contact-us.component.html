@@ -1,4 +1,42 @@
-<app-content [condition]="false">
+<app-content [condition]="! (user && contactUsModal)">
+  <!-- Actions -->
+  <div class="ui padded grid">
+    <div class="column">
+      <div class="ui blue segment">
+        <div class="ui blue ribbon label">Actions</div>
+        <div class="ui two column center aligned grid">
+          <div class="ui vertical divider">Ou</div>
+          <div class="middle aligned row">
+            <div class="column">
+              <div class="ui small icon header">
+                <i class="envelope icon"></i>
+                Par email
+              </div><br>
+              <app-button hiddenIcon="envelope" size="tiny" (click)="openModal()">
+                Envoyer un email
+              </app-button>
+            </div>
+            <div class="column">
+              <div class="ui small icon header">
+                <i class="facebook icon"></i>
+                Sur Facebook
+              </div><br>
+              <a class="ui fade animated facebook tiny button"
+                 href="{{ messengerUrl }}" target="_blank">
+                <div class="visible content">
+                  Envoyer un message
+                </div>
+                <div class="hidden content">
+                  <i class="external icon"></i>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="ui padded grid">
     <div class="sixteen wide column">
       <app-team></app-team>

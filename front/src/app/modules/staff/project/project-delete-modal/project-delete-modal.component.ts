@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from "../../../../core/classes/models/project";
-import { ComponentModalConfig, ModalSize } from "ng2-semantic-ui";
-import { Observable } from "rxjs";
-import { SuiModal } from "ng2-semantic-ui";
-import { ProjectService } from "../../../../core/http/project.service";
-import { AlertService } from "../../../../core/services/alert.service";
-import { Router } from "@angular/router";
+import { Project } from '../../../../core/classes/models/project';
+import { ComponentModalConfig, ModalSize } from 'ng2-semantic-ui';
+import { Observable } from 'rxjs';
+import { SuiModal } from 'ng2-semantic-ui';
+import { ProjectService } from '../../../../core/http/project.service';
+import { AlertService } from '../../../../core/services/alert.service';
+import { Router } from '@angular/router';
 
 export interface IProjectDeleteModalContext {
   title: string;
   question: string;
-  project: Project
+  project: Project;
 }
 
 @Component({
@@ -43,7 +43,7 @@ export class ProjectDeleteModalComponent implements OnInit {
         this.modal.approve(undefined);
       },
       errors => this.modal.deny(undefined)
-    )
+    );
   }
 
   deleteProject(): Observable<Project> {
