@@ -4,7 +4,7 @@
 
 <div class="modal content">
   <form class="ui large form"
-        [formGroup]="contactUsForm" (ngSubmit)="onSubmit()"
+        [formGroup]="contactUsForm" (ngSubmit)="recaptcha.execute()"
         [ngClass]="{ 'error': submitted && contactUsForm.invalid }">
     <div class="two fields">
       <div class="required field"
@@ -84,6 +84,7 @@
           </div>
         </a>
         <div class="or" data-text="ou"></div>
+        <re-captcha size="invisible" (resolved)="$event && onSubmit($event)" [siteKey]="captchaKey" #recaptcha></re-captcha>
         <button class="ui animated fade blue button"
                 [ngClass]="{'loading': loading, 'disabled': contactUsForm.invalid}">
           <div class="visible content">Envoyer</div>

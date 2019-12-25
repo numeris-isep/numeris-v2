@@ -10,6 +10,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { SubscribeModalComponent } from './modals/subscribe-modal/subscribe-modal.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ShowcaseRoutingModule } from './showcase-routing.module';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { ShowcaseRoutingModule } from './showcase-routing.module';
     ReactiveFormsModule,
     ShowcaseRoutingModule,
     SharedModule,
+    RecaptchaModule,
   ],
   declarations: [
     HomeComponent,

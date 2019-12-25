@@ -8,6 +8,7 @@ export const environment = {
   tokenName: 'numeris_token',
   savEmail: 'sav.numeris@gmail.com',
   messengerUrl: 'http://m.me/numerisisep',
+  captchaKey: '6LeE98kUAAAAAE3fmudb4al_bu_xhCO0CTdhnKDS',
 };
 
 /*

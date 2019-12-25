@@ -17,9 +17,13 @@ export class ContactUsService {
       email: string,
       subject: string,
       content: string,
-    }
+    },
+    reCaptchaToken: string
   ): Observable<[]> {
     const url = `${environment.apiUrl}/api/contact-us`;
-    return this.http.post<[]>(url, data);
+    return this.http.post<[]>(url, {
+      recaptcha_token: reCaptchaToken,
+      data: data
+    });
   }
 }

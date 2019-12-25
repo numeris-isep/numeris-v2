@@ -5,6 +5,7 @@ import { ContactUsService } from '../../../../core/http/contact-us.service';
 import { AlertService } from '../../../../core/services/alert.service';
 import { handleFormErrors } from '../../../../core/functions/form-error-handler';
 import { User } from '../../../../core/classes/models/user';
+import { environment } from '../../../../../environments/environment';
 
 export interface IContactUsModal {
   user: User;
@@ -21,6 +22,8 @@ export class ContactUsModalComponent implements OnInit {
   loading: boolean = false;
   submitted: boolean = false;
   user: User = this.modal.context.user;
+
+  captchaKey: string = environment.captchaKey;
 
   constructor(
     public modal: SuiModal<IContactUsModal, void, void>,
@@ -42,7 +45,7 @@ export class ContactUsModalComponent implements OnInit {
   // convenient getter for easy access to form fields
   get f() { return this.contactUsForm.controls; }
 
-  onSubmit() {
+  onSubmit(reCaptchaToken: string) {
     this.submitted = true;
 
     // stop here if form is invalid
@@ -50,7 +53,7 @@ export class ContactUsModalComponent implements OnInit {
 
     this.loading = true;
 
-    this.contactUsService.contactUs(this.contactUsForm.value).subscribe(
+    this.contactUsService.contactUs(this.contactUsForm.value, reCaptchaToken).subscribe(
       () => {
         this.alertService.success(['Votre message a bien été envoyé.']);
         this.modal.approve(null);

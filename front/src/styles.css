@@ -59,3 +59,7 @@ input.search {
 .ui.slider.checkbox input:checked ~ label:before {
   background-color: #0025AA !important;
 }
+
+.ui.modal.transition.active.visible.normal {
+  overflow: hidden;
+}

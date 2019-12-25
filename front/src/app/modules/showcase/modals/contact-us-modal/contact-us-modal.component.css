@@ -5,4 +5,5 @@
 
 textarea {
   height: 112px;
+  white-space: pre-wrap;
 }
