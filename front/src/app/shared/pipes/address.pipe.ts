@@ -7,7 +7,7 @@ import { Address } from "../../core/classes/models/address";
 export class AddressPipe implements PipeTransform {
 
   transform(address: Address, args?: any): string {
-    return `${address.street}, ${address.zipCode}, ${address.city}`;
+    return `${address.street}, ${address.zipCode} ${address.city}`;
   }
 
 }

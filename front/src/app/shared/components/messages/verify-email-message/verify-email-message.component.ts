@@ -20,17 +20,19 @@ export class VerifyEmailMessageComponent implements OnInit {
   }
 
   sendEmail() {
-    this.loading = true;
+    if (! this.disabled) {
+      this.loading = true;
 
-    this.authService.verifyEmail().subscribe(
-      message => {
-        this.alertService.success(message.message);
+      this.authService.verifyEmail().subscribe(
+        message => {
+          this.alertService.success(message.message);
 
-        this.loading = false;
-        this.disabled = true;
-      },
-      () => this.loading = false
-    );
+          this.loading = false;
+          this.disabled = true;
+        },
+        () => this.loading = false
+      );
+    }
   }
 
 }
