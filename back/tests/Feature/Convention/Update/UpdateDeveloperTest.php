@@ -179,7 +179,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $this->json('PUT', route('conventions.update', ['convention_id' => $convention->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         $this->assertDatabaseMissing('rates', $rate1);
         $this->assertDatabaseMissing('rates', $rate2);
@@ -209,7 +209,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $this->json('PUT', route('conventions.update', ['convention_id' => $convention->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         $this->assertDatabaseMissing('rates', $rate1);
         $this->assertDatabaseHas('rates', $convention->rates->get(1)->toArray());
@@ -247,7 +247,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $this->json('PUT', route('conventions.update', ['convention_id' => $convention_id]), $data)
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
-            ->assertJson(['errors' => [trans('api.404')]]);
+            ->assertJson(['errors' => [trans('errors.404')]]);
 
         $this->assertDatabaseMissing('rates', $rate1);
         $this->assertDatabaseMissing('rates', $rate2);

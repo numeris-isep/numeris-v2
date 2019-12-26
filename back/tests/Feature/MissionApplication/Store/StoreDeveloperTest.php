@@ -141,7 +141,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
         $this->json('POST', route('missions.applications.store', ['mission_id' => $mission_id]), $data)
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
-            ->assertJson(['errors' => [trans('api.404')]]);
+            ->assertJson(['errors' => [trans('errors.404')]]);
 
         $this->assertDatabaseMissing('applications', $application);
 
@@ -157,7 +157,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
         $this->json('POST', route('missions.applications.store', ['mission_id' => $mission->id]))
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
-            ->assertJson(['errors' => [trans('api.404')]]);
+            ->assertJson(['errors' => [trans('errors.404')]]);
 
         Notification::assertNothingSent();
     }
@@ -205,7 +205,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
         $this->json('POST', route('missions.applications.store', ['mission_id' => $mission->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         $this->assertDatabaseMissing('applications', $application);
 
@@ -235,7 +235,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
         $this->json('POST', route('missions.applications.store', ['mission_id' => $mission->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         $this->assertDatabaseMissing('applications', $application);
 
@@ -265,7 +265,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
         $this->json('POST', route('missions.applications.store', ['mission_id' => $mission->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         $this->assertDatabaseMissing('applications', $application);
 

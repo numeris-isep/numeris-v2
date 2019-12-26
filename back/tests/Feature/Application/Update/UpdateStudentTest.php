@@ -27,7 +27,7 @@ class UpdateUpdateStudentTest extends TestCaseWithAuth
 
         $this->json('PUT', route('applications.update', ['application_id' => $application->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         Notification::assertNotSentTo($application->user, ApplicationNotification::class);
     }

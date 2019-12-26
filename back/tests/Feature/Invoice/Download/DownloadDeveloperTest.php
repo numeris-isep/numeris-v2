@@ -31,6 +31,6 @@ class DownloadDeveloperTest extends TestCaseWithAuth
 
         $this->json('GET', route('invoices.download', ['invoice_id' => $invoice_id]))
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
-                ->assertJson(['errors' => [trans('api.404')]]);
+                ->assertJson(['errors' => [trans('errors.404')]]);
     }
 }

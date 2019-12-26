@@ -23,7 +23,7 @@ class NotifyAvailabilityStudentTest extends TestCaseWithAuth
 
         $this->json('POST', route('missions.notify'), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         Mail::assertNotSent(NewMissionsAvailableMail::class);
     }

@@ -47,6 +47,6 @@ class IndexDeveloperTest extends TestCaseWithAuth
 
         $this->json('GET', route('clients.projects.index', ['client_id' => $client_id]))
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
-            ->assertJson(['errors' => [trans('api.404')]]);
+            ->assertJson(['errors' => [trans('errors.404')]]);
     }
 }

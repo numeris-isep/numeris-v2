@@ -55,25 +55,25 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof AuthorizationException) {
             return response()->json([
-                'errors' => [trans('api.403')]
+                'errors' => [trans('errors.403')]
             ], JsonResponse::HTTP_FORBIDDEN);
         }
 
         if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) {
             return response()->json([
-                'errors' => [trans('api.404')]
+                'errors' => [trans('errors.404')]
             ], JsonResponse::HTTP_NOT_FOUND);
         }
 
         if ($exception instanceof MethodNotAllowedHttpException) {
             return response()->json([
-                'errors' => [trans('api.405')]
+                'errors' => [trans('errors.405')]
             ],JsonResponse::HTTP_METHOD_NOT_ALLOWED);
         }
 
         if ($exception instanceof ThrottleRequestsException) {
             return response()->json([
-                'errors' => [trans('api.429')]
+                'errors' => [trans('errors.429')]
             ],JsonResponse::HTTP_TOO_MANY_REQUESTS);
         }
 
@@ -89,6 +89,6 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        return response()->json(['errors' => [trans('api.auth')]], JsonResponse::HTTP_FORBIDDEN);
+        return response()->json(['errors' => [trans('errors.auth')]], JsonResponse::HTTP_FORBIDDEN);
     }
 }

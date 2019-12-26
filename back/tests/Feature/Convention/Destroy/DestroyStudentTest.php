@@ -21,7 +21,7 @@ class DestroyStudentTest extends TestCaseWithAuth
 
         $this->json('DELETE', route('conventions.destroy', ['convention_id' => $convention->id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         $this->assertDatabaseHas('conventions', $convention->toArray());
     }

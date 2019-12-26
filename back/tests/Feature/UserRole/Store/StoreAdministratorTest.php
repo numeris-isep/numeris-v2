@@ -29,7 +29,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
 
         $this->json('POST', route('users.roles.store', ['user_id' => $developer->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         $this->assertTrue($developer->role()->name == $role_name);
     }
@@ -52,7 +52,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
 
         $this->json('POST', route('users.roles.store', ['user_id' => $developer->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         $this->assertFalse($developer->role()->name == $role_name);
     }
@@ -75,7 +75,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
 
         $this->json('POST', route('users.roles.store', ['user_id' => $developer->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         $this->assertFalse($developer->role()->name == $role_name);
     }
@@ -98,7 +98,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
 
         $this->json('POST', route('users.roles.store', ['user_id' => $developer->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         $this->assertFalse($developer->role()->name == $role_name);
     }
@@ -121,7 +121,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
 
         $this->json('POST', route('users.roles.store', ['user_id' => $administrator->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         $this->assertFalse($administrator->role()->name == $role_name);
     }
@@ -144,7 +144,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
 
         $this->json('POST', route('users.roles.store', ['user_id' => $administrator->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         $this->assertTrue($administrator->role()->name == $role_name);
     }
@@ -219,7 +219,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
 
         $this->json('POST', route('users.roles.store', ['user_id' => $staff->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         $this->assertFalse($staff->role()->name == $role_name);
     }
@@ -268,7 +268,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
 
         $this->json('POST', route('users.roles.store', ['user_id' => $staff->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         $this->assertTrue($staff->role()->name == $role_name);
     }
@@ -317,7 +317,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
 
         $this->json('POST', route('users.roles.store', ['user_id' => $student->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         $this->assertFalse($student->role()->name == $role_name);
     }
@@ -392,7 +392,7 @@ class StoreAdministratorTest extends TestCaseWithAuth
 
         $this->json('POST', route('users.roles.store', ['user_id' => $student->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         $this->assertTrue($student->role()->name == $role_name);
     }

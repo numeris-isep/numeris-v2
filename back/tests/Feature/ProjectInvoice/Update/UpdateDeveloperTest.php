@@ -58,7 +58,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $this->json('PUT', route('projects.invoices.update', ['project' => $project->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
     }
 
     /**
@@ -70,7 +70,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
 
         $this->json('PUT', route('projects.invoices.update', ['project' => 0]), $data)
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
-            ->assertJson(['errors' => [trans('api.404')]]);
+            ->assertJson(['errors' => [trans('errors.404')]]);
     }
 
     /**

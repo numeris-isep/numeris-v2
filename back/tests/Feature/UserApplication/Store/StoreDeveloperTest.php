@@ -68,7 +68,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
         $this->json('POST', route('users.applications.store', ['user_id' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
-            ->assertJson(['errors' => [trans('api.404')]]);
+            ->assertJson(['errors' => [trans('errors.404')]]);
     }
 
     /**
@@ -104,7 +104,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
         $this->json('POST', route('users.applications.store', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         $this->assertDatabaseMissing('applications', $application);
     }
@@ -124,7 +124,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
         $this->json('POST', route('users.applications.store', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         $this->assertDatabaseMissing('applications', $application);
     }

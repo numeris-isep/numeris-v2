@@ -31,7 +31,7 @@ class UpdateStudentTest extends TestCaseWithAuth
 
         $this->json('PUT', route('projects.update', ['project_id' => $project->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         $this->assertDatabaseMissing('projects', $data);
     }

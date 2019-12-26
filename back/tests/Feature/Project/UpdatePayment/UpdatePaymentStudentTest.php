@@ -23,6 +23,6 @@ class UpdatePaymentStudentTest extends TestCaseWithAuth
 
         $this->json('PATCH', route('projects.update.payment', ['project_id' => $project->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
     }
 }

@@ -19,6 +19,6 @@ class IndexStudentTest extends TestCaseWithAuth
 
         $this->json('GET', route('users.roles.index', ['user_id' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
     }
 }

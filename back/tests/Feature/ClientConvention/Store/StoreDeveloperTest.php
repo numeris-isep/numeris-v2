@@ -89,7 +89,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
         $this->json('POST', route('clients.conventions.store', ['client_id' => $client_id]), $data)
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
-            ->assertJson(['errors' => [trans('api.404')]]);
+            ->assertJson(['errors' => [trans('errors.404')]]);
 
         $this->assertDatabaseMissing('rates', $rate1);
         $this->assertDatabaseMissing('rates', $rate2);

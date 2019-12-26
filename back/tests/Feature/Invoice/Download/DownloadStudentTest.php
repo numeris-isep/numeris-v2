@@ -19,6 +19,6 @@ class DownloadStudentTest extends TestCaseWithAuth
 
         $this->json('GET', route('invoices.download', ['invoice_id' => $invoice->id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
     }
 }

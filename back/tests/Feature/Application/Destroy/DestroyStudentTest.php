@@ -40,7 +40,7 @@ class DestroyStudentTest extends TestCaseWithAuth
 
         $this->json('DELETE', route('applications.destroy', ['application_id' => $application->id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
 
         Mail::assertNothingSent();
 

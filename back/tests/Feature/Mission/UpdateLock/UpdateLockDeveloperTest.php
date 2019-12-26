@@ -48,7 +48,7 @@ class UpdateLockDeveloperTest extends TestCaseWithAuth
 
         $this->json('PATCH', route('missions.update.lock', ['mission_id' => $mission_id]), $data)
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
-            ->assertJson(['errors' => [trans('api.404')]]);
+            ->assertJson(['errors' => [trans('errors.404')]]);
     }
 
     /**

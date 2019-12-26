@@ -51,6 +51,6 @@ class ShowDeveloperTest extends TestCaseWithAuth
 
         $this->json('GET', route('missions.show', ['mission_id' => $mission_id]))
             ->assertStatus(JsonResponse::HTTP_NOT_FOUND)
-            ->assertJson(['errors' => [trans('api.404')]]);
+            ->assertJson(['errors' => [trans('errors.404')]]);
     }
 }

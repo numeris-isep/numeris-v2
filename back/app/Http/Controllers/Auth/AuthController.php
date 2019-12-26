@@ -97,7 +97,7 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => [trans('api.logout')]]);
+        return response()->json(['message' => [trans('errors.logout')]]);
     }
 
     /**

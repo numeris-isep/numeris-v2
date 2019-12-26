@@ -68,6 +68,6 @@ class UpdateTermsOfUseDeveloperTest extends TestCaseWithAuth
 
         $this->json('PATCH', route('users.update.terms-of-use', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
     }
 }

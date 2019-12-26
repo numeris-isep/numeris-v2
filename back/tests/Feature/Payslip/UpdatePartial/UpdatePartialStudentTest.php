@@ -24,6 +24,6 @@ class UpdatePartialStudentTest extends TestCaseWithAuth
 
         $this->json('PATCH', route('payslips.update.partial'), ['payslips' => $payslips])
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('api.403')]]);
+            ->assertJson(['errors' => [trans('errors.403')]]);
     }
 }
