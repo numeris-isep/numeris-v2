@@ -5,8 +5,8 @@
 a envoyé un message depuis le formulaire de contact du site.
 
 @component('mail::panel')
-***{{ $subject }}***
+**{{ $subject }}**
 
-*{{ $content }}*
+{{ $content }}
 @endcomponent
 @endcomponent
