@@ -10,7 +10,7 @@
     <div *ngIf="tasks.length > 0; else empty">
       <div class="ui animated selection list">
         <a *ngFor="let task of tasks" [routerLink]="task.link" class="item">
-          <i class="{{ task.icon ? task.icon : 'dot' }} icon"></i>
+          <i class="{{ task.icon ? task.icon : 'dot' }} middle aligned large icon"></i>
           <div class="content">
             <div class="header">{{ task.title }}</div>
             <div class="description">{{ task.description }}</div>

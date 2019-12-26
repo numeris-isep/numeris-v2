@@ -44,6 +44,15 @@ export class TasksService {
       });
     }
 
+    if (user.payslips.filter(payslip => ! payslip.signed).length > 0) {
+      this.addTask({
+        icon: 'pencil',
+        title: 'Document à signer',
+        description: 'Veuillez télécharger et envoyer votre dernier contrat de travail signé à Numéris',
+        link: '/profil',
+      });
+    }
+
     return this.tasks;
   }
 
