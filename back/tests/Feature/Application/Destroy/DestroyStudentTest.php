@@ -2,8 +2,10 @@
 
 namespace Tests\Feature\Application\Destroy;
 
+use App\Mail\ApplicationRemovedMail;
 use App\Models\Role;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCaseWithAuth;
 
 class DestroyStudentTest extends TestCaseWithAuth
@@ -22,6 +24,8 @@ class DestroyStudentTest extends TestCaseWithAuth
         $this->json('DELETE', route('applications.destroy', ['application_id' => $application->id]))
             ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
 
+        Mail::assertSent(ApplicationRemovedMail::class);
+
         $this->assertDatabaseMissing('applications', $application->toArray());
     }
 
@@ -37,6 +41,8 @@ class DestroyStudentTest extends TestCaseWithAuth
         $this->json('DELETE', route('applications.destroy', ['application_id' => $application->id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
             ->assertJson(['errors' => [trans('api.403')]]);
+
+        Mail::assertNothingSent();
 
         $this->assertDatabaseHas('applications', $application->toArray());
     }

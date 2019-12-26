@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ApplicationRequest;
 use App\Http\Resources\ApplicationResource;
+use App\Mail\ApplicationRemovedMail;
 use App\Models\Application;
 use App\Notifications\ApplicationNotification;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 
 class ApplicationController extends Controller
@@ -71,6 +73,20 @@ class ApplicationController extends Controller
 
         $application->delete();
 
+        $this->sendApplicationRemovedMail($application);
+
         return response()->json(null, JsonResponse::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @param Application $application
+     */
+    private function sendApplicationRemovedMail(Application $application)
+    {
+        try {
+            Mail::to($application->mission->user)
+                ->cc(env('MAIL_FROM_ADDRESS'))
+                ->send(new ApplicationRemovedMail($application));
+        } catch (\Exception $exception) {}
     }
 }
