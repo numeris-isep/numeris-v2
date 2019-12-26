@@ -9,6 +9,11 @@
   > .item, .placeholder {
     border: 1px solid rgba(34, 36, 38, 0.15);
 
+    .description {
+      display: inline-flex;
+      align-items: baseline;
+    }
+
     &:active {
       cursor: grabbing;
     }
@@ -31,10 +36,14 @@
     background-color: #F7F7F7;
     padding: 0.5em 0.5em;
     margin: 0;
+    line-height: 1.14285714em;
 
     i.icon {
       display: table-cell;
       vertical-align: middle !important;
+      margin: 0;
+      padding-top: 0;
+      padding-right: 0.28571429em;
     }
 
     .content {
@@ -44,7 +53,18 @@
       vertical-align: top;
 
       .header {
+        display: block;
+        margin: 0;
         font-weight: bold;
+      }
+
+      .description {
+        display: inline-flex;
+        align-items: baseline;
+
+        i.flag {
+          margin: 0 0.65em 0 0;
+        }
       }
     }
   }

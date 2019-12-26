@@ -28,7 +28,12 @@
                 {{ application.user.firstName }} {{ application.user.lastName | uppercase }}
               </a>
               <div class="description">
-                <i *ngIf="application.user.nationality" class="{{ application.user.nationality | countryCode }} flag"></i>
+                <i *ngIf="application.user.nationality" class="{{ application.user.nationality | countryCode }} flag"
+                   [title]="application.user.nationality | titlecase"></i>
+                <i *ngIf="application.user.payslips && application.user.payslips.length == 0"
+                   class="child grey icon" title="Première mission"></i>
+                <i *ngIf="application.user.roles[0].name != 'student'"
+                   class="user md icon" title="Membre Numéris"></i>
               </div>
             </div>
           </div>

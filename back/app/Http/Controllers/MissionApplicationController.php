@@ -30,7 +30,7 @@ class MissionApplicationController extends Controller
 
         return response()->json(ApplicationResource::collection(
             $mission->applicationsWhoseStatusIs(request()->status)
-                ->load(['user', 'bills'])
+                ->load(['user', 'user.roles', 'bills', 'user.payslips'])
         ));
     }
 
