@@ -16,7 +16,7 @@ class BillPolicy
     {
         // Forbid everything to students
         if ($current_user->role()->isInferiorTo(Role::STAFF)) {
-            return false;
+            $this->deny(trans('errors.403'));
         }
     }
 

@@ -37,6 +37,6 @@ return [
     ],
 
     'projects' => [
-        Project::HIRING => 'Le projet doit avoir le status Ouvert',
+        Project::HIRING => 'Le projet doit avoir le status Ouvert.',
     ],
 ];
