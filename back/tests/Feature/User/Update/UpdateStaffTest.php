@@ -111,7 +111,7 @@ class UpdateStaffTest extends TestCaseWithAuth
 
         $this->json('PUT', route('users.update', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.403')]]);
+            ->assertJson(['errors' => [trans('errors.roles.' . Role::STAFF)]]);
 
         $this->assertDatabaseMissing('users', $db_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -154,7 +154,7 @@ class UpdateStaffTest extends TestCaseWithAuth
 
         $this->json('PUT', route('users.update', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.403')]]);
+            ->assertJson(['errors' => [trans('errors.roles.' . Role::STAFF)]]);
 
         $this->assertDatabaseMissing('users', $db_data);
         $this->assertDatabaseMissing('addresses', $address_data);
@@ -197,7 +197,7 @@ class UpdateStaffTest extends TestCaseWithAuth
 
         $this->json('PUT', route('users.update', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.403')]]);
+            ->assertJson(['errors' => [trans('errors.roles.' . Role::STAFF)]]);
 
         $this->assertDatabaseMissing('users', $db_data);
         $this->assertDatabaseMissing('addresses', $address_data);

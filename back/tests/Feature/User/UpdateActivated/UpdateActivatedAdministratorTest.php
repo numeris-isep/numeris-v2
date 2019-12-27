@@ -26,7 +26,7 @@ class UpdateActivatedAdministratorTest extends TestCaseWithAuth
 
         $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.403')]]);
+            ->assertJson(['errors' => [trans('errors.roles.' . Role::ADMINISTRATOR)]]);
 
         Notification::assertNothingSent();
     }
@@ -45,7 +45,7 @@ class UpdateActivatedAdministratorTest extends TestCaseWithAuth
 
         $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.403')]]);
+            ->assertJson(['errors' => [trans('errors.roles.' . Role::ADMINISTRATOR)]]);
 
         Notification::assertNothingSent();
     }
@@ -133,6 +133,31 @@ class UpdateActivatedAdministratorTest extends TestCaseWithAuth
     /**
      * @group administrator
      */
+    public function testAdministratorActivatingStudentWhoHasNotCompletedHisProfile()
+    {
+        $user = $this->activeStudentProvider();
+        $user->update([
+            'phone'                     => null,
+            'birth_city'                => null,
+            'nationality'               => null,
+            'social_insurance_number'   => null,
+            'bic'                       => null,
+        ]);
+
+        $data = [
+            'activated' => true
+        ];
+
+        $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
+            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
+            ->assertJson(['errors' => [trans('errors.users.completed')]]);
+
+        Notification::assertNothingSent();
+    }
+
+    /**
+     * @group administrator
+     */
     public function testAdministratorActivatingStudentWhoHasNotAcceptedTou()
     {
         $user = $this->activeStudentProvider();
@@ -147,7 +172,7 @@ class UpdateActivatedAdministratorTest extends TestCaseWithAuth
 
         $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.403')]]);
+            ->assertJson(['errors' => [trans('errors.users.tou_accepted')]]);
 
         Notification::assertNothingSent();
     }
@@ -169,7 +194,7 @@ class UpdateActivatedAdministratorTest extends TestCaseWithAuth
 
         $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.403')]]);
+            ->assertJson(['errors' => [trans('errors.users.email_verified_at')]]);
 
         Notification::assertNothingSent();
     }

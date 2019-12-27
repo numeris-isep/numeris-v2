@@ -95,6 +95,16 @@ class User extends Authenticatable implements JWTSubject
         );
     }
 
+    public function getIsCompletedAttribute()
+    {
+        return $this->phone
+            && $this->birth_city
+            && $this->nationality
+            && $this->social_insurance_number
+            && $this->iban
+            && $this->bic;
+    }
+
     public static function findByEmail($email)
     {
         return static::where('email', $email)->first();

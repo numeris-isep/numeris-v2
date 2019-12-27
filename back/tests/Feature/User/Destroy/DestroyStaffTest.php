@@ -23,7 +23,7 @@ class DestroyStaffTest extends TestCaseWithAuth
 
         $this->json('DELETE', route('users.destroy', ['user_id' => $user->id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.403')]]);
+            ->assertJson(['errors' => [trans('errors.roles.' . Role::STAFF)]]);
 
         $this->assertNull($user->deleted_at);
     }

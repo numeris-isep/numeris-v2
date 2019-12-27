@@ -26,17 +26,21 @@ abstract class AbstractFormRequest extends FormRequest
     abstract public function authorize();
 
     /**
-     * Handle a failed validation attempt.
-     *
-     * @param  \Illuminate\Contracts\Validation\Validator  $validator
-     * @return void
-     *
-     * @throws \Illuminate\Validation\ValidationException
+     * {@inheritdoc}
      */
     protected function failedValidation(Validator $validator)
     {
         $errors = (new ValidationException($validator))->errors();
+
         throw new HttpResponseException(response()
             ->json(['errors' => $errors], JsonResponse::HTTP_UNPROCESSABLE_ENTITY));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function failedAuthorization()
+    {
+        // IMPORTANT: do nothing here to let the Policy authorize the request
     }
 }

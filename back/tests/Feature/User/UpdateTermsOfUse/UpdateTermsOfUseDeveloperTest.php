@@ -53,21 +53,4 @@ class UpdateTermsOfUseDeveloperTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors(['tou_accepted']);
     }
-
-    /**
-     * @group developer
-     */
-    public function testDeveloperUpdatingHisOwnAlreadyAcceptedTermsOfUse()
-    {
-        $user = auth()->user();
-        $user->update(['tou_accepted' => true]);
-
-        $data = [
-            'tou_accepted' => true
-        ];
-
-        $this->json('PATCH', route('users.update.terms-of-use', ['user_id' => $user->id]), $data)
-            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.403')]]);
-    }
 }
