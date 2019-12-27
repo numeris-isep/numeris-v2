@@ -15,7 +15,7 @@ class ContactPolicy
     {
         // Grant everything to developers, administrators and staffs
         if ($current_user->role()->isInferiorTo(Role::STAFF)) {
-            $this->deny(trans('errors.403'));
+            return false;
         }
     }
 

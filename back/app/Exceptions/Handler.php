@@ -55,7 +55,11 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof AuthorizationException) {
             return response()->json([
-                'errors' => [$exception->getMessage()]
+                'errors' => [
+                    $exception->getMessage() === 'This action is unauthorized.'
+                        ? trans('errors.403')
+                        : $exception->getMessage()
+                ]
             ], JsonResponse::HTTP_FORBIDDEN);
         }
 

@@ -22,14 +22,12 @@ class ApplicationPolicy
 
     public function index(User $current_user)
     {
-        return $current_user->role()->isSuperiorTo(Role::STUDENT)
-            ?: $this->deny(trans('errors.403'));
+        return $current_user->role()->isSuperiorTo(Role::STUDENT);
     }
 
     public function indexStatus(User $current_user)
     {
-        return $current_user->role()->isSuperiorTo(Role::STUDENT)
-            ?: $this->deny(trans('errors.403'));
+        return $current_user->role()->isSuperiorTo(Role::STUDENT);
     }
 
     public function update(User $current_user, Application $application)
@@ -47,7 +45,6 @@ class ApplicationPolicy
     {
         // $user1 whose $role < 'staff' can't delete the $application of $user2
         // unless   $user1 == $application->user
-        return $current_user->is($application->user)
-            ?: $this->deny(trans('errors.403'));
+        return $current_user->is($application->user);
     }
 }

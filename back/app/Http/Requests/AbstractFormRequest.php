@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Role;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
@@ -41,6 +42,6 @@ abstract class AbstractFormRequest extends FormRequest
      */
     protected function failedAuthorization()
     {
-        // IMPORTANT: do nothing here to let the Policy authorize the request
+        return auth()->user()->role()->isInferiorTo(Role::STAFF);
     }
 }

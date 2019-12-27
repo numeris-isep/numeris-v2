@@ -15,7 +15,7 @@ class ConventionPolicy
     {
         // Forbid everything to students
         if ($current_user->role()->isInferiorTo(Role::STAFF)) {
-            $this->deny(trans('errors.403'));
+            return false;
         }
     }
 

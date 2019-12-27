@@ -14,7 +14,7 @@ class InvoicePolicy
     {
         // Forbid everything to students
         if ($current_user->role()->isInferiorTo(Role::STAFF)) {
-            return $this->deny(trans('errors.403'));
+            return false;
         }
     }
 

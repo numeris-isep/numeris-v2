@@ -21,22 +21,22 @@ class ClientPolicy
 
     public function index(User $current_user)
     {
-        $this->deny(trans('errors.403'));
+        return false;
     }
 
     public function store(User $current_user)
     {
-        $this->deny(trans('errors.403'));
+        return false;
     }
 
     public function show(User $current_user, Client $client)
     {
-        $this->deny(trans('errors.403'));
+        return false;
     }
 
     public function update(User $current_user, Client $client)
     {
-        $this->deny(trans('errors.403'));
+        return false;
     }
 
     public function destroy(User $current_user, Client $client)
@@ -44,7 +44,7 @@ class ClientPolicy
         return $current_user->role()->isEquivalentTo(Role::DEVELOPER)
             ?: (
                 $current_user->role()->isInferiorTo(Role::STAFF)
-                    ? $this->deny(trans('errors.403'))
+                    ? false
                     : (
                         $client->bills()->count() === 0
                             ?: $this->deny(trans('errors.clients.bills'))
