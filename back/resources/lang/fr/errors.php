@@ -43,4 +43,8 @@ return [
     'clients' => [
         'bills' => 'Des données de paiement sont associées à ce client.',
     ],
+
+    'conventions' => [
+        'projects' => 'La convention est rattachée à un ou plusieurs projet(s).'
+    ],
 ];

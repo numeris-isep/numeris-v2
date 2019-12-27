@@ -24,4 +24,19 @@ class DestroyAdministratorTest extends TestCaseWithAuth
 
         $this->assertDatabaseMissing('conventions', $convention->toArray());
     }
+    /**
+     * @group administrator
+     */
+    public function testAdministratorDeletingConventionWithAssociatedProject()
+    {
+        $convention = $this->conventionAndProjectProvider()['convention'];
+
+        $this->assertDatabaseHas('conventions', $convention->toArray());
+
+        $this->json('DELETE', route('conventions.destroy', ['convention_id' => $convention->id]))
+            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
+            ->assertJson(['errors' => [trans('errors.conventions.projects')]]);
+
+        $this->assertDatabaseHas('conventions', $convention->toArray());
+    }
 }

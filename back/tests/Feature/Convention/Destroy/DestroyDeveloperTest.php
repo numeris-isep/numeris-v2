@@ -36,7 +36,7 @@ class DestroyDeveloperTest extends TestCaseWithAuth
 
         $this->json('DELETE', route('conventions.destroy', ['convention_id' => $convention->id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.403')]]);
+            ->assertJson(['errors' => [trans('errors.conventions.projects')]]);
 
         $this->assertDatabaseHas('conventions', $convention->toArray());
     }

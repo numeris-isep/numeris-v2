@@ -13,40 +13,30 @@ class ConventionPolicy
 
     public function before(User $current_user, $ability)
     {
-        // Grant everything to developers, administrators and staffs (expect destroy)
-        if (
-            $current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF)
-            && $ability != 'destroy'
-            && $ability != 'update'
-        ) {
-            return true;
+        // Forbid everything to students
+        if ($current_user->role()->isInferiorTo(Role::STAFF)) {
+            $this->deny(trans('errors.403'));
         }
-    }
-
-    public function index(User $current_user)
-    {
-        return false;
-    }
-
-    public function store(User $current_user)
-    {
-        return false;
     }
 
     public function show(User $current_user, Convention $convention)
     {
-        return false;
+        return true;
     }
 
     public function update(User $current_user, Convention $convention)
     {
-        return $current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF)
-            && $convention->projects()->count() == 0;
+        return $convention->projects()->count() == 0
+            ?: $this->deny(trans('errors.conventions.projects'));
     }
 
     public function destroy(User $current_user, Convention $convention)
     {
-        return $current_user->role()->isSuperiorOrEquivalentTo(Role::ADMINISTRATOR)
-            && $convention->projects()->count() == 0;
+        return $current_user->role()->isInferiorTo(Role::ADMINISTRATOR)
+            ? $this->deny(trans('errors.roles.' . Role::STAFF))
+            : (
+                $convention->projects()->count() == 0
+                    ?: $this->deny(trans('errors.conventions.projects'))
+            );
     }
 }
