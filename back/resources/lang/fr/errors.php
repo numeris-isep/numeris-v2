@@ -47,4 +47,8 @@ return [
     'conventions' => [
         'projects' => 'La convention est rattachée à un ou plusieurs projet(s).'
     ],
+
+    'payslips' => [
+        'empty' => 'Il n\'y a pas de documents pour ce mois-ci.',
+    ],
 ];

@@ -37,8 +37,12 @@ class PayslipPolicy
 
     public function downloadZip(User $current_user, Collection $payslips)
     {
-        return $current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF)
-            && $payslips->isNotEmpty();
+        return $current_user->role()->isInferiorTo(Role::STAFF)
+            ? false
+            : (
+                $payslips->isNotEmpty()
+                    ?: $this->deny(trans('errors.payslips.empty'))
+            );
     }
 
     public function update(User $current_user)

@@ -19,6 +19,6 @@ class DownloadZipDeveloperTest extends TestCaseWithAuth
 
         $this->json('PUT', route('payslips.download.zip', ['month' => $month]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.403')]]);
+            ->assertJson(['errors' => [trans('errors.payslips.empty')]]);
     }
 }
