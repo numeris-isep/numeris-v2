@@ -29,7 +29,7 @@ class StoreStudentTest extends TestCaseWithAuth
             'zip_code'  => '75015',
             'city'      => 'Paris'
         ];
-        $data = array_merge($mission_data, $address_data);
+        $data = array_merge($mission_data, ['address' => $address_data]);
 
         $this->assertDatabaseMissing('missions', $mission_data);
         $this->assertDatabaseMissing('addresses', $address_data);

@@ -5,14 +5,21 @@ namespace App\Policies;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Mission;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MissionPolicy
 {
+    use HandlesAuthorization;
+
     public function before(User $current_user, $ability)
     {
         // Grant everything to developers, administrators and staffs
         if ($current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF) && $ability != 'destroy') {
             return true;
+        }
+
+        if ($current_user->role()->isInferiorTo(Role::STAFF) && $ability != 'index-available') {
+            return false;
         }
     }
 
@@ -58,9 +65,11 @@ class MissionPolicy
 
     public function destroy(User $current_user, Mission $mission)
     {
-        return $mission->bills->count() > 0
-            ? $current_user->role()->isEquivalentTo(Role::DEVELOPER)
-            : $current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF);
+        return $mission->bills->count() == 0
+            ?: (
+                $current_user->role()->isEquivalentTo(Role::DEVELOPER)
+                    ?: $this->deny(trans('errors.roles.' . Role::ADMINISTRATOR))
+            );
     }
 
     public function sendEmail(User $current_user, Mission $mission)
