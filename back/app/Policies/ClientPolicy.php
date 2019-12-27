@@ -21,28 +21,34 @@ class ClientPolicy
 
     public function index(User $current_user)
     {
-        return false;
+        $this->deny(trans('errors.403'));
     }
 
     public function store(User $current_user)
     {
-        return false;
+        $this->deny(trans('errors.403'));
     }
 
     public function show(User $current_user, Client $client)
     {
-        return false;
+        $this->deny(trans('errors.403'));
     }
 
     public function update(User $current_user, Client $client)
     {
-        return false;
+        $this->deny(trans('errors.403'));
     }
 
     public function destroy(User $current_user, Client $client)
     {
-        return $client->bills()->count() > 0
-            ? $current_user->role()->isEquivalentTo(Role::DEVELOPER)
-            : $current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF);
+        return $current_user->role()->isEquivalentTo(Role::DEVELOPER)
+            ?: (
+                $current_user->role()->isInferiorTo(Role::STAFF)
+                    ? $this->deny(trans('errors.403'))
+                    : (
+                        $client->bills()->count() === 0
+                            ?: $this->deny(trans('errors.clients.bills'))
+                )
+            );
     }
 }

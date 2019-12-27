@@ -63,7 +63,7 @@ class DestroyAdministratorTest extends TestCaseWithAuth
 
         $this->json('DELETE', route('clients.destroy', ['client_id' => $client->id]))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.403')]]);
+            ->assertJson(['errors' => [trans('errors.clients.bills')]]);
 
         $this->assertDatabaseHas('clients', $client->toArray());
         $this->assertDatabaseHas('addresses', $address->toArray());

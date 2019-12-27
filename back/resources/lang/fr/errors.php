@@ -39,4 +39,8 @@ return [
     'projects' => [
         Project::HIRING => 'Le projet doit avoir le status Ouvert.',
     ],
+
+    'clients' => [
+        'bills' => 'Des données de paiement sont associées à ce client.',
+    ],
 ];
