@@ -5,7 +5,8 @@
     <sui-message class="{{ cssClass(alert) }} icon" (dismiss)="removeAlert(i)">
       <ng-container *ngIf="alert.title">
         <i *ngIf="cssClass(alert) === 'success'" class="smile outline loading icon"></i>
-        <i *ngIf="cssClass(alert) === 'warning' || cssClass(alert) === 'error'" class="frown outline loading icon"></i>
+        <i *ngIf="cssClass(alert) === 'warning'" class="meh outline loading icon"></i>
+        <i *ngIf="cssClass(alert) === 'error' && alert.icon" class="frown outline loading icon"></i>
       </ng-container>
       <div class="content">
         <div *ngIf="alert.title" class="header">

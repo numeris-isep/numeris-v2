@@ -81,7 +81,8 @@ export class UserShowComponent implements OnInit, CanComponentDeactivate {
           `L'utilisateur ${user.firstName} ${user.lastName.toUpperCase()} a bien été ${ user.activated ? 'activé' : 'désactivé' }`
         ]);
         this.loading = false;
-      }
+      },
+      () => this.loading = false
     );
   }
 

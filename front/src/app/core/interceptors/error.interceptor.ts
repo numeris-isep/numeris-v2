@@ -25,7 +25,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           break;
 
         case 403:
-          this.alertService.error(['Vous n\'avez pas le droit d\'effectuer cette action.'], null, null);
+          this.alertService.error(err.error.errors, 'Action interdite', null);
           break;
 
         case 404:
@@ -37,7 +37,8 @@ export class ErrorInterceptor implements HttpInterceptor {
             ['Le serveur a rencontré une erreur, veuillez nous contacter si le problème persiste.'],
             'Erreur',
             false,
-            'main'
+            'main',
+            true
           );
           break;
 

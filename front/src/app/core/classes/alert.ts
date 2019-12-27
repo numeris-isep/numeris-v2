@@ -5,6 +5,7 @@ export class Alert {
   content: string[];
   title: string | null = null;
   target: string;
+  icon: boolean = false;
   transitionController: TransitionController;
 }
 

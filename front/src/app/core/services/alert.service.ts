@@ -30,10 +30,10 @@ export class AlertService {
     return this.subject.asObservable();
   }
 
-  alert(type: AlertType, content: string[], title: string | null, keepAfterRouteChange, target: string) {
+  alert(type: AlertType, content: string[], title: string | null, keepAfterRouteChange, target: string, icon: boolean = true) {
     this.clear();
     this.keepAfterRouteChange = keepAfterRouteChange;
-    this.subject.next(<Alert> { type: type, content: content, title: title, target: target });
+    this.subject.next(<Alert> { type: type, content: content, title: title, target: target, icon: icon });
   }
 
   success(content: string[], title: string | null = null, keepAfterRouteChange = false, target: string = 'main') {
@@ -48,8 +48,8 @@ export class AlertService {
     this.alert(AlertType.Warning, content, title, keepAfterRouteChange, target);
   }
 
-  error(content: string[], title: string | null = null, keepAfterRouteChange = false, target: string = 'main') {
-    this.alert(AlertType.Error, content, title, keepAfterRouteChange, target);
+  error(content: string[], title: string | null = null, keepAfterRouteChange = false, target: string = 'main', icon: boolean = false) {
+    this.alert(AlertType.Error, content, title, keepAfterRouteChange, target, icon);
   }
 
   errors(errors: object, keepAfterRouteChange = false, target: string = null) {

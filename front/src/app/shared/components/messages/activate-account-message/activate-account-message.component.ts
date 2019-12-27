@@ -31,6 +31,7 @@ export class ActivateAccountMessageComponent implements OnInit {
       || !this.user.birthCity
       || !this.user.nationality
       || !this.user.socialInsuranceNumber
+      || !this.user.iban
       || !this.user.bic
     );
   }
@@ -39,12 +40,13 @@ export class ActivateAccountMessageComponent implements OnInit {
     this.loading = true;
 
     this.userService.updateUserActivated(true, this.user).subscribe(
-      user => {
-        this.alertService.success(['Votre profil a bien été activé']);
+      () => {
+        this.alertService.success(['Votre profil a bien été activé.']);
         this.authService.logout();
         this.router.navigate([''], { queryParams: { returnUrl: 'profil'} });
         this.loading = false;
-      }
+      },
+      () => this.loading = false
     );
   }
 
