@@ -14,33 +14,33 @@ class ContactPolicy
     public function before(User $current_user, $ability)
     {
         // Grant everything to developers, administrators and staffs
-        if ($current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF)) {
-            return true;
+        if ($current_user->role()->isInferiorTo(Role::STAFF)) {
+            $this->deny(trans('errors.403'));
         }
     }
 
     public function index(User $current_user)
     {
-        return false;
+        return true;
     }
 
     public function store(User $current_user)
     {
-        return false;
+        return true;
     }
 
     public function show(User $current_user, Contact $contact)
     {
-        return false;
+        return true;
     }
 
     public function update(User $current_user, Contact $contact)
     {
-        return false;
+        return true;
     }
 
     public function destroy(User $current_user, Contact $contact)
     {
-        return false;
+        return true;
     }
 }

@@ -21,7 +21,7 @@ trait ClientProviderTrait
         return factory(Client::class)->create();
     }
 
-    public function clientContactProvider(): Client
+    public function clientContactProvider(): Contact
     {
         return factory(Contact::class)->create();
     }
