@@ -150,7 +150,7 @@ class UpdateActivatedAdministratorTest extends TestCaseWithAuth
 
         $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.users.completed')]]);
+            ->assertJson(['errors' => [trans('errors.profile_not_completed')]]);
 
         Notification::assertNothingSent();
     }
@@ -172,7 +172,7 @@ class UpdateActivatedAdministratorTest extends TestCaseWithAuth
 
         $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.users.tou_accepted')]]);
+            ->assertJson(['errors' => [trans('errors.tou_not_accepted')]]);
 
         Notification::assertNothingSent();
     }
@@ -194,7 +194,7 @@ class UpdateActivatedAdministratorTest extends TestCaseWithAuth
 
         $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.users.email_verified_at')]]);
+            ->assertJson(['errors' => [trans('errors.email_not_verified')]]);
 
         Notification::assertNothingSent();
     }

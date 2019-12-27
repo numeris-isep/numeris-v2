@@ -30,26 +30,18 @@ return [
         Role::DEVELOPER     => 'Cette action est interdite pour tous les utilisateurs.',
     ],
 
-    'users' => [
-        'completed'         => 'L\'utilisateur n\'a complété son profil.',
-        'tou_accepted'      => 'L\'utilisateur n\'a pas accepté les conditions d\'utilisations.',
-        'email_verified_at' => 'L\'utilisateur n\'a pas vérifié son adresse email.'
-    ],
+    'profile_not_completed' => 'L\'utilisateur n\'a complété son profil.',
+    'tou_not_accepted'      => 'L\'utilisateur n\'a pas accepté les conditions d\'utilisations.',
+    'email_not_verified'    => 'L\'utilisateur n\'a pas vérifié son adresse email.',
 
-    'projects' => [
-        Project::HIRING => 'Le projet doit avoir le status Ouvert.',
-        'bills'         => 'Les heures effectuées n\'ont pas été saisies.'
-    ],
+    'wrong_project_step'            => 'Le projet doit avoir le status :allowed_step.',
+    'project_contains_user'         => 'L\'utilisateur est déjà membre du projet.',
+    'project_doesnot_contain_user'  => 'L\'utilisateur n\'est déjà membre du projet.',
 
-    'clients' => [
-        'bills' => 'Des données de paiement sont associées à ce client.',
-    ],
+    'no_bill_on_project'   => 'Les heures effectuées par les étudiants n\'ont pas été saisies sur les missions de ce projet.',
+    'client_has_bill'      => 'Des données de paiement sont associées à ce client.',
 
-    'conventions' => [
-        'projects' => 'La convention est rattachée à un ou plusieurs projet(s).'
-    ],
+    'convention_has_project' => 'La convention est rattachée à au moins un projet.',
 
-    'payslips' => [
-        'empty' => 'Il n\'y a pas de documents pour ce mois-ci.',
-    ],
+    'no_payslip_for_month' => 'Il n\'y a pas de document étudiant pour ce mois-ci.',
 ];

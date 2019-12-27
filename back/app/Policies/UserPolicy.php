@@ -87,13 +87,13 @@ class UserPolicy
                     ? $this->deny(trans('errors.roles.' . $current_user->role()->name))
                     : (
                         ! $user->is_completed
-                            ? $this->deny(trans('errors.users.completed'))
+                            ? $this->deny(trans('errors.profile_not_completed'))
                             : (
                                 ! $user->tou_accepted
-                                    ? $this->deny(trans('errors.users.tou_accepted'))
+                                    ? $this->deny(trans('errors.tou_not_accepted'))
                                     : (
                                         ! is_null($user->email_verified_at)
-                                            ?: $this->deny(trans('errors.users.email_verified_at'))
+                                            ?: $this->deny(trans('errors.email_not_verified'))
                                 )
                         )
                 )

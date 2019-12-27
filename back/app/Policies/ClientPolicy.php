@@ -47,7 +47,7 @@ class ClientPolicy
                     ? false
                     : (
                         $client->bills()->count() === 0
-                            ?: $this->deny(trans('errors.clients.bills'))
+                            ?: $this->deny(trans('errors.client_has_bill'))
                 )
             );
     }

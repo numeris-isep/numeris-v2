@@ -67,7 +67,7 @@ class ProjectPolicy
     public function updateInvoice(User $current_user, Project $project)
     {
         return $project->bills()->isNotEmpty()
-            ?: $this->deny(trans('errors.projects.bills'));
+            ?: $this->deny(trans('errors.no_bill_on_project'));
     }
 
     public function destroy(User $current_user, Project $project)

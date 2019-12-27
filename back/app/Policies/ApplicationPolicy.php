@@ -37,7 +37,7 @@ class ApplicationPolicy
         return $current_user->role()->isInferiorTo(Role::STAFF)
             ? $this->deny(trans('errors.403'))
             : $application->mission->project->step == Project::HIRING
-                ?: $this->deny(trans('errors.projects.' . Project::HIRING))
+                ?: $this->deny(trans('errors.wrong_project_step', ['allowed_step' => 'Ouvert']))
         ;
     }
 

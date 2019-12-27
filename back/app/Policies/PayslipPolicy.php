@@ -41,7 +41,7 @@ class PayslipPolicy
             ? false
             : (
                 $payslips->isNotEmpty()
-                    ?: $this->deny(trans('errors.payslips.empty'))
+                    ?: $this->deny(trans('errors.no_payslip_for_month'))
             );
     }
 

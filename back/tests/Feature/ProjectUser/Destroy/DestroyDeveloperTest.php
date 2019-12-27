@@ -73,7 +73,7 @@ class DestroyDeveloperTest extends TestCaseWithAuth
 
         $this->json('DELETE', route('projects.users.destroy', $data))
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.403')]]);
+            ->assertJson(['errors' => [trans('errors.project_doesnot_contain_user')]]);
 
         $this->assertDatabaseMissing('project_user', $data);
     }

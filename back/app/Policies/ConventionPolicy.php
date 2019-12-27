@@ -27,7 +27,7 @@ class ConventionPolicy
     public function update(User $current_user, Convention $convention)
     {
         return $convention->projects()->count() == 0
-            ?: $this->deny(trans('errors.conventions.projects'));
+            ?: $this->deny(trans('errors.convention_has_project'));
     }
 
     public function destroy(User $current_user, Convention $convention)
@@ -36,7 +36,7 @@ class ConventionPolicy
             ? $this->deny(trans('errors.roles.' . Role::STAFF))
             : (
                 $convention->projects()->count() == 0
-                    ?: $this->deny(trans('errors.conventions.projects'))
+                    ?: $this->deny(trans('errors.convention_has_project'))
             );
     }
 }

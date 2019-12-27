@@ -104,7 +104,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
             route('projects.users.store', ['project_id' => $project->id]),
             ['user_id' => $user->id])
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.403')]]);
+            ->assertJson(['errors' => [trans('errors.project_contains_user')]]);
 
         $this->assertDatabaseHas('project_user', $data);
     }
