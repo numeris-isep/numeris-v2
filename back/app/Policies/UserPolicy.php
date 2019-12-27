@@ -59,9 +59,8 @@ class UserPolicy
         // or       $user1->role > $user2->role
         return $current_user->is($user)
             ?: (
-                $current_user->role()->isInferiorOrEquivalentTo($user->role()->name)
-                    ? $this->deny(trans('errors.roles.' . $current_user->role()->name))
-                    : true
+                $current_user->role()->isSuperiorTo($user->role()->name)
+                    ?: $this->deny(trans('errors.roles.' . $current_user->role()->name))
             );
     }
 
@@ -93,9 +92,8 @@ class UserPolicy
                                 ! $user->tou_accepted
                                     ? $this->deny(trans('errors.users.tou_accepted'))
                                     : (
-                                        is_null($user->email_verified_at)
-                                            ? $this->deny(trans('errors.users.email_verified_at'))
-                                            : true
+                                        ! is_null($user->email_verified_at)
+                                            ?: $this->deny(trans('errors.users.email_verified_at'))
                                 )
                         )
                 )

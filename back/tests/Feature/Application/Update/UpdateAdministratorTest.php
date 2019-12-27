@@ -3,6 +3,7 @@
 namespace Tests\Feature\Application\Update;
 
 use App\Mail\ApplicationMail;
+use App\Models\Project;
 use App\Models\Role;
 use App\Models\Application;
 use App\Notifications\ApplicationNotification;
@@ -40,6 +41,26 @@ class UpdateAdministratorTest extends TestCaseWithAuth
                 'mission' => ['project'],
             ]);
 
+
+        Notification::assertNotSentTo($application->user, ApplicationNotification::class);
+    }
+
+    /**
+     * @group administrator
+     */
+    public function testAdministratorUpdatingApplicationWhoseProjectIsNotHiring()
+    {
+        $mission = $this->validatedProjectAndAvailableMissionProvider()['mission'];
+
+        $application = factory(Application::class)->create(['mission_id' => $mission->id]);
+
+        $data = [
+            'status' => Application::ACCEPTED,
+        ];
+
+        $this->json('PUT', route('applications.update', ['application_id' => $application->id]), $data)
+            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
+            ->assertJson(['errors' => [trans('errors.projects.' . Project::HIRING)]]);
 
         Notification::assertNotSentTo($application->user, ApplicationNotification::class);
     }

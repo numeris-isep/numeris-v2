@@ -39,11 +39,10 @@ class DestroyDeveloperTest extends TestCaseWithAuth
         $this->assertDatabaseHas('applications', $application->toArray());
 
         $this->json('DELETE', route('applications.destroy', ['application_id' => $application->id]))
-            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.403')]]);
+            ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
 
-        Mail::assertNothingSent();
+        Mail::assertSent(ApplicationRemovedMail::class);
 
-        $this->assertDatabaseHas('applications', $application->toArray());
+        $this->assertDatabaseMissing('applications', $application->toArray());
     }
 }

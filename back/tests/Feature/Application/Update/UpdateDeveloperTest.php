@@ -35,7 +35,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'status',
                 'createdAt',
                 'updatedAt',
-                'mission' => ['project'],
             ]);
 
         Notification::assertNotSentTo($application->user, ApplicationNotification::class);
@@ -63,7 +62,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'status',
                 'createdAt',
                 'updatedAt',
-                'mission' => ['project'],
             ]);
 
         Notification::assertSentTo($application->user, ApplicationNotification::class);
@@ -91,7 +89,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'status',
                 'createdAt',
                 'updatedAt',
-                'mission' => ['project'],
             ]);
 
         Notification::assertSentTo($application->user, ApplicationNotification::class);
@@ -119,7 +116,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'status',
                 'createdAt',
                 'updatedAt',
-                'mission' => ['project'],
             ]);
 
         Notification::assertNotSentTo($application->user, ApplicationNotification::class);
@@ -157,9 +153,17 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         ];
 
         $this->json('PUT', route('applications.update', ['application_id' => $application->id]), $data)
-            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.403')]]);
+            ->assertStatus(JsonResponse::HTTP_CREATED)
+            ->assertJsonStructure([
+                'id',
+                'userId',
+                'missionId',
+                'type',
+                'status',
+                'createdAt',
+                'updatedAt',
+            ]);
 
-        Notification::assertNotSentTo($application->user, ApplicationNotification::class);
+        Notification::assertSentTo($application->user, ApplicationNotification::class);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Project;
 use App\Models\Role;
 
 return [
@@ -33,5 +34,9 @@ return [
         'completed'         => 'L\'utilisateur n\'a complété son profil.',
         'tou_accepted'      => 'L\'utilisateur n\'a pas accepté les conditions d\'utilisations.',
         'email_verified_at' => 'L\'utilisateur n\'a pas vérifié son adresse email.'
-    ]
+    ],
+
+    'projects' => [
+        Project::HIRING => 'Le projet doit avoir le status Ouvert',
+    ],
 ];

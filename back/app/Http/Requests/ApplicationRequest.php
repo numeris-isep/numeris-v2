@@ -17,7 +17,6 @@ class ApplicationRequest extends AbstractFormRequest
     {
         $current_user = auth()->user();
         $application = Application::find($this->route('application_id'));
-
         if ($application) {
             // Use ApplicationPolicy here to authorize before checking the fields
             return $current_user->can('update', $application);
