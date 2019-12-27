@@ -25,6 +25,9 @@ class PreferencePolicy
         // unless   $user1 == $user2
         // or       $user1->role > $user2->role
         return $current_user->is($preference->user)
-            || $current_user->role()->isSuperiorTo($preference->user->role()->name);
+            ?: (
+            $current_user->role()->isSuperiorTo($preference->user->role()->name)
+                ?: $this->deny(trans('errors.roles.' . $current_user->role()->name))
+            );
     }
 }
