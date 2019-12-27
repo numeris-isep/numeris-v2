@@ -12,19 +12,19 @@ class InvoicePolicy
 
     public function before(User $current_user, $ability)
     {
-        // Grant everything to developers, administrators and staffs
-        if ($current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF)) {
-            return true;
+        // Forbid everything to students
+        if ($current_user->role()->isInferiorTo(Role::STAFF)) {
+            return $this->deny(trans('errors.403'));
         }
     }
 
     public function index(User $current_user)
     {
-        return false;
+        return true;
     }
 
     public function download(User $current_user)
     {
-        return false;
+        return true;
     }
 }
