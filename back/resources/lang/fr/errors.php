@@ -38,6 +38,7 @@ return [
 
     'projects' => [
         Project::HIRING => 'Le projet doit avoir le status Ouvert.',
+        'bills'         => 'Les heures effectuées n\'ont pas été saisies.'
     ],
 
     'clients' => [

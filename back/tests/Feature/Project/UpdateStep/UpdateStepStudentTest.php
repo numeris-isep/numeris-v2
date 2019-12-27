@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Project\Update;
+namespace Tests\Feature\Project\UpdateStep;
 
 use App\Models\Role;
 use App\Models\Project;

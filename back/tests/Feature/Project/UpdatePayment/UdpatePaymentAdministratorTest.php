@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Project\Update;
+namespace Tests\Feature\Project\UpdatePayment;
 
 use App\Models\Role;
 use Illuminate\Http\JsonResponse;

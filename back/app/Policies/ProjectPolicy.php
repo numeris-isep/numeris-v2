@@ -23,6 +23,10 @@ class ProjectPolicy
         ) {
             return true;
         }
+
+        if ($current_user->role()->isInferiorTo(Role::STAFF)) {
+            return false;
+        }
     }
 
     public function index(User $current_user)
@@ -62,14 +66,16 @@ class ProjectPolicy
 
     public function updateInvoice(User $current_user, Project $project)
     {
-        return $current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF)
-            && ! $project->bills()->isEmpty();
+        return $project->bills()->isNotEmpty()
+            ?: $this->deny(trans('errors.projects.bills'));
     }
 
     public function destroy(User $current_user, Project $project)
     {
-        return $project->bills()->count() > 0
-            ? $current_user->role()->isEquivalentTo(Role::DEVELOPER)
-            : $current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF);
+        return $project->bills()->count() == 0
+            ?: (
+                $current_user->role()->isEquivalentTo(Role::DEVELOPER)
+                    ?: $this->deny(trans('errors.roles.' . Role::ADMINISTRATOR))
+            );
     }
 }
