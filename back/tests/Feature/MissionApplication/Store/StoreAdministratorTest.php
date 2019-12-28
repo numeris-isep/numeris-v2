@@ -44,6 +44,8 @@ class StoreAdministratorTest extends TestCaseWithAuth
                 'missionId',
                 'type',
                 'status',
+                'user' => ['roles'],
+                'mission',
                 'createdAt',
                 'updatedAt',
             ]);

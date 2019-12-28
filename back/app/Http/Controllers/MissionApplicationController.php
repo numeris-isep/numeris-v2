@@ -56,7 +56,7 @@ class MissionApplicationController extends Controller
         $mission->applications()->save($application);
         $user->applications()->save($application);
 
-        $application->load(['user', 'mission']);
+        $application->load(['user', 'user.roles','mission']);
 
         $user->sendApplicationNotification($application);
 

@@ -42,6 +42,8 @@ class StoreDeveloperTest extends TestCaseWithAuth
                 'missionId',
                 'type',
                 'status',
+                'user' => ['roles'],
+                'mission',
                 'createdAt',
                 'updatedAt',
             ]);
@@ -79,6 +81,8 @@ class StoreDeveloperTest extends TestCaseWithAuth
                 'missionId',
                 'type',
                 'status',
+                'user' => ['roles'],
+                'mission',
                 'createdAt',
                 'updatedAt',
             ]);
@@ -301,6 +305,8 @@ class StoreDeveloperTest extends TestCaseWithAuth
                 'missionId',
                 'type',
                 'status',
+                'user' => ['roles'],
+                'mission',
                 'createdAt',
                 'updatedAt',
             ]);
