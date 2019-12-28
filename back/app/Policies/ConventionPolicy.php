@@ -5,12 +5,9 @@ namespace App\Policies;
 use App\Models\Role;
 use App\Models\Convention;
 use App\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ConventionPolicy
+class ConventionPolicy extends AbstractPolicy
 {
-    use HandlesAuthorization;
-
     public function before(User $current_user, $ability)
     {
         // Forbid everything to students

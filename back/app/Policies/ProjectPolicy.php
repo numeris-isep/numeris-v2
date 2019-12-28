@@ -5,14 +5,9 @@ namespace App\Policies;
 use App\Models\Role;
 use App\Models\Project;
 use App\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ProjectPolicy
+class ProjectPolicy extends AbstractPolicy
 {
-    use HandlesAuthorization;
-
-    private $message = 'Accès interdit.';
-
     public function before(User $current_user, $ability)
     {
         // Grant everything to developers, administrators and staffs

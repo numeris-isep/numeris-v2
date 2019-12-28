@@ -5,12 +5,9 @@ namespace App\Policies;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Mission;
-use Illuminate\Auth\Access\HandlesAuthorization;
 
-class MissionPolicy
+class MissionPolicy extends AbstractPolicy
 {
-    use HandlesAuthorization;
-
     public function before(User $current_user, $ability)
     {
         // Grant everything to developers, administrators and staffs

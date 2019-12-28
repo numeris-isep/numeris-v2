@@ -5,12 +5,9 @@ namespace App\Policies;
 use App\Models\Role;
 use App\Models\Client;
 use App\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ClientPolicy
+class ClientPolicy extends AbstractPolicy
 {
-    use HandlesAuthorization;
-
     public function before(User $current_user, $ability)
     {
         // Grant everything to developers, administrators and staffs

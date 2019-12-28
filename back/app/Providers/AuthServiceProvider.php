@@ -33,11 +33,15 @@ use App\Policies\UserPolicy;
 use App\Policies\UserRolePolicy;
 use App\ProjectUser;
 use Carbon\Carbon;
+use App\Exceptions\AuthorizationException;
+use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
+    use HandlesAuthorization;
+
     /**
      * The policy mappings for the application.
      *
@@ -70,17 +74,48 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        // This gate defines if a user can apply to a mission
         Gate::define('store-application', function(User $current_user, User $user, Mission $mission) {
-            return ! $user->hasAppliedTo($mission)
-                && ! $mission->is_locked
-                && Carbon::parse($mission->start_at)->isAfter(now())
-                && $mission->project->step == Project::HIRING
-                && ($mission->project->is_private ? $user->belongsToProject($mission->project) : true);
+            return $user->hasAppliedTo($mission)
+                ? $this->deny($current_user, trans('errors.application_exists'))
+                : (
+                    $mission->is_locked
+                        ? $this->deny($current_user, trans('errors.mission_locked'))
+                        : (
+                            Carbon::parse($mission->start_at)->isBefore(now())
+                                ? $this->deny($current_user, trans('errors.mission_expired'))
+                                : (
+                                $mission->project->step != Project::HIRING
+                                    ? $this->deny($current_user, trans('errors.wrong_project_step', ['allowed_step' => 'Ouvert']))
+                                    : (
+                                        ! $mission->project->is_private
+                                            ?: (
+                                                $user->belongsToProject($mission->project)
+                                                    ?: $this->deny($current_user, trans('errors.project_doesnot_contain_user'))
+                                        )
+                                )
+                            )
+                    )
+                );
         });
 
         Gate::define('store-mission-application', function(User $current_user, User $user, Mission $mission) {
-            return $current_user->role()->isSuperiorOrEquivalentTo(Role::STAFF)
-                && Gate::allows('store-application', [$user, $mission]);
+            return $current_user->role()->isInferiorTo(Role::STAFF)
+                ? $this->deny($current_user, trans('errors.roles.' . Role::STUDENT))
+                : Gate::allows('store-application', [$user, $mission]);
         });
+    }
+
+    /**
+     * @param string $message
+     * @throws AuthorizationException
+     */
+    private function deny(User $user, string $message)
+    {
+        throw new AuthorizationException(
+            $user->role()->isInferiorTo(Role::STAFF)
+                ? trans('errors.roles.' . Role::STUDENT)
+                : $message
+        );
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use App\Models\Role;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Contracts\Validation\Validator;

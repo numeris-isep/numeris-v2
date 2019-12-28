@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use App\Exceptions\AuthorizationException as CustomAuthorizationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -55,11 +56,13 @@ class Handler extends ExceptionHandler
     {
         if ($exception instanceof AuthorizationException) {
             return response()->json([
-                'errors' => [
-                    $exception->getMessage() === 'This action is unauthorized.'
-                        ? trans('errors.403')
-                        : $exception->getMessage()
-                ]
+                'errors' => [trans('errors.403')]
+            ], JsonResponse::HTTP_FORBIDDEN);
+        }
+
+        if ($exception instanceof CustomAuthorizationException) {
+            return response()->json([
+                'errors' => [$exception->getMessage()]
             ], JsonResponse::HTTP_FORBIDDEN);
         }
 

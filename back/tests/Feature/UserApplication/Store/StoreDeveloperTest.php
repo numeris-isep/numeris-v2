@@ -85,8 +85,8 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $this->assertDatabaseHas('applications', $application);
 
         $this->json('POST', route('users.applications.store', ['user_id' => $user->id]), $data)
-            ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
-            ->assertJsonValidationErrors(['mission_id']);
+            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
+            ->assertJson(['errors' => [trans('errors.application_exists')]]);
     }
 
     /**
@@ -104,7 +104,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
         $this->json('POST', route('users.applications.store', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.403')]]);
+            ->assertJson(['errors' => [trans('errors.mission_locked')]]);
 
         $this->assertDatabaseMissing('applications', $application);
     }
@@ -124,7 +124,7 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
         $this->json('POST', route('users.applications.store', ['user_id' => $user->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.403')]]);
+            ->assertJson(['errors' => [trans('errors.mission_expired')]]);
 
         $this->assertDatabaseMissing('applications', $application);
     }

@@ -5,12 +5,9 @@ namespace App\Policies;
 use App\Models\Role;
 use App\Models\Rate;
 use App\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
 
-class RatePolicy
+class RatePolicy extends AbstractPolicy
 {
-    use HandlesAuthorization;
-
     public function before(User $current_user, $ability)
     {
         // Grant everything to developers, administrators and staffs
