@@ -28,7 +28,17 @@ class UserRolePolicy
         // Only $current_user->role >= $user->role can change $user->role
         // AND
         // $current_user->role >= $role
-        return $current_user->role()->isSuperiorOrEquivalentTo($user->role()->name)
-            && $current_user->role()->isSuperiorOrEquivalentTo($role->name);
+        // AND
+        // $user->role != $role
+        return $current_user->role()->isInferiorTo($user->role()->name)
+            ? $this->deny(trans('errors.roles.' . $current_user->role()->name))
+            : (
+                $current_user->role()->isInferiorTo($role->name)
+                    ? $this->deny(trans('errors.roles.superior'))
+                    : (
+                        $user->role()->isNot($role)
+                            ?: $this->deny(trans('errors.roles.same', ['role' => $role->name_fr]))
+                )
+            );
     }
 }

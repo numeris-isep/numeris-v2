@@ -28,6 +28,8 @@ return [
         Role::STAFF         => 'Veuillez contacter un Administrateur pour effectuer cette action.',
         Role::ADMINISTRATOR => 'Veuillez contacter un Développeur pour effectuer cette action.',
         Role::DEVELOPER     => 'Cette action est interdite pour tous les utilisateurs.',
+        'superior'          => 'Le rôle choisi doit être inférieur ou égal à votre rôle actuel.',
+        'same'              => 'Le rôle de l\'utilisateur est déjà :role',
     ],
 
     'profile_not_completed' => 'L\'utilisateur n\'a complété son profil.',

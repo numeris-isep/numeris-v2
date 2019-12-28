@@ -43,14 +43,6 @@ class UserRoleController extends Controller
         $role = Role::findOrFail($request->get('role_id'));
         $this->authorize('store', [UserRole::class, $user, $role]);
 
-        // If $user->role is equals to the role to be assigned then throw
-        // an exception to avoid the creation of the same role twice
-        if ($role->name === $user->role()->name) {
-            throw new AuthorizationException(
-                "Le rôle de l'utilisateur '$user->username' est déjà '$role->name'"
-            );
-        }
-
         $user->setRole($role);
 
         return response()->json(UserRoleResource::make($user->role()), JsonResponse::HTTP_CREATED);
