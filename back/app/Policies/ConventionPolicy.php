@@ -19,6 +19,16 @@ class ConventionPolicy
         }
     }
 
+    public function index(User $current_user)
+    {
+        return true;
+    }
+
+    public function store(User $current_user)
+    {
+        return true;
+    }
+
     public function show(User $current_user, Convention $convention)
     {
         return true;
