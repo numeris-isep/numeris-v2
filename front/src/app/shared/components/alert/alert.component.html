@@ -2,7 +2,7 @@
   <div *ngIf="target === alert.target || alert.target === 'all'"
        class="padded" [ngClass]="{ 'flying': alert.target === 'main' }" [style.top.px]="position"
        [suiTransition]="alert.transitionController" #container>
-    <sui-message class="{{ cssClass(alert) }} icon" (dismiss)="removeAlert(i)">
+    <sui-message class="{{ cssClass(alert) }} icon" [isDismissable]="false">
       <ng-container *ngIf="alert.title">
         <i *ngIf="cssClass(alert) === 'success'" class="smile outline loading icon"></i>
         <i *ngIf="cssClass(alert) === 'warning'" class="meh outline loading icon"></i>
@@ -22,5 +22,7 @@
         </div>
       </div>
     </sui-message>
+    <sui-progress class="bottom attached indicating" maximum="80"
+                  [showProgress]="false" [value]="progressValue"></sui-progress>
   </div>
 </div>

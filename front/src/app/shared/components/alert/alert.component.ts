@@ -1,9 +1,10 @@
 import { Component, ElementRef, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { AlertService } from '../../../core/services/alert.service';
 import { Alert, AlertType } from '../../../core/classes/alert';
-import { timer } from 'rxjs';
+import { interval, timer } from 'rxjs';
 import { Transition, TransitionController, TransitionDirection } from 'ng2-semantic-ui';
 import { ScrollService } from '../../../core/services/scroll.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-alert',
@@ -18,6 +19,9 @@ export class AlertComponent implements OnInit {
 
   alerts: Alert[] = [];
   position: number = 0;
+
+  dueTime: number = 8000;
+  progressValue: number = 80;
 
   constructor(
     private alertService: AlertService,
@@ -43,6 +47,7 @@ export class AlertComponent implements OnInit {
       this.alerts.push(alert);
 
       this.autoFade(alert);
+      this.progress();
     });
   }
 
@@ -75,8 +80,14 @@ export class AlertComponent implements OnInit {
     }
   }
 
+  progress() {
+    interval(100)
+      .pipe(takeUntil(timer(this.dueTime)))
+      .subscribe(value => this.progressValue = 80 - value);
+  }
+
   autoFade(alert: Alert) {
-    timer(8000).subscribe(() => {
+    timer(this.dueTime).subscribe(() => {
       this.animate(alert, this.alerts.findIndex(a => a === alert));
     });
   }

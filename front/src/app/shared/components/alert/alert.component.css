@@ -13,3 +13,8 @@
 .flying .content {
   margin-right: 1.5em !important;
 }
+
+.attached.indicating.progress {
+  border-radius: 0 0 10px 10px;
+  margin: 0 2px;
+}
