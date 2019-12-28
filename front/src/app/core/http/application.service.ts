@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { Observable, of } from "rxjs";
-import { environment } from "../../../environments/environment";
-import { HTTP_OPTIONS } from "../constants/http_options";
-import { Application, ApplicationStatus } from "../classes/models/application";
-import { User } from "../classes/models/user";
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { HTTP_OPTIONS } from '../constants/http_options';
+import { Application, ApplicationStatus } from '../classes/models/application';
+import { User } from '../classes/models/user';
 import { Mission } from '../classes/models/mission';
 
 @Injectable({

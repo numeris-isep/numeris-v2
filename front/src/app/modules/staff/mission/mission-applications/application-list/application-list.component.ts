@@ -46,17 +46,16 @@ export class ApplicationListComponent implements OnInit {
 
   updateApplication(status: string, application: Application) {
     this.loading = true;
+    const previousStatus = application.status;
 
     this.applicationHandler.setApplication(status, application); // Handle application in frontend
 
     this.applicationService.updateApplication(status, application).subscribe(
       () => {
-        // Here we know that the application is in the new list on a backend look.
-        // Now we need to do the same on the front end
         this.loading = false;
       },
-      errors => {
-        this.alertService.error(errors.status || errors);
+      () => {
+        this.applicationHandler.setApplication(previousStatus, application); // Handle application in frontend
         this.loading = false;
       }
     );
