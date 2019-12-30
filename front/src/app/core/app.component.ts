@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SuiLocalizationService } from 'ng2-semantic-ui';
 import fr from 'ng2-semantic-ui/locales/fr';
 import { AuthService } from './http/auth/auth.service';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     public localizationService: SuiLocalizationService,
+    private swUpdate: SwUpdate,
     private authService: AuthService,
   ) {
 
@@ -24,6 +26,17 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.authService.checkAuth();
+    this.notifyNewVersion();
+  }
+
+  notifyNewVersion() {
+    if (this.swUpdate.isEnabled) {
+      this.swUpdate.available.subscribe(() => {
+        if (confirm('Une ouvelle version est disponible, recharger la page ?')) {
+          window.location.reload();
+        }
+      });
+    }
   }
 
 }
