@@ -56,6 +56,9 @@ export class TokenService {
       if (payload) {
         // To be valid, the current time be must be <= to the expiration date of the token
         if (moment().unix() <= payload.exp) {
+          console.log(this.iss.login);
+          console.log(payload.iss);
+
           return this.iss.login.includes(payload.iss.replace('http://', ''));
         }
       }
