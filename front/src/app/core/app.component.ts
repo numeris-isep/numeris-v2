@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
   notifyNewVersion() {
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe(() => {
-        if (confirm('Une ouvelle version est disponible, recharger la page ?')) {
+        if (confirm('Une nouvelle version est disponible, recharger la page ?')) {
           window.location.reload();
         }
       });
