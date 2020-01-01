@@ -24,10 +24,7 @@ export class HomeComponent implements OnInit {
 
   @ViewChild('snowCanvas') private snowCanvas: ElementRef;
 
-  isWinter: boolean = moment().isBetween(
-    moment({d: 22, M: 11}),
-    moment({d: 20, M: 2}).add(1, 'year')
-  );
+  isWinter: boolean = moment().isAfter(moment({d: 22, M: 11})) || moment().isBefore(moment({d: 20, M: 2}));
 
   private elements: {
     top: ElementRef,
