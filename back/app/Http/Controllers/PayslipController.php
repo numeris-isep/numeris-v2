@@ -79,7 +79,7 @@ class PayslipController extends Controller
     }
 
     /**
-     * Download a ZIP archive containing contracts an payslips of a given month
+     * Download a ZIP archive containing contracts and payslips of a given month
      *
      * Note: this takes a bit of time
      *          ¯\_(ツ)_/¯
@@ -151,6 +151,28 @@ class PayslipController extends Controller
     }
 
     /**
+     * Send an email only when the document was recently created
+     * (we do not want to send an email each time we update payslips)
+     *
+     * @param Collection $payslips
+     */
+    private function sendNewDocumentMail(Collection $payslips)
+    {
+        try {
+            $users = $payslips
+                ->filter(function (Payslip $payslip) {
+                    return $payslip->wasRecentlyCreated;
+                })
+                ->pluck('user')
+                ->filter(function (User $user) {
+                    return $user->preference->on_document;
+                });
+
+            Mail::to($users)->send(new NewDocumentMail());
+        } catch (\Exception $exception) {}
+    }
+
+    /**
      * Update signed or paid attributes of given payslips
      *
      * @param PayslipRequest $request
@@ -174,27 +196,5 @@ class PayslipController extends Controller
         }
 
         return response()->json(PayslipResource::collection($payslips));
-    }
-
-    /**
-     * Send an email only when the document was recently created
-     * (we do not want to send an email each time we update payslips)
-     *
-     * @param Collection $payslips
-     */
-    private function sendNewDocumentMail(Collection $payslips)
-    {
-        try {
-            $users = $payslips
-                ->filter(function (Payslip $payslip) {
-                    return $payslip->wasRecentlyCreated;
-                })
-                ->pluck('user')
-                ->filter(function (User $user) {
-                    return $user->preference->on_document;
-                });
-
-            Mail::to($users)->send(new NewDocumentMail());
-        } catch (\Exception $exception) {}
     }
 }
