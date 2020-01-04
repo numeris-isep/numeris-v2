@@ -24,7 +24,7 @@ $factory->define(User::class, function (Faker $faker) {
         'password'      => bcrypt('azertyuiop'),
         'first_name'    => $faker->firstName,
         'last_name'     => $faker->lastName,
-        'promotion'     => $faker->numberBetween(2015, 2025),
+        'promotion'     => $faker->numberBetween(now()->year, now()->addYears(5)->year),
         'birth_date'    => $faker->dateTime,
     ];
 });
