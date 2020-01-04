@@ -12,7 +12,6 @@ import { ProfilePreferencesComponent } from './profile/profile-preferences/profi
 import { ProfileDocumentsComponent } from './profile/profile-documents/profile-documents.component';
 import { MissionComponent } from './mission/mission.component';
 import { ApplicationComponent } from './application/application.component';
-import { TutorialComponent } from './tutorial/tutorial.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ContactUsComponent } from './contact-us/contact-us.component';
@@ -47,7 +46,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MissionComponent,
     ApplicationComponent,
     ApplicationConfirmModalComponent,
-    TutorialComponent,
     ContactUsComponent,
     MissionDetailsComponent,
     ProfileEditComponent,

@@ -27,9 +27,6 @@
           </span>
         </a>
       </ng-container>
-      <a class="item" routerLink="/tutoriels" routerLinkActive="active">
-        <i class="info circle icon"></i> Tutoriels
-      </a>
       <a class="item" routerLink="/nous-contacter" routerLinkActive="active">
         <i class="envelope icon"></i> Nous contacter
       </a>
@@ -77,11 +74,8 @@
     </div>
 
     <div content (click)="sidebar.close()">
-      <a class="item">
+      <a class="item" routerLink="/parametres" routerLinkActive="active">
         <i class="cogs icon"></i> Paramètres
-      </a>
-      <a class="item" *ngIf="currentUserRole == 'developer'">
-        <i class="newspaper icon"></i> Activité
       </a>
     </div>
   </sui-accordion-panel>
