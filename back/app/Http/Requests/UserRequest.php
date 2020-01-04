@@ -54,7 +54,7 @@ class UserRequest extends AbstractFormRequest
             'nationality'               => 'required|string',
             'birth_city'                => 'required|string',
             'social_insurance_number'   => 'required|string|size:15',
-            'iban'                      => 'required|string|between:15,20',
+            'iban'                      => 'required|string|between:15,30',
             'bic'                       => 'required|string|between:8,15',
         ];
 
