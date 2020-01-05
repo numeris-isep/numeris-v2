@@ -8,7 +8,7 @@ import { ClientService } from '../../../../core/http/client.service';
 import { ConventionService } from '../../../../core/http/convention.service';
 import { Convention } from '../../../../core/classes/models/convention';
 import { Observable } from 'rxjs';
-import { dateToString } from '../../../../shared/utils';
+import { dateToISO, dateToString } from '../../../../shared/utils';
 import { first } from 'rxjs/operators';
 import { handleFormErrors } from '../../../../core/functions/form-error-handler';
 import { AlertService } from '../../../../core/services/alert.service';
@@ -63,7 +63,7 @@ export class ProjectFormComponent implements OnInit, AfterViewInit {
         Validators.required,
       ],
       start_at: [
-        this.project ? new Date(this.project.startAt) : '',
+        this.project ? new Date(dateToISO(this.project.startAt)) : '',
         Validators.required,
       ],
       is_private: [this.project ? this.project.isPrivate : false],

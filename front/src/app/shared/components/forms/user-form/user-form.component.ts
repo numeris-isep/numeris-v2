@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { User } from '../../../../core/classes/models/user';
 import * as moment from 'moment';
 import { Moment } from 'moment';
+import { dateToISO } from '../../../utils';
 
 @Component({
   selector: 'app-user-form',
@@ -43,7 +44,7 @@ export class UserFormComponent implements OnInit {
       first_name: [this.user ? this.user.firstName : '', Validators.required],
       last_name: [this.user ? this.user.lastName : '', Validators.required],
       promotion: [this.user ? parseInt(this.user.promotion) : '', Validators.required],
-      birth_date: [this.user ? new Date(this.user.birthDate) : '', Validators.required],
+      birth_date: [this.user ? new Date(dateToISO(this.user.birthDate)) : '', Validators.required],
     });
   }
 

@@ -6,7 +6,7 @@ import { MissionService } from '../../../../core/http/mission.service';
 import { AlertService } from '../../../../core/services/alert.service';
 import { Router } from '@angular/router';
 import { ProjectService } from '../../../../core/http/project.service';
-import { dateToString } from '../../../../shared/utils';
+import { dateToISO, dateToString } from '../../../../shared/utils';
 import { forkJoin, Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { handleFormErrors } from '../../../../core/functions/form-error-handler';
@@ -74,7 +74,7 @@ export class MissionFormComponent implements OnInit, AfterViewInit {
         this.mission ? (this.mission.contact ? this.mission.contact.id : '') : '',
       ],
       start_at: [
-        this.mission ? new Date(this.mission.startAt) : '',
+        this.mission ? new Date(dateToISO(this.mission.startAt)) : '',
         Validators.required,
       ],
       duration: [
