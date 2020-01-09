@@ -102,7 +102,21 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('store-mission-application', function(User $current_user, User $user, Mission $mission) {
             return $current_user->role()->isInferiorTo(Role::STAFF)
                 ? $this->deny($current_user, trans('errors.roles.' . Role::STUDENT))
-                : Gate::allows('store-application', [$user, $mission]);
+                : (
+                    $user->hasAppliedTo($mission)
+                        ? $this->deny($current_user, trans('errors.application_exists'))
+                        : (
+                            $mission->project->step != Project::HIRING
+                                ? $this->deny($current_user, trans('errors.wrong_project_step', ['allowed_step' => 'Ouvert']))
+                                : (
+                                    ! $mission->project->is_private
+                                        ?: (
+                                            $user->belongsToProject($mission->project)
+                                                ?: $this->deny($current_user, trans('errors.project_doesnot_contain_user'))
+                                    )
+                            )
+                    )
+                );
         });
     }
 

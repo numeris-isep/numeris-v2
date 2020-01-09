@@ -10,7 +10,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Mission::class, function (Faker $faker) {
     return [
-        'project_id'    => factory(Project::class),
+        'project_id'    => factory(Project::class)->state(Project::HIRING),
         'address_id'    => factory(Address::class),
         'user_id'       => factory(User::class),
         'is_locked'     => false,
@@ -34,7 +34,10 @@ $factory->state(Mission::class, 'private', function (Faker $faker) {
 });
 
 $factory->state(Mission::class, 'locked', function (Faker $faker) {
-    return ['is_locked' => true];
+    return [
+        'project_id'    => factory(Project::class)->state(Project::HIRING),
+        'is_locked'     => true,
+    ];
 });
 
 $factory->state(Mission::class, 'past', function (Faker $faker) {

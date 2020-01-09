@@ -208,12 +208,22 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('applications', $application);
 
         $this->json('POST', route('missions.applications.store', ['mission_id' => $mission->id]), $data)
-            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.mission_locked')]]);
+            ->assertStatus(JsonResponse::HTTP_CREATED)
+            ->assertJsonStructure([
+                'id',
+                'userId',
+                'missionId',
+                'type',
+                'status',
+                'user' => ['roles'],
+                'mission',
+                'createdAt',
+                'updatedAt',
+            ]);
 
         $this->assertDatabaseMissing('applications', $application);
 
-        Notification::assertNotSentTo($user, ApplicationNotification::class);
+        Notification::assertSentTo($user, ApplicationNotification::class);
     }
 
     /**
@@ -238,12 +248,22 @@ class StoreDeveloperTest extends TestCaseWithAuth
         $this->assertDatabaseMissing('applications', $application);
 
         $this->json('POST', route('missions.applications.store', ['mission_id' => $mission->id]), $data)
-            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.mission_expired')]]);
+            ->assertStatus(JsonResponse::HTTP_CREATED)
+            ->assertJsonStructure([
+                'id',
+                'userId',
+                'missionId',
+                'type',
+                'status',
+                'user' => ['roles'],
+                'mission',
+                'createdAt',
+                'updatedAt',
+            ]);
 
         $this->assertDatabaseMissing('applications', $application);
 
-        Notification::assertNotSentTo($user, ApplicationNotification::class);
+        Notification::assertSentTo($user, ApplicationNotification::class);
     }
 
     /**

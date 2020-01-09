@@ -20,7 +20,7 @@ $factory->define(User::class, function (Faker $faker) {
     return [
         'preference_id' => factory(Preference::class)->state('all-notifications'),
         'address_id'    => factory(Address::class),
-        'email'         => strtolower($faker->firstName . $faker->randomDigit * $faker->randomDigit . '@isep.fr'),
+        'email'         => strtolower($faker->firstName . $faker->randomDigit * $faker->randomDigit  * $faker->randomDigit  * $faker->randomDigit . '@isep.fr'),
         'password'      => bcrypt('azertyuiop'),
         'first_name'    => $faker->firstName,
         'last_name'     => $faker->lastName,
