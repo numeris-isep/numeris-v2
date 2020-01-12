@@ -28,6 +28,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'id',
+                'hourAmount',
                 'grossAmount',
                 'vatAmount',
                 'finalAmount',

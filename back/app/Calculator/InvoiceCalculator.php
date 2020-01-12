@@ -16,12 +16,14 @@ class InvoiceCalculator implements CalculatorInterface
     public function calculate($params): array
     {
         $details        = $this->calculateDetails($params['project']);
+        $hour_amount    = $details['hour_amount'];
         $gross_amount   = $details['gross_amount'];
         $vat_amount     = $this->calculateVAT($gross_amount);
         $final_amount   = $this->calculateFinalAmount($gross_amount, $vat_amount);
 
         return [
             'project_id'    => $params['project']->id,
+            'hour_amount'   => $hour_amount,
             'gross_amount'  => $gross_amount,
             'vat_amount'    => $vat_amount,
             'final_amount'  => $final_amount,
@@ -38,7 +40,11 @@ class InvoiceCalculator implements CalculatorInterface
      */
     public function calculateDetails(Project $project): array
     {
-        $details = ['gross_amount' => 0, 'details' => []];
+        $details = [
+            'gross_amount'  => 0,
+            'hour_amount'  => 0,
+            'details'       => []
+        ];
 
         foreach ($project->missions as $mission) {
             $detail = [
@@ -52,6 +58,7 @@ class InvoiceCalculator implements CalculatorInterface
                 $rate = Rate::findOrFail($rate_id);
                 $hours = $bills->sum('amount');
                 $details['gross_amount'] += $rate->for_client * $hours;
+                $details['hour_amount'] += $hours;
 
                 $detail['bills'][] = [
                     'rate' => $rate->name,

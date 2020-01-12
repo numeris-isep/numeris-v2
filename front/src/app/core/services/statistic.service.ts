@@ -28,6 +28,7 @@ export class StatisticService {
 
   initInvoiceAmount() {
     this.invoiceAmount = {
+      hourAmounts: 0,
       grossAmounts: 0,
       vatAmounts: 0,
       finalAmounts: 0,
@@ -54,6 +55,7 @@ export class StatisticService {
     this.initInvoiceAmount();
 
     invoices.forEach(invoice => {
+      this.invoiceAmount.hourAmounts += parseFloat(invoice.hourAmount.toString());
       this.invoiceAmount.grossAmounts += parseFloat(invoice.grossAmount.toString());
       this.invoiceAmount.vatAmounts += parseFloat(invoice.vatAmount.toString());
       this.invoiceAmount.finalAmounts += parseFloat(invoice.finalAmount.toString());

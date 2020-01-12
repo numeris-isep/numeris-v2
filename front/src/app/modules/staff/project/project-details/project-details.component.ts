@@ -3,6 +3,7 @@ import { Project } from '../../../../core/classes/models/project';
 import { ProjectDeleteModal } from '../project-delete-modal/project-delete-modal.component';
 import { SuiModalService } from 'ng2-semantic-ui';
 import { User } from '../../../../core/classes/models/user';
+import { Bill } from '../../../../core/classes/models/bill';
 
 @Component({
   selector: 'app-project-details',

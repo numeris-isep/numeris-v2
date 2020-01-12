@@ -28,6 +28,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure([
                 'id',
+                'hourAmount',
                 'grossAmount',
                 'vatAmount',
                 'finalAmount',
@@ -117,6 +118,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         $content = json_decode($response->getContent(), true);
 
         $this->assertEquals(240, $content['grossAmount']);
+        $this->assertEquals(11, $content['hourAmount']);
         $this->assertEquals($content['grossAmount'] * 0.2, $content['vatAmount']);
         $this->assertEquals($content['grossAmount'] + $content['vatAmount'], $content['finalAmount']);
         $this->assertEquals($content['timeLimit'], $data['time_limit']);

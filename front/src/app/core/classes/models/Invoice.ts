@@ -4,6 +4,7 @@ export class Invoice {
 
   id: number;
   project: Project;
+  hourAmount: number;
   grossAmount: number;
   vatAmount: number;
   finalAmount: number;

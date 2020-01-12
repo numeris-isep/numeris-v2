@@ -18,15 +18,21 @@
       </div>
       <div class="description center aligned marged">
         <div class="ui mini black statistic"
-             suiPopup popupText="Missions" [popupPlacement]="'bottom'">
+             suiPopup popupText="Missions" [popupPlacement]="'bottom'" popupInverted>
           <div class="value">
             <i class="copy blue icon"></i> {{ project.missionsCount }}
           </div>
         </div>
         <div *ngIf="project.isPrivate && users" class="ui mini black statistic"
-             suiPopup popupText="Étudiants du projet" [popupPlacement]="'bottom'">
+             suiPopup popupText="Étudiants du projet" [popupPlacement]="'bottom'" popupInverted>
           <div class="value">
             <i class="users blue icon"></i> {{ users.length }}
+          </div>
+        </div>
+        <div *ngIf="project.invoice" class="ui mini black statistic"
+             suiPopup popupText="Heures" [popupPlacement]="'bottom'" popupInverted>
+          <div class="value">
+            <i class="clock outside blue icon"></i> {{ project.invoice.hourAmount }}
           </div>
         </div>
       </div>

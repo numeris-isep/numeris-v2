@@ -23,6 +23,7 @@ class IndexAdministratorTest extends TestCaseWithAuth
             ->assertJsonStructure([[
                 'id',
                 'project',
+                'hourAmount',
                 'grossAmount',
                 'vatAmount',
                 'finalAmount',

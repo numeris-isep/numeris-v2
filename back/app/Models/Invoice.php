@@ -13,6 +13,7 @@ class Invoice extends Model
         'project_id',
 
         // attributes
+        'hour_amount',
         'gross_amount',
         'vat_amount',
         'final_amount',
