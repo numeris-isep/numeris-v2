@@ -32,7 +32,7 @@
         <div *ngIf="project.invoice" class="ui mini black statistic"
              suiPopup popupText="Heures" [popupPlacement]="'bottom'" popupInverted>
           <div class="value">
-            <i class="clock outside blue icon"></i> {{ project.invoice.hourAmount }}
+            <i class="clock outside blue icon"></i> {{ project.invoice.hourAmount | number:'1.0-1': 'fr-FR' }}
           </div>
         </div>
       </div>
