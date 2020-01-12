@@ -257,4 +257,46 @@ class UpdateActivatedDeveloperTest extends TestCaseWithAuth
 
         Notification::assertSentTo([$user], ActivateUserNotification::class);
     }
+
+    /**
+     * @group developer
+     */
+    public function testDeveloperActivatingDeletedStudent()
+    {
+        $user = $this->activeStudentProvider();
+        $user->update([
+            'deleted_at' => now(),
+        ]);
+
+        $data = [
+            'activated' => true
+        ];
+
+        $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
+            ->assertStatus(JsonResponse::HTTP_CREATED)
+            ->assertJsonStructure([
+                'id',
+                'preferenceId',
+                'addressId',
+                'activated',
+                'touAccepted',
+                'emailVerifiedAt',
+                'subscriptionPaidAt',
+                'email',
+                'firstName',
+                'lastName',
+                'promotion',
+                'phone',
+                'nationality',
+                'birthDate',
+                'birthCity',
+                'socialInsuranceNumber',
+                'iban',
+                'bic',
+                'createdAt',
+                'updatedAt',
+            ]);
+
+        Notification::assertNothingSent();
+    }
 }

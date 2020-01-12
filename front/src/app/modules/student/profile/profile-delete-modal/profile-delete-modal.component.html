@@ -1,0 +1,26 @@
+<div class="header">
+  Suppression de
+  {{
+    isOwnProfile
+      ? 'votre compte Numéris'
+      : 'l\'utilisateur ' + user.firstName + ' ' + user.lastName.toUpperCase()
+  }}
+</div>
+
+<div class="content">
+  Êtes vous sûr(e) de vouloir supprimer {{ isOwnProfile ? 'votre' : 'ce' }} compte ?
+  Cette action est <b>irréversible</b>.
+</div>
+
+<div class="actions">
+  <app-button hiddenIcon="cancel" color="basic" size="tiny"
+              (click)="modal.deny(undefined)">
+    Annuler
+  </app-button>
+  <app-button hiddenIcon="check" color="red" size="tiny" [isLoading]="loading"
+              (click)="delete()">
+    Je suis sûr(e)
+  </app-button>
+</div>
+
+

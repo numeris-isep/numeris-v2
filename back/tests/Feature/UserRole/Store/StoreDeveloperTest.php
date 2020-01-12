@@ -455,4 +455,20 @@ class StoreDeveloperTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors(['role_id']);
     }
+
+    /**
+     * @group developer
+     */
+    public function testDeveloperChangingDeletedUserRole()
+    {
+        $student = $this->deletedUserProvider();
+
+        $data = [
+            'role_id' => 1,
+        ];
+
+        $this->json('POST', route('users.roles.store', ['user_id' => $student->id]), $data)
+//            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
+            ->assertJson(['errors' => [trans('errors.profile_deleted')]]);
+    }
 }

@@ -52,6 +52,10 @@ $factory->state(User::class, 'active', function (Faker $faker) {
     ];
 });
 
+$factory->state(User::class, 'deleted', function (Faker $faker) {
+    return ['deleted_at' => now()];
+});
+
 $factory->state(User::class, 'no-notification', function () {
     return [
         'preference_id' => factory(Preference::class)->state('no-notification'),

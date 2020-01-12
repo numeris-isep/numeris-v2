@@ -23,13 +23,21 @@ class ProjectUserPolicy extends AbstractPolicy
 
     public function store(User $current_user, Project $project, User $user)
     {
-        return ! $project->users->contains($user)
-            ?: $this->deny(trans('errors.project_contains_user'));
+        return $user->deleted_at
+            ? $this->deny(trans('errors.profile_deleted'))
+            : (
+                ! $project->users->contains($user)
+                    ?: $this->deny(trans('errors.project_contains_user'))
+            );
     }
 
     public function destroy(User $current_user, Project $project, User $user)
     {
-        return $project->users->contains($user)
-            ?: $this->deny(trans('errors.project_doesnot_contain_user'));
+        return $user->deleted_at
+            ? $this->deny(trans('errors.profile_deleted'))
+            : (
+                $project->users->contains($user)
+                    ?: $this->deny(trans('errors.project_doesnot_contain_user'))
+            );
     }
 }

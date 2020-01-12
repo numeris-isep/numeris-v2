@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Traits\DateQueryTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
 
 class Payslip extends Model
@@ -58,7 +59,8 @@ class Payslip extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)
+            ->withoutGlobalScope(SoftDeletingScope::class);
     }
 
     public static function findByMonth(string $month)

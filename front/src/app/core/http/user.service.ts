@@ -110,13 +110,15 @@ export class UserService {
     return this.http.patch<User>(url, { tou_accepted: true }, HTTP_OPTIONS);
   }
 
-  updateUserActivated(activated: boolean, user: User): Observable<User> {
+  updateUserActivated(activated: boolean, user: User | number): Observable<User> {
     const userId: number = typeof user === 'number' ? user : user.id;
     const url = `${environment.apiUrl}/api/users/${userId}/activated`;
     return this.http.patch<User>(url, { activated: activated }, HTTP_OPTIONS);
   }
 
-  deleteUser(user: User) {
-    // TODO
+  deleteUser(user: User): Observable<User> {
+    const userId: number = typeof user === 'number' ? user : user.id;
+    const url = `${environment.apiUrl}/api/users/${userId}`;
+    return this.http.delete<User>(url, HTTP_OPTIONS);
   }
 }

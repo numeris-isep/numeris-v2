@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class Address extends Model
 {
@@ -30,7 +31,8 @@ class Address extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(User::class)
+            ->withoutGlobalScope(SoftDeletingScope::class);
     }
 
     public function client()

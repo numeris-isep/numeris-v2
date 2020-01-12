@@ -77,4 +77,29 @@ class DestroyDeveloperTest extends TestCaseWithAuth
 
         $this->assertDatabaseMissing('project_user', $data);
     }
+
+    /**
+     * @group developer
+     */
+    public function testDeveloperRemovingDeletedUserFromProject()
+    {
+        $test_data = $this->privateProjectAndUserInProjectProvider();
+        $project = $test_data['project'];
+        $user = $test_data['user'];
+
+        $user->update(['deleted_at' => now()]);
+
+        $data = [
+            'project_id'    => $project->id,
+            'user_id'       => $user->id,
+        ];
+
+        $this->assertDatabaseHas('project_user', $data);
+
+        $this->json('DELETE', route('projects.users.destroy', $data))
+            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
+            ->assertJson(['errors' => [trans('errors.profile_deleted')]]);
+
+        $this->assertDatabaseHas('project_user', $data);
+    }
 }

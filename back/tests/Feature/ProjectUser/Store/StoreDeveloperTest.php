@@ -108,4 +108,29 @@ class StoreDeveloperTest extends TestCaseWithAuth
 
         $this->assertDatabaseHas('project_user', $data);
     }
+
+    /**
+     * @group developer
+     */
+    public function testDeveloperAddingDeletedUserToProject()
+    {
+        $project = $this->privateProjectProvider();
+        $user = $this->deletedUserProvider();
+
+        $data = [
+            'project_id' => $project->id,
+            'user_id'    => $user->id,
+        ];
+
+        $this->assertDatabaseMissing('project_user', $data);
+
+        $this->json(
+            'POST',
+            route('projects.users.store', ['project_id' => $project->id]),
+            ['user_id' => $user->id])
+            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
+            ->assertJson(['errors' => [trans('errors.profile_deleted')]]);
+
+        $this->assertDatabaseMissing('project_user', $data);
+    }
 }

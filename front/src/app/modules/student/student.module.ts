@@ -23,6 +23,7 @@ import { ProfileMessagesComponent } from './profile/profile-messages/profile-mes
 import { TodoComponent } from './dashboard/todo/todo.component';
 import { ProfileStatisticsComponent } from './profile/profile-statistics/profile-statistics.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ProfileDeleteModalComponent } from './profile/profile-delete-modal/profile-delete-modal.component';
 
 @NgModule({
   imports: [
@@ -53,6 +54,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     ProfileMessagesComponent,
     TodoComponent,
     ProfileStatisticsComponent,
+    ProfileDeleteModalComponent,
   ],
   exports: [
     ProfileDetailsComponent,
@@ -66,6 +68,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   entryComponents: [
     ApplicationConfirmModalComponent,
     ProfileRoleModalComponent,
+    ProfileDeleteModalComponent,
   ]
 })
 export class StudentModule { }

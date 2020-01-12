@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { environment } from "../../../environments/environment";
-import { Observable } from "rxjs";
-import { PaginatedProject } from "../classes/pagination/paginated-project";
-import { HTTP_OPTIONS } from "../constants/http_options";
-import { Client } from "../classes/models/client";
-import { Project, ProjectStep } from "../classes/models/project";
-import { User } from "../classes/models/user";
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
+import { PaginatedProject } from '../classes/pagination/paginated-project';
+import { HTTP_OPTIONS } from '../constants/http_options';
+import { Client } from '../classes/models/client';
+import { Project, ProjectStep } from '../classes/models/project';
+import { User } from '../classes/models/user';
 import { Invoice } from '../classes/models/Invoice';
 
 @Injectable({
@@ -33,16 +33,16 @@ export class ProjectService {
 
     if (client) {
       const clientId = typeof client === 'number' ? client : client.id;
-      clientPath = `/clients/${clientId}`
+      clientPath = `/clients/${clientId}`;
     }
 
     let url = `${environment.apiUrl}/api${clientPath}/projects?`;
 
-    if (pageId) url += `&page=${pageId}`;
-    if (step != null) url += `&step=${step}`;
+    if (pageId) { url += `&page=${pageId}`; }
+    if (step != null) { url += `&step=${step}`; }
     if (range) {
-      if (range[0]) url += `&minDate=${range[0]}`;
-      if (range[1]) url += `&maxDate=${range[1]}`;
+      if (range[0]) { url += `&minDate=${range[0]}`; }
+      if (range[1]) { url += `&maxDate=${range[1]}`; }
     }
 
     return this.http.get<PaginatedProject>(url, HTTP_OPTIONS);

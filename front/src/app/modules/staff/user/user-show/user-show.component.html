@@ -2,22 +2,36 @@
   <div class="ui padded grid doubling">
     <!-- Messages -->
     <div class="sixteen wide column">
+      <!-- Deleted account -->
+      <div class="ui icon message" *ngIf="user && user.deletedAt">
+        <i class="times circle icon"></i>
+        <div class="content">
+          <div class="header">
+            Compte supprimé
+          </div>
+          <div>
+            Il est toujours possible de voir les informations de l'utilisateur dans les
+            différentes sections du site mais les actions de modifications sont interdites.
+          </div>
+        </div>
+      </div>
+
       <!-- Activate account -->
-      <div class="ui icon info message" *ngIf="user">
+      <div class="ui icon info message" *ngIf="user && ! user.deletedAt">
         <i class="{{ user.activated ? 'check' : 'ban' }} icon"></i>
         <div class="content" *ngIf="! user.activated; else activated">
           <div class="header">
             Ce compte n'est pas activé
           </div>
           <div class="ui list">
-            <div class="item">Vérifier que :</div>
+            <div class="item">À noter :</div>
             <ul>
               <li *ngIf="!user.touAccepted">
-                les <a routerLink="/conditions-dutilisation">conditions d'utilisation</a> sont acceptées
+                les <a routerLink="/conditions-dutilisation">conditions d'utilisation</a> ne pas sont acceptées
               </li>
-              <li *ngIf="!user.emailVerifiedAt">l'adresse email est vérifiée</li>
-              <li>le profil est complété</li>
-              <li>les informations fournies sont exactes</li>
+              <li *ngIf="!user.emailVerifiedAt">l'adresse email n'est pas vérifiée</li>
+              <li>le profil n'est pas complété</li>
+              <li>vérifier que les informations fournies sont exactes</li>
             </ul>
           </div>
         </div>
@@ -45,7 +59,7 @@
 
       <!-- Preferences -->
       <div class="sixteen wide mobile eight wide tablet four wide computer column">
-        <app-profile-preferences *ngIf="user" [preference]="user.preference"></app-profile-preferences>
+        <app-profile-preferences *ngIf="user" [user]="user"></app-profile-preferences>
       </div>
 
       <!-- Profile details -->

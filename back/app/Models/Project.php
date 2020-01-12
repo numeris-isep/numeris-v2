@@ -7,6 +7,7 @@ use App\ProjectUser;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class Project extends Model
 {
@@ -132,7 +133,8 @@ class Project extends Model
     public function users()
     {
         return $this->belongsToMany(User::class)
-            ->using(ProjectUser::class);
+            ->using(ProjectUser::class)
+            ->withoutGlobalScope(SoftDeletingScope::class);
     }
 
     public function hasUser(User $user)

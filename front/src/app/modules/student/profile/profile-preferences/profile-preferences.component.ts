@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
-import { Preference } from '../../../../core/classes/models/preference';
 import { PreferenceService } from '../../../../core/http/preference.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from '../../../../core/services/alert.service';
 import { equals } from '../../../../shared/utils';
+import { User } from '../../../../core/classes/models/user';
 
 @Component({
   selector: 'app-profile-preferences',
@@ -11,7 +11,7 @@ import { equals } from '../../../../shared/utils';
 })
 export class ProfilePreferencesComponent implements OnInit, AfterViewInit {
 
-  @Input() preference: Preference;
+  @Input() user: User;
 
   preferenceForm: FormGroup;
   initialValue: object;
@@ -34,22 +34,24 @@ export class ProfilePreferencesComponent implements OnInit, AfterViewInit {
 
   initForm() {
     this.preferenceForm  = this.formBuilder.group({
-      on_new_mission: [this.preference.onNewMission || false, Validators.required],
-      on_acceptance:  [this.preference.onAcceptance || false, Validators.required],
-      on_refusal:     [this.preference.onRefusal || false, Validators.required],
-      on_document:    [this.preference.onDocument || false, Validators.required],
+      on_new_mission: [this.user.preference.onNewMission || false, Validators.required],
+      on_acceptance:  [this.user.preference.onAcceptance || false, Validators.required],
+      on_refusal:     [this.user.preference.onRefusal || false, Validators.required],
+      on_document:    [this.user.preference.onDocument || false, Validators.required],
     });
   }
 
   isDisabled() {
     if (this.initialValue) {
-      return equals(this.initialValue, this.preferenceForm.value);
+      return equals(this.initialValue, this.preferenceForm.value) || this.user.deletedAt;
     }
 
     return true;
   }
 
   updatePreference() {
+    if (this.user.deletedAt) { return; }
+
     this.submitted = true;
 
     // stop here if form is invalid
@@ -58,10 +60,10 @@ export class ProfilePreferencesComponent implements OnInit, AfterViewInit {
     this.loading = true;
 
     this.preferenceService.updatePreference({
-      id: this.preference.id,
+      id: this.user.preference.id,
       ...this.preferenceForm.value
     }).subscribe(preference => {
-      Object.assign(this.preference, preference);
+      Object.assign(this.user.preference, preference);
       this.initialValue = this.preferenceForm.value;
       this.initForm();
       this.alertService.success(['Préférences de notifications mises à jour.'], null, false);

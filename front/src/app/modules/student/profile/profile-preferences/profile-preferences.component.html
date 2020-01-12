@@ -1,5 +1,5 @@
 <form class="ui form fluid card" [formGroup]="preferenceForm" (ngSubmit)="updatePreference()">
-  <div class="content">
+  <div class="disabled content">
     <div class="ui blue ribbon label">
       <i class="bell icon"></i>
       Notifications
@@ -7,22 +7,22 @@
 
     <div class="ui horizontal divider">A chaque ...</div>
     <div class="field">
-      <sui-checkbox class="toggle" formControlName="on_new_mission">
+      <sui-checkbox class="toggle" formControlName="on_new_mission" [isDisabled]="user.deletedAt">
         <span>Nouvelle mission</span>
       </sui-checkbox>
     </div>
     <div class="field">
-      <sui-checkbox class="toggle" formControlName="on_acceptance">
+      <sui-checkbox class="toggle" formControlName="on_acceptance" [isDisabled]="user.deletedAt">
         <span>Candidature acceptée</span>
       </sui-checkbox>
     </div>
     <div class="field">
-      <sui-checkbox class="toggle" formControlName="on_refusal">
+      <sui-checkbox class="toggle" formControlName="on_refusal" [isDisabled]="user.deletedAt">
         <span>Candidature refusée</span>
       </sui-checkbox>
     </div>
     <div class="field">
-      <sui-checkbox class="toggle" formControlName="on_document">
+      <sui-checkbox class="toggle" formControlName="on_document" [isDisabled]="user.deletedAt">
         <span>Document à signer</span>
       </sui-checkbox>
     </div>

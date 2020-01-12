@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Traits\DateQueryTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class Application extends Model
 {
@@ -96,7 +97,8 @@ class Application extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)
+            ->withoutGlobalScope(SoftDeletingScope::class);
     }
 
     public function bills()

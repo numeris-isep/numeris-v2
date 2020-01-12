@@ -33,6 +33,7 @@ return [
     ],
 
     'profile_not_completed' => 'L\'utilisateur n\'a complété son profil.',
+    'profile_deleted'       => 'L\'utilisateur est supprimé.',
     'tou_not_accepted'      => 'L\'utilisateur n\'a pas accepté les conditions d\'utilisations.',
     'email_not_verified'    => 'L\'utilisateur n\'a pas vérifié son adresse email.',
 

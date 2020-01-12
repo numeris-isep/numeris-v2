@@ -69,7 +69,7 @@
     </div>
   </div>
   <div class="or" data-text="ou"></div>
-  <div class="ui animated fade negative button">
+  <div class="ui animated fade negative button" (click)="openModal()">
     <div class="visible content">Supprimer</div>
     <div class="hidden content">
       <i class="trash alternate icon"></i>
@@ -79,14 +79,16 @@
 
 <ng-template #userShow>
   <div class="ui small bottom attached buttons">
-    <div class="ui animated fade orange button" routerLink="/utilisateurs/{{ user.id }}/modifier">
+    <div class="ui animated fade orange button" routerLink="/utilisateurs/{{ user.id }}/modifier"
+         [ngClass]="{ 'disabled': user.deletedAt }">
       <div class="visible content">Modifier</div>
       <div class="hidden content">
         <i class="edit icon"></i>
       </div>
     </div>
     <div class="or" data-text="ou"></div>
-    <div class="ui animated fade negative button">
+    <div class="ui animated fade negative button" (click)="openModal()"
+         [ngClass]="{ 'disabled': user.deletedAt }">
       <div class="visible content">Supprimer</div>
       <div class="hidden content">
         <i class="trash alternate icon"></i>

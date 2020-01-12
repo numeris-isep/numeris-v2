@@ -83,14 +83,18 @@ class UserPolicy extends AbstractPolicy
                 $current_user->role()->isInferiorOrEquivalentTo($user->role()->name)
                     ? $this->deny(trans('errors.roles.' . $current_user->role()->name))
                     : (
-                        ! $user->is_completed
-                            ? $this->deny(trans('errors.profile_not_completed'))
+                        $user->deleted_at
+                            ? $this->deny(trans('errors.profile_deleted'))
                             : (
-                                ! $user->tou_accepted
-                                    ? $this->deny(trans('errors.tou_not_accepted'))
+                                ! $user->is_completed
+                                    ? $this->deny(trans('errors.profile_not_completed'))
                                     : (
-                                        ! is_null($user->email_verified_at)
-                                            ?: $this->deny(trans('errors.email_not_verified'))
+                                        ! $user->tou_accepted
+                                            ? $this->deny(trans('errors.tou_not_accepted'))
+                                            : (
+                                                ! is_null($user->email_verified_at)
+                                                    ?: $this->deny(trans('errors.email_not_verified'))
+                                        )
                                 )
                         )
                 )
@@ -101,9 +105,16 @@ class UserPolicy extends AbstractPolicy
     {
         // $user1 whose $role < 'administrator' can't delete the profile of $user2
         // unless   $user1 == $user2
-        return (
-            $current_user->is($user)
-            || $current_user->role()->isSuperiorTo(Role::STAFF)
-        ) ?: $this->deny(trans('errors.roles.' . $current_user->role()->name));
+        // AND      $user1->role > $user2->role
+        if ($current_user->is($user)) {
+            return true;
+        }
+
+        return ! $current_user->role()->isSuperiorTo(Role::STAFF)
+            ? $this->deny(trans('errors.roles.' . $current_user->role()->name))
+            : (
+                ! $current_user->role()->isInferiorOrEquivalentTo($user->role()->name)
+                    ?: $this->deny(trans('errors.roles.' . $current_user->role()->name))
+            );
     }
 }

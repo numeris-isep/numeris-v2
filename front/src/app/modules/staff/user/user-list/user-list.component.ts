@@ -145,32 +145,36 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   enrolUser(user: User) {
-    this.loading = true;
-    this.applicationService.storeMissionApplication(this.mission, user).subscribe(
-      application => {
-        this.applicationHandler.setApplication('accepted', application); // Handle application in frontend
-        this.getPaginatedUsers();
-        this.loading = false;
-      },
-      errors => {
-        this.alertService.error(errors);
-        this.loading = false;
-      }
-    );
+    if (! user.deletedAt) {
+      this.loading = true;
+      this.applicationService.storeMissionApplication(this.mission, user).subscribe(
+        application => {
+          this.applicationHandler.setApplication('accepted', application); // Handle application in frontend
+          this.getPaginatedUsers();
+          this.loading = false;
+        },
+        errors => {
+          this.alertService.error(errors);
+          this.loading = false;
+        }
+      );
+    }
   }
 
   enrolProjectUser(user: User) {
-    this.loading = true;
-    this.projectService.addProjectUser(this.project, user).subscribe(
-      user => {
-        this.projectUserHandler.addProjectUser(user);
-        this.loading = false;
-      },
-      errors => {
-        this.alertService.error(errors);
-        this.loading = false;
-      }
-    );
+    if (! user.deletedAt) {
+      this.loading = true;
+      this.projectService.addProjectUser(this.project, user).subscribe(
+        user => {
+          this.projectUserHandler.addProjectUser(user);
+          this.loading = false;
+        },
+        errors => {
+          this.alertService.error(errors);
+          this.loading = false;
+        }
+      );
+    }
   }
 
   removeProjectUser(user: User) {

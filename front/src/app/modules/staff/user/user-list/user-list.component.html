@@ -69,9 +69,12 @@
         </thead>
 
         <tbody *ngIf="paginatedUser.data.length > 0; else noUser">
-        <tr *ngFor="let user of paginatedUser.data" [ngClass]="{'negative': ! user.activated}"
-            suiPopup popupText="À valider" popupPlacement="left" popupTrigger="manual" popupInverted #popup="suiPopup"
-            (mouseenter)="togglePopup(popup, !user.activated)" (mouseleave)="togglePopup(popup, !user.activated)">
+        <tr *ngFor="let user of paginatedUser.data"
+            [ngClass]="{'negative': ! user.activated && ! user.deletedAt, 'hatched': user.deletedAt }"
+            suiPopup popupText="{{ user.deletedAt ? 'Supprimé' : 'À valider' }}"
+            popupPlacement="left" popupTrigger="manual" popupInverted #popup="suiPopup"
+            (mouseenter)="togglePopup(popup, !user.activated || user.deletedAt)"
+            (mouseleave)="togglePopup(popup, !user.activated || user.deletedAt)">
           <td>
             <i *ngIf="user.nationality" class="{{ user.nationality | countryCode }} flag"></i>
             <a routerLink="/utilisateurs/{{ user.id }}">
@@ -100,12 +103,12 @@
               Voir
             </app-link-button>
             <app-button *ngIf="page == 'mission-show'" behaviour="compact"
-                             size="tiny" color="basic positive"
+                             size="tiny" color="basic positive" [isDisabled]="user.deletedAt"
                              hiddenIcon="handshake" (click)="enrolUser(user)">
               Inscrire
             </app-button>
             <app-button *ngIf="project && page == 'project-user-modal'" behaviour="compact"
-                             size="tiny" color="basic positive"
+                             size="tiny" color="basic positive" [isDisabled]="user.deletedAt"
                              hiddenIcon="handshake" (click)="enrolProjectUser(user)">
               Inscrire
             </app-button>

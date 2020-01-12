@@ -103,16 +103,20 @@ class AuthServiceProvider extends ServiceProvider
             return $current_user->role()->isInferiorTo(Role::STAFF)
                 ? $this->deny($current_user, trans('errors.roles.' . Role::STUDENT))
                 : (
-                    $user->hasAppliedTo($mission)
-                        ? $this->deny($current_user, trans('errors.application_exists'))
+                    $user->deleted_at
+                        ? $this->deny($current_user, trans('errors.profile_deleted'))
                         : (
-                            $mission->project->step != Project::HIRING
-                                ? $this->deny($current_user, trans('errors.wrong_project_step', ['allowed_step' => 'Ouvert']))
+                            $user->hasAppliedTo($mission)
+                                ? $this->deny($current_user, trans('errors.application_exists'))
                                 : (
-                                    ! $mission->project->is_private
-                                        ?: (
-                                            $user->belongsToProject($mission->project)
-                                                ?: $this->deny($current_user, trans('errors.project_doesnot_contain_user'))
+                                    $mission->project->step != Project::HIRING
+                                        ? $this->deny($current_user, trans('errors.wrong_project_step', ['allowed_step' => 'Ouvert']))
+                                        : (
+                                            ! $mission->project->is_private
+                                                ?: (
+                                                    $user->belongsToProject($mission->project)
+                                                        ?: $this->deny($current_user, trans('errors.project_doesnot_contain_user'))
+                                            )
                                     )
                             )
                     )

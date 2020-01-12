@@ -46,7 +46,7 @@ class MissionApplicationController extends Controller
     public function store(ApplicationRequest $request, $mission_id)
     {
         $mission = Mission::findOrFail($mission_id);
-        $user = User::findOrFail($request->get('user_id'));
+        $user = User::withTrashed()->findOrFail($request->get('user_id'));
         $this->authorize('store-mission-application', [$user, $mission]);
 
         $application = Application::create([

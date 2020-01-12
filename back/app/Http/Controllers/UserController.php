@@ -73,7 +73,7 @@ class UserController extends Controller
      */
     public function show($user_id)
     {
-        $user = User::findOrFail($user_id);
+        $user = User::withTrashed()->findOrFail($user_id);
         $this->authorize('show', $user);
 
         $user->load(['address', 'preference', 'payslips']);
@@ -152,7 +152,7 @@ class UserController extends Controller
      */
     public function updateActivated(Request $request, $user_id)
     {
-        $user = User::findOrFail($user_id);
+        $user = User::withTrashed()->findOrFail($user_id);
         $this->authorize('update-activated', $user);
 
         $request->validate(['activated' => 'required|boolean']);

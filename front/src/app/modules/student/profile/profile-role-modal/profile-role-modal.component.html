@@ -30,7 +30,7 @@
   </div>
 </div>
 
-<div class="actions">
+<div class="actions" *ngIf="! user.deletedAt">
   <form *ngIf="roles" class="ui form" [formGroup]="roleForm"
         [ngClass]="{'error': submitted && roleForm.invalid}" (ngSubmit)="onSubmit()">
 

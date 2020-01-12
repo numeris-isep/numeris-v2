@@ -169,6 +169,25 @@ class StoreDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      */
+    public function testDeveloperCreatingApplicationToDeletedUser()
+    {
+        $mission = $this->availableMissionProvider();
+        $user = $this->deletedUserProvider();
+
+        $data = [
+            'user_id' => $user->id,
+        ];
+
+        $this->json('POST', route('missions.applications.store', ['mission_id' => $mission->id]), $data)
+            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
+            ->assertJson(['errors' => [trans('errors.profile_deleted')]]);
+
+        Notification::assertNotSentTo($user, ApplicationNotification::class);
+    }
+
+    /**
+     * @group developer
+     */
     public function testDeveloperCreatingApplicationToAlreadyAppliedMission()
     {
         $test_data = $this->availableMissionAndUserWhoAlreadyAppliedProviderProvider();

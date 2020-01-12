@@ -134,6 +134,7 @@ class User extends Authenticatable implements JWTSubject
                     });
                 }
             })
+            ->withTrashed()
             ->get()
             ->when($role != null, function($query) use ($role) {
                 return $query->filter(function($user) use ($role) {
@@ -274,21 +275,37 @@ class User extends Authenticatable implements JWTSubject
 
     public function sendPasswordResetNotification($token)
     {
+        if ($this->deleted_at) {
+            return;
+        }
+
         $this->notify(new ResetPasswordNotification($token));
     }
 
     public function sendActivateUserNotification()
     {
+        if ($this->deleted_at) {
+            return;
+        }
+
         $this->notify(new ActivateUserNotification());
     }
 
     public function sendEmailVerificationNotification()
     {
+        if ($this->deleted_at) {
+            return;
+        }
+
         $this->notify(new VerifyEmailNotification());
     }
 
     public function sendApplicationNotification(Application $application)
     {
+        if ($this->deleted_at) {
+            return;
+        }
+
         if (in_array($application->status, [Application::ACCEPTED, Application::REFUSED])) {
             $attribute = Preference::statusToAttribute()[$application->status];
 

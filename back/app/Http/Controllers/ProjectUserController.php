@@ -63,7 +63,7 @@ class ProjectUserController extends Controller
     public function store(ProjectUserRequest $request, $project_id)
     {
         $project = Project::private()->findOrFail($project_id);
-        $user = User::findOrFail($request->get('user_id'));
+        $user = User::withTrashed()->findOrFail($request->get('user_id'));
         $this->authorize('store', [ProjectUser::class, $project, $user]);
 
         $project->addUser($user);
@@ -82,7 +82,7 @@ class ProjectUserController extends Controller
     public function destroy($project_id, $user_id)
     {
         $project = Project::private()->findOrFail($project_id);
-        $user = User::findOrFail($user_id);
+        $user = User::withTrashed()->findOrFail($user_id);
         $this->authorize('destroy', [ProjectUser::class, $project, $user]);
 
         $project->removeUser($user);

@@ -6,6 +6,7 @@ use App\Models\Traits\OnEventsTrait;
 use App\Models\Traits\DateQueryTrait;
 use App\Notifications\PreMissionNotification;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Notifications\Notifiable;
 
 class Mission extends Model
@@ -217,7 +218,8 @@ class Mission extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)
+            ->withoutGlobalScope(SoftDeletingScope::class);
     }
 
     public function contact()

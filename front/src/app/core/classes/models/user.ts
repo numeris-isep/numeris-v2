@@ -29,6 +29,7 @@ export class User {
   bic: string;
   createdAt: string;
   updatedAt: string;
+  deletedAt: string;
 
   address: Address;
   preference: Preference;

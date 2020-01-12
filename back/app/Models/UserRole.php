@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class UserRole extends Pivot
 {
@@ -17,7 +18,8 @@ class UserRole extends Pivot
     
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)
+            ->withoutGlobalScope(SoftDeletingScope::class);
     }
 
     public static function findByUser($user_id)

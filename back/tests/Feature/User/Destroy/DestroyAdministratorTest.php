@@ -17,7 +17,7 @@ class DestroyAdministratorTest extends TestCaseWithAuth
      */
     public function testAdministratorDeletingUser()
     {
-        $user = $this->activeUserProvider();
+        $user = $this->activeStudentProvider();
 
         $this->assertNull($user->deleted_at);
 
@@ -25,5 +25,21 @@ class DestroyAdministratorTest extends TestCaseWithAuth
             ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
 
         $this->assertNotNull(User::onlyTrashed()->find($user->id)->deleted_at);
+    }
+
+    /**
+     * @group administrator
+     */
+    public function testAdministratorDeletingDeveloper()
+    {
+        $user = $this->activeDeveloperProvider();
+
+        $this->assertNull($user->deleted_at);
+
+        $this->json('DELETE', route('users.destroy', ['user_id' => $user->id]))
+            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
+            ->assertJson(['errors' => [trans('errors.roles.' . Role::ADMINISTRATOR)]]);
+
+        $this->assertNull(User::find($user->id)->deleted_at);
     }
 }

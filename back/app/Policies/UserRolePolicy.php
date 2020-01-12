@@ -26,16 +26,22 @@ class UserRolePolicy extends AbstractPolicy
         // AND
         // $current_user->role >= $role
         // AND
+        // ! $user->deleted_at
+        // AND
         // $user->role != $role
-        return $current_user->role()->isInferiorTo($user->role()->name)
-            ? $this->deny(trans('errors.roles.' . $current_user->role()->name))
+        return $user->deleted_at
+            ? $this->deny(trans('errors.profile_deleted'))
             : (
-                $current_user->role()->isInferiorTo($role->name)
-                    ? $this->deny(trans('errors.roles.superior'))
+                $current_user->role()->isInferiorTo($user->role()->name)
+                    ? $this->deny(trans('errors.roles.' . $current_user->role()->name))
                     : (
-                        $user->role()->isNot($role)
-                            ?: $this->deny(trans('errors.roles.same', ['role' => $role->name_fr]))
-                )
+                        $current_user->role()->isInferiorTo($role->name)
+                            ? $this->deny(trans('errors.roles.superior'))
+                            : (
+                                $user->role()->isNot($role)
+                                    ?: $this->deny(trans('errors.roles.same', ['role' => $role->name_fr]))
+                        )
+                    )
             );
     }
 }

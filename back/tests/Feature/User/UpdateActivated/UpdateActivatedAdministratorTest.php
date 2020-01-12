@@ -198,4 +198,25 @@ class UpdateActivatedAdministratorTest extends TestCaseWithAuth
 
         Notification::assertNothingSent();
     }
+
+    /**
+     * @group administrator
+     */
+    public function testAdministratorActivatingDeletedStudent()
+    {
+        $user = $this->activeStudentProvider();
+        $user->update([
+            'deleted_at' => now(),
+        ]);
+
+        $data = [
+            'activated' => true
+        ];
+
+        $this->json('PATCH', route('users.update.activated', ['user_id' => $user->id]), $data)
+            ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
+            ->assertJson(['errors' => [trans('errors.profile_deleted')]]);
+
+        Notification::assertNothingSent();
+    }
 }

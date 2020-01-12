@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class Role extends Model
 {
@@ -33,7 +34,8 @@ class Role extends Model
     {
         return $this->belongsToMany(User::class)
             ->using(UserRole::class)
-            ->withTimestamps();
+            ->withTimestamps()
+            ->withoutGlobalScope(SoftDeletingScope::class);
     }
 
     public function isCurrentRoleOf(User $user)

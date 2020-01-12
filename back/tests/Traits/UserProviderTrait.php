@@ -18,6 +18,11 @@ trait UserProviderTrait
         return factory(User::class)->state('active')->create();
     }
 
+    public function deletedUserProvider(): User
+    {
+        return factory(User::class)->state('deleted')->create();
+    }
+
     public function activeStudentProvider(): User
     {
         $user = factory(User::class)->state('active')->create();
