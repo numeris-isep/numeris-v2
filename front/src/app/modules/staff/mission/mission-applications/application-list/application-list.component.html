@@ -32,7 +32,7 @@
                    [title]="application.user.nationality | titlecase"></i>
                 <i *ngIf="application.user.payslips && application.user.payslips.length == 0"
                    class="child grey icon" title="Première mission"></i>
-                <i *ngIf="application.user.payslips && application.user.payslips.length == 0"
+                <i *ngIf="application.user.deletedAt && application.user.deletedAt"
                    class="times circle red icon" title="Compte supprimé"></i>
                 <i *ngIf="application.user.roles[0].name != 'student'"
                    class="user md icon" title="Membre Numéris"></i>
