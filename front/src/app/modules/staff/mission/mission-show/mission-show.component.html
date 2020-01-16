@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="stretched row">
       <!-- Mission details -->
       <div class="sixteen wide mobile five wide computer column">
         <app-mission-details *ngIf="mission" [mission]="mission" page="show"></app-mission-details>
@@ -17,10 +17,10 @@
 
       <!-- Actions -->
       <div class="sixteen wide mobile eleven wide computer column">
-        <div class="ui segments">
-          <div class="ui blue segment">
+        <div class="ui blue segment">
             <div class="ui blue ribbon label">Actions</div>
             <div class="ui two column center aligned grid">
+              <div class="ui vertical divider">Ou</div>
               <div class="middle aligned row">
                 <div *ngIf="mission && !mission.isLocked; else isLocked" class="column">
                   <div class="ui small icon header">
@@ -31,7 +31,6 @@
                     Fermer les candidatures
                   </app-button>
                 </div>
-
                 <ng-template #isLocked>
                   <div class="column">
                     <div class="ui small icon header">
@@ -49,23 +48,7 @@
                     </ng-template>
                   </div>
                 </ng-template>
-              </div>
-            </div>
-          </div>
-          <div class="ui form segment">
-            <div class="ui two column center aligned grid">
-              <div class="ui vertical divider">Ou</div>
-              <div class="middle aligned row">
-                <div class="column">
-                  <div class="ui small icon header">
-                    <i class="users icon"></i>
-                    Liste effectif
-                  </div><br>
-                  <app-button size="tiny" hiddenIcon="users"
-                              [isDisabled]="false" [isLoading]="false">
-                    Générer
-                  </app-button>
-                </div>
+
                 <div class="column">
                   <div class="ui small icon header">
                     <i class="mail icon"></i>
@@ -85,7 +68,6 @@
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
     </div>
