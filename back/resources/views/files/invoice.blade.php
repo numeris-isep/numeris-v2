@@ -118,7 +118,7 @@
 
 @section('footer')
   <p class="right-aligned text">
-    Fait à Paris, le {{ now()->format('d/m/Y') }}.
+    Fait à Paris, le {{ $month->lastOfMonth()->format('d/m/Y') }}.
   </p>
 
   <div class="ui segment">
@@ -141,7 +141,7 @@
     <div class="ui no-padding segment">
       <ul class="information">
         <li>
-          Date limite : {{ $timeLimit > 0 ? now()->addDays($timeLimit)->format('d/m/Y') : 'paiement comptant' }}
+          Date limite : {{ $timeLimit > 0 ? $month->lastOfMonth()->addDays($timeLimit)->format('d/m/Y') : 'paiement comptant' }}
           @if($timeLimit > 0)({{ $timeLimit }} {{ $timeLimit > 1 ? 'jours' : 'jour' }})@endif
         </li>
         <li>

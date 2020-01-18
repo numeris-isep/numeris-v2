@@ -163,7 +163,7 @@
 
 @section('footer')
   <p class="right-aligned text">
-    Fait à Paris, le {{ now()->format('d/m/Y') }}.
+    Fait à Paris, le {{ $month->firstOfMonth()->format('d/m/Y') }}.
   </p>
 
   <p class="center-aligned information">

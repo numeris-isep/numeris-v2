@@ -49,7 +49,7 @@
     demeurant au {{ $employee->address->getFullAddress() }} ci-après dénommé "<b>l'étudiant</b>" d'autre part.
   </div>
   <div class="text">
-    L'étudiant et Numéris sont ci-arpès désignés individuellement une "<b>Partie</b>" et ensemble les "<b>Parties</b>".
+    L'étudiant et Numéris sont ci-après désignés individuellement une "<b>Partie</b>" et ensemble les "<b>Parties</b>".
   </div>
 
   <h4 class="marged header">Il a préalablement exposé ce qui suit</h4>
@@ -91,7 +91,7 @@
 
 @section('footer')
   <p class="right-aligned text">
-    Fait à Paris, le {{ now()->format('d/m/Y') }} en double exemplaire.
+    Fait à Paris, le {{ $month->firstOfMonth()->format('d/m/Y') }} en double exemplaire.
   </p>
 
   <div class="ui segment">
