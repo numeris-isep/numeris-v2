@@ -48,7 +48,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
     /**
      * @group administrator
      */
-    public function testAdministratorUpdatingApplicationWhoseProjectIsNotHiring()
+    public function testAdministratorUpdatingApplicationWhoseProjectIsNotHiringOrValidated()
     {
         $mission = $this->validatedProjectAndAvailableMissionProvider()['mission'];
 
@@ -60,7 +60,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
 
         $this->json('PUT', route('applications.update', ['application_id' => $application->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans('errors.wrong_project_step', ['allowed_step' => 'Ouvert'])]]);
+            ->assertJson(['errors' => [trans_choice('errors.wrong_project_step', 2, ['step1' => 'Ouvert', 'step2' => 'Validé'])]]);
 
         Notification::assertNotSentTo($application->user, ApplicationNotification::class);
     }

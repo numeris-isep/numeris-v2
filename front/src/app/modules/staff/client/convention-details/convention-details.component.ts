@@ -48,7 +48,7 @@ export class ConventionDetailsComponent implements OnInit {
   initBillsForm() {
     for (const rate of this.mission.project.convention.rates) {
       this.billsFormArray.push(this.fb.group({
-        amount: ['', Validators.required]
+        amount: [0, Validators.required]
       }));
     }
 

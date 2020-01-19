@@ -1,4 +1,4 @@
-<app-button *ngIf="mission && mission.project.step == 'validated'" size="mini" color="green"
+<app-button *ngIf="mission && ['hiring', 'validated'].includes(mission.project.step)" size="mini" color="green"
             behaviour="right floated {{ loading ? 'loading' : '' }}" hiddenIcon="down arrow" (click)="onSubmit()">
   Appliquer à tous les étudiants
 </app-button>
@@ -50,7 +50,7 @@
     </th>
     <th><i class="money bill alternate icon"></i> Forfait ?</th>
     <th><i class="clock outline icon"></i> Heures forfaits</th>
-    <th *ngIf="page == 'mission-show' && mission && mission.project.step == 'validated'">
+    <th *ngIf="page == 'mission-show' && mission && ['hiring', 'validated'].includes(mission.project.step)">
       <i class="sort numeric up icon"></i> Heures
     </th>
   </tr>
@@ -68,7 +68,7 @@
     <td>
       {{ (rate.hours | number) || '-' }}{{ rate.hours ? 'h' : '' }}
     </td>
-    <td class="collapsing" *ngIf="page == 'mission-show' && mission && mission.project.step == 'validated'">
+    <td class="collapsing" *ngIf="page == 'mission-show' && mission && ['hiring', 'validated'].includes(mission.project.step)">
       <div class="required field" [ngClass]="{ 'error': submitted && this.billsForm.invalid }">
         <div class="ui mini left icon input">
           <i class="clock icon"></i>

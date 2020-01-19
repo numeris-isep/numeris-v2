@@ -37,7 +37,7 @@ return [
     'tou_not_accepted'      => 'L\'utilisateur n\'a pas accepté les conditions d\'utilisations.',
     'email_not_verified'    => 'L\'utilisateur n\'a pas vérifié son adresse email.',
 
-    'wrong_project_step'            => 'Le projet doit avoir le status :allowed_step.',
+    'wrong_project_step'            => '{0} Le projet n\'a pas le bon status.|{1} Le projet doit avoir le status :step. |{2} Le projet doit avoir le status :step1 ou :step2.',
     'project_contains_user'         => 'L\'utilisateur est déjà membre du projet.',
     'project_doesnot_contain_user'  => 'L\'utilisateur n\'est pas membre du projet.',
 

@@ -27,23 +27,25 @@ export class ApplicationHandlerService {
 
   watchApplications(mission: Mission) {
     this.applicationService.getMissionApplications(mission)
-      .subscribe(applications => {
-        this.applications.next(applications);
-        applications
-          .map(application => {
-            switch (application.status) {
-              case 'waiting':
-                this.waitingApplications.next([...this.waitingApplications.getValue(), application]);
-                break;
-              case 'accepted':
-                this.acceptedApplications.next([...this.acceptedApplications.getValue(), application]);
-                break;
-              case 'refused':
-                this.refusedApplications.next([...this.refusedApplications.getValue(), application]);
-                break;
-              default: break;
-            }
-          });
+      .subscribe(applications => this.setApplications(applications));
+  }
+
+  setApplications(applications: Application[]) {
+    this.applications.next(applications);
+    applications
+      .forEach(application => {
+        switch (application.status) {
+          case 'waiting':
+            this.waitingApplications.next([...this.waitingApplications.getValue(), application]);
+            break;
+          case 'accepted':
+            this.acceptedApplications.next([...this.acceptedApplications.getValue(), application]);
+            break;
+          case 'refused':
+            this.refusedApplications.next([...this.refusedApplications.getValue(), application]);
+            break;
+          default: break;
+        }
       });
   }
 

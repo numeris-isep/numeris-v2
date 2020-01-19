@@ -9,6 +9,7 @@ import { first } from 'rxjs/operators';
 import { handleFormErrors } from '../../../../../core/functions/form-error-handler';
 import { Router } from '@angular/router';
 import { ApplicationService } from '../../../../../core/http/application.service';
+import { ApplicationHandlerService } from '../../../../../core/services/handlers/application-handler.service';
 
 @Component({
   selector: 'app-bills-form',
@@ -29,6 +30,7 @@ export class BillsFormComponent implements OnInit {
     private router: Router,
     private missionService: MissionService,
     private applicationService: ApplicationService,
+    private applicationHandler: ApplicationHandlerService,
     private fb: FormBuilder,
   ) { }
 
@@ -38,7 +40,7 @@ export class BillsFormComponent implements OnInit {
   }
 
   getApplications() {
-    this.applicationService.getMissionApplications(this.mission, 'accepted').subscribe(applications => {
+    this.applicationHandler.getApplications('accepted').subscribe(applications => {
       this.applications = applications;
 
       this.initApplicationsForm();
@@ -66,6 +68,8 @@ export class BillsFormComponent implements OnInit {
   }
 
   initApplicationsForm() {
+    this.applicationsFormArray = this.fb.array([]);
+
     for (const application of this.applications) {
       this.addApplication(application);
     }
@@ -101,29 +105,32 @@ export class BillsFormComponent implements OnInit {
     return this.fb.group({
       id: [bill ? bill.id : null],
       rate_id: [rate.id, Validators.required],
-      amount: [bill ? bill.amount : '', Validators.required],
+      amount: [bill ? bill.amount : 0.00, Validators.required],
     });
   }
 
   onSubmit() {
-    this.submitted = true;
-    this.loading = true;
+    if (['hiring', 'validated'].includes(this.mission.project.step)) {
+      this.submitted = true;
+      this.loading = true;
 
-    this.missionService.updateMissionBills(this.billsForm.value, this.mission).pipe(first())
-      .subscribe(
-        () => {
-          this.ngOnInit();
-          this.loading = false;
-        },
-        errors => {
-          for (let i = 0; i < this.applications.length; i++) {
-            for (let j = 0; j < this.mission.project.convention.rates.length; j++) {
-              handleFormErrors(this.fbg(i, j, 'amount') as FormGroup, errors);
+      this.missionService.updateMissionBills(this.billsForm.value, this.mission).pipe(first())
+        .subscribe(
+          () => {
+            this.applicationHandler.setApplications(this.billsForm.value.applications);
+            // this.ngOnInit();
+            this.loading = false;
+          },
+          errors => {
+            for (let i = 0; i < this.applications.length; i++) {
+              for (let j = 0; j < this.mission.project.convention.rates.length; j++) {
+                handleFormErrors(this.fbg(i, j, 'amount') as FormGroup, errors);
+              }
             }
+            this.loading = false;
           }
-          this.loading = false;
-        }
-      );
+        );
+    }
   }
 
 }

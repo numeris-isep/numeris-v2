@@ -27,7 +27,6 @@ export class ApplicationListComponent implements OnInit {
   constructor(
     private applicationService: ApplicationService,
     private applicationHandler: ApplicationHandlerService,
-    private alertService: AlertService,
   ) { }
 
   ngOnInit() {
@@ -49,6 +48,10 @@ export class ApplicationListComponent implements OnInit {
     const previousStatus = application.status;
 
     this.applicationHandler.setApplication(status, application); // Handle application in frontend
+
+    if (previousStatus === 'accepted') {
+      Object.assign(application, { bills: []});
+    }
 
     this.applicationService.updateApplication(status, application).subscribe(
       () => {

@@ -86,7 +86,7 @@ class AuthServiceProvider extends ServiceProvider
                                 ? $this->deny($current_user, trans('errors.mission_expired'))
                                 : (
                                 $mission->project->step != Project::HIRING
-                                    ? $this->deny($current_user, trans('errors.wrong_project_step', ['allowed_step' => 'Ouvert']))
+                                    ? $this->deny($current_user, trans_choice('errors.wrong_project_step', 1, ['step' => 'Ouvert']))
                                     : (
                                         ! $mission->project->is_private
                                             ?: (
@@ -110,7 +110,7 @@ class AuthServiceProvider extends ServiceProvider
                                 ? $this->deny($current_user, trans('errors.application_exists'))
                                 : (
                                     $mission->project->step != Project::HIRING
-                                        ? $this->deny($current_user, trans('errors.wrong_project_step', ['allowed_step' => 'Ouvert']))
+                                        ? $this->deny($current_user, trans_choice('errors.wrong_project_step', 1, ['step' => 'Ouvert']))
                                         : (
                                             ! $mission->project->is_private
                                                 ?: (

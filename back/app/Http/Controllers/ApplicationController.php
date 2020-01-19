@@ -6,6 +6,8 @@ use App\Http\Requests\ApplicationRequest;
 use App\Http\Resources\ApplicationResource;
 use App\Mail\ApplicationRemovedMail;
 use App\Models\Application;
+use App\Models\Bill;
+use App\Models\Project;
 use App\Notifications\ApplicationNotification;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Mail;
@@ -51,6 +53,19 @@ class ApplicationController extends Controller
     {
         $application = Application::findOrFail($application_id);
         $this->authorize('update', $application);
+
+        // We want to delete eventual bills when an application is updated to
+        // 'waiting' or 'refused' to prevent the bills to be taken into account
+        // for payslips calculation
+        if (
+            $application->status === Application::ACCEPTED
+            && in_array($request->get('status'), [Application::WAITING, Application::REFUSED])
+            && $application->bills
+        ) {
+            $application->bills->each(function(Bill $bill) {
+                $bill->delete();
+            });
+        }
 
         $application->update($request->all());
 

@@ -91,15 +91,9 @@
               <i class="users icon"></i> Étudiants
             </ng-template>
           </a>
-          <a class="item" suiTabHeader="3" [isDisabled]="mission.project.step == 'hiring'"
+          <a class="item" suiTabHeader="3"
              [isActive]="hoursTabActive">
-            <span *ngIf="mission.project.step == 'hiring'; else noHoursPopup"
-                  suiPopup popupText="Le projet ne doit pas être 'Ouvert'" popupPlacement="top" popupInverted>
-              <i class="clock icon"></i> Heures
-            </span>
-            <ng-template #noHoursPopup>
-              <i class="clock icon"></i> Heures
-            </ng-template>
+            <i class="clock icon"></i> Heures
           </a>
         </div>
 
@@ -111,8 +105,8 @@
           <app-user-list *ngIf="mission.project.step == 'hiring'" page="mission-show" [mission]="mission"></app-user-list>
         </div>
 
-        <div class="ui" suiTabContent="3">
-          <app-mission-bills *ngIf="applications && mission.project.step != 'hiring'" [mission]="mission" [applications]="applications"></app-mission-bills>
+        <div class="ui" suiTabContent="3" (click)="getApplications()">
+          <app-mission-bills *ngIf="applications" [mission]="mission" [applications]="applications"></app-mission-bills>
         </div>
       </sui-tabset>
     </div>

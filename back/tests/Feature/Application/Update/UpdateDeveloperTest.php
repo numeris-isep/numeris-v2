@@ -142,7 +142,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     /**
      * @group developer
      */
-    public function testDeveloperUpdatingApplicationWhoseProjectIsNotHiring()
+    public function testDeveloperUpdatingApplicationWhoseProjectIsNotHiringOrValidated()
     {
         $mission = $this->validatedProjectAndAvailableMissionProvider()['mission'];
 
@@ -165,5 +165,36 @@ class UpdateDeveloperTest extends TestCaseWithAuth
             ]);
 
         Notification::assertSentTo($application->user, ApplicationNotification::class);
+    }
+
+    /**
+     * @group developer
+     */
+    public function testDeveloperUpdatingApplicationToWaitingWithBills()
+    {
+        // Test that eventual bills are deleted
+        $test_data = $this->clientAndProjectAndMissionAndConventionWithBillsProvider();
+        $application = $test_data['application'];
+        $bill = $test_data['bill'];
+
+        $data = [
+            'status' => Application::WAITING,
+        ];
+
+        $this->assertDatabaseHas('bills', $bill->toArray());
+
+        $this->json('PUT', route('applications.update', ['application_id' => $application->id]), $data)
+            ->assertStatus(JsonResponse::HTTP_CREATED)
+            ->assertJsonStructure([
+                'id',
+                'userId',
+                'missionId',
+                'type',
+                'status',
+                'createdAt',
+                'updatedAt',
+            ]);
+
+        $this->assertDatabaseMissing('bills', $bill->toArray());
     }
 }

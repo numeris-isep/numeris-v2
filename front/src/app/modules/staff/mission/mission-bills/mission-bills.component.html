@@ -1,11 +1,11 @@
 <app-content [condition]="!mission">
-  <div *ngIf="mission && mission.project.step != 'validated'" class="ui message">
+  <div *ngIf="mission && ! ['hiring', 'validated'].includes(mission.project.step)" class="ui message">
     <div class="ui header">
       Information
     </div>
     Les heures de cette mission ne peuvent pas être modifiées car le projet
     <a routerLink="/projets/{{ mission.project.id }}">{{ mission.project.name }}</a>
-    n'a plus le status <b>Validé</b>.
+    n'a plus le status <b>Ouvert</b> ou <b>Validé</b>.
   </div>
 
   <div class="ui grid">

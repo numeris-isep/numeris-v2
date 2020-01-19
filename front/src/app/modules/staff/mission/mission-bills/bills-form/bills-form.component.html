@@ -5,7 +5,8 @@
       <div class="detail">{{ applications.length }}</div>
     </div>
 
-    <app-button *ngIf="mission && mission.project.step == 'validated'" (click)="onSubmit()" size="mini" color="green"
+    <app-button *ngIf="mission && ['hiring', 'validated'].includes(mission.project.step)"
+                (click)="onSubmit()" size="mini" color="green"
                 behaviour="right floated" hiddenIcon="save">
       Sauvegarder
     </app-button>
@@ -29,7 +30,7 @@
             <div class="ui mini left icon input">
               <i class="clock icon"></i>
               <input type="number" [formControl]="fbg(i, j, 'amount')"
-                     [readOnly]="mission && mission.project.step != 'validated'"
+                     [readOnly]="mission && ! ['hiring', 'validated'].includes(mission.project.step)"
                      placeholder="Heures" min="0" step="0.5">
             </div>
           </div>
