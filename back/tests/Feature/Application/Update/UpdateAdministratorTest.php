@@ -60,7 +60,7 @@ class UpdateAdministratorTest extends TestCaseWithAuth
 
         $this->json('PUT', route('applications.update', ['application_id' => $application->id]), $data)
             ->assertStatus(JsonResponse::HTTP_FORBIDDEN)
-            ->assertJson(['errors' => [trans_choice('errors.wrong_project_step', 2, ['step1' => 'Ouvert', 'step2' => 'Validé'])]]);
+            ->assertJson(['errors' => [trans_choice('errors.wrong_project_step', 1, ['step' => 'Ouvert'])]]);
 
         Notification::assertNotSentTo($application->user, ApplicationNotification::class);
     }
