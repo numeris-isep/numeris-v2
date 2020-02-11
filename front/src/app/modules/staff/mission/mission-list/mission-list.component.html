@@ -28,7 +28,7 @@
               <i class="calendar outline icon"></i>
               <input suiDatepicker pickerMode="month" placeholder="Début"
                      [(ngModel)]="from" [pickerMaxDate]="to"
-                     [pickerUseNativeOnMobile]="true" (ngModelChange)="setFilter()">
+                     [pickerUseNativeOnMobile]="false" (ngModelChange)="setFilter()">
               <button class="ui icon button" (click)="reset('from')">
                 <i class="x icon"></i>
               </button>
@@ -40,7 +40,7 @@
               <i class="calendar icon"></i>
               <input suiDatepicker pickerMode="month" placeholder="Fin"
                      [(ngModel)]="to" [pickerMinDate]="from"
-                     [pickerUseNativeOnMobile]="true" (ngModelChange)="setFilter()">
+                     [pickerUseNativeOnMobile]="false" (ngModelChange)="setFilter()">
               <button class="ui icon button" (click)="reset('to')">
                 <i class="x icon"></i>
               </button>

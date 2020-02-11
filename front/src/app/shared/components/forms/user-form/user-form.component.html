@@ -56,7 +56,7 @@
       <div class="ui left icon corner labeled input">
         <i class="calendar alternate icon"></i>
         <input suiDatepicker pickerMode="date" placeholder="Date de naissance"
-               [pickerMaxDate]="maxDate.toDate()" formControlName="birth_date" [pickerUseNativeOnMobile]="true"
+               [pickerMaxDate]="maxDate.toDate()" formControlName="birth_date" [pickerUseNativeOnMobile]="false"
                suiPopup popupPlacement="top left" popupHeader="Date de naissance"
                popupTrigger="focus" [popupTemplate]="birthDateTemplate">
         <ng-template #birthDateTemplate>
