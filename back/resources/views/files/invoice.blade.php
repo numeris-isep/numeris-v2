@@ -69,13 +69,13 @@
     @foreach($details as $detail)
       @php
         $reference = $detail['reference'];
-        $title = $detail['title'];
+        $title = $detail['title'] ?? 'Tâches administratives';
         $date = \Carbon\Carbon::parse($detail['startAt'])->format('d/m/Y');
         $bills = $detail['bills'];
       @endphp
       <tr>
         <td class="collapsing">{{ $reference }}</td>
-        <td class="collapsing">Tâches administratives</td>
+        <td>{{ $title }}</td>
         <td class="collapsing">{{ $date }}</td>
         <td class="collapsing">
           @foreach($bills as $bill)
@@ -90,7 +90,7 @@
       </tr>
     @endforeach
     </tbody>
-</table>
+  </table>
 
   <div class="block">
     <table class="ui celled very compact structured grey table">
