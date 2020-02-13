@@ -79,12 +79,16 @@
         <td class="collapsing">{{ $date }}</td>
         <td class="collapsing">
           @foreach($bills as $bill)
-            <div>{{ $bill['hours'] }} x {{ $bill['rate'] }}</div>
+            @if($bill['total'] != 0)
+              <div>{{ $bill['hours'] }} x {{ $bill['rate'] }}</div>
+            @endif
           @endforeach
         </td>
         <td class="collapsing">
           @foreach($bills as $bill)
-            <div>{{ $bill['hours'] }} x {{ $bill['amount'] }} = {{ $bill['total'] }}€</div>
+            @if($bill['total'] != 0)
+              <div>{{ $bill['hours'] }} x {{ $bill['amount'] }} = {{ $bill['total'] }}€</div>
+            @endif
           @endforeach
         </td>
       </tr>
