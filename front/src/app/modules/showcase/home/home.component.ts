@@ -1,11 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ScrollService } from '../../../core/services/scroll.service';
 import { ContactUsModal } from '../modals/contact-us-modal/contact-us-modal.component';
-import { SuiModalService } from 'ng2-semantic-ui';
+import { ComponentModalConfig, SuiModalService } from 'ng2-semantic-ui';
 import { AuthService } from '../../../core/http/auth/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfettiService, ConfettiType } from '../../../core/services/confetti.service';
 import * as moment from 'moment';
+import { PreviewModal } from '../modals/preview-modal/preview-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -34,7 +35,11 @@ export class HomeComponent implements OnInit {
     contactUs: ElementRef
   };
 
-  private modal: ContactUsModal = new ContactUsModal();
+  private contactUsModal: ContactUsModal = new ContactUsModal();
+  private previewModal: PreviewModal = new PreviewModal(
+    'assets/images/team/2019-2020/team.png',
+    'Équipe 2018/2019'
+  );
 
   constructor(
     private scrollService: ScrollService,
@@ -70,8 +75,8 @@ export class HomeComponent implements OnInit {
     this.scrollService.scrollToElement(anchor);
   }
 
-  openModal() {
-    this.modalService.open(this.modal);
+  openModal(modal: ComponentModalConfig<any, any, any>) {
+    this.modalService.open(modal);
   }
 
   rainSnow() {

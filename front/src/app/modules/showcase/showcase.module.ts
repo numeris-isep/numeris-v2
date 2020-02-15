@@ -11,6 +11,7 @@ import { SubscribeModalComponent } from './modals/subscribe-modal/subscribe-moda
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ShowcaseRoutingModule } from './showcase-routing.module';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { PreviewModalComponent } from './modals/preview-modal/preview-modal.component';
 
 @NgModule({
   imports: [
@@ -28,11 +29,13 @@ import { RecaptchaModule } from 'ng-recaptcha';
     ContactUsModalComponent,
     SubscribeModalComponent,
     ResetPasswordComponent,
+    PreviewModalComponent,
   ],
   entryComponents: [
     LoginModalComponent,
     SubscribeModalComponent,
     ContactUsModalComponent,
+    PreviewModalComponent,
   ]
 })
 export class ShowcaseModule { }

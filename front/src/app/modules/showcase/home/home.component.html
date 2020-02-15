@@ -34,7 +34,9 @@
         </p>
       </div>
       <div class="seven wide right floated column">
-        <img class="ui huge rounded bordered image" src="assets/images/team/2019-2020/team.png" alt="Équipe 2018/2019">
+        <a href="#" class="ui huge rounded bordered clickable image" (click)="openModal(previewModal)">
+          <img src="assets/images/team/2019-2020/team.png" alt="Équipe 2018/2019">
+        </a>
       </div>
     </div>
   </div>
@@ -115,7 +117,7 @@
 
 <!-- Contact us -->
 <button class="ui blue massive fluid vertical animated button"
-   #contactUs (click)="openModal()">
+   #contactUs (click)="openModal(contactUsModal)">
   <div class="visible content position">Nous contacter</div>
   <div class="hidden content position">
     <i class="large envelope icon"></i>
