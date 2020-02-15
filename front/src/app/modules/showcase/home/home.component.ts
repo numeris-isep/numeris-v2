@@ -35,8 +35,8 @@ export class HomeComponent implements OnInit {
     contactUs: ElementRef
   };
 
-  private contactUsModal: ContactUsModal = new ContactUsModal();
-  private previewModal: PreviewModal = new PreviewModal(
+  contactUsModal: ContactUsModal = new ContactUsModal();
+  previewModal: PreviewModal = new PreviewModal(
     'assets/images/team/2019-2020/team.png',
     'Équipe 2018/2019'
   );
