@@ -109,5 +109,11 @@ config-clear:
 	docker exec numeris_back sh -c 'php artisan route:clear'
 
 config-cache:
-    docker exec numeris_back sh -c 'php artisan route:cache'
-    docker exec numeris_back sh -c 'php artisan config:cache'
+	docker exec numeris_back sh -c 'php artisan route:cache'
+	docker exec numeris_back sh -c 'php artisan config:cache'
+
+key-generate:
+	docker exec numeris_back sh -c 'php artisan key:generate'
+
+jwt-secret:
+	docker exec numeris_back sh -c 'php artisan jwt:secret'
