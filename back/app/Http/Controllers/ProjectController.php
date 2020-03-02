@@ -32,7 +32,7 @@ class ProjectController extends Controller
                 Project::filtered(
                     request()->step,
                     [request()->minDate, request()->maxDate]
-                )->withCount('missions', 'users')->with('client')->paginate(10)
+                )->withCount('missions', 'users')->with('client')->orderBy('start_at', 'desc')->paginate(10)
             );
         } else {
             return response()->json(

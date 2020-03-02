@@ -32,7 +32,7 @@ class ClientProjectController extends Controller
             request()->step,
             [request()->minDate, request()->maxDate],
             $client->id
-        )->withCount('missions')->with('client')->paginate(10);
+        )->withCount('missions')->with('client')->orderBy('start_at', 'desc')->paginate(10);
 
         return ProjectResource::collection($projects);
     }
