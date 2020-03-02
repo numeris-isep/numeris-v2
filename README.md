@@ -21,7 +21,7 @@ This repository contains the code of the new website of Numéris for students of
 
 ## Getting started
 
-Here are the instructions to install the project locally on Linux or Mac. For Windows, please use a linux terminal emulator if you want to be able to run `make` commands which is recommended.
+Here are the instructions to install the project locally on Linux or Mac. For Windows users, please consider using a linux terminal emulator if you want to be able to run `make` commands which is recommended.
 > **Note:** Only collaborators can contribute to this project.
 
 ## Prerequisites
