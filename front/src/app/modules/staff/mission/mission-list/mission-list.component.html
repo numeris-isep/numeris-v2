@@ -61,14 +61,14 @@
           <th class="collapsing"><i class="clock outline icon"></i> Durée</th>
           <th class="collapsing"><i class="users icon"></i> Capacité</th>
           <th class="collapsing"><i class="user secret icon"></i> Visibilité</th>
-          <th class="collapsing"><i class="hand pointer outline icon"></i> Action</th>
         </tr>
         </thead>
 
         <tbody *ngIf="paginatedMission.data.length > 0; else noMission">
         <tr *ngFor="let mission of paginatedMission.data" [ngClass]="{'hatched': mission.isLocked || isMissionExpired(mission)}"
             suiPopup popupText="{{ isMissionExpired(mission) ? 'Expirée' : 'Fermée' }}" popupPlacement="left" popupTrigger="manual" #popup="suiPopup"
-            (mouseenter)="togglePopup(popup, mission)" (mouseleave)="togglePopup(popup, mission)" popupInverted>
+            (mouseenter)="togglePopup(popup, mission)" (mouseleave)="togglePopup(popup, mission)" popupInverted
+            routerLink="/missions/{{mission.id}}">
           <td class="collapsing">{{ mission.startAt | dateToISO | date:'dd/MM/y HH\'h\'mm' }}</td>
           <td class="collapsing">{{ mission.title }}</td>
           <td class="collapsing"><a routerLink="/projets/{{ mission.project.id }}">{{ mission.project.name }}</a></td>
@@ -81,14 +81,6 @@
           </td>
           <td class="center aligned" [ngClass]="{'warning': mission.project.isPrivate}">
             <i class="eye icon" [ngClass]="{'slash': mission.project.isPrivate}"></i>
-          </td>
-          <td class="center aligned">
-            <app-link-button routerLink="/missions/{{mission.id}}"
-                             behaviour="compact"
-                             size="tiny" color="basic"
-                             hiddenIcon="zoom-in">
-              Voir
-            </app-link-button>
           </td>
         </tr>
         </tbody>

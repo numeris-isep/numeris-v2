@@ -61,14 +61,14 @@
           <th class="collapsing"><i class="building icon"></i> Client</th>
           <th class="collapsing"><i class="copy icon"></i> Missions</th>
           <th class="collapsing"><i class="user secret icon"></i> Visibilité</th>
-          <th class="collapsing"><i class="hand pointer outline icon"></i> Action</th>
         </tr>
         </thead>
 
         <tbody *ngIf="paginatedProject.data.length > 0; else noProject">
         <tr *ngFor="let project of paginatedProject.data" [ngClass]="{'hatched': project.step == 'closed'}"
             suiPopup popupText="Cloturé" popupPlacement="left" popupTrigger="manual" #popup="suiPopup" popupInverted
-            (mouseenter)="togglePopup(popup, project.step == 'closed')" (mouseleave)="togglePopup(popup, project.step == 'closed')">
+            (mouseenter)="togglePopup(popup, project.step == 'closed')" (mouseleave)="togglePopup(popup, project.step == 'closed')"
+            routerLink="/projets/{{project.id}}">
           <td>{{ project.startAt | dateToISO | date:'dd/MM/y' }}</td>
           <td class="collapsing">{{ project.name }}</td>
           <td [ngClass]="(project.step != 'hiring' && project.step != 'closed') ? project.step : ''">
@@ -80,14 +80,6 @@
           <td class="center aligned">{{ project.missionsCount }}</td>
           <td class="center aligned" [ngClass]="{'warning': project.isPrivate}">
             <i class="eye icon" [ngClass]="{'slash': project.isPrivate}"></i>
-          </td>
-          <td class="center aligned">
-            <app-link-button routerLink="/projets/{{project.id}}"
-                             behaviour="compact"
-                             size="tiny" color="basic"
-                             hiddenIcon="zoom-in">
-              Voir
-            </app-link-button>
           </td>
         </tr>
         </tbody>

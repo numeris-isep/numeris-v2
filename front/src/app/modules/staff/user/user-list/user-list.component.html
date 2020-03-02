@@ -64,7 +64,9 @@
           <th class="collapsing"><i class="phone icon"></i> Téléphone</th>
           <th class="collapsing"><i class="users icon"></i> Promotion</th>
           <th class="collapsing"><i class="unlock alternate icon"></i> Rôle</th>
-          <th class="collapsing"><i class="hand pointer outline icon"></i> Action{{ project ? 's' : '' }}</th>
+          <th class="collapsing" *ngIf="page == 'mission-show' || (project && (page == 'project-show' || page == 'project-user-modal'))">
+            <i class="hand pointer outline icon"></i> Actions
+          </th>
         </tr>
         </thead>
 
@@ -74,12 +76,10 @@
             suiPopup popupText="{{ user.deletedAt ? 'Supprimé' : 'À valider' }}"
             popupPlacement="left" popupTrigger="manual" popupInverted #popup="suiPopup"
             (mouseenter)="togglePopup(popup, !user.activated || user.deletedAt)"
-            (mouseleave)="togglePopup(popup, !user.activated || user.deletedAt)">
+            (mouseleave)="togglePopup(popup, !user.activated || user.deletedAt)" routerLink="/utilisateurs/{{ user.id }}">
           <td>
             <i *ngIf="user.nationality" class="{{ user.nationality | countryCode }} flag"></i>
-            <a routerLink="/utilisateurs/{{ user.id }}">
-              {{ user.firstName || '-' }} {{ user.lastName | uppercase }}
-            </a>
+            {{ user.firstName || '-' }} {{ user.lastName | uppercase }}
           </td>
           <td>
             <a *ngIf="user.email; else noEmail" href="mailto:{{ user.email }}">
@@ -95,13 +95,8 @@
           </td>
           <td>{{ user.promotion || '-' }}</td>
           <td>{{ user.roles[0] | role }}</td>
-          <td class="center aligned collapsing">
-            <app-link-button routerLink="/utilisateurs/{{user.id}}"
-                             behaviour="compact"
-                             size="tiny" color="basic"
-                             hiddenIcon="zoom-in">
-              Voir
-            </app-link-button>
+          <td class="center aligned collapsing"
+              *ngIf="page == 'mission-show' || (project && (page == 'project-show' || page == 'project-user-modal'))">
             <app-button *ngIf="page == 'mission-show'" behaviour="compact"
                              size="tiny" color="basic positive" [isDisabled]="user.deletedAt"
                              hiddenIcon="handshake" (click)="enrolUser(user)">

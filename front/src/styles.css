@@ -63,3 +63,11 @@ input.search {
 .ui.modal.transition.active.visible.normal {
   overflow: hidden;
 }
+
+table.ui.table.selectable tr:hover {
+  cursor: pointer;
+}
+
+table.ui.table.selectable tr:focus {
+  outline: none;
+}
