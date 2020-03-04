@@ -136,7 +136,10 @@ class PayslipController extends Controller
     {
         $this->authorize('update', Payslip::class);
 
-        $results = $calculator->calculate($request->get('month'));
+        $results = $calculator->calculate(
+            $request->input('month'),
+            $request->input('users', [])
+        );
         $payslips = collect();
 
         foreach ($results as $result) {

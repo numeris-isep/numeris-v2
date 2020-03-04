@@ -15,14 +15,15 @@ class PayslipCalculator implements CalculatorInterface
     /**
      * Calculate payslips for projects of the given month
      *
-     * @param string $month
+     * @param $month
+     * @param array $users
      * @return array
      */
-    public function calculate($month): array
+    public function calculate($month, $users = []): array
     {
         $payslips = [];
 
-        foreach ($this->sortBillsByUser(Project::findByMonth($month)) as $value) {
+        foreach ($this->sortBillsByUser(Project::findByMonth($month), $users) as $value) {
             $hour_amount        = $value['hour_amount'];
             $gross_amount       = $value['gross_amount'];
             $deductions         = $this->calculateDeductions($gross_amount);
@@ -55,36 +56,39 @@ class PayslipCalculator implements CalculatorInterface
      * Sort projects bills by user for further calculation
      *
      * @param $projects
+     * @param array $users
      * @return array
      */
-    private function sortBillsByUser($projects): array {
+    private function sortBillsByUser($projects, $users = []): array {
         $values = [];
 
         foreach ($projects as $project) {
             foreach ($project->missions as $mission) {
                 foreach ($mission->bills as $bill) {
-                    $values[$bill->application->user_id]['user'] = $bill->application->user;
-                    $index = &$values[$bill->application->user_id];
+                    if (count($users) == 0 || (count($users) > 0 && in_array($bill->application->user->id, $users))) {
+                        $values[$bill->application->user_id]['user'] = $bill->application->user;
+                        $index = &$values[$bill->application->user_id];
 
-                    // Create 'gross_amount' index and increment it
-                    isset($index['gross_amount'])
-                        ? $index['gross_amount'] += $this->calculateGrossAmount($bill)
-                        : $index['gross_amount'] = $this->calculateGrossAmount($bill);
+                        // Create 'gross_amount' index and increment it
+                        isset($index['gross_amount'])
+                            ? $index['gross_amount'] += $this->calculateGrossAmount($bill)
+                            : $index['gross_amount'] = $this->calculateGrossAmount($bill);
 
-                    // Create 'hour_amount' index and increment it
-                    isset($index['hour_amount'])
-                        ? $index['hour_amount'] += $bill->amount
-                        : $index['hour_amount'] = $bill->amount;
+                        // Create 'hour_amount' index and increment it
+                        isset($index['hour_amount'])
+                            ? $index['hour_amount'] += $bill->amount
+                            : $index['hour_amount'] = $bill->amount;
 
-                    // Create 'operations' index and add missions references and start_at dates to it
-                    $mission_info = ['id' => $mission->id, 'reference' => $mission->reference, 'startAt' => $mission->start_at];
-                    in_array($mission_info, $index['operations'] ?? [])
-                        ?: $index['operations'][] = $mission_info;
+                        // Create 'operations' index and add missions references and start_at dates to it
+                        $mission_info = ['id' => $mission->id, 'reference' => $mission->reference, 'startAt' => $mission->start_at];
+                        in_array($mission_info, $index['operations'] ?? [])
+                            ?: $index['operations'][] = $mission_info;
 
-                    // Create 'clients' index and add clients name to it
-                    $client_info = ['id' => $project->client->id, 'name' => $project->client->name];
-                    in_array($client_info, $index['clients'] ?? [])
-                        ?: $index['clients'][] = $client_info;
+                        // Create 'clients' index and add clients name to it
+                        $client_info = ['id' => $project->client->id, 'name' => $project->client->name];
+                        in_array($client_info, $index['clients'] ?? [])
+                            ?: $index['clients'][] = $client_info;
+                    }
                 }
             }
         }

@@ -190,6 +190,8 @@ return [
         'step'                      => 'status',
         'mission_id'                => 'mission',
         'user_id'                   => 'utilisateur',
+        'users'                     => 'utilisateurs',
+        'users.*'                   => 'identifiant',
         'is_flat'                   => 'forfait',
         'for_student'               => 'tarif étudiant',
         'for_staff'                 => 'tarif staff',

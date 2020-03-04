@@ -2,9 +2,11 @@
 
 namespace Tests\Feature\Payslip\Update;
 
+use App\Mail\NewDocumentMail;
 use App\Models\Payslip;
 use App\Models\Role;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Tests\TestCaseWithAuth;
 
@@ -47,6 +49,48 @@ class UpdateDeveloperTest extends TestCaseWithAuth
                 'createdAt',
                 'updatedAt',
             ]]);
+
+        Mail::assertSent(NewDocumentMail::class);
+    }
+
+    /**
+     * @group developer
+     */
+    public function testDeveloperUpdatingPayslipsForSelectedUsers()
+    {
+        $test_data = $this->clientAndProjectAndMissionAndConventionWithBillsProvider();
+        $month = '2000-01-01 00:00:00';
+        $users = [$test_data['user']->id];
+
+        $res = $this->json('PUT', route('payslips.update'), ['month' => $month, 'users' => $users])
+            ->assertStatus(JsonResponse::HTTP_OK)
+            ->assertJsonStructure([[
+                'signed',
+                'paid',
+                'user',
+                'month',
+                'hourAmount',
+                'grossAmount',
+                'netAmount',
+                'finalAmount',
+                'subscriptionFee',
+                'deductionAmount',
+                'employerDeductionAmount',
+                'deductions' => [[
+                    'socialContribution',
+                    'base',
+                    'employeeRate',
+                    'employerRate',
+                    'employeeAmount',
+                    'employerAmount'
+                ]],
+                'operations' => [['id', 'reference', 'startAt']],
+                'clients' => [['id', 'name']],
+                'createdAt',
+                'updatedAt',
+            ]]);
+
+        $this->assertCount(1, json_decode($res->getContent(), true));
     }
 
     /**
@@ -59,6 +103,8 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         $this->json('PUT', route('payslips.update'), ['month' => $month])
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJson([]);
+
+        Mail::assertSent(NewDocumentMail::class);
     }
 
     /**

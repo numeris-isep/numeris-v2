@@ -43,7 +43,9 @@ class PayslipRequest extends AbstractFormRequest
                 ];
             case 'PUT':
                 return [
-                    'month' => 'required|string|date',
+                    'month'     => 'required|string|date',
+                    'users'     => 'array',
+                    'users.*'   => 'numeric|exists:users,id',
                 ];
             case 'PATCH':
                 return [
