@@ -76,25 +76,25 @@
             suiPopup popupText="{{ user.deletedAt ? 'Supprimé' : 'À valider' }}"
             popupPlacement="left" popupTrigger="manual" popupInverted #popup="suiPopup"
             (mouseenter)="togglePopup(popup, !user.activated || user.deletedAt)"
-            (mouseleave)="togglePopup(popup, !user.activated || user.deletedAt)" routerLink="/utilisateurs/{{ user.id }}">
-          <td>
+            (mouseleave)="togglePopup(popup, !user.activated || user.deletedAt)">
+          <td routerLink="/utilisateurs/{{ user.id }}">
             <i *ngIf="user.nationality" class="{{ user.nationality | countryCode }} flag"></i>
             {{ user.firstName || '-' }} {{ user.lastName | uppercase }}
           </td>
-          <td>
+          <td routerLink="/utilisateurs/{{ user.id }}">
             <a *ngIf="user.email; else noEmail" href="mailto:{{ user.email }}">
               {{ user.email }}
             </a>
             <ng-template #noEmail>-</ng-template>
           </td>
-          <td>
+          <td routerLink="/utilisateurs/{{ user.id }}">
             <a *ngIf="user.phone; else noPhone" href="tel:{{ user.phone }}">
               {{ user.phone | phone }}
             </a>
             <ng-template #noPhone>-</ng-template>
           </td>
-          <td>{{ user.promotion || '-' }}</td>
-          <td>{{ user.roles[0] | role }}</td>
+          <td routerLink="/utilisateurs/{{ user.id }}">{{ user.promotion || '-' }}</td>
+          <td routerLink="/utilisateurs/{{ user.id }}">{{ user.roles[0] | role }}</td>
           <td class="center aligned collapsing"
               *ngIf="page == 'mission-show' || (project && (page == 'project-show' || page == 'project-user-modal'))">
             <app-button *ngIf="page == 'mission-show'" behaviour="compact"

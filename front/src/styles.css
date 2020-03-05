@@ -68,6 +68,6 @@ table.ui.table.selectable tr:hover {
   cursor: pointer;
 }
 
-table.ui.table.selectable tr:focus {
+table.ui.table.selectable tr:focus, table.ui.table.selectable td:focus {
   outline: none;
 }
