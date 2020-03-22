@@ -112,4 +112,10 @@ export const TEAM_MEMBERS: TeamMember[] = [
     'eliott.deseguier',
     'team/2019-2020/eliott-deseguier.jpg',
   ),
+  new TeamMember(
+    'Minh Nam',
+    'Nguyen',
+    'Assistant DSI',
+    'minhnam.nguyen',
+  ),
 ];
