@@ -1,6 +1,6 @@
 # Numeris-v2
 
-[![Build Status](https://travis-ci.org/2Seg/numeris-v2.svg?branch=master)](https://travis-ci.org/2Seg/numeris-v2.svg?branch=master)
+[![Build Status](https://travis-ci.com/2Seg/numeris-v2.svg?branch=master)](https://travis-ci.com/2Seg/numeris-v2)
 
 > Created and maintened by [2Seg](https://github.com/2Seg)
 
