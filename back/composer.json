@@ -9,6 +9,11 @@
             "name": "Eliott de Séguier",
             "email": "eliottdes@gmail.com",
             "role": "Developer"
+        },
+        {
+            "name": "MinhNam Nguyen",
+            "email": "nguyen.minhnam@hotmail.fr",
+            "role": "Developer"
         }
     ],
     "require": {
