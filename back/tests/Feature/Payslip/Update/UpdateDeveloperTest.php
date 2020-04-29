@@ -344,7 +344,10 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     public function testDeveloperUpdatingPayslipsCheckAmountsForStudent()
     {
         $user = $this->activeUserProvider();
-        $this->clientAndProjectAndMissionAndConventionWithBillsProvider($user);
+        $test_data = $this->clientAndProjectAndMissionAndConventionWithBillsProvider($user);
+        $bill = $test_data['bill'];
+        $flat_rate_bill = $test_data['flat_rate_bill'];
+        $flat_rate = $test_data['flat_rate'];
         $month = '2000-01-01 00:00:00';
 
         $response = $this->json('PUT', route('payslips.update'), ['month' => $month])
@@ -354,6 +357,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         $this->assertEquals(160, $content['grossAmount']);
         $this->assertEquals($content['grossAmount'] - $content['deductionAmount'], $content['netAmount']);
         $this->assertEquals($content['netAmount'] - $content['subscriptionFee'], $content['finalAmount']);
+        $this->assertEquals($bill->amount + $flat_rate_bill->amount * $flat_rate->hours, $content['hourAmount']);
         $this->assertEquals(User::SUBSCRIPTION_0, $content['subscriptionFee']);
         $this->assertEquals(33.3444, $content['deductionAmount']);
         $this->assertEquals(52.5216, $content['employerDeductionAmount']);
@@ -365,7 +369,10 @@ class UpdateDeveloperTest extends TestCaseWithAuth
     public function testDeveloperUpdatingPayslipsCheckAmountsForStaff()
     {
         $user = $this->activeStaffProvider();
-        $this->clientAndProjectAndMissionAndConventionWithBillsProvider($user);
+        $test_data = $this->clientAndProjectAndMissionAndConventionWithBillsProvider($user);
+        $bill = $test_data['bill'];
+        $flat_rate_bill = $test_data['flat_rate_bill'];
+        $flat_rate = $test_data['flat_rate'];
         $month = '2000-01-01 00:00:00';
 
         $response = $this->json('PUT', route('payslips.update'), ['month' => $month])
@@ -375,6 +382,7 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         $this->assertEquals(200, $content['grossAmount']);
         $this->assertEquals($content['grossAmount'] - $content['deductionAmount'], $content['netAmount']);
         $this->assertEquals($content['netAmount'] - $content['subscriptionFee'], $content['finalAmount']);
+        $this->assertEquals($bill->amount + $flat_rate_bill->amount * $flat_rate->hours, $content['hourAmount']);
         $this->assertEquals(User::SUBSCRIPTION_0, $content['subscriptionFee']);
         $this->assertEquals(41.680499999999995, $content['deductionAmount']);
         $this->assertEquals(65.652, $content['employerDeductionAmount']);

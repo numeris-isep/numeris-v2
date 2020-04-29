@@ -74,10 +74,13 @@ class PayslipCalculator implements CalculatorInterface
                             ? $index['gross_amount'] += $this->calculateGrossAmount($bill)
                             : $index['gross_amount'] = $this->calculateGrossAmount($bill);
 
-                        // Create 'hour_amount' index and increment it
+                        // Create 'hour_amount' index and increment it, and check for flat rates
+                        $hour_amount = $bill->rate->is_flat
+                            ? $bill->rate->hours * $bill->amount
+                            : $bill->amount;
                         isset($index['hour_amount'])
-                            ? $index['hour_amount'] += $bill->amount
-                            : $index['hour_amount'] = $bill->amount;
+                            ? $index['hour_amount'] += $hour_amount
+                            : $index['hour_amount'] = $hour_amount;
 
                         // Create 'operations' index and add missions references and start_at dates to it
                         $mission_info = ['id' => $mission->id, 'reference' => $mission->reference, 'startAt' => $mission->start_at];

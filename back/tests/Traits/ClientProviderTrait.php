@@ -120,7 +120,7 @@ trait ClientProviderTrait
             'rate_id'           => $rate->id,
             'amount'            => 10,
         ]);
-        factory(Bill::class)->create([
+        $flat_rate_bill = factory(Bill::class)->create([
             'application_id'    => $application->id,
             'rate_id'           => $flat_rate->id,
             'amount'            => 1,
@@ -134,16 +134,18 @@ trait ClientProviderTrait
         $invoice = factory(Invoice::class)->create(['project_id' => $project->id]);
 
         return [
-            'client'        => $client,
-            'project'       => $project,
-            'user'          => $user,
-            'mission'       => $mission,
-            'convention'    => $convention,
-            'application'   => $application,
-            'rate'          => $rate,
-            'bill'          => $bill,
-            'payslip'       => $payslip,
-            'invoice'       => $invoice,
+            'client'            => $client,
+            'project'           => $project,
+            'user'              => $user,
+            'mission'           => $mission,
+            'convention'        => $convention,
+            'application'       => $application,
+            'rate'              => $rate,
+            'flat_rate'         => $flat_rate,
+            'bill'              => $bill,
+            'flat_rate_bill'    => $flat_rate_bill,
+            'payslip'           => $payslip,
+            'invoice'           => $invoice,
         ];
     }
 }
