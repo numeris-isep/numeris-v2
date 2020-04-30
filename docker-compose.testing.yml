@@ -1,16 +1,6 @@
 version: '3'
 services:
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
-    ports:
-      - 3000:80
-    links:
-      - mysql:db
-    depends_on:
-      - mysql
-    container_name: numeris_phpmyadmin
-
   mysql:
     image: mysql:5.7
     environment:
