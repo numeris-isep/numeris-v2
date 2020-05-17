@@ -24,7 +24,7 @@ class MessageController extends Controller
         return response()->json(MessageResource::make($message), JsonResponse::HTTP_CREATED);
     }
 
-    public function update($message_id, MessageRequest $request)
+    public function update(MessageRequest $request,$message_id)
     {
         $message = Message::findOrFail($message_id);
         $message->update($request->only(['title','content']));
@@ -37,7 +37,7 @@ class MessageController extends Controller
     {
         $message = Message::findOrFail($message_id);
         $message->delete();
-        
+
         return response()->json(null, JsonResponse::HTTP_NO_CONTENT);
     }
 }

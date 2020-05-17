@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Message;
 
 class MessageRequest extends AbstractFormRequest
 {
@@ -13,7 +14,12 @@ class MessageRequest extends AbstractFormRequest
      */
     public function authorize()
     {
-        return true;
+        $current_user = auth()->user();
+        $message = Message::find($this->route('message_id'));
+
+        // Use ContactPolicy here to authorize before checking the fields
+        return $current_user->can('store', Message::class)
+            || $current_user->can('update', $message);
     }
 
     /**
