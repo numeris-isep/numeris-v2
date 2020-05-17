@@ -23,6 +23,7 @@ class MessagesTableSeeder extends Seeder
       factory(Message::class)->create([
         'title'     => 'Test',
         'content'   => 'This is a test for MessagesTableSeeder',
+        'link'      => 'https://numeris-isep.fr/'
       ]);
     }
 }

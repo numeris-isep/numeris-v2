@@ -27,11 +27,6 @@ class MessagePolicy extends AbstractPolicy
         return true;
     }
 
-    public function show(User $current_user, Message $message)
-    {
-        return true;
-    }
-
     public function update(User $current_user, Message $message)
     {
         return true;

@@ -4,11 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Message extends Model
 {
-  protected $fillable = [
-      'title',
-      'content'
-  ];
+    use softDeletes;
+    
+    protected $fillable = [
+        'title',
+        'content',
+        'link',
+    ];
 }

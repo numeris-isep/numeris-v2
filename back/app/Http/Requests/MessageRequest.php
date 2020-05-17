@@ -31,7 +31,8 @@ class MessageRequest extends AbstractFormRequest
     {
         return [
             'title'    => 'required|string',
-            'content'     => 'required|string',
+            'content'  => 'required|string',
+            'link'     => 'string|url'
         ];
     }
 }
