@@ -32,6 +32,11 @@ class MessagePolicy extends AbstractPolicy
         return true;
     }
 
+    public function updateActivated(User $current_user, Message $message)
+    {
+        return true;
+    }
+
     public function destroy(User $current_user, Message $message)
     {
         return true;

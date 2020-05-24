@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\MessageRequest;
+use App\Http\Requests\UpdateMessageActivationRequest;
 use App\Models\Message;
 use App\Http\Resources\MessageResource;
 use Illuminate\Http\JsonResponse;
@@ -13,15 +14,17 @@ class MessageController extends Controller
     public function index()
     {
         $this->authorize('index', Message::class);
+        
         return response()->json(MessageResource::collection(Message::all()));
     }
 
     public function store(MessageRequest $request)
     {
         $this->authorize('store', Message::class);
-        $message = Message::create(
-            $request->only(['title', 'content', 'link'])
-        );
+        $message = Message::create(array_merge(
+            $request->only(['title', 'content', 'link']),
+            ['is_active' => false]
+        ));
 
         return response()->json(MessageResource::make($message), JsonResponse::HTTP_CREATED);
     }
@@ -31,6 +34,17 @@ class MessageController extends Controller
         $message = Message::findOrFail($message_id);
         $this->authorize('update', $message);
         $message->update($request->only(['title', 'content', 'link']));
+
+        return response()->json(MessageResource::make($message), JsonResponse::HTTP_CREATED);
+    }
+
+    public function updateActivated(UpdateMessageActivationRequest $request, $message_id)
+    {
+        $message = Message::findOrFail($message_id);
+        $this->authorize('updateActivated', $message);
+
+        Message::active()->update(['is_active' => false]);
+        $message->update(['is_active' => $request['is_active']]);
 
         return response()->json(MessageResource::make($message), JsonResponse::HTTP_CREATED);
     }

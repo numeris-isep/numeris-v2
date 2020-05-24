@@ -111,11 +111,8 @@ Route::group(['middleware' => 'auth:api'], function () {
         ->name('invoices.download');
 
     // Message ressource routes
-    Route::apiResource('messages', 'MessageController', ['parameters' => ['messages' => 'message_id']])->except(['store']);
-    Route::get('messages', 'MessageController@index')->name('message.index');
-    Route::post('messages', 'MessageController@store')->name('message.store');
-    Route::put('messages', 'MessageController@update')->name('message.update');
-    Route::delete('messages', 'MessageController@destroy')->name('message.destroy');
+    Route::apiResource('messages', 'MessageController', ['parameters' => ['messages' => 'message_id']]);
+    Route::patch('messages/{message_id}/activation', 'MessageController@updateActivated')->name('message.updateActivated');
 
 });
 
