@@ -17,7 +17,7 @@ class UpdateMessageActivationRequest extends AbstractFormRequest
         $current_user = auth()->user();
         $message = Message::find($this->route('message_id'));
 
-        // Use ContactPolicy here to authorize before checking the fields
+        // Use MessagePolicy here to authorize before checking the fields
         return $current_user->can('updateActivated', $message);
     }
 

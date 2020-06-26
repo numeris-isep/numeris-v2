@@ -14,8 +14,15 @@ class MessageController extends Controller
     public function index()
     {
         $this->authorize('index', Message::class);
-        
+
         return response()->json(MessageResource::collection(Message::all()));
+    }
+
+    public function current()
+    {
+        $this->authorize('current', Message::class);
+
+        return response()->json(MessageResource::make(Message::active()->first()));
     }
 
     public function store(MessageRequest $request)

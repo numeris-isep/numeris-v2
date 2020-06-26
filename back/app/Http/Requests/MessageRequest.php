@@ -17,14 +17,14 @@ class MessageRequest extends AbstractFormRequest
         $current_user = auth()->user();
         $message = Message::find($this->route('message_id'));
 
-        // Use ContactPolicy here to authorize before checking the fields
+        // Use MessagePolicy here to authorize before checking the fields
         return $current_user->can('store', Message::class)
             || $current_user->can('update', $message);
     }
 
     /**
      * Get the validation rules that apply to the request.
-     *
+     *+
      * @return array
      */
     public function rules()
