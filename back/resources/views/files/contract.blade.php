@@ -45,7 +45,7 @@
   <h4 class="marged header">Entre les soussignés</h4>
   <div class="text">
     L'association <b>Numéris</b>, association régie à la loi de 1901 est au 28 rue Notre Dame des Champs, 75006 Paris
-    représentée par sa présidente Candice RUMEAU ci-après dénommé "<b>Numéris</b>" d'une part et {{ $employee->getFullName() }},
+    représentée par son président Maxime SCHUCHMANN ci-après dénommé "<b>Numéris</b>" d'une part et {{ $employee->getFullName() }},
     demeurant au {{ $employee->address->getFullAddress() }} ci-après dénommé "<b>l'étudiant</b>" d'autre part.
   </div>
   <div class="text">
@@ -97,10 +97,10 @@
   <div class="ui segment">
     <div class="center-aligned half block">
       <div>Pour <b>Numéris</b></div>
-      <div>Candice RUMEAU</div>
+      <div>Maxime SCHUCHMANN</div>
       <div class="middle-aligned information">
         <i>lu et approuvé</i>
-        <img class="ui mini-tall image" src="{{ public_path('images/signature-candice-rumeau.png') }}">
+        <img class="ui mini-tall image" src="{{ public_path('images/signature-maxime-schuchmann.png') }}">
       </div>
     </div>
 

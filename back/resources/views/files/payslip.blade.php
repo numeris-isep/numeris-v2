@@ -50,7 +50,7 @@
         <h2 class="header">Employeur</h2>
         <ul class="information no-bullet">
           <li>Association Numéris ISEP</li>
-          <li>Mme Candice RUMEAU</li>
+          <li>M Maxime SCHUCHMANN</li>
           <li>28 rue Notre Dame des Champs, 75006 Paris</li>
           <li>Code NAF : 9499Z</li>
           <li>N° employeur : 117000001559324700</li>
