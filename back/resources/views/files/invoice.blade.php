@@ -127,10 +127,10 @@
 
   <div class="ui segment">
     <div class="center-aligned block">
-      <div>La présidente, Candice RUMEAU</div>
+      <div>Le président, Maxime SCHUCHMANN</div>
       <div class="middle-aligned information">
         <i>lu et approuvé</i>
-        <img class="ui mini-tall image" src="{{ public_path('images/signature-candice-rumeau.png') }}">
+        <img class="ui mini-tall image" src="{{ public_path('images/signature-maxime-schuchmann.png') }}">
       </div>
     </div>
   </div>
