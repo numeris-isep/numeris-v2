@@ -111,10 +111,9 @@ Route::group(['middleware' => 'auth:api'], function () {
         ->name('invoices.download');
 
     // Message ressource routes
-    Route::get('messages/current', 'MessageController@current')->name('message.current');
-    Route::patch('messages/{message_id}/activation', 'MessageController@updateActivated')->name('message.updateActivated');
+    Route::get('messages/current', 'MessageController@current')->name('messages.current');
+    Route::patch('messages/{message_id}/activation', 'MessageController@updateActivated')->name('messages.updateActivated');
     Route::apiResource('messages', 'MessageController', ['parameters' => ['messages' => 'message_id']]);
-
 
 });
 

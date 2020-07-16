@@ -13,6 +13,7 @@ use Tests\Traits\ConventionProviderTrait;
 use Tests\Traits\MissionProviderTrait;
 use Tests\Traits\ProjectProviderTrait;
 use Tests\Traits\UserProviderTrait;
+use Tests\Traits\MessageProviderTrait;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -24,7 +25,8 @@ abstract class TestCase extends BaseTestCase
         ApplicationProviderTrait,
         ConventionProviderTrait,
         MissionProviderTrait,
-        UserProviderTrait;
+        UserProviderTrait,
+        MessageProviderTrait;
 
     protected function setUp(): void
     {
