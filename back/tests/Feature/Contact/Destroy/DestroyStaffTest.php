@@ -19,7 +19,7 @@ class DestroyStaffTest extends TestCaseWithAuth
 
         $this->assertDatabaseHas('contacts', $contact->toArray());
 
-        $this->json('DELETE', route('contacts.show', ['contact_id' => $contact->id]))
+        $this->json('DELETE', route('contacts.destroy', ['contact_id' => $contact->id]))
             ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
 
         $this->assertDatabaseMissing('contacts', $contact->toArray());
