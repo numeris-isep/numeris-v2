@@ -8,6 +8,7 @@ use App\Models\Client;
 use App\Models\Contact;
 use App\Models\Convention;
 use App\Models\Invoice;
+use App\Models\Message;
 use App\Models\Mission;
 use App\Models\Payslip;
 use App\Models\Preference;
@@ -22,6 +23,7 @@ use App\Policies\ClientPolicy;
 use App\Policies\ContactPolicy;
 use App\Policies\ConventionPolicy;
 use App\Policies\InvoicePolicy;
+use App\Policies\MessagePolicy;
 use App\Policies\MissionPolicy;
 use App\Policies\PayslipPolicy;
 use App\Policies\PreferencePolicy;
@@ -63,6 +65,7 @@ class AuthServiceProvider extends ServiceProvider
         Bill::class         => BillPolicy::class,
         Payslip::class      => PayslipPolicy::class,
         Invoice::class      => InvoicePolicy::class,
+        Message::class      => MessagePolicy::class,
     ];
 
     /**
