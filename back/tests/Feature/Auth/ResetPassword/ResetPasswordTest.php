@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Auth\ForgotPassword;
+namespace Tests\Feature\Auth\ResetPassword;
 
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Http\JsonResponse;

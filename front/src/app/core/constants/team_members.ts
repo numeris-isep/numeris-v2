@@ -87,14 +87,14 @@ export const TEAM_MEMBERS: TeamMember[] = [
   new TeamMember(
     'Alexandre',
     'Nge',
-    'Assistant DSI',
+    'DSI',
     'alexandre.nge',
     'team/2021-2022/alexandre_nge.png',
   ),
   new TeamMember(
     'Yona',
     'Bitton',
-    'Assistante DSI',
+    'DSI',
     'yona.cullen',
     'team/2021-2022/yona_bitton.png',
   ),
