@@ -15,6 +15,7 @@ before_script:
   - cp back/.env.travis back/.env
   - make start-testing
   - make back-update
+  - sleep 60s
   - make db-reset
 
 script:
