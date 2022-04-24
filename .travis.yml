@@ -17,6 +17,7 @@ before_script:
   - make back-update
   - sleep 60s
   - make db-reset
+  - composer require lcobucci/jwt:3.3.3
 
 script:
   - make test
