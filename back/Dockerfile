@@ -26,8 +26,8 @@ COPY . /home/numeris
 # Composer install
 WORKDIR /home/numeris
 RUN composer self-update --2
-RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-interaction
-
+# RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-interaction
+RUN composer update
 
 # Final touch
 RUN . ~/.bashrc
