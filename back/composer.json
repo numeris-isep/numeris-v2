@@ -27,7 +27,8 @@
         "guzzlehttp/guzzle": "^6.5",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
-        "tymon/jwt-auth": "1.0.0-rc.4.1"
+        "tymon/jwt-auth": "1.0.0-rc.4.1",
+        "lcobucci/jwt": "3.3.3"
     },
     "require-dev": {
         "filp/whoops": "^2.0",
