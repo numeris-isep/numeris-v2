@@ -13,18 +13,17 @@
 
 use Illuminate\Support\Facades\Route;
 
-
+// Auth routes
+Route::post('login', 'Auth\AuthController@login')->name('login');
+Route::post('subscribe', 'Auth\AuthController@subscribe')->name('subscribe');
+Route::post('password/forgot', 'Auth\ForgotPasswordController@forgot')->name('password.forgot');
+Route::post('password/reset/{token}', 'Auth\ResetPasswordController@doReset')->name('password.reset');
 
 // Contact us
 Route::post('contact-us', 'ContactUsController@contactUs')->name('contact-us');
 
 // Every route in this group require user authentication
 Route::group(['middleware' => 'auth:api'], function () {
-    // Auth routes
-    Route::post('login', 'Auth\AuthController@login')->name('login');
-    Route::post('subscribe', 'Auth\AuthController@subscribe')->name('subscribe');
-    Route::post('password/forgot', 'Auth\ForgotPasswordController@forgot')->name('password.forgot');
-    Route::post('password/reset/{token}', 'Auth\ResetPasswordController@doReset')->name('password.reset');
 
     // Verify Email routes
     Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');

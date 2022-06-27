@@ -20,7 +20,6 @@ class LoginAdministratorTest extends TestCase
             'email'     => $user->email,
             'password'  => 'azertyuiop'
         ];
-        $this->withoutExceptionHandling();
 
         $this->json('POST', route('login'), $data)
             ->assertStatus(JsonResponse::HTTP_OK)
