@@ -12,7 +12,7 @@ class LoginAdministratorTest extends TestCase
     /**
      * @group administrator
      */
-    $this->markTestSkipped('must be revisited.');
+
     public function testAdministratorLoggingIn()
     {
         $user = User::where('email', Role::ADMINISTRATOR . '@isep.fr')->first();
@@ -21,6 +21,7 @@ class LoginAdministratorTest extends TestCase
             'email'     => $user->email,
             'password'  => 'azertyuiop'
         ];
+        $this->markTestSkipped('must be revisited.');
 
         $this->json('POST', route('login'), $data)
             ->assertStatus(JsonResponse::HTTP_OK)
