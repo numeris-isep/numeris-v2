@@ -18,6 +18,7 @@ Route::post('login', 'Auth\AuthController@login')->name('login');
 Route::post('subscribe', 'Auth\AuthController@subscribe')->name('subscribe');
 Route::post('password/forgot', 'Auth\ForgotPasswordController@forgot')->name('password.forgot');
 Route::post('password/reset/{token}', 'Auth\ResetPasswordController@doReset')->name('password.reset');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 
 // Contact us
 Route::post('contact-us', 'ContactUsController@contactUs')->name('contact-us');
