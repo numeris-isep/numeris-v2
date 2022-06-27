@@ -19,8 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('contact-us', 'ContactUsController@contactUs')->name('contact-us');
 
 // Every route in this group require user authentication
-Route::group(['middleware' => 'web'], function () {
-
+Route::group(['middleware' => 'auth:api'], function () {
     // Auth routes
     Route::post('login', 'Auth\AuthController@login')->name('login');
     Route::post('subscribe', 'Auth\AuthController@subscribe')->name('subscribe');
