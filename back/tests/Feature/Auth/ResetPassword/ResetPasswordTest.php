@@ -24,7 +24,7 @@ class ResetPasswordTest extends TestCase
             'password_confirmation' => 'azertyuiopq',
             'token'                 => Password::broker()->createToken($user)
         ];
-        $this->json('POST', route('password.reset'), $data)
+        $this->json('POST', route('password.reset', ['token' => $token]), $data)
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJson(['message' => [trans('passwords.reset')]]);
     }
