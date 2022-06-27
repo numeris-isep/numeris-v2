@@ -6,14 +6,12 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class LoginAdministratorTest extends TestCase
 {
     /**
      * @group administrator
      */
-    use RefreshDatabase;
     public function testAdministratorLoggingIn()
     {
         $user = User::where('email', Role::ADMINISTRATOR . '@isep.fr')->first();
@@ -22,6 +20,7 @@ class LoginAdministratorTest extends TestCase
             'email'     => $user->email,
             'password'  => 'azertyuiop'
         ];
+        $this->withoutExceptionHandling();
 
         $this->json('POST', route('login'), $data)
             ->assertStatus(JsonResponse::HTTP_OK)
