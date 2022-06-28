@@ -21,9 +21,6 @@ class LoginAdministratorTest extends TestCase
             'email'     => $user->email,
             'password'  => 'azertyuiop'
         ];
-        echo($user);
-        error_log(print_r($results,true));
-
 
         $this->json('POST', route('login'), $data)
             ->assertStatus(JsonResponse::HTTP_OK)
