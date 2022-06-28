@@ -2,100 +2,120 @@ import { TeamMember } from '../classes/team-member';
 
 export const TEAM_MEMBERS: TeamMember[] = [
   new TeamMember(
-    'Valentine',
-    'Le Saint',
+    'Candice',
+    'Rumeau',
     'Présidente',
-    'valentine.lesaint.7',
-    'team/2021-2022/valentine_lesaint.png',
+    'candylol17',
+    'team/2019-2020/candice-rumeau.jpg',
   ),
   new TeamMember(
-    'Léna',
-    'Cheam',
+    'Toan',
+    'Dang Ngoc',
+    'Vice-président',
+    'toan.dangngoc.94',
+    'team/2019-2020/toan-dang-ngoc.jpg',
+  ),
+  new TeamMember(
+    'Tchong-kite',
+    'Huam',
     'Secrétaire général',
-    'LenaCheam2',
-    'team/2021-2022/lena_cheam.png',
+    'tchong.kite.h',
+    'team/2019-2020/tchong-kite-huam.jpg',
   ),
   new TeamMember(
-    'Clara',
-    'Augié',
+    'Elise',
+    'Savornin',
     'Trésorière',
-    'clara.augie.8',
-    'team/2021-2022/clara_augie.png',
+    'elise.savornin',
+    'team/2019-2020/elise-savornin.jpg',
   ),
   new TeamMember(
-    'Thomas',
-    'Le Deventec',
+    'Jeanne',
+    'Fricaudet',
+    'Vice-trésorière',
+    'jeanne.fricaudet',
+    'team/2019-2020/jeanne-fricaudet.jpg'
+  ),
+  new TeamMember(
+    'David',
+    'Ni',
     'Vice-trésorier',
-    'thomas.ld.370',
-    'team/2021-2022/thomas_ledeventec.png'
+    'David.Ni.1108',
+    'team/2019-2020/david-ni.jpg'
   ),
   new TeamMember(
-    'Théophile',
-    'Thomas',
-    'Vice-trésorier',
-    'profile.php?id=100010298058705',
-    'team/2021-2022/theophile_thomas.png'
-  ),
-  new TeamMember(
-    'Chloé',
-    'Blanchon',
-    'Responsable RH',
-    'chloe.blanchon.5',
-    'team/2021-2022/chloe_blanchon.png'
-  ),
-  new TeamMember(
-    'Camilla',
-    'Colas',
+    'Pierre-Jean',
+    'Drieu La-Rochelle',
     'Graphiste',
-    'milla.cls',
-    'team/2021-2022/camilla_colas.png'
+    'pierrejean.drieu',
+    'team/2019-2020/pierre-jean-drieu-la-rochelle.jpg'
   ),
   new TeamMember(
-    'Hugues',
-    'Rubin de Cervens',
-    'Chargé de contrat',
-    'hugues.rubin',
-    'team/2021-2022/hugues_rubindecervens.png'
+    'Hashley',
+    'Ramanankatsoina',
+    'Responsable communication',
+    'hleyjr',
+    'team/2019-2020/hashley-ramanankatsoina.jpg'
   ),
   new TeamMember(
-    'Maxime',
-    'Mathiot',
+    'Oussama',
+    'Belhia',
+    'Responsable démarchage',
+    'oussama.belhia',
+    'team/2019-2020/oussama-belhia.jpg'
+  ),
+  new TeamMember(
+    'Alexandre',
+    'Ulku',
+    'Responsable démarchage',
+    'alexandre.ulku.7',
+    'team/2019-2020/alexandre-ulku.jpg'
+  ),
+  new TeamMember(
+    'Valentin',
+    'Guilhem',
     'Chargé de contrat',
-    'maxime.mathiot.3',
-    'team/2021-2022/maxime_mathiot.png'
+    'valentin.guilhem',
+    'team/2019-2020/valentin-guilhem.jpg'
+  ),
+  new TeamMember(
+    'Clémence',
+    'Ouyang',
+    'Chargé de contrat',
+    'clemence.ouyang',
+    'team/2019-2020/clemence-ouyang.jpg'
   ),
   new TeamMember(
     'Ali',
     'Qassou',
     'Chargé de contrat',
-    'ali.vtk.7',
-    'team/2021-2022/ali_quassou.png'
+    'numerisisep',
   ),
   new TeamMember(
-    'Thibault',
-    'Delalande',
+    'Maxime',
+    'Schuchmann',
     'Chargé de contrat',
-    'thibault.delalande.9',
-    'team/2021-2022/thibault_delalande.png'
+    'maxime.schuch',
+    'team/2019-2020/maxime-schuchmann.jpg'
   ),
   new TeamMember(
-    'Hugo',
-    'Richier',
-    'DSI',
-    'hugo.richier.7',
+    'Théophile',
+    'Valenduc',
+    'Chargé de contrat',
+    '100009793662548',
+    'team/2019-2020/theophile-valenduc.jpg'
   ),
   new TeamMember(
-    'Alexandre',
-    'Nge',
+    'Eliott',
+    'de Séguier',
     'DSI',
-    'alexandre.nge',
-    'team/2021-2022/alexandre_nge.png',
+    'eliott.deseguier',
+    'team/2019-2020/eliott-deseguier.jpg',
   ),
   new TeamMember(
-    'Yona',
-    'Bitton',
-    'DSI',
-    'yona.cullen',
-    'team/2021-2022/yona_bitton.png',
+    'Minh Nam',
+    'Nguyen',
+    'Assistant DSI',
+    'minhnam.nguyen',
   ),
 ];

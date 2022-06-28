@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', 'Auth\AuthController@login')->name('login');
 Route::post('subscribe', 'Auth\AuthController@subscribe')->name('subscribe');
 Route::post('password/forgot', 'Auth\ForgotPasswordController@forgot')->name('password.forgot');
-Route::post('password/reset/{token}', 'Auth\ResetPasswordController@doReset')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@doReset')->name('password.reset');
 
 // Contact us
 Route::post('contact-us', 'ContactUsController@contactUs')->name('contact-us');
