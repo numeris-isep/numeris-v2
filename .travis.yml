@@ -15,9 +15,7 @@ before_script:
   - cp back/.env.travis back/.env
   - make start-testing
   - make back-update
-  - sleep 30s
   - make db-reset
-  - composer require lcobucci/jwt:3.3.3
 
 script:
   - make test
