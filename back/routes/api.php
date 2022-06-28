@@ -23,7 +23,7 @@ Route::post('password/reset/{token}', 'Auth\ResetPasswordController@doReset')->n
 Route::post('contact-us', 'ContactUsController@contactUs')->name('contact-us');
 
 // Every route in this group require user authentication
-Route::group(['middleware' => 'auth:api'], function () {
+Route::group(['middleware' => 'web'], function () {
 
     // Verify Email routes
     Route::get('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
