@@ -21,7 +21,7 @@ class LoginAdministratorTest extends TestCase
             'email'     => $user->email,
             'password'  => 'azertyuiop'
         ];
-        $this->markTestSkipped('must be revisited.');
+        $this->withoutExceptionHandling();
 
         $this->json('POST', route('login'), $data)
             ->assertStatus(JsonResponse::HTTP_OK)
@@ -39,7 +39,7 @@ class LoginAdministratorTest extends TestCase
             'email'     => $user->email,
             'password'  => 'wrong-password'
         ];
-        $this->markTestSkipped('must be revisited.');
+
 
         $this->json('POST', route('login'), $data)
             ->assertStatus(JsonResponse::HTTP_UNAUTHORIZED)
