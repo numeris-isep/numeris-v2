@@ -95,7 +95,6 @@ class UpdateDeveloperTest extends TestCaseWithAuth
         $data = ['time_limit' => 30];
         $this->markTestSkipped('must be revisited.');
 
-
         $this->json('PUT', route('projects.invoices.update', ['project' => $project->id]), $data)
             ->assertStatus(JsonResponse::HTTP_OK);
 
