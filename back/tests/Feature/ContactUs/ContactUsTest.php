@@ -21,6 +21,7 @@ class ContactUsTest extends TestCase
                 'content'       => 'Hello, I have basically no idea why I want to reach you but I do. Regards, Johnny Doe.'
             ],
         ];
+        $this->withoutExceptionHandling();
 
         $this->json('POST', route('contact-us'), $data)
             ->assertStatus(JsonResponse::HTTP_NO_CONTENT);
