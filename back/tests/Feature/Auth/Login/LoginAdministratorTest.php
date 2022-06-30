@@ -12,6 +12,7 @@ class LoginAdministratorTest extends TestCase
     /**
      * @group administrator
      */
+
     public function testAdministratorLoggingIn()
     {
         $user = User::where('email', Role::ADMINISTRATOR . '@isep.fr')->first();
@@ -37,6 +38,7 @@ class LoginAdministratorTest extends TestCase
             'email'     => $user->email,
             'password'  => 'wrong-password'
         ];
+
 
         $this->json('POST', route('login'), $data)
             ->assertStatus(JsonResponse::HTTP_UNAUTHORIZED)
