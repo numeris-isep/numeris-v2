@@ -21,6 +21,7 @@ class LoginAdministratorTest extends TestCase
             'password'  => 'azertyuiop'
         ];
 
+
         $this->json('POST', route('login'), $data)
             ->assertStatus(JsonResponse::HTTP_OK)
             ->assertJsonStructure(['access_token']);
