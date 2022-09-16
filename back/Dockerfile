@@ -31,5 +31,5 @@ RUN composer install --no-interaction
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN usermod -u 1000 www-data
-RUN chown -R www-data:www-data /home/numeris
+RUN chown -R www-data:www-data /opt/numeris
 RUN chown -R www-data:www-data /var/log/apache2/
