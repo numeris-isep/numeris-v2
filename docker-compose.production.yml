@@ -1,4 +1,4 @@
-version: '3'
+version: "3.9"
 services:
 
   phpmyadmin:
@@ -23,7 +23,7 @@ services:
   back:
     build:
       context: ./back
-      dockerfile: Dockerfile.production
+      dockerfile: Dockerfile
     environment:
       APP_ENV: production
       APP_DEBUG: 'false'
