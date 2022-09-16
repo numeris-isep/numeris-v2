@@ -1,7 +1,5 @@
 FROM php:7.4-apache
 
-RUN mkdir -p /home/numeris
-
 # Install packages
 RUN apt-get update && apt-get install -y \
     git \
@@ -23,18 +21,15 @@ RUN a2dissite 000-default.conf && a2ensite numeris.conf && a2enmod rewrite && se
 # Enable php conf
 COPY docker/php/php.ini /usr/local/etc/php/conf.d/default.ini
 
-COPY . /home/numeris
+WORKDIR /opt/numeris
+COPY . .
 
 # Composer install
-WORKDIR /home/numeris
 RUN composer install --no-interaction
 
 # Final touch
-RUN . ~/.bashrc
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN usermod -u 1000 www-data
 RUN chown -R www-data:www-data /home/numeris
 RUN chown -R www-data:www-data /var/log/apache2/
-
-WORKDIR /home/numeris
