@@ -1,4 +1,4 @@
-FROM php:7.2-apache
+FROM php:7.4-apache
 
 RUN mkdir -p /home/numeris
 
@@ -8,7 +8,9 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     nano \
-    libpng-dev
+    libpng-dev \
+    libzip-dev
+
 
 # Install the PHP mcrypt pdo_mysql extension
 RUN docker-php-ext-install pdo_mysql gd zip
