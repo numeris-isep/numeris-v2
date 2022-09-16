@@ -1,6 +1,8 @@
 name: Docker
 
 on:
+  schedule:
+  - cron: "0 4 * * 0" # run every sunday at 4 am to test if the image builds correctly given that changes of debian or compose packages can break the image
   push:
     branches:
       - "master"
