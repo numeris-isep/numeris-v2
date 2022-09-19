@@ -1,6 +1,16 @@
 version: '3'
 services:
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: numeris_phpmyadmin
+    ports:
+      - 3000:80
+    links:
+      - mysql:db
+    depends_on:
+      - mysql
+
   mysql:
     image: mysql:5.7
     container_name: numeris_mysql
@@ -33,7 +43,7 @@ services:
       context: ./front
       dockerfile: Dockerfile
     ports:
-      - 3000:4200
+      - 4200:4200
     links:
       - back
     depends_on:
