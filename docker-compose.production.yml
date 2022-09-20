@@ -3,6 +3,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
+    container_name: numeris_phpmyadmin
     restart: unless-stopped
     ports:
       - 3000:80
@@ -13,6 +14,7 @@ services:
 
   mysql:
     image: mysql:5.7
+    container_name: numeris_mysql
     restart: unless-stopped
     env_file:
       - .env
@@ -20,6 +22,7 @@ services:
     - ./var/mysql:/var/lib/mysql
 
   back:
+    container_name: numeris_back
     restart: unless-stopped
     build:
       context: ./back
@@ -30,6 +33,7 @@ services:
     - mysql
 
   front:
+    container_name: numeris_front
     build:
       context: ./front
       dockerfile: Dockerfile
