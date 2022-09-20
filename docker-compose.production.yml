@@ -5,12 +5,13 @@ services:
     image: phpmyadmin/phpmyadmin:latest
     container_name: numeris_phpmyadmin
     restart: unless-stopped
-    ports:
-      - 3000:80
     links:
       - mysql:db
     depends_on:
       - mysql
+    labels:
+      caddy: phpmyadmin.numeris-isep.fr
+      caddy.reverse_proxy: "{{upstreams 80}}"
 
   mysql:
     image: mysql:5.7
@@ -31,6 +32,9 @@ services:
       - .env
     depends_on:
     - mysql
+    labels:
+      caddy: api.numeris-isep.fr
+      caddy.reverse_proxy: "{{upstreams 8080}}"
 
   front:
     container_name: numeris_front
@@ -39,6 +43,27 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - back
+    labels:
+      caddy: numeris-isep.fr
+      caddy.reverse_proxy: "{{upstreams 4200}}"
+
+  caddy:
+    image: marcpartensky/caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      CADDY_INGRESS_NETWORKS: caddy
+    volumes:
+      # docker rootless daemon socker https://docs.docker.com/engine/security/rootless/
+      - /run/user/1000/docker.sock:/var/run/docker.sock
+      - caddy_data:/data
+    networks:
+      caddy:
+    healthcheck:
+      test: ["CMD", "curl", "-f", "localhost:80"]
 
 volumes:
+  caddy_data:
   mysql:
