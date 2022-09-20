@@ -33,3 +33,5 @@ RUN apt-get clean && \
 RUN usermod -u 1000 www-data
 RUN chown -R www-data:www-data /opt/numeris
 RUN chown -R www-data:www-data /var/log/apache2/
+
+ENTRYPOINT [ "./entrypoint.sh" ]
