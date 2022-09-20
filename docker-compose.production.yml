@@ -17,7 +17,7 @@ services:
     env_file:
       - .env
     volumes:
-    - mysql:/var/lib/mysql
+    - ./var/mysql:/var/lib/mysql
 
   back:
     restart: unless-stopped
@@ -35,7 +35,6 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - back
-    entrypoint: ng s --host 0.0.0.0
 
 volumes:
   mysql:
