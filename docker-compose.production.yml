@@ -9,6 +9,8 @@ services:
       - mysql:db
     depends_on:
       - mysql
+    networks:
+      caddy:
     labels:
       caddy: phpmyadmin.numeris-isep.fr
       caddy.reverse_proxy: "{{upstreams 80}}"
@@ -32,6 +34,8 @@ services:
       - .env
     depends_on:
     - mysql
+    networks:
+      caddy:
     labels:
       caddy: api.numeris-isep.fr
       caddy.reverse_proxy: "{{upstreams 8080}}"
@@ -43,6 +47,8 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - back
+    networks:
+      caddy:
     labels:
       caddy: numeris-isep.fr
       caddy.reverse_proxy: "{{upstreams 4200}}"
@@ -63,6 +69,9 @@ services:
       caddy:
     healthcheck:
       test: ["CMD", "curl", "-f", "localhost:80"]
+
+networks:
+  caddy:
 
 volumes:
   caddy_data:
