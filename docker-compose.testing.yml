@@ -4,6 +4,7 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     container_name: numeris_phpmyadmin
+    restart: unless-stopped
     ports:
       - 3000:80
     links:
@@ -16,12 +17,14 @@ services:
   mysql:
     image: mysql:5.7
     container_name: numeris_mysql
+    restart: unless-stopped
     environment:
       MYSQL_DATABASE: 'numeris_testing'
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
 
   back:
     container_name: numeris_back
+    restart: unless-stopped
     build:
       context: ./back
       dockerfile: Dockerfile
@@ -41,6 +44,7 @@ services:
 
   front:
     container_name: numeris_front
+    restart: unless-stopped
     build:
       context: ./front
       dockerfile: Dockerfile
