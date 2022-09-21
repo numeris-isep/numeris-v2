@@ -1,42 +1,44 @@
-version: '3'
+version: "3.9"
 services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
+    container_name: numeris_phpmyadmin
+    restart: unless-stopped
     ports:
       - 3000:80
     links:
       - mysql:db
     depends_on:
       - mysql
-    container_name: numeris_phpmyadmin
 
   mysql:
     image: mysql:5.7
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: 'numeris'
+    container_name: numeris_mysql
+    restart: unless-stopped
+    env_file:
+      - .env
     volumes:
     - ./var/mysql:/var/lib/mysql
-    container_name: numeris_mysql
 
   back:
+    container_name: numeris_back
+    restart: unless-stopped
     build:
       context: ./back
-      dockerfile: Dockerfile.production
-    environment:
-      APP_ENV: production
-      APP_DEBUG: 'false'
-      DB_CONNECTION: mysql
-      DB_HOST: ${DB_HOST}
-      DB_PORT: ${DB_PORT}
-      DB_DATABASE: ${DB_DATABASE}
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - ${BACK_PORT}:80
-    links:
-    - mysql
+      dockerfile: Dockerfile
+    env_file:
+      - .env
     depends_on:
     - mysql
-    container_name: numeris_back
+
+  front:
+    container_name: numeris_front
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    depends_on:
+      - back
+
+volumes:
+  mysql:
