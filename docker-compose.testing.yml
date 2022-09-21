@@ -45,7 +45,7 @@ services:
       context: ./front
       dockerfile: Dockerfile
     ports:
-      - 4200:4200
+      - 8000:80
     links:
       - back
     depends_on:
