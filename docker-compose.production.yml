@@ -29,7 +29,7 @@ services:
     restart: unless-stopped
     build:
       context: ./back
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.production
     env_file:
       - .env
     depends_on:
