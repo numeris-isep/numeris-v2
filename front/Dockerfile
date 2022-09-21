@@ -10,7 +10,7 @@ RUN npm run build-prod
 ENTRYPOINT [ "ng", "s", "--host", "0.0.0.0" ]
 
 FROM nginx
-COPY conf/default.conf /etc/nginx/conf.d/
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder dist /usr/share/nginx/html
 EXPOSE 80
