@@ -34,3 +34,5 @@ RUN chown -R www-data:www-data /var/log/apache2/
 
 RUN php artisan config:cache
 RUN php artisan route:cache
+
+ENTRYPOINT [ "/opt/numeris/entrypoint.sh" ]
