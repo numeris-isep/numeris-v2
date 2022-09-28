@@ -4,6 +4,7 @@
 .vscode
 .DS_Store
 docker-compose*.yml
+.env
 
 # Back
 back/.DS_Store
