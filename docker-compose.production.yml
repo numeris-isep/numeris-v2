@@ -67,7 +67,7 @@ services:
   traefik:
     image: traefik
     restart: unless-stopped
-    # command:
+    command:
     #   ## Provider Settings - https://docs.traefik.io/providers/docker/#provider-configuration ##
     #   # - --providers.docker.exposedbydefault=false # <== Don't expose every container to traefik, only expose enabled ones
     #   - --providers.file.filename=/dynamic.yaml # <== Referring to a dynamic configuration file
