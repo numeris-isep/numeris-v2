@@ -76,6 +76,7 @@ services:
 
 networks:
   caddy:
+    external: true
   mysql:
 
 volumes:
