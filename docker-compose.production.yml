@@ -7,15 +7,21 @@ services:
     restart: unless-stopped
     ports:
       - 3000:80
-    links:
-      - mysql:db
     depends_on:
       - mysql
+    networks:
+      - caddy
+      - mysql
+    labels:
+      caddy: phpmyadmin.numeris-isep.fr
+      caddy.reverse_proxy: "{{upstreams 80}}"
 
   mysql:
     image: mysql:5.7
     container_name: numeris_mysql
     restart: unless-stopped
+    networks:
+      - mysql
     env_file:
       - .env
     volumes:
@@ -27,6 +33,9 @@ services:
     build:
       context: ./back
       dockerfile: Dockerfile.production
+    networks:
+      - caddy
+      - mysql
     env_file:
       - .env
     depends_on:
@@ -37,8 +46,34 @@ services:
     build:
       context: ./front
       dockerfile: Dockerfile
+    networks:
+      - caddy
     depends_on:
       - back
+    labels:
+      caddy: numeris-isep.fr
+      caddy.reverse_proxy: "{{upstreams 4200}}"
+
+  caddy:
+    image: marcpartensky/caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      CADDY_INGRESS_NETWORKS: caddy
+    volumes:
+      # docker rootless daemon socket https://docs.docker.com/engine/security/rootless/
+      - /run/user/1000/docker.sock:/var/run/docker.sock
+      - caddy_data:/data
+    networks:
+      caddy:
+    healthcheck:
+      test: ["CMD", "curl", "-f", "localhost:80"]
+
+networks:
+  caddy:
+  mysql:
 
 volumes:
   mysql:
