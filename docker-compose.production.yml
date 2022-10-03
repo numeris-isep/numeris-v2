@@ -64,7 +64,7 @@ services:
       CADDY_INGRESS_NETWORKS: caddy
     volumes:
       # docker rootless daemon socket https://docs.docker.com/engine/security/rootless/
-      - /run/user/1000/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
       - caddy_data:/data
     networks:
       - caddy
