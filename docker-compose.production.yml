@@ -5,6 +5,8 @@ services:
     image: phpmyadmin/phpmyadmin:latest
     container_name: numeris_phpmyadmin
     restart: unless-stopped
+    link:
+      - mysql:db
     depends_on:
       - mysql
     networks:
