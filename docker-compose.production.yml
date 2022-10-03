@@ -16,7 +16,7 @@ services:
       traefik.enable: "true"
       traefik.http.routers.phpmyadmin.rule: Host(`phpmyadmin.numeris-isep.fr`)
       traefik.http.routers.phpmyadmin.entrypoints: websecure
-      traefik.http.routers.phpmyadmin.tls.certresolver: tls
+      traefik.http.routers.phpmyadmin.tls.certresolver: zerossl
       traefik.http.services.phpmyadmin.loadbalancer.server.port: 80
 
   mysql:
@@ -47,7 +47,7 @@ services:
       traefik.enable: "true"
       traefik.http.routers.back.rule: Host(`api.numeris-isep.fr`)
       traefik.http.routers.back.entrypoints: websecure
-      traefik.http.routers.back.tls.certresolver: tls
+      traefik.http.routers.back.tls.certresolver: zerossl
       traefik.http.services.back.loadbalancer.server.port: 80
 
   front:
@@ -63,7 +63,7 @@ services:
       traefik.enable: "true"
       traefik.http.routers.front.rule: Host(`numeris-isep.fr`)
       traefik.http.routers.front.entrypoints: websecure
-      traefik.http.routers.front.tls.certresolver: tls
+      traefik.http.routers.front.tls.certresolver: zerossl
       traefik.http.services.front.loadbalancer.server.port: 80
 
   traefik:
@@ -104,10 +104,10 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     labels:
       traefik.enable: "true"
-      traefik.http.routers.traefik.rule: Host(`traefik.marcpartensky.com`)
+      traefik.http.routers.traefik.rule: Host(`traefik.numeris-isep.fr`)
       traefik.http.routers.traefik.service: api@internal
       traefik.http.routers.traefik.entrypoints: websecure
-      traefik.http.routers.traefik.tls.certresolver: tls
+      traefik.http.routers.traefik.tls.certresolver: zerossl
       traefik.docker.network: traefik
 
 networks:
