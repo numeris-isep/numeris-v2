@@ -110,5 +110,5 @@ networks:
   mysql:
 
 volumes:
-  caddy_data:
+  traefik_letsencrypt:
   mysql:
