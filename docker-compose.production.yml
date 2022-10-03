@@ -5,12 +5,13 @@ services:
     image: phpmyadmin/phpmyadmin:latest
     container_name: numeris_phpmyadmin
     restart: unless-stopped
-    links:
-      - mysql:db
+    ports:
+      - 3000:80
     depends_on:
       - mysql
     networks:
-      caddy:
+      - caddy
+      - mysql
     labels:
       caddy: phpmyadmin.numeris-isep.fr
       caddy.reverse_proxy: "{{upstreams 80}}"
@@ -19,6 +20,8 @@ services:
     image: mysql:5.7
     container_name: numeris_mysql
     restart: unless-stopped
+    networks:
+      - mysql
     env_file:
       - .env
     volumes:
@@ -30,6 +33,9 @@ services:
     build:
       context: ./back
       dockerfile: Dockerfile.production
+    networks:
+      - caddy
+      - mysql
     env_file:
       - .env
     depends_on:
@@ -45,10 +51,10 @@ services:
     build:
       context: ./front
       dockerfile: Dockerfile
+    networks:
+      - caddy
     depends_on:
       - back
-    networks:
-      caddy:
     labels:
       caddy: numeris-isep.fr
       caddy.reverse_proxy: "{{upstreams 4200}}"
@@ -72,6 +78,7 @@ services:
 
 networks:
   caddy:
+  mysql:
 
 volumes:
   caddy_data:
