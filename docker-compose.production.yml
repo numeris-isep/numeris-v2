@@ -60,8 +60,6 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    environment:
-      CADDY_INGRESS_NETWORKS: caddy
     volumes:
       # docker rootless daemon socket https://docs.docker.com/engine/security/rootless/
       - /var/run/docker.sock:/var/run/docker.sock
