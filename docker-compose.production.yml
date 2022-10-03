@@ -82,9 +82,12 @@ services:
     #   ## Entrypoints Settings - https://docs.traefik.io/routing/entrypoints/#configuration ##
       - --entrypoints.web.address=:80
       - --entrypoints.websecure.address=:443
-      - --certificatesresolvers.tls.acme.email = support@numeris-isep.fr
-      - --certificatesresolvers.tls.acme.tlschallenge=true # <== Enable TLS-ALPN-01 to generate and renew ACME certs - --certificatesresolvers.tls.acme.email=marc.partensky@gmail.com
-      - --certificatesresolvers.tls.acme.storage=/letsencrypt/acme.json # Log Settings (options: ERROR, DEBUG, PANIC, FATAL, WARN, INFO) - https://docs.traefik.io/observability/logs/ ##
+      # - --certificatesresolvers.tls.acme.email = support@numeris-isep.fr
+      # - --certificatesresolvers.tls.acme.tlschallenge=true # <== Enable TLS-ALPN-01 to generate and renew ACME certs - --certificatesresolvers.tls.acme.email=marc.partensky@gmail.com
+      # - --certificatesresolvers.tls.acme.storage=/letsencrypt/acme.json # Log Settings (options: ERROR, DEBUG, PANIC, FATAL, WARN, INFO) - https://docs.traefik.io/observability/logs/ ##
+      - --certificatesresolvers.zerossl.acme.email=support@numeris-isep.fr
+      - --certificatesresolvers.zerossl.acme.tlschallenge=true # <== Enable TLS-ALPN-01 to generate and renew ACME certs - --certificatesresolvers.tls.acme.email=marc.partensky@gmail.com
+      - --certificatesresolvers.zerossl.acme.storage=/zerossl/acme.json # Log Settings (options: ERROR, DEBUG, PANIC, FATAL, WARN, INFO) - https://docs.traefik.io/observability/logs/ ##
       - --log.level=DEBUG # <== Setting the level of the logs from traefik
       - --entrypoints.web.http.redirections.entryPoint.to=websecure
       - --entrypoints.web.http.redirections.entryPoint.scheme=https
