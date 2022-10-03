@@ -5,16 +5,17 @@ services:
     image: phpmyadmin/phpmyadmin:latest
     container_name: numeris_phpmyadmin
     restart: unless-stopped
-    ports:
-      - 3000:80
     depends_on:
       - mysql
     networks:
-      - caddy
+      - traefik
       - mysql
     labels:
-      caddy: phpmyadmin.numeris-isep.fr
-      caddy.reverse_proxy: "{{upstreams 80}}"
+      traefik.enable: "true"
+      traefik.http.routers.phpmyadmin.rule: Host(`phpmyadmin.numeris-isep.fr`)
+      traefik.http.routers.phpmyadmin.entrypoints: websecure
+      traefik.http.routers.phpmyadmin.tls.certresolver: tls
+      traefik.http.services.phpmyadmin.loadbalancer.server.port: 80
 
   mysql:
     image: mysql:5.7
@@ -34,17 +35,18 @@ services:
       context: ./back
       dockerfile: Dockerfile.production
     networks:
-      - caddy
+      - traefik
       - mysql
     env_file:
       - .env
     depends_on:
-    - mysql
-    networks:
-      caddy:
+      - mysql
     labels:
-      caddy: api.numeris-isep.fr
-      caddy.reverse_proxy: "{{upstreams 80}}"
+      traefik.enable: "true"
+      traefik.http.routers.back.rule: Host(`api.numeris-isep.fr`)
+      traefik.http.routers.back.entrypoints: websecure
+      traefik.http.routers.back.tls.certresolver: tls
+      traefik.http.services.back.loadbalancer.server.port: 80
 
   front:
     container_name: numeris_front
@@ -52,30 +54,58 @@ services:
       context: ./front
       dockerfile: Dockerfile
     networks:
-      - caddy
+      - traefik
     depends_on:
       - back
     labels:
-      caddy: numeris-isep.fr
-      caddy.reverse_proxy: "{{upstreams 80}}"
+      traefik.enable: "true"
+      traefik.http.routers.front.rule: Host(`numeris-isep.fr`)
+      traefik.http.routers.front.entrypoints: websecure
+      traefik.http.routers.front.tls.certresolver: tls
+      traefik.http.services.front.loadbalancer.server.port: 80
 
-  caddy:
-    image: lucaslorentz/caddy-docker-proxy:ci-alpine
+  traefik:
+    image: traefik
     restart: unless-stopped
+    # command:
+    #   ## Provider Settings - https://docs.traefik.io/providers/docker/#provider-configuration ##
+    #   # - --providers.docker.exposedbydefault=false # <== Don't expose every container to traefik, only expose enabled ones
+    #   - --providers.file.filename=/dynamic.yaml # <== Referring to a dynamic configuration file
+      - --providers.docker.network=web # <== Operate on the docker network named web
+      - --providers.docker=true # <== Enabling docker as the provider for traefik
+    #   ## API Settings - https://docs.traefik.io/operations/api/, endpoints - https://docs.traefik.io/operations/api/#endpoints ##
+    #   - --api.insecure=false # <== Enabling insecure api, NOT RECOMMENDED FOR PRODUCTION
+      - --api.dashboard=true
+      - --api.debug=true # <== Enabling additional endpoints for debugging and profiling
+    #   ## Entrypoints Settings - https://docs.traefik.io/routing/entrypoints/#configuration ##
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --certificatesresolvers.tls.acme.tlschallenge=true # <== Enable TLS-ALPN-01 to generate and renew ACME certs - --certificatesresolvers.tls.acme.email=marc.partensky@gmail.com
+      - --certificatesresolvers.tls.acme.storage=/letsencrypt/acme.json # Log Settings (options: ERROR, DEBUG, PANIC, FATAL, WARN, INFO) - https://docs.traefik.io/observability/logs/ ##
+      - --log.level=DEBUG # <== Setting the level of the logs from traefik
+      - --entrypoints.web.http.redirections.entryPoint.to=websecure
+      - --entrypoints.web.http.redirections.entryPoint.scheme=https
+      - --entrypoints.web.http.redirections.entrypoint.permanent=true
     ports:
       - "80:80"
       - "443:443"
-    volumes:
-      # docker rootless daemon socket https://docs.docker.com/engine/security/rootless/
-      - /var/run/docker.sock:/var/run/docker.sock
-      - caddy_data:/data
     networks:
-      - caddy
-    healthcheck:
-      test: ["CMD", "curl", "-f", "localhost:80"]
+      - traefik
+    volumes:
+      - ../data/traefik/traefik.yml:/traefik.yml # static configuration
+      - ../data/traefik/dynamic.yml:/dynamic.yml
+      - traefik_letsencrypt:/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.traefik.rule: Host(`traefik.marcpartensky.com`)
+      traefik.http.routers.traefik.service: api@internal
+      traefik.http.routers.traefik.entrypoints: websecure
+      traefik.http.routers.traefik.tls.certresolver: tls
+      traefik.docker.network: traefik
 
 networks:
-  caddy:
+  traefik:
     external: true
   mysql:
 
