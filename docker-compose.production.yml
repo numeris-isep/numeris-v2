@@ -44,7 +44,7 @@ services:
       caddy:
     labels:
       caddy: api.numeris-isep.fr
-      caddy.reverse_proxy: "{{upstreams 8080}}"
+      caddy.reverse_proxy: "{{upstreams 80}}"
 
   front:
     container_name: numeris_front
@@ -57,7 +57,7 @@ services:
       - back
     labels:
       caddy: numeris-isep.fr
-      caddy.reverse_proxy: "{{upstreams 4200}}"
+      caddy.reverse_proxy: "{{upstreams 80}}"
 
   caddy:
     image: lucaslorentz/caddy-docker-proxy:ci-alpine
