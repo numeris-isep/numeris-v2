@@ -72,7 +72,7 @@ services:
       - /run/user/1000/docker.sock:/var/run/docker.sock
       - caddy_data:/data
     networks:
-      caddy:
+      - caddy
     healthcheck:
       test: ["CMD", "curl", "-f", "localhost:80"]
 
