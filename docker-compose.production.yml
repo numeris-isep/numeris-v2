@@ -60,7 +60,7 @@ services:
       caddy.reverse_proxy: "{{upstreams 4200}}"
 
   caddy:
-    image: marcpartensky/caddy
+    image: lucaslorentz/caddy-docker-proxy:ci-alpine
     restart: unless-stopped
     ports:
       - "80:80"
