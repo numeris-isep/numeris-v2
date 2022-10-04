@@ -7,6 +7,8 @@ services:
     restart: unless-stopped
     ports:
       - 3000:80
+    link:
+      - mysql:db
     depends_on:
       - mysql
     networks:
