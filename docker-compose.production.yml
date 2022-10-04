@@ -62,6 +62,8 @@ services:
   caddy:
     image: lucaslorentz/caddy-docker-proxy:ci-alpine
     restart: unless-stopped
+    environment:
+      CADDY_INGRESS_NETWORKS: caddy
     ports:
       - "80:80"
       - "443:443"
