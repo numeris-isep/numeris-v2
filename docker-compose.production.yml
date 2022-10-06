@@ -60,6 +60,8 @@ services:
     labels:
       caddy: numeris-isep.fr
       caddy.reverse_proxy: "{{upstreams 80}}"
+      caddy.reverse_proxy.header_down: -Access-Control-Allow-Origin
+
 
   caddy:
     image: lucaslorentz/caddy-docker-proxy:ci-alpine
