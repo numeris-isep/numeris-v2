@@ -42,8 +42,6 @@ services:
       - .env
     depends_on:
       - mysql
-    networks:
-      - caddy
     labels:
       caddy: api.numeris-isep.fr
       caddy.reverse_proxy: "{{upstreams 80}}"
