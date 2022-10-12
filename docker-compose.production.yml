@@ -53,7 +53,7 @@ services:
     container_name: numeris_front
     build:
       context: ./front
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.production
     networks:
       - caddy
     depends_on:
