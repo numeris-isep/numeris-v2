@@ -30,6 +30,7 @@ services:
     - ./var/mysql:/var/lib/mysql
 
   back:
+    image: numerisisep/numeris-back
     container_name: numeris_back
     restart: unless-stopped
     build:
@@ -50,6 +51,7 @@ services:
       caddy.reverse_proxy.header_down: -Access-Control-Allow-Origin
 
   front:
+    image: numerisisep/numeris-back
     container_name: numeris_front
     build:
       context: ./front
