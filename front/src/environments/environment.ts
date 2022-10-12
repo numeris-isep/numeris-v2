@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080',
+  apiUrl: 'https://api.numeris-isep.fr',
   tokenName: 'numeris_token',
   savEmail: 'sav.numeris@gmail.com',
   messengerUrl: 'http://m.me/numerisisep',
