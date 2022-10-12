@@ -60,6 +60,8 @@ services:
       - caddy
     depends_on:
       - back
+    volumes:
+      - ./env:/home/numeris/.env
     labels:
       caddy: numeris-isep.fr
       caddy.reverse_proxy: "{{upstreams 80}}"
