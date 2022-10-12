@@ -44,7 +44,7 @@ services:
     depends_on:
       - mysql
     volumes:
-      - .env:.env
+      - ./env:/home/numeris/.env
     labels:
       caddy: api.numeris-isep.fr
       caddy.reverse_proxy: "{{upstreams 80}}"
