@@ -49,7 +49,7 @@ services:
       caddy.reverse_proxy.header_down: -Access-Control-Allow-Origin
 
   front:
-    image: numerisisep/numeris-back
+    image: numerisisep/numeris-front
     container_name: numeris_front
     build:
       context: ./front
