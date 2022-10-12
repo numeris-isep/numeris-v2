@@ -6,5 +6,5 @@ RUN npm ci
 RUN npm install -g @angular/cli@7.3.9
 COPY . .
 RUN npm rebuild node-sass
-RUN npm run build-prod
-ENTRYPOINT [ "ng", "s", "--host", "0.0.0.0" ]
+RUN npm run build
+ENTRYPOINT [ "ng", "s", "--host", "0.0.0.0", "--port", "80" ]
