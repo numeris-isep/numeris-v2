@@ -31,10 +31,18 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Build and push Docker images
+    - name: Build and push back
       uses: docker/build-push-action@v3
       with:
         context: back
         dockerfile: Dockerfile.production
         push: true
-        tags: marcpartensky/numeris-back:latest
+        tags: numerisisep/numeris-back:latest
+
+    - name: Build and push front
+      uses: docker/build-push-action@v3
+      with:
+        context: front
+        dockerfile: Dockerfile
+        push: true
+        tags: numerisisep/numeris-back:latest
