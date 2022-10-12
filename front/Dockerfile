@@ -7,4 +7,4 @@ RUN npm install -g @angular/cli@7.3.9
 COPY . .
 RUN npm rebuild node-sass
 RUN npm run build
-ENTRYPOINT [ "ng", "s", "--host", "0.0.0.0", "--port", "80" ]
+ENTRYPOINT [ "ng", "s", "--host", "0.0.0.0", "--port", "80", "--disable-host-check" ]
