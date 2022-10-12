@@ -23,7 +23,7 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
 
   back:
-    image: numeris-back
+    image: numerisisep/numeris-back
     container_name: numeris_back
     restart: unless-stopped
     build:
@@ -44,7 +44,7 @@ services:
       - mysql
 
   front:
-    image: numeris-front
+    image: numerisisep/numeris-front
     container_name: numeris_front
     restart: unless-stopped
     build:
