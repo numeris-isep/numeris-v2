@@ -69,9 +69,6 @@ jobs:
 
   pull-and-recreate:
     name: Pull and recreate
-    needs:
-      - build-front
-      - build-back
     runs-on: ubuntu-latest
     steps:
     - name: executing remote ssh commands using password
