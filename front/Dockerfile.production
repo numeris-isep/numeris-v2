@@ -7,7 +7,7 @@ RUN npm install -g @angular/cli@7.3.9
 COPY . .
 RUN npm rebuild node-sass
 RUN npm run build-prod
-ENTRYPOINT [ "ng", "s", "--host", "0.0.0.0" ]
+ENTRYPOINT [ "ng", "s", "--port", "80" ]
 
 FROM nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
