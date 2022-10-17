@@ -31,13 +31,13 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Build and push back
+    - name: Build and push front
       uses: docker/build-push-action@v3
       with:
-        context: back
-        dockerfile: Dockerfile.production
+        context: front
+        dockerfile: Dockerfile
         push: true
-        tags: numerisisep/numeris-back:latest
+        tags: numerisisep/numeris-front:latest
 
   build-back:
     runs-on: ubuntu-latest
@@ -60,6 +60,6 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         context: back
-        dockerfile: Dockerfile
+        dockerfile: Dockerfile.production
         push: true
         tags: numerisisep/numeris-back:latest
