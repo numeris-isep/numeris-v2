@@ -41,6 +41,8 @@ services:
       - mysql
     env_file:
       - .env
+    volumes:
+      - .env:/home/numeris/.env
     depends_on:
       - mysql
     labels:
