@@ -58,8 +58,6 @@ services:
       dockerfile: Dockerfile.production
     networks:
       - caddy
-    depends_on:
-      - back
     labels:
       caddy: numeris-isep.fr
       caddy.reverse_proxy: "{{upstreams 80}}"
