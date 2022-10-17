@@ -15,6 +15,7 @@ on:
 
 jobs:
   build-front:
+    name: Build front
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -40,6 +41,7 @@ jobs:
         tags: numerisisep/numeris-front:latest
 
   build-back:
+    name: Build back
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -63,3 +65,22 @@ jobs:
         dockerfile: Dockerfile.production
         push: true
         tags: numerisisep/numeris-back:latest
+
+
+  pull-and-recreate:
+    name: Pull and recreate
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+          # password: ${{ secrets.PASSWORD }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd numeris
+          git pull
+          docker-compose -f docker-compose.production.yml pull
+          docker-compose -f docker-compose.production.yml up -d --force-recreate
