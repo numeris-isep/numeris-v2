@@ -17,7 +17,7 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY docker/apache/numeris.conf /etc/apache2/sites-available/numeris.conf
 RUN a2dissite 000-default.conf && \
       a2ensite numeris.conf && \
-      a2endmod headers && \
+      a2enmod headers && \
       a2enmod rewrite && \
       service apache2 restart
 # Enable php conf
