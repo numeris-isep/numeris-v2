@@ -1,42 +1,90 @@
-version: '3'
+version: "3.9"
 services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
+    container_name: numeris_phpmyadmin
+    restart: unless-stopped
     ports:
       - 3000:80
     links:
       - mysql:db
     depends_on:
       - mysql
-    container_name: numeris_phpmyadmin
+    networks:
+      - caddy
+      - mysql
+    labels:
+      caddy: phpmyadmin.numeris-isep.fr
+      caddy.reverse_proxy: "{{upstreams 80}}"
 
   mysql:
     image: mysql:5.7
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: 'numeris'
+    container_name: numeris_mysql
+    restart: unless-stopped
+    networks:
+      - mysql
+    env_file:
+      - .env
     volumes:
     - ./var/mysql:/var/lib/mysql
-    container_name: numeris_mysql
 
   back:
+    image: numerisisep/numeris-back
+    container_name: numeris_back
+    restart: unless-stopped
     build:
       context: ./back
       dockerfile: Dockerfile.production
-    environment:
-      APP_ENV: production
-      APP_DEBUG: 'false'
-      DB_CONNECTION: mysql
-      DB_HOST: ${DB_HOST}
-      DB_PORT: ${DB_PORT}
-      DB_DATABASE: ${DB_DATABASE}
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - ${BACK_PORT}:80
-    links:
-    - mysql
+    networks:
+      - caddy
+      - mysql
+    env_file:
+      - .env
+    volumes:
+      - .env:/home/numeris/.env
     depends_on:
-    - mysql
-    container_name: numeris_back
+      - mysql
+    labels:
+      caddy: api.numeris-isep.fr
+      caddy.reverse_proxy: "{{upstreams 80}}"
+        # caddy.reverse_proxy.header_down: -Access-Control-Allow-Origin
+
+  front:
+    image: numerisisep/numeris-front
+    container_name: numeris_front
+    build:
+      context: ./front
+      dockerfile: Dockerfile.production
+    networks:
+      - caddy
+    labels:
+      caddy: numeris-isep.fr
+      caddy.reverse_proxy: "{{upstreams 80}}"
+
+
+  caddy:
+    image: lucaslorentz/caddy-docker-proxy:ci-alpine
+    restart: unless-stopped
+    environment:
+      CADDY_INGRESS_NETWORKS: caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # docker rootless daemon socket https://docs.docker.com/engine/security/rootless/
+      - /var/run/docker.sock:/var/run/docker.sock
+      - caddy_data:/data
+    networks:
+      - caddy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "localhost:80"]
+
+networks:
+  caddy:
+    external: true
+  mysql:
+
+volumes:
+  caddy_data:
+  mysql:
