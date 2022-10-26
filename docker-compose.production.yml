@@ -48,7 +48,7 @@ services:
     labels:
       caddy: api.numeris-isep.fr
       caddy.reverse_proxy: "{{upstreams 80}}"
-      caddy.reverse_proxy.header_down: -Access-Control-Allow-Origin
+        # caddy.reverse_proxy.header_down: -Access-Control-Allow-Origin
 
   front:
     image: numerisisep/numeris-front
