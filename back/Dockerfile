@@ -1,6 +1,4 @@
-FROM php:7.2-apache
-
-RUN mkdir -p /home/numeris
+FROM php:7.4-apache
 
 # Install packages
 RUN apt-get update && apt-get install -y \
@@ -8,7 +6,9 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     nano \
-    libpng-dev
+    libpng-dev \
+    libzip-dev
+
 
 # Install the PHP mcrypt pdo_mysql extension
 RUN docker-php-ext-install pdo_mysql gd zip
@@ -21,19 +21,18 @@ RUN a2dissite 000-default.conf && a2ensite numeris.conf && a2enmod rewrite && se
 # Enable php conf
 COPY docker/php/php.ini /usr/local/etc/php/conf.d/default.ini
 
-COPY . /home/numeris
+WORKDIR /home/numeris
+COPY . .
 
 # Composer install
-WORKDIR /home/numeris
 RUN composer self-update --2
 RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-interaction
 
 # Final touch
-RUN . ~/.bashrc
 RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN usermod -u 1000 www-data
 RUN chown -R www-data:www-data /home/numeris
 RUN chown -R www-data:www-data /var/log/apache2/
 
-WORKDIR /home/numeris
+ENTRYPOINT [ "/home/numeris/entrypoint.sh" ]
