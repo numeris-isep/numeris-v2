@@ -54,5 +54,3 @@ services:
       - 8000:80
     links:
       - back
-    depends_on:
-      - back
