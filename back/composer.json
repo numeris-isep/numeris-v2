@@ -1,7 +1,11 @@
 {
     "name": "2seg/numeris-v2",
     "description": "Home of the new website of Numéris.",
-    "keywords": ["Numéris", "association", "website"],
+    "keywords": [
+        "Numéris",
+        "association",
+        "website"
+    ],
     "license": "MIT",
     "type": "project",
     "authors": [
@@ -13,6 +17,11 @@
         {
             "name": "MinhNam Nguyen",
             "email": "nguyen.minhnam@hotmail.fr",
+            "role": "Developer"
+        },
+        {
+            "name": "Marc Partensky",
+            "email": "marc@marcpartensky.com",
             "role": "Developer"
         }
     ],
@@ -51,8 +60,7 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": [
-            ]
+            "dont-discover": []
         }
     },
     "scripts": {
