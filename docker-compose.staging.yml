@@ -18,16 +18,16 @@ services:
       caddy: phpmyadmin.staging.numeris-isep.fr
       caddy.reverse_proxy: "{{upstreams 80}}"
 
-  mysql:
-    image: mysql:5.7
-    container_name: numeris_mysql
-    restart: unless-stopped
-    networks:
-      - mysql
-    env_file:
-      - .env
-    volumes:
-    - ./var/mysql:/var/lib/mysql
+  # mysql:
+  #   image: mysql:5.7
+  #   container_name: numeris_mysql
+  #   restart: unless-stopped
+  #   networks:
+  #     - mysql
+  #   env_file:
+  #     - .env
+  #   volumes:
+  #   - ./var/mysql:/var/lib/mysql
 
   back:
     image: numerisisep/numeris-back
