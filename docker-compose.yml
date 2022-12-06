@@ -50,5 +50,5 @@ services:
       - ./front/src:/home/numeris/src
       - /home/numeris/node_modules
     ports:
-      - ${FRONT_PORT:-5000}:${FRONT_PORT:-5000}
+      - ${FRONT_PORT:-5000}:80
     # command: ng serve --host 0.0.0.0
