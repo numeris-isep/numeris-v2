@@ -13,4 +13,4 @@ COPY . .
 RUN yarn run build-prod
 
 EXPOSE 80
-ENTRYPOINT [ "ng", "serve", "--configuration", "production", "--port", "80" ]
+ENTRYPOINT [ "ng", "serve", "--host", "0.0.0.0", "--port", "80" ]
