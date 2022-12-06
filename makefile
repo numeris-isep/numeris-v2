@@ -37,83 +37,83 @@ reload: stop start
 #############################
 
 back-install:
-	docker exec -it numeris_back composer install
+	docker exec -it numeris-back composer install
 
 back-update:
-	docker exec -it numeris_back composer update
+	docker exec -it numeris-back composer update
 
 front-install:
-	docker exec -it numeris_front npm install
+	docker exec -it numeris-front npm install
 
 front-update:
-	docker exec -it numeris_front npm update
+	docker exec -it numeris-front npm update
 
 front-fix-vulnerabilities:
-	docker exec -it numeris_front npm audit fix
+	docker exec -it numeris-front npm audit fix
 
 
 ## Shell commands
 ###################
 
 shell-back:
-	docker exec -it numeris_back bash
+	docker exec -it numeris-back bash
 
 shell-front:
-	docker exec -it numeris_front bash
+	docker exec -it numeris-front bash
 
 shell-sql:
-	docker exec -it numeris_mysql bash
+	docker exec -it numeris-mysql bash
 
 tinker:
-	docker exec -it numeris_back sh -c 'php artisan tinker'
+	docker exec -it numeris-back sh -c 'php artisan tinker'
 
 
 ## Database commands
 ######################
 
 db-reset:
-	docker exec -it numeris_back sh -c 'php artisan migrate:refresh --seed'
+	docker exec -it numeris-back sh -c 'php artisan migrate:refresh --seed'
 
 migrate:
-	docker exec -it numeris_back sh -c 'php artisan migrate'
+	docker exec -it numeris-back sh -c 'php artisan migrate'
 
 migrate-prod:
-	docker exec -t numeris_back sh -c 'php artisan migrate --force'
+	docker exec -t numeris-back sh -c 'php artisan migrate --force'
 
 db-refresh:
-	docker exec -it numeris_back sh -c 'php artisan migrate:refresh'
+	docker exec -it numeris-back sh -c 'php artisan migrate:refresh'
 
 migrate-rollback:
-	docker exec -it numeris_back sh -c 'php artisan migrate:rollback'
+	docker exec -it numeris-back sh -c 'php artisan migrate:rollback'
 
 db-seed:
-	docker exec -it numeris_back sh -c 'php artisan db:seed'
+	docker exec -it numeris-back sh -c 'php artisan db:seed'
 
 
 ## Test commands
 ###################
 
 test:
-	docker exec -it numeris_back sh -c 'vendor/bin/phpunit'
+	docker exec -it numeris-back sh -c 'vendor/bin/phpunit'
 
 
 ## Utils commands
 ###################
 
 log-back:
-	docker exec -it numeris_back sh -c 'less +G storage/logs/laravel.log'
+	docker exec -it numeris-back sh -c 'less +G storage/logs/laravel.log'
 
 config-clear:
-	docker exec numeris_back sh -c 'php artisan config:clear'
-	docker exec numeris_back sh -c 'php artisan cache:clear'
-	docker exec numeris_back sh -c 'php artisan route:clear'
+	docker exec numeris-back sh -c 'php artisan config:clear'
+	docker exec numeris-back sh -c 'php artisan cache:clear'
+	docker exec numeris-back sh -c 'php artisan route:clear'
 
 config-cache:
-	docker exec numeris_back sh -c 'php artisan route:cache'
-	docker exec numeris_back sh -c 'php artisan config:cache'
+	docker exec numeris-back sh -c 'php artisan route:cache'
+	docker exec numeris-back sh -c 'php artisan config:cache'
 
 key-generate:
-	docker exec numeris_back sh -c 'php artisan key:generate'
+	docker exec numeris-back sh -c 'php artisan key:generate'
 
 jwt-secret:
-	docker exec numeris_back sh -c 'php artisan jwt:secret'
+	docker exec numeris-back sh -c 'php artisan jwt:secret'
