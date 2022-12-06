@@ -1,4 +1,4 @@
-version: '3'
+version: "3.9"
 services:
 
   phpmyadmin:
@@ -9,26 +9,26 @@ services:
       - mysql:db
     depends_on:
       - mysql
-    container_name: numeris_phpmyadmin
 
   mysql:
     image: mysql:5.7
     environment:
       MYSQL_DATABASE: 'numeris'
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-    container_name: numeris_mysql
 
   back:
+    image: numerisisep/back:dev
+    container_name: numeris_back
     build:
       context: ./back
       dockerfile: Dockerfile
     env_file:
-      - back/.env
+      - ./back/.env
     environment:
-      DB_HOST: ${DB_HOST}
-      DB_PORT: ${DB_PORT}
-      DB_DATABASE: ${DB_DATABASE}
-      DB_USERNAME: ${DB_USERNAME}
+      DB_HOST: ${DB_HOST:-mysql}
+      DB_PORT: ${DB_PORT:-3306}
+      DB_DATABASE: ${DB_DATABASE:-numeris}
+      DB_USERNAME: ${DB_USERNAME:-root}
       DB_PASSWORD: ${DB_PASSWORD}
     volumes:
       - ./back:/home/numeris
@@ -39,20 +39,16 @@ services:
       - mysql
     depends_on:
       - mysql
-    container_name: numeris_back
 
   front:
+    image: numerisisep/front:dev
+    container_name: numeris_front
     build:
       context: ./front
       dockerfile: Dockerfile
     volumes:
       - ./front/src:/home/numeris/src
       - /home/numeris/node_modules
-    links:
-      - back
-    expose:
-      - ${FRONT_PORT}
     ports:
       - ${FRONT_PORT}:${FRONT_PORT}
-    command: ng s --host 0.0.0.0
-    container_name: numeris_front
+    command: ng serve --host 0.0.0.0
