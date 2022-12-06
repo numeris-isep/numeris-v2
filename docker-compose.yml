@@ -18,7 +18,7 @@ services:
 
   back:
     image: numerisisep/back:dev
-    container_name: numeris_back
+    container_name: numeris-back
     build:
       context: ./back
       dockerfile: Dockerfile
@@ -42,7 +42,7 @@ services:
 
   front:
     image: numerisisep/front:dev
-    container_name: numeris_front
+    container_name: numeris-front
     build:
       context: ./front
       dockerfile: Dockerfile
@@ -51,4 +51,4 @@ services:
       - /home/numeris/node_modules
     ports:
       - ${FRONT_PORT:-5000}:${FRONT_PORT:-5000}
-    command: ng serve --host 0.0.0.0
+    # command: ng serve --host 0.0.0.0
