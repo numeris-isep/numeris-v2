@@ -28,6 +28,7 @@ services:
       - .env
     volumes:
     - ./var/mysql:/var/lib/mysql
+    - /var/mysqld:/var/mysqld
 
   back:
     image: numerisisep/numeris-back
