@@ -24,11 +24,13 @@ services:
     restart: unless-stopped
     networks:
       - mysql
+    ports:
+      - localhost:3306:3306
     env_file:
       - .env
     volumes:
     - ./var/mysql:/var/lib/mysql
-    - /var/run/mysqld:/var/run/mysqld
+    # - /var/run/mysqld:/var/run/mysqld
 
   back:
     image: numerisisep/numeris-back
