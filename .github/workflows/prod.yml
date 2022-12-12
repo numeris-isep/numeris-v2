@@ -34,6 +34,8 @@ jobs:
         dockerfile: Dockerfile
         push: true
         tags: numerisisep/numeris-front:prod
+        cache-from: type=gha
+        cache-to: type=gha
 
   build-back:
     name: Build back
@@ -60,6 +62,8 @@ jobs:
         dockerfile: Dockerfile.production
         push: true
         tags: numerisisep/numeris-back:prod
+        cache-from: type=gha
+        cache-to: type=gha
 
 
   pull-and-recreate:

@@ -28,8 +28,15 @@ jobs:
     - name: Fake env file
       run: touch .env
 
-    - name: Build
-      run: docker-compose -f docker-compose.infra.yml build back
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v3
+      with:
+        context: back
+        dockerfile: Dockerfile.production
+        push: false
+        tags: numerisisep/back:prod
+        cache-from: type=gha
+        cache-to: type=gha
 
   front-prod:
     runs-on: ubuntu-latest
@@ -45,8 +52,15 @@ jobs:
     - name: Fake env file
       run: touch .env
 
-    - name: Build
-      run: docker-compose -f docker-compose.infra.yml build front
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v3
+      with:
+        context: front
+        dockerfile: Dockerfile.production
+        push: false
+        tags: numerisisep/front:prod
+        cache-from: type=gha
+        cache-to: type=gha
 
   back-dev:
     runs-on: ubuntu-latest
@@ -62,8 +76,15 @@ jobs:
     - name: Fake env file
       run: touch .env
 
-    - name: Build
-      run: docker-compose -f docker-compose.yml build back
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v3
+      with:
+        context: back
+        dockerfile: Dockerfile
+        push: false
+        tags: numerisisep/back:dev
+        cache-from: type=gha
+        cache-to: type=gha
 
   front-dev:
     runs-on: ubuntu-latest
@@ -79,5 +100,12 @@ jobs:
     - name: Fake env file
       run: touch .env
 
-    - name: Build
-      run: docker-compose -f docker-compose.yml build front
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v3
+      with:
+        context: front
+        dockerfile: Dockerfile
+        push: false
+        tags: numerisisep/front:dev
+        cache-from: type=gha
+        cache-to: type=gha
