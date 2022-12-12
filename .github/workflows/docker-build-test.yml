@@ -29,7 +29,7 @@ jobs:
       run: touch .env
 
     - name: Build
-      run: docker-compose -f docker-compose.yml build back
+      run: docker-compose -f docker-compose.infra.yml build back
 
   build-front:
     runs-on: ubuntu-latest
@@ -46,4 +46,4 @@ jobs:
       run: touch .env
 
     - name: Build
-      run: docker-compose -f docker-compose.yml build front
+      run: docker-compose -f docker-compose.infra.yml build front
