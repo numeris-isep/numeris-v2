@@ -50,8 +50,6 @@ services:
       - /home/numeris/node_modules
     links:
       - back
-    expose:
-      - ${FRONT_PORT}
     ports:
       - ${FRONT_PORT}:${FRONT_PORT}
     command: ng s --host 0.0.0.0
