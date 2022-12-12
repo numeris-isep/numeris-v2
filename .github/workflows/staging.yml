@@ -7,9 +7,6 @@ on:
     tags:
       - v*
 
-  # Run tests for any PRs.
-  pull_request:
-
 jobs:
   build-front:
     name: Build front
