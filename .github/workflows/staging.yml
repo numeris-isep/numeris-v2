@@ -9,7 +9,7 @@ on:
 
 jobs:
   build-front:
-    name: Build front
+    name: Build and push front
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -37,7 +37,7 @@ jobs:
         cache-to: type=gha
 
   build-back:
-    name: Build back
+    name: Build and push back
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
