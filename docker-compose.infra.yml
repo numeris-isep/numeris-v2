@@ -78,7 +78,7 @@ services:
 
   back-staging:
     image: numerisisep/numeris-back:staging
-    container_name: numeris_back
+    container_name: numeris_back_staging
     restart: unless-stopped
     networks:
       - caddy
@@ -95,7 +95,7 @@ services:
 
   front-staging:
     image: numerisisep/numeris-front:staging
-    container_name: numeris_front
+    container_name: numeris_front_staging
     networks:
       - caddy
     labels:
