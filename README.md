@@ -1,3 +1,7 @@
+[![Deploy production](https://github.com/numeris-isep/numeris-v2/actions/workflows/prod.yml/badge.svg?branch=master)](https://github.com/numeris-isep/numeris-v2/actions/workflows/prod.yml)
+[![Deploy staging](https://github.com/numeris-isep/numeris-v2/actions/workflows/staging.yml/badge.svg?branch=staging)](https://github.com/numeris-isep/numeris-v2/actions/workflows/staging.yml)
+[![Test docker build](https://github.com/numeris-isep/numeris-v2/actions/workflows/test.yml/badge.svg)](https://github.com/numeris-isep/numeris-v2/actions/workflows/test.yml)
+
 # Numeris-v2
 
 [![Build Status](https://travis-ci.com/2Seg/numeris-v2.svg?branch=master)](https://travis-ci.com/2Seg/numeris-v2)
