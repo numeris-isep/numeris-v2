@@ -28,7 +28,7 @@ jobs:
     - name: Fake env file
       run: touch .env
 
-    - name: Build and push Docker image
+    - name: Build back prod
       uses: docker/build-push-action@v3
       with:
         context: back
@@ -52,7 +52,7 @@ jobs:
     - name: Fake env file
       run: touch .env
 
-    - name: Build and push Docker image
+    - name: Build front prod
       uses: docker/build-push-action@v3
       with:
         context: front
@@ -76,7 +76,7 @@ jobs:
     - name: Fake env file
       run: touch .env
 
-    - name: Build and push Docker image
+    - name: Build back dev
       uses: docker/build-push-action@v3
       with:
         context: back
@@ -100,7 +100,7 @@ jobs:
     - name: Fake env file
       run: touch .env
 
-    - name: Build and push Docker image
+    - name: Build front dev
       uses: docker/build-push-action@v3
       with:
         context: front
