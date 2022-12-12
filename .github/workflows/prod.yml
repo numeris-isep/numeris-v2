@@ -1,4 +1,4 @@
-name: Docker production
+name: Deploy production
 
 on:
   push:
