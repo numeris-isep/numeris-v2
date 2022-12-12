@@ -83,4 +83,4 @@ jobs:
           cd numeris
           git pull
           docker-compose -f docker-compose.infra.yml pull
-          docker-compose -f docker-compose.infra.yml up -d --force-recreate
+          docker-compose -f docker-compose.infra.yml up -d --force-recreate back-staging front-staging
