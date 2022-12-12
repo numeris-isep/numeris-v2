@@ -22,19 +22,17 @@ services:
     build:
       context: ./back
       dockerfile: Dockerfile
-    env_file:
-      - back/.env
     environment:
-      DB_HOST: ${DB_HOST}
-      DB_PORT: ${DB_PORT}
-      DB_DATABASE: ${DB_DATABASE}
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: numeris
+      DB_USERNAME: root
+      DB_PASSWORD:
     volumes:
       - ./back:/home/numeris
       - /home/numeris/vendor
     ports:
-      - ${BACK_PORT}:80
+      - ${BACK_PORT:-8000}:80
     links:
       - mysql
     depends_on:
@@ -51,6 +49,6 @@ services:
     links:
       - back
     ports:
-      - ${FRONT_PORT}:${FRONT_PORT}
+      - ${FRONT_PORT:-8080}:80
     command: ng s --host 0.0.0.0
     container_name: numeris_front

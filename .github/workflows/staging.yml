@@ -1,17 +1,11 @@
-name: Docker
+name: Deploy staging
 
 on:
-  schedule:
-  - cron: "0 4 * * 0" # run every sunday at 4 am to test if the image builds correctly given that changes of debian or compose packages can break the image
   push:
     branches:
-      - "master"
-    # Publish `v1.2.3` tags as releases.
+      - "staging"
     tags:
       - v*
-
-  # Run tests for any PRs.
-  pull_request:
 
 jobs:
   build-front:
@@ -38,7 +32,9 @@ jobs:
         context: front
         dockerfile: Dockerfile
         push: true
-        tags: numerisisep/numeris-front:latest
+        tags: numerisisep/numeris-front:staging
+        cache-from: type=gha
+        cache-to: type=gha
 
   build-back:
     name: Build back
@@ -64,8 +60,9 @@ jobs:
         context: back
         dockerfile: Dockerfile.production
         push: true
-        tags: numerisisep/numeris-back:latest
-
+        tags: numerisisep/numeris-back:staging
+        cache-from: type=gha
+        cache-to: type=gha
 
   pull-and-recreate:
     name: Pull and recreate
@@ -85,5 +82,5 @@ jobs:
         script: |
           cd numeris
           git pull
-          docker-compose -f docker-compose.production.yml pull
-          docker-compose -f docker-compose.production.yml up -d --force-recreate
+          docker-compose -f docker-compose.infra.yml pull
+          docker-compose -f docker-compose.infra.yml up -d --force-recreate
