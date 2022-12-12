@@ -50,7 +50,7 @@ services:
     # - /var/run/mysqld:/var/run/mysqld
 
   back:
-    image: numerisisep/numeris-back
+    image: numerisisep/numeris-back:prod
     container_name: numeris_back
     restart: unless-stopped
     networks:
@@ -67,7 +67,7 @@ services:
       caddy.reverse_proxy: "{{upstreams 80}}"
 
   front:
-    image: numerisisep/numeris-front
+    image: numerisisep/numeris-front:prod
     container_name: numeris_front
     networks:
       - caddy
