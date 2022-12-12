@@ -1,6 +1,23 @@
 version: "3.9"
 services:
 
+  caddy:
+    image: lucaslorentz/caddy-docker-proxy:ci-alpine
+    restart: unless-stopped
+    environment:
+      CADDY_INGRESS_NETWORKS: caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # docker rootless daemon socket https://docs.docker.com/engine/security/rootless/
+      - /var/run/docker.sock:/var/run/docker.sock
+      - caddy_data:/data
+    networks:
+      - caddy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "localhost:80"]
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     container_name: numeris_phpmyadmin
@@ -36,9 +53,6 @@ services:
     image: numerisisep/numeris-back
     container_name: numeris_back
     restart: unless-stopped
-    build:
-      context: ./back
-      dockerfile: Dockerfile.production
     networks:
       - caddy
       - mysql
@@ -51,14 +65,10 @@ services:
     labels:
       caddy: api.numeris-isep.fr
       caddy.reverse_proxy: "{{upstreams 80}}"
-        # caddy.reverse_proxy.header_down: -Access-Control-Allow-Origin
 
   front:
     image: numerisisep/numeris-front
     container_name: numeris_front
-    build:
-      context: ./front
-      dockerfile: Dockerfile.production
     networks:
       - caddy
     labels:
@@ -66,22 +76,31 @@ services:
       caddy.reverse_proxy: "{{upstreams 80}}"
 
 
-  caddy:
-    image: lucaslorentz/caddy-docker-proxy:ci-alpine
+  back-staging:
+    image: numerisisep/numeris-back:staging
+    container_name: numeris_back
     restart: unless-stopped
-    environment:
-      CADDY_INGRESS_NETWORKS: caddy
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      # docker rootless daemon socket https://docs.docker.com/engine/security/rootless/
-      - /var/run/docker.sock:/var/run/docker.sock
-      - caddy_data:/data
     networks:
       - caddy
-    healthcheck:
-      test: ["CMD", "curl", "-f", "localhost:80"]
+      - mysql
+    env_file:
+      - .env
+    volumes:
+      - .env:/home/numeris/.env
+    depends_on:
+      - mysql
+    labels:
+      caddy: api.staging.numeris-isep.fr
+      caddy.reverse_proxy: "{{upstreams 80}}"
+
+  front-staging:
+    image: numerisisep/numeris-front:staging
+    container_name: numeris_front
+    networks:
+      - caddy
+    labels:
+      caddy: staging.numeris-isep.fr
+      caddy.reverse_proxy: "{{upstreams 80}}"
 
 networks:
   caddy:
