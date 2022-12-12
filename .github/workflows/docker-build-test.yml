@@ -5,6 +5,7 @@ on:
     branches:
       - "*"
       - "!master"
+      - "!staging"
     # Publish `v1.2.3` tags as releases.
     tags:
       - v*
@@ -28,7 +29,7 @@ jobs:
       run: touch .env
 
     - name: Build
-      run: docker-compose -f docker-compose.production.yml build back
+      run: docker-compose -f docker-compose.yml build back
 
   build-front:
     runs-on: ubuntu-latest
@@ -45,4 +46,4 @@ jobs:
       run: touch .env
 
     - name: Build
-      run: docker-compose -f docker-compose.production.yml build front
+      run: docker-compose -f docker-compose.yml build front
