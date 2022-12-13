@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         context: front
-        dockerfile: Dockerfile
+        file: Dockerfile
         push: true
         tags: numerisisep/numeris-front:staging
         cache-from: type=gha
@@ -58,7 +58,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         context: back
-        dockerfile: Dockerfile.production
+        file: Dockerfile.production
         push: true
         tags: numerisisep/numeris-back:staging
         cache-from: type=gha
