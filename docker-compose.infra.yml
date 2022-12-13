@@ -104,7 +104,8 @@ services:
 
 networks:
   caddy:
-    external: true
+    # external: true
+    attachable: true
   mysql:
 
 volumes:
