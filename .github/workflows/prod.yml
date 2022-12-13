@@ -30,7 +30,7 @@ jobs:
     - name: Build and push front
       uses: docker/build-push-action@v3
       with:
-        # context: front
+        context: front
         file: front/Dockerfile.production
         push: true
         tags: numerisisep/numeris-front:prod
@@ -58,7 +58,7 @@ jobs:
     - name: Build and push back
       uses: docker/build-push-action@v3
       with:
-        # context: back
+        context: back
         file: back/Dockerfile.production
         push: true
         tags: numerisisep/numeris-back:prod
