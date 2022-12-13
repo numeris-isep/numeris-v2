@@ -30,8 +30,8 @@ jobs:
     - name: Build and push front
       uses: docker/build-push-action@v3
       with:
-        context: front
-        file: Dockerfile.production
+        # context: front
+        file: front/Dockerfile.production
         push: true
         tags: numerisisep/numeris-front:prod
         cache-from: type=gha
@@ -58,8 +58,8 @@ jobs:
     - name: Build and push back
       uses: docker/build-push-action@v3
       with:
-        context: back
-        file: Dockerfile.production
+        # context: back
+        file: back/Dockerfile.production
         push: true
         tags: numerisisep/numeris-back:prod
         cache-from: type=gha
