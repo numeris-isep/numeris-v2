@@ -104,6 +104,7 @@ services:
 
 networks:
   caddy:
+    name: caddy
     # external: true
     attachable: true
   mysql:
