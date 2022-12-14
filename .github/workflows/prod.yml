@@ -85,4 +85,7 @@ jobs:
           cd numeris
           git pull
           docker-compose -f docker-compose.infra.yml pull
-          docker-compose -f docker-compose.infra.yml up -d --force-recreate back front
+          docker-compose -f docker-compose.infra.yml rm -f front back
+          docker-compose -f docker-compose.infra.yml up -d front back
+          docker system prune -a
+          # storage is limited so we clean
