@@ -6,7 +6,8 @@
     "start": "ng serve",
     "start-http": "http-server -c-1 dist",
     "build": "ng build",
-    "build-prod": "ng build --prod --output-path dist",
+    "build-production": "ng build --prod --c=production --output-path dist",
+    "build-staging": "ng build --prod -c=staging --output-path dist",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
