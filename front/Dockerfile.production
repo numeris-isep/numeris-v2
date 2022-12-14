@@ -6,7 +6,7 @@ COPY package.json /opt/numeris/
 COPY yarn.lock /opt/numeris/
 RUN yarn install
 COPY . .
-RUN yarn run build-prod
+RUN yarn run build-$ENVIRONMENT
 ENTRYPOINT [ "ng", "serve", "--configuration", "$ENVIRONMENT", "--port", "80" ]
 
 FROM nginx
