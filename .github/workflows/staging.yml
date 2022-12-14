@@ -29,6 +29,8 @@ jobs:
     - name: Build and push front
       uses: docker/build-push-action@v3
       with:
+        build-args:
+          - environment=staging
         context: front
         file: front/Dockerfile.production
         push: true
@@ -57,6 +59,8 @@ jobs:
     - name: Build and push back
       uses: docker/build-push-action@v3
       with:
+        build-args:
+          - environment=staging
         context: back
         file: back/Dockerfile.production
         push: true
