@@ -84,9 +84,9 @@ services:
       - caddy
       - mysql
     env_file:
-      - .env
+      - .env.staging
     volumes:
-      - .env:/home/numeris/.env
+      - .env.staging:/home/numeris/.env
     depends_on:
       - mysql
     labels:
