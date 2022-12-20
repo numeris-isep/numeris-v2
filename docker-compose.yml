@@ -32,7 +32,7 @@ services:
       - ./back:/home/numeris
       - /home/numeris/vendor
     ports:
-      - ${BACK_PORT:-8000}:80
+      - ${BACK_PORT:-8080}:8080
     links:
       - mysql
     depends_on:
@@ -50,5 +50,4 @@ services:
       - back
     ports:
       - ${FRONT_PORT:-8080}:80
-    command: ng s --host 0.0.0.0
     container_name: numeris_front
