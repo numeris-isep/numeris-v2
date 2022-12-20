@@ -1,3 +1,5 @@
+Dockerfile
+Dockerfile.production
 .DS_Store
 vendor
 public/storage

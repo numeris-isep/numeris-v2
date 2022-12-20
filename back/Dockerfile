@@ -38,4 +38,5 @@ RUN usermod -u 1000 www-data
 RUN chown -R www-data:www-data /home/numeris
 RUN chown -R www-data:www-data /var/log/apache2/
 
-ENTRYPOINT [ "/home/numeris/entrypoint.sh" ]
+# ENTRYPOINT [ "/home/numeris/entrypoint.sh" ]
+ENTRYPOINT ["php", "artisan", "serve"]
