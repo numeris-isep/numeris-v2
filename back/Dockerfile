@@ -39,4 +39,4 @@ RUN chown -R www-data:www-data /home/numeris
 RUN chown -R www-data:www-data /var/log/apache2/
 
 # ENTRYPOINT [ "/home/numeris/entrypoint.sh" ]
-ENTRYPOINT ["php", "artisan", "serve"]
+ENTRYPOINT ["php", "artisan", "serve", "--host", "0.0.0.0"]
