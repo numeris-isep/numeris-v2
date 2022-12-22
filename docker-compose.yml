@@ -49,5 +49,5 @@ services:
     links:
       - back
     ports:
-      - ${FRONT_PORT:-8080}:80
+      - ${FRONT_PORT:-4200}:80
     container_name: numeris_front
