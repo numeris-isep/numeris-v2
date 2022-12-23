@@ -11,7 +11,7 @@ ENTRYPOINT [ "ng", "serve", "--configuration", "$ENVIRONMENT", "--port", "80" ]
 
 FROM nginx
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
-COPY nginx/mime.types /etc/nginx/conf.d/default.conf
+COPY nginx/mime.types /etc/nginx/mime.types
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder /opt/numeris/dist /usr/share/nginx/html
 EXPOSE 80
