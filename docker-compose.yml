@@ -29,7 +29,7 @@ services:
       DB_PORT: 3306
       DB_DATABASE: numeris_testing
       DB_USERNAME: root
-      DB_PASSWORD:
+      DB_PASSWORD: ""
     volumes:
       - ./back:/home/numeris
       - /home/numeris/vendor
