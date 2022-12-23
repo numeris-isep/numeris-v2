@@ -3,22 +3,23 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
+    container_name: numeris_phpmyadmin
     ports:
       - 3000:80
     links:
       - mysql:db
     depends_on:
       - mysql
-    container_name: numeris_phpmyadmin
 
   mysql:
     image: mysql:5.7
+    container_name: numeris_mysql
     environment:
       MYSQL_DATABASE: 'numeris'
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-    container_name: numeris_mysql
 
   back:
+    image: numerisisep/back:dev
     container_name: numeris_back
     build:
       context: ./back
@@ -40,6 +41,7 @@ services:
       - mysql
 
   front:
+    image: numerisisep/front:dev
     container_name: numeris_front
     build:
       context: ./front
