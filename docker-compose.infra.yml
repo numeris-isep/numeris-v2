@@ -69,6 +69,7 @@ services:
   front:
     image: numerisisep/numeris-front:prod
     container_name: numeris_front
+    restart: unless-stopped
     networks:
       - caddy
     labels:
@@ -96,6 +97,7 @@ services:
   front-staging:
     image: numerisisep/numeris-front:staging
     container_name: numeris_front_staging
+    restart: unless-stopped
     networks:
       - caddy
     labels:
