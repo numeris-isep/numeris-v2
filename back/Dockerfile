@@ -39,6 +39,7 @@ RUN chown -R www-data:www-data /home/numeris
 RUN chown -R www-data:www-data /var/log/apache2/
 
 # Permissions logs
+RUN touch /home/numeris/storage/logs/laravel.log
 RUN chown www-data:www-data /home/numeris/storage/logs/laravel.log
 RUN chmod 664 /home/numeris/storage/logs/laravel.log
 
