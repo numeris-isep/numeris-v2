@@ -9,4 +9,7 @@ php artisan config:clear
 php artisan migrate:refresh
 
 docker-php-entrypoint
+
 apache2-foreground
+
+echo ">>> Entrypoint exécuté"

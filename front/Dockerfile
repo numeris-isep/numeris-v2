@@ -6,4 +6,4 @@ RUN yarn install
 # RUN yarn add -g @angular/cli@7.3.9
 COPY . .
 RUN yarn run build
-ENTRYPOINT [ "ng", "serve", "--port", "80" ]
+ENTRYPOINT [ "ng", "serve","--host", "0.0.0.0", "--port", "80" ]
