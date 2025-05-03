@@ -35,7 +35,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         context: back
-        dockerfile: Dockerfile.production
+        dockerfile: back/Dockerfile.production
         push: false
         tags: numerisisep/back:prod
         cache-from: type=gha
@@ -59,7 +59,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         context: front
-        dockerfile: Dockerfile.production
+        dockerfile: front/Dockerfile.production
         push: false
         tags: numerisisep/front:prod
         cache-from: type=gha
@@ -83,7 +83,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         context: back
-        dockerfile: Dockerfile
+        dockerfile: back/Dockerfile
         push: false
         tags: numerisisep/back:dev
         cache-from: type=gha
@@ -107,7 +107,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         context: front
-        dockerfile: Dockerfile
+        dockerfile: front/Dockerfile
         push: false
         tags: numerisisep/front:dev
         cache-from: type=gha
