@@ -57,7 +57,8 @@ services:
       - caddy
       - mysql
     env_file:
-      - .env
+      - ./back/.env
+      # Erreur ici pas le bon env
     volumes:
       - .env:/home/numeris/.env
     depends_on:
@@ -85,7 +86,8 @@ services:
       - caddy
       - mysql
     env_file:
-      - .env.staging
+      - ./back/.env.staging
+      # pareil ici
     volumes:
       - .env.staging:/home/numeris/.env
     depends_on:
