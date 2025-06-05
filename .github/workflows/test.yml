@@ -28,9 +28,6 @@ jobs:
     - name: Fake env file
       run: touch .env
 
-    - name: Show Dockerfile content used
-      run: cat back/Dockerfile.production
-
     - name: Build back prod
       uses: docker/build-push-action@v3
       with:
