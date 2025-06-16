@@ -1,4 +1,4 @@
-version: '3'
+
 services:
 
   phpmyadmin:
@@ -12,7 +12,7 @@ services:
       - mysql
 
   mysql:
-    image: mysql:5.7
+    image: mysql
     container_name: numeris_mysql
     environment:
       MYSQL_DATABASE: 'numeris'
@@ -34,7 +34,7 @@ services:
       - ./back:/home/numeris
       - /home/numeris/vendor
     ports:
-      - ${BACK_PORT:-8000}:8000
+      - ${BACK_PORT:-8000}:80
     links:
       - mysql
     depends_on:
