@@ -33,8 +33,8 @@ class ApplicationPolicy extends AbstractPolicy
         // different than 'hiring'
         return $current_user->role()->isInferiorTo(Role::STAFF)
             ? $this->deny(trans('errors.403'))
-            : $application->mission->project->step == Project::HIRING
-                ?: $this->deny(trans_choice('errors.wrong_project_step', 1, ['step' => 'Ouvert']))
+            : ($application->mission->project->step == Project::HIRING
+                ?: $this->deny(trans_choice('errors.wrong_project_step', 1, ['step' => 'Ouvert'])))
         ;
     }
 
