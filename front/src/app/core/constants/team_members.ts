@@ -2,18 +2,29 @@ import { TeamMember } from '../classes/team-member';
 
 export const TEAM_MEMBERS: TeamMember[] = [
   new TeamMember(
-    'Amir',
-    'Abo Ali',
+    'Ayoub',
+    'Chemlali',
     'Président',
-    'amir.aboali@numeris-isep.fr',
-    'team/2024-2025/amir-abo-ali.jpeg',
+    'ayoub.chemlali@numeris-isep.fr',
   ),
   new TeamMember(
-    'Nabil',
+    'Margaux',
+    'Cloarec',
+    'Vice Présidente',
+    'margaux.cloarec@numeris-isep.fr',
+  ),
+  new TeamMember(
+    'Touline',
+    'Chaouachi',
+    'Trésorière',
+    'touline.chaouachi@numeris-isep.fr',
+  ),
+  new TeamMember(
+    'Djelloul',
     'Derni',
-    'Trésorier',
-    'nabil.derni@numeris-isep.fr',
-    'team/2024-2025/nabil-derni.jpeg',
+    'Responsable des chargés de contrat',
+    'djelloul.derni@numeris-isep.fr',
+    'team/2025-2026/djelloul-derni.jpeg',
   ),
   new TeamMember(
     'Angel',
@@ -22,11 +33,10 @@ export const TEAM_MEMBERS: TeamMember[] = [
     'angel.segui@numeris-isep.fr',
   ),
   new TeamMember(
-    'Katheepsini',
-    'RamesKumar',
+    'Omar',
+    'Tir',
     'Secrétaire Général',
-    'katheepsini.rameskumar@numeris-isep.fr',
-    'team/2024-2025/katheepsini-rameskumar.jpeg',
+    'omar.tir@numeris-isep.fr',
   ),
   new TeamMember(
     'Clémence',
@@ -42,12 +52,6 @@ export const TEAM_MEMBERS: TeamMember[] = [
     'team/2024-2025/helene-grandjean.jpeg',
   ),
   new TeamMember(
-    'Margaux',
-    'Cloarec',
-    'Graphiste',
-    'margaux.cloarec@numeris-isep.fr',
-  ),
-  new TeamMember(
     'Lucien',
     'Guillon',
     'Respo Event',
@@ -55,28 +59,9 @@ export const TEAM_MEMBERS: TeamMember[] = [
     'team/2024-2025/lucien-guillon.jpeg',
   ),
   new TeamMember(
-    'Hector',
-    'Vizzavona',
-    'DSI',
-    'hector.vizzavona@numeris-isep.fr',
-    'team/2024-2025/hector-vizzavona.jpeg',
-  ),
-  new TeamMember(
     'Aimée',
     'Karam',
     'RH',
     'aimee.karam@numeris-isep.fr',
-  ),
-  new TeamMember(
-    'Touline',
-    'Chaouachi',
-    'Vice-Présidente',
-    'touline.chaouachi@numeris-isep.fr',
-  ),
-  new TeamMember(
-    'Ayoub',
-    'Chemlali',
-    'Chargé Des Contrats',
-    'ayoub.chemlali@numeris-isep.fr',
   ),
 ];
